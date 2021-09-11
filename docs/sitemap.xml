@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
-        <loc>http://localhost:8820//screenshots.html</loc>
+        <loc>https://roboquant.org/screenshots.html</loc>
         <lastmod>2021-09-21</lastmod>
     </url>
     <url>
-        <loc>http://localhost:8820//get_started.html</loc>
+        <loc>https://roboquant.org/get_started.html</loc>
         <lastmod>2021-09-21</lastmod>
     </url>
     <url>
-        <loc>http://localhost:8820//documentation/index.html</loc>
+        <loc>https://roboquant.org/documentation/index.html</loc>
         <lastmod>2021-09-21</lastmod>
     </url>
     <url>
-        <loc>http://localhost:8820//documentation/features.html</loc>
+        <loc>https://roboquant.org/documentation/features.html</loc>
         <lastmod>2021-09-21</lastmod>
     </url>
     <url>
-        <loc>http://localhost:8820//documentation/design.html</loc>
+        <loc>https://roboquant.org/documentation/design.html</loc>
         <lastmod>2021-09-21</lastmod>
     </url>
     <url>
-        <loc>http://localhost:8820//community.html</loc>
+        <loc>https://roboquant.org/community.html</loc>
         <lastmod>2021-09-20</lastmod>
     </url>
 </urlset>
