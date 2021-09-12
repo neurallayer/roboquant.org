@@ -11351,6 +11351,11 @@ img[alt="screenshot"] {
 }
 
 .masthead-avatar {
+    min-height: 200px;
+}
+
+
+.masthead-banner {
     width: 80%;
 }
 

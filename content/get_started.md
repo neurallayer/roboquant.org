@@ -15,7 +15,7 @@ There are two ways to use roboquant and develop trading strategies:
     
     
 2. As a library in your standalone Kotlin or Java application. If you plan to develop large and complex trading strategies, this is the good approach since you have the full power of an IDE like IntelliJ IDEA at your disposal.
-    <div class="text-center">
+  
     <img src="/img/screenshots/idea.png" alt="screenshot" />
  
 ## Jupyter Notebook
