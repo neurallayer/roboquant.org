@@ -2,7 +2,7 @@ title=community
 date=2021-09-20
 type=page
 status=published
-heading=data is the new gold
+heading=data is the new oil
 ~~~~~~
 
 # Community 

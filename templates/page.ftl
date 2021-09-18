@@ -2,6 +2,7 @@
 <html lang="en">
     <#include "head.ftl">
     <body class="d-flex flex-column">
+        <#include "github_ribbon.ftl">
         <main class="flex-shrink-0">
             <!-- Navigation-->
              <#include "menu.ftl">
