@@ -3,7 +3,7 @@ date=2021-09-21
 type=page
 status=published
 heading=without the data to back it up,<br> any trading strategy is just an opinion
-~~~~~~
+~~
 
 # Get Started
 

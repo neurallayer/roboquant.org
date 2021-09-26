@@ -3,7 +3,7 @@ date=2021-09-21
 type=page
 status=published
 heading=We can chart our future clearly<br> only when we know the path<br> that led to the present
-~~~~~~
+~~
 
 # Screenshots
 When working in a Jupyter Notebook, roboquant comes with several types of charts that help to understand how the strategy is behaving. This pages contains some samples of those charts.

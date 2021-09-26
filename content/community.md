@@ -3,7 +3,7 @@ date=2021-09-20
 type=page
 status=published
 heading=data is the new oil
-~~~~~~
+~~
 
 # Community 
 There are several ways to get into contact, ask questions and share your experience regarding roboquant.

@@ -3,7 +3,7 @@ date=2021-09-21
 type=page
 status=published
 heading=testing leads to failure,<br> and failure leads to understanding
-~~~~~~
+~~
 
 # Design decisions
 This document provides an overview of the high level design choices, and the rational why they were made. It is provided mainly as background information. And it can also help to decide if roboquant is the right solution for you.
