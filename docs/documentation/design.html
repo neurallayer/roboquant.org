@@ -45,14 +45,12 @@
             <section class="py-3">
                 <div class="container-sm px-5 my-5">
                      <h1>Design decisions</h1>
-<p>This document provides an overview of the high level design choices, and the rational why they were made. It is<br />
-provided mainly as background information. And it can also help to decide if roboquant is the right solution for you.</p>
+<p>This document provides an overview of the high level design choices, and the rational why they were made. It is provided mainly as background information. And it can also help to decide if roboquant is the right solution for you.</p>
 <h2>Why develop a new framework</h2>
-<p>Before we start developing roboquant, we of course looked at existing frameworks to see if these could fit the bill.<br />
-However for our use-cases none of them checked the boxes that we required:</p>
+<p>Before we start developing roboquant, we of course looked at existing frameworks to see if these could fit the bill. However for our use-cases none of them checked the boxes that we required:</p>
 <ul>
 <li>Trade assets in multiple currencies at the same time</li>
-<li>Support many asset classes including crypto-currencies</li>
+<li>Support many asset classes including cryptocurrencies</li>
 <li>Solid live trading, including support for advanced order types to reduce risk</li>
 <li>Deal with large volumes of data and run extensive back-tests</li>
 <li>Support for trading in multiple markets in different regions at the same time</li>
@@ -78,15 +76,15 @@ the cores found on modern CPU's is difficult to do with Python without a lot of 
 <p>The good news is that if you really want to stick with Python, there are plenty of alternatives available. For example,<br />
 you could have a look at backtrader, pyalgotrade or zipline.</p>
 <h2>Interactive and traditional development</h2>
-<p>From the start we developed <em>roboquant</em> to be used either as a library included in your application or interactively<br />
-from a Jupyter notebook. The various API's have been designed so that they support both use-cases.</p>
-<p>Where many Java based applications require a lot of ceremony to implement even the simplest piece of functionality,<br />
-<em>roboquant</em> it designed to remove most of that. Especially in a Jupyter notebook environment, it is very<br />
-easy to get started:</p>
+<p>From the start we developed <em>roboquant</em> to be used either as a library included in your application or interactively from a Jupyter notebook. The various API's have been designed so that they support both use-cases.</p>
+<p>Where many Java based applications require a lot of ceremony to implement even the simplest piece of functionality, <em>roboquant</em> it designed to remove most of that. Especially in a Jupyter notebook environment, it is very easy to get started. Because of this the API exposed by roboquant follows certain rules:</p>
 <ul>
-<li>Almost no imports required</li>
-<li>No explicit type info need to be provided</li>
-<li>Out of the box powerfull charts</li>
+<li>Minimize need for imports, for example don't expose third party types if it can be avoided</li>
+<li>Use sensible defaults for method parameters where possible</li>
+<li>Use informative toString() implementations and explanatory exception messages</li>
+<li>Provide overloaded convenience methods if it makes life easier for the user of the API</li>
+<li>Use a flat package structure, so any import is simple to remember</li>
+<li>Leverage type inference where possible so no additional type info needs to be provided</li>
 </ul>
 <h2>Modules</h2>
 <p>In order to keep the project manageable and also reduce the download sizes, roboquant is divided into a number<br />
@@ -95,45 +93,31 @@ of distinct modules:</p>
 <li>roboquant-core: all the functionality required for back testing a strategy</li>
 <li>roboquant-extra: adds support for data feeds and 3rd party brokers</li>
 <li>roboquant-crypto: adds support for cryptocurrency feeds and exchanges</li>
-<li>roboquant-ml: adds support for machine learning strategies. This is a huge module because the dependent packages tend<br />
-to be very large</li>
+<li>roboquant-ml: adds support for machine learning strategies. This is a huge module because the dependent packages tend to be very large. Right now, this module is not published yet.</li>
 </ul>
 <p>This approach allows people with limited hardware to only load the modules required.</p>
 <h2>Time handling</h2>
-<p>When testing strategies that trade simultaneously in multiple timezones, like stocks in New York and London, it is key<br />
-to have proper time management. Otherwise, you run the risk that your strategy performs very well but only because<br />
-it can peep into the future due to faulty handling of timezones.</p>
-<p>Because of that, roboquant internally only uses the Java Instant type to represent a moment in time. So all time events<br />
-can be easily compared without having to consider time zones.</p>
-<p>When importing data, there is functionality to convert the data from timezone specific value towards the Instant type.<br />
-When displaying time related information, it can be converted back the other way around if desired.</p>
-<p>But the fact remains that all internal logic relies only on the Instant type in order to prevent timezone mistakes from<br />
-happening.</p>
+<p>When testing strategies that trade simultaneously in multiple time-zones, like stocks in New York and London, it is key to have proper time management. Otherwise, you run the risk that your strategy performs very well but only because it can peep into the future due to faulty handling of time-zones.</p>
+<p>Because of that, roboquant internally only uses the Java Instant type to represent a moment in time. So all time events can be easily compared without having to consider time zones.</p>
+<p>When importing data, there is functionality to convert the data from timezone specific value towards the Instant type. When displaying time related information, it can be converted back the other way around if desired.</p>
+<p>But the fact remains that all internal logic relies only on the Instant type in order to prevent timezone mistakes from happening.</p>
 <h2>Performance</h2>
-<p>With data sets growing, it is important that a strategy can still be quickly evaluated and tuned when required. If this<br />
-develop-test cycle becomes too slow, it is nearly impossible to create high performing strategies.</p>
+<p>With data sets growing, it is important that a strategy can still be quickly evaluated and tuned when required. If this develop-test cycle becomes too slow, it is nearly impossible to create high performing strategies.</p>
 <ul>
 <li>
-<p>Roboquant isn't setup to be a ledger and does not require the same accuracy when it comes to trading data. The native<br />
-Double type provides enough precision for any trading purpose and there is no need to use (the much slower and<br />
-memory hungry) BigDecimal type.</p>
+<p>Roboquant isn't setup to be a ledger and does not require the same accuracy when it comes to trading data. The native Double type provides enough precision for any trading purpose and there is no need to use (the much slower and memory hungry) BigDecimal type.</p>
 </li>
 <li>
-<p>The data Feed API supports data that is kept in-memory as well data that is stored on disk and only accessed when<br />
-required. This allows for running back test where the test data doesn't fit in memory or running back-tests<br />
-on machines with limited memory. In fact roboquant can be used on a JVM with only 1 gigabyte of heap allocated.</p>
+<p>The data Feed API supports data that is kept in-memory as well data that is stored on disk and only accessed when required. This allows for running back test where the test data doesn't fit in memory or running back-tests on machines with limited memory. In fact roboquant can be used on a JVM with only 512 MB of heap allocated.</p>
 </li>
 <li>
-<p>Many of the builtin features support multi-core machines to speedup processing. For example the CSV parser can<br />
-parse CSV files in parallel so even directories with thousands of CSV files can be parsed in seconds.</p>
+<p>Many of the builtin features support multi-core machines to speedup processing. For example the CSV parser can parse CSV files in parallel so even directories with thousands of CSV files can be parsed in seconds.</p>
 </li>
 <li>
-<p>Avoid (auto)boxing, so the JVM can access these variables directly. This means where possible use native types and<br />
-not the wrapper one. See <a href="https://docs.oracle.com/javase/1.5.0/docs/guide/language/autoboxing.html">background</a></p>
+<p>Avoid (auto)boxing, so the JVM can access these variables directly. This means where possible use native types and not the wrapper one. See <a href="https://docs.oracle.com/javase/1.5.0/docs/guide/language/autoboxing.html">background</a></p>
 </li>
 <li>
-<p>Overall the latency is kept very low when processing a new event and generating a signal and order. So it is feasible to<br />
-to create fast, low latency (sub-second) trading strategies.</p>
+<p>Overall the latency is kept very low when processing a new event and generating a signal and order. So it is feasible to create fast, low latency (sub-second) trading strategies.</p>
 </li>
 </ul>
 <h2>Reliability</h2>
