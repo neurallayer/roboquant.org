@@ -11365,3 +11365,7 @@ img[alt="screenshot"] {
     font-size: 4rem;
   }
 }
+
+img.logo {
+    max-width: 200px;
+}
