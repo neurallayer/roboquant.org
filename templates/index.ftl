@@ -60,6 +60,19 @@
                 </div>
             </section>
 
+              <section class="py-5" id="sample">
+                            <div class="container px-5 my-1">
+                                <div class="row gx-5">
+                                    <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">3rd Party Integration</h2></div>
+                                    <div class="col-lg-8">
+                                        <div class="col h-100">
+                                            <#include "integration.ftl">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
             <section>
                 <#include "subscribe.ftl">
             </section>
