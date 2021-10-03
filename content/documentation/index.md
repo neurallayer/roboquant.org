@@ -14,6 +14,6 @@ But here are already some links to available material:
 
 - [Design Decisions](/documentation/design.html)
 
-- [Tutorial Jupyter Notebooks](https://github.com/neurallayer/roboquant-notebook/tree/main/tutorials)
+- [Tutorial Jupyter Notebooks](https://github.com/neurallayer/roboquant-notebook/tree/main)
 
 - [Roadmap and todo items](https://github.com/neurallayer/roboquant/blob/main/docs/TODO.md)
