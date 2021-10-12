@@ -1,9 +1,8 @@
-title=Documentation
-date=2021-09-21
-type=page
-status=published
-heading=testing leads to failure,<br> and failure leads to understanding
-~~
+= Learning
+:icons: font
+:jbake-type: page
+:jbake-status: published
+:jbake-heading: testing leads to failure, and failure leads to understanding
 
 There still needs to be a lot done to improve the documentation of roboquant, ranging from better API descriptions to nice introduction tutorials.
 
@@ -16,3 +15,4 @@ But here are already some links to available material:
 * https://github.com/neurallayer/roboquant-notebook/tree/main[Tutorial Jupyter Notebooks]
 
 * https://github.com/neurallayer/roboquant/blob/main/docs/TODO.md[Roadmap and todo items]
+

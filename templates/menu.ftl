@@ -5,7 +5,7 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="/get_started.html">Get Started</a></li>
-                <li class="nav-item"><a class="nav-link" href="/documentation/index.html">Documentation</a></li>
+                <li class="nav-item"><a class="nav-link" href="/learning.html">Learning</a></li>
                 <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
                 <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
             </ul>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
-    <title>roboquant - Interactive Brokers</title>
+    <title>roboquant - Main Flow</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -38,7 +38,7 @@
                                 <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
                             <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Interactive Brokers</h3>
+                                <h3 class="masthead-subheading font-weight-light mt-3">Main Flow</h3>
                             </div>
                          </div>
 
@@ -105,101 +105,66 @@ Introduction
 </ul>                         </div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <div id="preamble">
+                                <div class="sect1">
+<h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Interactive Brokers is a large broker that operates in many regions of the world and offers a wide variety of markets to trade in. It offers since a long time an API to connect to their platform and retrieve data and execute trades programmatically.</p>
+<p>There are 4 distinct stages that you go through when you develop and run of a new trading strategy. Each stage has its own purpose and benefits. If possible at all, it is best not to skip a stage. And perhaps more important, if you are not happy about the performance in a later stage, go back to the first stage.</p>
 </div>
-<div class="paragraph">
-<p>That being said, the software and way of integrating is not as modern or convenient to use as some newer brokers like Alpaca, who really has an API first strategy.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_installation">Installation</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Interactive brokers integration is different from other brokers, mainly because:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>It requires a local running instance of Trader Workstation or IB Gateway. So you cannot connect directly to a server of Interactive Brokers and always need to take this "proxy" approach.</p>
-</li>
-<li>
-<p>There is not a free to use client library distributed by Interactive Brokers. The client software that is available, requires the end user to download it themselves and cannot be freely redistributed by third party software like roboquant.</p>
-</li>
-</ol>
-</div>
-<div class="sect2">
-<h3 id="_jupyter_notebooks">Jupyter Notebooks</h3>
-<div class="paragraph">
-<p>Take the following steps if you want to use Interactive Brokers in a notebook environment</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Startup Trader Workstation or IB Gateway on your local machine.
-&gt; Always select the paper trading account with appropriate username and password since roboquant is still very much in beta.</p>
-</li>
-<li>
-<p>Start the docker container with access tot the local network</p>
-</li>
-<li>
-<p>Download the required client library from Interactive Brokers</p>
-</li>
-<li>
-<p>Upload the TwaAPi.jar file to the notebook.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_standalone_application">Standalone application</h3>
-
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_back_testing">Back Testing</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Roboquant has support for retrieving historic data from IBKR and use that in back testing.</p>
-</div>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">val feed = IBKRHistoricFeed()
-feed.retrieve(asset1, asset2)</code></pre>
+<img src="main_flow.png" alt="main flow">
 </div>
+</div>
+<div class="paragraph">
+<p>Roboquant support all four stages and requires minimal changes to your code to move from one stage to the next. Your strategy and policy should not change at all, and only the selected data feed and broker may differ between stages.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_live_testing">Live Testing</h2>
+<h2 id="_feed">Feed</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Roboquant has support for retrieving live data from IBKR and use that in back testing.</p>
+<p>In this stage you&#8217;ll use historic data and the <strong>SimBroker</strong> that comes with roboquant to test your strategy and policy.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">val feed = IBKRLiveFeed()
-feed.subscribe(asset1, asset2)</code></pre>
+<div class="paragraph">
+<p>You can of course run a single back test over the complete timeline of historic data. But roboquant makes it easy to also run walk forward and randomly sampled time-frames that will give you more insights into the performance under different regimes. It is very important to get as many insights as possible about the overall performance and behavior, so you know what to expect and also what not expect when you finally will go live.</p>
 </div>
+<div class="paragraph">
+<p>This is also the only stage where you should develop and modify your strategy and policy. If you are not happy with the performance at a later stage, you should return this first stage and make the changes here. If for example you would like to use circuit-breakers during live trading to give some extra peace of mind, you should already include this logic during back testing.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_paper_trading">Paper Trading</h2>
+<h2 id="_strategy">Strategy</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Roboquant has support for retrieving live data from IBKR and use their paper trading account.</p>
+<p>In this stage you&#8217;ll use live data and the <strong>SimBroker</strong> to test your strategy and policy. The main purpose is to validate if your strategy is still performing well on real unseen data.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="kotlin">val broker = IBKRBroker()
-val feed = IBKRLiveFeed()
-feed.subscribe(asset1, asset2)</code></pre>
+<div class="paragraph">
+<p>It is very easy to over fit your strategy during back testing, and this stage provides some confirmation if that is the case. That being said, often you cannot run this stage for as long as required to have a perfect insight into over fitting, so this is an indication at best.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_policy">Policy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this stage you&#8217;ll use live data with a paper trading account to test your strategy and policy. Of course this will only work if your broker offers paper trading. But if you are serious about algo-trading, you should only select a broker that offers a realistic paper trading account.</p>
+</div>
+<div class="paragraph">
+<p>The main purpose is to validate if your policy is still performing well using a different broker implementation. For example, are the order types generated by the policy fully supported and behave as expected.</p>
+</div>
+<div class="paragraph">
+<p>This stage is where you really validate the robustness of your approach and give extra confirmation that it is ready to go live. If you don&#8217;t have a solid policy in place that fully behaves as expected, you should never go to the next stage.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_broker">broker</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this stage you&#8217;ll use live data and the live trading account to run your strategy and policy and now real money is at stake. And although not any more testing, you will need to closely monitor the performance and take appropriate actions. One reason is that even paper trading is a simulation and cannot fully prepare for live trading.</p>
 </div>
 </div>
 </div>

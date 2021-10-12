@@ -25,7 +25,7 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="/get_started.html">Get Started</a></li>
-                <li class="nav-item"><a class="nav-link" href="/documentation/index.html">Documentation</a></li>
+                <li class="nav-item"><a class="nav-link" href="/learning.html">Learning</a></li>
                 <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
                 <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
             </ul>
@@ -55,18 +55,18 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Interactively in a Jupyter Notebook. If you want to be up and running quickly, this is the best approach. Additionally, you get many charts out-of-the-box that help you to understand how the strategy is performing.</p>
+<p>Interactively in a <em>Jupyter Notebook</em>. If you want to be up and running quickly, this is the best approach. Additionally, you get many charts out-of-the-box that help you to understand how the strategy is performing.</p>
 <div class="imageblock">
 <div class="content">
-<img src="/img/screenshots/jupyter-lab.png" alt="screenshot">
+<img src="img/jupyter-lab.png" alt="screenshot">
 </div>
 </div>
 </li>
 <li>
-<p>As a library in your standalone Kotlin or Java application. If you plan to develop large and complex trading strategies, this is the good approach since you have the full power of an IDE like IntelliJ IDEA at your disposal.</p>
+<p>As a library in your <em>standalone Kotlin or Java application</em>. If you plan to develop large and complex trading strategies, this is the good approach since you have the full power of an IDE like IntelliJ IDEA at your disposal.</p>
 <div class="imageblock">
 <div class="content">
-<img src="/img/screenshots/idea.png" alt="screenshot">
+<img src="img/idea.png" alt="screenshot">
 </div>
 </div>
 </li>
@@ -78,7 +78,7 @@
 <h2 id="_jupyter_notebook">Jupyter Notebook</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you have already Docker installed, all it takes is a single command to have a fully functional notebook environment available.</p>
+<p>If you have already Docker installed on your local machine, all it takes is a single command to have a fully functional Jupyter Notebook environment available.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -86,13 +86,23 @@
 </div>
 </div>
 <div class="paragraph">
-<p>By default, this starts a Jupyter-Lab environment. The installation comes with several tutorial notebooks that demonstrate how to develop and run your own strategies.</p>
+<p>By default, this will start a new Jupyter-Lab environment and disposes of it as soon as you stop the container. The installation comes with several tutorial notebooks included that demonstrate how to develop and run your own strategies.</p>
 </div>
 <div class="paragraph">
 <p>If you don&#8217;t have Docker yet installed on your computer, check out <a href="https://www.docker.com/get-started">Docker get started</a> and download Docker for Desktop from there. If you are running Linux, then your distribution likely already has Docker or Podman included.</p>
 </div>
 <div class="paragraph">
-<p>If you don&#8217;t want to install anything locally, you can use <a href="https://datalore.jetbrains.com/">JetBrains Datalore</a>. It has excellent support for Kotlin notebooks and has a free tier available if you just want to try roboquant out. Or try some same notebooks right now <span class="image"><a class="image" href="https://mybinder.org/v2/gh/neurallayer/roboquant/main?filepath=notebooks"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a></span></p>
+<p>If you don&#8217;t want to install anything locally, you can use a publicly hosted environment:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Launch the notebooks right now on MyBinder.org by clicking <span class="image"><a class="image" href="https://mybinder.org/v2/gh/neurallayer/roboquant/main?filepath=notebooks"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a></span></p>
+</li>
+<li>
+<p>Go to <a href="https://datalore.jetbrains.com/">JetBrains Datalore</a>. It has excellent support for Kotlin notebooks and has a free tier available if you just want to try roboquant out.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -100,7 +110,7 @@
 <h2 id="_standalone_application">Standalone application</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Just add <em>roboquant-core</em> as a dependency to your build tool, like Maven or Gradle. Next to roboquant-core, the following additional modules are available for inclusion in your application:</p>
+<p>Just add <strong>roboquant-core</strong> as a dependency to your build tool, like Maven or Gradle. Next to roboquant-core, the following additional modules are available for inclusion in your application:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -148,8 +158,7 @@ on third party libraries like Tensorflow</p>
 <h2 id="_building_from_source">Building from source</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>First start with cloning the roboquant GitHub repository to your local disk. The quickest way to be up and running is then to install IntelliJ IDEA (either the free community edition or the paid Ultimate version) and open the directory you
-just cloned. IntelliJ IDEA will recognize it as Kotlin/Maven project, and you can build it and run test directly from the IDE.</p>
+<p>First start with cloning the roboquant GitHub repository to your local disk. The quickest way to be up and running is then to install IntelliJ IDEA (either the free community edition or the paid Ultimate version) and open the directory you just cloned. IntelliJ IDEA will recognize it as Kotlin/Maven project, and you can build it and run test directly from the IDE.</p>
 </div>
 <div class="paragraph">
 <p>You can also use command line tools. Roboquant uses a setup and directory structure that removes much of the ceremony
@@ -163,17 +172,6 @@ looking for.</p>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="shell">mvn clean install</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>You can also build the Docker images from the source. This script has to be run from the project root directory:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="shell">./docker/dockerbuild.sh</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The build script has been tested and used with <a href="https://podman.io/">Podman</a>, but should also work with Docker.</p>
 </div>
 </div>
 </div>
