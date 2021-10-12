@@ -11369,3 +11369,7 @@ img[alt="screenshot"] {
 img.logo {
     max-width: 200px;
 }
+
+ul.checklist {
+    list-style-type: none;
+}

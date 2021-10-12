@@ -8,8 +8,10 @@
     <title>roboquant - Get Started</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
-    <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Font awesome icons-->
+    <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/css/styles.css" rel="stylesheet" />
 </head>    <body class="d-flex flex-column">
@@ -36,7 +38,7 @@
                                 <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
                             <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">without the data to back it up,<br> any trading strategy is just an opinion</h3>
+                                <h3 class="masthead-subheading font-weight-light mt-3">without the data to back it up, any trading strategy is just an opinion</h3>
                             </div>
                          </div>
                      </div>
@@ -45,66 +47,136 @@
             <section class="py-3">
                 <div class="container-sm px-5 my-5">
                      <h1>Get Started</h1>
+                     <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
 <p>There are two ways to use roboquant and develop trading strategies:</p>
-<ol>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>Interactively in a Jupyter Notebook.  If you want to be up and running quickly, this is the best approach. Additionally, you get many charts out-of-the-box that help you to understand how the strategy is performing.</p>
-<p><img src="/img/screenshots/jupyter-lab.png" alt="screenshot" /></p>
+<p>Interactively in a Jupyter Notebook. If you want to be up and running quickly, this is the best approach. Additionally, you get many charts out-of-the-box that help you to understand how the strategy is performing.</p>
+<div class="imageblock">
+<div class="content">
+<img src="/img/screenshots/jupyter-lab.png" alt="screenshot">
+</div>
+</div>
 </li>
 <li>
 <p>As a library in your standalone Kotlin or Java application. If you plan to develop large and complex trading strategies, this is the good approach since you have the full power of an IDE like IntelliJ IDEA at your disposal.</p>
-<p><img src="/img/screenshots/idea.png" alt="screenshot" /></p>
+<div class="imageblock">
+<div class="content">
+<img src="/img/screenshots/idea.png" alt="screenshot">
+</div>
+</div>
 </li>
 </ol>
-<h2>Jupyter Notebook</h2>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_jupyter_notebook">Jupyter Notebook</h2>
+<div class="sectionbody">
+<div class="paragraph">
 <p>If you have already Docker installed, all it takes is a single command to have a fully functional notebook environment available.</p>
-<pre><code class="language-shell">docker run --rm -p 8888:8888 roboquant/jupyter 
-</code></pre>
-<p>By default this starts a Jupyter-Lab environment. The installation comes with several tutorial notebooks that demonstrate how to develop and run your own strategies.</p>
-<p>If you don't have Docker yet installed on your computer, check out <a href="https://www.docker.com/get-started">Docker get started</a> and download Docker for Desktop from there. If you are running Linux, then your distribution likely already has Docker or Podman included.</p>
-<p>If you don't want to install anything locally, you can use <a href="https://datalore.jetbrains.com/">JetBrains Datalore</a>. It has excellent support for Kotlin notebooks and has a free tier available if you just want to try roboquant out. Or try some same notebooks right now <a href="https://mybinder.org/v2/gh/neurallayer/roboquant/main?filepath=notebooks"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></p>
-<h2>Standalone application</h2>
-<p>Just add <em>roboquant-core</em> as a dependency to your build tool, like Maven or Gradle.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="shell">docker run --rm -p 8888:8888 roboquant/jupyter</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, this starts a Jupyter-Lab environment. The installation comes with several tutorial notebooks that demonstrate how to develop and run your own strategies.</p>
+</div>
+<div class="paragraph">
+<p>If you don&#8217;t have Docker yet installed on your computer, check out <a href="https://www.docker.com/get-started">Docker get started</a> and download Docker for Desktop from there. If you are running Linux, then your distribution likely already has Docker or Podman included.</p>
+</div>
+<div class="paragraph">
+<p>If you don&#8217;t want to install anything locally, you can use <a href="https://datalore.jetbrains.com/">JetBrains Datalore</a>. It has excellent support for Kotlin notebooks and has a free tier available if you just want to try roboquant out. Or try some same notebooks right now <span class="image"><a class="image" href="https://mybinder.org/v2/gh/neurallayer/roboquant/main?filepath=notebooks"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_standalone_application">Standalone application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Just add <em>roboquant-core</em> as a dependency to your build tool, like Maven or Gradle. Next to roboquant-core, the following additional modules are available for inclusion in your application:</p>
+</div>
+<div class="ulist">
 <ul>
 <li>
-<p>Maven; include the following snippet in your pom.xml file in the dependencies section:</p>
-<pre><code class="language-xml">&lt;dependency&gt;
+<p><strong>roboquant-crypto</strong> Adds support for many of today&#8217;s most popular crypto exchanges</p>
+</li>
+<li>
+<p><strong>roboquant-extra</strong> Adds out-of-the-box integrations with 3rd party brokers and data providers</p>
+</li>
+<li>
+<p><strong>roboquant-ml</strong> Adds machine learning capabilities to roboquant. This is a very large module due to the dependencies
+on third party libraries like Tensorflow</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_maven">Maven</h3>
+<div class="paragraph">
+<p>Include the following snippet in your pom.xml file in the dependencies section:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="xml">&lt;dependency&gt;
     &lt;groupId&gt;org.roboquant&lt;/groupId&gt;
     &lt;artifactId&gt;roboquant-core&lt;/artifactId&gt;
     &lt;version&gt;the version&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
-</li>
-<li>
-<p>Gradle; include the following line in your build.gradle script:</p>
-<pre><code class="language-shell">implementation group: 'org.roboquant', name: 'roboquant-core', version: 'the version'    
-</code></pre>
-</li>
-</ul>
-<p>Next to roboquant-core, the following additional modules are available for inclusion in your application:</p>
-<ul>
-<li><strong>roboquant-crypto</strong> Adds support for many of today's most popular crypto exchanges</li>
-<li><strong>roboquant-extra</strong> Adds out-of-the-box integrations with 3rd party brokers and data providers</li>
-<li><strong>roboquant-ml</strong> Adds machine learning capabilities to roboquant. This is a very large module due to the dependencies<br />
-on third party libraries like Tensorflow</li>
-</ul>
-<h2>Build from source</h2>
-<p>First start with cloning the roboquant GitHub repository to your local disk. The quickest way to be up and running is<br />
-then to install IntelliJ IDEA (either the free community edition or the paid Ultimate version) and open the directory you<br />
-just cloned. IntelliJ IDEA will recognize it as Kotlin/Maven project, and you can build it and run test directly<br />
-from the IDE.</p>
-<p>You can also use command line tools. Roboquant uses a setup and directory structure that removes much of the ceremony<br />
-often found in many Java/Kotlin projects. So no need to go 10 directories deep to locate the source file you were<br />
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gradle">Gradle</h3>
+<div class="paragraph">
+<p>Include the following line in your build.gradle script:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code>implementation group: 'org.roboquant', name: 'roboquant-core', version: 'the version'</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_from_source">Building from source</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>First start with cloning the roboquant GitHub repository to your local disk. The quickest way to be up and running is then to install IntelliJ IDEA (either the free community edition or the paid Ultimate version) and open the directory you
+just cloned. IntelliJ IDEA will recognize it as Kotlin/Maven project, and you can build it and run test directly from the IDE.</p>
+</div>
+<div class="paragraph">
+<p>You can also use command line tools. Roboquant uses a setup and directory structure that removes much of the ceremony
+often found in many Java/Kotlin projects. So no need to go 10 directories deep to locate the source file you were
 looking for.</p>
-<p>Roboquant uses (for the time being)  Maven for the build process. So if you want to build the libraries from source,<br />
-you can issue the following command from the project root (assuming you have Maven already installed):</p>
-<pre><code class="language-shell">mvn clean install
-</code></pre>
+</div>
+<div class="paragraph">
+<p>Roboquant uses (for the time being) Maven for the build process. So if you want to build the libraries from source, you can issue the following command from the project root (assuming you have Maven already installed):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="shell">mvn clean install</code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p>You can also build the Docker images from the source. This script has to be run from the project root directory:</p>
-<pre><code class="language-shell">./docker/dockerbuild.sh
-</code></pre>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="shell">./docker/dockerbuild.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p>The build script has been tested and used with <a href="https://podman.io/">Podman</a>, but should also work with Docker.</p>
-
+</div>
+</div>
+</div>
                </div>
             </section>
         </main>
@@ -121,5 +193,8 @@ you can issue the following command from the project root (assuming you have Mav
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/idea.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
     </body>
 </html>

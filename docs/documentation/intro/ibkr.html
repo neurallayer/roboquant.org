@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="roboquant algo-trading framework" />
+    <meta name="keywords" content="trading Kotlin algo roboquant">
+    <title>roboquant - Interactive Brokers</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+    <!-- Font awesome icons-->
+    <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/get_started.html">Get Started</a></li>
+                <li class="nav-item"><a class="nav-link" href="/documentation/index.html">Documentation</a></li>
+                <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
+                <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>              <header class="masthead bg-primary text-white text-center">
+                     <div class="container d-flex align-items-center flex-column">
+                         <div class="row gx-5">
+                            <div class="col-lg-4 mb-5 mb-lg-0">
+                                <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
+                            </div>
+                         </div>
+                     </div>
+                 </header>
+            <!-- Page content-->
+            <section class="py-5">
+                <div class="container px-5 my-1">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+Introduction
+<ul class="nav flex-column">
+     <li class="nav-item">
+        <a href="/documentation/features.html" class="nav-link">Features</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/intro/four_stages.html" class="nav-link">Four Stages</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/intro/ibkr.html" class="nav-link">Interactive Brokers</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/design.html" class="nav-link">Design Decisions</a>
+     </li>
+</ul>
+<h2>Developing</h2>
+<ul class="nav flex-column">
+     <li class="nav-item">
+        <a href="/documentation/features.html" class="nav-link">Features</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/intro/four_stages.html" class="nav-link">Four Stages</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/intro/ibkr.html" class="nav-link">Interactive Brokers</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/design.html" class="nav-link">Design Decisions</a>
+     </li>
+</ul>
+<ul class="nav flex-column">
+<h2>Integration</h2>
+     <li class="nav-item">
+        <a href="/documentation/features.html" class="nav-link">Features</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/intro/four_stages.html" class="nav-link">Four Stages</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/intro/ibkr.html" class="nav-link">Interactive Brokers</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/design.html" class="nav-link">Design Decisions</a>
+     </li>
+</ul>                         </div>
+                        <div class="col-lg-8">
+                            <div class="col h-100">
+                                <h1>Interactive Brokers</h1>
+                                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Interactive Brokers is a large broker that operates in many regions of the world and offers a wide variety of markets to trade in. It offers since a long time an API to connect to their platform and retrieve data and execute trades programmatically.</p>
+</div>
+<div class="paragraph">
+<p>That being said, the software and way of integrating is not as modern or convenient to use as some newer brokers like Alpaca, who really has an API first strategy.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation">Installation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Interactive brokers integration is different from other brokers, mainly because:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>It requires a local running instance of Trader Workstation or IB Gateway. So you cannot connect directly to a server of Interactive Brokers and always need to take this "proxy" approach.</p>
+</li>
+<li>
+<p>There is not a free to use client library distributed by Interactive Brokers. The client software that is available, requires the end user to download it themselves and cannot be freely redistributed by third party software like roboquant.</p>
+</li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="_jupyter_notebooks">Jupyter Notebooks</h3>
+<div class="paragraph">
+<p>Take the following steps if you want to use Interactive Brokers in a notebook environment</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Startup Trader Workstation or IB Gateway on your local machine.
+&gt; Always select the paper trading account with appropriate username and password since roboquant is still very much in beta.</p>
+</li>
+<li>
+<p>Start the docker container with access tot the local network</p>
+</li>
+<li>
+<p>Download the required client library from Interactive Brokers</p>
+</li>
+<li>
+<p>Upload the TwaAPi.jar file to the notebook.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_standalone_application">Standalone application</h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_back_testing">Back Testing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Roboquant has support for retrieving historic data from IBKR and use that in back testing.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">val feed = IBKRHistoricFeed()
+feed.retrieve(asset1, asset2)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_live_testing">Live Testing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Roboquant has support for retrieving live data from IBKR and use that in back testing.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">val feed = IBKRLiveFeed()
+feed.subscribe(asset1, asset2)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_paper_trading">Paper Trading</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Roboquant has support for retrieving live data from IBKR and use their paper trading account.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="kotlin">val broker = IBKRBroker()
+val feed = IBKRLiveFeed()
+feed.subscribe(asset1, asset2)</code></pre>
+</div>
+</div>
+</div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer-->
+<footer class="bg-dark py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; roboquant.org 2021</div></div>
+            <div class="col-auto">
+                <a class="link-light small" href="/community.html">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/idea.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script type="text/javascript" src="https://unpkg.com/mermaid@8.0.0-rc.8/dist/mermaid.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    mermaid.initialize({
+        theme: 'neutral'
+    });
+});
+</script>    </body>
+</html>

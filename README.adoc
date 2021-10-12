@@ -1,0 +1,28 @@
+= roboquant website
+
+This repo contains the content for the roboquant.org website. It uses JBake as the generator for the static website and asciidoc for most content.
+
+== Build
+
+Not the JBake default output directory is used, but rather the ```docs``` directory. The reason for this is that the website is hosted on GitHub Pages and right now only / or /docs can serve as the content root and not other directories.
+
+To generate the website, run:
+
+[source,shell]
+----
+mvn jbake:generate
+----
+
+To develop, you can run: 
+
+[source,shell]
+----
+mvn jbake:inline
+----
+
+You'll need also to have graphviz package installed, since some pages include PlantUML diagrams that are being rendered to images using graphviz.
+
+== Other
+Check the roboquant site at https://roboquant.org[roboquant.org]
+
+If you want to fork this for your own website, please be aware that the index.ftl template still has some hard coded content in there that you need to replace. The other pages use the content.

@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.roboquant</groupId>
+	<artifactId>roboquant-org</artifactId>
+	<version>0.8-SNAPSHOT</version>
+	<name>roboquant-org</name>
+
+	<build>
+		<directory>${project.basedir}/docs</directory>
+		<plugins>
+			<plugin>
+				<groupId>org.jbake</groupId>
+				<artifactId>jbake-maven-plugin</artifactId>
+				<version>0.3.4</version>
+				<configuration>
+				    <inputDirectory>${project.basedir}</inputDirectory>
+				    <outputDirectory>${project.build.directory}</outputDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>default-generate</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<!-- AsciiDoc content support -->
+					<dependency>
+			            <groupId>org.asciidoctor</groupId>
+			            <artifactId>asciidoctorj</artifactId>
+			            <version>2.4.3</version>
+			        </dependency>
+					<dependency>
+						<groupId>org.asciidoctor</groupId>
+						<artifactId>asciidoctorj-diagram</artifactId>
+						<version>2.2.1</version>
+					</dependency>
+
+			        <!-- Freemarker template support -->
+			        <dependency>
+            			<groupId>org.freemarker</groupId>
+            			<artifactId>freemarker</artifactId>
+            			<version>2.3.31</version>
+        			</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+</project>

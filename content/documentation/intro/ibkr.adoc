@@ -1,0 +1,60 @@
+= Interactive Brokers
+:jbake-type: doc
+:jbake-status: published
+:jbake-heading: testing leads to failure,<br> and failure leads to understanding
+
+Interactive Brokers is a large broker that operates in many regions of the world and offers a wide variety of markets to trade in. It offers since a long time an API to connect to their platform and retrieve data and execute trades programmatically.
+
+That being said, the software and way of integrating is not as modern or convenient to use as some newer brokers like Alpaca, who really has an API first strategy.
+
+== Installation
+Interactive brokers integration is different from other brokers, mainly because:
+
+1. It requires a local running instance of Trader Workstation or IB Gateway. So you cannot connect directly to a server of Interactive Brokers and always need to take this "proxy" approach.
+
+2. There is not a free to use client library distributed by Interactive Brokers. The client software that is available, requires the end user to download it themselves and cannot be freely redistributed by third party software like roboquant.
+
+=== Jupyter Notebooks
+Take the following steps if you want to use Interactive Brokers in a notebook environment
+
+1. Startup Trader Workstation or IB Gateway on your local machine. 
+    > Always select the paper trading account with appropriate username and password since roboquant is still very much in beta.
+
+2. Start the docker container with access tot the local network
+
+3. Download the required client library from Interactive Brokers
+
+4. Upload the TwaAPi.jar file to the notebook.
+
+=== Standalone application
+
+
+== Back Testing
+Roboquant has support for retrieving historic data from IBKR and use that in back testing.
+
+[source,kotlin]
+----
+val feed = IBKRHistoricFeed()
+feed.retrieve(asset1, asset2)
+----
+
+== Live Testing
+Roboquant has support for retrieving live data from IBKR and use that in back testing.
+
+[source,kotlin]
+----
+val feed = IBKRLiveFeed()
+feed.subscribe(asset1, asset2)
+----
+
+== Paper Trading
+Roboquant has support for retrieving live data from IBKR and use their paper trading account.
+
+[source,kotlin]
+----
+val broker = IBKRBroker()
+val feed = IBKRLiveFeed()
+feed.subscribe(asset1, asset2)
+----
+
+
