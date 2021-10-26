@@ -1,7 +1,5 @@
 = Features
 :jbake-type: doc
-:jbake-status: published
-:jbake-heading: testing leads to failure,<br> and failure leads to understanding
 :icons: font
 
 This page list some main features of roboquant for each key area: Fast, Flexible, Easy, and Free.

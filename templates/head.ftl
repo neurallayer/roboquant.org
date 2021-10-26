@@ -8,6 +8,7 @@
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
     <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link href="/css/rouge_github.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
     <!-- Core theme CSS (includes Bootstrap)-->

@@ -1,0 +1,39 @@
+= Introduction
+:jbake-type: doc
+:jbake-status: published
+:icons: font
+:source-highlighter: rouge
+
+Welcome to the roboquant documentation. The roboquant platform has 4 main drivers:
+
+. Fast, so you can validate ideas as quickly as possible
+. Flexible, so you can convert any idea into a strategy
+. Easy, so you don't spend time with learning things that don't add value
+. Free, so anyone can improve the platform
+
+== High Level Overview
+Developing a strategy and validate it during a back-test is a straight forward process.
+
+[source, kotlin,  subs="attributes,verbatim"]
+----
+class MyStrategy : Strategy { // <1>
+    override fun generate(event: Event): List<Signal> {
+        // your code goes here
+    }
+}
+
+val strategy = MyStrategy() // <2>
+val metric = AccountSummary() //<3>
+val roboquant = Roboquant(strategy, metric) //<4>
+
+val feed = CSVFeed("./data/us") //<5>
+roboquant.run(feed) //<6>
+----
+<1> Develop a new strategy based on some idea you have. This can be done either from scratch or by assembling existing building blocks. In many cases, this is the only real software development required.
+<2> Create an instance of your strategy
+<3> Instantiate the metrics you want to use to evaluate the performance of your strategy.
+<4> Create an instance of Roboquant (the engine) with the strategy and metric(s) as parameters.
+<5> Pick the data feed you want to use to validate your strategy.
+<6> Run the back test using the data feed you just created.
+
+The platform is very flexible and provides way more options than the above example shows. You can easily extend almost any part of the system if the default included behavior doesn't work for you.

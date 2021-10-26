@@ -1,0 +1,29 @@
+= Event
+:source-highlighter: rouge
+
+An event contains the following two attributes:
+
+. The timestamp of when the actions within the event became available.
+. The list of actions
+
+== Timestamp
+It is very important that the timestamp in the event reflects when the actions in that same event became available, not when it happened. Typically, there is some delay between when something occurred and when it is published.
+
+For example when you want to use unemployment numbers as part of your feed, you should use the timestamp when they are published, and you have access to them, not the last day of the period they are covered. Otherwise, your strategy is looking into the future and can make decisions based on information it will never have in live trading.
+
+== Action
+Action is an abstraction for any type of information. It can range from price actions, like price-bars and order-book snapshots, to social media content or even satellite images. There is now commonality between actions, and you can add any type of actions you like to the platform. The only requirements is that they implement the empty interface ```Action```
+
+It is up to the strategy to filter for the action types it is interested in:
+
+[source, kotlin]
+----
+class MyStrategy : Strategy {
+    override fun generate(event: Event): List<Signal> {
+        for (priceBar in event.actions.filterIsInstance<PriceBar>()) {
+            // your code
+        }
+    }
+}
+----
+

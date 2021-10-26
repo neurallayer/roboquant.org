@@ -1,0 +1,34 @@
+= Order
+:source-highlighter: rouge
+:icons: font
+
+
+
+== Order Types
+The following diagram shows what orders are supported out of the box:
+
+image::order_types.png[]
+
+TIP: only use order types during back testing that are also supported by the broker you want to use for live trading.
+
+The policy creates the order. An example how to convert signals into orders:
+
+[source, kotlin]
+----
+val orders = mutableMapOf<Order>()
+for (signal in signals) {
+    val qty = if (signal.positive) 100.0 else -100.0
+    val order = MarketOrder(signal.asset, qty)
+    orders.add(order)
+}
+----
+
+
+== TIF
+TIF (Time in Force) sets a policy for an order on when the order remains valid. Typically, there are two types of TIF:
+
+. Time based, defining how long the order stays valid
+. Fill based, defining under what fill conditions the order stays valid
+
+
+

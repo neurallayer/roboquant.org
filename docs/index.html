@@ -10,6 +10,7 @@
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
     <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link href="/css/rouge_github.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -36,11 +37,28 @@
                 <div class="container d-flex align-items-center flex-column">
                     <!-- Masthead Banner Image-->
                     <img class="masthead-banner mb-2" src="/img/banner.png" alt="roboquant banner">
-                    <h3 class="masthead-subheading font-weight-light mb-1">an open source algorithmic trading framework written in Kotlin<br>for anyone serious about algo-trading</h3>
                 </div>
             </header>
 
-            <section class="py-5" id="sample">
+            <section class="py-4" id="intro">
+                <div class="container px-5 my-1">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">What is roboquant</h2></div>
+                        <div class="col-lg-8">
+                            <div class="col h-100">
+                                Roboquant is an open source algorithmic trading platform written in Kotlin. No snake-oil about making
+                                lots of profit without doing the hard work, just a great foundation to build your strategies on top.
+                                <br><br>
+                                Roboquant is for anyone serious about algo-trading. So whether you are a retail trader or a trading firm,
+                                roboquant can help you to quickly develop fully automated trading strategies.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="py-4" id="sample">
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">Simple to get started</h2></div>
@@ -63,7 +81,7 @@ roboquant.<span class="pl-c1">run</span>(feed)
             </section>
 
             <!-- Features section-->
-            <section id="features">
+            <section class="py-4" id="features">
                 <div class="container px-5 my-3">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">Main Features</h2></div>
@@ -91,13 +109,13 @@ roboquant.<span class="pl-c1">run</span>(feed)
                 </div>
             </section>
 
-              <section class="py-5" id="sample">
+              <section class="py-4" id="sample">
                             <div class="container px-5 my-1">
                                 <div class="row gx-5">
                                     <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">3rd Party Integration</h2></div>
                                     <div class="col-lg-8">
                                         <div class="col h-100">
-An algo-trading framework requires integration with 3rd party brokers and data providers in order to be useful.
+An algo-trading platform requires integration with 3rd party brokers and data providers in order to be useful.
 So roboquant comes out-of-the-box with several integrations included:
 
 <div class="col-lg-12">
@@ -150,8 +168,6 @@ So roboquant comes out-of-the-box with several integrations included:
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/idea.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
+
     </body>
 </html>

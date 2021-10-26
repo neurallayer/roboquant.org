@@ -20,7 +20,6 @@ To develop, you can run:
 mvn jbake:inline
 ----
 
-You'll need also to have graphviz package installed, since some pages include PlantUML diagrams that are being rendered to images using graphviz.
 
 == Other
 Check the roboquant site at https://roboquant.org[roboquant.org]

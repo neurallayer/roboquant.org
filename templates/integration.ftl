@@ -1,4 +1,4 @@
-An algo-trading framework requires integration with 3rd party brokers and data providers in order to be useful.
+An algo-trading platform requires integration with 3rd party brokers and data providers in order to be useful.
 So roboquant comes out-of-the-box with several integrations included:
 
 <div class="col-lg-12">

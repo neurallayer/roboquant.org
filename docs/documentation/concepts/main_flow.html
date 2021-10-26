@@ -10,6 +10,7 @@
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
     <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link href="/css/rouge_github.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -49,75 +50,100 @@
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0">
-Introduction
+<h2>Manual</h2>
 <ul class="nav flex-column">
      <li class="nav-item">
-        <a href="/documentation/intro/four_stages.html" class="nav-link">Four Stages</a>
+        <a href="/documentation/policy/index.html" class="nav-link">Policy</a>
      </li>
      <li class="nav-item">
-        <a href="/documentation/design.html" class="nav-link">Design Decisions</a>
+        <a href="/documentation/policy/order.html" class="nav-link">Order</a>
      </li>
      <li class="nav-item">
-        <a href="/documentation/intro/main_flow.html" class="nav-link">Main Flow</a>
+        <a href="/documentation/integration/alpaca.html" class="nav-link">Alpaca</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/integration/oanda.html" class="nav-link">OANDA</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/feed/avro.html" class="nav-link">Avro</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/integration/ibkr.html" class="nav-link">Interactive Brokers</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/strategy/index.html" class="nav-link">Strategy</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/feed/csv.html" class="nav-link">CSV</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/feed/event.html" class="nav-link">Event</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/concepts/events.html" class="nav-link">Event Driven</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/concepts/main_flow.html" class="nav-link">Main Flow</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/concepts/four_stages.html" class="nav-link">Four Stages</a>
      </li>
      <li class="nav-item">
         <a href="/documentation/features.html" class="nav-link">Features</a>
      </li>
      <li class="nav-item">
-        <a href="/documentation/intro/ibkr.html" class="nav-link">Interactive Brokers</a>
+        <a href="/documentation/index.html" class="nav-link">Introduction</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/design.html" class="nav-link">Design Decisions</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/feed/index.html" class="nav-link">Feed</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/roboquant/index.html" class="nav-link">Roboquant</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/integration/index.html" class="nav-link">Integration</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/strategy/signal.html" class="nav-link">Signal</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/metrics/index.html" class="nav-link">Metrics</a>
+     </li>
+     <li class="nav-item">
+        <a href="/documentation/install/index.html" class="nav-link">Install</a>
      </li>
 </ul>
-<h2>Developing</h2>
-<ul class="nav flex-column">
-     <li class="nav-item">
-        <a href="/documentation/intro/four_stages.html" class="nav-link">Four Stages</a>
-     </li>
-     <li class="nav-item">
-        <a href="/documentation/design.html" class="nav-link">Design Decisions</a>
-     </li>
-     <li class="nav-item">
-        <a href="/documentation/intro/main_flow.html" class="nav-link">Main Flow</a>
-     </li>
-     <li class="nav-item">
-        <a href="/documentation/features.html" class="nav-link">Features</a>
-     </li>
-     <li class="nav-item">
-        <a href="/documentation/intro/ibkr.html" class="nav-link">Interactive Brokers</a>
-     </li>
-</ul>
-<ul class="nav flex-column">
-<h2>Integration</h2>
-     <li class="nav-item">
-        <a href="/documentation/intro/four_stages.html" class="nav-link">Four Stages</a>
-     </li>
-     <li class="nav-item">
-        <a href="/documentation/design.html" class="nav-link">Design Decisions</a>
-     </li>
-     <li class="nav-item">
-        <a href="/documentation/intro/main_flow.html" class="nav-link">Main Flow</a>
-     </li>
-     <li class="nav-item">
-        <a href="/documentation/features.html" class="nav-link">Features</a>
-     </li>
-     <li class="nav-item">
-        <a href="/documentation/intro/ibkr.html" class="nav-link">Interactive Brokers</a>
-     </li>
-</ul>                         </div>
+                         </div>
                         <div class="col-lg-8">
                             <div class="col h-100">
                                 <div class="sect1">
 <h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are 4 distinct stages that you go through when you develop and run of a new trading strategy. Each stage has its own purpose and benefits. If possible at all, it is best not to skip a stage. And perhaps more important, if you are not happy about the performance in a later stage, go back to the first stage.</p>
+<p>The following diagram shows all the main components of the platform and the type of data they produce.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="main_flow.png" alt="main flow">
 </div>
 </div>
-<div class="paragraph">
-<p>Roboquant support all four stages and requires minimal changes to your code to move from one stage to the next. Your strategy and policy should not change at all, and only the selected data feed and broker may differ between stages.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+it is the Roboquant instance that orchestrates the data flow between the components in order to allow for low coupling and easy swapping out of components.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -125,13 +151,7 @@ Introduction
 <h2 id="_feed">Feed</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this stage you&#8217;ll use historic data and the <strong>SimBroker</strong> that comes with roboquant to test your strategy and policy.</p>
-</div>
-<div class="paragraph">
-<p>You can of course run a single back test over the complete timeline of historic data. But roboquant makes it easy to also run walk forward and randomly sampled time-frames that will give you more insights into the performance under different regimes. It is very important to get as many insights as possible about the overall performance and behavior, so you know what to expect and also what not expect when you finally will go live.</p>
-</div>
-<div class="paragraph">
-<p>This is also the only stage where you should develop and modify your strategy and policy. If you are not happy with the performance at a later stage, you should return this first stage and make the changes here. If for example you would like to use circuit-breakers during live trading to give some extra peace of mind, you should already include this logic during back testing.</p>
+<p>Provides the data needed for testing and trading in the form of events.</p>
 </div>
 </div>
 </div>
@@ -139,10 +159,7 @@ Introduction
 <h2 id="_strategy">Strategy</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this stage you&#8217;ll use live data and the <strong>SimBroker</strong> to test your strategy and policy. The main purpose is to validate if your strategy is still performing well on real unseen data.</p>
-</div>
-<div class="paragraph">
-<p>It is very easy to over fit your strategy during back testing, and this stage provides some confirmation if that is the case. That being said, often you cannot run this stage for as long as required to have a perfect insight into over fitting, so this is an indication at best.</p>
+<p>Receives events from the feed and produces signals. A signal consist of a rating for a certain asset, like a BUY rating for Tesla.</p>
 </div>
 </div>
 </div>
@@ -150,21 +167,39 @@ Introduction
 <h2 id="_policy">Policy</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this stage you&#8217;ll use live data with a paper trading account to test your strategy and policy. Of course this will only work if your broker offers paper trading. But if you are serious about algo-trading, you should only select a broker that offers a realistic paper trading account.</p>
-</div>
-<div class="paragraph">
-<p>The main purpose is to validate if your policy is still performing well using a different broker implementation. For example, are the order types generated by the policy fully supported and behave as expected.</p>
-</div>
-<div class="paragraph">
-<p>This stage is where you really validate the robustness of your approach and give extra confirmation that it is ready to go live. If you don&#8217;t have a solid policy in place that fully behaves as expected, you should never go to the next stage.</p>
+<p>Receives the signals and produces orders.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_broker">broker</h2>
+<h2 id="_broker">Broker</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this stage you&#8217;ll use live data and the live trading account to run your strategy and policy and now real money is at stake. And although not any more testing, you will need to closely monitor the performance and take appropriate actions. One reason is that even paper trading is a simulation and cannot fully prepare for live trading.</p>
+<p>Received the orders generated by the policy and process them. Any open orders will also be processed until they are closed. After this step, it will return an updated account that reflects the order and trade status.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_metric">Metric</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Receives the last state of the account and calculates various metrics that are of interest to determine the progress and results of the run.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_metricslogger">MetricsLogger</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Stores and/or log the calculated metrics.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_roboquant">Roboquant</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The engine of the platform that performs the actual run and orchestrate the interaction between the components. The engine support all <a href="four_stages.html">four stages</a> of developing a strategy with minimal change.</p>
 </div>
 </div>
 </div>
@@ -187,15 +222,6 @@ Introduction
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/idea.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
-<script type="text/javascript" src="https://unpkg.com/mermaid@8.0.0-rc.8/dist/mermaid.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    mermaid.initialize({
-        theme: 'neutral'
-    });
-});
-</script>    </body>
+
+    </body>
 </html>

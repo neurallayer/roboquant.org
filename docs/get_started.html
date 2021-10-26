@@ -10,6 +10,7 @@
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
     <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link href="/css/rouge_github.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -82,7 +83,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code data-lang="shell">docker run --rm -p 8888:8888 roboquant/jupyter</code></pre>
+<pre class="rouge highlight"><code data-lang="shell">docker run <span class="nt">--rm</span> <span class="nt">-p</span> 8888:8888 roboquant/jupyter</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -133,11 +134,11 @@ on third party libraries like Tensorflow</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code data-lang="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.roboquant&lt;/groupId&gt;
-    &lt;artifactId&gt;roboquant-core&lt;/artifactId&gt;
-    &lt;version&gt;the version&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
+<pre class="rouge highlight"><code data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.roboquant<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>roboquant-core<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>the version<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -148,7 +149,7 @@ on third party libraries like Tensorflow</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code>implementation group: 'org.roboquant', name: 'roboquant-core', version: 'the version'</code></pre>
+<pre class="rouge highlight"><code>implementation group: 'org.roboquant', name: 'roboquant-core', version: 'the version'</code></pre>
 </div>
 </div>
 </div>
@@ -170,7 +171,7 @@ looking for.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code data-lang="shell">mvn clean install</code></pre>
+<pre class="rouge highlight"><code data-lang="shell">mvn clean <span class="nb">install</span></code></pre>
 </div>
 </div>
 </div>
@@ -191,8 +192,6 @@ looking for.</p>
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/idea.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
+
     </body>
 </html>

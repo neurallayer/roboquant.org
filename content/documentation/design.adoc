@@ -4,9 +4,9 @@
 
 This document provides an overview of the high level design choices, and the rational why they were made. It is provided mainly as background information. And it can also help to decide if roboquant is the right solution for you.
 
-== Why develop a new framework
+== Why develop a new platform
 
-Before we start developing roboquant, we of course looked at existing frameworks to see if these could fit the bill. However, for our use-cases none of them checked the boxes that we required:
+Before we start developing roboquant, we of course looked at existing frameworks and platforms to see if these could fit the bill. However, for our specific use-cases none of them checked the boxes that we required:
 
 * Trade assets in multiple currencies at the same time
 * Support many asset classes including cryptocurrencies
@@ -25,6 +25,7 @@ we decided to go with Kotlin. Some main benefits being:
 * Fast enough to even handle the largest data sets during back testing
 * Access to the huge Java ecosystem with a library available for almost any task at hand
 * Excellent for building robust software, a necessity when developing complex trading strategies and your own money is at risk
+
 
 === Why not Python
 

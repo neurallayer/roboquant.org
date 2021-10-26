@@ -4,15 +4,12 @@
 :jbake-status: published
 :jbake-heading: testing leads to failure, and failure leads to understanding
 
-There still needs to be a lot done to improve the documentation of roboquant, ranging from better API descriptions to nice introduction tutorials.
+NOTE: There still needs to be a lot done to improve the documentation of roboquant, ranging from better API descriptions to some nice introduction tutorials. But here are already some links to available material that get your started.
 
-But here are already some links to available material:
+== Manual
+A good place to start learning how to use roboquant, is by reading link:/documentation/index.html[manual]. It provides an overview of the key concepts and how to apply them when you develop your own strategies. There many code snippets included that can be cut & pasted to have head start.
 
-* link:/documentation/features.html[Main features]
+== Jupyter Notebook Tutorials
+If you like to learn more by being hands-on, there are several ready to use tutorials in Jupyter Notebook format that you can try out. To find out more, go to: https://github.com/neurallayer/roboquant-notebook/tree/main[Tutorial Jupyter Notebooks]
 
-* link:/documentation/design.html[Design Decisions]
-
-* https://github.com/neurallayer/roboquant-notebook/tree/main[Tutorial Jupyter Notebooks]
-
-* https://github.com/neurallayer/roboquant/blob/main/docs/TODO.md[Roadmap and todo items]
 

@@ -1,0 +1,24 @@
+= OANDA
+:icons: font
+:source-highlighter: rouge
+
+OANDA provides several types of CFD instruments, including indices, forex, commodities, metals and bonds.
+
+
+== Historic Data
+[source, kotlin]
+----
+val feed = OANDAHistoricalFeed()
+----
+
+== Live Data
+[source, kotlin]
+----
+val feed = OANDALiveFeed()
+----
+
+== Trading
+[source, kotlin]
+----
+val broker = OANDABroker()
+----

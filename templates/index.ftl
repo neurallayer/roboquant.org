@@ -11,11 +11,28 @@
                 <div class="container d-flex align-items-center flex-column">
                     <!-- Masthead Banner Image-->
                     <img class="masthead-banner mb-2" src="/img/banner.png" alt="${config.site} banner">
-                    <h3 class="masthead-subheading font-weight-light mb-1">an open source algorithmic trading framework written in Kotlin<br>for anyone serious about algo-trading</h3>
                 </div>
             </header>
 
-            <section class="py-5" id="sample">
+            <section class="py-4" id="intro">
+                <div class="container px-5 my-1">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">What is roboquant</h2></div>
+                        <div class="col-lg-8">
+                            <div class="col h-100">
+                                Roboquant is an open source algorithmic trading platform written in Kotlin. No snake-oil about making
+                                lots of profit without doing the hard work, just a great foundation to build your strategies on top.
+                                <br><br>
+                                Roboquant is for anyone serious about algo-trading. So whether you are a retail trader or a trading firm,
+                                roboquant can help you to quickly develop fully automated trading strategies.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="py-4" id="sample">
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">Simple to get started</h2></div>
@@ -32,7 +49,7 @@
             </section>
 
             <!-- Features section-->
-            <section id="features">
+            <section class="py-4" id="features">
                 <div class="container px-5 my-3">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">Main Features</h2></div>
@@ -60,7 +77,7 @@
                 </div>
             </section>
 
-              <section class="py-5" id="sample">
+              <section class="py-4" id="sample">
                             <div class="container px-5 my-1">
                                 <div class="row gx-5">
                                     <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">3rd Party Integration</h2></div>

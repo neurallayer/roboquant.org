@@ -1,0 +1,66 @@
+= Policy
+:source-highlighter: rouge
+:icons: font
+
+A policy is responsible for generating the orders that will be placed at a broker. The most common use-case is that a policy does this based on the signals it receives from a strategy.
+
+A good policy is key in making your solution as robust as possible. Key things to consider when implementing a new policy:
+
+* What is a good allocation strategy
+* What order types to use
+* How to handle new orders when there are still open orders for the same asset
+* How to limit the maximum number of orders send to a broker (circuit breaker)
+* How to deal with conflicting signals from a strategy
+* How to handle yo-yo signals (buy-sell-buy-sell) in a short timeframe
+* How to manage risk and exposure
+* How to ensure there is still enough balance left to place an order
+
+NOTE: If there is one thing that prevents people from actually going live with a strategy, it is that there is not a robust enough policy in place that handles all the possible use-cases.
+
+== Implementation
+
+[source, kotlin]
+----
+class MyPolicy :  Policy  {
+
+    override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
+        // Your code here
+    }
+}
+----
+
+So a very naive implementation could look something like
+
+[source, kotlin]
+----
+class MyPolicy :  Policy  {
+
+    override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
+        val orders = mutableMapOf<Order>()
+        for (signal in signals) {
+            val qty = if (signal.positive) 100.0 else -100.0
+            val order = MarketOrder(signal.asset, qty)
+            orders.add(order)
+        }
+        return orders
+    }
+}
+----
+
+Or using the more concise Kotlin way:
+[source, kotlin]
+----
+class MyPolicy :  Policy  {
+
+    override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
+        return signals.map {
+            val qty = if (it.positive) 100.0 else -100.0
+            MarketOrder(it.asset, qty)
+       }
+    }
+}
+----
+
+
+
+== Advanced

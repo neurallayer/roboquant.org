@@ -1,0 +1,24 @@
+= Event Driven
+
+
+== What is event-driven software
+Event-driven software is software that is triggered as soon a new event occurs. Within the context of algo-trading, events can be for example a new price action for an asset.
+
+Roboquant uses the same event-driven approach for all xref:four_stages.adoc[four stages], ensuring minimal friction when moving from one stage to the next.
+
+
+== Why an event-driven approach?
+Event-driven algo-trading platforms provide several advantages over a vectorised approach:
+
+* Reuse - An event-driven framework can be used for back testing and live trading with minimal change of components.
+
+* Lookahead Bias - With an event-driven test, tit is unlikely the strategy will actually peep into the future since at making any decision in the code, the future data is not yet available.
+
+* Robustness - Live trading is by definition event driven. So by using the same approach during back testing, it ensures you got have to address use-cases that otherwise wouldn't show up until it is too late.
+
+Although event-driven systems come with the above benefits, they traditionally suffer from two disadvantages over simpler vectorised systems:
+
+. They are more complex to implement and test. That is why reusing a solid platform like roboquant makes a lot of sense, since then much of the heavy lifting is done by the platform.
+
+. They can be slower to execute compared to a vectorised system. But by using Kotlin and a highly optimized code-base, roboquant is actually faster than most other frameworks.
+

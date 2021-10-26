@@ -4,6 +4,7 @@
 :jbake-status: published
 :jbake-heading: without the data to back it up, any trading strategy is just an opinion
 :imagesdir: img/
+:source-highlighter: rouge
 
 There are two ways to use roboquant and develop trading strategies:
 

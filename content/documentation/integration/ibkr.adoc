@@ -1,7 +1,7 @@
 = Interactive Brokers
 :jbake-type: doc
-:jbake-status: published
-:jbake-heading: testing leads to failure,<br> and failure leads to understanding
+:icons: font
+:source-highlighter: rouge
 
 Interactive Brokers is a large broker that operates in many regions of the world and offers a wide variety of markets to trade in. It offers since a long time an API to connect to their platform and retrieve data and execute trades programmatically.
 
@@ -24,9 +24,15 @@ Take the following steps if you want to use Interactive Brokers in a notebook en
 
 3. Download the required client library from Interactive Brokers
 
-4. Upload the TwaAPi.jar file to the notebook.
+4. Upload the TwsApi.jar file to the notebook.
 
 === Standalone application
+For standalone application, make sure you install the TwsApi.jar to your local maven repository. You can use the following command to do so:
+
+[source,shell]
+----
+mvn install:install-file -Dfile=TwsApi.jar -DgroupId=com.interactivebrokers -DartifactId=tws-api -Dversion=9.76 -Dpackaging=jar
+----
 
 
 == Back Testing

@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
-        <loc>https://roboquant.org/learning.html</loc>
-        <lastmod>2021-10-12</lastmod>
+        <loc>https://roboquant.org/get_started.html</loc>
+        <lastmod>2021-10-15</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/get_started.html</loc>
-        <lastmod>2021-10-12</lastmod>
+        <loc>https://roboquant.org/learning.html</loc>
+        <lastmod>2021-10-14</lastmod>
     </url>
     <url>
         <loc>https://roboquant.org/screenshots.html</loc>
-        <lastmod>2021-10-12</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/comparison.html</loc>
         <lastmod>2021-10-12</lastmod>
     </url>
     <url>
@@ -21,23 +17,91 @@
         <lastmod>2021-10-12</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/intro/four_stages.html</loc>
-        <lastmod>2021-10-12</lastmod>
+        <loc>https://roboquant.org/documentation/policy/index.html</loc>
+        <lastmod>2021-10-24</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/design.html</loc>
-        <lastmod>2021-10-12</lastmod>
+        <loc>https://roboquant.org/documentation/policy/order.html</loc>
+        <lastmod>2021-10-23</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/intro/main_flow.html</loc>
-        <lastmod>2021-10-12</lastmod>
+        <loc>https://roboquant.org/documentation/integration/alpaca.html</loc>
+        <lastmod>2021-10-23</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/integration/oanda.html</loc>
+        <lastmod>2021-10-23</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/feed/avro.html</loc>
+        <lastmod>2021-10-23</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/integration/ibkr.html</loc>
+        <lastmod>2021-10-23</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/strategy/index.html</loc>
+        <lastmod>2021-10-22</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/feed/csv.html</loc>
+        <lastmod>2021-10-22</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/integration/iex.html</loc>
+        <lastmod>2021-10-21</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/feed/event.html</loc>
+        <lastmod>2021-10-21</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/concepts/events.html</loc>
+        <lastmod>2021-10-21</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/concepts/main_flow.html</loc>
+        <lastmod>2021-10-21</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/concepts/four_stages.html</loc>
+        <lastmod>2021-10-21</lastmod>
     </url>
     <url>
         <loc>https://roboquant.org/documentation/features.html</loc>
-        <lastmod>2021-10-12</lastmod>
+        <lastmod>2021-10-21</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/intro/ibkr.html</loc>
-        <lastmod>2021-10-11</lastmod>
+        <loc>https://roboquant.org/documentation/index.html</loc>
+        <lastmod>2021-10-21</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/design.html</loc>
+        <lastmod>2021-10-18</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/feed/index.html</loc>
+        <lastmod>2021-10-15</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/roboquant/index.html</loc>
+        <lastmod>2021-10-15</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/integration/index.html</loc>
+        <lastmod>2021-10-15</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/strategy/signal.html</loc>
+        <lastmod>2021-10-15</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/metrics/index.html</loc>
+        <lastmod>2021-10-15</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/install/index.html</loc>
+        <lastmod>2021-10-15</lastmod>
     </url>
 </urlset>

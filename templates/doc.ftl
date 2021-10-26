@@ -37,6 +37,5 @@
         </main>
         <!-- Footer-->
         <#include "footer.ftl">
-        <#include "mermaid.ftl">
     </body>
 </html>

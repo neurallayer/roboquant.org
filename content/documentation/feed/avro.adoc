@@ -1,0 +1,28 @@
+= Avro
+:icons: font
+:source-highlighter: rouge
+
+Apache Avro™ is a data serialization system. Avro provides:
+
+* Rich data structures.
+* A compact, fast, binary data format.
+* A container file, to store persistent data.
+* Remote procedure call (RPC).
+* Simple integration with dynamic languages. Code generation is not required to read or write data files nor to use or implement RPC protocols. Code generation as an optional optimization, only worth implementing for statically typed languages.
+
+Avro files make it easy to store large amount of data in a single file and efficiently use it during back testing.
+
+== Use
+To use a compatible Avro file as a feed is straight forward.
+
+[source, kotlin]
+----
+val feed = AvroFeed("myfile.avro")
+----
+
+== Convert
+You can also convert other feeds into an Avro file that you can then later use for back-testing. This works with both historic data feeds as wel as live data feeds. However, the current limitation is that it only works with price actions and not other type of data.
+
+TIP: If you work a lot with a directory full of CSV files, you can convert it to a single Avro file and use that from then on.
+
+
