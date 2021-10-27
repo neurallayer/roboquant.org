@@ -1,3 +1,3 @@
 rm -rf docs
-jbake -b . docs
+mvn jbake:generate
 
