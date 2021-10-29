@@ -22,7 +22,7 @@ Follow roboquant news on Twitter to stay up to date on updates and new versions 
 
 icon:inbox[2x]
 
-We would love to hear from you. So for any other type of questions or inquiries, just send an email to: link:mailto:&#105;n&#102;&#x6f;&#x40;&#x72;&#x6f;&#98;&#x6f;&#x71;u&#97;&#x6e;&#116;.&#111;&#114;&#103;[&#105;n&#102;&#x6f;&#x40;&#x72;&#x6f;&#98;&#x6f;&#x71;u&#97;&#x6e;&#116;.&#111;&#114;&#103;]
+We would love to hear from you. So for any other type of questions or inquiries, just email info@roboquant.org
 Also if you are using roboquant in a professional setting like a prop-shop, we like to hear from you what you think works well and what can be improved.
 
 icon:paper-plane[2x]

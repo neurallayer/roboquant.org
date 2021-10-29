@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
-    <title>roboquant - Introduction</title>
+    <title>roboquant - Crypto</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -39,7 +39,7 @@
                                 <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
                             <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Introduction</h3>
+                                <h3 class="masthead-subheading font-weight-light mt-3">Crypto</h3>
                             </div>
                          </div>
 
@@ -158,78 +158,31 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Welcome to the roboquant documentation. The roboquant platform has 4 main drivers:</p>
+<p>Roboquant supports crypto exchanges in two ways:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Fast, so you can validate ideas as quickly as possible</p>
+<p>Dedicated support for Binance using their Java client library.</p>
 </li>
 <li>
-<p>Flexible, so you can convert any idea into a strategy</p>
-</li>
-<li>
-<p>Easy, so you don&#8217;t spend time with learning things that don&#8217;t add value</p>
-</li>
-<li>
-<p>Free, so anyone can improve the platform</p>
+<p>Support for most other exchanges using the excellent XChange library</p>
 </li>
 </ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_high_level_overview">High Level Overview</h2>
+<h2 id="_binance">Binance</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_other">Other</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Developing a strategy and validate it during a back-test is a straight forward process.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyStrategy</span> <span class="p">:</span> <span class="nc">Strategy</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">generate</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;</span> <span class="p">{</span>
-        <span class="c1">// your code goes here</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">MyStrategy</span><span class="p">()</span> <i class="conum" data-value="2"></i><b>(2)</b>
-<span class="kd">val</span> <span class="py">metric</span> <span class="p">=</span> <span class="nc">AccountSummary</span><span class="p">()</span> <i class="conum" data-value="3"></i><b>(3)</b>
-<span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
-
-<span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">CSVFeed</span><span class="p">(</span><span class="s">"./data/us"</span><span class="p">)</span> <i class="conum" data-value="5"></i><b>(5)</b>
-<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span> <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Develop a new strategy based on some idea you have. This can be done either from scratch or by assembling existing building blocks. In many cases, this is the only real software development required.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Create an instance of your strategy</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Instantiate the metrics you want to use to evaluate the performance of your strategy.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Create an instance of Roboquant (the engine) with the strategy and metric(s) as parameters.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Pick the data feed you want to use to validate your strategy.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>Run the back test using the data feed you just created.</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The platform is very flexible and provides way more options than the above example shows. You can easily extend almost any part of the system if the default included behavior doesn&#8217;t work for you.</p>
+<p>Many other crypto exchanges are being integrated using the XChange library. Out of the box, roboquant includes the core libraries, but for connecting to a specific exchange, you&#8217;ll need to include the client libraries for that exchange.</p>
 </div>
 </div>
 </div>

@@ -11373,3 +11373,7 @@ img.logo {
 ul.checklist {
     list-style-type: none;
 }
+
+details ul li .nav-link {
+        padding: 0px 10px;
+}

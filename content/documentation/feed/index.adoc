@@ -1,7 +1,7 @@
 = Feed
 :source-highlighter: rouge
 
-A feed is responsible for providing the required data in order to be able to test and run strategies. A feed can contain any type of data. So it is not limited to prices only, but can also contain social media data or images for example.
+A feed is responsible for providing the required data in order to be able to test and run strategies. A feed can contain any type of data. So it is not limited to price data only, but can also contain social media data or images for example.
 
 [source, kotlin]
 ----
@@ -15,7 +15,7 @@ interface Feed {
 ----
 
 
-A feed wraps data in an event and put it in a EventChannel. An event contains all the data that happens at a certain point in time.
+A feed wraps data in an event and put that event in a EventChannel. An event contains all the data that happens at a certain point in time.
 
 [source, kotlin]
 ----

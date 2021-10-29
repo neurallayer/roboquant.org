@@ -1,8 +1,24 @@
 = Integration
 
+There are three types of integrations:
+
+. Historic data providers
+. Live data providers
+. Brokers
+
+In some cases a single 3rd party provides all three (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides data)
 
 == Configuration
 
 
 
 == Supported 3rd parties
+The following 3rd parties are supported:
+
+* Interactive Brokers: historic feed, live feed, trading
+* Alpaca: historic feed, live feed, trading
+* Oanda: historic feed, live feed, trading
+* IEX Cloud: historic feed, live feed
+* Yahoo Finance: historic feed
+
+There are also many crypto exchanges supported. For more details on that, see the xref:crypto.adoc[crypto] page.

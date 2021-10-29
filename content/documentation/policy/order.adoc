@@ -1,17 +1,18 @@
-= Order
+= Orders
 :source-highlighter: rouge
 :icons: font
 
-
-
 == Order Types
-The following diagram shows what orders are supported out of the box:
+The following diagram shows which orders are supported out of the box:
 
 image::order_types.png[]
 
-TIP: only use order types during back testing that are also supported by the broker you want to use for live trading.
+All orders refer to a single asset, including advanced order types like BracketOrders. The reason for putting this rule
+in place is that real brokers only have limited support for this and could lead to issues that are only discovered during live trading.
 
-The policy creates the order. An example how to convert signals into orders:
+
+== Creating Orders
+The policy creates the orders. An example on how to convert signals into simple market orders:
 
 [source, kotlin]
 ----
@@ -24,11 +25,23 @@ for (signal in signals) {
 ----
 
 
+TIP: only use order types during back testing that are also supported by the broker you want to use for live trading.
+
+
 == TIF
-TIF (Time in Force) sets a policy for an order on when the order remains valid. Typically, there are two types of TIF:
+TIF (Time in Force) sets a policy for an order until when the order remains valid. There are two types of TIF:
 
 . Time based, defining how long the order stays valid
 . Fill based, defining under what fill conditions the order stays valid
+
+The default TIF is GTC (Goof Till Cancelled)
+
+
+== Advanced usage
+Orders can be easily extended with own order types if the ones that come out of the box are not sufficient. The two steps required to make this possible are:
+
+. Implement the Order abstract class and add the desired logic for your new order type
+. Create these new order types in your policy
 
 
 
