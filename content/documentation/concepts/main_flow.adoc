@@ -1,5 +1,6 @@
 = Main Flow
 :icons: font
+:jbake-date: 2020-01-31
 
 == Introduction
 Perhaps the most important part of using roboquant is to understand the main flow of data and the responsibility each component has in this flow. The following diagram shows all the main components of the platform and the type of data they produce.

@@ -1,6 +1,7 @@
 = Four Stages
 :jbake-type: doc
 :icons: font
+:jbake-date: 2020-01-15
 
 There are 4 distinct stages that you go through when you develop and run a new trading strategy. The below diagram shows the stages and the order in which they are executed:
 
