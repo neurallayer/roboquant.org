@@ -1,0 +1,14 @@
+= Metrics Logger
+:icons: font
+:source-highlighter: rouge
+
+The metrics logger receives the metric values at the end of each step and then stores and/or logs these values.
+
+
+== Standard Loggers
+
+=== MemoryLogger
+
+
+== Custom Loggers
+You can implement also your own MetricsLogger, for example if you want to store values into a database or have some custom file format that you want to use.

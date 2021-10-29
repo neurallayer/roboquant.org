@@ -2,7 +2,12 @@
 <nav id="sidebar">
     <h3>Documentation</h3>
     <#list sections as section>
-        <details>
+        <#if content.uri?starts_with("documentation/" + section)>
+            <#assign state="open" />
+        <#else>
+            <#assign state="close" />
+        </#if>
+        <details ${state}>
             <summary>${section}</summary>
             <ul class="nav flex-column">
                 <#list docs as doc>

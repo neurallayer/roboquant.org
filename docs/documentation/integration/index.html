@@ -52,7 +52,7 @@
                         <div class="col-lg-4 mb-5 mb-lg-0">
 <nav id="sidebar">
     <h3>Documentation</h3>
-        <details>
+        <details close>
             <summary>install</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
@@ -60,21 +60,21 @@
                          </li>
             </ul>
         </details>
-        <details>
+        <details close>
             <summary>concepts</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/concepts/events.html" class="nav-link">Event Driven</a>
+                            <a href="/documentation/concepts/main_flow.html" class="nav-link">Main Flow</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/concepts/main_flow.html" class="nav-link">Main Flow</a>
+                            <a href="/documentation/concepts/events.html" class="nav-link">Event Driven</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/concepts/four_stages.html" class="nav-link">Four Stages</a>
                          </li>
             </ul>
         </details>
-        <details>
+        <details close>
             <summary>roboquant</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
@@ -82,14 +82,14 @@
                          </li>
             </ul>
         </details>
-        <details>
+        <details close>
             <summary>feed</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/feed/event.html" class="nav-link">Event</a>
+                            <a href="/documentation/feed/index.html" class="nav-link">Feed</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/feed/index.html" class="nav-link">Feed</a>
+                            <a href="/documentation/feed/event.html" class="nav-link">Event</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/feed/avro.html" class="nav-link">Avro</a>
@@ -99,7 +99,7 @@
                          </li>
             </ul>
         </details>
-        <details>
+        <details close>
             <summary>strategy</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
@@ -110,7 +110,7 @@
                          </li>
             </ul>
         </details>
-        <details>
+        <details close>
             <summary>policy</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
@@ -121,19 +121,22 @@
                          </li>
             </ul>
         </details>
-        <details>
+        <details close>
             <summary>metrics</summary>
             <ul class="nav flex-column">
+                         <li class="nav-item">
+                            <a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a>
+                         </li>
                          <li class="nav-item">
                             <a href="/documentation/metrics/index.html" class="nav-link">Metrics</a>
                          </li>
             </ul>
         </details>
-        <details>
+        <details open>
             <summary>integration</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/integration/crypto.html" class="nav-link">Crypto</a>
+                            <a href="/documentation/integration/crypto.html" class="nav-link">Crypto Exchanges</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/integration/index.html" class="nav-link">Integration</a>
@@ -181,7 +184,34 @@
 <div class="sect1">
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>When you want to integrate a 3rd party, you most likely require credentials to gain access. Often this is in the form of an  API id and key. Although you can embed these directly in your source code, roboquant supports better and more secure alternatives.</p>
+</div>
+<div class="paragraph">
+<p>The following shows the steps how roboquant resolves these configuration parameters:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If the credentials are provided directly in the software when calling the API use these, otherwise go to next step.</p>
+</li>
+<li>
+<p>If the credentials are provided as startup parameter to the JVM with the -D syntax use these, otherwise go to next step.</p>
+</li>
+<li>
+<p>If the credentials are set as system environment use these, otherwise go to next step.</p>
+</li>
+<li>
+<p>If the credentials are set in a property file called ".env" in the working directory use these, otherwise go to next step.</p>
+</li>
+<li>
+<p>If the credentials are set in a property file called "dotenv" in the working directory use these, otherwise go to next step.</p>
+</li>
+<li>
+<p>If the credentials are set in a property file called ".env" in the $HOME/.roboquant directory use these, otherwise go to next step.</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 <div class="sect1">

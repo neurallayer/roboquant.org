@@ -1,1 +1,16 @@
 = Metrics
+:icons: font
+:source-highlighter: rouge
+
+Metrics allow monitoring the progress of a run. It can be used both during testing and trading.
+
+NOTE: metrics only calculate the values, the storing/logging of these values is done by a MetricsLogger.
+
+
+== Standard Metrics
+
+
+
+
+== Custom Metrics
+You can develop your own metrics.

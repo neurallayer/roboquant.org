@@ -3,6 +3,8 @@
 
 A feed is responsible for providing the required data in order to be able to test and run strategies. A feed can contain any type of data. So it is not limited to price data only, but can also contain social media data or images for example.
 
+A feed is used for historic and live data without a difference in the interface:
+
 [source, kotlin]
 ----
 interface Feed {
@@ -14,7 +16,6 @@ interface Feed {
 }
 ----
 
-
 A feed wraps data in an event and put that event in a EventChannel. An event contains all the data that happens at a certain point in time.
 
 [source, kotlin]
@@ -24,7 +25,7 @@ A feed wraps data in an event and put that event in a EventChannel. An event con
 
 
 == Included
-Roboquant included several feeds out of the box.
+Roboquant included several feed implementations out of the box.
 
 . CSV files, stored somewhere on your local machine
 . Avro files, stored somewhere on your local machine

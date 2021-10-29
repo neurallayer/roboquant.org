@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
-    <title>roboquant - IEX Cloud</title>
+    <title>roboquant - Metrics Logger</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -39,7 +39,7 @@
                                 <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
                             <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">IEX Cloud</h3>
+                                <h3 class="masthead-subheading font-weight-light mt-3">Metrics Logger</h3>
                             </div>
                          </div>
 
@@ -121,7 +121,7 @@
                          </li>
             </ul>
         </details>
-        <details close>
+        <details open>
             <summary>metrics</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
@@ -132,7 +132,7 @@
                          </li>
             </ul>
         </details>
-        <details open>
+        <details close>
             <summary>integration</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
@@ -161,28 +161,24 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>IEX Cloud is a financial data platform and provides a variety of data, so not only data form the IEX Exchange.
-Currently, roboquant focuses on the price data from IEX Cloud and not other types of data like fundamental data.</p>
+<p>The metrics logger receives the metric values at the end of each step and then stores and/or logs these values.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_historical_data">Historical data</h2>
+<h2 id="_standard_loggers">Standard Loggers</h2>
 <div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">IEXHistoricalFeed</span><span class="p">()</span></code></pre>
-</div>
+<div class="sect2">
+<h3 id="_memorylogger">MemoryLogger</h3>
+
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_live_data">Live data</h2>
+<h2 id="_custom_loggers">Custom Loggers</h2>
 <div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">IEXLiveFeed</span><span class="p">()</span></code></pre>
-</div>
+<div class="paragraph">
+<p>You can implement also your own MetricsLogger, for example if you want to store values into a database or have some custom file format that you want to use.</p>
 </div>
 </div>
 </div>

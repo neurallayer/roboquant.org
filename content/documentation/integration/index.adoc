@@ -9,7 +9,16 @@ There are three types of integrations:
 In some cases a single 3rd party provides all three (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides data)
 
 == Configuration
+When you want to integrate a 3rd party, you most likely require credentials to gain access. Often this is in the form of an  API id and key. Although you can embed these directly in your source code, roboquant supports better and more secure alternatives.
 
+The following shows the steps how roboquant resolves these configuration parameters:
+
+. If the credentials are provided directly in the software when calling the API use these, otherwise go to next step.
+. If the credentials are provided as startup parameter to the JVM with the -D syntax use these, otherwise go to next step.
+. If the credentials are set as system environment use these, otherwise go to next step.
+. If the credentials are set in a property file called ".env" in the working directory use these, otherwise go to next step.
+. If the credentials are set in a property file called "dotenv" in the working directory use these, otherwise go to next step.
+. If the credentials are set in a property file called ".env" in the $HOME/.roboquant directory use these, otherwise go to next step.
 
 
 == Supported 3rd parties
