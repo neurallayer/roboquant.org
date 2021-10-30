@@ -6,7 +6,7 @@
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
     <meta name="theme-color" content="#3296C8">
-    <title>roboquant - Four Stages</title>
+    <title>roboquant - Event Driven</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -40,7 +40,7 @@
                                 <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
                             <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Four Stages</h3>
+                                <h3 class="masthead-subheading font-weight-light mt-3">Event Driven</h3>
                             </div>
                          </div>
 
@@ -53,25 +53,34 @@
                         <div class="col-lg-4 mb-5 mb-lg-0">
 <nav id="sidebar">
     <h3>Documentation</h3>
-        <details close>
-            <summary>install</summary>
+        <details open>
+            <summary>introduction</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/install/index.html" class="nav-link">Installation</a>
+                            <a href="/documentation/introduction/index.html" class="nav-link">Introduction</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/features.html" class="nav-link">Features</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/main_flow.html" class="nav-link">Main Flow</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/four_stages.html" class="nav-link">Four Stages</a>
                          </li>
             </ul>
         </details>
-        <details open>
-            <summary>concepts</summary>
+        <details close>
+            <summary>installation</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/concepts/main_flow.html" class="nav-link">Main Flow</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/concepts/events.html" class="nav-link">Event Driven</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/concepts/four_stages.html" class="nav-link">Four Stages</a>
+                            <a href="/documentation/installation/index.html" class="nav-link">Installation</a>
                          </li>
             </ul>
         </details>
@@ -143,13 +152,13 @@
                             <a href="/documentation/integration/index.html" class="nav-link">Integration</a>
                          </li>
                          <li class="nav-item">
+                            <a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a>
+                         </li>
+                         <li class="nav-item">
                             <a href="/documentation/integration/oanda.html" class="nav-link">OANDA</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/integration/ibkr.html" class="nav-link">Interactive Brokers</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/integration/alpaca.html" class="nav-link">Alpaca</a>
@@ -159,126 +168,48 @@
 </nav>                         </div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <div id="preamble">
+                                <div class="sect1">
+<h2 id="_what_is_event_driven_software">What is event-driven software</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are 4 distinct stages that you go through when you develop and run a new trading strategy. The below diagram shows the stages and the order in which they are executed:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="four_stages.png" alt="four stages">
-</div>
+<p>Event-driven software is software that is triggered as soon a new event occurs. Within the context of algo-trading, events can be for example a new price action for an asset.</p>
 </div>
 <div class="paragraph">
-<p>Each stage has its own purpose and benefits. Two important rules to adhere to are:</p>
+<p>Roboquant uses the same event-driven approach for all <a href="four_stages.html">four stages</a>, ensuring minimal friction when moving from one stage to the next.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_why_an_event_driven_approach">Why an event-driven approach?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Event-driven algo-trading platforms provide several advantages over a vectorised approach:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Reuse - An event-driven framework can be used for back testing and live trading with minimal change of components.</p>
+</li>
+<li>
+<p>Avoid Lookahead - With an event-driven test, it is unlikely that the strategy will actually peep into the future since at the time of making any decision in the code, the future data is not yet available.</p>
+</li>
+<li>
+<p>Robustness - Live trading is by definition event driven. So by using the same approach during back testing, it ensures you got have to address use-cases that otherwise wouldn&#8217;t show up until it is too late.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Although event-driven systems come with the above benefits, they traditionally suffer from two disadvantages over simpler vectorised systems:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>If possible at all, don&#8217;t skip a stage.</p>
+<p>They are more complex to implement and test. That is why using platform like roboquant makes a lot of sense, since then much of the heavy lifting is done by the platform.</p>
 </li>
 <li>
-<p>And perhaps more important, if you are not happy about the performance in a later stage, go back to the first stage.</p>
+<p>They can be slower to execute compared to a vectorised system. But by using Kotlin and a highly optimized code-base, roboquant is actually faster than most other algo-trading solutions.</p>
 </li>
 </ol>
-</div>
-<div class="paragraph">
-<p>Roboquant support all four stages and requires minimal changes to your code to move from one stage to the next. Your strategy and policy should not change at all between stages, and only the selected data feed and broker differ between stages.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_stage_1_back_testing">Stage 1: Back Testing</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In this stage you&#8217;ll use <strong>historic data</strong> and the <strong>SimBroker</strong> that comes with roboquant to test your strategy and policy.</p>
-</div>
-<div class="paragraph">
-<p>You can of course run a single back test over the complete timeline of historic data. But roboquant makes it easy to also run walk forward and randomly sampled time-frames. This give you more insights into the performance under different regimes.</p>
-</div>
-<div class="paragraph">
-<p>It is very important to get as many insights as possible about the overall performance and behavior, so you know what to expect and also what not expect when you finally will go live.</p>
-</div>
-<div class="paragraph">
-<p>This is also the only stage where you should develop and modify your strategy and policy. If you are not happy with the performance at a later stage, you should return this first stage and make the changes here. If for example you would like to use circuit-breakers during live trading to get some extra peace of mind, you should already include this logic during back testing.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-configure the SimBroker similar to the live trading account and broker you are going to use. Provide realistic cost and starting account balance, so you don&#8217;t get a too optimistic outlook on the overall cost. In general is it preferable to be a bit conservative and define a higher cost structure at this stage then the other way around.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_stage_2_live_testing">Stage 2: Live Testing</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In this stage you&#8217;ll use <strong>live data</strong> and the <strong>SimBroker</strong> to test your strategy and policy. The main purpose is to validate if your strategy is still performing well on real unseen data.</p>
-</div>
-<div class="paragraph">
-<p>It is very easy to over fit your strategy during back testing, and this stage provides some confirmation if that is the case. That being said, often you cannot run this stage for as long as required to have a perfect insight into over fitting, so this is an indication at best.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-roboquant can use any combination of data feed and broker. So you don&#8217;t need to restrict yourself to data feed from your broker. There might be better and/or cheaper alternatives available.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_stage_3_paper_trading">Stage 3: Paper Trading</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In this stage you&#8217;ll use <strong>live data</strong> with a <strong>paper trading account</strong> to test your strategy and policy. The main purpose is to validate if your policy is still performing well using a different broker implementation. For example, are the order generated by the policy fully supported and behave as expected.</p>
-</div>
-<div class="paragraph">
-<p>This stage is where you really validate the robustness of your approach and get extra confirmation that it is ready to go live. If you don&#8217;t have a solid policy in place that fully behaves as expected, you should never go to the next stage.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-of course this will only work if your broker offers paper trading functionality. But if you are serious about algo-trading, you should only select a broker that offers a realistic paper trading account.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_stage_4_live_trading">Stage 4: Live Trading</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In this stage you&#8217;ll use <strong>live data</strong> and the <strong>live trading account</strong> to run your strategy and policy and now real money is at stake. And although we are not at a testing stage, you will need to closely monitor the performance and take appropriate actions. One reason is that even paper trading is a just simulation and cannot fully prepare for what will happen during live trading.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-it is easier than you think to create a solution that goes haywire and generates way too many orders. If this happens, you can quickly lose all your money due to transaction- and spread-cost.
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>

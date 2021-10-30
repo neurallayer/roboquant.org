@@ -6,7 +6,7 @@
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
     <meta name="theme-color" content="#3296C8">
-    <title>roboquant - Installation</title>
+    <title>roboquant - Four Stages</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -40,7 +40,7 @@
                                 <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
                             <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Installation</h3>
+                                <h3 class="masthead-subheading font-weight-light mt-3">Four Stages</h3>
                             </div>
                          </div>
 
@@ -54,24 +54,33 @@
 <nav id="sidebar">
     <h3>Documentation</h3>
         <details open>
-            <summary>install</summary>
+            <summary>introduction</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/install/index.html" class="nav-link">Installation</a>
+                            <a href="/documentation/introduction/index.html" class="nav-link">Introduction</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/features.html" class="nav-link">Features</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/main_flow.html" class="nav-link">Main Flow</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/four_stages.html" class="nav-link">Four Stages</a>
                          </li>
             </ul>
         </details>
         <details close>
-            <summary>concepts</summary>
+            <summary>installation</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/concepts/main_flow.html" class="nav-link">Main Flow</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/concepts/events.html" class="nav-link">Event Driven</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/concepts/four_stages.html" class="nav-link">Four Stages</a>
+                            <a href="/documentation/installation/index.html" class="nav-link">Installation</a>
                          </li>
             </ul>
         </details>
@@ -143,13 +152,13 @@
                             <a href="/documentation/integration/index.html" class="nav-link">Integration</a>
                          </li>
                          <li class="nav-item">
+                            <a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a>
+                         </li>
+                         <li class="nav-item">
                             <a href="/documentation/integration/oanda.html" class="nav-link">OANDA</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/integration/ibkr.html" class="nav-link">Interactive Brokers</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/integration/alpaca.html" class="nav-link">Alpaca</a>
@@ -162,102 +171,123 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are two ways to use roboquant that determines how to install it:</p>
+<p>There are 4 distinct stages that you go through when you develop and run a new trading strategy. The below diagram shows the stages and the order in which they are executed:</p>
 </div>
-<div class="ulist">
-<ul>
+<div class="imageblock">
+<div class="content">
+<img src="four_stages.png" alt="four stages">
+</div>
+</div>
+<div class="paragraph">
+<p>Each stage has its own purpose and benefits. Two important rules to adhere to are:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>Interactively in a Jupyter notebook. If you want to get up and running quickly, and want to experiment with many strategies, this is the best approach. Additionally, you get many charts out-of-the-box.</p>
+<p>If possible at all, don&#8217;t skip a stage.</p>
 </li>
 <li>
-<p>As a library in your own Kotlin or Java application. If you plan to develop large and complex trading strategies, this is the good approach since you have the full power of an IDE like IntelliJ IDEA at your disposal.</p>
+<p>And perhaps more important, if you are not happy about the performance in a later stage, go back to the first stage.</p>
 </li>
-</ul>
+</ol>
+</div>
+<div class="paragraph">
+<p>Roboquant support all four stages and requires minimal changes to your code to move from one stage to the next. Your strategy and policy should not change at all between stages, and only the selected data feed and broker differ between stages.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_jupyter_notebook">Jupyter Notebook</h2>
+<h2 id="_stage_1_back_testing">Stage 1: Back Testing</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you have already Docker installed, all it takes is a single command to have a fully functional Jupyter Lab environment available:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="shell">docker run <span class="nt">--rm</span> <span class="nt">-p</span> 8888:8888 roboquant/jupyter</code></pre>
-</div>
+<p>In this stage you&#8217;ll use <strong>historic data</strong> and the <strong>SimBroker</strong> that comes with roboquant to test your strategy and policy.</p>
 </div>
 <div class="paragraph">
-<p>The installation comes with several tutorial-notebooks that demonstrate how to develop and run your own strategies. If you don&#8217;t have Docker yet installed on your computer, check out <a href="https://www.docker.com/get-started">Docker get started</a> and download Docker for Desktop from there. If you are running Linux, then your distribution likely already has Docker or Podman included.</p>
+<p>You can of course run a single back test over the complete timeline of historic data. But roboquant makes it easy to also run walk forward and randomly sampled time-frames. This give you more insights into the performance under different regimes.</p>
 </div>
 <div class="paragraph">
-<p>If you don&#8217;t want to install anything locally, you can use <a href="https://datalore.jetbrains.com/">JetBrains Datalore</a>. It supports Kotlin Notebooks and has a free tier available if you just want to try it out.</p>
+<p>It is very important to get as many insights as possible about the overall performance and behavior, so you know what to expect and also what not expect when you finally will go live.</p>
 </div>
 <div class="paragraph">
-<p>Or try some same notebooks right now <span class="image"><a class="image" href="https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?filepath=tutorials"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a></span></p>
+<p>This is also the only stage where you should develop and modify your strategy and policy. If you are not happy with the performance at a later stage, you should return this first stage and make the changes here. If for example you would like to use circuit-breakers during live trading to get some extra peace of mind, you should already include this logic during back testing.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+configure the SimBroker similar to the live trading account and broker you are going to use. Provide realistic cost and starting account balance, so you don&#8217;t get a too optimistic outlook on the overall cost. In general is it preferable to be a bit conservative and define a higher cost structure at this stage then the other way around.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_standalone_application">Standalone Application</h2>
+<h2 id="_stage_2_live_testing">Stage 2: Live Testing</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Just add <em>roboquant-core</em> as a dependency to your build tool, like Maven or Gradle.</p>
+<p>In this stage you&#8217;ll use <strong>live data</strong> and the <strong>SimBroker</strong> to test your strategy and policy. The main purpose is to validate if your strategy is still performing well on real unseen data.</p>
 </div>
 <div class="paragraph">
-<p><strong>Maven</strong></p>
+<p>It is very easy to over fit your strategy during back testing, and this stage provides some confirmation if that is the case. That being said, often you cannot run this stage for as long as required to have a perfect insight into over fitting, so this is an indication at best.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.roboquant<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>roboquant-core<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>the version<span class="nt">&lt;/version&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Gradle</strong></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="shell">implementation group: <span class="s1">'org.roboquant'</span>, name: <span class="s1">'roboquant-core'</span>, version: <span class="s1">'the version'</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Next to roboquant-core, the following additional modules are available for inclusion in your application:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>roboquant-crypto</strong> Adds support for many of today&#8217;s most popular crypto exchanges</p>
-</li>
-<li>
-<p><strong>roboquant-extra</strong> Adds out-of-the-box integrations with 3rd party brokers and data providers.</p>
-</li>
-<li>
-<p><strong>roboquant-ibkr</strong> Adds out-of-the-box integrations with Interactive Brokers</p>
-</li>
-</ul>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+roboquant can use any combination of data feed and broker. So you don&#8217;t need to restrict yourself to data feed from your broker. There might be better and/or cheaper alternatives available.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_building_from_source">Building from source</h2>
+<h2 id="_stage_3_paper_trading">Stage 3: Paper Trading</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>First start with cloning the roboquant GitHub repository to your local disk. The quickest way to be up and running is then to install IntelliJ IDEA (either the free community edition or the paid Ultimate version) and open the directory you just cloned. IntelliJ IDEA will recognize it as Kotlin/Maven project, and you can build it and run test directly from the IDE.</p>
+<p>In this stage you&#8217;ll use <strong>live data</strong> with a <strong>paper trading account</strong> to test your strategy and policy. The main purpose is to validate if your policy is still performing well using a different broker implementation. For example, are the order generated by the policy fully supported and behave as expected.</p>
 </div>
 <div class="paragraph">
-<p>You can also use command line tools. Roboquant uses a setup and directory structure that removes much of the ceremony often found in many Java/Kotlin projects. So no need to go 10 directories deep to locate the source file you were looking for.</p>
+<p>This stage is where you really validate the robustness of your approach and get extra confirmation that it is ready to go live. If you don&#8217;t have a solid policy in place that fully behaves as expected, you should never go to the next stage.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+of course this will only work if your broker offers paper trading functionality. But if you are serious about algo-trading, you should only select a broker that offers a realistic paper trading account.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_stage_4_live_trading">Stage 4: Live Trading</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Roboquant uses Maven for the build process and assumes you already have this installed. Building, testing and installing the libraries locally, is as easy as:</p>
+<p>In this stage you&#8217;ll use <strong>live data</strong> and the <strong>live trading account</strong> to run your strategy and policy and now real money is at stake. And although we are not at a testing stage, you will need to closely monitor the performance and take appropriate actions. One reason is that even paper trading is a just simulation and cannot fully prepare for what will happen during live trading.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="shell">mvn clean <span class="nb">install</span></code></pre>
-</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+it is easier than you think to create a solution that goes haywire and generates way too many orders. If this happens, you can quickly lose all your money due to transaction- and spread-cost.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

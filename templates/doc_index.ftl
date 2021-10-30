@@ -1,4 +1,4 @@
-<#assign sections = ["install", "concepts",  "roboquant", "feed", "strategy", "policy", "metrics", "integration"]>
+<#assign sections = ["introduction",  "installation", "roboquant", "feed", "strategy", "policy", "metrics", "integration"]>
 <nav id="sidebar">
     <h3>Documentation</h3>
     <#list sections as section>

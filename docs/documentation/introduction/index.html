@@ -6,7 +6,7 @@
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
     <meta name="theme-color" content="#3296C8">
-    <title>roboquant - Main Flow</title>
+    <title>roboquant - Introduction</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -40,7 +40,7 @@
                                 <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
                             <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Main Flow</h3>
+                                <h3 class="masthead-subheading font-weight-light mt-3">Introduction</h3>
                             </div>
                          </div>
 
@@ -53,25 +53,34 @@
                         <div class="col-lg-4 mb-5 mb-lg-0">
 <nav id="sidebar">
     <h3>Documentation</h3>
-        <details close>
-            <summary>install</summary>
+        <details open>
+            <summary>introduction</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/install/index.html" class="nav-link">Installation</a>
+                            <a href="/documentation/introduction/index.html" class="nav-link">Introduction</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/features.html" class="nav-link">Features</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/main_flow.html" class="nav-link">Main Flow</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/four_stages.html" class="nav-link">Four Stages</a>
                          </li>
             </ul>
         </details>
-        <details open>
-            <summary>concepts</summary>
+        <details close>
+            <summary>installation</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/concepts/main_flow.html" class="nav-link">Main Flow</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/concepts/events.html" class="nav-link">Event Driven</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/concepts/four_stages.html" class="nav-link">Four Stages</a>
+                            <a href="/documentation/installation/index.html" class="nav-link">Installation</a>
                          </li>
             </ul>
         </details>
@@ -143,13 +152,13 @@
                             <a href="/documentation/integration/index.html" class="nav-link">Integration</a>
                          </li>
                          <li class="nav-item">
+                            <a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a>
+                         </li>
+                         <li class="nav-item">
                             <a href="/documentation/integration/oanda.html" class="nav-link">OANDA</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/integration/ibkr.html" class="nav-link">Interactive Brokers</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/integration/alpaca.html" class="nav-link">Alpaca</a>
@@ -159,89 +168,82 @@
 </nav>                         </div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <div class="sect1">
-<h2 id="_introduction">Introduction</h2>
+                                <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Perhaps the most important part of using roboquant is to understand the main flow of data and the responsibility each component has in this flow. The following diagram shows all the main components of the platform and the type of data they produce.</p>
+<p>Welcome to the roboquant documentation. The roboquant platform has 4 main drivers:</p>
 </div>
-<div class="imageblock">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Fast, so you can validate ideas as quickly as possible</p>
+</li>
+<li>
+<p>Flexible, so you can convert any idea into a strategy</p>
+</li>
+<li>
+<p>Easy, so you don&#8217;t spend time with learning things that don&#8217;t add value</p>
+</li>
+<li>
+<p>Free, so anyone can improve the platform</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_high_level_overview">High Level Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Developing a strategy and validate it during a back-test is a straight forward process.</p>
+</div>
+<div class="listingblock">
 <div class="content">
-<img src="main_flow.png" alt="main flow">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyStrategy</span> <span class="p">:</span> <span class="nc">Strategy</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">generate</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="c1">// your code goes here</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">MyStrategy</span><span class="p">()</span> <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="kd">val</span> <span class="py">metric</span> <span class="p">=</span> <span class="nc">AccountSummary</span><span class="p">()</span> <i class="conum" data-value="3"></i><b>(3)</b>
+<span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
+
+<span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">CSVFeed</span><span class="p">(</span><span class="s">"./data/us"</span><span class="p">)</span> <i class="conum" data-value="5"></i><b>(5)</b>
+<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span> <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
 </div>
 </div>
-<div class="admonitionblock note">
+<div class="colist arabic">
 <table>
 <tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-it is the Roboquant instance that orchestrates the data flow between the components in order to allow for low coupling and easy swapping out of components.
-</td>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Develop a new strategy based on some idea you have. This can be done either from scratch or by assembling existing building blocks. In many cases, this is the only real software development required.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Create an instance of your strategy</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Instantiate the metrics you want to use to evaluate the performance of your strategy.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Create an instance of Roboquant (the engine) with the strategy and metric(s) as parameters.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Pick the data feed you want to use to validate your strategy.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Run the back test using the data feed you just created.</td>
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_responsibilities">Responsibilities</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>The role and responsibilities of each of the components:</p>
+<p>The platform is very flexible and provides way more options than the above example shows. You can easily extend almost any part of the system if the default included behavior doesn&#8217;t work for you.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Roboquant</p>
-<div class="paragraph">
-<p>The engine of the platform that performs the actual run and orchestrate the interaction between the components. The engine support all <a href="four_stages.html">four stages</a> of developing a strategy with minimal change to your code. This is also the only component that is not designed to be swapped out for a custom one.</p>
-</div>
-</li>
-<li>
-<p>Feed</p>
-<div class="paragraph">
-<p>Provides the data needed for testing and trading in the form of events. A feed can represent both historic and live data.</p>
-</div>
-</li>
-<li>
-<p>Strategy</p>
-<div class="paragraph">
-<p>Receives events from the feed and generates signals. A signal consist of a rating for a certain asset, like a BUY rating for Tesla. So a strategy doesn&#8217;t create orders, that is the responsibility of a policy.</p>
-</div>
-</li>
-<li>
-<p>Policy</p>
-<div class="paragraph">
-<p>Receives the signals and creates orders.</p>
-</div>
-</li>
-<li>
-<p>Broker</p>
-<div class="paragraph">
-<p>Received the orders generated by the policy and process them. Any open orders will also be processed until they are closed. After this step, it will return an updated account that reflects the order and trade status.</p>
-</div>
-</li>
-<li>
-<p>Metric</p>
-<div class="paragraph">
-<p>Receives the last state of the account and calculates various metrics that are of interest to determine the progress and results of the run.</p>
-</div>
-</li>
-<li>
-<p>Metrics Logger</p>
-<div class="paragraph">
-<p>Stores and/or log the metric values</p>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_component_interface">Component Interface</h2>
-<div class="sectionbody">
-
 </div>
 </div>
                             </div>

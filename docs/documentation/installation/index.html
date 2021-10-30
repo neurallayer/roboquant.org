@@ -6,7 +6,7 @@
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
     <meta name="theme-color" content="#3296C8">
-    <title>roboquant - Introduction</title>
+    <title>roboquant - Installation</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -40,7 +40,7 @@
                                 <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
                             <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Introduction</h3>
+                                <h3 class="masthead-subheading font-weight-light mt-3">Installation</h3>
                             </div>
                          </div>
 
@@ -54,24 +54,33 @@
 <nav id="sidebar">
     <h3>Documentation</h3>
         <details close>
-            <summary>install</summary>
+            <summary>introduction</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/install/index.html" class="nav-link">Installation</a>
+                            <a href="/documentation/introduction/index.html" class="nav-link">Introduction</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/features.html" class="nav-link">Features</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/main_flow.html" class="nav-link">Main Flow</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/four_stages.html" class="nav-link">Four Stages</a>
                          </li>
             </ul>
         </details>
-        <details close>
-            <summary>concepts</summary>
+        <details open>
+            <summary>installation</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/concepts/main_flow.html" class="nav-link">Main Flow</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/concepts/events.html" class="nav-link">Event Driven</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/concepts/four_stages.html" class="nav-link">Four Stages</a>
+                            <a href="/documentation/installation/index.html" class="nav-link">Installation</a>
                          </li>
             </ul>
         </details>
@@ -143,13 +152,13 @@
                             <a href="/documentation/integration/index.html" class="nav-link">Integration</a>
                          </li>
                          <li class="nav-item">
+                            <a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a>
+                         </li>
+                         <li class="nav-item">
                             <a href="/documentation/integration/oanda.html" class="nav-link">OANDA</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/integration/ibkr.html" class="nav-link">Interactive Brokers</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/integration/alpaca.html" class="nav-link">Alpaca</a>
@@ -162,78 +171,102 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Welcome to the roboquant documentation. The roboquant platform has 4 main drivers:</p>
+<p>There are two ways to use roboquant that determines how to install it:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Fast, so you can validate ideas as quickly as possible</p>
+<p>Interactively in a Jupyter notebook. If you want to get up and running quickly, and want to experiment with many strategies, this is the best approach. Additionally, you get many charts out-of-the-box.</p>
 </li>
 <li>
-<p>Flexible, so you can convert any idea into a strategy</p>
+<p>As a library in your own Kotlin or Java application. If you plan to develop large and complex trading strategies, this is the good approach since you have the full power of an IDE like IntelliJ IDEA at your disposal.</p>
 </li>
-<li>
-<p>Easy, so you don&#8217;t spend time with learning things that don&#8217;t add value</p>
-</li>
-<li>
-<p>Free, so anyone can improve the platform</p>
-</li>
-</ol>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_high_level_overview">High Level Overview</h2>
+<h2 id="_jupyter_notebook">Jupyter Notebook</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Developing a strategy and validate it during a back-test is a straight forward process.</p>
+<p>If you have already Docker installed, all it takes is a single command to have a fully functional Jupyter Lab environment available:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyStrategy</span> <span class="p">:</span> <span class="nc">Strategy</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">generate</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;</span> <span class="p">{</span>
-        <span class="c1">// your code goes here</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">MyStrategy</span><span class="p">()</span> <i class="conum" data-value="2"></i><b>(2)</b>
-<span class="kd">val</span> <span class="py">metric</span> <span class="p">=</span> <span class="nc">AccountSummary</span><span class="p">()</span> <i class="conum" data-value="3"></i><b>(3)</b>
-<span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
-
-<span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">CSVFeed</span><span class="p">(</span><span class="s">"./data/us"</span><span class="p">)</span> <i class="conum" data-value="5"></i><b>(5)</b>
-<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span> <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
+<pre class="rouge highlight"><code data-lang="shell">docker run <span class="nt">--rm</span> <span class="nt">-p</span> 8888:8888 roboquant/jupyter</code></pre>
 </div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Develop a new strategy based on some idea you have. This can be done either from scratch or by assembling existing building blocks. In many cases, this is the only real software development required.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Create an instance of your strategy</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Instantiate the metrics you want to use to evaluate the performance of your strategy.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Create an instance of Roboquant (the engine) with the strategy and metric(s) as parameters.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Pick the data feed you want to use to validate your strategy.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>Run the back test using the data feed you just created.</td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
-<p>The platform is very flexible and provides way more options than the above example shows. You can easily extend almost any part of the system if the default included behavior doesn&#8217;t work for you.</p>
+<p>The installation comes with several tutorial-notebooks that demonstrate how to develop and run your own strategies. If you don&#8217;t have Docker yet installed on your computer, check out <a href="https://www.docker.com/get-started">Docker get started</a> and download Docker for Desktop from there. If you are running Linux, then your distribution likely already has Docker or Podman included.</p>
+</div>
+<div class="paragraph">
+<p>If you don&#8217;t want to install anything locally, you can use <a href="https://datalore.jetbrains.com/">JetBrains Datalore</a>. It supports Kotlin Notebooks and has a free tier available if you just want to try it out.</p>
+</div>
+<div class="paragraph">
+<p>Or try some same notebooks right now <span class="image"><a class="image" href="https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?filepath=tutorials"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_standalone_application">Standalone Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Just add <em>roboquant-core</em> as a dependency to your build tool, like Maven or Gradle.</p>
+</div>
+<div class="paragraph">
+<p><strong>Maven</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.roboquant<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>roboquant-core<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>the version<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Gradle</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">implementation group: <span class="s1">'org.roboquant'</span>, name: <span class="s1">'roboquant-core'</span>, version: <span class="s1">'the version'</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next to roboquant-core, the following additional modules are available for inclusion in your application:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>roboquant-crypto</strong> Adds support for many of today&#8217;s most popular crypto exchanges</p>
+</li>
+<li>
+<p><strong>roboquant-extra</strong> Adds out-of-the-box integrations with 3rd party brokers and data providers.</p>
+</li>
+<li>
+<p><strong>roboquant-ibkr</strong> Adds out-of-the-box integrations with Interactive Brokers</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_from_source">Building from source</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>First start with cloning the roboquant GitHub repository to your local disk. The quickest way to be up and running is then to install IntelliJ IDEA (either the free community edition or the paid Ultimate version) and open the directory you just cloned. IntelliJ IDEA will recognize it as Kotlin/Maven project, and you can build it and run test directly from the IDE.</p>
+</div>
+<div class="paragraph">
+<p>You can also use command line tools. Roboquant uses a setup and directory structure that removes much of the ceremony often found in many Java/Kotlin projects. So no need to go 10 directories deep to locate the source file you were looking for.</p>
+</div>
+<div class="paragraph">
+<p>Roboquant uses Maven for the build process and assumes you already have this installed. Building, testing and installing the libraries locally, is as easy as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">mvn clean <span class="nb">install</span></code></pre>
+</div>
 </div>
 </div>
 </div>

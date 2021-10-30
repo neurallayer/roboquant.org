@@ -6,25 +6,25 @@
 
 There are several ways to get into contact, ask questions, contribute, and share your experience regarding roboquant.
 
-icon:github[2x]
+== icon:github[1x] GitHub
 
-If you find a bug or know of a great feature to add to roboquant, best to raise an issue in GitHub. Issues are used to track todos, bugs, feature requests, and more. As issues are created, they’ll appear here in a searchable and filterable list. Before you create a new issue, please check if not someone else already raised a similar ticket. To see the open issues and create a new one, click over https://github.com/neurallayer/roboquant/issues[here]
+If you find a bug or know of a great feature to add to roboquant, best to raise an issue in GitHub. Issues are used to track todos, bugs, feature requests, and more.As issues are created, they’ll appear here in a searchable and filterable list.Before you create a new issue, please check if not someone else already raised a similar ticket.To see the open issues and create a new one, click over https://github.com/neurallayer/roboquant/issues[here]
 
 TIP: if you want to contribute, this is a great place to check what still needs to be done and ask for advice what to work on.
 
-icon:reddit[2x]
+== icon:reddit[1x] Reddit
 
-For more general chat and questions about roboquant and trading strategies, there is a reddit channel. Since documentation is still lacking, this is a good to find out more. Join the https://www.reddit.com/r/roboquant/[r/roboquant] subreddit.
+For more general chat and questions about roboquant and trading strategies, there is a reddit channel.Since documentation is still lacking, this is a good to find out more.Join the https://www.reddit.com/r/roboquant/[r/roboquant] subreddit.
 
-icon:twitter[2x]
+== icon:twitter[1x] Twitter
 
-Follow roboquant news on Twitter to stay up to date on updates and new versions of the software: https://twitter.com/roboquant_news[@roboquant_news]. There will be an automatic tweet generated whenever there a push of new functionality to the source repository.
+Follow roboquant news on Twitter to stay up to date on updates and new versions of the software: https://twitter.com/roboquant_news[@roboquant_news].There will be an automatic tweet generated whenever there a push of new functionality to the source repository.
 
-icon:inbox[2x]
+== icon:inbox[1x] Email
 
-We would love to hear from you. So for any other type of questions or inquiries, just email info@roboquant.org
+We would love to hear from you.So for any other type of questions or inquiries, just email info@roboquant.org
 Also if you are using roboquant in a professional setting like a prop-shop, we like to hear from you what you think works well and what can be improved.
 
-icon:paper-plane[2x]
+== icon:paper-plane[1x] Mailing List
 
-Get emails about important updates in your inbox. We limit the emails to no more than 1 per week and won't sell any data to third parties. Subscribe and un-subscribe at https://www.freelists.org/list/roboquant[mailing list]
+Get emails about important updates in your inbox.We limit the emails to no more than 1 per week and won't sell any data to third parties.Subscribe and un-subscribe at https://www.freelists.org/list/roboquant[mailing list]

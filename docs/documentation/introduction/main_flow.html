@@ -6,7 +6,7 @@
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
     <meta name="theme-color" content="#3296C8">
-    <title>roboquant - Event Driven</title>
+    <title>roboquant - Main Flow</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -40,7 +40,7 @@
                                 <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
                             <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Event Driven</h3>
+                                <h3 class="masthead-subheading font-weight-light mt-3">Main Flow</h3>
                             </div>
                          </div>
 
@@ -53,25 +53,34 @@
                         <div class="col-lg-4 mb-5 mb-lg-0">
 <nav id="sidebar">
     <h3>Documentation</h3>
-        <details close>
-            <summary>install</summary>
+        <details open>
+            <summary>introduction</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/install/index.html" class="nav-link">Installation</a>
+                            <a href="/documentation/introduction/index.html" class="nav-link">Introduction</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/features.html" class="nav-link">Features</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/main_flow.html" class="nav-link">Main Flow</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/introduction/four_stages.html" class="nav-link">Four Stages</a>
                          </li>
             </ul>
         </details>
-        <details open>
-            <summary>concepts</summary>
+        <details close>
+            <summary>installation</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/concepts/main_flow.html" class="nav-link">Main Flow</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/concepts/events.html" class="nav-link">Event Driven</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/concepts/four_stages.html" class="nav-link">Four Stages</a>
+                            <a href="/documentation/installation/index.html" class="nav-link">Installation</a>
                          </li>
             </ul>
         </details>
@@ -143,13 +152,13 @@
                             <a href="/documentation/integration/index.html" class="nav-link">Integration</a>
                          </li>
                          <li class="nav-item">
+                            <a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a>
+                         </li>
+                         <li class="nav-item">
                             <a href="/documentation/integration/oanda.html" class="nav-link">OANDA</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/integration/ibkr.html" class="nav-link">Interactive Brokers</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/integration/alpaca.html" class="nav-link">Alpaca</a>
@@ -160,48 +169,88 @@
                         <div class="col-lg-8">
                             <div class="col h-100">
                                 <div class="sect1">
-<h2 id="_what_is_event_driven_software">What is event-driven software</h2>
+<h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Event-driven software is software that is triggered as soon a new event occurs. Within the context of algo-trading, events can be for example a new price action for an asset.</p>
+<p>Perhaps the most important part of using roboquant is to understand the main flow of data and the responsibility each component has in this flow. The following diagram shows all the main components of the platform and the type of data they produce.</p>
 </div>
-<div class="paragraph">
-<p>Roboquant uses the same event-driven approach for all <a href="four_stages.html">four stages</a>, ensuring minimal friction when moving from one stage to the next.</p>
+<div class="imageblock">
+<div class="content">
+<img src="main_flow.png" alt="main flow">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+it is the Roboquant instance that orchestrates the data flow between the components in order to allow for low coupling and easy swapping out of components.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_why_an_event_driven_approach">Why an event-driven approach?</h2>
+<h2 id="_responsibilities">Responsibilities</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Event-driven algo-trading platforms provide several advantages over a vectorised approach:</p>
+<p>The role and responsibilities of each of the components:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Reuse - An event-driven framework can be used for back testing and live trading with minimal change of components.</p>
+<p>Roboquant</p>
+<div class="paragraph">
+<p>The engine of the platform that performs the actual run and orchestrate the interaction between the components. The engine support all <a href="four_stages.html">four stages</a> of developing a strategy with minimal change to your code. This is also the only component that is not designed to be swapped out for a custom one.</p>
+</div>
 </li>
 <li>
-<p>Avoid Lookahead - With an event-driven test, it is unlikely that the strategy will actually peep into the future since at the time of making any decision in the code, the future data is not yet available.</p>
+<p>Feed</p>
+<div class="paragraph">
+<p>Provides the data needed for testing and trading in the form of events. A feed can represent both historic and live data.</p>
+</div>
 </li>
 <li>
-<p>Robustness - Live trading is by definition event driven. So by using the same approach during back testing, it ensures you got have to address use-cases that otherwise wouldn&#8217;t show up until it is too late.</p>
+<p>Strategy</p>
+<div class="paragraph">
+<p>Receives events from the feed and generates signals. A signal consist of a rating for a certain asset, like a BUY rating for Tesla. So a strategy doesn&#8217;t create orders, that is the responsibility of a policy.</p>
+</div>
+</li>
+<li>
+<p>Policy</p>
+<div class="paragraph">
+<p>Receives the signals and creates orders.</p>
+</div>
+</li>
+<li>
+<p>Broker</p>
+<div class="paragraph">
+<p>Received the orders generated by the policy and process them. Any open orders will also be processed until they are closed. After this step, it will return an updated account that reflects the order and trade status.</p>
+</div>
+</li>
+<li>
+<p>Metric</p>
+<div class="paragraph">
+<p>Receives the last state of the account and calculates various metrics that are of interest to determine the progress and results of the run.</p>
+</div>
+</li>
+<li>
+<p>Metrics Logger</p>
+<div class="paragraph">
+<p>Stores and/or log the metric values</p>
+</div>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Although event-driven systems come with the above benefits, they traditionally suffer from two disadvantages over simpler vectorised systems:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>They are more complex to implement and test. That is why using platform like roboquant makes a lot of sense, since then much of the heavy lifting is done by the platform.</p>
-</li>
-<li>
-<p>They can be slower to execute compared to a vectorised system. But by using Kotlin and a highly optimized code-base, roboquant is actually faster than most other algo-trading solutions.</p>
-</li>
-</ol>
 </div>
+<div class="sect1">
+<h2 id="_component_interface">Component Interface</h2>
+<div class="sectionbody">
+
 </div>
 </div>
                             </div>

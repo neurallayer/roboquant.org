@@ -14,17 +14,18 @@
                 </div>
             </header>
 
-            <section class="py-4" id="intro">
+            <section class="py-3" id="intro">
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">What is roboquant</h2></div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                Roboquant is an open source algorithmic trading platform written in Kotlin. No snake-oil about making
-                                lots of profit without doing the hard work, just a great foundation to build your strategies on top.
+                                Roboquant is an open source algorithmic trading platform written in Kotlin. It is very fast, easy to use and extend
+                                and completely free to use.
                                 <br><br>
                                 Roboquant is for anyone serious about algo-trading. So whether you are a retail trader or a trading firm,
-                                roboquant can help you to quickly develop fully automated trading strategies.
+                                roboquant can help you to quickly develop fully automated trading strategies. No promises of making lots of
+                                 profit without doing the hard work, just a great foundation for building your strategies.
                             </div>
                         </div>
                     </div>
@@ -32,12 +33,15 @@
             </section>
 
 
-            <section class="py-4" id="sample">
+            <section class="py-3" id="sample">
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">Simple to get started</h2></div>
                         <div class="col-lg-8">
                             <div class="col h-100">
+                                A lot of attention went into making sure roboquant is easy to use, especially for less experienced developers.
+                                The following code snippet shows all the key ingredients required to run a back test.
+                                <br><br>
                                 <#include "snippet.ftl">
                                 <form action="/get_started.html">
                                 <button class="btn btn-outline-dark" id="install_software" type="submit">Get the software</button>
@@ -49,7 +53,7 @@
             </section>
 
             <!-- Features section-->
-            <section class="py-4" id="features">
+            <section class="py-3" id="features">
                 <div class="container px-5 my-3">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">Main Features</h2></div>
@@ -77,7 +81,7 @@
                 </div>
             </section>
 
-              <section class="py-4" id="sample">
+              <section class="py-3" id="sample">
                             <div class="container px-5 my-1">
                                 <div class="row gx-5">
                                     <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">3rd Party Integration</h2></div>

@@ -7,7 +7,7 @@
 NOTE: There still needs to be a lot done to improve the documentation of roboquant, ranging from better API descriptions to some nice introduction tutorials. But here are already some links to available material that get your started.
 
 == Documentation
-A good place to start learning how to use roboquant, is by reading the main link:/documentation/index.html[documentation]. It provides an overview of the key concepts and how to apply them when you develop your own strategies. There are many code snippets included that can be cut & pasted to have head start.
+A good place to start learning how to use roboquant, is by reading the main link:/documentation/introduction/index.html[documentation]. It provides an overview of the key concepts and how to apply them when you develop your own strategies. There are many code snippets included that can be cut & pasted to have head start.
 
 == Jupyter Notebook Tutorials
 If you like to learn more by being hands-on, there are several ready to use tutorials in Jupyter Notebook format that you can try out. To find out more, go to: https://github.com/neurallayer/roboquant-notebook/tree/main[Tutorial Jupyter Notebooks]
