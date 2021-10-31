@@ -1,8 +1,7 @@
-= Introduction
-:jbake-type: doc
-:jbake-status: published
+= Welcome
 :icons: font
 :source-highlighter: rouge
+:jbake-date: 2020-01-31
 
 Welcome to the roboquant documentation. The roboquant platform has 4 main drivers:
 

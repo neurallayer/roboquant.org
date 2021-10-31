@@ -1,6 +1,6 @@
 = Design Decisions
 :jbake-type: doc
-:jbake-status: published
+:jbake-date: 2020-01-10
 
 This document provides an overview of the high level design choices, and the rational why they were made. It is provided mainly as background information. And it can also help to decide if roboquant is the right solution for you.
 

@@ -31,7 +31,7 @@ If you don't have Docker yet installed on your computer, check out https://www.d
 
 If you don't want to install anything locally, you can use a publicly hosted environment:
 
-* Launch the notebooks right now on MyBinder.org by clicking image:https://mybinder.org/badge_logo.svg[Binder,link=https://mybinder.org/v2/gh/neurallayer/roboquant/main?filepath=notebooks]
+* Launch the notebooks right now on MyBinder.org by clicking image:https://mybinder.org/badge_logo.svg[Binder,link=https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/tutorials]
 * Go to https://datalore.jetbrains.com/[JetBrains Datalore]. It has excellent support for Kotlin notebooks and has a free tier available if you just want to try roboquant out.
 
 == Standalone application

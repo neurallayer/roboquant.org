@@ -1,6 +1,7 @@
 = Features
 :jbake-type: doc
 :icons: font
+:jbake-date: 2020-01-15
 
 This page list some main features of roboquant for each key area: Fast, Flexible, Easy, and Free.
 It also provides a short overview of how roboquant compares to some other algo-trading software.

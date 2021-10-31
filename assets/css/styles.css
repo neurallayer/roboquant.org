@@ -287,7 +287,7 @@ pre {
   font-size: 0.875em;
 }
 pre code {
-  font-size: inherit;
+  /* font-size: inherit; */
   color: inherit;
   word-break: normal;
 }
