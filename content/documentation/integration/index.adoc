@@ -1,4 +1,4 @@
-= Integration
+= Overview
 
 There are three types of integrations:
 
@@ -6,7 +6,7 @@ There are three types of integrations:
 . Live data providers
 . Brokers
 
-In some cases a single 3rd party provides all three (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides data)
+In some cases a single 3rd party provides all three types of integration (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides historic and live data)
 
 == Configuration
 When you want to integrate a 3rd party, you most likely require credentials to gain access. Often this is in the form of an  API id and key. Although you can embed these directly in your source code, roboquant supports better and more secure alternatives.
@@ -26,7 +26,7 @@ The following 3rd parties are supported:
 
 * Interactive Brokers: historic feed, live feed, trading
 * Alpaca: historic feed, live feed, trading
-* Oanda: historic feed, live feed, trading
+* OANDA: historic feed, live feed, trading
 * IEX Cloud: historic feed, live feed
 * Yahoo Finance: historic feed
 

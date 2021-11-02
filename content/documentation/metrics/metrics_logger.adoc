@@ -8,7 +8,19 @@ The metrics logger receives the metric values at the end of each step and then s
 == Standard Loggers
 
 === MemoryLogger
+This is the default logger used if no other logger is configured
 
+=== NOPLogger
+No-Operation logger, in other words this logger just ignores all metrics and is particular useful for unit tests
+
+=== InfoLogger
+
+=== ConsoleLogger
+Logs metric value to the console using a simple "println" statement.
 
 == Custom Loggers
 You can implement also your own MetricsLogger, for example if you want to store values into a database or have some custom file format that you want to use.
+
+[source,shell]
+----
+----

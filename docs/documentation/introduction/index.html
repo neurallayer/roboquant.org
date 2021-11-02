@@ -26,7 +26,7 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="/get_started.html">Get Started</a></li>
-                <li class="nav-item"><a class="nav-link" href="/learning.html">Learning</a></li>
+                <li class="nav-item"><a class="nav-link" href="/documentation/introduction/index.html">Documentation</a></li>
                 <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
                 <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
             </ul>
@@ -58,9 +58,6 @@
             <ul class="nav flex-column">
                          <li class="nav-item">
                             <a href="/documentation/introduction/index.html" class="nav-link">Welcome</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/introduction/main_flow.html" class="nav-link">Main Flow</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a>
@@ -113,10 +110,10 @@
             <summary>strategy</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/strategy/index.html" class="nav-link">Strategy</a>
+                            <a href="/documentation/strategy/signal.html" class="nav-link">Signal</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/strategy/signal.html" class="nav-link">Signal</a>
+                            <a href="/documentation/strategy/index.html" class="nav-link">Strategy</a>
                          </li>
             </ul>
         </details>
@@ -149,7 +146,7 @@
                             <a href="/documentation/integration/crypto.html" class="nav-link">Crypto Exchanges</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/integration/index.html" class="nav-link">Integration</a>
+                            <a href="/documentation/integration/index.html" class="nav-link">Overview</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a>
@@ -171,7 +168,7 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Welcome to the roboquant documentation. The roboquant platform has 4 main drivers:</p>
+<p>Welcome to the roboquant documentation. The roboquant platform has 4 main goals:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -189,10 +186,99 @@
 </li>
 </ol>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you like to learn more by being hands-on, there are several ready to use tutorials in Jupyter Notebook format that you can try out. To find out more, go to: <a href="https://github.com/neurallayer/roboquant-notebook/tree/main">Tutorial Notebooks</a>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_high_level_overview">High Level Overview</h2>
+<h2 id="_data_flow">Data Flow</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Perhaps the most important part of using roboquant is to understand the main flow of data and the responsibility each component has in this flow.</p>
+</div>
+<div class="paragraph">
+<p>The following diagram shows the main components of the platform and the type of data they consume and produce.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="main_flow.png" alt="main flow">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+it is an instance of the Roboquant class that orchestrates the data flow between the components in order to allow for low coupling and easy swapping out of components. So components don&#8217;t directly call each other.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The role and responsibilities of each of the components:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Roboquant</p>
+<div class="paragraph">
+<p>The engine of the platform that performs the actual run and orchestrate the interaction between the components. The engine supports all <a href="four_stages.html">four stages</a> of developing a strategy with minimal change to your code. This is also the only component that is not designed to be swapped out for a custom one.</p>
+</div>
+</li>
+<li>
+<p>Feed</p>
+<div class="paragraph">
+<p>Provides the data needed for testing and trading in the form of events. A feed can represent both historic and live data.</p>
+</div>
+</li>
+<li>
+<p>Strategy</p>
+<div class="paragraph">
+<p>Receives events from the feed and generates signals. A signal consist of a rating for a certain asset, like a BUY rating for Tesla. So a strategy doesn&#8217;t create orders, that is the responsibility of a policy.</p>
+</div>
+</li>
+<li>
+<p>Policy</p>
+<div class="paragraph">
+<p>Receives the signals and creates orders.</p>
+</div>
+</li>
+<li>
+<p>Broker</p>
+<div class="paragraph">
+<p>Received the orders generated by the policy and process them. Any open orders will also be processed until they are closed. After this step, it will return an updated account that reflects the order and trade status.</p>
+</div>
+</li>
+<li>
+<p>Metric</p>
+<div class="paragraph">
+<p>Receives the last state of the account and calculates various metrics that are of interest to determine the progress and results of the run.</p>
+</div>
+</li>
+<li>
+<p>Metrics Logger</p>
+<div class="paragraph">
+<p>Stores and/or log the metric values</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_running_a_strategy">Running a strategy</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Developing a strategy and validate it during a back-test is a straight forward process.</p>

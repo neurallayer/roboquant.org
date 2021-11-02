@@ -26,7 +26,7 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="/get_started.html">Get Started</a></li>
-                <li class="nav-item"><a class="nav-link" href="/learning.html">Learning</a></li>
+                <li class="nav-item"><a class="nav-link" href="/documentation/introduction/index.html">Documentation</a></li>
                 <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
                 <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
             </ul>
@@ -58,9 +58,6 @@
             <ul class="nav flex-column">
                          <li class="nav-item">
                             <a href="/documentation/introduction/index.html" class="nav-link">Welcome</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/introduction/main_flow.html" class="nav-link">Main Flow</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a>
@@ -113,10 +110,10 @@
             <summary>strategy</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/strategy/index.html" class="nav-link">Strategy</a>
+                            <a href="/documentation/strategy/signal.html" class="nav-link">Signal</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/strategy/signal.html" class="nav-link">Signal</a>
+                            <a href="/documentation/strategy/index.html" class="nav-link">Strategy</a>
                          </li>
             </ul>
         </details>
@@ -149,7 +146,7 @@
                             <a href="/documentation/integration/crypto.html" class="nav-link">Crypto Exchanges</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/integration/index.html" class="nav-link">Integration</a>
+                            <a href="/documentation/integration/index.html" class="nav-link">Overview</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a>
@@ -171,7 +168,10 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Metrics allow monitoring the progress of a run. It can be used both during testing and trading.</p>
+<p>Metrics allow monitoring the progress of a run and get the necessary insights how a strategy id performing. Metrics are not limited to back testing and also be used both during live testing and trading.</p>
+</div>
+<div class="paragraph">
+<p>The configured metrics are invoked at the end of each step. A single metric can return multiple values, each value has a unique name.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -198,6 +198,11 @@ metrics only calculate the values, the storing/logging of these values is done b
 <div class="sectionbody">
 <div class="paragraph">
 <p>You can develop your own metrics.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"></code></pre>
+</div>
 </div>
 </div>
 </div>

@@ -2,7 +2,9 @@
 :icons: font
 :source-highlighter: rouge
 
-Metrics allow monitoring the progress of a run. It can be used both during testing and trading.
+Metrics allow monitoring the progress of a run and get the necessary insights how a strategy id performing. Metrics are not limited to back testing and also be used both during live testing and trading.
+
+The configured metrics are invoked at the end of each step. A single metric can return multiple values, each value has a unique name.
 
 NOTE: metrics only calculate the values, the storing/logging of these values is done by a MetricsLogger.
 
@@ -14,3 +16,7 @@ NOTE: metrics only calculate the values, the storing/logging of these values is 
 
 == Custom Metrics
 You can develop your own metrics.
+
+[source,shell]
+----
+----

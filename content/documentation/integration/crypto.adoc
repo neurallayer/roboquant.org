@@ -2,8 +2,10 @@
 
 Roboquant supports crypto exchanges in two ways:
 
-. Dedicated support for Binance using their Java client library.
+. Dedicated support for Binance using their Java client library
 . Support for most other exchanges using the excellent XChange library
+
+The module roboquant-crypto contains all the logic, so make sure you include it in your build tool if you want to use it in a standalone application.
 
 == Binance
 The roboquant-crypto package contains a dedicated client for Binance.

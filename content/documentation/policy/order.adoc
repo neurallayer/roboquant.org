@@ -29,7 +29,7 @@ TIP: only use order types during back testing that are also supported by the bro
 
 
 == TIF
-TIF (Time in Force) sets a policy for an order until when the order remains valid. There are two types of TIF:
+TIF (Time in Force) sets an execution policy for an order until when the order remains valid. There are two types of TIF:
 
 . Time based, defining how long the order stays valid
 . Fill based, defining under what fill conditions the order stays valid
