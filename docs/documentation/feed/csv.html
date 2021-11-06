@@ -6,7 +6,7 @@
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
     <meta name="theme-color" content="#3296C8">
-    <title>roboquant - CSV</title>
+    <title>roboquant - CSV Feed</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -40,7 +40,7 @@
                                 <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
                             <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">CSV</h3>
+                                <h3 class="masthead-subheading font-weight-light mt-3">CSV Feed</h3>
                             </div>
                          </div>
 
@@ -93,16 +93,16 @@
             <summary>feed</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/feed/index.html" class="nav-link">Feed</a>
-                         </li>
-                         <li class="nav-item">
                             <a href="/documentation/feed/event.html" class="nav-link">Event</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/feed/avro.html" class="nav-link">Avro</a>
+                            <a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/feed/csv.html" class="nav-link">CSV</a>
+                            <a href="/documentation/feed/index.html" class="nav-link">Feed</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/feed/avro.html" class="nav-link">Avro</a>
                          </li>
             </ul>
         </details>
@@ -110,10 +110,10 @@
             <summary>strategy</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/strategy/signal.html" class="nav-link">Signal</a>
+                            <a href="/documentation/strategy/index.html" class="nav-link">Strategy</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/strategy/index.html" class="nav-link">Strategy</a>
+                            <a href="/documentation/strategy/signal.html" class="nav-link">Signal</a>
                          </li>
             </ul>
         </details>
@@ -121,10 +121,10 @@
             <summary>policy</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/policy/order.html" class="nav-link">Orders</a>
+                            <a href="/documentation/policy/index.html" class="nav-link">Policy</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/policy/index.html" class="nav-link">Policy</a>
+                            <a href="/documentation/policy/order.html" class="nav-link">Orders</a>
                          </li>
             </ul>
         </details>
@@ -132,10 +132,10 @@
             <summary>metrics</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a>
+                            <a href="/documentation/metrics/index.html" class="nav-link">Metrics</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/metrics/index.html" class="nav-link">Metrics</a>
+                            <a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a>
                          </li>
             </ul>
         </details>
@@ -173,20 +173,22 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_basics">Basics</h2>
+<h2 id="_basic_usage">Basic usage</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The simplest usage is to provide the directory that contains the CSV files and the CSVFeed will try to parse them based on defaults and the content it finds.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">CSVFeed</span><span class="p">(</span><span class="s">"some/path"</span><span class="p">)</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">CSVFeed</span><span class="p">(</span><span class="s">"data/test"</span><span class="p">)</span>
+<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span>
+<span class="n">feed</span><span class="p">.</span><span class="n">assets</span><span class="p">.</span><span class="nf">summary</span><span class="p">().</span><span class="nf">log</span><span class="p">()</span></code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_advanced">Advanced</h2>
+<h2 id="_advanced_usage">Advanced usage</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Since the format of CSV files differs a lot, the CSVFeed allows for a lot of configuration to cather to this.</p>

@@ -93,16 +93,16 @@
             <summary>feed</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/feed/index.html" class="nav-link">Feed</a>
-                         </li>
-                         <li class="nav-item">
                             <a href="/documentation/feed/event.html" class="nav-link">Event</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/feed/avro.html" class="nav-link">Avro</a>
+                            <a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/feed/csv.html" class="nav-link">CSV</a>
+                            <a href="/documentation/feed/index.html" class="nav-link">Feed</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/feed/avro.html" class="nav-link">Avro</a>
                          </li>
             </ul>
         </details>
@@ -110,10 +110,10 @@
             <summary>strategy</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/strategy/signal.html" class="nav-link">Signal</a>
+                            <a href="/documentation/strategy/index.html" class="nav-link">Strategy</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/strategy/index.html" class="nav-link">Strategy</a>
+                            <a href="/documentation/strategy/signal.html" class="nav-link">Signal</a>
                          </li>
             </ul>
         </details>
@@ -121,10 +121,10 @@
             <summary>policy</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/policy/order.html" class="nav-link">Orders</a>
+                            <a href="/documentation/policy/index.html" class="nav-link">Policy</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/policy/index.html" class="nav-link">Policy</a>
+                            <a href="/documentation/policy/order.html" class="nav-link">Orders</a>
                          </li>
             </ul>
         </details>
@@ -132,10 +132,10 @@
             <summary>metrics</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a>
+                            <a href="/documentation/metrics/index.html" class="nav-link">Metrics</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/metrics/index.html" class="nav-link">Metrics</a>
+                            <a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a>
                          </li>
             </ul>
         </details>
@@ -183,26 +183,53 @@
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyStrategy</span> <span class="p">:</span> <span class="nc">Strategy</span> <span class="p">{</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">generate</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;</span> <span class="p">{</span>
-        <span class="c1">// your code goes here</span>
+        <span class="nc">TODO</span><span class="p">(</span><span class="s">"Not yet implemented"</span><span class="p">)</span>
     <span class="p">}</span>
+
+<span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyStrategy2</span> <span class="p">:</span> <span class="nc">Strategy</span> <span class="p">{</span>
+
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">lastPrices</span> <span class="p">=</span> <span class="n">mutableMapOf</span><span class="p">&lt;</span><span class="nc">Asset</span><span class="p">,</span> <span class="nc">Double</span><span class="p">&gt;()</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">generate</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">signals</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;()</span>
+        <span class="k">for</span> <span class="p">((</span><span class="n">asset</span><span class="p">,</span> <span class="n">priceAction</span><span class="p">)</span> <span class="k">in</span> <span class="n">event</span><span class="p">.</span><span class="n">prices</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">val</span> <span class="py">lastPrice</span> <span class="p">=</span> <span class="n">lastPrices</span><span class="p">.</span><span class="nf">getOrDefault</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="nc">Double</span><span class="p">.</span><span class="nc">MAX_VALUE</span><span class="p">)</span>
+            <span class="kd">val</span> <span class="py">currentPrice</span> <span class="p">=</span> <span class="n">priceAction</span><span class="p">.</span><span class="nf">getPrice</span><span class="p">()</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">currentPrice</span> <span class="p">&gt;</span> <span class="n">lastPrice</span><span class="p">)</span> <span class="n">signals</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nc">Signal</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="nc">Rating</span><span class="p">.</span><span class="nc">BUY</span><span class="p">))</span>
+            <span class="n">lastPrices</span><span class="p">[</span><span class="n">asset</span><span class="p">]</span> <span class="p">=</span> <span class="n">currentPrice</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">signals</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">start</span><span class="p">(</span><span class="n">runPhase</span><span class="p">:</span> <span class="nc">RunPhase</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">lastPrices</span><span class="p">.</span><span class="nf">clear</span><span class="p">()</span>
+    <span class="p">}</span>
+
 <span class="p">}</span></code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_advanced">Advanced</h2>
+<h2 id="_policy_based_strategies">Policy based Strategies</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are use cases that require not only access to the event, but also to for example the account. These type of strategies can be implemented in roboquant, but they should be implemented as a policy and not strategy.</p>
+<p>There are use cases that require not only access to the event. These type of strategies can be implemented in roboquant, but they should be implemented as a policy and not strategy. Some reasons you might want to use a policy:</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">NOPStrategy</span><span class="p">()</span>
-<span class="kd">val</span> <span class="py">customPolicy</span> <span class="p">=</span> <span class="nc">MyCustomPolicy</span><span class="p">()</span>
-<span class="kd">val</span> <span class="py">metric</span> <span class="p">=</span> <span class="nc">AccountSummary</span><span class="p">()</span>
-<span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">metric</span><span class="p">,</span> <span class="n">policy</span><span class="p">=</span> <span class="n">customPolicy</span><span class="p">)</span></code></pre>
-</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Access to the Account instance is required, for example to re-balance a portfolio</p>
+</li>
+<li>
+<p>Directly generate orders instead of signals</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

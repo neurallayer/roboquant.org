@@ -93,16 +93,16 @@
             <summary>feed</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/feed/index.html" class="nav-link">Feed</a>
-                         </li>
-                         <li class="nav-item">
                             <a href="/documentation/feed/event.html" class="nav-link">Event</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/feed/avro.html" class="nav-link">Avro</a>
+                            <a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/feed/csv.html" class="nav-link">CSV</a>
+                            <a href="/documentation/feed/index.html" class="nav-link">Feed</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/feed/avro.html" class="nav-link">Avro</a>
                          </li>
             </ul>
         </details>
@@ -110,10 +110,10 @@
             <summary>strategy</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/strategy/signal.html" class="nav-link">Signal</a>
+                            <a href="/documentation/strategy/index.html" class="nav-link">Strategy</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/strategy/index.html" class="nav-link">Strategy</a>
+                            <a href="/documentation/strategy/signal.html" class="nav-link">Signal</a>
                          </li>
             </ul>
         </details>
@@ -121,10 +121,10 @@
             <summary>policy</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/policy/order.html" class="nav-link">Orders</a>
+                            <a href="/documentation/policy/index.html" class="nav-link">Policy</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/policy/index.html" class="nav-link">Policy</a>
+                            <a href="/documentation/policy/order.html" class="nav-link">Orders</a>
                          </li>
             </ul>
         </details>
@@ -132,10 +132,10 @@
             <summary>metrics</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a>
+                            <a href="/documentation/metrics/index.html" class="nav-link">Metrics</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/metrics/index.html" class="nav-link">Metrics</a>
+                            <a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a>
                          </li>
             </ul>
         </details>
@@ -234,10 +234,12 @@ If there is one thing that prevents people from actually going live with a strat
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyPolicy</span> <span class="p">:</span>  <span class="nc">Policy</span>  <span class="p">{</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyPolicy</span> <span class="p">:</span> <span class="nc">Policy</span> <span class="p">{</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">act</span><span class="p">(</span><span class="n">signals</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;,</span> <span class="n">account</span><span class="p">:</span> <span class="nc">Account</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">result</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;()</span>
         <span class="c1">// Your code here</span>
+        <span class="k">return</span> <span class="n">result</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
 </div>
@@ -247,12 +249,12 @@ If there is one thing that prevents people from actually going live with a strat
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyPolicy</span> <span class="p">:</span>  <span class="nc">Policy</span>  <span class="p">{</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyNativePolicy</span> <span class="p">:</span>  <span class="nc">Policy</span>  <span class="p">{</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">act</span><span class="p">(</span><span class="n">signals</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;,</span> <span class="n">account</span><span class="p">:</span> <span class="nc">Account</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;</span> <span class="p">{</span>
-        <span class="kd">val</span> <span class="py">orders</span> <span class="p">=</span> <span class="n">mutableMapOf</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;()</span>
+        <span class="kd">val</span> <span class="py">orders</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;()</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">signal</span> <span class="k">in</span> <span class="n">signals</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">val</span> <span class="py">qty</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">positive</span><span class="p">)</span> <span class="mf">100.0</span> <span class="k">else</span> <span class="p">-</span><span class="mf">100.0</span>
+            <span class="kd">val</span> <span class="py">qty</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">rating</span><span class="p">.</span><span class="n">isPositive</span><span class="p">)</span> <span class="mf">100.0</span> <span class="k">else</span> <span class="p">-</span><span class="mf">100.0</span>
             <span class="kd">val</span> <span class="py">order</span> <span class="p">=</span> <span class="nc">MarketOrder</span><span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">asset</span><span class="p">,</span> <span class="n">qty</span><span class="p">)</span>
             <span class="n">orders</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
         <span class="p">}</span>
@@ -262,17 +264,17 @@ If there is one thing that prevents people from actually going live with a strat
 </div>
 </div>
 <div class="paragraph">
-<p>Or using the more concise Kotlin way:</p>
+<p>Or using the more concise Kotlin way of doing things:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyPolicy</span> <span class="p">:</span>  <span class="nc">Policy</span>  <span class="p">{</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyNativePolicy2</span> <span class="p">:</span>  <span class="nc">Policy</span>  <span class="p">{</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">act</span><span class="p">(</span><span class="n">signals</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;,</span> <span class="n">account</span><span class="p">:</span> <span class="nc">Account</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">signals</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span>
-            <span class="kd">val</span> <span class="py">qty</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">positive</span><span class="p">)</span> <span class="mf">100.0</span> <span class="k">else</span> <span class="p">-</span><span class="mf">100.0</span>
+            <span class="kd">val</span> <span class="py">qty</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">rating</span><span class="p">.</span><span class="n">isPositive</span><span class="p">)</span> <span class="mf">100.0</span> <span class="k">else</span> <span class="p">-</span><span class="mf">100.0</span>
             <span class="nc">MarketOrder</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">asset</span><span class="p">,</span> <span class="n">qty</span><span class="p">)</span>
-       <span class="p">}</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
 </div>

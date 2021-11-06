@@ -1,6 +1,7 @@
 = Strategy
 :source-highlighter: rouge
 :icons: font
+:sourcefile: ../../../samples/strategy.kt
 
 A strategy is most likely the place where you do most custom development. It is responsible for generating signals based on the events it receives.
 
@@ -9,22 +10,18 @@ You will only need to implement a single method, called ```generate```
 
 [source, kotlin]
 ----
-class MyStrategy : Strategy {
-
-    override fun generate(event: Event): List<Signal> {
-        // your code goes here
-    }
-}
+include::{sourcefile}[tag=basic]
 ----
 
-
-== Advanced
-There are use cases that require not only access to the event, but also to for example the account. These type of strategies can be implemented in roboquant, but they should be implemented as a policy and not strategy.
 
 [source, kotlin]
 ----
-val strategy = NOPStrategy()
-val customPolicy = MyCustomPolicy()
-val metric = AccountSummary()
-val roboquant = Roboquant(strategy, metric, policy= customPolicy)
+include::{sourcefile}[tag=naive]
 ----
+
+
+== Policy based Strategies
+There are use cases that require not only access to the event. These type of strategies can be implemented in roboquant, but they should be implemented as a policy and not strategy. Some reasons you might want to use a policy:
+
+* Access to the Account instance is required, for example to re-balance a portfolio
+* Directly generate orders instead of signals

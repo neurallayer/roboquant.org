@@ -1,5 +1,6 @@
 = Event
 :source-highlighter: rouge
+:sourcefile: ../../../samples/feed.kt
 
 An event contains the following two attributes:
 
@@ -14,16 +15,10 @@ For example when you want to use unemployment numbers as part of your feed, you 
 == Action
 Action is an abstraction for any type of information. It can range from price actions, like price-bars and order-book snapshots, to social media content or even satellite images. There is now commonality between actions, and you can add any type of actions you like to the platform. The only requirements is that they implement the empty interface ```Action```
 
-It is up to the strategy to filter for the action types it is interested in:
+It is up to the strategy to filter for the action types it is interested in, for example:
 
-[source, kotlin]
+[source, kotlin, indent=0]
 ----
-class MyStrategy : Strategy {
-    override fun generate(event: Event): List<Signal> {
-        for (priceBar in event.actions.filterIsInstance<PriceBar>()) {
-            // your code
-        }
-    }
-}
+include::{sourcefile}[tag=event]
 ----
 

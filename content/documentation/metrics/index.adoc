@@ -1,6 +1,8 @@
 = Metrics
 :icons: font
 :source-highlighter: rouge
+:sourcefile: ../../../samples/metrics.kt
+
 
 Metrics allow monitoring the progress of a run and get the necessary insights how a strategy id performing. Metrics are not limited to back testing and also be used both during live testing and trading.
 
@@ -10,13 +12,16 @@ NOTE: metrics only calculate the values, the storing/logging of these values is 
 
 
 == Standard Metrics
-
-
+[source,kotlin]
+----
+include::{sourcefile}[tag=standard]
+----
 
 
 == Custom Metrics
-You can develop your own metrics.
+You can develop your own metrics. The easiest way to do so is to extend the SimpleMetric class
 
-[source,shell]
+[source,kotlin]
 ----
+include::{sourcefile}[tag=simple]
 ----

@@ -10,11 +10,12 @@ There are two ways to use roboquant and develop trading strategies:
 
 . Interactively in a _Jupyter Notebook_. If you want to be up and running quickly, this is the best approach. Additionally, you get many charts out-of-the-box that help you to understand how the strategy is performing.
 +
-image::jupyter-lab.png[alt="screenshot"]
+image::jupyter-lab.png[alt="screenshot", width="400", align="center"]
 
 . As a library in your _standalone Kotlin or Java application_. If you plan to develop large and complex trading strategies, this is the good approach since you have the full power of an IDE like IntelliJ IDEA at your disposal.
 +
-image::idea.png[alt="screenshot"]
+image::idea.png[alt="screenshot", width="400", align="center"]
+
 
 == Jupyter Notebook
 

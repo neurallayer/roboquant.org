@@ -1,6 +1,7 @@
 = Policy
 :source-highlighter: rouge
 :icons: font
+:sourcefile: ../../../samples/policy.kt
 
 A policy is responsible for generating the orders that will be placed at a broker. The most common use-case is that a policy does this based on the signals it receives from a strategy.
 
@@ -23,50 +24,25 @@ NOTE: If there is one thing that prevents people from actually going live with a
 === DefaultPolicy
 As the name already suggests, this is the default policy that will be used if no other policy is specified.
 
-
 == Implementing your own policies
 In case none of the out-of-the-box policies will do, you can always implement your own policy. You only have to implement a single method:
 
 [source, kotlin]
 ----
-class MyPolicy :  Policy  {
-
-    override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
-        // Your code here
-    }
-}
+include::{sourcefile}[tag=basic]
 ----
 
 So a very naive implementation could look something like this:
 
 [source, kotlin]
 ----
-class MyPolicy :  Policy  {
-
-    override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
-        val orders = mutableMapOf<Order>()
-        for (signal in signals) {
-            val qty = if (signal.positive) 100.0 else -100.0
-            val order = MarketOrder(signal.asset, qty)
-            orders.add(order)
-        }
-        return orders
-    }
-}
+include::{sourcefile}[tag=naive]
 ----
 
-Or using the more concise Kotlin way:
+Or using the more concise Kotlin way of doing things:
 [source, kotlin]
 ----
-class MyPolicy :  Policy  {
-
-    override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
-        return signals.map {
-            val qty = if (it.positive) 100.0 else -100.0
-            MarketOrder(it.asset, qty)
-       }
-    }
-}
+include::{sourcefile}[tag=naive2]
 ----
 
 

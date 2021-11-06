@@ -10,13 +10,14 @@ The metrics logger receives the metric values at the end of each step and then s
 === MemoryLogger
 This is the default logger used if no other logger is configured
 
-=== NOPLogger
-No-Operation logger, in other words this logger just ignores all metrics and is particular useful for unit tests
+=== SilentLogger
+This logger just silently ignores all metrics and is mostly useful for unit tests
 
 === InfoLogger
+Logs metrics using the built-in Logger
 
 === ConsoleLogger
-Logs metric value to the console using a simple "println" statement.
+Logs the metrics to the console using a simple "println" statement.
 
 == Custom Loggers
 You can implement also your own MetricsLogger, for example if you want to store values into a database or have some custom file format that you want to use.

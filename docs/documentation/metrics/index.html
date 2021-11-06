@@ -93,16 +93,16 @@
             <summary>feed</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/feed/index.html" class="nav-link">Feed</a>
-                         </li>
-                         <li class="nav-item">
                             <a href="/documentation/feed/event.html" class="nav-link">Event</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/feed/avro.html" class="nav-link">Avro</a>
+                            <a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/feed/csv.html" class="nav-link">CSV</a>
+                            <a href="/documentation/feed/index.html" class="nav-link">Feed</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/feed/avro.html" class="nav-link">Avro</a>
                          </li>
             </ul>
         </details>
@@ -110,10 +110,10 @@
             <summary>strategy</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/strategy/signal.html" class="nav-link">Signal</a>
+                            <a href="/documentation/strategy/index.html" class="nav-link">Strategy</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/strategy/index.html" class="nav-link">Strategy</a>
+                            <a href="/documentation/strategy/signal.html" class="nav-link">Signal</a>
                          </li>
             </ul>
         </details>
@@ -121,10 +121,10 @@
             <summary>policy</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/policy/order.html" class="nav-link">Orders</a>
+                            <a href="/documentation/policy/index.html" class="nav-link">Policy</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/policy/index.html" class="nav-link">Policy</a>
+                            <a href="/documentation/policy/order.html" class="nav-link">Orders</a>
                          </li>
             </ul>
         </details>
@@ -132,10 +132,10 @@
             <summary>metrics</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a>
+                            <a href="/documentation/metrics/index.html" class="nav-link">Metrics</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/metrics/index.html" class="nav-link">Metrics</a>
+                            <a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a>
                          </li>
             </ul>
         </details>
@@ -190,18 +190,34 @@ metrics only calculate the values, the storing/logging of these values is done b
 <div class="sect1">
 <h2 id="_standard_metrics">Standard Metrics</h2>
 <div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">metric1</span> <span class="p">=</span> <span class="nc">AccountSummary</span><span class="p">()</span>
+    <span class="kd">val</span> <span class="py">metric2</span> <span class="p">=</span> <span class="nc">PortfolioExposure</span><span class="p">()</span>
+    <span class="kd">val</span> <span class="py">metric3</span> <span class="p">=</span> <span class="nc">ProgressMetric</span><span class="p">()</span>
+    <span class="kd">val</span> <span class="py">metric4</span> <span class="p">=</span> <span class="nc">VWAPMetric</span><span class="p">()</span>
+    <span class="kd">val</span> <span class="py">metric5</span> <span class="p">=</span> <span class="nc">SharpRatio</span><span class="p">()</span>
 
+    <span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="nc">EMACrossover</span><span class="p">(),</span> <span class="n">metric1</span><span class="p">,</span> <span class="n">metric2</span><span class="p">,</span> <span class="n">metric3</span><span class="p">,</span> <span class="n">metric4</span><span class="p">,</span> <span class="n">metric5</span><span class="p">)</span></code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_custom_metrics">Custom Metrics</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You can develop your own metrics.</p>
+<p>You can develop your own metrics. The easiest way to do so is to extend the SimpleMetric class</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="shell"></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyMetric</span> <span class="p">:</span> <span class="nc">SimpleMetric</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">calc</span><span class="p">(</span><span class="n">account</span><span class="p">:</span> <span class="nc">Account</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">MetricResults</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nf">mapOf</span><span class="p">(</span><span class="s">"metricName1"</span> <span class="n">to</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s">"metricName2"</span> <span class="n">to</span> <span class="mf">2.0</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="p">}</span></code></pre>
 </div>
 </div>
 </div>
