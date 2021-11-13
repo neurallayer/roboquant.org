@@ -93,16 +93,16 @@
             <summary>feed</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
-                            <a href="/documentation/feed/event.html" class="nav-link">Event</a>
+                            <a href="/documentation/feed/avro.html" class="nav-link">Avro</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/feed/index.html" class="nav-link">Feed</a>
+                            <a href="/documentation/feed/event.html" class="nav-link">Event</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/feed/avro.html" class="nav-link">Avro</a>
+                            <a href="/documentation/feed/index.html" class="nav-link">Feed</a>
                          </li>
             </ul>
         </details>
@@ -143,38 +143,107 @@
             <summary>integration</summary>
             <ul class="nav flex-column">
                          <li class="nav-item">
+                            <a href="/documentation/integration/alpaca.html" class="nav-link">Alpaca</a>
+                         </li>
+                         <li class="nav-item">
                             <a href="/documentation/integration/crypto.html" class="nav-link">Crypto Exchanges</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/integration/index.html" class="nav-link">Overview</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a>
-                         </li>
-                         <li class="nav-item">
-                            <a href="/documentation/integration/oanda.html" class="nav-link">OANDA</a>
                          </li>
                          <li class="nav-item">
                             <a href="/documentation/integration/ibkr.html" class="nav-link">Interactive Brokers</a>
                          </li>
                          <li class="nav-item">
-                            <a href="/documentation/integration/alpaca.html" class="nav-link">Alpaca</a>
+                            <a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/integration/index.html" class="nav-link">Overview</a>
+                         </li>
+                         <li class="nav-item">
+                            <a href="/documentation/integration/oanda.html" class="nav-link">OANDA</a>
                          </li>
             </ul>
         </details>
 </nav>                         </div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <div class="sect1">
+                                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Roboquant is the engine of the platform. It orchestrates the interaction between all the components and perform the actual runs.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_default_settings">Default settings</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>By default, you only need to provide a strategy when creating a new instance of Roboquant.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">strategy</span>  <span class="p">=</span> <span class="nc">EMACrossover</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following default values will then be used:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>No metrics at all will be captured</p>
+</li>
+<li>
+<p>The SimBroker as the broker</p>
+</li>
+<li>
+<p>The DefaultPolicy as the policy</p>
+</li>
+<li>
+<p>The MemoryLogger as the MetricsLogger (although without metrics, there is not much to log)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each of these can be overwritten with a different implementation when you instantiate a Roboquant if you want:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">metric1</span><span class="p">,</span> <span class="n">metric2</span><span class="p">,</span> <span class="n">policy</span> <span class="p">=</span> <span class="n">myPolicy</span><span class="p">,</span> <span class="n">broker</span> <span class="p">=</span> <span class="n">myBroker</span><span class="p">,</span> <span class="n">logger</span> <span class="p">=</span> <span class="n">myLogger</span><span class="p">)</span></code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_run">Run</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>After you have created an instance of roboquant and have a <a href="../feed/index.html">feed</a> defined, you can start a run.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case, all the events available in the feed will be used in the run. You can restrict it to a certain time-frame:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">timeFrame</span> <span class="p">=</span> <span class="nc">TimeFrame</span><span class="p">.</span><span class="nf">fromYears</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)</span>
+<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">timeFrame</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can invoke a run multiple times, for example for different time frames. The following code shows how to easily perform a walk forward:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">timeFrame</span> <span class="p">=</span> <span class="nc">TimeFrame</span><span class="p">.</span><span class="nf">fromYears</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)</span>
+<span class="n">timeFrame</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="nc">Period</span><span class="p">.</span><span class="nf">ofYears</span><span class="p">(</span><span class="mi">2</span><span class="p">)).</span><span class="nf">forEach</span> <span class="p">{</span>
+    <span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">it</span><span class="p">)</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
 </div>
 </div>
                             </div>

@@ -1,8 +1,49 @@
 = Roboquant
+:source-highlighter: rouge
+:icons: font
+:sourcefile: ../../../samples/roboquant.kt
 
+Roboquant is the engine of the platform. It orchestrates the interaction between all the components and perform the actual runs.
 
 == Default settings
+By default, you only need to provide a strategy when creating a new instance of Roboquant.
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=basic]
+----
+
+The following default values will then be used:
+
+* No metrics at all will be captured
+* The SimBroker as the broker
+* The DefaultPolicy as the policy
+* The MemoryLogger as the MetricsLogger (although without metrics, there is not much to log)
+
+Each of these can be overwritten with a different implementation when you instantiate a Roboquant if you want:
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=complete]
+----
 
 == Run
+After you have created an instance of roboquant and have a xref:../feed/index.adoc[feed] defined, you can start a run.
 
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=run]
+----
 
+In this case, all the events available in the feed will be used in the run. You can restrict it to a certain time-frame:
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=run2]
+----
+
+You can invoke a run multiple times, for example for different time frames. The following code shows how to easily perform a walk forward:
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=run3]
+----

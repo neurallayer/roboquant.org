@@ -1,9 +1,9 @@
 = roboquant website
+:icons: font
 
 This repo contains the content for the roboquant.org website. It uses JBake as the generator for the static website and asciidoc for most content.
 
 == Build
-
 Not the JBake default output directory is used, but rather the ```docs``` directory. The reason for this is that the website is hosted on GitHub Pages and right now only / or /docs can serve as the content root and not other directories.
 
 To generate the website, run:
@@ -13,13 +13,22 @@ To generate the website, run:
 mvn jbake:generate
 ----
 
+or if you have JBake installed.
+
+[source,shell]
+----
+rm -rf docs
+jbake . docs
+----
+
+NOTE: If you are on Apple Silicon (the M1 processor), the default JBake installation won't work. But there is a patch available that uses SQLLite under the hood and works. You can get it at: https://github.com/mhberger/jbake/tree/mhb/sqlite-2021-05-30[JBake SQLLite Patched]
+
 To develop, you can run: 
 
 [source,shell]
 ----
 mvn jbake:inline
 ----
-
 
 == Other
 Check the roboquant site at https://roboquant.org[roboquant.org]
