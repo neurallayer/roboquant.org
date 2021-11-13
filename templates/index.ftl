@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-   <#include "head.ftl">
+    <#include "head.ftl">
     <body class="d-flex flex-column h-100">
         <#include "github_ribbon.ftl">
         <main class="flex-shrink-0">

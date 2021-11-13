@@ -51,6 +51,17 @@ fun run2() {
 }
 
 
+
+fun run2b() {
+    val roboquant = Roboquant(EMACrossover())
+    val feed = RandomWalk.lastYears()
+    // tag::run2b[]
+    val timeFrame = TimeFrame.nextMinutes(60)
+    roboquant.run(feed, timeFrame)
+    // end::run2b[]
+}
+
+
 fun run3() {
     val roboquant = Roboquant(EMACrossover())
     val feed = RandomWalk.lastYears()

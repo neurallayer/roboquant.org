@@ -2,6 +2,7 @@
 :jbake-type: doc
 :icons: font
 :source-highlighter: rouge
+:jbake-date: 2020-01-25
 
 Interactive Brokers is a large broker that operates in many regions of the world and offers a wide variety of markets to trade in. It offers since a long time an API to connect to their platform and retrieve data and execute trades programmatically.
 

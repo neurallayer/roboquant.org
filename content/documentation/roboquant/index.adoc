@@ -42,6 +42,14 @@ In this case, all the events available in the feed will be used in the run. You 
 include::{sourcefile}[tag=run2]
 ----
 
+If you are using live feeds you almost always want to include a timestamp since otherwise the run will last forever.
+There are some utility methods included with TimeFrame to make this easier:
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=run2b]
+----
+
 You can invoke a run multiple times, for example for different time frames. The following code shows how to easily perform a walk forward:
 [source, kotlin, indent=0]
 ----

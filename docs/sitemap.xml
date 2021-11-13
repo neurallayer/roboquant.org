@@ -13,12 +13,16 @@
         <lastmod>2021-11-06</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/roboquant/index.html</loc>
-        <lastmod>2021-11-12</lastmod>
+        <loc>https://roboquant.org/documentation/feed/avro.html</loc>
+        <lastmod>2021-11-13</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/feed/avro.html</loc>
-        <lastmod>2021-11-06</lastmod>
+        <loc>https://roboquant.org/documentation/feed/index.html</loc>
+        <lastmod>2021-11-13</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/roboquant/index.html</loc>
+        <lastmod>2021-11-13</lastmod>
     </url>
     <url>
         <loc>https://roboquant.org/documentation/feed/csv.html</loc>
@@ -29,35 +33,7 @@
         <lastmod>2021-11-06</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/feed/index.html</loc>
-        <lastmod>2021-11-06</lastmod>
-    </url>
-    <url>
         <loc>https://roboquant.org/documentation/installation/index.html</loc>
-        <lastmod>2021-11-06</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/integration/alpaca.html</loc>
-        <lastmod>2021-11-06</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/integration/crypto.html</loc>
-        <lastmod>2021-11-06</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/integration/ibkr.html</loc>
-        <lastmod>2021-11-06</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/integration/iex.html</loc>
-        <lastmod>2021-11-06</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/integration/index.html</loc>
-        <lastmod>2021-11-06</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/integration/oanda.html</loc>
         <lastmod>2021-11-06</lastmod>
     </url>
     <url>
@@ -85,12 +61,36 @@
         <lastmod>2021-11-06</lastmod>
     </url>
     <url>
+        <loc>https://roboquant.org/documentation/integration/index.html</loc>
+        <lastmod>2020-01-31</lastmod>
+    </url>
+    <url>
         <loc>https://roboquant.org/documentation/introduction/index.html</loc>
         <lastmod>2020-01-31</lastmod>
     </url>
     <url>
+        <loc>https://roboquant.org/documentation/integration/alpaca.html</loc>
+        <lastmod>2020-01-29</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/integration/ibkr.html</loc>
+        <lastmod>2020-01-25</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/integration/iex.html</loc>
+        <lastmod>2020-01-22</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/integration/oanda.html</loc>
+        <lastmod>2020-01-20</lastmod>
+    </url>
+    <url>
         <loc>https://roboquant.org/documentation/introduction/events.html</loc>
         <lastmod>2020-01-20</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/integration/crypto.html</loc>
+        <lastmod>2020-01-15</lastmod>
     </url>
     <url>
         <loc>https://roboquant.org/documentation/introduction/features.html</loc>

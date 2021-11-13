@@ -1,6 +1,7 @@
 = Avro
 :icons: font
 :source-highlighter: rouge
+:sourcefile: ../../../samples/feed.kt
 
 Apache Avro™ is a data serialization system. Avro provides:
 
@@ -15,9 +16,9 @@ Avro files make it easy to store large amount of data in a single file and effic
 == Use
 To use a compatible Avro file as a feed is straight forward.
 
-[source, kotlin]
+[source, kotlin, indent=0]
 ----
-val feed = AvroFeed("myfile.avro")
+include::{sourcefile}[tag=avro]
 ----
 
 == Convert

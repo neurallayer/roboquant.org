@@ -1,6 +1,7 @@
 = OANDA
 :icons: font
 :source-highlighter: rouge
+:jbake-date: 2020-01-20
 
 OANDA provides several types of CFD instruments, including indices, forex, commodities, metals and bonds.
 

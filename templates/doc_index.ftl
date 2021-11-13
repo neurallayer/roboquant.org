@@ -12,9 +12,7 @@
             <ul class="nav flex-column">
                 <#list docs as doc>
                      <#if doc.uri?starts_with("documentation/" + section)>
-                         <li class="nav-item">
-                            <a href="/${doc.uri}" class="nav-link">${doc.title}</a>
-                         </li>
+                 <li class="nav-item"><a href="/${doc.uri}" class="nav-link">${doc.title}</a></li>
                      </#if>
                 </#list>
             </ul>

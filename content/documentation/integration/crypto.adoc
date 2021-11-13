@@ -1,4 +1,5 @@
 = Crypto Exchanges
+:jbake-date: 2020-01-15
 
 Roboquant supports crypto exchanges in two ways:
 

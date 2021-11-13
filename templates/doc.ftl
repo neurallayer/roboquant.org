@@ -3,11 +3,9 @@
     <#include "head.ftl">
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
-            <!-- Navigation-->
-             <#include "menu.ftl">
+              <#include "menu.ftl">
               <header class="masthead bg-primary text-white text-center">
                      <div class="container d-flex align-items-center flex-column">
-
                          <div class="row gx-5">
                             <div class="col-lg-4 mb-5 mb-lg-0">
                                 <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="${config.site} avatar">
@@ -19,7 +17,7 @@
 
                      </div>
                  </header>
-            <!-- Page content-->
+
             <section class="py-5">
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
@@ -35,7 +33,7 @@
                 </div>
             </section>
         </main>
-        <!-- Footer-->
+
         <#include "footer.ftl">
     </body>
 </html>

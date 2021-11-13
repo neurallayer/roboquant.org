@@ -1,6 +1,7 @@
 = IEX Cloud
 :icons: font
 :source-highlighter: rouge
+:jbake-date: 2020-01-22
 
 IEX Cloud is a financial data platform and provides a variety of data, so not only data form the IEX Exchange.
 Currently, roboquant focuses on the price data from IEX Cloud and not other types of data like fundamental data.

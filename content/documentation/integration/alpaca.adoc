@@ -1,6 +1,7 @@
 = Alpaca
 :icons: font
 :source-highlighter: rouge
+:jbake-date: 2020-01-29
 
 Alpaca is an API first broker.
 

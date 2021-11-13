@@ -1,5 +1,6 @@
 = Feed
 :source-highlighter: rouge
+:sourcefile: ../../../samples/feed.kt
 
 A feed is responsible for providing the required data in order to be able to test and run strategies. A feed can contain any type of data. So it is not limited to price data only, but can also contain social media data or images for example.
 
@@ -17,12 +18,14 @@ interface Feed {
 ----
 
 A feed wraps data in an event and put that event in a EventChannel. An event contains all the data that happens at a certain point in time.
+The order in which a feed sends out events has to be ordered by the included timestamp.
 
-[source, kotlin]
+The following implementation sends out 100 empty events, empty meaning an event without any actions included.
+
+[source, kotlin, indent=0]
 ----
-
+include::{sourcefile}[tag=play]
 ----
-
 
 == Included
 Roboquant included several feed implementations out of the box.
