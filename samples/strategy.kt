@@ -1,7 +1,6 @@
 import org.roboquant.RunPhase
 import org.roboquant.common.Asset
 import org.roboquant.feeds.Event
-import org.roboquant.feeds.PriceBar
 import org.roboquant.strategies.Rating
 import org.roboquant.strategies.Signal
 import org.roboquant.strategies.Strategy

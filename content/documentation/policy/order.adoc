@@ -1,6 +1,7 @@
 = Orders
 :source-highlighter: rouge
 :icons: font
+:jbake-date: 2020-01-15
 
 == Order Types
 The following diagram shows which orders are supported out of the box:

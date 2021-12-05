@@ -2,6 +2,7 @@
 :icons: font
 :source-highlighter: rouge
 :sourcefile: ../../../samples/metrics.kt
+:jbake-date: 2020-01-31
 
 
 Metrics allow monitoring the progress of a run and get the necessary insights how a strategy id performing. Metrics are not limited to back testing and also be used both during live testing and trading.
@@ -12,7 +13,7 @@ NOTE: metrics only calculate the values, the storing/logging of these values is 
 
 
 == Standard Metrics
-[source,kotlin]
+[source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=standard]
 ----
@@ -21,7 +22,7 @@ include::{sourcefile}[tag=standard]
 == Custom Metrics
 You can develop your own metrics. The easiest way to do so is to extend the SimpleMetric class
 
-[source,kotlin]
+[source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=simple]
 ----

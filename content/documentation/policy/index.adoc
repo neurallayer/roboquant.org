@@ -2,6 +2,7 @@
 :source-highlighter: rouge
 :icons: font
 :sourcefile: ../../../samples/policy.kt
+:jbake-date: 2020-01-31
 
 A policy is responsible for generating the orders that will be placed at a broker. The most common use-case is that a policy does this based on the signals it receives from a strategy.
 

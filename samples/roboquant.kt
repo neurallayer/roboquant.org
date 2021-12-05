@@ -1,13 +1,14 @@
 import org.roboquant.Roboquant
 import org.roboquant.brokers.sim.SimBroker
 import org.roboquant.common.TimeFrame
+import org.roboquant.common.minutes
+import org.roboquant.common.years
 import org.roboquant.feeds.random.RandomWalk
 import org.roboquant.logging.MemoryLogger
 import org.roboquant.metrics.AccountSummary
 import org.roboquant.metrics.ProgressMetric
 import org.roboquant.policies.DefaultPolicy
 import org.roboquant.strategies.EMACrossover
-import java.time.Period
 
 
 fun basic() {
@@ -56,7 +57,7 @@ fun run2b() {
     val roboquant = Roboquant(EMACrossover())
     val feed = RandomWalk.lastYears()
     // tag::run2b[]
-    val timeFrame = TimeFrame.nextMinutes(60)
+    val timeFrame = TimeFrame.next(60.minutes)
     roboquant.run(feed, timeFrame)
     // end::run2b[]
 }
@@ -67,7 +68,7 @@ fun run3() {
     val feed = RandomWalk.lastYears()
     // tag::run3[]
     val timeFrame = TimeFrame.fromYears(2010, 2020)
-    timeFrame.split(Period.ofYears(2)).forEach {
+    timeFrame.split(2.years).forEach {
         roboquant.run(feed, it)
     }
     // end::run3[]

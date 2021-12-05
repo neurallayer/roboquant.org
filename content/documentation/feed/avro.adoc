@@ -2,6 +2,7 @@
 :icons: font
 :source-highlighter: rouge
 :sourcefile: ../../../samples/feed.kt
+:jbake-date: 2020-01-09
 
 Apache Avro™ is a data serialization system. Avro provides:
 

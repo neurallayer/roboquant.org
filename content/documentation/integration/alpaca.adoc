@@ -3,7 +3,12 @@
 :source-highlighter: rouge
 :jbake-date: 2020-01-29
 
-Alpaca is an API first broker.
+Alpaca is an API first broker. The integration with Alpaca covers the following aspects:
+
+1. Get historic data
+2. Get live data
+3. Use the broker account (both paper trading and live trading)
+
 
 [source, kotlin]
 ----
@@ -23,7 +28,7 @@ val feed = AlpacaHistoricalFeed()
 val feed = AlpacaLiveFeed()
 ----
 
-== Trading
+== Broker
 [source, kotlin]
 ----
 val broker = AlpacaBroker()

@@ -66,7 +66,7 @@
         <details close>
             <summary>installation</summary>
             <ul class="nav flex-column">
-                 <li class="nav-item"><a href="/documentation/installation/index.html" class="nav-link">Installation</a></li>
+                 <li class="nav-item"><a href="/documentation/installation/index.html" class="nav-link">Install roboquant</a></li>
             </ul>
         </details>
         <details close>
@@ -78,10 +78,10 @@
         <details close>
             <summary>feed</summary>
             <ul class="nav flex-column">
-                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
                  <li class="nav-item"><a href="/documentation/feed/event.html" class="nav-link">Event</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
             </ul>
         </details>
         <details close>
@@ -113,6 +113,7 @@
                  <li class="nav-item"><a href="/documentation/integration/ibkr.html" class="nav-link">Interactive Brokers</a></li>
                  <li class="nav-item"><a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a></li>
                  <li class="nav-item"><a href="/documentation/integration/oanda.html" class="nav-link">OANDA</a></li>
+                 <li class="nav-item"><a href="/documentation/integration/yahoo.html" class="nav-link">Yahoo</a></li>
                  <li class="nav-item"><a href="/documentation/integration/crypto.html" class="nav-link">Crypto Exchanges</a></li>
             </ul>
         </details>
@@ -132,7 +133,20 @@
 <div class="sect2">
 <h3 id="_memorylogger">MemoryLogger</h3>
 <div class="paragraph">
-<p>This is the default logger used if no other logger is configured</p>
+<p>This is the default logger used if no other logger is configured. It stores all the recorded values in memory and
+allows them to be queried afterwards. It also comes with a progress-bar that shows how much time is remaining during
+a run.</p>
+</div>
+<div class="paragraph">
+<p>This logger is very useful if you are testing your approach in a Jupyter Notebook or another interactive development
+environment.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">logger</span> <span class="p">=</span> <span class="nc">MemoryLogger</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">keys</span> <span class="p">=</span> <span class="n">logger</span><span class="p">.</span><span class="nf">getMetricNames</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">data</span> <span class="p">=</span> <span class="n">logger</span><span class="p">.</span><span class="nf">getMetric</span><span class="p">(</span><span class="n">keys</span><span class="p">.</span><span class="nf">first</span><span class="p">())</span></code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">

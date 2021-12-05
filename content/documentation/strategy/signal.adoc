@@ -1,6 +1,7 @@
 = Signal
 :source-highlighter: rouge
 :icons: font
+:jbake-date: 2020-01-15
 
 A signal is the outcome of a strategy and is modelled closely after the ratings given by ratings agencies. The two mandatory parts of a signal are:
 

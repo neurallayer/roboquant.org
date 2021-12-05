@@ -1,13 +1,16 @@
 = Overview
 :jbake-date: 2020-01-31
 
-There are three types of integrations:
+There are three types of integrations available within roboquant with external parties:
 
 . Historic data providers
 . Live data providers
 . Brokers
 
-In some cases a single 3rd party provides all three types of integration (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides historic and live data)
+In some cases a single 3rd party provides all three types of integration (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides historic and live data).
+
+You can combine several of these 3rd parties together, for example the data feeds from IEX Cloud and the broker
+functionality from Alpaca.
 
 == Configuration
 When you want to integrate a 3rd party, you most likely require credentials to gain access. Often this is in the form of an  API id and key. Although you can embed these directly in your source code, roboquant supports better and more secure alternatives.
@@ -25,10 +28,10 @@ The following shows the steps how roboquant resolves these configuration paramet
 == Supported 3rd parties
 The following 3rd parties are supported:
 
-* Interactive Brokers: historic feed, live feed, trading
-* Alpaca: historic feed, live feed, trading
-* OANDA: historic feed, live feed, trading
-* IEX Cloud: historic feed, live feed
-* Yahoo Finance: historic feed
+* xref:ibkr.adoc[Interactive Brokers]: historic feed, live feed, trading
+* xref:alpaca.adoc[Alpaca]: historic feed, live feed, trading
+* xref:oanda.adoc[OANDA]: historic feed, live feed, trading
+* xref:iex.adoc[IEX Cloud]: historic feed, live feed
+* xref:yahoo.adoc[Yahoo Finance]: historic feed
 
-There are also many crypto exchanges supported. For more details on that, see the xref:crypto.adoc[crypto] page.
+There are also many crypto exchanges supported. For more details on that, see the xref:crypto.adoc[crypto] documentation.

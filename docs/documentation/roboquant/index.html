@@ -66,7 +66,7 @@
         <details close>
             <summary>installation</summary>
             <ul class="nav flex-column">
-                 <li class="nav-item"><a href="/documentation/installation/index.html" class="nav-link">Installation</a></li>
+                 <li class="nav-item"><a href="/documentation/installation/index.html" class="nav-link">Install roboquant</a></li>
             </ul>
         </details>
         <details open>
@@ -78,10 +78,10 @@
         <details close>
             <summary>feed</summary>
             <ul class="nav flex-column">
-                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
                  <li class="nav-item"><a href="/documentation/feed/event.html" class="nav-link">Event</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
             </ul>
         </details>
         <details close>
@@ -113,6 +113,7 @@
                  <li class="nav-item"><a href="/documentation/integration/ibkr.html" class="nav-link">Interactive Brokers</a></li>
                  <li class="nav-item"><a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a></li>
                  <li class="nav-item"><a href="/documentation/integration/oanda.html" class="nav-link">OANDA</a></li>
+                 <li class="nav-item"><a href="/documentation/integration/yahoo.html" class="nav-link">Yahoo</a></li>
                  <li class="nav-item"><a href="/documentation/integration/crypto.html" class="nav-link">Crypto Exchanges</a></li>
             </ul>
         </details>
@@ -193,7 +194,7 @@ There are some utility methods included with TimeFrame to make this easier:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">timeFrame</span> <span class="p">=</span> <span class="nc">TimeFrame</span><span class="p">.</span><span class="nf">nextMinutes</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">timeFrame</span> <span class="p">=</span> <span class="nc">TimeFrame</span><span class="p">.</span><span class="nf">next</span><span class="p">(</span><span class="mi">60</span><span class="p">.</span><span class="n">minutes</span><span class="p">)</span>
 <span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">timeFrame</span><span class="p">)</span></code></pre>
 </div>
 </div>
@@ -203,7 +204,7 @@ There are some utility methods included with TimeFrame to make this easier:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">timeFrame</span> <span class="p">=</span> <span class="nc">TimeFrame</span><span class="p">.</span><span class="nf">fromYears</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)</span>
-<span class="n">timeFrame</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="nc">Period</span><span class="p">.</span><span class="nf">ofYears</span><span class="p">(</span><span class="mi">2</span><span class="p">)).</span><span class="nf">forEach</span> <span class="p">{</span>
+<span class="n">timeFrame</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="n">years</span><span class="p">).</span><span class="nf">forEach</span> <span class="p">{</span>
     <span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">it</span><span class="p">)</span>
 <span class="p">}</span></code></pre>
 </div>

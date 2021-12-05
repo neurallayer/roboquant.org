@@ -4,9 +4,15 @@
 :source-highlighter: rouge
 :jbake-date: 2020-01-25
 
-Interactive Brokers is a large broker that operates in many regions of the world and offers a wide variety of markets to trade in. It offers since a long time an API to connect to their platform and retrieve data and execute trades programmatically.
+Interactive Brokers (IBKR) is a large broker that operates in many regions of the world and offers a wide variety of markets to trade in. It offers since a long time an API to connect to their platform and retrieve data and execute trades programmatically.ß
 
 That being said, the software and way of integrating is not as modern or convenient to use as some newer brokers like Alpaca, who really has an API first strategy.
+
+The integration with IBKR covers the following aspects:
+
+1. Get historic data
+2. Get live data
+3. Use the broker account (both paper trading and live trading)
 
 == Installation
 Interactive brokers integration is different from other brokers, mainly because:

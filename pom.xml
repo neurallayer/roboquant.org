@@ -12,8 +12,8 @@
 		<kotlin.code.style>official</kotlin.code.style>
 		<kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
 		<kotlin.compiler.incremental>false</kotlin.compiler.incremental>
-		<kotlin.version>1.5.31</kotlin.version>
-		<kotlinx.version>1.5.2</kotlinx.version>
+		<kotlin.version>1.6.0</kotlin.version>
+		<roboquant.version>0.8-SNAPSHOT</roboquant.version>
 	</properties>
 
 	<build>
@@ -91,7 +91,17 @@
 		<dependency>
 			<artifactId>roboquant-core</artifactId>
 			<groupId>org.roboquant</groupId>
-			<version>0.8-SNAPSHOT</version>
+			<version>${roboquant.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>roboquant-extra</artifactId>
+			<groupId>org.roboquant</groupId>
+			<version>${roboquant.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>roboquant-crypto</artifactId>
+			<groupId>org.roboquant</groupId>
+			<version>${roboquant.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>

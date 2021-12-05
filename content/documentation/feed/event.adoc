@@ -1,6 +1,7 @@
 = Event
 :source-highlighter: rouge
 :sourcefile: ../../../samples/feed.kt
+:jbake-date: 2020-01-21
 
 An event contains the following two attributes:
 

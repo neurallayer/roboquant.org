@@ -1,4 +1,4 @@
-= Installation
+= Install roboquant
 
 There are two ways to use roboquant that determines how to install it:
 

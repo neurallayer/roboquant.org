@@ -1,6 +1,7 @@
 = Feed
 :source-highlighter: rouge
 :sourcefile: ../../../samples/feed.kt
+:jbake-date: 2020-01-31
 
 A feed is responsible for providing the required data in order to be able to test and run strategies. A feed can contain any type of data. So it is not limited to price data only, but can also contain social media data or images for example.
 

@@ -66,7 +66,7 @@
         <details close>
             <summary>installation</summary>
             <ul class="nav flex-column">
-                 <li class="nav-item"><a href="/documentation/installation/index.html" class="nav-link">Installation</a></li>
+                 <li class="nav-item"><a href="/documentation/installation/index.html" class="nav-link">Install roboquant</a></li>
             </ul>
         </details>
         <details close>
@@ -78,10 +78,10 @@
         <details close>
             <summary>feed</summary>
             <ul class="nav flex-column">
-                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
                  <li class="nav-item"><a href="/documentation/feed/event.html" class="nav-link">Event</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
             </ul>
         </details>
         <details close>
@@ -113,6 +113,7 @@
                  <li class="nav-item"><a href="/documentation/integration/ibkr.html" class="nav-link">Interactive Brokers</a></li>
                  <li class="nav-item"><a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a></li>
                  <li class="nav-item"><a href="/documentation/integration/oanda.html" class="nav-link">OANDA</a></li>
+                 <li class="nav-item"><a href="/documentation/integration/yahoo.html" class="nav-link">Yahoo</a></li>
                  <li class="nav-item"><a href="/documentation/integration/crypto.html" class="nav-link">Crypto Exchanges</a></li>
             </ul>
         </details>
@@ -122,7 +123,7 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are three types of integrations:</p>
+<p>There are three types of integrations available within roboquant with external parties:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -138,7 +139,11 @@
 </ol>
 </div>
 <div class="paragraph">
-<p>In some cases a single 3rd party provides all three types of integration (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides historic and live data)</p>
+<p>In some cases a single 3rd party provides all three types of integration (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides historic and live data).</p>
+</div>
+<div class="paragraph">
+<p>You can combine several of these 3rd parties together, for example the data feeds from IEX Cloud and the broker
+functionality from Alpaca.</p>
 </div>
 </div>
 </div>
@@ -184,24 +189,24 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Interactive Brokers: historic feed, live feed, trading</p>
+<p><a href="ibkr.html">Interactive Brokers</a>: historic feed, live feed, trading</p>
 </li>
 <li>
-<p>Alpaca: historic feed, live feed, trading</p>
+<p><a href="alpaca.html">Alpaca</a>: historic feed, live feed, trading</p>
 </li>
 <li>
-<p>OANDA: historic feed, live feed, trading</p>
+<p><a href="oanda.html">OANDA</a>: historic feed, live feed, trading</p>
 </li>
 <li>
-<p>IEX Cloud: historic feed, live feed</p>
+<p><a href="iex.html">IEX Cloud</a>: historic feed, live feed</p>
 </li>
 <li>
-<p>Yahoo Finance: historic feed</p>
+<p><a href="yahoo.html">Yahoo Finance</a>: historic feed</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>There are also many crypto exchanges supported. For more details on that, see the <a href="crypto.html">crypto</a> page.</p>
+<p>There are also many crypto exchanges supported. For more details on that, see the <a href="crypto.html">crypto</a> documentation.</p>
 </div>
 </div>
 </div>
