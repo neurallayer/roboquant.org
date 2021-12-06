@@ -114,6 +114,7 @@
                  <li class="nav-item"><a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a></li>
                  <li class="nav-item"><a href="/documentation/integration/oanda.html" class="nav-link">OANDA</a></li>
                  <li class="nav-item"><a href="/documentation/integration/yahoo.html" class="nav-link">Yahoo</a></li>
+                 <li class="nav-item"><a href="/documentation/integration/alphavantage.html" class="nav-link">Yahoo</a></li>
                  <li class="nav-item"><a href="/documentation/integration/crypto.html" class="nav-link">Crypto Exchanges</a></li>
             </ul>
         </details>
@@ -123,10 +124,15 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Interactive Brokers (IBKR) is a large broker that operates in many regions of the world and offers a wide variety of markets to trade in. It offers since a long time an API to connect to their platform and retrieve data and execute trades programmatically.ß</p>
+<p>Interactive Brokers (IBKR) is a large broker that operates in many regions of the world and offers a wide variety of markets to trade in. It offers since a long time an API to connect to their platform and retrieve data and execute trades programmatically.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="http://roboquant.org/img/thirdparty/interactive-brokers.jpg" alt="ibkr" width="500">
+</div>
 </div>
 <div class="paragraph">
-<p>That being said, the software and way of integrating is not as modern or convenient to use as some newer brokers like Alpaca, who really has an API first strategy.</p>
+<p>That being said, the software and way of integrating is not as modern or convenient to use as some newer brokers like Alpaca, who really have an API first strategy. You can find out more at their website <a href="https://www.interactivebrokers.com" class="bare">https://www.interactivebrokers.com</a></p>
 </div>
 <div class="paragraph">
 <p>The integration with IBKR covers the following aspects:</p>
@@ -150,12 +156,12 @@
 <h2 id="_installation">Installation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Interactive brokers integration is different from other brokers, mainly because:</p>
+<p>Interactive brokers integration is different from other 3rd party providers, mainly because:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>It requires a local running instance of Trader Workstation or IB Gateway. So you cannot connect directly to a server of Interactive Brokers and always need to take this "proxy" approach.</p>
+<p>It requires a local running instance of Trader Workstation or IB Gateway. So you cannot connect directly to a server of Interactive Brokers and you will always need to take this "proxy" approach.</p>
 </li>
 <li>
 <p>There is not a free to use client library distributed by Interactive Brokers. The client software that is available, requires the end user to download it themselves and cannot be freely redistributed by third party software like roboquant.</p>

@@ -6,7 +6,7 @@
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
     <meta name="theme-color" content="#3296C8">
-    <title>roboquant - Four Stages</title>
+    <title>roboquant - Yahoo</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -40,7 +40,7 @@
                                 <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
                             <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Four Stages</h3>
+                                <h3 class="masthead-subheading font-weight-light mt-3">Yahoo</h3>
                             </div>
                          </div>
 
@@ -53,7 +53,7 @@
                         <div class="col-lg-4 mb-5 mb-lg-0">
 <nav id="sidebar">
     <h3>Documentation</h3>
-        <details open>
+        <details close>
             <summary>introduction</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/introduction/index.html" class="nav-link">Welcome</a></li>
@@ -105,7 +105,7 @@
                  <li class="nav-item"><a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a></li>
             </ul>
         </details>
-        <details close>
+        <details open>
             <summary>integration</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/integration/index.html" class="nav-link">Overview</a></li>
@@ -124,123 +124,23 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are 4 distinct stages that you go through when you develop and run a new trading strategy. The below diagram shows the stages and the order in which they are executed:</p>
+<p>This feed uses historic data from Alpha Vantage API.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="four_stages.png" alt="four stages">
+<img src="http://roboquant.org/img/thirdparty/alpha-vantage.png" alt="alphavantage" width="500">
 </div>
-</div>
-<div class="paragraph">
-<p>Each stage has its own purpose and benefits. Two important rules to adhere to are:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>If possible at all, don&#8217;t skip a stage.</p>
-</li>
-<li>
-<p>And perhaps more important, if you are not happy about the performance in a later stage, go back to the first stage.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Roboquant support all four stages and requires minimal changes to your code to move from one stage to the next. Your strategy and policy should not change at all between stages, and only the selected data feed and broker differ between stages.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_stage_1_back_testing">Stage 1: Back Testing</h2>
+<h2 id="_historical_data">Historical data</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this stage you&#8217;ll use <strong>historic data</strong> and the <strong>SimBroker</strong> that comes with roboquant to test your strategy and policy.</p>
+<p>You can retrieve historical prices based on the assets or symbols. You also need to provide the time-frame you are interested in.</p>
 </div>
 <div class="paragraph">
-<p>You can of course run a single back test over the complete timeline of historic data. But roboquant makes it easy to also run walk forward and randomly sampled time-frames. This give you more insights into the performance under different regimes.</p>
-</div>
-<div class="paragraph">
-<p>It is very important to get as many insights as possible about the overall performance and behavior, so you know what to expect and also what not expect when you finally will go live.</p>
-</div>
-<div class="paragraph">
-<p>This is also the only stage where you should develop and modify your strategy and policy. If you are not happy with the performance at a later stage, you should return this first stage and make the changes here. If for example you would like to use circuit-breakers during live trading to get some extra peace of mind, you should already include this logic during back testing.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-configure the SimBroker similar to the live trading account and broker you are going to use. Provide realistic cost and starting account balance, so you don&#8217;t get a too optimistic outlook on the overall cost. In general is it preferable to be a bit conservative and define a higher cost structure at this stage then the other way around.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_stage_2_live_testing">Stage 2: Live Testing</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In this stage you&#8217;ll use <strong>live data</strong> and the <strong>SimBroker</strong> to test your strategy and policy. The main purpose is to validate if your strategy is still performing well on real unseen data.</p>
-</div>
-<div class="paragraph">
-<p>It is very easy to over fit your strategy during back testing, and this stage provides some confirmation if that is the case. That being said, often you cannot run this stage for as long as required to have a perfect insight into over fitting, so this is an indication at best.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-roboquant can use any combination of data feed and broker. So you don&#8217;t need to restrict yourself to data feed from your broker. There might be better and/or cheaper alternatives available.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_stage_3_paper_trading">Stage 3: Paper Trading</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In this stage you&#8217;ll use <strong>live data</strong> with a <strong>paper trading account</strong> to test your strategy and policy. The main purpose is to validate if your policy is still performing well using a different broker implementation. For example, are the order generated by the policy fully supported and behave as expected.</p>
-</div>
-<div class="paragraph">
-<p>This stage is where you really validate the robustness of your approach and get extra confirmation that it is ready to go live. If you don&#8217;t have a solid policy in place that fully behaves as expected, you should never go to the next stage.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-of course this will only work if your broker offers paper trading functionality. But if you are serious about algo-trading, you should only select a broker that offers a realistic paper trading account.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_stage_4_live_trading">Stage 4: Live Trading</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In this stage you&#8217;ll use <strong>live data</strong> and the <strong>live trading account</strong> to run your strategy and policy and now real money is at stake. And although we are not at a testing stage, you will need to closely monitor the performance and take appropriate actions. One reason is that even paper trading is a just simulation and cannot fully prepare for what will happen during live trading.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-it is easier than you think to create a solution that goes haywire and generates way too many orders. If this happens, you can quickly lose all your money due to transaction- and spread-cost.
-</td>
-</tr>
-</table>
+<p>The result is a feed containing price bars (candlesticks) that you can use during back testing.</p>
 </div>
 </div>
 </div>

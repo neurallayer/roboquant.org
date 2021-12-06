@@ -4,8 +4,11 @@
 :jbake-date: 2020-01-20
 :sourcefile: ../../../samples/integration.kt
 
-OANDA provides several types of CFD instruments, including indices, forex, commodities, metals and bonds. The
-integration with OANDA covers the following aspects:
+OANDA provides several types of CFD instruments, including indices, forex, commodities, metals and bonds. You can find more about OANDA by visiting their website at https://www.oanda.com
+
+image::http://roboquant.org/img/thirdparty/oanda.jpeg[oanda, 500]
+
+The integration with OANDA covers the following aspects:
 
 1. Get historic data
 2. Get live data
@@ -21,7 +24,7 @@ include::{sourcefile}[tag=oandahistoric]
 ----
 
 == Live Data
-Next to historic data, OANDA also provdes live data feeds.
+Next to historic data, OANDA also provides live data feeds.
 
 [source, kotlin, indent=0]
 ----

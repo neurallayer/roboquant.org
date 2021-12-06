@@ -114,6 +114,7 @@
                  <li class="nav-item"><a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a></li>
                  <li class="nav-item"><a href="/documentation/integration/oanda.html" class="nav-link">OANDA</a></li>
                  <li class="nav-item"><a href="/documentation/integration/yahoo.html" class="nav-link">Yahoo</a></li>
+                 <li class="nav-item"><a href="/documentation/integration/alphavantage.html" class="nav-link">Yahoo</a></li>
                  <li class="nav-item"><a href="/documentation/integration/crypto.html" class="nav-link">Crypto Exchanges</a></li>
             </ul>
         </details>
@@ -144,6 +145,38 @@
 <div class="paragraph">
 <p>You can combine several of these 3rd parties together, for example the data feeds from IEX Cloud and the broker
 functionality from Alpaca.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_modules_packages">Modules &amp; Packages</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The third party integrations have their own modules:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>roboquant-extra for all "traditional" trading</p>
+</li>
+<li>
+<p>roboquant-crypto for all cryptocurrency related 3rd parties</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Include these in your Maven or Gradle build. They are by default already included in the Jupyter Notebooks.</p>
+</div>
+<div class="paragraph">
+<p>In order to use the 3rd party integration, you&#8217;ll first have to import the package. All third party integration have their own package directly under org.roboquant</p>
+</div>
+<div class="paragraph">
+<p>So you can import all the classes for OANDA as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="k">import</span> <span class="nn">org.roboquant.oanda.*</span></code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -186,27 +219,74 @@ functionality from Alpaca.</p>
 <div class="paragraph">
 <p>The following 3rd parties are supported:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="ibkr.html">Interactive Brokers</a>: historic feed, live feed, trading</p>
-</li>
-<li>
-<p><a href="alpaca.html">Alpaca</a>: historic feed, live feed, trading</p>
-</li>
-<li>
-<p><a href="oanda.html">OANDA</a>: historic feed, live feed, trading</p>
-</li>
-<li>
-<p><a href="iex.html">IEX Cloud</a>: historic feed, live feed</p>
-</li>
-<li>
-<p><a href="yahoo.html">Yahoo Finance</a>: historic feed</p>
-</li>
-</ul>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">3rd party</th>
+<th class="tableblock halign-left valign-top">historic feed</th>
+<th class="tableblock halign-left valign-top">live feed</th>
+<th class="tableblock halign-left valign-top">broker</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="ibkr.html">Interactive Brokers</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="alpaca.html">Alpaca</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="oanda.html">OANDA</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="iex.html">IEX Cloud</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="yahoo.html">Yahoo Finance</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="alphavantage.html">Alpha Vantage</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p>There are also many crypto exchanges supported. For more details on that, see the <a href="crypto.html">crypto</a> documentation.</p>
+<p>Roboquant also supports many crypto exchanges. For more details on that, see the <a href="crypto.html">crypto</a> documentation.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+roboquant is open source software that is developed independently of these 3rd party providers.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

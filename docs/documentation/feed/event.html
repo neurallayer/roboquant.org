@@ -114,6 +114,7 @@
                  <li class="nav-item"><a href="/documentation/integration/iex.html" class="nav-link">IEX Cloud</a></li>
                  <li class="nav-item"><a href="/documentation/integration/oanda.html" class="nav-link">OANDA</a></li>
                  <li class="nav-item"><a href="/documentation/integration/yahoo.html" class="nav-link">Yahoo</a></li>
+                 <li class="nav-item"><a href="/documentation/integration/alphavantage.html" class="nav-link">Yahoo</a></li>
                  <li class="nav-item"><a href="/documentation/integration/crypto.html" class="nav-link">Crypto Exchanges</a></li>
             </ul>
         </details>
@@ -123,7 +124,7 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>An event contains the following two attributes:</p>
+<p>An event is the information send by a Feed and contains the following two attributes:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -152,7 +153,7 @@
 <h2 id="_action">Action</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Action is an abstraction for any type of information. It can range from price actions, like price-bars and order-book snapshots, to social media content or even satellite images. There is now commonality between actions, and you can add any type of actions you like to the platform. The only requirements is that they implement the empty interface <code><code>Action</code></code></p>
+<p>Action is an abstraction for any type of information that can be made available in an event. It can range from price actions, like price-bars and order-book snapshots, to social media content or even satellite images. There is no commonality between actions, and you can add any type of actions you like to the platform. The only requirements is that they implement the empty interface <code><code>Action</code></code></p>
 </div>
 <div class="paragraph">
 <p>It is up to the strategy to filter for the action types it is interested in, for example:</p>

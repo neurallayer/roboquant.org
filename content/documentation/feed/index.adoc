@@ -18,8 +18,7 @@ interface Feed {
 }
 ----
 
-A feed wraps data in an event and put that event in a EventChannel. An event contains all the data that happens at a certain point in time.
-The order in which a feed sends out events has to be ordered by the included timestamp.
+A feed wraps data in an event and put that event in a EventChannel. An event contains all the data that happens at a certain point in time. The order in which a feed sends out events has to be ordered by the included timestamp.
 
 The following implementation sends out 100 empty events, empty meaning an event without any actions included.
 

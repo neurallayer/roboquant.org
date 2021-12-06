@@ -1,3 +1,6 @@
+import org.roboquant.alpaca.AlpacaBroker
+import org.roboquant.alpaca.AlpacaHistoricFeed
+import org.roboquant.alpaca.AlpacaLiveFeed
 import org.roboquant.common.TimeFrame
 import org.roboquant.common.days
 import org.roboquant.common.minutes
@@ -36,10 +39,38 @@ fun oandaLiveFeed() {
 }
 
 
-
 fun oandaBroker() {
     // tag::oandabroker[]
     val broker = OANDABroker()
     broker.account.summary().log()
     // end::oandabroker[]
+}
+
+
+
+fun alpacaHistoricFeed() {
+    // tag::alpacahistoric[]
+    val feed = AlpacaHistoricFeed()
+    val tf = TimeFrame.past(100.days)
+    feed.retrieve("AAPL", "IBM", timeFrame = tf)
+    // end::alpacahistoric[]
+}
+
+
+fun alpacaLiveFeed() {
+    // tag::alpacalive[]
+    val feed = AlpacaLiveFeed()
+    feed.subscribe("AAPL", "IBM")
+
+    val tf = TimeFrame.next(120.minutes)
+    roboquant.run(feed,tf)
+    // end::alpacalive[]
+}
+
+
+fun alpacaBroker() {
+    // tag::alpacabroker[]
+    val broker = AlpacaBroker()
+    broker.account.summary().log()
+    // end::alpacabroker[]
 }

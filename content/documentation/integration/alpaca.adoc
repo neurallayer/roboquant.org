@@ -2,8 +2,15 @@
 :icons: font
 :source-highlighter: rouge
 :jbake-date: 2020-01-29
+:sourcefile: ../../../samples/integration.kt
 
-Alpaca is an API first broker. The integration with Alpaca covers the following aspects:
+Alpaca is an API first broker. Their focus is mainly on US stocks, but they also added cryptocurrencies.
+
+image::https://roboquant.org/img/thirdparty/alpaca.jpg[]
+
+You can find out more at their website at https://alpaca.markets/
+
+The integration with Alpaca covers the following aspects:
 
 1. Get historic data
 2. Get live data
@@ -17,19 +24,24 @@ import org.roboquant.alpaca.*
 
 
 == Historic Data
-[source, kotlin]
+Alpaca provides a nice set of historic data that you can use during back testing.
+
+[source, kotlin, indent=0]
 ----
-val feed = AlpacaHistoricalFeed()
+include::{sourcefile}[tag=alpacahistoric]
 ----
 
 == Live Data
-[source, kotlin]
+Next to historic data, Alpaca also provdes live data feeds.
+
+[source, kotlin, indent=0]
 ----
-val feed = AlpacaLiveFeed()
+include::{sourcefile}[tag=alpacalive]
 ----
 
 == Broker
-[source, kotlin]
+
+[source, kotlin, indent=0]
 ----
-val broker = AlpacaBroker()
+include::{sourcefile}[tag=alpacabroker]
 ----

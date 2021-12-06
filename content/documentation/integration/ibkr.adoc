@@ -4,9 +4,11 @@
 :source-highlighter: rouge
 :jbake-date: 2020-01-25
 
-Interactive Brokers (IBKR) is a large broker that operates in many regions of the world and offers a wide variety of markets to trade in. It offers since a long time an API to connect to their platform and retrieve data and execute trades programmatically.ß
+Interactive Brokers (IBKR) is a large broker that operates in many regions of the world and offers a wide variety of markets to trade in. It offers since a long time an API to connect to their platform and retrieve data and execute trades programmatically.
 
-That being said, the software and way of integrating is not as modern or convenient to use as some newer brokers like Alpaca, who really has an API first strategy.
+image::http://roboquant.org/img/thirdparty/interactive-brokers.jpg[ibkr, 500]
+
+That being said, the software and way of integrating is not as modern or convenient to use as some newer brokers like Alpaca, who really have an API first strategy. You can find out more at their website https://www.interactivebrokers.com
 
 The integration with IBKR covers the following aspects:
 
@@ -15,9 +17,9 @@ The integration with IBKR covers the following aspects:
 3. Use the broker account (both paper trading and live trading)
 
 == Installation
-Interactive brokers integration is different from other brokers, mainly because:
+Interactive brokers integration is different from other 3rd party providers, mainly because:
 
-1. It requires a local running instance of Trader Workstation or IB Gateway. So you cannot connect directly to a server of Interactive Brokers and always need to take this "proxy" approach.
+1. It requires a local running instance of Trader Workstation or IB Gateway. So you cannot connect directly to a server of Interactive Brokers and you will always need to take this "proxy" approach.
 
 2. There is not a free to use client library distributed by Interactive Brokers. The client software that is available, requires the end user to download it themselves and cannot be freely redistributed by third party software like roboquant.
 

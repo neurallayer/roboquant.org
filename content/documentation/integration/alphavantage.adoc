@@ -1,0 +1,18 @@
+= Yahoo
+:icons: font
+:source-highlighter: rouge
+:jbake-date: 2020-01-19
+:sourcefile: ../../../samples/integration.kt
+
+This feed uses historic data from Alpha Vantage API.
+
+image::http://roboquant.org/img/thirdparty/alpha-vantage.png[alphavantage, 500]
+
+== Historical data
+You can retrieve historical prices based on the assets or symbols. You also need to provide the time-frame you are interested in.
+
+
+The result is a feed containing price bars (candlesticks) that you can use during back testing.
+
+
+

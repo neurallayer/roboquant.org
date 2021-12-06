@@ -1,10 +1,10 @@
 = Crypto Exchanges
 :jbake-date: 2020-01-15
 
-Roboquant supports crypto exchanges in two ways:
+Roboquant supports crypto data feeds and exchanges in two ways:
 
 . Dedicated support for Binance using their Java client library
-. Support for most other exchanges using the excellent XChange library
+. Support for most other crypto exchanges using the excellent XChange library
 
 The module roboquant-crypto contains all the logic, so make sure you include it in your build tool if you want to use it in a standalone application.
 
