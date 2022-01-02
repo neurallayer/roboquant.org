@@ -20,21 +20,21 @@ class MyStrategy : Strategy {
 // tag::naive[]
 class MyStrategy2 : Strategy {
 
-    private val lastPrices = mutableMapOf<Asset, Double>()
+    private val previousPrices = mutableMapOf<Asset, Double>()
 
     override fun generate(event: Event): List<Signal> {
         val signals = mutableListOf<Signal>()
         for ((asset, priceAction) in event.prices) {
-            val lastPrice = lastPrices.getOrDefault(asset, Double.MAX_VALUE)
+            val previousPrice = previousPrices.getOrDefault(asset, Double.MAX_VALUE)
             val currentPrice = priceAction.getPrice()
-            if (currentPrice > lastPrice) signals.add(Signal(asset, Rating.BUY))
-            lastPrices[asset] = currentPrice
+            if (currentPrice > previousPrice) signals.add(Signal(asset, Rating.BUY))
+            previousPrices[asset] = currentPrice
         }
         return signals
     }
 
     override fun start(runPhase: RunPhase) {
-        lastPrices.clear()
+        previousPrices.clear()
     }
 
 }

@@ -1,9 +1,14 @@
 import org.roboquant.alpaca.AlpacaBroker
 import org.roboquant.alpaca.AlpacaHistoricFeed
 import org.roboquant.alpaca.AlpacaLiveFeed
+import org.roboquant.common.Asset
 import org.roboquant.common.TimeFrame
 import org.roboquant.common.days
 import org.roboquant.common.minutes
+import org.roboquant.iex.IEXHistoricFeed
+import org.roboquant.iex.IEXLiveFeed
+import org.roboquant.iex.Interval
+import org.roboquant.iex.Range
 import org.roboquant.oanda.OANDABroker
 import org.roboquant.oanda.OANDAHistoricFeed
 import org.roboquant.oanda.OANDALiveFeed
@@ -54,6 +59,23 @@ fun alpacaHistoricFeed() {
     val tf = TimeFrame.past(100.days)
     feed.retrieve("AAPL", "IBM", timeFrame = tf)
     // end::alpacahistoric[]
+}
+
+
+
+fun iexHistoricFeed() {
+    // tag::iexhistoric[]
+    val feed = IEXHistoricFeed()
+    feed.retrievePriceBar("AAPL", "IBM", range = Range.FIVE_YEARS)
+    // end::iexhistoric[]
+}
+
+
+fun iexLiveFeed() {
+    // tag::iexlive[]
+    val feed = IEXLiveFeed()
+    feed.subscribeQuotes(Asset("IBM"), Asset("AAPL"), interval = Interval.ONE_MINUTE)
+    // end::iexlive[]
 }
 
 

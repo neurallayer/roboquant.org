@@ -6,7 +6,7 @@
 
 This feed uses historic data from Alpha Vantage API.
 
-image::http://roboquant.org/img/thirdparty/alpha-vantage.png[alphavantage, 500]
+image::http://roboquant.org/img/thirdparty/alpha-vantage.png[Alpha Vantage, 500]
 
 == Historical data
 You can retrieve historical prices based on the assets or symbols. You also need to provide the time-frame you are interested in.

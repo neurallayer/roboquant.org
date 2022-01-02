@@ -16,12 +16,17 @@ The integration with IBKR covers the following aspects:
 2. Get live data
 3. Use the broker account (both paper trading and live trading)
 
+NOTE: in order to be able to retrieve data, you most likely will require a (paid) market data subscription from IBKR.
+
 == Installation
-Interactive brokers integration is different from other 3rd party providers, mainly because:
+IBKR integration is different from other 3rd party providers, mainly because:
 
-1. It requires a local running instance of Trader Workstation or IB Gateway. So you cannot connect directly to a server of Interactive Brokers and you will always need to take this "proxy" approach.
+1. It requires a local running instance of Trader Workstation or IB Gateway (recommended). So you cannot connect directly to a server of Interactive Brokers and you will always need to take this "proxy" approach. And since the gateway requires daily authentication, it is also harder to run this unattended.
 
-2. There is not a free to use client library distributed by Interactive Brokers. The client software that is available, requires the end user to download it themselves and cannot be freely redistributed by third party software like roboquant.
+2. There is not a free to use client library distributed by Interactive Brokers. The client software that is available, requires the end user to download it themselves and cannot be freely redistributed by third party software like roboquant. Because of this, the integration with IBKR is also put in its own module named `roboquant-ibkr`.
+
+3. IBKR only allows 1 active connection per username. So if you use your mobile app, your API client (roboquant) gets terminated.
+
 
 === Jupyter Notebooks
 Take the following steps if you want to use Interactive Brokers in a notebook environment
@@ -31,7 +36,7 @@ Take the following steps if you want to use Interactive Brokers in a notebook en
 
 2. Start the docker container with access tot the local network
 
-3. Download the required client library from Interactive Brokers
+3. Download the client library from https://interactivebrokers.github.io/. In this client library you'll find a file called `TwsApi.jar` that you are going to need for the next step.
 
 4. Upload the TwsApi.jar file to the notebook.
 
@@ -44,7 +49,7 @@ mvn install:install-file -Dfile=TwsApi.jar -DgroupId=com.interactivebrokers -Dar
 ----
 
 
-== Back Testing
+== Historical Feed
 Roboquant has support for retrieving historic data from IBKR and use that in back testing.
 
 [source,kotlin]
@@ -53,7 +58,7 @@ val feed = IBKRHistoricFeed()
 feed.retrieve(asset1, asset2)
 ----
 
-== Live Testing
+== Live Feed
 Roboquant has support for retrieving live data from IBKR and use that in back testing.
 
 [source,kotlin]
@@ -62,7 +67,7 @@ val feed = IBKRLiveFeed()
 feed.subscribe(asset1, asset2)
 ----
 
-== Paper Trading
+== Broker
 Roboquant has support for retrieving live data from IBKR and use their paper trading account.
 
 [source,kotlin]

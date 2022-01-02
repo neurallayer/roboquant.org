@@ -149,21 +149,21 @@
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyStrategy2</span> <span class="p">:</span> <span class="nc">Strategy</span> <span class="p">{</span>
 
-    <span class="k">private</span> <span class="kd">val</span> <span class="py">lastPrices</span> <span class="p">=</span> <span class="n">mutableMapOf</span><span class="p">&lt;</span><span class="nc">Asset</span><span class="p">,</span> <span class="nc">Double</span><span class="p">&gt;()</span>
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">previousPrices</span> <span class="p">=</span> <span class="n">mutableMapOf</span><span class="p">&lt;</span><span class="nc">Asset</span><span class="p">,</span> <span class="nc">Double</span><span class="p">&gt;()</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">generate</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;</span> <span class="p">{</span>
         <span class="kd">val</span> <span class="py">signals</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;()</span>
         <span class="k">for</span> <span class="p">((</span><span class="n">asset</span><span class="p">,</span> <span class="n">priceAction</span><span class="p">)</span> <span class="k">in</span> <span class="n">event</span><span class="p">.</span><span class="n">prices</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">val</span> <span class="py">lastPrice</span> <span class="p">=</span> <span class="n">lastPrices</span><span class="p">.</span><span class="nf">getOrDefault</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="nc">Double</span><span class="p">.</span><span class="nc">MAX_VALUE</span><span class="p">)</span>
+            <span class="kd">val</span> <span class="py">previousPrice</span> <span class="p">=</span> <span class="n">previousPrices</span><span class="p">.</span><span class="nf">getOrDefault</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="nc">Double</span><span class="p">.</span><span class="nc">MAX_VALUE</span><span class="p">)</span>
             <span class="kd">val</span> <span class="py">currentPrice</span> <span class="p">=</span> <span class="n">priceAction</span><span class="p">.</span><span class="nf">getPrice</span><span class="p">()</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">currentPrice</span> <span class="p">&gt;</span> <span class="n">lastPrice</span><span class="p">)</span> <span class="n">signals</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nc">Signal</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="nc">Rating</span><span class="p">.</span><span class="nc">BUY</span><span class="p">))</span>
-            <span class="n">lastPrices</span><span class="p">[</span><span class="n">asset</span><span class="p">]</span> <span class="p">=</span> <span class="n">currentPrice</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">currentPrice</span> <span class="p">&gt;</span> <span class="n">previousPrice</span><span class="p">)</span> <span class="n">signals</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nc">Signal</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="nc">Rating</span><span class="p">.</span><span class="nc">BUY</span><span class="p">))</span>
+            <span class="n">previousPrices</span><span class="p">[</span><span class="n">asset</span><span class="p">]</span> <span class="p">=</span> <span class="n">currentPrice</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">signals</span>
     <span class="p">}</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">start</span><span class="p">(</span><span class="n">runPhase</span><span class="p">:</span> <span class="nc">RunPhase</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">lastPrices</span><span class="p">.</span><span class="nf">clear</span><span class="p">()</span>
+        <span class="n">previousPrices</span><span class="p">.</span><span class="nf">clear</span><span class="p">()</span>
     <span class="p">}</span>
 
 <span class="p">}</span></code></pre>
@@ -175,7 +175,7 @@
 <h2 id="_policy_based_strategies">Policy based Strategies</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are use cases that require not only access to the event. These type of strategies can be implemented in roboquant, but they should be implemented as a policy and not strategy. Some reasons you might want to use a policy:</p>
+<p>There are use cases that require a strategy not only to have access to the event but also to the account. These type of strategies can be implemented in roboquant, but they should be implemented as a policy and not strategy. Some reasons you might want to use a policy:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -186,6 +186,9 @@
 <p>Directly generate orders instead of signals</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>See the <a href="../policy/index.html">policy documentation</a> for more details.</p>
 </div>
 </div>
 </div>

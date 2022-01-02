@@ -22,7 +22,9 @@ include::{sourcefile}[tag=naive]
 
 
 == Policy based Strategies
-There are use cases that require not only access to the event. These type of strategies can be implemented in roboquant, but they should be implemented as a policy and not strategy. Some reasons you might want to use a policy:
+There are use cases that require a strategy not only to have access to the event but also to the account. These type of strategies can be implemented in roboquant, but they should be implemented as a policy and not strategy. Some reasons you might want to use a policy:
 
 * Access to the Account instance is required, for example to re-balance a portfolio
 * Directly generate orders instead of signals
+
+See the xref:../policy/index.adoc[policy documentation] for more details.

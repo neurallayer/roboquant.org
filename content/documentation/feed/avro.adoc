@@ -25,6 +25,11 @@ include::{sourcefile}[tag=avro]
 == Convert
 You can also convert other feeds into an Avro file that you can then later use for back-testing. This works with both historic data feeds as wel as live data feeds. However, the current limitation is that it only works with price actions and not other type of data.
 
-TIP: If you work a lot with a directory full of CSV files, you can convert it to a single Avro file and use that from then on.
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=avrocapture]
+----
+
+TIP: If you work a lot with directories full of CSV files, you can convert them to a single Avro file and use that from then on. This is both faster and has lower memory consumption.
 
 

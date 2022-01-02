@@ -140,10 +140,10 @@
 </ol>
 </div>
 <div class="paragraph">
-<p>In some cases a single 3rd party provides all three types of integration (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides historic and live data).</p>
+<p>In some cases a single 3rd party provides all three types of functionality (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides historic and live data).</p>
 </div>
 <div class="paragraph">
-<p>You can combine several of these 3rd parties together, for example the data feeds from IEX Cloud and the broker
+<p>You can combine several of these 3rd parties together in a single run, for example the data feeds from IEX Cloud and the broker
 functionality from Alpaca.</p>
 </div>
 </div>
@@ -157,21 +157,21 @@ functionality from Alpaca.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>roboquant-extra for all "traditional" trading</p>
+<p>roboquant-extra for all "traditional" brokers and data providers</p>
 </li>
 <li>
 <p>roboquant-crypto for all cryptocurrency related 3rd parties</p>
 </li>
+<li>
+<p>roboquant-ibkr for Interactive Brokers</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Include these in your Maven or Gradle build. They are by default already included in the Jupyter Notebooks.</p>
+<p>Include these modules in your Maven or Gradle build. Except <code>roboquant-ibkr</code>, they are by default included in the Jupyter Notebooks.</p>
 </div>
 <div class="paragraph">
-<p>In order to use the 3rd party integration, you&#8217;ll first have to import the package. All third party integration have their own package directly under org.roboquant</p>
-</div>
-<div class="paragraph">
-<p>So you can import all the classes for OANDA as follows:</p>
+<p>In order to use the 3rd party integration, you&#8217;ll first have to import the package. All third party integration have their own package directly under <code>org.roboquant</code>. So you can import all the required classes for OANDA as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -184,7 +184,7 @@ functionality from Alpaca.</p>
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When you want to integrate a 3rd party, you most likely require credentials to gain access. Often this is in the form of an  API id and key. Although you can embed these directly in your source code, roboquant supports better and more secure alternatives.</p>
+<p>When you want to integrate a 3rd party, you most likely require credentials to gain access. Often this is in the form of an API key and secret. Although you can embed these directly in your source code, roboquant supports better and more secure alternatives.</p>
 </div>
 <div class="paragraph">
 <p>The following shows the steps how roboquant resolves these configuration parameters:</p>
@@ -192,7 +192,7 @@ functionality from Alpaca.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>If the credentials are provided directly in the software when calling the API use these, otherwise go to next step.</p>
+<p>If the credentials are provided directly in the code when calling the API use these, otherwise go to next step.</p>
 </li>
 <li>
 <p>If the credentials are provided as startup parameter to the JVM with the -D syntax use these, otherwise go to next step.</p>
@@ -217,7 +217,7 @@ functionality from Alpaca.</p>
 <h2 id="_supported_3rd_parties">Supported 3rd parties</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The following 3rd parties are supported:</p>
+<p>The following table shows which 3rd parties are supported out of the box and what functionality they offer:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -271,10 +271,22 @@ functionality from Alpaca.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="crypto.html">Binance</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="crypto.html">Other Crypto</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>Roboquant also supports many crypto exchanges. For more details on that, see the <a href="crypto.html">crypto</a> documentation.</p>
+<p>For more details on the integration with crypto exchanges, see the <a href="crypto.html">crypto</a> documentation.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -287,6 +299,17 @@ roboquant is open source software that is developed independently of these 3rd p
 </td>
 </tr>
 </table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adding_new_3rd_parties">Adding new 3rd parties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Adding integration with a 3rd party is not hard. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library, this could take as little as a few hours to a few days.</p>
+</div>
+<div class="paragraph">
+<p>Integrating with a new broker is also not hard but will require more time. The most amount of work will be the translation of object exposes by the broker versus those used by roboquant.</p>
 </div>
 </div>
 </div>

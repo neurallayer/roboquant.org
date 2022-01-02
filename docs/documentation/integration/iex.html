@@ -124,8 +124,27 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>IEX Cloud is a financial data platform and provides a variety of data, so not only data form the IEX Exchange.
-Currently, roboquant focuses on the price data from IEX Cloud and not other types of data like fundamental data.</p>
+<p>IEX Cloud is a financial data platform and provides a variety of datasets, so not only data from the IEX Exchange.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://roboquant.org/img/thirdparty/iex-cloud.jpg" alt="IEX Cloud" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Currently, roboquant integration focuses on price data from IEX Cloud, and not other types of data like fundamental data.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+IEX Cloud uses a credit system that charges per API call and not a flat fee. So badly written code can quickly consume all your credits.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -134,7 +153,8 @@ Currently, roboquant focuses on the price data from IEX Cloud and not other type
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">IEXHistoricalFeed</span><span class="p">()</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">IEXHistoricFeed</span><span class="p">()</span>
+<span class="n">feed</span><span class="p">.</span><span class="nf">retrievePriceBar</span><span class="p">(</span><span class="s">"AAPL"</span><span class="p">,</span> <span class="s">"IBM"</span><span class="p">,</span> <span class="n">range</span> <span class="p">=</span> <span class="nc">Range</span><span class="p">.</span><span class="nc">FIVE_YEARS</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </div>
@@ -144,8 +164,21 @@ Currently, roboquant focuses on the price data from IEX Cloud and not other type
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">IEXLiveFeed</span><span class="p">()</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">IEXLiveFeed</span><span class="p">()</span>
+<span class="n">feed</span><span class="p">.</span><span class="nf">subscribeQuotes</span><span class="p">(</span><span class="nc">Asset</span><span class="p">(</span><span class="s">"IBM"</span><span class="p">),</span> <span class="nc">Asset</span><span class="p">(</span><span class="s">"AAPL"</span><span class="p">),</span> <span class="n">interval</span> <span class="p">=</span> <span class="nc">Interval</span><span class="p">.</span><span class="nc">ONE_MINUTE</span><span class="p">)</span></code></pre>
 </div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+IEX Cloud has their own cache that will reduce the number of credits you use when retrieving the same data multiple times. However this data is only cached a certain period. You can also use the Avro capture functionality to record a IEX Cloud Feed (both historic and live) and use that afterwards.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

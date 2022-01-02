@@ -121,7 +121,9 @@
 </nav>                         </div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <div class="paragraph">
+                                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
 <p>A signal is the outcome of a strategy and is modelled closely after the ratings given by ratings agencies. The two mandatory parts of a signal are:</p>
 </div>
 <div class="olist arabic">
@@ -163,15 +165,44 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-a hold rating  is not the same as no signal. Only generate hold signals if you think the asset will perform market conform.
+a hold rating is not the same as no signal. Only generate hold signals if you think the asset will perform market conform. If your strategy has no idea about the performance of an asset, don&#8217;t generate a signal at all.
 </td>
 </tr>
 </table>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_simple_signals">Simple Signals</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// apple is of the type Asset</span>
     <span class="kd">val</span> <span class="py">signal</span> <span class="p">=</span> <span class="nc">Signal</span><span class="p">(</span><span class="n">apple</span><span class="p">,</span> <span class="nc">Rating</span><span class="p">.</span><span class="nc">BUY</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_advanced_signals">Advanced Signals</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Besides the mandatory Rating and Asset, a signal can optionally contain the following attributes (with their default values):</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>val asset: Asset,
+val rating: Rating,
+val type: SignalType = SignalType.BOTH,
+val takeProfit: Double = Double.NaN,
+val stopLoss: Double = Double.NaN,
+val probability: Double = Double.NaN,
+val source: String = ""</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is up to the <a href="../policy/index.html">policy</a> how to use these attributes when generating the orders.</p>
+</div>
 </div>
 </div>
                             </div>

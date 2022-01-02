@@ -6,7 +6,7 @@
 
 Alpaca is an API first broker. Their focus is mainly on US stocks, but they also added cryptocurrencies.
 
-image::https://roboquant.org/img/thirdparty/alpaca.jpg[]
+image::https://roboquant.org/img/thirdparty/alpaca.jpg[Alpaca, 500]
 
 You can find out more at their website at https://alpaca.markets/
 

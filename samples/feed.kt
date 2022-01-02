@@ -5,6 +5,7 @@ import org.roboquant.feeds.Event
 import org.roboquant.feeds.EventChannel
 import org.roboquant.feeds.PriceBar
 import org.roboquant.feeds.avro.AvroFeed
+import org.roboquant.feeds.avro.AvroUtil
 import org.roboquant.feeds.csv.CSVFeed
 import org.roboquant.strategies.EMACrossover
 import java.time.Instant
@@ -41,6 +42,14 @@ fun avro() {
     // end::avro[]
 }
 
+
+fun avroCapture() {
+    // tag::avrocapture[]
+    val feed = CSVFeed("some/path/")
+    AvroUtil.record(feed, "sp500.avro")
+    // end::avrocapture[]
+
+}
 
 fun testEvent(event: Event) {
     // tag::event[]

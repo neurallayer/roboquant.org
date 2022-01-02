@@ -173,7 +173,10 @@
 <h2 id="_run">Run</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>After you have created an instance of roboquant and have a <a href="../feed/index.html">feed</a> defined, you can start a run.</p>
+<p>After you have created an instance of roboquant and have a <a href="../feed/index.html">feed</a> defined, you can start a run. A run is used for all the different stages, from back testing to live trading.</p>
+</div>
+<div class="paragraph">
+<p>In the most simple form, you only provide a feed as a parameter. In this case, all the events available in the feed will be used in the run. If you provide a live feed, it will run forever.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -181,12 +184,17 @@
 </div>
 </div>
 <div class="paragraph">
-<p>In this case, all the events available in the feed will be used in the run. You can restrict it to a certain time-frame:</p>
+<p>However, you can restrict the run to a certain time-frame, again you can use this for a historical feed and a live feed alike.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">timeFrame</span> <span class="p">=</span> <span class="nc">TimeFrame</span><span class="p">.</span><span class="nf">fromYears</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)</span>
-<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">timeFrame</span><span class="p">)</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="c1">// Historical feed example</span>
+<span class="kd">val</span> <span class="py">timeFrame</span> <span class="p">=</span> <span class="nc">TimeFrame</span><span class="p">.</span><span class="nf">fromYears</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)</span>
+<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">timeFrame</span><span class="p">)</span>
+
+<span class="c1">// Live feed example</span>
+<span class="kd">val</span> <span class="py">timeFrame2</span> <span class="p">=</span> <span class="nc">TimeFrame</span><span class="p">.</span><span class="nf">next</span><span class="p">(</span><span class="mi">120</span><span class="p">.</span><span class="n">minutes</span><span class="p">)</span>
+<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">timeFrame2</span><span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="paragraph">

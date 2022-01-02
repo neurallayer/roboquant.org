@@ -2,21 +2,30 @@
 :icons: font
 :source-highlighter: rouge
 :jbake-date: 2020-01-22
+:sourcefile: ../../../samples/integration.kt
 
-IEX Cloud is a financial data platform and provides a variety of data, so not only data form the IEX Exchange.
-Currently, roboquant focuses on the price data from IEX Cloud and not other types of data like fundamental data.
+IEX Cloud is a financial data platform and provides a variety of datasets, so not only data from the IEX Exchange.
+
+image::https://roboquant.org/img/thirdparty/iex-cloud.jpg[IEX Cloud, 500]
+
+Currently, roboquant integration focuses on price data from IEX Cloud, and not other types of data like fundamental data.
+
+WARNING: IEX Cloud uses a credit system that charges per API call and not a flat fee. So badly written code can quickly consume all your credits.
 
 == Historical data
 
-[source, kotlin]
+[source, kotlin, indent=0]
 ----
-val feed = IEXHistoricalFeed()
+include::{sourcefile}[tag=iexhistoric]
 ----
 
 
 == Live data
 
-[source, kotlin]
+[source, kotlin, indent=0]
 ----
-val feed = IEXLiveFeed()
+include::{sourcefile}[tag=iexlive]
 ----
+
+
+TIP: IEX Cloud has their own cache that will reduce the number of credits you use when retrieving the same data multiple times. However this data is only cached a certain period. You can also use the Avro capture functionality to record a IEX Cloud Feed (both historic and live) and use that afterwards.

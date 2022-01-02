@@ -150,21 +150,36 @@
 </li>
 </ol>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+in order to be able to retrieve data, you most likely will require a (paid) market data subscription from IBKR.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_installation">Installation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Interactive brokers integration is different from other 3rd party providers, mainly because:</p>
+<p>IBKR integration is different from other 3rd party providers, mainly because:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>It requires a local running instance of Trader Workstation or IB Gateway. So you cannot connect directly to a server of Interactive Brokers and you will always need to take this "proxy" approach.</p>
+<p>It requires a local running instance of Trader Workstation or IB Gateway (recommended). So you cannot connect directly to a server of Interactive Brokers and you will always need to take this "proxy" approach. And since the gateway requires daily authentication, it is also harder to run this unattended.</p>
 </li>
 <li>
-<p>There is not a free to use client library distributed by Interactive Brokers. The client software that is available, requires the end user to download it themselves and cannot be freely redistributed by third party software like roboquant.</p>
+<p>There is not a free to use client library distributed by Interactive Brokers. The client software that is available, requires the end user to download it themselves and cannot be freely redistributed by third party software like roboquant. Because of this, the integration with IBKR is also put in its own module named <code>roboquant-ibkr</code>.</p>
+</li>
+<li>
+<p>IBKR only allows 1 active connection per username. So if you use your mobile app, your API client (roboquant) gets terminated.</p>
 </li>
 </ol>
 </div>
@@ -183,7 +198,7 @@
 <p>Start the docker container with access tot the local network</p>
 </li>
 <li>
-<p>Download the required client library from Interactive Brokers</p>
+<p>Download the client library from <a href="https://interactivebrokers.github.io/" class="bare">https://interactivebrokers.github.io/</a>. In this client library you&#8217;ll find a file called <code>TwsApi.jar</code> that you are going to need for the next step.</p>
 </li>
 <li>
 <p>Upload the TwsApi.jar file to the notebook.</p>
@@ -205,7 +220,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_back_testing">Back Testing</h2>
+<h2 id="_historical_feed">Historical Feed</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Roboquant has support for retrieving historic data from IBKR and use that in back testing.</p>
@@ -219,7 +234,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_live_testing">Live Testing</h2>
+<h2 id="_live_feed">Live Feed</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Roboquant has support for retrieving live data from IBKR and use that in back testing.</p>
@@ -233,7 +248,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_paper_trading">Paper Trading</h2>
+<h2 id="_broker">Broker</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Roboquant has support for retrieving live data from IBKR and use their paper trading account.</p>

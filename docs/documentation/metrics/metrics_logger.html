@@ -145,7 +145,7 @@ environment.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">logger</span> <span class="p">=</span> <span class="nc">MemoryLogger</span><span class="p">()</span>
-<span class="kd">val</span> <span class="py">keys</span> <span class="p">=</span> <span class="n">logger</span><span class="p">.</span><span class="nf">getMetricNames</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">keys</span> <span class="p">=</span> <span class="n">logger</span><span class="p">.</span><span class="n">metricNames</span>
 <span class="kd">val</span> <span class="py">data</span> <span class="p">=</span> <span class="n">logger</span><span class="p">.</span><span class="nf">getMetric</span><span class="p">(</span><span class="n">keys</span><span class="p">.</span><span class="nf">first</span><span class="p">())</span></code></pre>
 </div>
 </div>

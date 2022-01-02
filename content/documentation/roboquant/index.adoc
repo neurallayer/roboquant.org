@@ -28,14 +28,17 @@ include::{sourcefile}[tag=complete]
 ----
 
 == Run
-After you have created an instance of roboquant and have a xref:../feed/index.adoc[feed] defined, you can start a run.
+After you have created an instance of roboquant and have a xref:../feed/index.adoc[feed] defined, you can start a run. A run is used for all the different stages, from back testing to live trading.
+
+In the most simple form, you only provide a feed as a parameter. In this case, all the events available in the feed will be used in the run. If you provide a live feed, it will run forever.
 
 [source, kotlin, indent=0]
 ----
 include::{sourcefile}[tag=run]
 ----
 
-In this case, all the events available in the feed will be used in the run. You can restrict it to a certain time-frame:
+
+However, you can restrict the run to a certain time-frame, again you can use this for a historical feed and a live feed alike.
 
 [source, kotlin, indent=0]
 ----

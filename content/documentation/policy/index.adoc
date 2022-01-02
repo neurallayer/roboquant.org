@@ -23,7 +23,15 @@ NOTE: If there is one thing that prevents people from actually going live with a
 == Out-of-the-box policies
 
 === DefaultPolicy
-As the name already suggests, this is the default policy that will be used if no other policy is specified.
+As the name already suggests, this is the default policy that will be used if no other policy is specified. It provides
+several properties that influence its behavior.
+
+You can also extend the DefaultPolicy to create your own order types:
+
+[source, kotlin]
+----
+include::{sourcefile}[tag=default]
+----
 
 == Implementing your own policies
 In case none of the out-of-the-box policies will do, you can always implement your own policy. You only have to implement a single method:

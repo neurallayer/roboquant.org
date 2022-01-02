@@ -1,7 +1,7 @@
 import org.roboquant.brokers.Account
 import org.roboquant.feeds.Event
-import org.roboquant.orders.MarketOrder
-import org.roboquant.orders.Order
+import org.roboquant.orders.*
+import org.roboquant.policies.DefaultPolicy
 import org.roboquant.policies.Policy
 import org.roboquant.strategies.Signal
 
@@ -9,15 +9,34 @@ import org.roboquant.strategies.Signal
 class MyPolicy : Policy {
 
     override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
-        val result = mutableListOf<Order>()
+        val orders = mutableListOf<Order>()
         // Your code here
-        return result
+        return orders
     }
 }
 // end::basic[]
 
+
+// tag::default[]
+class MyDefaultPolicy(private val percentage:Double = 0.05) : DefaultPolicy() {
+
+    override fun createOrder(signal: Signal, qty: Double, price: Double): Order? {
+        // We don't short and  all other sell/exit orders are covered by the bracket order
+        if (qty < 0) return null
+
+        val asset = signal.asset
+        return BracketOrder(
+            MarketOrder(asset, qty),
+            TrailOrder(asset, -qty, percentage/2.0),
+            StopOrder(asset, -qty, price* (1 - percentage))
+        )
+    }
+}
+// end::default[]
+
+
 // tag::naive[]
-class MyNativePolicy :  Policy  {
+class MyNativePolicy : Policy {
 
     override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
         val orders = mutableListOf<Order>()
@@ -32,7 +51,7 @@ class MyNativePolicy :  Policy  {
 // end::naive[]
 
 // tag::naive2[]
-class MyNativePolicy2 :  Policy  {
+class MyNativePolicy2 : Policy {
 
     override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
         return signals.map {

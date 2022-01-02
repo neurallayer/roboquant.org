@@ -7,23 +7,22 @@ There are three types of integrations available within roboquant with external p
 . Live data providers
 . Brokers
 
-In some cases a single 3rd party provides all three types of integration (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides historic and live data).
+In some cases a single 3rd party provides all three types of functionality (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides historic and live data).
 
-You can combine several of these 3rd parties together, for example the data feeds from IEX Cloud and the broker
+You can combine several of these 3rd parties together in a single run, for example the data feeds from IEX Cloud and the broker
 functionality from Alpaca.
 
 
 == Modules & Packages
 The third party integrations have their own modules:
 
-* roboquant-extra for all "traditional" trading
+* roboquant-extra for all "traditional" brokers and data providers
 * roboquant-crypto for all cryptocurrency related 3rd parties
+* roboquant-ibkr for Interactive Brokers
 
-Include these in your Maven or Gradle build. They are by default already included in the Jupyter Notebooks.
+Include these modules in your Maven or Gradle build. Except `roboquant-ibkr`, they are by default included in the Jupyter Notebooks.
 
-In order to use the 3rd party integration, you'll first have to import the package. All third party integration have their own package directly under org.roboquant
-
-So you can import all the classes for OANDA as follows:
+In order to use the 3rd party integration, you'll first have to import the package. All third party integration have their own package directly under `org.roboquant`. So you can import all the required classes for OANDA as follows:
 
 [source, kotlin]
 ----
@@ -32,11 +31,11 @@ import org.roboquant.oanda.*
 
 
 == Configuration
-When you want to integrate a 3rd party, you most likely require credentials to gain access. Often this is in the form of an  API id and key. Although you can embed these directly in your source code, roboquant supports better and more secure alternatives.
+When you want to integrate a 3rd party, you most likely require credentials to gain access. Often this is in the form of an API key and secret. Although you can embed these directly in your source code, roboquant supports better and more secure alternatives.
 
 The following shows the steps how roboquant resolves these configuration parameters:
 
-. If the credentials are provided directly in the software when calling the API use these, otherwise go to next step.
+. If the credentials are provided directly in the code when calling the API use these, otherwise go to next step.
 . If the credentials are provided as startup parameter to the JVM with the -D syntax use these, otherwise go to next step.
 . If the credentials are set as system environment use these, otherwise go to next step.
 . If the credentials are set in a property file called ".env" in the working directory use these, otherwise go to next step.
@@ -45,7 +44,7 @@ The following shows the steps how roboquant resolves these configuration paramet
 
 
 == Supported 3rd parties
-The following 3rd parties are supported:
+The following table shows which 3rd parties are supported out of the box and what functionality they offer:
 
 |===
 |3rd party |historic feed |live feed |broker
@@ -56,9 +55,18 @@ The following 3rd parties are supported:
 |xref:iex.adoc[IEX Cloud]|Y|Y|N
 |xref:yahoo.adoc[Yahoo Finance]|Y|N|N
 |xref:alphavantage.adoc[Alpha Vantage]|Y|N|N
+|xref:crypto.adoc[Binance]|Y|Y|Y
+|xref:crypto.adoc[Other Crypto]|Y|Y|Y
 |===
 
 
-Roboquant also supports many crypto exchanges. For more details on that, see the xref:crypto.adoc[crypto] documentation.
+For more details on the integration with crypto exchanges, see the xref:crypto.adoc[crypto] documentation.
 
 NOTE: roboquant is open source software that is developed independently of these 3rd party providers.
+
+
+
+== Adding new 3rd parties
+Adding integration with a 3rd party is not hard. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library, this could take as little as a few hours to a few days.
+
+Integrating with a new broker is also not hard but will require more time. The most amount of work will be the translation of object exposes by the broker versus those used by roboquant.
