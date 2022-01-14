@@ -1,0 +1,38 @@
+= Currencies
+:source-highlighter: rouge
+:sourcefile: ../../../samples/currencies.kt
+:jbake-date: 2020-01-31
+
+Roboquant is build from the ground up to support trading in assets that have different currencies. So for example at the same time you can hold US stocks and EuroNext stocks in your portfolio.
+
+
+== Currency
+The roboquant Currency class represents any type of currency. It follows closely the API that comes with the standard  Java Currency class, but is independent of it. The main reason is that the Java implementation doesn't support cryptocurrencies while the roboquant implementation supports any type of currency.
+
+== Amount
+An amount can hold a value for a single currency. Besides creating a new amount using the Amount constructor, you can also use an extension function that is defined on numbers (f.e. 120.EUR) for commonly used currencies.
+
+[source,kotlin,indent=0]
+----
+include::{sourcefile}[tag=amount]
+----
+
+NOTE: Amounts store their values as Doubles and not BigDecimals. For (simulated) trading the potential loss of precision is not a major issue and the benefits are much better performance and lower memory consumption.
+
+== Wallet
+A wallet can hold values for multiple currencies at the same time. You can create a wallet by using its constructor, or by adding multiple amounts together.
+
+[source,kotlin,indent=0]
+----
+include::{sourcefile}[tag=wallet]
+----
+
+NOTE: If you add two amounts together you'll always get a wallet back, even if the two amounts have the same currency.
+
+== ExchangeRates
+ExchangeRates allow to convert an amount from one currency to another one. Although you can invoke the API directly, typically you would invoke a conversion of an Amount or Wallet.
+
+[source,kotlin,indent=0]
+----
+include::{sourcefile}[tag=er]
+----
