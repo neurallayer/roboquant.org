@@ -37,20 +37,21 @@ Flexible also means roboquant is fully modular and can be extended:
 Developing trading algorithms requires a lot of different skills. You need to know of course a lot about trading itself, but also programming and even a bit of statistics comes in handy. Roboquant tries to cater for both experienced and less experienced user.
 
 === Interactive Development
-Roboquant can be run inside a Jupyter Notebook which provides a very easy entry for people who might find a full-blown development environment too much hassle. A lot of effort went into designing an API that is very easy to use from a
+Roboquant can be run inside a Jupyter Notebook which provides a very easy entry for people who might find a full-blown development environment too much hassle.A lot of effort went into designing an API that is very easy to use from a
 Notebook.
 
-* [x] Graceful introduction of complexity. In other words: simple things should be simple, complex things should be possible
+* [x] Graceful introduction of complexity.In other words: simple things should be simple, complex things should be possible
 * [x] Many convenience methods to get results with minimal amount of coding
 * [x] Many charts out of the box that provides insights into the feeds and the results of a run
 * [x] Sensible defaults for many arguments, so you don't have to specify them all the time
 
 Once you code base grow too large for a notebook, the exact same code can be used in a traditional IDE.
 
+[#_order_management]
 === Order management
-One of the hardest (and most overlooked aspect) of algorithmic trading is order management, especially when your goal is to bring it to a live trading environment. There are so many things that potentially can go wrong and will cost you real money. It is a real endeavor to translate signals into actual orders and manage these outstanding orders.
+One of the hardest (and most overlooked aspect) of algorithmic trading is order management, especially when your goal is to bring it to a live trading environment.There are so many things that potentially can go wrong and will cost you real money.It is a real endeavor to translate signals into actual orders and manage these outstanding orders.
 
-Because of this, roboquant separates the generation of signals (Strategy) from the actual orders (Policy). This allows algo-traders to focus on the generation of signals and pick the order management that fits the risk profile and trading style. And if full control over portfolio- and order-management is required, it is still available.
+Because of this, roboquant separates the generation of signals (Strategy) from the actual orders (Policy).This allows algo-traders to focus on the generation of signals and pick the order management that fits the risk profile and trading style.And if full control over portfolio- and order-management is required, it is still available.
 
 === Batteries included
 * [x] Over 200 technical indicators that are very easy to use in your own strategies
