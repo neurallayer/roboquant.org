@@ -142,7 +142,7 @@
 </div>
 <div class="paragraph">
 <p>All orders refer to a single asset, including advanced order types like BracketOrders. The reason for putting this rule
-in place is that real brokers only have limited support for this and could lead to issues that are only discovered during live trading.</p>
+in place is that real brokers only have limited support for multi-asset orders and this could lead to issues that are only discovered during live trading. Additionally, it makes back testing difficult if the price for one asset is known but not for the other.</p>
 </div>
 </div>
 </div>
@@ -150,7 +150,10 @@ in place is that real brokers only have limited support for this and could lead 
 <h2 id="_creating_orders">Creating Orders</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The policy creates the orders. An example on how to convert signals into simple market orders:</p>
+<p>The used <code>Policy</code> implementation is responsible for creating the orders. This can be based on the received signals from the <code>Strategy</code>, but can also be done for other reasons (like for example cyclic portfolio re-balancing)</p>
+</div>
+<div class="paragraph">
+<p>An example on how to convert a <code>Signal</code> into a <code>MarketOrder</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -169,7 +172,7 @@ in place is that real brokers only have limited support for this and could lead 
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-only use order types during back testing that are also supported by the broker you want to use for live trading.
+make sure to only use order types during back testing that are also supported by the broker you want to use for live trading.
 </td>
 </tr>
 </table>
@@ -177,41 +180,44 @@ only use order types during back testing that are also supported by the broker y
 </div>
 </div>
 <div class="sect1">
-<h2 id="_tif">TIF</h2>
+<h2 id="_tif_time_in_force">TIF (Time In Force)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TIF (Time in Force) sets an execution policy for an order until when the order remains valid. There are two types of TIF:</p>
+<p>TIF sets an execution policy for an order under which conditions the order remains valid. Roughly speaking, there are two types of TIF:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Time based, defining how long the order stays valid</p>
+<p>Time based, defining how long the order stays valid. Two common ones are GTD (Good Till Day) and GTC (Good Till Cancelled)</p>
 </li>
 <li>
-<p>Fill based, defining under what fill conditions the order stays valid</p>
+<p>Fill based, defining under what fill conditions the order stays valid. A common one if FOK (Fill Or Kill)</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>The default TIF is GTC (Goof Till Cancelled)</p>
+<p>The default TIF used in none is specified is GTC (Good Till Cancelled).</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_advanced_usage">Advanced usage</h2>
+<h2 id="_custom_order_types">Custom Order Types</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Orders can be easily extended with own order types if the ones that come out of the box are not sufficient. The two steps required to make this possible are:</p>
+<p>Orders can be extended with own order types if the ones that come out of the box are not sufficient. The two steps required to make to use yor own order types are:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Implement the Order abstract class and add the desired logic for your new order type</p>
+<p>Implement the <code>Order</code> abstract class and add the desired logic for your new order type</p>
 </li>
 <li>
 <p>Create these new order types in your policy</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>Since the execution logic of an order is within the <code>Order</code> class itself, the new <code>Order</code> type will be automatically processed by hte SimBroker. There are no changes required to other components.</p>
 </div>
 </div>
 </div>

@@ -7,6 +7,12 @@ Welcome to the roboquant™ documentation. Just like the roboquant software, the
 
 TIP: If you like to learn more by being hands-on, there are several ready to use tutorials in Jupyter Notebook format that you can try out. To find out more, go to: https://github.com/neurallayer/roboquant-notebook/tree/main[Tutorial Notebooks]
 
+
+== Reading Guide
+You can select any item from the menu on the left to get more information about that topic. Content that is formatted like `SomeName`, represents a real Kotlin class, interface, method or attribute. The package name is typically omitted.
+
+All the used code snippets are actually real compilable and runnable code. However, the required import statements are not shown to improve readability.
+
 == Main components
 Perhaps the most important part of using roboquant is to understand the sequence of steps and the responsibility each component has in this flow. The following diagram provides a logical overview of the main components and the type of data they consume and produce.
 
@@ -29,7 +35,7 @@ Provides the data needed for testing and trading in the form of events. A feed c
 +
 Receives the events from the feed and generates signals. A signal is a rating for a certain asset, like a BUY rating for stock XYZ. So the strategy doesn't create orders, that is the responsibility of the next component, the policy.
 
-* Policy
+* `Policy`
 +
 Receives the generated signals and creates the orders. If you need to create orders that are not based on signals, this is also the place to do so, for example re-balance your portfolio at regular intervals. Check the xref:features.adoc#_order_management[features documentation] why it is smart to separate this from your strategy logic.
 

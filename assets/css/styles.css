@@ -11338,7 +11338,9 @@ html {
 
 img[alt="screenshot"] {
     width: 98%;
-    margin: 20px;
+    margin: 0px;
+    padding: 20px;
+    border: 1px solid grey;
     border-radius: 10px;
 }
 
@@ -11348,7 +11350,7 @@ img[alt="screenshot"] {
 
 
 .masthead-avatar {
-    min-height: 200px;
+    height: 200px;
 }
 
 

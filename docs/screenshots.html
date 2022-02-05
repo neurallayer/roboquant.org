@@ -54,10 +54,19 @@
                      <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>When working in a Jupyter Notebook, roboquant comes with several types of charts that help to understand how the strategy is behaving. This pages contains some samples of those charts.</p>
+<p>When working in a Jupyter Notebook, roboquant comes with several types of charts that help to understand how the strategy is behaving. This pages shows some examples of those charts. The charts in a Notebook are also interactive, allowing you to zoom in areas of interest of filter only those values you want to see.</p>
 </div>
-<div class="paragraph">
-<p>You can try out these charts yourself, since they all come from the visualization notebook.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can try out these charts yourself, since they all come from the <a href="https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/tutorials/visualization.ipynb">visualization notebook</a>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -65,7 +74,7 @@
 <h2 id="_walk_forward">Walk forward</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Plot a metric during a walk-forward test to provide insight into the performance of the strategy during different timeframes. Here we plot the total account value (= cash + positions) and that provides insights how a strategy performs during different time periods. Clearly we can see that the strategy wasn&#8217;t profitable during every time frame.</p>
+<p>Plot a metric during a walk-forward test to provide insight into the performance of the strategy during different timeframes. Here we plot the account equity (= cash + positions) and that provides insights how a strategy performs during different timeframes. Clearly we can see that the strategy wasn&#8217;t profitable during every timeframe.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -78,10 +87,10 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_random_periods">Random periods</h2>
+<h2 id="_random_samples">Random Samples</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>An even more extensive back-test is to run the experiment over randomly sampled periods. In this example we selected the period to be 250 trading days. We then plot the results of all samples and this provide a good view of the maximum profit or loss of the strategy during for a certain duration.</p>
+<p>An even more extensive back-test is to run the experiment over randomly sampled timeframes of a fixed duration. In this example we selected the duration to be 250 trading days. We then plot the results of all samples and this provide a good view of the maximum profit or loss of the strategy during for a certain duration.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -119,7 +128,20 @@ Especially for strategies based only on price actions this helps to validate if 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_asset_allocation">Asset allocation</h2>
+<h2 id="_correlation_matrix">Correlation Matrix</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Another interesting visualization is the correlation matrix that shows how different assets are correlated to each other over a certain period of time.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/correlation.png" alt="screenshot">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_asset_allocation">Asset Allocation</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>See the asset allocation within the portfolio. If assets are denoted in different currencies, this will convert to the base currency of the account.</p>

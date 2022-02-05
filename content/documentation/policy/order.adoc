@@ -9,11 +9,12 @@ The following diagram shows which orders are supported out of the box:
 image::order_types.png[]
 
 All orders refer to a single asset, including advanced order types like BracketOrders. The reason for putting this rule
-in place is that real brokers only have limited support for this and could lead to issues that are only discovered during live trading.
-
+in place is that real brokers only have limited support for multi-asset orders and this could lead to issues that are only discovered during live trading. Additionally, it makes back testing difficult if the price for one asset is known but not for the other.
 
 == Creating Orders
-The policy creates the orders. An example on how to convert signals into simple market orders:
+The used `Policy` implementation is responsible for creating the orders. This can be based on the received signals from the `Strategy`, but can also be done for other reasons (like for example cyclic portfolio re-balancing)
+
+An example on how to convert a `Signal` into a `MarketOrder`:
 
 [source, kotlin]
 ----
@@ -26,23 +27,25 @@ for (signal in signals) {
 ----
 
 
-TIP: only use order types during back testing that are also supported by the broker you want to use for live trading.
+TIP: make sure to only use order types during back testing that are also supported by the broker you want to use for live trading.
 
 
-== TIF
-TIF (Time in Force) sets an execution policy for an order until when the order remains valid. There are two types of TIF:
+== TIF (Time In Force)
+TIF sets an execution policy for an order under which conditions the order remains valid. Roughly speaking, there are two types of TIF:
 
-. Time based, defining how long the order stays valid
-. Fill based, defining under what fill conditions the order stays valid
+. Time based, defining how long the order stays valid. Two common ones are GTD (Good Till Day) and GTC (Good Till Cancelled)
+. Fill based, defining under what fill conditions the order stays valid. A common one if FOK (Fill Or Kill)
 
-The default TIF is GTC (Goof Till Cancelled)
+The default TIF used in none is specified is GTC (Good Till Cancelled).
 
 
-== Advanced usage
-Orders can be easily extended with own order types if the ones that come out of the box are not sufficient. The two steps required to make this possible are:
+== Custom Order Types
+Orders can be extended with own order types if the ones that come out of the box are not sufficient. The two steps required to make to use yor own order types are:
 
-. Implement the Order abstract class and add the desired logic for your new order type
+. Implement the `Order` abstract class and add the desired logic for your new order type
 . Create these new order types in your policy
+
+Since the execution logic of an order is within the `Order` class itself, the new `Order` type will be automatically processed by hte SimBroker. There are no changes required to other components.
 
 
 
