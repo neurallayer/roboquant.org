@@ -2,7 +2,7 @@ import org.roboquant.alpaca.AlpacaBroker
 import org.roboquant.alpaca.AlpacaHistoricFeed
 import org.roboquant.alpaca.AlpacaLiveFeed
 import org.roboquant.common.Asset
-import org.roboquant.common.TimeFrame
+import org.roboquant.common.Timeframe
 import org.roboquant.common.days
 import org.roboquant.common.minutes
 import org.roboquant.iex.IEXHistoricFeed
@@ -18,8 +18,8 @@ import org.roboquant.yahoo.YahooHistoricFeed
 fun yahooFeed() {
     // tag::yahoo[]
     val feed = YahooHistoricFeed()
-    val tf = TimeFrame.past(100.days)
-    feed.retrieve("AAPL", "GOOGL", "IBM", timeFrame = tf)
+    val tf = Timeframe.past(100.days)
+    feed.retrieve("AAPL", "GOOGL", "IBM", timeframe = tf)
     // end::yahoo[]
 }
 
@@ -27,8 +27,8 @@ fun yahooFeed() {
 fun oandaHistoricFeed() {
     // tag::oandahistoric[]
     val feed = OANDAHistoricFeed()
-    val tf = TimeFrame.past(2.days)
-    feed.retrieveCandles("EUR_USD", "USD_JPY", "GBP_USD", timeFrame = tf)
+    val tf = Timeframe.past(2.days)
+    feed.retrieveCandles("EUR_USD", "USD_JPY", "GBP_USD", timeframe = tf)
     // end::oandahistoric[]
 }
 
@@ -38,7 +38,7 @@ fun oandaLiveFeed() {
     val feed = OANDALiveFeed()
     feed.subscribePrices("EUR_USD", "USD_JPY", "GBP_USD")
 
-    val tf = TimeFrame.next(120.minutes)
+    val tf = Timeframe.next(120.minutes)
     roboquant.run(feed,tf)
     // end::oandalive[]
 }
@@ -56,8 +56,8 @@ fun oandaBroker() {
 fun alpacaHistoricFeed() {
     // tag::alpacahistoric[]
     val feed = AlpacaHistoricFeed()
-    val tf = TimeFrame.past(100.days)
-    feed.retrieve("AAPL", "IBM", timeFrame = tf)
+    val tf = Timeframe.past(100.days)
+    feed.retrieveBars("AAPL", "IBM", timeframe = tf)
     // end::alpacahistoric[]
 }
 
@@ -84,7 +84,7 @@ fun alpacaLiveFeed() {
     val feed = AlpacaLiveFeed()
     feed.subscribe("AAPL", "IBM")
 
-    val tf = TimeFrame.next(120.minutes)
+    val tf = Timeframe.next(120.minutes)
     roboquant.run(feed,tf)
     // end::alpacalive[]
 }

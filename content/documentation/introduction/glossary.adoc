@@ -1,0 +1,40 @@
+= Glossary
+:jbake-type: doc
+:icons: font
+:jbake-date: 2020-01-15
+
+== Introduction
+This page provides an overview of the different concepts used within roboquant and their meaning.
+
+[%autowidth]
+|===
+|Concept|Meaning
+
+2+|*Stages*
+|Back Testing|Testing of a strategy and policy using historic data and the simulated broker
+|Live Testing|Testing of a strategy and policy using live data and the simulated broker
+|Paper Trading|Testing of a strategy and policy using live data and the paper trading account of a real broker
+|Live Trading|Running of a strategy and policy using live data and a live trading account of a real broker
+|Run|The run of any of the above stages
+
+2+|*Components*
+|Feed|Functionality responsible for generating Events
+|Event|Piece of information that is available at a certain moment in time
+|Strategy|Functionality responsible for generating `Signals` based on `Events`
+|Policy|Functionality responsible for generating `Orders` based on `Signals`
+|Metric|Functionality that capture and/or calculates information during a run
+
+2+|*Time*
+|Timeframe|(Limited) time period that has a start and end time
+|Timeline|list of sorted times
+
+2+|*Money*
+|Amount|monetary value denoted in a single currency
+|Wallet|collection of amounts, so it can contain multiple currency
+|Exchange Rates|set of rates that allows for the conversion between currencies
+|Equity|total of cash and portfolio positions
+|Buying Power|Total amount available for trading
+|Realized PnL|Made Profit or Loss as part of a transaction, and so reflected in the cash balance of the account
+|Unrealized PnL|Profit or Loss based on the current market prices but not yet materialized since the position within the portfolio is not yet closed. So this is NOT yet reflected in the cash balance.
+
+|===

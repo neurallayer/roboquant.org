@@ -34,16 +34,16 @@
     </div>
 </nav>
               <header class="masthead bg-primary text-white text-center">
-                     <div class="container d-flex align-items-center flex-column">
+                     <div class="container px-5 my-1">
                          <div class="row gx-5">
                             <div class="col-lg-4 mb-5 mb-lg-0">
-                                <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
-                            <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">OANDA</h3>
-                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">OANDA</h1>
+                                 </div>
+                             </div>
                          </div>
-
                      </div>
                  </header>
 
@@ -57,9 +57,10 @@
             <summary>introduction</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/introduction/index.html" class="nav-link">Welcome</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">The 4 Stages</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/features.html" class="nav-link">Features</a></li>
-                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">Four Stages</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/glossary.html" class="nav-link">Glossary</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a></li>
             </ul>
         </details>
@@ -79,9 +80,8 @@
             <summary>feed</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/event.html" class="nav-link">Event</a></li>
                  <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro Feed</a></li>
             </ul>
         </details>
         <details close>
@@ -96,6 +96,14 @@
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/policy/index.html" class="nav-link">Policy</a></li>
                  <li class="nav-item"><a href="/documentation/policy/order.html" class="nav-link">Orders</a></li>
+            </ul>
+        </details>
+        <details close>
+            <summary>broker</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/broker/index.html" class="nav-link">Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/simbroker.html" class="nav-link">Simulated Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
         <details close>
@@ -158,8 +166,8 @@
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">OANDAHistoricFeed</span><span class="p">()</span>
-<span class="kd">val</span> <span class="py">tf</span> <span class="p">=</span> <span class="nc">TimeFrame</span><span class="p">.</span><span class="nf">past</span><span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="n">days</span><span class="p">)</span>
-<span class="n">feed</span><span class="p">.</span><span class="nf">retrieveCandles</span><span class="p">(</span><span class="s">"EUR_USD"</span><span class="p">,</span> <span class="s">"USD_JPY"</span><span class="p">,</span> <span class="s">"GBP_USD"</span><span class="p">,</span> <span class="n">timeFrame</span> <span class="p">=</span> <span class="n">tf</span><span class="p">)</span></code></pre>
+<span class="kd">val</span> <span class="py">tf</span> <span class="p">=</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="nf">past</span><span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="n">days</span><span class="p">)</span>
+<span class="n">feed</span><span class="p">.</span><span class="nf">retrieveCandles</span><span class="p">(</span><span class="s">"EUR_USD"</span><span class="p">,</span> <span class="s">"USD_JPY"</span><span class="p">,</span> <span class="s">"GBP_USD"</span><span class="p">,</span> <span class="n">timeframe</span> <span class="p">=</span> <span class="n">tf</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </div>
@@ -175,7 +183,7 @@
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">OANDALiveFeed</span><span class="p">()</span>
 <span class="n">feed</span><span class="p">.</span><span class="nf">subscribePrices</span><span class="p">(</span><span class="s">"EUR_USD"</span><span class="p">,</span> <span class="s">"USD_JPY"</span><span class="p">,</span> <span class="s">"GBP_USD"</span><span class="p">)</span>
 
-<span class="kd">val</span> <span class="py">tf</span> <span class="p">=</span> <span class="nc">TimeFrame</span><span class="p">.</span><span class="nf">next</span><span class="p">(</span><span class="mi">120</span><span class="p">.</span><span class="n">minutes</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">tf</span> <span class="p">=</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="nf">next</span><span class="p">(</span><span class="mi">120</span><span class="p">.</span><span class="n">minutes</span><span class="p">)</span>
 <span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span><span class="n">tf</span><span class="p">)</span></code></pre>
 </div>
 </div>

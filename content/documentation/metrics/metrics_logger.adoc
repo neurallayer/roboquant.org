@@ -4,7 +4,7 @@
 :sourcefile: ../../../samples/logger.kt
 :jbake-date: 2020-01-15
 
-The metrics logger receives the metric values at the end of each step and then stores and/or logs these values.
+A `MetricsLogger` receives the calculated metric values at the end of each step and then stores and/or logs these values.
 
 
 == Standard Loggers
@@ -27,14 +27,14 @@ include::{sourcefile}[tag=standard]
 This logger just silently ignores all metrics and is mostly useful for unit tests
 
 === InfoLogger
-Logs metrics using the built-in Logger
+Logs metrics using the built-in Logger.
 
 === ConsoleLogger
 Logs the metrics to the console using a simple "println" statement.
 
 == Custom Loggers
-You can implement also your own MetricsLogger, for example if you want to store values into a database or have some custom file format that you want to use.
+You can implement also your own MetricsLogger, for example if you want to store values into a database or have a custom file format that you want to use.
 
-[source,shell]
+[source,kotlin,indent=0]
 ----
 ----

@@ -11346,6 +11346,7 @@ img[alt="screenshot"] {
     padding: 10px;
 }
 
+
 .masthead-avatar {
     min-height: 200px;
 }
@@ -11373,4 +11374,8 @@ ul.checklist {
 details ul li .nav-link {
         padding: 0px 10px;
         color: #3296c8;
+}
+
+h1.doc {
+    text-align: left;
 }

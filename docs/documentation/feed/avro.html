@@ -6,7 +6,7 @@
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
     <meta name="theme-color" content="#3296C8">
-    <title>roboquant - Avro</title>
+    <title>roboquant - Avro Feed</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -34,16 +34,16 @@
     </div>
 </nav>
               <header class="masthead bg-primary text-white text-center">
-                     <div class="container d-flex align-items-center flex-column">
+                     <div class="container px-5 my-1">
                          <div class="row gx-5">
                             <div class="col-lg-4 mb-5 mb-lg-0">
-                                <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
-                            <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Avro</h3>
-                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Avro Feed</h1>
+                                 </div>
+                             </div>
                          </div>
-
                      </div>
                  </header>
 
@@ -57,9 +57,10 @@
             <summary>introduction</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/introduction/index.html" class="nav-link">Welcome</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">The 4 Stages</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/features.html" class="nav-link">Features</a></li>
-                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">Four Stages</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/glossary.html" class="nav-link">Glossary</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a></li>
             </ul>
         </details>
@@ -79,9 +80,8 @@
             <summary>feed</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/event.html" class="nav-link">Event</a></li>
                  <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro Feed</a></li>
             </ul>
         </details>
         <details close>
@@ -96,6 +96,14 @@
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/policy/index.html" class="nav-link">Policy</a></li>
                  <li class="nav-item"><a href="/documentation/policy/order.html" class="nav-link">Orders</a></li>
+            </ul>
+        </details>
+        <details close>
+            <summary>broker</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/broker/index.html" class="nav-link">Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/simbroker.html" class="nav-link">Simulated Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
         <details close>
@@ -137,42 +145,46 @@
 <li>
 <p>A container file, to store persistent data.</p>
 </li>
-<li>
-<p>Remote procedure call (RPC).</p>
-</li>
-<li>
-<p>Simple integration with dynamic languages. Code generation is not required to read or write data files nor to use or implement RPC protocols. Code generation as an optional optimization, only worth implementing for statically typed languages.</p>
-</li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Avro files make it easy to store large amount of data in a single file and efficiently use it during back testing.</p>
+<p>Avro files make it easy to store large amount of data in a single file and efficiently use it during back testing. The AvroFeed implementation of roboquant only loads data in memory when it is required, so very large datasets can be used without having to worry about memory issues.</p>
+</div>
+<div class="paragraph">
+<p>Also since the Avro Feed uses a single file, it is easier to distribute than for example directories full of CSV files.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_use">Use</h2>
+<h2 id="_using_an_avrofeed">Using an AvroFeed</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To use a compatible Avro file as a feed is straight forward.</p>
+<p>To use any compatible Avro file as a feed is straight forward. You just provide the file location to the constructor as a parameter and the feed will be ready to use.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">AvroFeed</span><span class="p">(</span><span class="s">"myfile.avro"</span><span class="p">)</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">AvroFeed</span><span class="p">(</span><span class="s">"myfile.avro"</span><span class="p">)</span>
+<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span></code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>A single feed can contain mixed price actions if required. So you can have Trade Prices and Price Bars in the same feed.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_convert">Convert</h2>
+<h2 id="_convert_to_an_avrofeed">Convert to an AvroFeed</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You can also convert other feeds into an Avro file that you can then later use for back-testing. This works with both historic data feeds as wel as live data feeds. However, the current limitation is that it only works with price actions and not other type of data.</p>
+<p>You can also convert other feeds into Avro files that you can then later use for back-testing. This works with both historic data feeds as wel as live data feeds. The current limitation is that it only works with price actions and not other type of actions like image data or social media post.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">CSVFeed</span><span class="p">(</span><span class="s">"some/path/"</span><span class="p">)</span>
-<span class="nc">AvroUtil</span><span class="p">.</span><span class="nf">record</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="s">"sp500.avro"</span><span class="p">)</span></code></pre>
+<span class="nc">AvroUtil</span><span class="p">.</span><span class="nf">record</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="s">"myfile.avro"</span><span class="p">)</span>
+
+<span class="c1">// Later you can use the same file in a AvroFeed</span>
+<span class="kd">val</span> <span class="py">feed2</span> <span class="p">=</span> <span class="nc">AvroFeed</span><span class="p">(</span><span class="s">"myfile.avro"</span><span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock tip">
@@ -183,6 +195,49 @@
 </td>
 <td class="content">
 If you work a lot with directories full of CSV files, you can convert them to a single Avro file and use that from then on. This is both faster and has lower memory consumption.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The nice thing is that the recording also works with live feeds. So you can record a live feed for a specified timeframe and then use it from then on in your own back test.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows how you can record 4 hours of Bitcoin price-bars from Binance.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">BinanceLiveFeed</span><span class="p">()</span>
+<span class="n">feed</span><span class="p">.</span><span class="nf">subscribePriceBar</span><span class="p">(</span><span class="s">"BTCUSDT"</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">timeframe</span> <span class="p">=</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="nf">next</span><span class="p">(</span><span class="mi">4</span><span class="p">.</span><span class="n">hours</span><span class="p">)</span>
+<span class="nc">AvroUtil</span><span class="p">.</span><span class="nf">record</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="s">"bitcoin.avro"</span><span class="p">,</span> <span class="n">timeframe</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_default_avrofeeds">Default AvroFeeds</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Roboquant comes with a few default AvroFeeds. The main benefit is that you can quickly test if your code is working without having to download and set up your own feeds.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed1</span> <span class="p">=</span> <span class="nc">AvroFeed</span><span class="p">.</span><span class="nf">sp500</span><span class="p">()</span> <span class="c1">// S&amp;P500 for 5 years</span>
+<span class="kd">val</span> <span class="py">feed2</span> <span class="p">=</span> <span class="nc">AvroFeed</span><span class="p">.</span><span class="nf">test</span><span class="p">()</span> <span class="c1">// 6 popular US stocks for last 60 years</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the future there will be more default AvroFeeds that you can use, also depending on the feedback from the community. Likely candidates that are currently missing are FOREX feeds and cryptocurrency feeds.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+these default feeds should not be relied on for serious back testing.
 </td>
 </tr>
 </table>

@@ -2,10 +2,10 @@ import org.roboquant.Roboquant
 import org.roboquant.brokers.Account
 import org.roboquant.feeds.Event
 import org.roboquant.metrics.*
-import org.roboquant.strategies.EMACrossover
+import org.roboquant.strategies.Strategy
 
 
-fun standard() {
+fun standard(strategy: Strategy) {
     // tag::standard[]
     val metric1 = AccountSummary()
     val metric2 = PortfolioExposure()
@@ -13,7 +13,7 @@ fun standard() {
     val metric4 = VWAPMetric()
     val metric5 = SharpRatio()
 
-    val roboquant = Roboquant(EMACrossover(), metric1, metric2, metric3, metric4, metric5)
+    val roboquant = Roboquant(strategy, metric1, metric2, metric3, metric4, metric5)
     // end::standard[]
 }
 

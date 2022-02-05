@@ -13,7 +13,7 @@
                                 <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="${config.site} avatar">
                             </div>
                             <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">${content.heading}</h3>
+                                <h3 class="masthead-subheading font-weight-light mt-5">${content.heading}</h3>
                             </div>
                          </div>
                      </div>

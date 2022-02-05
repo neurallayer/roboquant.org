@@ -1,22 +1,25 @@
 = Overview
 :jbake-date: 2020-01-31
+:icons: font
+:source-highlighter: rouge
+:dotenvfile: ../../../samples/dotenv
 
-There are three types of integrations available within roboquant with external parties:
 
-. Historic data providers
-. Live data providers
-. Brokers
+There are three types of integrations available within roboquant with 3rd parties:
 
-In some cases a single 3rd party provides all three types of functionality (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides historic and live data).
+. Historic data feeds
+. Live data feeds
+. Brokers implementations
+
+In some cases a single 3rd party provides all three types of functionality (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides historic and live data feeds).
 
 You can combine several of these 3rd parties together in a single run, for example the data feeds from IEX Cloud and the broker
 functionality from Alpaca.
 
-
 == Modules & Packages
-The third party integrations have their own modules:
+The third party integrations have their own modules and are not part of the `roboquant-core` module:
 
-* roboquant-extra for all "traditional" brokers and data providers
+* roboquant-extra for all "traditional" brokers and data feed providers
 * roboquant-crypto for all cryptocurrency related 3rd parties
 * roboquant-ibkr for Interactive Brokers
 
@@ -31,23 +34,31 @@ import org.roboquant.oanda.*
 
 
 == Configuration
-When you want to integrate a 3rd party, you most likely require credentials to gain access. Often this is in the form of an API key and secret. Although you can embed these directly in your source code, roboquant supports better and more secure alternatives.
+When you want to integrate with a 3rd party, you most likely require credentials to gain access to their API's. Often this is in the form of an API key and secret. You can of course embed these credentials directly in your source code, however roboquant offers better and more secure alternatives.
 
-The following shows the steps how roboquant resolves these configuration parameters:
+The following list shows the steps how roboquant resolves these configuration parameters:
 
 . If the credentials are provided directly in the code when calling the API use these, otherwise go to next step.
 . If the credentials are provided as startup parameter to the JVM with the -D syntax use these, otherwise go to next step.
-. If the credentials are set as system environment use these, otherwise go to next step.
+. If the credentials are set as system environment variable (export MY_KEY="some value") use these, otherwise go to next step.
 . If the credentials are set in a property file called ".env" in the working directory use these, otherwise go to next step.
 . If the credentials are set in a property file called "dotenv" in the working directory use these, otherwise go to next step.
 . If the credentials are set in a property file called ".env" in the $HOME/.roboquant directory use these, otherwise go to next step.
+
+The following provides an overview of the used properties in roboquant
+
+[source, properties, indent=0]
+----
+include::{dotenvfile}[]
+----
 
 
 == Supported 3rd parties
 The following table shows which 3rd parties are supported out of the box and what functionality they offer:
 
+[cols="<,^,^,^"]
 |===
-|3rd party |historic feed |live feed |broker
+|3rd party |Historic feed |Live feed |Broker
 
 |xref:ibkr.adoc[Interactive Brokers]|Y|Y|Y
 |xref:alpaca.adoc[Alpaca]|Y|Y|Y
@@ -56,17 +67,15 @@ The following table shows which 3rd parties are supported out of the box and wha
 |xref:yahoo.adoc[Yahoo Finance]|Y|N|N
 |xref:alphavantage.adoc[Alpha Vantage]|Y|N|N
 |xref:crypto.adoc[Binance]|Y|Y|Y
-|xref:crypto.adoc[Other Crypto]|Y|Y|Y
+|xref:crypto.adoc[Other Crypto Exchanges]|Y|Y|Y
 |===
 
 
-For more details on the integration with crypto exchanges, see the xref:crypto.adoc[crypto] documentation.
+NOTE: roboquant is open source software that is developed independently of these 3rd party companies. There are no direct or indirect ties to any of these companies.
 
-NOTE: roboquant is open source software that is developed independently of these 3rd party providers.
+== Adding new 3rd party integrations
+Adding integration with a 3rd party is not hard. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library that is available, this could take as little as a few hours to a few days. You can read more about the Feed interface that you need to implement right xref:../feed/index.adoc#_custom_feeds[here]
 
+Integrating with a new broker is also not hard but will require more time. The most amount of work will be the translation of object exposes by the broker versus those used by roboquant. For example an Order in roboquant might be slightly different from an Order expected by the client library of the broker and a conversion needs to happen.
 
-
-== Adding new 3rd parties
-Adding integration with a 3rd party is not hard. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library, this could take as little as a few hours to a few days.
-
-Integrating with a new broker is also not hard but will require more time. The most amount of work will be the translation of object exposes by the broker versus those used by roboquant.
+For both custom Feed and Broker integrations, it is recommended to first look at some existing integrations and use them as a starting point. And if you have questions, you can always reach out via one of the channels mentioned on the contact page.

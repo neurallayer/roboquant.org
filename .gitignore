@@ -3,3 +3,4 @@
 .asciidocotor/
 *.cache
 jbake_sample_sqlite.db
+output

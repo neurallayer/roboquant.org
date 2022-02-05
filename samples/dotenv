@@ -1,0 +1,26 @@
+
+
+# Uncomment the following two lines and change the values for Alpaca API access
+APCA_API_KEY_ID=your_api_key_id
+APCA_API_SECRET_KEY=your_api_secret_key
+
+# Uncomment the following two lines and change values for IEX Cloud access
+IEX_PUBLIC_KEY=your_publishable_key
+IEX_SECRET_KEY=your_secret_key
+
+# Uncomment the following line and change the value for Alpha Vantage access
+ALPHA_VANTAGE_API_KEY=your_api_key
+
+# Uncomment the following two lines and change the values for Binance access
+BINANCE_API_KEY=your_key
+BINANCE_API_SECRET=you_secret
+
+# Uncomment the following two lines and change the values for OANDA access
+OANDA_ACCOUNT_ID=your_account
+OANDA_API_KEY=your_key
+
+# Uncomment the following lines for email authentication
+mail.host=email_host
+mail.username=your_email_username
+mail.password=your_email_password
+

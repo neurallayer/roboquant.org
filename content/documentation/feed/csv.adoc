@@ -4,10 +4,9 @@
 :sourcefile: ../../../samples/feed.kt
 :jbake-date: 2020-01-11
 
-CSV files are one of the most commonly used formats for storing historic price data. However, since there is no standard format, they differ a lot depending on where you downloaded them from.
+CSV files are one of the most common used file formats for storing historic price data. However, since there is no standard defined, they differ a lot depending on where you downloaded them from. Additionally, they often lack some required meta-data, like the currency of the price or exchange they ar traded.
 
-The CSVFeed class in roboquant offers several configuration options to cather to the different formats.
-
+The `CSVFeed` class in roboquant offers several configuration options to cater to these differences, allowing you to parse almost all CSV files found on the internet.
 
 == Basic usage
 The simplest usage is to provide the directory that contains the CSV files and the CSVFeed will try to parse them based on defaults and the content it finds.
@@ -17,7 +16,7 @@ The simplest usage is to provide the directory that contains the CSV files and t
 include::{sourcefile}[tag=basic]
 ----
 
-== Advanced usage
+== Configuration
 Since the format of CSV files differs a lot, the CSVFeed allows for a lot of configuration to cather to this.
 
 The following properties decide on how the CSV files are parsed
@@ -31,3 +30,15 @@ asset.currency = EUR
 file.extension = csv
 file.skip = ABN.csv ASML.csv
 ----
+
+== Memory Constraints
+The default `CSVFeed` loads all the data found in all the files into memory during initializing. The benefit is that after initialization the CSVFeed is very fast when used in back tests. And since you reuse the feed in concurrent back-tests, this is becomes even more important when doing extensive back testing.
+
+However, the downside are possible memory constraints. So there is also a CSV Feed implementation that only reads the data when required. This is substantial slower, but consumes a lot less memory. It supports the same configuration, the only difference is that you need to `LazyCSVFeed` instead of the regular `CSVFeed`
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=lazy]
+----
+
+TIP: Convert the CSV files to an AvroFeed, that way you have the best of both worlds: low memory consumption and high performance. See xref:avro.adoc#_convert_to_an_avrofeed[the avro documentation] on how to do that.

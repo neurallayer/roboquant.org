@@ -6,7 +6,7 @@
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
     <meta name="theme-color" content="#3296C8">
-    <title>roboquant - Four Stages</title>
+    <title>roboquant - The 4 Stages</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -34,16 +34,16 @@
     </div>
 </nav>
               <header class="masthead bg-primary text-white text-center">
-                     <div class="container d-flex align-items-center flex-column">
+                     <div class="container px-5 my-1">
                          <div class="row gx-5">
                             <div class="col-lg-4 mb-5 mb-lg-0">
-                                <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
-                            <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Four Stages</h3>
-                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">The 4 Stages</h1>
+                                 </div>
+                             </div>
                          </div>
-
                      </div>
                  </header>
 
@@ -57,9 +57,10 @@
             <summary>introduction</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/introduction/index.html" class="nav-link">Welcome</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">The 4 Stages</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/features.html" class="nav-link">Features</a></li>
-                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">Four Stages</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/glossary.html" class="nav-link">Glossary</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a></li>
             </ul>
         </details>
@@ -79,9 +80,8 @@
             <summary>feed</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/event.html" class="nav-link">Event</a></li>
                  <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro Feed</a></li>
             </ul>
         </details>
         <details close>
@@ -96,6 +96,14 @@
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/policy/index.html" class="nav-link">Policy</a></li>
                  <li class="nav-item"><a href="/documentation/policy/order.html" class="nav-link">Orders</a></li>
+            </ul>
+        </details>
+        <details close>
+            <summary>broker</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/broker/index.html" class="nav-link">Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/simbroker.html" class="nav-link">Simulated Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
         <details close>
@@ -124,7 +132,7 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are 4 distinct stages that you go through when you develop and run a new trading strategy. The below diagram shows the stages and the order in which they are executed:</p>
+<p>There are 4 distinct stages that you go through when you develop, test and run a new trading strategy. The below diagram shows the stages and the order in which they are executed:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -137,16 +145,55 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>If possible at all, don&#8217;t skip a stage.</p>
+<p>If possible at all, don&#8217;t skip a stage. Every stage has its purpose in order to end up with a well performing and robust trading strategy.</p>
 </li>
 <li>
-<p>And perhaps more important, if you are not happy about the performance in a later stage, go back to the first stage.</p>
+<p>And perhaps more important, if you are not happy about the performance in a later stage, go back to the first stage. Often minor changes to the code can have major impact on the results and should be thoroughly tested at every stage.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>Roboquant support all four stages and requires minimal changes to your code to move from one stage to the next. Your strategy and policy should not change at all between stages, and only the selected data feed and broker differ between stages.</p>
+<p>Roboquant support all 4 stages and requires minimal changes to your code to move from one stage to the next. Your strategy and policy should not change at all between stages, and only the selected data feeds and broker differ between certain stages.</p>
 </div>
+<div class="paragraph">
+<p>The following table shows the differences in each stage:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Stage</th>
+<th class="tableblock halign-left valign-top">Broker</th>
+<th class="tableblock halign-left valign-top">Feed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Back Testing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SimBroker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Historic data feeds</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Live Testing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SimBroker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Live data feeds</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Paper Trading</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Real broker using demo account</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Live data feeds</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Live Trading</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Real broker using live account</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Live data feeds</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
@@ -171,7 +218,7 @@
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-configure the SimBroker similar to the live trading account and broker you are going to use. Provide realistic cost and starting account balance, so you don&#8217;t get a too optimistic outlook on the overall cost. In general is it preferable to be a bit conservative and define a higher cost structure at this stage then the other way around.
+configure the SimBroker similar to the live trading account and broker you are going to use. Provide realistic cost and starting account balance, so you don&#8217;t get a too optimistic outlook on the overall cost. In general is it preferable to be conservative and define a higher cost structure at this stage then the other way around.
 </td>
 </tr>
 </table>
@@ -205,10 +252,10 @@ roboquant can use any combination of data feed and broker. So you don&#8217;t ne
 <h2 id="_stage_3_paper_trading">Stage 3: Paper Trading</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this stage you&#8217;ll use <strong>live data</strong> with a <strong>paper trading account</strong> to test your strategy and policy. The main purpose is to validate if your policy is still performing well using a different broker implementation. For example, are the order generated by the policy fully supported and behave as expected.</p>
+<p>In this stage you&#8217;ll use <strong>live data</strong> with a <strong>paper trading or demo account</strong> to test your strategy and policy. The main purpose is to validate if your policy is still performing well using a different broker implementation. For example, are the order generated by the policy fully supported and behave as expected.</p>
 </div>
 <div class="paragraph">
-<p>This stage is where you really validate the robustness of your approach and get extra confirmation that it is ready to go live. If you don&#8217;t have a solid policy in place that fully behaves as expected, you should never go to the next stage.</p>
+<p>This stage is where you validate the robustness of your approach and get extra confirmation that it is ready to go live. If you don&#8217;t have a solid policy in place that fully behaves as expected, you should never go to the next stage.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -217,7 +264,7 @@ roboquant can use any combination of data feed and broker. So you don&#8217;t ne
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-of course this will only work if your broker offers paper trading functionality. But if you are serious about algo-trading, you should only select a broker that offers a realistic paper trading account.
+of course this will only work if your broker offers decent paper trading functionality. But if you are serious about algo-trading, you should only settle on brokers that offer realistic paper trading functionality.
 </td>
 </tr>
 </table>
@@ -237,7 +284,7 @@ of course this will only work if your broker offers paper trading functionality.
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-it is easier than you think to create a solution that goes haywire and generates way too many orders. If this happens, you can quickly lose all your money due to transaction- and spread-cost.
+it is easier than you think to create a solution that goes haywire and generates way too many orders. If this happens, you can quickly lose all your money due to transaction- and other types of cost.
 </td>
 </tr>
 </table>

@@ -34,16 +34,16 @@
     </div>
 </nav>
               <header class="masthead bg-primary text-white text-center">
-                     <div class="container d-flex align-items-center flex-column">
+                     <div class="container px-5 my-1">
                          <div class="row gx-5">
                             <div class="col-lg-4 mb-5 mb-lg-0">
-                                <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
-                            <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Event Driven</h3>
-                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Event Driven</h1>
+                                 </div>
+                             </div>
                          </div>
-
                      </div>
                  </header>
 
@@ -57,9 +57,10 @@
             <summary>introduction</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/introduction/index.html" class="nav-link">Welcome</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">The 4 Stages</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/features.html" class="nav-link">Features</a></li>
-                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">Four Stages</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/glossary.html" class="nav-link">Glossary</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a></li>
             </ul>
         </details>
@@ -79,9 +80,8 @@
             <summary>feed</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/event.html" class="nav-link">Event</a></li>
                  <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro Feed</a></li>
             </ul>
         </details>
         <details close>
@@ -96,6 +96,14 @@
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/policy/index.html" class="nav-link">Policy</a></li>
                  <li class="nav-item"><a href="/documentation/policy/order.html" class="nav-link">Orders</a></li>
+            </ul>
+        </details>
+        <details close>
+            <summary>broker</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/broker/index.html" class="nav-link">Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/simbroker.html" class="nav-link">Simulated Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
         <details close>
@@ -125,10 +133,7 @@
 <h2 id="_what_is_event_driven_software">What is event-driven software</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Event-driven software is software that is triggered as soon a new event occurs. Within the context of algo-trading, events can be for example a new price action for an asset.</p>
-</div>
-<div class="paragraph">
-<p>Roboquant uses the same event-driven approach for all <a href="four_stages.html">four stages</a>, ensuring minimal friction when moving from one stage to the next.</p>
+<p>Event-driven software is a paradigm in which the flow of the application is determined by events such as user actions, sensor outputs, or message passing from other programs. In the case of algo-trading, these actions are often price actions that happen in the market or other financial news.</p>
 </div>
 </div>
 </div>
@@ -141,13 +146,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Reuse - An event-driven framework can be used for back testing and live trading with minimal change of components.</p>
+<p>Reuse - roboquant uses the same event-driven approach for all <a href="four_stages.html">4 stages</a> of developing trading strategies, ensuring minimal friction when moving from one stage to the next.</p>
 </li>
 <li>
 <p>Avoid Lookahead - With an event-driven test, it is unlikely that the strategy will actually peep into the future since at the time of making any decision in the code, the future data is not yet available.</p>
 </li>
 <li>
-<p>Robustness - Live trading is by definition event driven. So by using the same approach during back testing, it ensures you got have to address use-cases that otherwise wouldn&#8217;t show up until it is too late.</p>
+<p>Robustness - Live trading is by definition event-driven. So by using the same approach during back testing, it ensures you got have to address use-cases that otherwise wouldn&#8217;t show up until it is too late.</p>
 </li>
 </ul>
 </div>
@@ -163,6 +168,9 @@
 <p>They can be slower to execute compared to a vectorised system. But by using Kotlin and a highly optimized code-base, roboquant is actually faster than most other algo-trading solutions.</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>To find out more about Events and Actions, check out the documentation on <a href="../feed/index.html">feeds</a>.</p>
 </div>
 </div>
 </div>

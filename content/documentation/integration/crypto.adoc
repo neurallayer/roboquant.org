@@ -1,19 +1,40 @@
 = Crypto Exchanges
 :jbake-date: 2020-01-15
+:icons: font
+:source-highlighter: rouge
+:sourcefile: ../../../samples/crypto.kt
 
 Roboquant supports crypto data feeds and exchanges in two ways:
 
-. Dedicated support for Binance using their Java client library
-. Support for most other crypto exchanges using the excellent XChange library
+. Dedicated support for the Binance crypto-exchange using their bespoke client library
+. Support for most crypto exchanges using the excellent XChange library
 
-The module roboquant-crypto contains all the logic, so make sure you include it in your build tool if you want to use it in a standalone application.
+The module roboquant-crypto contains all the logic, so make sure to include it in your build tool if you want to use it in a standalone application.
 
 == Binance
-The roboquant-crypto package contains a dedicated client for Binance. If you are using Binance, this is the easiest way to get started.
+The roboquant-crypto package contains a dedicated client for Binance. If you want to use Binance, this is the easiest way to get started. The Binance integration supports Historic Feeds, Live Feeds and Broker functionality.
+
+The following properties will be used (if found) to connect to the Binance API's:
+
+* BINANCE_API_KEY containing the API key
+* BINANCE_API_SECRET containing the API secret key
+
+NOTE: some of the Feed functionality is available without an API KEY or SECRET.
+
+=== Binance Historic Feed
 
 
-== Other Exchanges
-Many other crypto exchanges are being integrated using the XChange library. Out of the box, roboquant includes the core libraries, but for connecting to a specific exchange, you'll need to include the client libraries for that exchange.
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=binancehistoricfeed]
+----
 
-This makes it very flexible, but a bit more work to setup as the Binance client.
+=== Binance Live Feed
+
+=== Binance Broker
+
+== Other Crypto-Exchanges
+Many other crypto exchanges are integrated using the XChange library. Out of the box, roboquant includes the core libraries, but for connecting to a specific exchange, you'll need to also include the client libraries for that exchange.
+
+This approach makes it very flexible, but a bit more work to set up and configure compared to the Binance client.
 

@@ -6,7 +6,7 @@
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
     <meta name="theme-color" content="#3296C8">
-    <title>roboquant - Welcome</title>
+    <title>roboquant - Glossary</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -40,7 +40,7 @@
                             </div>
                              <div class="col-lg-8">
                                  <div class="col h-100">
-                                    <h1 class="font-weight-light mt-1 doc">Welcome</h1>
+                                    <h1 class="font-weight-light mt-1 doc">Glossary</h1>
                                  </div>
                              </div>
                          </div>
@@ -129,152 +129,114 @@
 </nav>                         </div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <div id="preamble">
+                                <div class="sect1">
+<h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Welcome to the roboquant™ documentation. Just like the roboquant software, the documentation is also open source. So if you find mistakes or want to contribute, head over to the <a href="https://github.com/neurallayer/roboquant.org">documentation repository</a> where you can find the source.</p>
+<p>This page provides an overview of the different concepts used within roboquant and their meaning.</p>
 </div>
-<div class="admonitionblock tip">
-<table>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
 <tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-If you like to learn more by being hands-on, there are several ready to use tutorials in Jupyter Notebook format that you can try out. To find out more, go to: <a href="https://github.com/neurallayer/roboquant-notebook/tree/main">Tutorial Notebooks</a>
-</td>
+<th class="tableblock halign-left valign-top">Concept</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
 </tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock"><strong>Stages</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Back Testing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Testing of a strategy and policy using historic data and the simulated broker</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Live Testing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Testing of a strategy and policy using live data and the simulated broker</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Paper Trading</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Testing of a strategy and policy using live data and the paper trading account of a real broker</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Live Trading</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Running of a strategy and policy using live data and a live trading account of a real broker</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The run of any of the above stages</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock"><strong>Components</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Feed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Functionality responsible for generating Events</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Event</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Piece of information that is available at a certain moment in time</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Strategy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Functionality responsible for generating <code>Signals</code> based on <code>Events</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Policy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Functionality responsible for generating <code>Orders</code> based on <code>Signals</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Metric</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Functionality that capture and/or calculates information during a run</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock"><strong>Time</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeframe</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(Limited) time period that has a start and end time</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeline</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list of sorted times</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock"><strong>Money</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Amount</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">monetary value denoted in a single currency</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wallet</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">collection of amounts, so it can contain multiple currency</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exchange Rates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">set of rates that allows for the conversion between currencies</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Equity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">total of cash and portfolio positions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Buying Power</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total amount available for trading</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Realized PnL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Made Profit or Loss as part of a transaction, and so reflected in the cash balance of the account</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unrealized PnL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Profit or Loss based on the current market prices but not yet materialized since the position within the portfolio is not yet closed. So this is NOT yet reflected in the cash balance.</p></td>
+</tr>
+</tbody>
 </table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_main_components">Main components</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Perhaps the most important part of using roboquant is to understand the sequence of steps and the responsibility each component has in this flow. The following diagram provides a logical overview of the main components and the type of data they consume and produce.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-it is an instance of the <code>Roboquant</code> class that orchestrates the interaction between the components in order to allow for low coupling and easy swapping out of components. So components don&#8217;t directly call each other.
-</td>
-</tr>
-</table>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="main_flow.png" alt="main flow">
-</div>
-</div>
-<div class="paragraph">
-<p>The role and responsibilities of each of the components are as follows:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Roboquant</code></p>
-<div class="paragraph">
-<p>The engine of the platform that performs the actual run and orchestrate the interaction between the components. The engine supports all <a href="four_stages.html">4 stages</a> of developing a trading strategy with minimal changes to your code. This is also the only component that is a concrete Class and not an Interface. It is also the only component not designed to be swapped out for a custom one.</p>
-</div>
-</li>
-<li>
-<p><code>Feed</code></p>
-<div class="paragraph">
-<p>Provides the data needed for testing and trading in the form of events. A feed can represent both historic and live data and is not restricted to pricing information only.</p>
-</div>
-</li>
-<li>
-<p><code>Strategy</code></p>
-<div class="paragraph">
-<p>Receives the events from the feed and generates signals. A signal is a rating for a certain asset, like a BUY rating for stock XYZ. So the strategy doesn&#8217;t create orders, that is the responsibility of the next component, the policy.</p>
-</div>
-</li>
-<li>
-<p>Policy</p>
-<div class="paragraph">
-<p>Receives the generated signals and creates the orders. If you need to create orders that are not based on signals, this is also the place to do so, for example re-balance your portfolio at regular intervals. Check the <a href="features.html#_order_management">features documentation</a> why it is smart to separate this from your strategy logic.</p>
-</div>
-</li>
-<li>
-<p><code>Broker</code></p>
-<div class="paragraph">
-<p>Receives the created orders by the policy and process them. Any open orders will also be processed until they are closed. After this step, it will return an updated account that reflects the latest state.</p>
-</div>
-</li>
-<li>
-<p><code>Metric</code></p>
-<div class="paragraph">
-<p>Receives the last state of the account and calculates various metrics that are of interest to determine the progress and results of the run so far. However, the metric doesn&#8217;t store the results, that is the responsibility of the MetricsLogger.</p>
-</div>
-</li>
-<li>
-<p><code>MetricsLogger</code></p>
-<div class="paragraph">
-<p>Stores and/or logs the metric values, so you can inspect them at a later time.</p>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_developing_a_strategy">Developing a strategy</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Developing a new strategy and validate it during a back-test is a straight forward process. The code snippet below shows the different steps that you have to take to develop and run your strategy.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyStrategy</span> <span class="p">:</span> <span class="nc">Strategy</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">generate</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;</span> <span class="p">{</span>
-        <span class="c1">// your code goes here</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">MyStrategy</span><span class="p">()</span> <i class="conum" data-value="2"></i><b>(2)</b>
-<span class="kd">val</span> <span class="py">metric</span> <span class="p">=</span> <span class="nc">AccountSummary</span><span class="p">()</span> <i class="conum" data-value="3"></i><b>(3)</b>
-<span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
-
-<span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">CSVFeed</span><span class="p">(</span><span class="s">"./data/us"</span><span class="p">)</span> <i class="conum" data-value="5"></i><b>(5)</b>
-<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span> <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Develop a new strategy based on some idea you have. This can be done either from scratch or by assembling existing building blocks. In many cases, this is the only real software development required.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Create an instance of your strategy.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Instantiate the metrics you want to use to evaluate the performance of your strategy.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Create an instance of Roboquant (the engine) with the strategy and metric(s) as parameters.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Pick the data feed you want to use to test your strategy.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>Run the back test using the data feed you just created.</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The roboquant platform is very flexible and provides many more options than the above example shows. You can easily change almost any aspect of the platform if the default behavior doesn&#8217;t suit your needs.</p>
-</div>
 </div>
 </div>
                             </div>

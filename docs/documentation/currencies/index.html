@@ -34,16 +34,16 @@
     </div>
 </nav>
               <header class="masthead bg-primary text-white text-center">
-                     <div class="container d-flex align-items-center flex-column">
+                     <div class="container px-5 my-1">
                          <div class="row gx-5">
                             <div class="col-lg-4 mb-5 mb-lg-0">
-                                <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
-                            <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Currencies</h3>
-                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Currencies</h1>
+                                 </div>
+                             </div>
                          </div>
-
                      </div>
                  </header>
 
@@ -57,9 +57,10 @@
             <summary>introduction</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/introduction/index.html" class="nav-link">Welcome</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">The 4 Stages</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/features.html" class="nav-link">Features</a></li>
-                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">Four Stages</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/glossary.html" class="nav-link">Glossary</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a></li>
             </ul>
         </details>
@@ -79,9 +80,8 @@
             <summary>feed</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/event.html" class="nav-link">Event</a></li>
                  <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro Feed</a></li>
             </ul>
         </details>
         <details close>
@@ -96,6 +96,14 @@
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/policy/index.html" class="nav-link">Policy</a></li>
                  <li class="nav-item"><a href="/documentation/policy/order.html" class="nav-link">Orders</a></li>
+            </ul>
+        </details>
+        <details close>
+            <summary>broker</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/broker/index.html" class="nav-link">Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/simbroker.html" class="nav-link">Simulated Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
         <details close>
@@ -132,7 +140,17 @@
 <h2 id="_currency">Currency</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The roboquant Currency class represents any type of currency. It follows closely the API that comes with the standard  Java Currency class, but is independent of it. The main reason is that the Java implementation doesn&#8217;t support cryptocurrencies while the roboquant implementation supports any type of currency.</p>
+<p>The roboquant Currency class represents any type of currency. It follows closely the interface that comes with the standard  Java Currency class, but is independent of it. The main reason is that the Java implementation doesn&#8217;t support cryptocurrencies while the roboquant implementation supports any type of currency.</p>
+</div>
+<div class="paragraph">
+<p>Also several common currencies are predefined, to make it easier to work with.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="nc">Currency</span><span class="p">.</span><span class="nc">USD</span>
+<span class="nc">Currency</span><span class="p">.</span><span class="nc">BTC</span>
+<span class="nc">Currency</span><span class="p">.</span><span class="nf">getInstance</span><span class="p">(</span><span class="s">"MyCryptoCoin"</span><span class="p">)</span></code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -142,11 +160,19 @@
 <div class="paragraph">
 <p>An amount can hold a value for a single currency. Besides creating a new amount using the Amount constructor, you can also use an extension function that is defined on numbers (f.e. 120.EUR) for commonly used currencies.</p>
 </div>
+<div class="paragraph">
+<p>There are several extension functions defined that make it easy to work with amounts and require less boilerplate code.</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">amount1</span> <span class="p">=</span> <span class="nc">Amount</span><span class="p">(</span><span class="nc">Currency</span><span class="p">.</span><span class="nc">USD</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">)</span>
-<span class="kd">val</span> <span class="py">amount2</span> <span class="p">=</span> <span class="mi">50</span><span class="p">.</span><span class="nc">USD</span> <span class="p">*</span> <span class="mi">2</span>
-<span class="nf">println</span><span class="p">(</span><span class="n">amount1</span> <span class="p">==</span> <span class="n">amount2</span><span class="p">)</span> <span class="c1">// true</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">amount1</span> <span class="p">=</span> <span class="nc">Amount</span><span class="p">(</span><span class="nc">Currency</span><span class="p">.</span><span class="nf">getInstance</span><span class="p">(</span><span class="s">"USD"</span><span class="p">),</span> <span class="mf">100.0</span><span class="p">)</span> <span class="c1">// the most amount of code</span>
+<span class="kd">val</span> <span class="py">amount2</span> <span class="p">=</span> <span class="nc">Amount</span><span class="p">(</span><span class="nc">Currency</span><span class="p">.</span><span class="nc">USD</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">)</span> <span class="c1">// less code</span>
+<span class="kd">val</span> <span class="py">amount3</span> <span class="p">=</span> <span class="mi">100</span><span class="p">.</span><span class="nc">USD</span> <span class="c1">// and even less code</span>
+
+<span class="kd">val</span> <span class="py">amount4</span> <span class="p">=</span> <span class="mi">50</span><span class="p">.</span><span class="nc">USD</span> <span class="p">*</span> <span class="mi">2</span> <span class="c1">// simple calculation</span>
+<span class="nf">require</span><span class="p">(</span><span class="n">amount4</span> <span class="p">==</span> <span class="n">amount3</span><span class="p">)</span>
+
+<span class="nf">println</span><span class="p">(</span><span class="n">amount1</span><span class="p">.</span><span class="nf">formatValue</span><span class="p">())</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -156,7 +182,7 @@
 <div class="title">Note</div>
 </td>
 <td class="content">
-Amounts store their values as Doubles and not BigDecimals. For (simulated) trading the potential loss of precision is not a major issue and the benefits are much better performance and lower memory consumption.
+Amounts store their values internally as Doubles and not BigDecimals. For (simulated) trading the potential loss of precision is not an issue and the benefits are much better performance and lower memory consumption.
 </td>
 </tr>
 </table>
@@ -167,16 +193,18 @@ Amounts store their values as Doubles and not BigDecimals. For (simulated) tradi
 <h2 id="_wallet">Wallet</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A wallet can hold values for multiple currencies at the same time. You can create a wallet by using its constructor, or by adding multiple amounts together.</p>
+<p>A wallet can hold amounts of multiple currencies at the same time. You can create a new wallet by using its constructor, or by adding multiple amounts together. You can also deposit and withdraw amounts from a wallet.</p>
+</div>
+<div class="paragraph">
+<p>There is an important difference between <code>deposit</code> method and using the <code>+ operator</code>. The <code>deposit</code> method will modify the existing instance while the <code>+ operator</code> will return a new wallet instance.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">wallet1</span> <span class="p">=</span> <span class="nc">Wallet</span><span class="p">(</span><span class="nc">Amount</span><span class="p">(</span><span class="nc">Currency</span><span class="p">.</span><span class="nc">USD</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">))</span>
-<span class="n">wallet1</span><span class="p">.</span><span class="nf">deposit</span><span class="p">(</span><span class="nc">Amount</span><span class="p">(</span><span class="nc">Currency</span><span class="p">.</span><span class="nc">GBP</span><span class="p">,</span> <span class="mf">200.0</span><span class="p">))</span>
-<span class="n">wallet1</span><span class="p">.</span><span class="nf">withdraw</span><span class="p">(</span><span class="nc">Amount</span><span class="p">(</span><span class="nc">Currency</span><span class="p">.</span><span class="nc">JPY</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">wallet1</span> <span class="p">=</span> <span class="nc">Wallet</span><span class="p">(</span><span class="mi">100</span><span class="p">.</span><span class="nc">EUR</span><span class="p">,</span> <span class="mi">10</span><span class="p">.</span><span class="nc">USD</span><span class="p">)</span>
+<span class="n">wallet1</span><span class="p">.</span><span class="nf">deposit</span><span class="p">(</span><span class="mi">200</span><span class="p">.</span><span class="nc">GBP</span><span class="p">)</span>
+<span class="n">wallet1</span><span class="p">.</span><span class="nf">withdraw</span><span class="p">(</span><span class="mi">1000</span><span class="p">.</span><span class="nc">JPY</span><span class="p">)</span>
 
 <span class="kd">val</span> <span class="py">wallet2</span> <span class="p">=</span> <span class="mi">20</span><span class="p">.</span><span class="nc">EUR</span> <span class="p">-</span> <span class="mi">1000</span><span class="p">.</span><span class="nc">JPY</span> <span class="p">+</span> <span class="mi">100</span><span class="p">.</span><span class="nc">GBP</span>
-
 <span class="kd">val</span> <span class="py">wallet3</span> <span class="p">=</span> <span class="mf">0.02</span><span class="p">.</span><span class="nc">BTC</span> <span class="p">+</span> <span class="mi">100</span><span class="p">.</span><span class="nc">USDT</span> <span class="p">+</span> <span class="mf">0.1</span><span class="p">.</span><span class="nc">ETH</span></code></pre>
 </div>
 </div>
@@ -198,15 +226,22 @@ If you add two amounts together you&#8217;ll always get a wallet back, even if t
 <h2 id="_exchangerates">ExchangeRates</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>ExchangeRates allow to convert an amount from one currency to another one. Although you can invoke the API directly, typically you would invoke a conversion of an Amount or Wallet.</p>
+<p>ExchangeRates allow to convert an amount from one currency to another one. Although you can invoke the API directly, typically you would invoke a conversion of an Amount or Wallet instance.</p>
+</div>
+<div class="paragraph">
+<p>The ExchangeRates interface allows for different rates at different moments in time, but it depends on the implementation if the provided time parameter is taken into consideration. One of the implementations that comes out of the box with roboquant, is the <code>ECBExchangeRates</code> which contains daily exchange rates for most fiat currencies from the year 2000 onwards.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="nc">Config</span><span class="p">.</span><span class="n">exchangeRates</span> <span class="p">=</span> <span class="nc">ECBExchangeRates</span><span class="p">.</span><span class="nf">fromWeb</span><span class="p">()</span>
 <span class="kd">val</span> <span class="py">amountEUR</span> <span class="p">=</span> <span class="mi">20</span><span class="p">.</span><span class="nc">EUR</span>
 <span class="kd">val</span> <span class="py">amountUSD</span> <span class="p">=</span> <span class="n">amountEUR</span><span class="p">.</span><span class="nf">convert</span><span class="p">(</span><span class="nc">Currency</span><span class="p">.</span><span class="nc">USD</span><span class="p">)</span>
+
 <span class="kd">val</span> <span class="py">wallet</span> <span class="p">=</span> <span class="mi">20</span><span class="p">.</span><span class="nc">USD</span> <span class="p">+</span> <span class="mi">1000</span><span class="p">.</span><span class="nc">JPY</span>
-<span class="kd">val</span> <span class="py">amountGBP</span> <span class="p">=</span> <span class="n">wallet</span><span class="p">.</span><span class="nf">convert</span><span class="p">(</span><span class="nc">Currency</span><span class="p">.</span><span class="nc">GBP</span><span class="p">)</span></code></pre>
+<span class="kd">val</span> <span class="py">amountGBP1</span> <span class="p">=</span> <span class="n">wallet</span><span class="p">.</span><span class="nf">convert</span><span class="p">(</span><span class="nc">Currency</span><span class="p">.</span><span class="nc">GBP</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">time</span> <span class="p">=</span> <span class="nc">Instant</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span> <span class="p">-</span> <span class="mi">2</span><span class="p">.</span><span class="n">years</span>
+<span class="kd">val</span> <span class="py">amountGBP2</span> <span class="p">=</span> <span class="n">wallet</span><span class="p">.</span><span class="nf">convert</span><span class="p">(</span><span class="nc">Currency</span><span class="p">.</span><span class="nc">GBP</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+<span class="nf">require</span><span class="p">(</span><span class="n">amountGBP1</span> <span class="p">!=</span> <span class="n">amountGBP2</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </div>

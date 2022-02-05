@@ -6,7 +6,7 @@
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
     <meta name="theme-color" content="#3296C8">
-    <title>roboquant - Event</title>
+    <title>roboquant - Simulated Broker</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -34,16 +34,16 @@
     </div>
 </nav>
               <header class="masthead bg-primary text-white text-center">
-                     <div class="container d-flex align-items-center flex-column">
+                     <div class="container px-5 my-1">
                          <div class="row gx-5">
                             <div class="col-lg-4 mb-5 mb-lg-0">
-                                <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
-                            <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Event</h3>
-                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Simulated Broker</h1>
+                                 </div>
+                             </div>
                          </div>
-
                      </div>
                  </header>
 
@@ -57,9 +57,10 @@
             <summary>introduction</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/introduction/index.html" class="nav-link">Welcome</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">The 4 Stages</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/features.html" class="nav-link">Features</a></li>
-                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">Four Stages</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/glossary.html" class="nav-link">Glossary</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a></li>
             </ul>
         </details>
@@ -75,13 +76,12 @@
                  <li class="nav-item"><a href="/documentation/roboquant/index.html" class="nav-link">Roboquant</a></li>
             </ul>
         </details>
-        <details open>
+        <details close>
             <summary>feed</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/event.html" class="nav-link">Event</a></li>
                  <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro Feed</a></li>
             </ul>
         </details>
         <details close>
@@ -96,6 +96,14 @@
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/policy/index.html" class="nav-link">Policy</a></li>
                  <li class="nav-item"><a href="/documentation/policy/order.html" class="nav-link">Orders</a></li>
+            </ul>
+        </details>
+        <details open>
+            <summary>broker</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/broker/index.html" class="nav-link">Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/simbroker.html" class="nav-link">Simulated Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
         <details close>
@@ -124,46 +132,74 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>An event is the information send by a Feed and contains the following two attributes:</p>
+<p>You use the <code>SimBroker</code> class (short for Simulated Broker) both for the back testing and live testing stages. See also the <a href="../introduction/four_stages.html">four stages</a> for more info about the different stages when developing trading strategies.</p>
+</div>
+<div class="paragraph">
+<p>SimBroker can simulate a wide range of brokers and the exchanges. Besides several configuration options that are available,  the behavior can be further extended by providing custom models for cost and buying power calculations.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_order_handling">Order Handling</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When an order is placed at the SimBroker, it only gets processed once there is a known price for the underlying asset. Till an event happens that has that price available, the order will remain in its INITIAL state.</p>
+</div>
+<div class="paragraph">
+<p>Any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted (so it is in open state). So an order in INITIAL state cannot expire and time based TIF only start counting after it has been accepted.</p>
+</div>
+<div class="paragraph">
+<p>Any open orders will be processed based on FIFO, so older open orders are processed first. Exception to this rule are cancellation orders that are always processed before other order types.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_initial_deposit">Initial Deposit</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit.</p>
+</div>
+<div class="paragraph">
+<p>Typically, the initial deposit is denoted in a single currency, like a <code>$50,000.00 USD</code> account. But this is not a hard requirement and in roboquant™ you can use multi-currency initial deposit if you like.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_custom_models">Custom Models</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Custom models are a way to further customize the behavior of <code>SimBroker</code>. The following two types of models can implemented if the default ones that comes with roboquant are not sufficient.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Cost models: the transaction related cost like slippage and fees/commissions. It is important to notice that if you don&#8217;t take these type of cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading.</p>
+</li>
+<li>
+<p>Buying power models: the different type of funding of an account, like a Cash or Margin account. See the page about <a href="buyingpower.html">buying power</a> for more details.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_limitations">Limitations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Like any simulation, SimBroker also has limitations compared to a real life trading. It is important to realize this and take appropriate actions where possible:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The timestamp of when the actions within the event became available.</p>
+<p>The default cost calculations become less realistic if you trade large amount compared to overall daily volume. Don&#8217;t underestimate the transaction cost like spread, slippage and commissions and rather be too pessimistic.</p>
 </li>
 <li>
-<p>The list of actions</p>
+<p>Order types might behave slightly different between SimBroker and different real brokers. If possible at all, also perform paper trading to see if your solution still performs as expected.</p>
+</li>
+<li>
+<p>The buying power and margin calculations might differ. Be on the safe side and use a higher margin requirement in the SimBroker than required.</p>
 </li>
 </ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_timestamp">Timestamp</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>It is very important that the timestamp in the event reflects when the actions in that same event became available, not when it happened. Typically, there is some delay between when something occurred and when it is published.</p>
-</div>
-<div class="paragraph">
-<p>For example when you want to use unemployment numbers as part of your feed, you should use the timestamp when they are published, and you have access to them, not the last day of the period they are covered. Otherwise, your strategy is looking into the future during back testing and can make decisions based on information it will never have in live trading.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_action">Action</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Action is an abstraction for any type of information that can be made available in an event. It can range from price actions, like price-bars and order-book snapshots, to social media content or even satellite images. There is no commonality between actions, and you can add any type of actions you like to the platform. The only requirements is that they implement the empty interface <code><code>Action</code></code></p>
-</div>
-<div class="paragraph">
-<p>It is up to the strategy to filter for the action types it is interested in, for example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="k">for</span> <span class="p">(</span><span class="n">priceBar</span> <span class="k">in</span> <span class="n">event</span><span class="p">.</span><span class="n">actions</span><span class="p">.</span><span class="n">filterIsInstance</span><span class="p">&lt;</span><span class="nc">PriceBar</span><span class="p">&gt;())</span> <span class="p">{</span>
-    <span class="c1">// your code</span>
-<span class="p">}</span></code></pre>
-</div>
 </div>
 </div>
 </div>

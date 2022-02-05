@@ -34,16 +34,16 @@
     </div>
 </nav>
               <header class="masthead bg-primary text-white text-center">
-                     <div class="container d-flex align-items-center flex-column">
+                     <div class="container px-5 my-1">
                          <div class="row gx-5">
                             <div class="col-lg-4 mb-5 mb-lg-0">
-                                <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
-                            <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">CSV Feed</h3>
-                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">CSV Feed</h1>
+                                 </div>
+                             </div>
                          </div>
-
                      </div>
                  </header>
 
@@ -57,9 +57,10 @@
             <summary>introduction</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/introduction/index.html" class="nav-link">Welcome</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">The 4 Stages</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/features.html" class="nav-link">Features</a></li>
-                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">Four Stages</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/glossary.html" class="nav-link">Glossary</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a></li>
             </ul>
         </details>
@@ -79,9 +80,8 @@
             <summary>feed</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/event.html" class="nav-link">Event</a></li>
                  <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro Feed</a></li>
             </ul>
         </details>
         <details close>
@@ -96,6 +96,14 @@
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/policy/index.html" class="nav-link">Policy</a></li>
                  <li class="nav-item"><a href="/documentation/policy/order.html" class="nav-link">Orders</a></li>
+            </ul>
+        </details>
+        <details close>
+            <summary>broker</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/broker/index.html" class="nav-link">Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/simbroker.html" class="nav-link">Simulated Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
         <details close>
@@ -124,10 +132,10 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>CSV files are one of the most commonly used formats for storing historic price data. However, since there is no standard format, they differ a lot depending on where you downloaded them from.</p>
+<p>CSV files are one of the most common used file formats for storing historic price data. However, since there is no standard defined, they differ a lot depending on where you downloaded them from. Additionally, they often lack some required meta-data, like the currency of the price or exchange they ar traded.</p>
 </div>
 <div class="paragraph">
-<p>The CSVFeed class in roboquant offers several configuration options to cather to the different formats.</p>
+<p>The <code>CSVFeed</code> class in roboquant offers several configuration options to cater to these differences, allowing you to parse almost all CSV files found on the internet.</p>
 </div>
 </div>
 </div>
@@ -147,7 +155,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_advanced_usage">Advanced usage</h2>
+<h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Since the format of CSV files differs a lot, the CSVFeed allows for a lot of configuration to cather to this.</p>
@@ -164,6 +172,35 @@
 <span class="py">file.extension</span> <span class="p">=</span> <span class="s">csv</span>
 <span class="py">file.skip</span> <span class="p">=</span> <span class="s">ABN.csv ASML.csv</span></code></pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_memory_constraints">Memory Constraints</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The default <code>CSVFeed</code> loads all the data found in all the files into memory during initializing. The benefit is that after initialization the CSVFeed is very fast when used in back tests. And since you reuse the feed in concurrent back-tests, this is becomes even more important when doing extensive back testing.</p>
+</div>
+<div class="paragraph">
+<p>However, the downside are possible memory constraints. So there is also a CSV Feed implementation that only reads the data when required. This is substantial slower, but consumes a lot less memory. It supports the same configuration, the only difference is that you need to <code>LazyCSVFeed</code> instead of the regular <code>CSVFeed</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">LazyCSVFeed</span><span class="p">(</span><span class="s">"data/test"</span><span class="p">)</span>
+<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Convert the CSV files to an AvroFeed, that way you have the best of both worlds: low memory consumption and high performance. See <a href="avro.html#_convert_to_an_avrofeed">the avro documentation</a> on how to do that.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

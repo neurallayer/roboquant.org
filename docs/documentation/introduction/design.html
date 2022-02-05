@@ -34,16 +34,16 @@
     </div>
 </nav>
               <header class="masthead bg-primary text-white text-center">
-                     <div class="container d-flex align-items-center flex-column">
+                     <div class="container px-5 my-1">
                          <div class="row gx-5">
                             <div class="col-lg-4 mb-5 mb-lg-0">
-                                <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
-                            <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Design Decisions</h3>
-                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Design Decisions</h1>
+                                 </div>
+                             </div>
                          </div>
-
                      </div>
                  </header>
 
@@ -57,9 +57,10 @@
             <summary>introduction</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/introduction/index.html" class="nav-link">Welcome</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">The 4 Stages</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/features.html" class="nav-link">Features</a></li>
-                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">Four Stages</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/glossary.html" class="nav-link">Glossary</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a></li>
             </ul>
         </details>
@@ -79,9 +80,8 @@
             <summary>feed</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/event.html" class="nav-link">Event</a></li>
                  <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro Feed</a></li>
             </ul>
         </details>
         <details close>
@@ -96,6 +96,14 @@
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/policy/index.html" class="nav-link">Policy</a></li>
                  <li class="nav-item"><a href="/documentation/policy/order.html" class="nav-link">Orders</a></li>
+            </ul>
+        </details>
+        <details close>
+            <summary>broker</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/broker/index.html" class="nav-link">Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/simbroker.html" class="nav-link">Simulated Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
         <details close>
@@ -124,7 +132,7 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This document provides an overview of the high level design choices, and the rational why they were made. It is provided mainly as background information. And it can also help to decide if roboquant is the right solution for you.</p>
+<p>This section provides an overview of the high level design choices, and the rational why they were made. It is provided mainly as background information. And it can also help to decide if roboquant is the right solution for you.</p>
 </div>
 </div>
 </div>
@@ -132,7 +140,7 @@
 <h2 id="_why_develop_a_new_platform">Why develop a new platform</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Before we start developing roboquant, we of course looked at existing frameworks and platforms to see if these could fit the bill. However, for our specific use-cases none of them checked the boxes that we required:</p>
+<p>Before we start developing roboquant, we looked at existing frameworks and platforms to see if these could fit the bill. However, for our use-cases none of them checked the boxes that we required:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -185,20 +193,19 @@ we decided to go with Kotlin. Some main benefits being:</p>
 </ul>
 </div>
 <div class="sect2">
-<h3 id="_why_not_python">Why not Python</h3>
+<h3 id="_why_not_use_python">Why not use Python</h3>
 <div class="paragraph">
-<p>One often asked question is "Why didn&#8217;t you use Python instead?". The truth to be said, we would have loved to be able
+<p>One often asked question is "Why didn&#8217;t you use Python instead ?". The truth to be said, we would have loved to be able
 to use Python. However, during the prototype phase we discovered that the performance was lacking too much for our
 use-cases. This was including using libraries like Numpy and Pandas and even some Cython to speedup processing
 where possible.</p>
 </div>
 <div class="paragraph">
-<p>The main reason for this lackluster performance is not only the language itself. But also the fact that using all
-the cores found on modern CPU&#8217;s is difficult to do with Python without a lot of overhead.</p>
+<p>The main reason for this lackluster performance is not only that Python is an interpreted language, but also the fact that it is has a single threaded runtime that makes it difficult to use all the cores found on modern CPU&#8217;s.</p>
 </div>
 <div class="paragraph">
 <p>The good news is that if you really want to stick with Python, there are plenty of alternatives available. For example,
-you could have a look at backtrader, pyalgotrade or zipline.</p>
+you could have a look at Backtrader, pyalgotrade or zipline. But we recommend to give roboquant and Kotlin a try, and are confident you will not regret that decision.</p>
 </div>
 </div>
 </div>
@@ -207,7 +214,7 @@ you could have a look at backtrader, pyalgotrade or zipline.</p>
 <h2 id="_interactive_and_traditional_development">Interactive and traditional development</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>From the start we developed <em>roboquant</em> to be used either as a library included in your application or interactively from a Jupyter notebook. The various API&#8217;s have been designed so that they support both use-cases.</p>
+<p>From the start we developed <em>roboquant</em> to be used either as a library included in your application or interactively from a Jupyter Notebook. The various API&#8217;s have been designed so that they support both use-cases.</p>
 </div>
 <div class="paragraph">
 <p>Where many Java based applications require a lot of ceremony to implement even the simplest piece of functionality, <em>roboquant</em> it designed to remove most of that. Especially in a Jupyter notebook environment, it is very easy to get started. Because of this the API exposed by roboquant follows certain rules:</p>
@@ -241,7 +248,7 @@ you could have a look at backtrader, pyalgotrade or zipline.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In order to keep the project manageable and also reduce the download sizes, roboquant is divided into a number
-of distinct modules:</p>
+of separate modules:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -249,18 +256,21 @@ of distinct modules:</p>
 <p>roboquant-core: all the functionality required for back testing a strategy</p>
 </li>
 <li>
-<p>roboquant-extra: adds support for data feeds and 3rd party brokers</p>
+<p>roboquant-extra: adds support for 3rd party data feeds and brokers</p>
+</li>
+<li>
+<p>roboquant-ibkr: adds support for Interactive Brokers</p>
 </li>
 <li>
 <p>roboquant-crypto: adds support for cryptocurrency feeds and exchanges</p>
 </li>
 <li>
-<p>roboquant-ml: adds support for machine learning strategies. This is a huge module because the dependent packages tend to be very large. Right now, this module is not published yet.</p>
+<p>roboquant-ml: adds support for machine learning strategies. This is a huge module because the dependent packages tend to be very large. Right now, this module is not yet published available.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>This approach allows people with limited hardware to only load the modules required.</p>
+<p>This approach allows people with limited hardware to only load the modules they required.</p>
 </div>
 </div>
 </div>
@@ -296,7 +306,7 @@ of distinct modules:</p>
 <p>The data Feed API supports data that is kept in-memory as well data that is stored on disk and only accessed when required. This allows for running back test where the test data doesn&#8217;t fit in memory or running back-tests on machines with limited memory. In fact roboquant can be used on a JVM with only 512 MB of heap allocated.</p>
 </li>
 <li>
-<p>Many of the builtin features support multi-core machines to speedup processing. For example the CSV parser can parse CSV files in parallel so even directories with thousands of CSV files can be parsed in seconds.</p>
+<p>Many of the builtin features support multithreading to speedup processing. For example the CSV parser can parse CSV files in parallel so even directories with thousands of CSV files can be parsed in seconds.</p>
 </li>
 <li>
 <p>Avoid (auto)boxing, so the JVM can access these variables directly. This means where possible use native types and not the wrapper one. See <a href="https://docs.oracle.com/javase/1.5.0/docs/guide/language/autoboxing.html">background</a></p>
@@ -329,7 +339,7 @@ of distinct modules:</p>
 <p>Assert/requires to validate input parameters</p>
 </li>
 <li>
-<p>Good unit test suite to cover much of the code base</p>
+<p>Good unit test suite that covers most of the code base</p>
 </li>
 <li>
 <p>Proven third party libraries</p>

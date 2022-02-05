@@ -34,16 +34,16 @@
     </div>
 </nav>
               <header class="masthead bg-primary text-white text-center">
-                     <div class="container d-flex align-items-center flex-column">
+                     <div class="container px-5 my-1">
                          <div class="row gx-5">
                             <div class="col-lg-4 mb-5 mb-lg-0">
-                                <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
-                            <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Roboquant</h3>
-                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Roboquant</h1>
+                                 </div>
+                             </div>
                          </div>
-
                      </div>
                  </header>
 
@@ -57,9 +57,10 @@
             <summary>introduction</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/introduction/index.html" class="nav-link">Welcome</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">The 4 Stages</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/features.html" class="nav-link">Features</a></li>
-                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">Four Stages</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/glossary.html" class="nav-link">Glossary</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a></li>
             </ul>
         </details>
@@ -79,9 +80,8 @@
             <summary>feed</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/event.html" class="nav-link">Event</a></li>
                  <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro Feed</a></li>
             </ul>
         </details>
         <details close>
@@ -96,6 +96,14 @@
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/policy/index.html" class="nav-link">Policy</a></li>
                  <li class="nav-item"><a href="/documentation/policy/order.html" class="nav-link">Orders</a></li>
+            </ul>
+        </details>
+        <details close>
+            <summary>broker</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/broker/index.html" class="nav-link">Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/simbroker.html" class="nav-link">Simulated Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
         <details close>
@@ -124,7 +132,7 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Roboquant is the engine of the platform. It orchestrates the interaction between all the components and perform the actual runs.</p>
+<p>The <code>Roboquant</code> class (org.roboquant.Roboquant) is the engine of the platform, not to be confused with roboquant™ which is the name of the platform itself. An instance of the <code>Roboquant</code> class orchestrates the interaction between all the components and performs the actual runs.</p>
 </div>
 </div>
 </div>
@@ -132,7 +140,7 @@
 <h2 id="_default_settings">Default settings</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>By default, you only need to provide a strategy when creating a new instance of Roboquant.</p>
+<p>By default, you only need to provide a strategy when creating a new instance of Roboquant. So the bare minimum would be:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -146,25 +154,30 @@
 <div class="ulist">
 <ul>
 <li>
-<p>No metrics at all will be captured</p>
+<p>No metrics will be captured</p>
 </li>
 <li>
-<p>The SimBroker as the broker</p>
+<p>The <code>SimBroker</code> will be used as the broker</p>
 </li>
 <li>
-<p>The DefaultPolicy as the policy</p>
+<p>The <code>DefaultPolicy</code> will be the policy used</p>
 </li>
 <li>
-<p>The MemoryLogger as the MetricsLogger (although without metrics, there is not much to log)</p>
+<p>The <code>MemoryLogger</code> as the MetricsLogger (although without metrics to capture, there is not much to log)</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Each of these can be overwritten with a different implementation when you instantiate a Roboquant if you want:</p>
+<p>Each of these defaults can be overwritten with a different implementation when you instantiate a <code>Roboquant</code> if you want to.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">metric1</span><span class="p">,</span> <span class="n">metric2</span><span class="p">,</span> <span class="n">policy</span> <span class="p">=</span> <span class="n">myPolicy</span><span class="p">,</span> <span class="n">broker</span> <span class="p">=</span> <span class="n">myBroker</span><span class="p">,</span> <span class="n">logger</span> <span class="p">=</span> <span class="n">myLogger</span><span class="p">)</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span>
+    <span class="n">strategy</span><span class="p">,</span>
+    <span class="n">metric1</span><span class="p">,</span> <span class="n">metric2</span><span class="p">,</span>
+    <span class="n">policy</span> <span class="p">=</span> <span class="n">myPolicy</span><span class="p">,</span>
+    <span class="n">broker</span> <span class="p">=</span> <span class="n">myBroker</span><span class="p">,</span>
+    <span class="n">logger</span> <span class="p">=</span> <span class="n">myLogger</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </div>
@@ -173,10 +186,10 @@
 <h2 id="_run">Run</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>After you have created an instance of roboquant and have a <a href="../feed/index.html">feed</a> defined, you can start a run. A run is used for all the different stages, from back testing to live trading.</p>
+<p>After you have created an instance of roboquant and have a <a href="../feed/index.html">feed</a> created, you can start a run. the same <code>run</code> method can be used for all the different stages, from back testing to live trading (see also <a href="../introduction/four_stages.html">4 stages</a>)</p>
 </div>
 <div class="paragraph">
-<p>In the most simple form, you only provide a feed as a parameter. In this case, all the events available in the feed will be used in the run. If you provide a live feed, it will run forever.</p>
+<p>In the most simple form, you only provide a feed as a parameter. In this case, all the events available in the feed will be used in the run.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -184,38 +197,64 @@
 </div>
 </div>
 <div class="paragraph">
-<p>However, you can restrict the run to a certain time-frame, again you can use this for a historical feed and a live feed alike.</p>
+<p>If you provide a live feed, it would run forever. However, you can restrict the run to a certain timeframe, again you can use this for a historical feed and a live feed alike.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="c1">// Historical feed example</span>
-<span class="kd">val</span> <span class="py">timeFrame</span> <span class="p">=</span> <span class="nc">TimeFrame</span><span class="p">.</span><span class="nf">fromYears</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)</span>
-<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">timeFrame</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">timeframe</span> <span class="p">=</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="nf">fromYears</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)</span>
+<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed1</span><span class="p">,</span> <span class="n">timeframe</span><span class="p">)</span>
 
 <span class="c1">// Live feed example</span>
-<span class="kd">val</span> <span class="py">timeFrame2</span> <span class="p">=</span> <span class="nc">TimeFrame</span><span class="p">.</span><span class="nf">next</span><span class="p">(</span><span class="mi">120</span><span class="p">.</span><span class="n">minutes</span><span class="p">)</span>
-<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">timeFrame2</span><span class="p">)</span></code></pre>
+<span class="kd">val</span> <span class="py">timeframe2</span> <span class="p">=</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="nf">next</span><span class="p">(</span><span class="mi">120</span><span class="p">.</span><span class="n">minutes</span><span class="p">)</span>
+<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed2</span><span class="p">,</span> <span class="n">timeframe2</span><span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If you are using live feeds you almost always want to include a timestamp since otherwise the run will last forever.
-There are some utility methods included with TimeFrame to make this easier:</p>
+<p>You can invoke a run multiple times, for example for different timeframes. The following code shows how to perform a walk-forward back test of two-year cycle:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">timeFrame</span> <span class="p">=</span> <span class="nc">TimeFrame</span><span class="p">.</span><span class="nf">next</span><span class="p">(</span><span class="mi">60</span><span class="p">.</span><span class="n">minutes</span><span class="p">)</span>
-<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">timeFrame</span><span class="p">)</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can invoke a run multiple times, for example for different time frames. The following code shows how to easily perform a walk forward:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">timeFrame</span> <span class="p">=</span> <span class="nc">TimeFrame</span><span class="p">.</span><span class="nf">fromYears</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)</span>
-<span class="n">timeFrame</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="n">years</span><span class="p">).</span><span class="nf">forEach</span> <span class="p">{</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">timeframe</span> <span class="p">=</span> <span class="n">feed</span><span class="p">.</span><span class="n">timeframe</span>
+<span class="n">timeframe</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="n">years</span><span class="p">).</span><span class="nf">forEach</span> <span class="p">{</span>
     <span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">it</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">roboquant</span><span class="p">.</span><span class="n">broker</span><span class="p">.</span><span class="n">account</span><span class="p">.</span><span class="n">equityAmount</span><span class="p">)</span>
 <span class="p">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_running_in_parallel">Running in Parallel</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you have a lot of back test to run, you can run them in parallel and use all the cores on your computer to expedite the process. Roboquant scales almost linear with the number of available cores, and it only requires a few extra lines of code.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows how to run a walk forward in parallel. By reusing the same logger instance, all results will be stored in a single instance and can be easily compared afterwards.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">timeframe</span> <span class="p">=</span> <span class="n">feed</span><span class="p">.</span><span class="n">timeframe</span>
+<span class="kd">val</span> <span class="py">logger</span> <span class="p">=</span> <span class="nc">MemoryLogger</span><span class="p">(</span><span class="n">showProgress</span> <span class="p">=</span> <span class="k">false</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">jobs</span> <span class="p">=</span> <span class="nc">ParallelJobs</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">period</span> <span class="k">in</span> <span class="n">timeframe</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="n">years</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">jobs</span><span class="p">.</span><span class="nf">add</span> <span class="p">{</span>
+        <span class="c1">// Create a new roboquant instance for each job</span>
+        <span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="nc">EMACrossover</span><span class="p">(),</span> <span class="nc">AccountSummary</span><span class="p">(),</span> <span class="n">logger</span> <span class="p">=</span> <span class="n">logger</span><span class="p">)</span>
+
+        <span class="c1">// Give the run a unique name so the metrics can be easily identified</span>
+        <span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">runName</span> <span class="p">=</span> <span class="s">"run-$period"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Wait till all jobs are finished</span>
+<span class="n">jobs</span><span class="p">.</span><span class="nf">joinAllBlocking</span><span class="p">()</span>
+
+<span class="c1">// If you are in Jupyter Notebook you can plot the metrics</span>
+<span class="kd">val</span> <span class="py">data</span> <span class="p">=</span> <span class="n">logger</span><span class="p">.</span><span class="nf">getMetric</span><span class="p">(</span><span class="s">"account.equity"</span><span class="p">)</span>
+<span class="nc">MetricChart</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </div>

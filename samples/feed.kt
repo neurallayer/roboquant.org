@@ -1,4 +1,8 @@
 import org.roboquant.Roboquant
+import org.roboquant.binance.BinanceLiveFeed
+import org.roboquant.common.Asset
+import org.roboquant.common.Timeframe
+import org.roboquant.common.hours
 import org.roboquant.common.summary
 import org.roboquant.feeds.Action
 import org.roboquant.feeds.Event
@@ -7,6 +11,7 @@ import org.roboquant.feeds.PriceBar
 import org.roboquant.feeds.avro.AvroFeed
 import org.roboquant.feeds.avro.AvroUtil
 import org.roboquant.feeds.csv.CSVFeed
+import org.roboquant.feeds.csv.LazyCSVFeed
 import org.roboquant.strategies.EMACrossover
 import java.time.Instant
 
@@ -20,6 +25,13 @@ fun test() {
     // end::basic[]
 }
 
+
+fun testLazy() {
+    // tag::lazy[]
+    val feed = LazyCSVFeed("data/test")
+    roboquant.run(feed)
+    // end::lazy[]
+}
 
 
 fun play() {
@@ -36,9 +48,10 @@ fun play() {
 }
 
 
-fun avro() {
+fun avro(roboquant: Roboquant) {
     // tag::avro[]
     val feed = AvroFeed("myfile.avro")
+    roboquant.run(feed)
     // end::avro[]
 }
 
@@ -46,10 +59,34 @@ fun avro() {
 fun avroCapture() {
     // tag::avrocapture[]
     val feed = CSVFeed("some/path/")
-    AvroUtil.record(feed, "sp500.avro")
-    // end::avrocapture[]
+    AvroUtil.record(feed, "myfile.avro")
 
+    // Later you can use the same file in a AvroFeed
+    val feed2 = AvroFeed("myfile.avro")
+    // end::avrocapture[]
 }
+
+
+fun avroCaptureLive() {
+    // tag::avrocapturelive[]
+    val feed = BinanceLiveFeed()
+    feed.subscribePriceBar("BTCUSDT")
+    val timeframe = Timeframe.next(4.hours)
+    AvroUtil.record(feed, "bitcoin.avro", timeframe)
+    // end::avrocapturelive[]
+}
+
+
+
+
+fun predefined() {
+    // tag::predefined[]
+    val feed1 = AvroFeed.sp500() // S&P500 for 5 years
+    val feed2 = AvroFeed.test() // 6 popular US stocks for last 60 years
+    // end::predefined[]
+}
+
+
 
 fun testEvent(event: Event) {
     // tag::event[]
@@ -57,6 +94,19 @@ fun testEvent(event: Event) {
         // your code
     }
     // end::event[]
+}
+
+
+fun testPriceAction(event: Event) {
+    // tag::priceaction[]
+    // iterate over all price actions in an event
+    for (priceAction in event.prices) {
+        println(priceAction)
+    }
+
+    // get the first price for a particular asset
+    val price:Double? = event.getPrice(Asset("XYZ"))
+    // end::priceaction[]
 }
 
 

@@ -34,16 +34,16 @@
     </div>
 </nav>
               <header class="masthead bg-primary text-white text-center">
-                     <div class="container d-flex align-items-center flex-column">
+                     <div class="container px-5 my-1">
                          <div class="row gx-5">
                             <div class="col-lg-4 mb-5 mb-lg-0">
-                                <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
-                            <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Overview</h3>
-                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Overview</h1>
+                                 </div>
+                             </div>
                          </div>
-
                      </div>
                  </header>
 
@@ -57,9 +57,10 @@
             <summary>introduction</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/introduction/index.html" class="nav-link">Welcome</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">The 4 Stages</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/features.html" class="nav-link">Features</a></li>
-                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">Four Stages</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/glossary.html" class="nav-link">Glossary</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a></li>
             </ul>
         </details>
@@ -79,9 +80,8 @@
             <summary>feed</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/event.html" class="nav-link">Event</a></li>
                  <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro Feed</a></li>
             </ul>
         </details>
         <details close>
@@ -96,6 +96,14 @@
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/policy/index.html" class="nav-link">Policy</a></li>
                  <li class="nav-item"><a href="/documentation/policy/order.html" class="nav-link">Orders</a></li>
+            </ul>
+        </details>
+        <details close>
+            <summary>broker</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/broker/index.html" class="nav-link">Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/simbroker.html" class="nav-link">Simulated Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
         <details close>
@@ -124,23 +132,23 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are three types of integrations available within roboquant with external parties:</p>
+<p>There are three types of integrations available within roboquant with 3rd parties:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Historic data providers</p>
+<p>Historic data feeds</p>
 </li>
 <li>
-<p>Live data providers</p>
+<p>Live data feeds</p>
 </li>
 <li>
-<p>Brokers</p>
+<p>Brokers implementations</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>In some cases a single 3rd party provides all three types of functionality (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides historic and live data).</p>
+<p>In some cases a single 3rd party provides all three types of functionality (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides historic and live data feeds).</p>
 </div>
 <div class="paragraph">
 <p>You can combine several of these 3rd parties together in a single run, for example the data feeds from IEX Cloud and the broker
@@ -152,12 +160,12 @@ functionality from Alpaca.</p>
 <h2 id="_modules_packages">Modules &amp; Packages</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The third party integrations have their own modules:</p>
+<p>The third party integrations have their own modules and are not part of the <code>roboquant-core</code> module:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>roboquant-extra for all "traditional" brokers and data providers</p>
+<p>roboquant-extra for all "traditional" brokers and data feed providers</p>
 </li>
 <li>
 <p>roboquant-crypto for all cryptocurrency related 3rd parties</p>
@@ -184,10 +192,10 @@ functionality from Alpaca.</p>
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When you want to integrate a 3rd party, you most likely require credentials to gain access. Often this is in the form of an API key and secret. Although you can embed these directly in your source code, roboquant supports better and more secure alternatives.</p>
+<p>When you want to integrate with a 3rd party, you most likely require credentials to gain access to their API&#8217;s. Often this is in the form of an API key and secret. You can of course embed these credentials directly in your source code, however roboquant offers better and more secure alternatives.</p>
 </div>
 <div class="paragraph">
-<p>The following shows the steps how roboquant resolves these configuration parameters:</p>
+<p>The following list shows the steps how roboquant resolves these configuration parameters:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -198,7 +206,7 @@ functionality from Alpaca.</p>
 <p>If the credentials are provided as startup parameter to the JVM with the -D syntax use these, otherwise go to next step.</p>
 </li>
 <li>
-<p>If the credentials are set as system environment use these, otherwise go to next step.</p>
+<p>If the credentials are set as system environment variable (export MY_KEY="some value") use these, otherwise go to next step.</p>
 </li>
 <li>
 <p>If the credentials are set in a property file called ".env" in the working directory use these, otherwise go to next step.</p>
@@ -210,6 +218,36 @@ functionality from Alpaca.</p>
 <p>If the credentials are set in a property file called ".env" in the $HOME/.roboquant directory use these, otherwise go to next step.</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>The following provides an overview of the used properties in roboquant</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="properties"><span class="c"># Uncomment the following two lines and change the values for Alpaca API access
+</span><span class="py">APCA_API_KEY_ID</span><span class="p">=</span><span class="s">your_api_key_id</span>
+<span class="py">APCA_API_SECRET_KEY</span><span class="p">=</span><span class="s">your_api_secret_key</span>
+
+<span class="c"># Uncomment the following two lines and change values for IEX Cloud access
+</span><span class="py">IEX_PUBLIC_KEY</span><span class="p">=</span><span class="s">your_publishable_key</span>
+<span class="py">IEX_SECRET_KEY</span><span class="p">=</span><span class="s">your_secret_key</span>
+
+<span class="c"># Uncomment the following line and change the value for Alpha Vantage access
+</span><span class="py">ALPHA_VANTAGE_API_KEY</span><span class="p">=</span><span class="s">your_api_key</span>
+
+<span class="c"># Uncomment the following two lines and change the values for Binance access
+</span><span class="py">BINANCE_API_KEY</span><span class="p">=</span><span class="s">your_key</span>
+<span class="py">BINANCE_API_SECRET</span><span class="p">=</span><span class="s">you_secret</span>
+
+<span class="c"># Uncomment the following two lines and change the values for OANDA access
+</span><span class="py">OANDA_ACCOUNT_ID</span><span class="p">=</span><span class="s">your_account</span>
+<span class="py">OANDA_API_KEY</span><span class="p">=</span><span class="s">your_key</span>
+
+<span class="c"># Uncomment the following lines for email authentication
+</span><span class="py">mail.host</span><span class="p">=</span><span class="s">email_host</span>
+<span class="py">mail.username</span><span class="p">=</span><span class="s">your_email_username</span>
+<span class="py">mail.password</span><span class="p">=</span><span class="s">your_email_password</span></code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -229,73 +267,70 @@ functionality from Alpaca.</p>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">3rd party</th>
-<th class="tableblock halign-left valign-top">historic feed</th>
-<th class="tableblock halign-left valign-top">live feed</th>
-<th class="tableblock halign-left valign-top">broker</th>
+<th class="tableblock halign-center valign-top">Historic feed</th>
+<th class="tableblock halign-center valign-top">Live feed</th>
+<th class="tableblock halign-center valign-top">Broker</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="ibkr.html">Interactive Brokers</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="alpaca.html">Alpaca</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="oanda.html">OANDA</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="iex.html">IEX Cloud</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">N</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="yahoo.html">Yahoo Finance</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">N</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">N</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="alphavantage.html">Alpha Vantage</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">N</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">N</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="crypto.html">Binance</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="crypto.html">Other Crypto</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="crypto.html">Other Crypto Exchanges</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Y</p></td>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>For more details on the integration with crypto exchanges, see the <a href="crypto.html">crypto</a> documentation.</p>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<div class="title">Note</div>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-roboquant is open source software that is developed independently of these 3rd party providers.
+roboquant is open source software that is developed independently of these 3rd party companies. There are no direct or indirect ties to any of these companies.
 </td>
 </tr>
 </table>
@@ -303,13 +338,16 @@ roboquant is open source software that is developed independently of these 3rd p
 </div>
 </div>
 <div class="sect1">
-<h2 id="_adding_new_3rd_parties">Adding new 3rd parties</h2>
+<h2 id="_adding_new_3rd_party_integrations">Adding new 3rd party integrations</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Adding integration with a 3rd party is not hard. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library, this could take as little as a few hours to a few days.</p>
+<p>Adding integration with a 3rd party is not hard. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library that is available, this could take as little as a few hours to a few days. You can read more about the Feed interface that you need to implement right <a href="../feed/index.html#_custom_feeds">here</a></p>
 </div>
 <div class="paragraph">
-<p>Integrating with a new broker is also not hard but will require more time. The most amount of work will be the translation of object exposes by the broker versus those used by roboquant.</p>
+<p>Integrating with a new broker is also not hard but will require more time. The most amount of work will be the translation of object exposes by the broker versus those used by roboquant. For example an Order in roboquant might be slightly different from an Order expected by the client library of the broker and a conversion needs to happen.</p>
+</div>
+<div class="paragraph">
+<p>For both custom Feed and Broker integrations, it is recommended to first look at some existing integrations and use them as a starting point. And if you have questions, you can always reach out via one of the channels mentioned on the contact page.</p>
 </div>
 </div>
 </div>

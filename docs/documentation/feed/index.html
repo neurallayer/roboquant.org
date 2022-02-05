@@ -34,16 +34,16 @@
     </div>
 </nav>
               <header class="masthead bg-primary text-white text-center">
-                     <div class="container d-flex align-items-center flex-column">
+                     <div class="container px-5 my-1">
                          <div class="row gx-5">
                             <div class="col-lg-4 mb-5 mb-lg-0">
-                                <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="roboquant avatar">
                             </div>
-                            <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-3">Feed</h3>
-                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Feed</h1>
+                                 </div>
+                             </div>
                          </div>
-
                      </div>
                  </header>
 
@@ -57,9 +57,10 @@
             <summary>introduction</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/introduction/index.html" class="nav-link">Welcome</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">The 4 Stages</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/events.html" class="nav-link">Event Driven</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/features.html" class="nav-link">Features</a></li>
-                 <li class="nav-item"><a href="/documentation/introduction/four_stages.html" class="nav-link">Four Stages</a></li>
+                 <li class="nav-item"><a href="/documentation/introduction/glossary.html" class="nav-link">Glossary</a></li>
                  <li class="nav-item"><a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a></li>
             </ul>
         </details>
@@ -79,9 +80,8 @@
             <summary>feed</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/event.html" class="nav-link">Event</a></li>
                  <li class="nav-item"><a href="/documentation/feed/csv.html" class="nav-link">CSV Feed</a></li>
-                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro</a></li>
+                 <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro Feed</a></li>
             </ul>
         </details>
         <details close>
@@ -96,6 +96,14 @@
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/policy/index.html" class="nav-link">Policy</a></li>
                  <li class="nav-item"><a href="/documentation/policy/order.html" class="nav-link">Orders</a></li>
+            </ul>
+        </details>
+        <details close>
+            <summary>broker</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/broker/index.html" class="nav-link">Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/simbroker.html" class="nav-link">Simulated Broker</a></li>
+                 <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
         <details close>
@@ -124,10 +132,108 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>A feed is responsible for providing the required data in order to be able to test and run strategies. A feed can contain any type of data. So it is not limited to price data only, but can also contain social media data or images for example.</p>
+<p>A feed is responsible for delivering the data that is required to test and run strategies. There are no restrictions on the type of data that a Feed can emit. It can be a simple as a stock prices or as complex as a satellite image.</p>
 </div>
 <div class="paragraph">
-<p>A feed is used for historic and live data without a difference in the interface:</p>
+<p>A Feed can be used to deliver historic and live data. A feed wraps its information in an event and put that event on a EventChannel. This is all done asynchronously from rest of the trading logic. And although an <code>EventChannel</code> is used to deliver the events, this channel is normally only directly accessed by the <code>Roboquant</code> instance. A strategy will be passed just the plain Event object.</p>
+</div>
+<div class="paragraph">
+<p>To read more why roboquant has selected this event-driven approach, read this <a href="../introduction/events.html">introduction on event-driven software</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_event">Event</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An event contains all the data that happens at a certain point in time and contains the following two attributes</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>time</code> when the information within the event became available.</p>
+</li>
+<li>
+<p>The list of all the <code>actions</code> at that time</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Events are always delivered in chronological order.</p>
+</div>
+<div class="sect2">
+<h3 id="_time">Time</h3>
+<div class="paragraph">
+<p>The time in an event is of the type Instant. It is very important that the time in the event reflects when the actions in that same event became available, not when they happened. Typically, there is some delay between when something occurred and when it is published.</p>
+</div>
+<div class="paragraph">
+<p>For example when you want to use unemployment numbers as part of your feed, you should use the time when they are published, and you have access to them, not the last day of the period they cover. Otherwise, your strategy is looking into the future during back testing and can make decisions based on information it will never have in live trading.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_action">Action</h3>
+<div class="paragraph">
+<p>Action is an abstraction for any type of information that can be made available in an event.</p>
+</div>
+<div class="paragraph">
+<p>An action can range from price actions, like price-bars and order-book snapshots, to social media content or even satellite images. There is no commonality between actions, and you can add any type of actions you like to the platform. The only requirements is that they implement the empty interface <code>Action</code></p>
+</div>
+<div class="paragraph">
+<p>It is up to the strategy to filter for the action types it is interested in, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="k">for</span> <span class="p">(</span><span class="n">priceBar</span> <span class="k">in</span> <span class="n">event</span><span class="p">.</span><span class="n">actions</span><span class="p">.</span><span class="n">filterIsInstance</span><span class="p">&lt;</span><span class="nc">PriceBar</span><span class="p">&gt;())</span> <span class="p">{</span>
+    <span class="c1">// your code</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There are however a few helper methods in Event to access PriceActions that are of interest of many strategies:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="c1">// iterate over all price actions in an event</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">priceAction</span> <span class="k">in</span> <span class="n">event</span><span class="p">.</span><span class="n">prices</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">priceAction</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// get the first price for a particular asset</span>
+<span class="kd">val</span> <span class="py">price</span><span class="p">:</span><span class="nc">Double</span><span class="p">?</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="nf">getPrice</span><span class="p">(</span><span class="nc">Asset</span><span class="p">(</span><span class="s">"XYZ"</span><span class="p">))</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_included_feeds">Included Feeds</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Roboquant includes several feed implementations out of the box:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CSVFeed that can process CSV files stored somewhere on your local machine. You read more about it <a href="csv.html">here</a></p>
+</li>
+<li>
+<p>AvroFeed that can process an Avro file stored somewhere on your local machine. . You read more about them <a href="avro.html">here</a></p>
+</li>
+<li>
+<p>RandomWalk that (as the name already suggests) generates random price actions</p>
+</li>
+<li>
+<p>Many third party data providers that make their data available through an API</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_custom_feeds">Custom Feeds</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you have a data source that is not yet covered by roboquant, you can implement your own Feed. The main method to implement is the <code>play</code> method that will put the available events on the channel.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -141,10 +247,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>A feed wraps data in an event and put that event in a EventChannel. An event contains all the data that happens at a certain point in time. The order in which a feed sends out events has to be ordered by the included timestamp.</p>
-</div>
-<div class="paragraph">
-<p>The following implementation sends out 100 empty events, empty meaning an event without any actions included.</p>
+<p>The following implementation of the <code>play</code> method sends out 100 empty events, empty meaning an event without any actions included. In case the EventChannel is full, the <code>channel.send</code> method will be blocking.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -157,27 +260,6 @@
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_included">Included</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Roboquant included several feed implementations out of the box.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>CSV files, stored somewhere on your local machine</p>
-</li>
-<li>
-<p>Avro files, stored somewhere on your local machine</p>
-</li>
-<li>
-<p>Many third party brokers and data providers that make their data available through an API.</p>
-</li>
-</ol>
 </div>
 </div>
 </div>
