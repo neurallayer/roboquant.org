@@ -5,3 +5,4 @@
 jbake_sample_sqlite.db
 output
 *.dylib
+.DS_Store
