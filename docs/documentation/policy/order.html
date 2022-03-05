@@ -53,7 +53,7 @@
                         <div class="col-lg-4 mb-5 mb-lg-0">
 <nav id="sidebar">
     <h3>Documentation</h3>
-        <details close>
+        <details >
             <summary>introduction</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/introduction/index.html" class="nav-link">Welcome</a></li>
@@ -64,19 +64,19 @@
                  <li class="nav-item"><a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>installation</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/installation/index.html" class="nav-link">Install roboquant</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>roboquant</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/roboquant/index.html" class="nav-link">Roboquant</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>feed</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
@@ -84,7 +84,7 @@
                  <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro Feed</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>strategy</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/strategy/index.html" class="nav-link">Strategy</a></li>
@@ -98,7 +98,7 @@
                  <li class="nav-item"><a href="/documentation/policy/order.html" class="nav-link">Orders</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>broker</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/broker/index.html" class="nav-link">Broker</a></li>
@@ -106,14 +106,28 @@
                  <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>metrics</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/metrics/index.html" class="nav-link">Metrics</a></li>
                  <li class="nav-item"><a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
+            <summary>jupyter</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/jupyter/charts.html" class="nav-link">Charts</a></li>
+                 <li class="nav-item"><a href="/documentation/jupyter/index.html" class="nav-link">Jupyter Notebooks</a></li>
+            </ul>
+        </details>
+        <details >
+            <summary>multimarkets</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/multimarkets/currencies.html" class="nav-link">Currencies</a></li>
+                 <li class="nav-item"><a href="/documentation/multimarkets/time.html" class="nav-link">Time</a></li>
+            </ul>
+        </details>
+        <details >
             <summary>integration</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/integration/index.html" class="nav-link">Overview</a></li>
@@ -133,7 +147,7 @@
 <h2 id="_order_types">Order Types</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The following diagram shows which orders are supported out of the box:</p>
+<p>Roboquant comes out of the box with support for different types of orders. The following diagram shows which orders are supported and also their class relationship to each other.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -141,7 +155,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>All orders refer to a single asset, including advanced order types like BracketOrders. The reason for putting this rule
+<p>All orders refer to a single asset, including advanced order types like BracketOrders. The reason for putting this restriction
 in place is that real brokers only have limited support for multi-asset orders and this could lead to issues that are only discovered during live trading. Additionally, it makes back testing difficult if the price for one asset is known but not for the other.</p>
 </div>
 </div>
@@ -150,19 +164,43 @@ in place is that real brokers only have limited support for multi-asset orders a
 <h2 id="_creating_orders">Creating Orders</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The used <code>Policy</code> implementation is responsible for creating the orders. This can be based on the received signals from the <code>Strategy</code>, but can also be done for other reasons (like for example cyclic portfolio re-balancing)</p>
+<p>The used <code>Policy</code> implementation during a <code>run</code> is responsible for creating the orders. This can be based on the received signals from the <code>Strategy</code>, but can also be done for other reasons (like for example cyclic portfolio re-balancing)</p>
 </div>
 <div class="paragraph">
 <p>An example on how to convert a <code>Signal</code> into a <code>MarketOrder</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">orders</span> <span class="p">=</span> <span class="n">mutableMapOf</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;()</span>
-<span class="k">for</span> <span class="p">(</span><span class="n">signal</span> <span class="k">in</span> <span class="n">signals</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">val</span> <span class="py">qty</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">positive</span><span class="p">)</span> <span class="mf">100.0</span> <span class="k">else</span> <span class="p">-</span><span class="mf">100.0</span>
-    <span class="kd">val</span> <span class="py">order</span> <span class="p">=</span> <span class="nc">MarketOrder</span><span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">asset</span><span class="p">,</span> <span class="n">qty</span><span class="p">)</span>
-    <span class="n">orders</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
-<span class="p">}</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">orders</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;()</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">signal</span> <span class="k">in</span> <span class="n">signals</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">qty</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">rating</span><span class="p">.</span><span class="n">isPositive</span><span class="p">)</span> <span class="mf">100.0</span> <span class="k">else</span> <span class="p">-</span><span class="mf">100.0</span>
+        <span class="kd">val</span> <span class="py">order</span> <span class="p">=</span> <span class="nc">MarketOrder</span><span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">asset</span><span class="p">,</span> <span class="n">qty</span><span class="p">)</span>
+        <span class="n">orders</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+    <span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+there is no explicit notion of BUY or SELL orders in roboquant. A BUY order is just any order with a positive quantity and a SELL order has a negative quantity. But other than that, they are equal and created the same way.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Most advanced order types are often constructed using <code>SingleOrder</code> types. The following snippet shows how to instantiate a BracketOrder with three individual SingleOrders.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">order</span> <span class="p">=</span> <span class="nc">BracketOrder</span><span class="p">(</span>
+        <span class="nc">MarketOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">),</span> <span class="c1">// main order</span>
+        <span class="nc">LimitOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="p">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">price</span> <span class="p">*</span> <span class="mf">1.05</span><span class="p">),</span> <span class="c1">// take profit order</span>
+        <span class="nc">StopOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="p">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">price</span> <span class="p">*</span> <span class="mf">0.95</span><span class="p">)</span> <span class="c1">// stop loss order</span>
+    <span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock tip">
@@ -172,7 +210,7 @@ in place is that real brokers only have limited support for multi-asset orders a
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-make sure to only use order types during back testing that are also supported by the broker you want to use for live trading.
+always make sure to only use order types during back testing that are also supported by the broker you want to use for live trading. Also be aware the way these advanced order types are exactly executed might differ between brokers.
 </td>
 </tr>
 </table>
@@ -196,7 +234,7 @@ make sure to only use order types during back testing that are also supported by
 </ol>
 </div>
 <div class="paragraph">
-<p>The default TIF used in none is specified is GTC (Good Till Cancelled).</p>
+<p>The default TIF used if none is specified, is GTC (Good Till Cancelled).</p>
 </div>
 </div>
 </div>
@@ -204,20 +242,55 @@ make sure to only use order types during back testing that are also supported by
 <h2 id="_custom_order_types">Custom Order Types</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Orders can be extended with own order types if the ones that come out of the box are not sufficient. The two steps required to make to use yor own order types are:</p>
+<p>Orders can be extended with your own order types if the ones that come out of the box are not sufficient. The steps required to make to use yor own order types are:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Implement the <code>Order</code> abstract class and add the desired logic for your new order type</p>
+<p>Extend the <code>Order</code> abstract class.</p>
 </li>
 <li>
-<p>Create these new order types in your policy</p>
+<p>If you want to use these orders also in back testing, you&#8217;ll also need to implement and register an OrderHandler</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>Since the execution logic of an order is within the <code>Order</code> class itself, the new <code>Order</code> type will be automatically processed by hte SimBroker. There are no changes required to other components.</p>
+<p>After that, you can use this new order type in your policy.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// Simple custom order type</span>
+    <span class="kd">class</span> <span class="nc">MyOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nc">Asset</span><span class="p">,</span> <span class="kd">val</span> <span class="py">quantity</span><span class="p">:</span> <span class="nc">Double</span><span class="p">,</span> <span class="kd">val</span> <span class="py">customProperty</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">id</span><span class="p">:</span><span class="nc">Int</span> <span class="p">=</span> <span class="nf">nextId</span><span class="p">())</span> <span class="p">:</span> <span class="nc">Order</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
+
+    <span class="c1">// Define a handler for your custom order type.</span>
+    <span class="c1">// This is only required if you want your order to be supported by the SimBroker</span>
+    <span class="kd">class</span> <span class="nc">MyOrderHandler</span><span class="p">(</span><span class="kd">val</span> <span class="py">order</span><span class="p">:</span> <span class="nc">MyOrder</span><span class="p">)</span> <span class="p">:</span> <span class="nc">TradeOrderHandler</span> <span class="p">{</span>
+
+        <span class="k">override</span> <span class="kd">var</span> <span class="py">state</span> <span class="p">=</span> <span class="nc">OrderState</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">execute</span><span class="p">(</span><span class="n">pricing</span><span class="p">:</span> <span class="nc">Pricing</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="nc">Instant</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Execution</span><span class="p">&gt;</span> <span class="p">{</span>
+
+            <span class="c1">// Set state to accepted</span>
+            <span class="n">state</span> <span class="p">=</span> <span class="nc">OrderState</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="nc">OrderStatus</span><span class="p">.</span><span class="nc">ACCEPTED</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+
+            <span class="c1">// some logic for the order type</span>
+            <span class="c1">// ....</span>
+
+            <span class="c1">// Calculate the price to use</span>
+            <span class="kd">val</span> <span class="py">price</span> <span class="p">=</span> <span class="n">pricing</span><span class="p">.</span><span class="nf">marketPrice</span><span class="p">(</span><span class="n">order</span><span class="p">.</span><span class="n">quantity</span><span class="p">)</span>
+
+            <span class="c1">// Set the state to COMPLETED. As long as the state is not closed, this handler stay active.</span>
+            <span class="n">state</span> <span class="p">=</span> <span class="nc">OrderState</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="nc">OrderStatus</span><span class="p">.</span><span class="nc">COMPLETED</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+
+            <span class="c1">// Return the executions</span>
+            <span class="k">return</span> <span class="nf">listOf</span><span class="p">(</span><span class="nc">Execution</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">order</span><span class="p">.</span><span class="n">quantity</span><span class="p">,</span> <span class="n">price</span><span class="p">))</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+    <span class="c1">// Register the handler</span>
+    <span class="nc">ExecutionEngine</span><span class="p">.</span><span class="n">register</span><span class="p">&lt;</span><span class="nc">MyOrder</span><span class="p">&gt;</span> <span class="p">{</span> <span class="nc">MyOrderHandler</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="p">}</span></code></pre>
+</div>
 </div>
 </div>
 </div>

@@ -10,9 +10,9 @@ A Feed can be used to deliver historic and live data. A feed wraps its informati
 To read more why roboquant has selected this event-driven approach, read this xref:../introduction/events.adoc[introduction on event-driven software].
 
 == Event
-An event contains all the data that happens at a certain point in time and contains the following two attributes
+An `Event` instance contains all the data that happens at a certain point in time. It contains the following two attributes
 
-. The `time` when the information within the event became available.
+. The `time` attribute when the information within the event became available.
 . The list of all the `actions` at that time
 
 Events are always delivered in chronological order.
@@ -42,17 +42,16 @@ include::{sourcefile}[tag=priceaction]
 ----
 
 == Included Feeds
-Roboquant includes several feed implementations out of the box:
+Roboquant includes several `Feed` implementations out of the box:
 
 * CSVFeed that can process CSV files stored somewhere on your local machine. You read more about it xref:csv.adoc[here]
 * AvroFeed that can process an Avro file stored somewhere on your local machine. . You read more about them xref:avro.adoc[here]
-* RandomWalk that (as the name already suggests) generates random price actions
-* Many third party data providers that make their data available through an API
+* RandomWalk that (as the name suggests) generates random price actions for random assets.
+* Integration with third party data providers that make their data available through an API. See also the xref:../integration/index.adoc[integration documentation]
 
 
 == Custom Feeds
-If you have a data source that is not yet covered by roboquant, you can implement your own Feed. The main method to implement is the `play` method that will put the available events on the channel.
-
+If you have a data source that is not yet covered by roboquant, you can implement your own `Feed`. The main method to implement is the `play` method that will put the available events on the channel.
 
 [source, kotlin]
 ----

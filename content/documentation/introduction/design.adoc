@@ -14,8 +14,7 @@ Before we start developing roboquant, we looked at existing frameworks and platf
 * Support for trading in multiple markets in different regions at the same time
 
 == Why use Kotlin
-There are many computer languages available to choose from. After having developed several prototypes in different languages,
-we decided to go with Kotlin. Some main benefits being:
+There are many computer languages available to choose from. After having developed several prototypes in different languages, we decided to go with Kotlin. Some main benefits being:
 
 * Easy to learn and use with excellent tooling support
 * It is very concise with almost no boilerplate code required
@@ -24,16 +23,13 @@ we decided to go with Kotlin. Some main benefits being:
 * Access to the huge Java ecosystem with a library available for almost any task at hand
 * Excellent for building robust software, a necessity when developing complex trading strategies and your own money is at risk
 
-=== Why not use Python
-One often asked question is "Why didn't you use Python instead ?". The truth to be said, we would have loved to be able
-to use Python. However, during the prototype phase we discovered that the performance was lacking too much for our
-use-cases. This was including using libraries like Numpy and Pandas and even some Cython to speedup processing
-where possible.
+One often heard question is *Why didn't you choose Python instead?* Truth be told, we would have loved to be able
+to use Python. However, during the prototype phase of roboquant we discovered that the performance was lacking too much for our use-cases. In some scenarios the performance was over 100x slower. This was including using libraries like Numpy and Pandas and even some Cython to speedup processing. One problem is that in back testing many things cannot be vectorized.
 
-The main reason for this lackluster performance is not only that Python is an interpreted language, but also the fact that it is has a single threaded runtime that makes it difficult to use all the cores found on modern CPU's.
+The main reason for this lackluster performance is not only that Python is an interpreted language, but also the fact that it is has a single threaded runtime that makes it difficult and inefficient to use all the cores found on modern CPU's.
 
 The good news is that if you really want to stick with Python, there are plenty of alternatives available. For example,
-you could have a look at Backtrader, pyalgotrade or zipline. But we recommend to give roboquant and Kotlin a try, and are confident you will not regret that decision.
+you could have a look at Backtrader, pyalgotrade or zipline. But we recommend to give roboquant and Kotlin a try, and we are confident you will not regret that decision.
 
 == Interactive and traditional development
 From the start we developed _roboquant_ to be used either as a library included in your application or interactively from a Jupyter Notebook. The various API's have been designed so that they support both use-cases.
@@ -54,10 +50,10 @@ of separate modules:
 * roboquant-core: all the functionality required for back testing a strategy
 * roboquant-extra: adds support for 3rd party data feeds and brokers
 * roboquant-ibkr: adds support for Interactive Brokers
-* roboquant-crypto: adds support for cryptocurrency feeds and exchanges
-* roboquant-ml: adds support for machine learning strategies. This is a huge module because the dependent packages tend to be very large. Right now, this module is not yet published available.
+* roboquant-crypto: adds support for many cryptocurrency feeds and exchanges
+* roboquant-ml: adds support for machine learning strategies. This is a huge module because the dependent packages tend to be very large. Right now, this module is not yet available.
 
-This approach allows people with limited hardware to only load the modules they required.
+The modular approach allows people with limited hardware resources to only load the modules they required.
 
 == Time handling
 When testing strategies that trade simultaneously in multiple time-zones, like stocks in New York and London, it is key to have proper time management. Otherwise, you run the risk that your strategy performs very well but only because it can peep into the future due to faulty handling of time-zones.

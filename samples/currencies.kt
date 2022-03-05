@@ -16,9 +16,9 @@ fun currency() {
 
 fun amount() {
     // tag::amount[]
-    val amount1 = Amount(Currency.getInstance("USD"), 100.0) // the most amount of code
+    val amount1 = Amount(Currency.getInstance("USD"), 100.0) // the most code
     val amount2 = Amount(Currency.USD, 100.0) // less code
-    val amount3 = 100.USD // and even less code
+    val amount3 = 100.USD // the least code
 
     val amount4 = 50.USD * 2 // simple calculation
     require(amount4 == amount3)

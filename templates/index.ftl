@@ -94,10 +94,6 @@
                 </div>
             </section>
 
-            <section>
-                <#include "subscribe.ftl">
-            </section>
-
         </main>
        <#include "footer.ftl">
     </body>

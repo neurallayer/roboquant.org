@@ -64,19 +64,19 @@
                  <li class="nav-item"><a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>installation</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/installation/index.html" class="nav-link">Install roboquant</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>roboquant</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/roboquant/index.html" class="nav-link">Roboquant</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>feed</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
@@ -84,21 +84,21 @@
                  <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro Feed</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>strategy</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/strategy/index.html" class="nav-link">Strategy</a></li>
                  <li class="nav-item"><a href="/documentation/strategy/signal.html" class="nav-link">Signal</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>policy</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/policy/index.html" class="nav-link">Policy</a></li>
                  <li class="nav-item"><a href="/documentation/policy/order.html" class="nav-link">Orders</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>broker</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/broker/index.html" class="nav-link">Broker</a></li>
@@ -106,14 +106,28 @@
                  <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>metrics</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/metrics/index.html" class="nav-link">Metrics</a></li>
                  <li class="nav-item"><a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
+            <summary>jupyter</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/jupyter/charts.html" class="nav-link">Charts</a></li>
+                 <li class="nav-item"><a href="/documentation/jupyter/index.html" class="nav-link">Jupyter Notebooks</a></li>
+            </ul>
+        </details>
+        <details >
+            <summary>multimarkets</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/multimarkets/currencies.html" class="nav-link">Currencies</a></li>
+                 <li class="nav-item"><a href="/documentation/multimarkets/time.html" class="nav-link">Time</a></li>
+            </ul>
+        </details>
+        <details >
             <summary>integration</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/integration/index.html" class="nav-link">Overview</a></li>
@@ -152,7 +166,7 @@ If you like to learn more by being hands-on, there are several ready to use tuto
 <h2 id="_reading_guide">Reading Guide</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You can select any item from the menu on the left to get more information about that topic. Content that is formatted like <code>SomeName</code>, represents a real Kotlin class, interface, method or attribute. The package name is typically omitted.</p>
+<p>You can select any item from the menu to get more information about that topic. Content that is formatted like <code>SomeName</code>, represents a real Kotlin class, interface, method or attribute. The package name is typically omitted.</p>
 </div>
 <div class="paragraph">
 <p>All the used code snippets are actually real compilable and runnable code. However, the required import statements are not shown to improve readability.</p>
@@ -214,13 +228,13 @@ it is an instance of the <code>Roboquant</code> class that orchestrates the inte
 <li>
 <p><code>Broker</code></p>
 <div class="paragraph">
-<p>Receives the created orders by the policy and process them. Any open orders will also be processed until they are closed. After this step, it will return an updated account that reflects the latest state.</p>
+<p>Receives the created orders by the policy and process them. Any open orders will be processed until they are closed. After this step, it will return an updated account that reflects the latest state.</p>
 </div>
 </li>
 <li>
 <p><code>Metric</code></p>
 <div class="paragraph">
-<p>Receives the last state of the account and calculates various metrics that are of interest to determine the progress and results of the run so far. However, the metric doesn&#8217;t store the results, that is the responsibility of the MetricsLogger.</p>
+<p>Receives the latest state of the account and calculates various metrics that are of interest to determine the progress and results of the run so far. However, the metric doesn&#8217;t store the results, that is the responsibility of the MetricsLogger.</p>
 </div>
 </li>
 <li>
@@ -234,7 +248,7 @@ it is an instance of the <code>Roboquant</code> class that orchestrates the inte
 </div>
 </div>
 <div class="sect1">
-<h2 id="_developing_a_strategy">Developing a strategy</h2>
+<h2 id="_developing_your_strategy">Developing your strategy</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Developing a new strategy and validate it during a back-test is a straight forward process. The code snippet below shows the different steps that you have to take to develop and run your strategy.</p>
@@ -259,7 +273,7 @@ it is an instance of the <code>Roboquant</code> class that orchestrates the inte
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Develop a new strategy based on some idea you have. This can be done either from scratch or by assembling existing building blocks. In many cases, this is the only real software development required.</td>
+<td>Develop a new strategy based on some idea you have. This can be done either from scratch or by assembling existing building blocks. In many cases, this is the only real software development required. See also <a href="../strategy/index.html">Strategy</a> for more details.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -271,7 +285,7 @@ it is an instance of the <code>Roboquant</code> class that orchestrates the inte
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Create an instance of Roboquant (the engine) with the strategy and metric(s) as parameters.</td>
+<td>Create an instance of Roboquant (the engine) with the strategy and metric(s) as parameters to the constructor.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>

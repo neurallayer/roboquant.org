@@ -7,15 +7,16 @@ This page list the main features of roboquant for each key area: Fast, Flexible,
 It also provides a short overview of how roboquant compares to some other popular algo-trading software.
 
 == Fast
-Nowadays, there is so much more data available than ever before. It would be a lost opportunity not being able to leverage this data to make smarter and better performing strategies. Roboquant can work seamlessly with these large data-sets:
+Nowadays, there is so much more data available than ever before. It would be a lost opportunity not being able to leverage this data to develop smarter and better performing strategies. Roboquant can work seamlessly with these large data-sets:
 
 * [x] Fully utilize modern hardware, like large multicore machines
-* [x] Highly tuned back-test engine so the engine itself will not become a bottleneck
+* [x] Highly tuned back-test engine so the engine itself will not become the bottleneck
 * [x] Just a few lines of code to run multiple back-test in parallel
 * [x] Very fast CSV parsing, allowing to process directories full of CSV files in just seconds
 * [x] Support for file formats like Apache Avro™ to further reduce parsing overhead and easily share data sets
 * [x] Support for lazy loading of data, so memory doesn't become a constraint
-* [x] Several very fast trading algorithms out of the box
+* [x] Several very fast algorithms out of the box
+
 
 == Flexible
 Flexible means being able to trade at different markets at different parts in the world. This implies:
@@ -36,6 +37,9 @@ Flexible also means roboquant is fully modular and can be extended:
 == Easy
 Developing trading algorithms requires a lot of different skills. You need to know of course a lot about trading itself, but also programming and even a bit of statistics comes in handy. Roboquant tries to cater for both experienced and less experienced user.
 
+=== Trading specific Domain Model
+Rather than having a generic framework where you still have to code a lot to make it usable, roboquant approach is that of a trading specific model. For example, if you want to plot a chart, you don't first have to mangle data to make it consumable by the chart. In roboquant the charts understand the key domain concepts like Account, Trades and Metrics and can plot these directly.
+
 === Interactive Development
 Roboquant can be run inside a Jupyter Notebook which provides a very easy entry for people who might find a full-blown development environment too much hassle.A lot of effort went into designing an API that is very easy to use from a
 Notebook.
@@ -48,7 +52,7 @@ Notebook.
 Once you code base grow too large for a notebook, the exact same code can be used in a traditional IDE.
 
 [#_order_management]
-=== Order management
+=== Order Management
 One of the hardest (and most overlooked aspect) of algorithmic trading is order management, especially when your goal is to bring it to a live trading environment.There are so many things that potentially can go wrong and will cost you real money.It is a real endeavor to translate signals into actual orders and manage these outstanding orders.
 
 Because of this, roboquant separates the generation of signals (Strategy) from the actual orders (Policy).This allows algo-traders to focus on the generation of signals and pick the order management that fits the risk profile and trading style.And if full control over portfolio- and order-management is required, it is still available.
@@ -56,7 +60,7 @@ Because of this, roboquant separates the generation of signals (Strategy) from t
 === Batteries included
 * [x] Over 200 technical indicators that are very easy to use in your own strategies
 * [x] Powerful charts when running back-tests in a Jupyter Notebook
-* [x] Support for many back-testing approaches, like for example walk-forwards.
+* [x] Support for many back-testing approaches, like for walk-forwards and random samples
 * [x] Pluggable metrics you can use to see how a strategy is performing
 * [x] An advanced simulated broker for back-testing and live-testing that can handle both basic and advanced order types
 * [x] Integration with 3rd party brokers and data providers
@@ -67,7 +71,7 @@ In order to build the greatest environment for algo-trading possible, it is impo
 But it doesn't stop at the software. For real progress also data has to become freely available so performance of various strategies can be more easily compared. For inspiration look at what quality training data did for deep learning networks and the progress in recent years.
 
 == Feature Comparison
-The following table provide a quick overview of how the features of roboquant stack up to some alternative algo-trading frameworks. Of course, we are not completely objective, so we recommend trying them out yourself and see which one suits you best.
+The following table provide a short overview of how the features of roboquant stack up to some alternative algo-trading frameworks. Of course, we are not completely objective, so we recommend trying them out yourself and see which one suits you best.
 
 [frame=ends]
 [.table]

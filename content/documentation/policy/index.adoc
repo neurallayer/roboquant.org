@@ -4,9 +4,9 @@
 :sourcefile: ../../../samples/policy.kt
 :jbake-date: 2020-01-31
 
-A policy is responsible for generating the orders that will be placed at a broker. The most common use-case is that a policy does this based on the signals it receives from a strategy.
+A `Policy` is responsible for creating the orders that will be placed at a broker. The most common use-case is that a `Policy` does this based on the signals it receives from a `Strategy`, but there are other use-cases.
 
-A good policy is key in making your solution as robust as possible. Key things to consider when implementing a new policy:
+A good `Policy` is key in making your solution as robust as possible. Key things to consider when implementing a new policy:
 
 * What is a good allocation strategy
 * What order types to use
@@ -24,7 +24,7 @@ NOTE: If there is one thing that prevents people from actually going live with a
 
 === DefaultPolicy
 As the name already suggests, this is the default policy that will be used if no other policy is specified. It provides
-several properties that influence its behavior.
+several configuration properties that influence its behavior.
 
 You can also extend the DefaultPolicy to create your own order types:
 
@@ -33,15 +33,22 @@ You can also extend the DefaultPolicy to create your own order types:
 include::{sourcefile}[tag=default]
 ----
 
-== Implementing your own policies
-In case none of the out-of-the-box policies will do, you can always implement your own policy. You only have to implement a single method:
+
+== Fractional Order sizes
+Roboquant doesn't make assumptions on the possible order- and position-sizes. They are not limited to integers only and so there is no restriction on using a broker that supports fractional trading. Since it is the Policy that create the orders, here you can also put any type of order size logic yuo require.
+
+To make it even easier, there is an OrderSizer interface with default implementations you can reuse.
+
+
+== Custom Policies
+In case the out-of-the-box policies will not do, you can implement your own `Policy`. You only have to implement a single method named `act`. This method has access both to the generated signals as well ass the `Account` and `Event`.
 
 [source, kotlin]
 ----
 include::{sourcefile}[tag=basic]
 ----
 
-So a very naive implementation could look something like this:
+So a very naive and not robust implementation could look something like this:
 
 [source, kotlin]
 ----
@@ -54,7 +61,18 @@ Or using the more concise Kotlin way of doing things:
 include::{sourcefile}[tag=naive2]
 ----
 
+When developing custom policies, they should not only be robust and deal with corner-cases, but they should also be explainable. Back-testing over large amounts of data is already challenging enough without having a Policy in place which behavior is very difficult to wrap your head around. So the KISS design principle (Keep It Simple, Stupid) applies to Policies.
 
-== Advanced policies
-A policy can be used to transform signals into orders. But it can also be used for more advanced strategies that directly translates events into orders, thus skipping the signals all together.
+== Advanced Policies
+Most commonly a `Policy` is used to transform signals it receives from the `Strategy` into orders. But there are other use-cases where the policy is not using Signals to create orders. Common use-case are:
+
+. Re-balancing your portfolio at regular intervals (like monthly) based on some risk profile.
+. Advanced machine learning techniques like reinforcement learning that train the algorithm to directly create orders based on events (and not signals).
+
+In these cases you don't require a Strategy and implement all the logic in the Policy instead. You can use the `NoSignalStrategy` as strategy that doesn't perform any action.
+
+[source, kotlin]
+----
+include::{sourcefile}[tag=advanced]
+----
 

@@ -53,7 +53,7 @@
                         <div class="col-lg-4 mb-5 mb-lg-0">
 <nav id="sidebar">
     <h3>Documentation</h3>
-        <details close>
+        <details >
             <summary>introduction</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/introduction/index.html" class="nav-link">Welcome</a></li>
@@ -64,19 +64,19 @@
                  <li class="nav-item"><a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>installation</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/installation/index.html" class="nav-link">Install roboquant</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>roboquant</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/roboquant/index.html" class="nav-link">Roboquant</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>feed</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
@@ -84,7 +84,7 @@
                  <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro Feed</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>strategy</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/strategy/index.html" class="nav-link">Strategy</a></li>
@@ -98,7 +98,7 @@
                  <li class="nav-item"><a href="/documentation/policy/order.html" class="nav-link">Orders</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>broker</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/broker/index.html" class="nav-link">Broker</a></li>
@@ -106,14 +106,28 @@
                  <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>metrics</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/metrics/index.html" class="nav-link">Metrics</a></li>
                  <li class="nav-item"><a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
+            <summary>jupyter</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/jupyter/charts.html" class="nav-link">Charts</a></li>
+                 <li class="nav-item"><a href="/documentation/jupyter/index.html" class="nav-link">Jupyter Notebooks</a></li>
+            </ul>
+        </details>
+        <details >
+            <summary>multimarkets</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/multimarkets/currencies.html" class="nav-link">Currencies</a></li>
+                 <li class="nav-item"><a href="/documentation/multimarkets/time.html" class="nav-link">Time</a></li>
+            </ul>
+        </details>
+        <details >
             <summary>integration</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/integration/index.html" class="nav-link">Overview</a></li>
@@ -132,10 +146,10 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>A policy is responsible for generating the orders that will be placed at a broker. The most common use-case is that a policy does this based on the signals it receives from a strategy.</p>
+<p>A <code>Policy</code> is responsible for creating the orders that will be placed at a broker. The most common use-case is that a <code>Policy</code> does this based on the signals it receives from a <code>Strategy</code>, but there are other use-cases.</p>
 </div>
 <div class="paragraph">
-<p>A good policy is key in making your solution as robust as possible. Key things to consider when implementing a new policy:</p>
+<p>A good <code>Policy</code> is key in making your solution as robust as possible. Key things to consider when implementing a new policy:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -186,7 +200,7 @@ If there is one thing that prevents people from actually going live with a strat
 <h3 id="_defaultpolicy">DefaultPolicy</h3>
 <div class="paragraph">
 <p>As the name already suggests, this is the default policy that will be used if no other policy is specified. It provides
-several properties that influence its behavior.</p>
+several configuration properties that influence its behavior.</p>
 </div>
 <div class="paragraph">
 <p>You can also extend the DefaultPolicy to create your own order types:</p>
@@ -213,10 +227,21 @@ several properties that influence its behavior.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_implementing_your_own_policies">Implementing your own policies</h2>
+<h2 id="_fractional_order_sizes">Fractional Order sizes</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In case none of the out-of-the-box policies will do, you can always implement your own policy. You only have to implement a single method:</p>
+<p>Roboquant doesn&#8217;t make assumptions on the possible order- and position-sizes. They are not limited to integers only and so there is no restriction on using a broker that supports fractional trading. Since it is the Policy that create the orders, here you can also put any type of order size logic yuo require.</p>
+</div>
+<div class="paragraph">
+<p>To make it even easier, there is an OrderSizer interface with default implementations you can reuse.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_custom_policies">Custom Policies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In case the out-of-the-box policies will not do, you can implement your own <code>Policy</code>. You only have to implement a single method named <code>act</code>. This method has access both to the generated signals as well ass the <code>Account</code> and <code>Event</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -231,11 +256,11 @@ several properties that influence its behavior.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>So a very naive implementation could look something like this:</p>
+<p>So a very naive and not robust implementation could look something like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyNativePolicy</span> <span class="p">:</span> <span class="nc">Policy</span> <span class="p">{</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyNaivePolicy</span> <span class="p">:</span> <span class="nc">Policy</span> <span class="p">{</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">act</span><span class="p">(</span><span class="n">signals</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;,</span> <span class="n">account</span><span class="p">:</span> <span class="nc">Account</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;</span> <span class="p">{</span>
         <span class="kd">val</span> <span class="py">orders</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;()</span>
@@ -254,7 +279,7 @@ several properties that influence its behavior.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyNativePolicy2</span> <span class="p">:</span> <span class="nc">Policy</span> <span class="p">{</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyNaivePolicy2</span> <span class="p">:</span> <span class="nc">Policy</span> <span class="p">{</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">act</span><span class="p">(</span><span class="n">signals</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;,</span> <span class="n">account</span><span class="p">:</span> <span class="nc">Account</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">signals</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span>
@@ -265,13 +290,34 @@ several properties that influence its behavior.</p>
 <span class="p">}</span></code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>When developing custom policies, they should not only be robust and deal with corner-cases, but they should also be explainable. Back-testing over large amounts of data is already challenging enough without having a Policy in place which behavior is very difficult to wrap your head around. So the KISS design principle (Keep It Simple, Stupid) applies to Policies.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_advanced_policies">Advanced policies</h2>
+<h2 id="_advanced_policies">Advanced Policies</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A policy can be used to transform signals into orders. But it can also be used for more advanced strategies that directly translates events into orders, thus skipping the signals all together.</p>
+<p>Most commonly a <code>Policy</code> is used to transform signals it receives from the <code>Strategy</code> into orders. But there are other use-cases where the policy is not using Signals to create orders. Common use-case are:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Re-balancing your portfolio at regular intervals (like monthly) based on some risk profile.</p>
+</li>
+<li>
+<p>Advanced machine learning techniques like reinforcement learning that train the algorithm to directly create orders based on events (and not signals).</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>In these cases you don&#8217;t require a Strategy and implement all the logic in the Policy instead. You can use the <code>NoSignalStrategy</code> as strategy that doesn&#8217;t perform any action.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="nc">NoSignalStrategy</span><span class="p">(),</span> <span class="n">policy</span> <span class="p">=</span> <span class="n">myAdvancedPolicy</span><span class="p">)</span></code></pre>
+</div>
 </div>
 </div>
 </div>

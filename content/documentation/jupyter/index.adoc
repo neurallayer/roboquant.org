@@ -1,0 +1,33 @@
+= Jupyter Notebooks
+:source-highlighter: rouge
+:icons: font
+:sourcefile: ../../../samples/jupyter.kt
+:jbake-date: 2020-01-31
+
+Since developing an algorithmic trading strategy requires a lot of experimentation and testing, an interactive development environment like Jupyter Notebooks is ideal. Especially in the beginning phase it can help to progress a lot quicker.
+
+Roboquant is designed to be used in both your own standalone application, and in Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without too much ceremony and there are many charts included out-of-the-box that makes it easier to interpreter what is going on during a `run`.
+
+== Usage
+Using roboquant in a Kotlin Jupyter Notebook requires just a single command:
+
+    %use roboquant
+
+This will automatically load the roboquant library (it will actually load three roboquant modules: core, extra and crypt) and import most packages from the core module. If you run `Welcome()` in a notebook cell, you'll see the version of roboquant you are using together with other information about the environment you are in.
+
+TIP: Chromium based browsers perform best, especially when you plot charts with many data points.
+
+
+== Jupyter Lab vs Jupyter Classic
+The rendering required for Jupyter Lab is slightly different from for Jupyter Lab.
+
+
+== Importing packages
+By default, most of the core roboquant packages are imported. But the packages of the crypto and extra modules are not by default included.
+
+
+== Using external libraries
+You are not limited to using roboquant libraries only. In fact, you can use any Java or Kotlin library that is published.
+
+
+

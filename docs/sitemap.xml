@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
-        <loc>https://roboquant.org/screenshots.html</loc>
-        <lastmod>2022-02-05</lastmod>
+        <loc>https://roboquant.org/community.html</loc>
+        <lastmod>2022-02-14</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/community.html</loc>
-        <lastmod>2021-11-06</lastmod>
+        <loc>https://roboquant.org/screenshots.html</loc>
+        <lastmod>2022-02-05</lastmod>
     </url>
     <url>
         <loc>https://roboquant.org/get_started.html</loc>
         <lastmod>2021-11-06</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/roboquant/index.html</loc>
-        <lastmod>2022-02-05</lastmod>
+        <loc>https://roboquant.org/documentation/installation/index.html</loc>
+        <lastmod>2022-02-06</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/installation/index.html</loc>
-        <lastmod>2021-11-15</lastmod>
+        <loc>https://roboquant.org/documentation/roboquant/index.html</loc>
+        <lastmod>2022-02-05</lastmod>
     </url>
     <url>
         <loc>https://roboquant.org/documentation/broker/index.html</loc>
@@ -30,10 +30,6 @@
     </url>
     <url>
         <loc>https://roboquant.org/documentation/broker/buyingpower.html</loc>
-        <lastmod>2020-01-31</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/currencies/index.html</loc>
         <lastmod>2020-01-31</lastmod>
     </url>
     <url>
@@ -49,7 +45,23 @@
         <lastmod>2020-01-31</lastmod>
     </url>
     <url>
+        <loc>https://roboquant.org/documentation/jupyter/charts.html</loc>
+        <lastmod>2020-01-31</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/jupyter/index.html</loc>
+        <lastmod>2020-01-31</lastmod>
+    </url>
+    <url>
         <loc>https://roboquant.org/documentation/metrics/index.html</loc>
+        <lastmod>2020-01-31</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/multimarkets/currencies.html</loc>
+        <lastmod>2020-01-31</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation/multimarkets/time.html</loc>
         <lastmod>2020-01-31</lastmod>
     </url>
     <url>

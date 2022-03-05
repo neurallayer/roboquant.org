@@ -6,7 +6,7 @@
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
     <meta name="theme-color" content="#3296C8">
-    <title>roboquant - Metrics Logger</title>
+    <title>roboquant - Charts</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -40,7 +40,7 @@
                             </div>
                              <div class="col-lg-8">
                                  <div class="col h-100">
-                                    <h1 class="font-weight-light mt-1 doc">Metrics Logger</h1>
+                                    <h1 class="font-weight-light mt-1 doc">Charts</h1>
                                  </div>
                              </div>
                          </div>
@@ -106,14 +106,14 @@
                  <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
-        <details open>
+        <details >
             <summary>metrics</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/metrics/index.html" class="nav-link">Metrics</a></li>
                  <li class="nav-item"><a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a></li>
             </ul>
         </details>
-        <details >
+        <details open>
             <summary>jupyter</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/jupyter/charts.html" class="nav-link">Charts</a></li>
@@ -146,62 +146,208 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>A <code>MetricsLogger</code> receives the calculated metric values at the end of each step and then stores and/or logs these values.</p>
+<p>Roboquant uses the excellent <a href="https://echarts.apache.org">Apache ECharts</a> JavaScript library to render the actual charts in your browser. All charts are interactive, meaning you can zoom into areas of interest, and you can often filter on values of interest. There is a toolbar at the right top of each chart that allows for additional functionality, like downloading the chart or seeing the raw data.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_standard_loggers">Standard Loggers</h2>
+<h2 id="_design_philosophy">Design Philosophy</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_memorylogger">MemoryLogger</h3>
 <div class="paragraph">
-<p>This is the default logger used if no other logger is configured. It stores all the recorded values in memory and
-allows them to be queried afterwards. It also comes with a progress-bar that shows how much time is remaining during
-a run.</p>
+<p>In order to build robust and well performing trading algorithms, often you need to diversify across assets and asset classes. So a lot of the visualization is focused on providing insights on what is happening in such scenario and less in plotting the metrics a single asset only.</p>
 </div>
 <div class="paragraph">
-<p>This logger is very useful if you are testing your approach in a Jupyter Notebook or another interactive development
-environment.</p>
+<p>All the charts are tailored for roboquant usage and are not a generic plotting library. So typically with just one line of code, you plot a very feature rich chart. However, adding a new custom chart is not much work, see also <a href="#_custom_charts">Custom Charts</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_global_settings">Global settings</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are several global settings that will apply to all charts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>if you have to plot a lot of samples (&gt; 500,000) your browser can become unresponsive. To avoid this problem, you can limit the number of samples send to the browser. The default is no limits.</p>
+</li>
+<li>
+<p>you can change the theme used to draw the charts. The default is "auto" when it will try to detect the theme from your Jupyter Lab environment and use that.</p>
+</li>
+</ul>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">logger</span> <span class="p">=</span> <span class="nc">MemoryLogger</span><span class="p">()</span>
-<span class="kd">val</span> <span class="py">keys</span> <span class="p">=</span> <span class="n">logger</span><span class="p">.</span><span class="n">metricNames</span>
-<span class="kd">val</span> <span class="py">data</span> <span class="p">=</span> <span class="n">logger</span><span class="p">.</span><span class="nf">getMetric</span><span class="p">(</span><span class="n">keys</span><span class="p">.</span><span class="nf">first</span><span class="p">())</span></code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_silentlogger">SilentLogger</h3>
-<div class="paragraph">
-<p>This logger just silently ignores all metrics and is mostly useful for unit tests</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_infologger">InfoLogger</h3>
-<div class="paragraph">
-<p>Logs metrics using the built-in Logger.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_consolelogger">ConsoleLogger</h3>
-<div class="paragraph">
-<p>Logs the metrics to the console using a simple "println" statement.</p>
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="nc">Chart</span><span class="p">.</span><span class="n">maxSamples</span> <span class="p">=</span> <span class="mi">100_000</span>
+    <span class="nc">Chart</span><span class="p">.</span><span class="n">theme</span> <span class="p">=</span> <span class="s">"auto"</span> <span class="c1">// auto, dark, light</span></code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_custom_loggers">Custom Loggers</h2>
+<h2 id="_general_usage">General usage</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You can implement also your own MetricsLogger, for example if you want to store values into a database or have a custom file format that you want to use.</p>
+<p>If the chart instance is the last statement of a notebook cell, it will get rendered automatically.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// If last line, will get plotted</span>
+    <span class="nc">MetricChart</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>If however if it is not the last statement, you&#8217;ll need to invoke the <code>render()</code> method. This is also the way to plot multiple charts.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// Plot the correlation matrix over different timeframes</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">timeframe</span> <span class="k">in</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="nf">past</span><span class="p">(</span><span class="mi">20</span><span class="p">.</span><span class="n">years</span><span class="p">).</span><span class="nf">split</span><span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="n">years</span><span class="p">))</span>
+        <span class="nc">PriceCorrelationChart</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">assets</span><span class="p">,</span> <span class="n">timeframe</span><span class="p">).</span><span class="nf">render</span><span class="p">()</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pricebarcart">PriceBarCart</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="https://roboquant.org/img/prices.png" alt="prices">
+</div>
+</div>
+<div class="paragraph">
+<p>Main features of this chart include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>shows the PriceBar actions (also referred to a candlesticks) for a certain <code>Asset</code> in a <code>Feed</code></p>
+</li>
+<li>
+<p>provides an overview of the volume in the same chart (if the feed has this information)</p>
+</li>
+<li>
+<p>can handle large amounts of candles, and you can easily zoom into smaller timeframes to see more details</p>
+</li>
+<li>
+<p>you can plot trades for the same asset in the same chart to see when they were created.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">trades</span> <span class="p">=</span> <span class="n">roboquant</span><span class="p">.</span><span class="n">broker</span><span class="p">.</span><span class="n">account</span><span class="p">.</span><span class="n">trades</span>
+
+    <span class="c1">// Plot the first asset from the feed and also all the trades for that same asset</span>
+    <span class="nc">PriceBarChart</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">feed</span><span class="p">.</span><span class="n">assets</span><span class="p">.</span><span class="nf">first</span><span class="p">(),</span> <span class="n">trades</span> <span class="p">=</span> <span class="n">trades</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pricechart">PriceChart</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Similar to the functionality offered by a PriceBarChart, but this chart displays a single price and not a candlestick. As a result it can be used to plot any type of <code>PriceAction</code> and not only a PriceBar. So if you have a feed with order books data or trade prices, this is the chart to use.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// Plot how Apple performed during the 2008 financial crisis</span>
+    <span class="kd">val</span> <span class="py">apple</span> <span class="p">=</span> <span class="n">feed</span><span class="p">.</span><span class="n">assets</span><span class="p">.</span><span class="nf">getBySymbol</span><span class="p">(</span><span class="s">"AAPL"</span><span class="p">)</span>
+    <span class="nc">PriceChart</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">apple</span><span class="p">,</span> <span class="n">timeframe</span> <span class="p">=</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="n">financialCrisis2008</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+currently, you can only plot a single asset at a time. This might change in the future.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_pricecorrelationchart">PriceCorrelationChart</h3>
+<div class="paragraph">
+<p>Plots the Pearson correlation ofa set of assets using the prices found in the provided <code>Feed</code>. You can optionally specify the period to take into account.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://roboquant.org/img/correlation.png" alt="correlation">
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    val assets = feed.assets.take(10)
+    PriceCorrelationChart(feed, assets, timeframe = Timeframe.past(2.years))</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_metricchart">MetricChart</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Plots a metric from that has been captured during runs. If the metric data covers multiple runs, like in a walk-forward back test, each run will be plotted as its own series.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://roboquant.org/img/walkforward.png" alt="walkforward">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_calendarchart">CalendarChart</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Plots a metric over one or more year calendar, using color coding (heatmap) to indicate how each individual day performed. If you quickly want to see which days had the highest and lowest PNL, this is a great chart to use.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://roboquant.org/img/calendar.png" alt="calendar">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_orderchart">OrderChart</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Plots all the placed orders.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tradechart">TradeChart</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Plots all the executed trades from a run.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://roboquant.org/img/trades.png" alt="trades">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_assetallocation">AssetAllocation</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_custom_charts">Custom Charts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Developing your own chart is not difficult.Have a look at source code of one of the included charts as inspiration.If you think your chart would also be useful for other traders, consider creating a PR to get it included.</p>
 </div>
 </div>
 </div>

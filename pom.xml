@@ -4,7 +4,7 @@
 
 	<groupId>org.roboquant</groupId>
 	<artifactId>roboquant-org</artifactId>
-	<version>0.8-SNAPSHOT</version>
+	<version>0.9-SNAPSHOT</version>
 	<name>roboquant-org</name>
 
 	<properties>
@@ -13,7 +13,7 @@
 		<kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
 		<kotlin.compiler.incremental>false</kotlin.compiler.incremental>
 		<kotlin.version>1.6.10</kotlin.version>
-		<roboquant.version>0.8-SNAPSHOT</roboquant.version>
+		<roboquant.version>0.9-SNAPSHOT</roboquant.version>
 	</properties>
 
 	<build>

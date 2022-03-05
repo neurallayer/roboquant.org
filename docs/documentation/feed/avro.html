@@ -53,7 +53,7 @@
                         <div class="col-lg-4 mb-5 mb-lg-0">
 <nav id="sidebar">
     <h3>Documentation</h3>
-        <details close>
+        <details >
             <summary>introduction</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/introduction/index.html" class="nav-link">Welcome</a></li>
@@ -64,13 +64,13 @@
                  <li class="nav-item"><a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>installation</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/installation/index.html" class="nav-link">Install roboquant</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>roboquant</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/roboquant/index.html" class="nav-link">Roboquant</a></li>
@@ -84,21 +84,21 @@
                  <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro Feed</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>strategy</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/strategy/index.html" class="nav-link">Strategy</a></li>
                  <li class="nav-item"><a href="/documentation/strategy/signal.html" class="nav-link">Signal</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>policy</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/policy/index.html" class="nav-link">Policy</a></li>
                  <li class="nav-item"><a href="/documentation/policy/order.html" class="nav-link">Orders</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>broker</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/broker/index.html" class="nav-link">Broker</a></li>
@@ -106,14 +106,28 @@
                  <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>metrics</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/metrics/index.html" class="nav-link">Metrics</a></li>
                  <li class="nav-item"><a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
+            <summary>jupyter</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/jupyter/charts.html" class="nav-link">Charts</a></li>
+                 <li class="nav-item"><a href="/documentation/jupyter/index.html" class="nav-link">Jupyter Notebooks</a></li>
+            </ul>
+        </details>
+        <details >
+            <summary>multimarkets</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/multimarkets/currencies.html" class="nav-link">Currencies</a></li>
+                 <li class="nav-item"><a href="/documentation/multimarkets/time.html" class="nav-link">Time</a></li>
+            </ul>
+        </details>
+        <details >
             <summary>integration</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/integration/index.html" class="nav-link">Overview</a></li>
@@ -224,7 +238,7 @@ If you work a lot with directories full of CSV files, you can convert them to a 
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed1</span> <span class="p">=</span> <span class="nc">AvroFeed</span><span class="p">.</span><span class="nf">sp500</span><span class="p">()</span> <span class="c1">// S&amp;P500 for 5 years</span>
-<span class="kd">val</span> <span class="py">feed2</span> <span class="p">=</span> <span class="nc">AvroFeed</span><span class="p">.</span><span class="nf">test</span><span class="p">()</span> <span class="c1">// 6 popular US stocks for last 60 years</span></code></pre>
+<span class="kd">val</span> <span class="py">feed2</span> <span class="p">=</span> <span class="nc">AvroFeed</span><span class="p">.</span><span class="nf">usTest</span><span class="p">()</span> <span class="c1">// 6 popular US stocks for last 60 years</span></code></pre>
 </div>
 </div>
 <div class="paragraph">

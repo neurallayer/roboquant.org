@@ -1,3 +1,5 @@
+@file:Suppress("unused", "ControlFlowWithEmptyBody")
+
 import org.roboquant.Roboquant
 import org.roboquant.binance.BinanceLiveFeed
 import org.roboquant.common.Asset
@@ -82,7 +84,7 @@ fun avroCaptureLive() {
 fun predefined() {
     // tag::predefined[]
     val feed1 = AvroFeed.sp500() // S&P500 for 5 years
-    val feed2 = AvroFeed.test() // 6 popular US stocks for last 60 years
+    val feed2 = AvroFeed.usTest() // 6 popular US stocks for last 60 years
     // end::predefined[]
 }
 

@@ -6,7 +6,7 @@
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
     <meta name="theme-color" content="#3296C8">
-    <title>roboquant - Roboquant</title>
+    <title>roboquant - Currencies</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -40,7 +40,7 @@
                             </div>
                              <div class="col-lg-8">
                                  <div class="col h-100">
-                                    <h1 class="font-weight-light mt-1 doc">Roboquant</h1>
+                                    <h1 class="font-weight-light mt-1 doc">Currencies</h1>
                                  </div>
                              </div>
                          </div>
@@ -70,7 +70,7 @@
                  <li class="nav-item"><a href="/documentation/installation/index.html" class="nav-link">Install roboquant</a></li>
             </ul>
         </details>
-        <details open>
+        <details >
             <summary>roboquant</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/roboquant/index.html" class="nav-link">Roboquant</a></li>
@@ -120,7 +120,7 @@
                  <li class="nav-item"><a href="/documentation/jupyter/index.html" class="nav-link">Jupyter Notebooks</a></li>
             </ul>
         </details>
-        <details >
+        <details open>
             <summary>multimarkets</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/multimarkets/currencies.html" class="nav-link">Currencies</a></li>
@@ -146,129 +146,119 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>Roboquant</code> class (org.roboquant.Roboquant) is the engine of the platform, not to be confused with roboquant™ which is the name of the platform itself. An instance of the <code>Roboquant</code> class orchestrates the interaction between all the components and performs the actual runs.</p>
+<p>Roboquant has extensive support for trading in assets that have different currencies. So for example at the same time you can hold US stocks and EuroNext stocks in your portfolio and trade them.</p>
+</div>
+<div class="paragraph">
+<p>In order to make it easier to develop in a multi-currency setup, roboquant introduces a number of domain classes: <a href="#_currency">Currency</a>, <a href="#_amount">Amount</a>, <a href="#_wallet">Wallet</a> and <a href="#_exchangerates">ExchangeRates</a> that will help.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_default_settings">Default settings</h2>
+<h2 id="_currency">Currency</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>By default, you only need to provide a strategy when creating a new instance of Roboquant. So the bare minimum would be:</p>
+<p>The roboquant <code>Currency</code> class represents any type of currency. It follows closely the interface that comes with the standard  Java Currency class, but is independent of it. The main reason is that the Java implementation doesn&#8217;t support cryptocurrencies while the roboquant implementation supports any type of currency.</p>
+</div>
+<div class="paragraph">
+<p>Also several common currencies are predefined, to make it easier to work with.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">strategy</span>  <span class="p">=</span> <span class="nc">EMACrossover</span><span class="p">()</span>
-<span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">)</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The following default values will then be used:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>No metrics will be captured</p>
-</li>
-<li>
-<p>The <code>SimBroker</code> will be used as the broker</p>
-</li>
-<li>
-<p>The <code>DefaultPolicy</code> will be the policy used</p>
-</li>
-<li>
-<p>The <code>MemoryLogger</code> as the MetricsLogger (although without metrics to capture, there is not much to log)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Each of these defaults can be overwritten with a different implementation when you instantiate a <code>Roboquant</code> if you want to.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span>
-    <span class="n">strategy</span><span class="p">,</span>
-    <span class="n">metric1</span><span class="p">,</span> <span class="n">metric2</span><span class="p">,</span>
-    <span class="n">policy</span> <span class="p">=</span> <span class="n">myPolicy</span><span class="p">,</span>
-    <span class="n">broker</span> <span class="p">=</span> <span class="n">myBroker</span><span class="p">,</span>
-    <span class="n">logger</span> <span class="p">=</span> <span class="n">myLogger</span><span class="p">)</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="nc">Currency</span><span class="p">.</span><span class="nc">USD</span>
+<span class="nc">Currency</span><span class="p">.</span><span class="nc">BTC</span>
+<span class="nc">Currency</span><span class="p">.</span><span class="nf">getInstance</span><span class="p">(</span><span class="s">"MyCryptoCoin"</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_run">Run</h2>
+<h2 id="_amount">Amount</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>After you have created an instance of roboquant and have a <a href="../feed/index.html">feed</a> created, you can start a run. the same <code>run</code> method can be used for all the different stages, from back testing to live trading (see also <a href="../introduction/four_stages.html">4 stages</a>)</p>
-</div>
-<div class="paragraph">
-<p>In the most simple form, you only provide a feed as a parameter. In this case, all the events available in the feed will be used in the run.</p>
+<p>An amount can hold the value for a single currency. You can create a new <code>Amount</code> using the constructor. But you can also use the extension functions that are defined on numbers for commonly used currencies (f.e. 120.EUR). Amounts are just like numbers immutable.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you provide a live feed, it would run forever. However, you can restrict the run to a certain timeframe, again you can use this for a historical feed and a live feed alike.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="c1">// Historical feed example</span>
-<span class="kd">val</span> <span class="py">timeframe</span> <span class="p">=</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="nf">fromYears</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)</span>
-<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed1</span><span class="p">,</span> <span class="n">timeframe</span><span class="p">)</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">amount1</span> <span class="p">=</span> <span class="nc">Amount</span><span class="p">(</span><span class="nc">Currency</span><span class="p">.</span><span class="nf">getInstance</span><span class="p">(</span><span class="s">"USD"</span><span class="p">),</span> <span class="mf">100.0</span><span class="p">)</span> <span class="c1">// the most code</span>
+<span class="kd">val</span> <span class="py">amount2</span> <span class="p">=</span> <span class="nc">Amount</span><span class="p">(</span><span class="nc">Currency</span><span class="p">.</span><span class="nc">USD</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">)</span> <span class="c1">// less code</span>
+<span class="kd">val</span> <span class="py">amount3</span> <span class="p">=</span> <span class="mi">100</span><span class="p">.</span><span class="nc">USD</span> <span class="c1">// the least code</span>
 
-<span class="c1">// Live feed example</span>
-<span class="kd">val</span> <span class="py">timeframe2</span> <span class="p">=</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="nf">next</span><span class="p">(</span><span class="mi">120</span><span class="p">.</span><span class="n">minutes</span><span class="p">)</span>
-<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed2</span><span class="p">,</span> <span class="n">timeframe2</span><span class="p">)</span></code></pre>
+<span class="kd">val</span> <span class="py">amount4</span> <span class="p">=</span> <span class="mi">50</span><span class="p">.</span><span class="nc">USD</span> <span class="p">*</span> <span class="mi">2</span> <span class="c1">// simple calculation</span>
+<span class="nf">require</span><span class="p">(</span><span class="n">amount4</span> <span class="p">==</span> <span class="n">amount3</span><span class="p">)</span>
+
+<span class="nf">println</span><span class="p">(</span><span class="n">amount1</span><span class="p">.</span><span class="nf">formatValue</span><span class="p">())</span></code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>You can invoke a run multiple times, for example for different timeframes. The following code shows how to perform a walk-forward back test of two-year cycle:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">timeframe</span> <span class="p">=</span> <span class="n">feed</span><span class="p">.</span><span class="n">timeframe</span>
-<span class="n">timeframe</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="n">years</span><span class="p">).</span><span class="nf">forEach</span> <span class="p">{</span>
-    <span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">it</span><span class="p">)</span>
-    <span class="nf">println</span><span class="p">(</span><span class="n">roboquant</span><span class="p">.</span><span class="n">broker</span><span class="p">.</span><span class="n">account</span><span class="p">.</span><span class="n">equityAmount</span><span class="p">)</span>
-<span class="p">}</span></code></pre>
-</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Amounts store their values internally as Doubles and not BigDecimals. For (simulated) trading the potential loss of precision is not an issue and the benefits are much better performance and lower memory consumption.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_running_in_parallel">Running in Parallel</h2>
+<h2 id="_wallet">Wallet</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you have a lot of back test to run, you can run them in parallel and use all the cores on your computer to expedite the process. Roboquant scales almost linear with the number of available cores, and it only requires a few extra lines of code.</p>
+<p>A <code>Wallet</code> can hold amounts of multiple currencies at the same time. You can create a new <code>Wallet</code> by using its constructor, or by adding multiple amounts together. You can also deposit and withdraw amounts in a wallet. A <code>Wallet</code> instance is mutable.</p>
 </div>
 <div class="paragraph">
-<p>The following example shows how to run a walk forward in parallel. By reusing the same logger instance, all results will be stored in a single instance and can be easily compared afterwards.</p>
+<p>There is an important difference between <code>deposit</code> method and using the <code>+ operator</code>. The <code>deposit</code> method will modify the existing instance while the <code>+ operator</code> will return a new wallet instance.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">timeframe</span> <span class="p">=</span> <span class="n">feed</span><span class="p">.</span><span class="n">timeframe</span>
-<span class="kd">val</span> <span class="py">logger</span> <span class="p">=</span> <span class="nc">MemoryLogger</span><span class="p">(</span><span class="n">showProgress</span> <span class="p">=</span> <span class="k">false</span><span class="p">)</span>
-<span class="kd">val</span> <span class="py">jobs</span> <span class="p">=</span> <span class="nc">ParallelJobs</span><span class="p">()</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">wallet1</span> <span class="p">=</span> <span class="nc">Wallet</span><span class="p">(</span><span class="mi">100</span><span class="p">.</span><span class="nc">EUR</span><span class="p">,</span> <span class="mi">10</span><span class="p">.</span><span class="nc">USD</span><span class="p">)</span>
+<span class="n">wallet1</span><span class="p">.</span><span class="nf">deposit</span><span class="p">(</span><span class="mi">200</span><span class="p">.</span><span class="nc">GBP</span><span class="p">)</span>
+<span class="n">wallet1</span><span class="p">.</span><span class="nf">withdraw</span><span class="p">(</span><span class="mi">1000</span><span class="p">.</span><span class="nc">JPY</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="p">(</span><span class="n">period</span> <span class="k">in</span> <span class="n">timeframe</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="n">years</span><span class="p">))</span> <span class="p">{</span>
-    <span class="n">jobs</span><span class="p">.</span><span class="nf">add</span> <span class="p">{</span>
-        <span class="c1">// Create a new roboquant instance for each job</span>
-        <span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="nc">EMACrossover</span><span class="p">(),</span> <span class="nc">AccountSummary</span><span class="p">(),</span> <span class="n">logger</span> <span class="p">=</span> <span class="n">logger</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">wallet2</span> <span class="p">=</span> <span class="mi">20</span><span class="p">.</span><span class="nc">EUR</span> <span class="p">-</span> <span class="mi">1000</span><span class="p">.</span><span class="nc">JPY</span> <span class="p">+</span> <span class="mi">100</span><span class="p">.</span><span class="nc">GBP</span>
+<span class="kd">val</span> <span class="py">wallet3</span> <span class="p">=</span> <span class="mf">0.02</span><span class="p">.</span><span class="nc">BTC</span> <span class="p">+</span> <span class="mi">100</span><span class="p">.</span><span class="nc">USDT</span> <span class="p">+</span> <span class="mf">0.1</span><span class="p">.</span><span class="nc">ETH</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you add two amounts together you&#8217;ll always get a new <code>Wallet</code> instance back, even if the two amounts have the same currency.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exchangerates">ExchangeRates</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>ExchangeRates</code> is an interface that supports the conversion of an amount from one currency to another one. Although you can invoke the API of an implementation directly, typically you would use the <code>convert</code> method of an <code>Amount</code> or <code>Wallet</code> instance.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Config.exchangeRates</code> property is used by the components to perform the actual conversion. So you can change this property and all code from now on will use this new implementation.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ExchangeRates</code> interface also supports different rates at different moments in time, but it depends on the actual implementation if the provided time parameter is taken into consideration. One of the implementations that comes out of the box with roboquant, is the <code>ECBExchangeRates</code> which contains daily exchange rates for most fiat currencies from the year 2000 onwards.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="nc">Config</span><span class="p">.</span><span class="n">exchangeRates</span> <span class="p">=</span> <span class="nc">ECBExchangeRates</span><span class="p">.</span><span class="nf">fromWeb</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">amountEUR</span> <span class="p">=</span> <span class="mi">20</span><span class="p">.</span><span class="nc">EUR</span>
+<span class="kd">val</span> <span class="py">amountUSD</span> <span class="p">=</span> <span class="n">amountEUR</span><span class="p">.</span><span class="nf">convert</span><span class="p">(</span><span class="nc">Currency</span><span class="p">.</span><span class="nc">USD</span><span class="p">)</span>
 
-        <span class="c1">// Give the run a unique name so the metrics can be easily identified</span>
-        <span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">runName</span> <span class="p">=</span> <span class="s">"run-$period"</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// Wait till all jobs are finished</span>
-<span class="n">jobs</span><span class="p">.</span><span class="nf">joinAllBlocking</span><span class="p">()</span>
-
-<span class="c1">// If you are in Jupyter Notebook you can plot the metrics</span>
-<span class="kd">val</span> <span class="py">data</span> <span class="p">=</span> <span class="n">logger</span><span class="p">.</span><span class="nf">getMetric</span><span class="p">(</span><span class="s">"account.equity"</span><span class="p">)</span>
-<span class="nc">MetricChart</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code></pre>
+<span class="kd">val</span> <span class="py">wallet</span> <span class="p">=</span> <span class="mi">20</span><span class="p">.</span><span class="nc">USD</span> <span class="p">+</span> <span class="mi">1000</span><span class="p">.</span><span class="nc">JPY</span>
+<span class="kd">val</span> <span class="py">amountGBP1</span> <span class="p">=</span> <span class="n">wallet</span><span class="p">.</span><span class="nf">convert</span><span class="p">(</span><span class="nc">Currency</span><span class="p">.</span><span class="nc">GBP</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">time</span> <span class="p">=</span> <span class="nc">Instant</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span> <span class="p">-</span> <span class="mi">2</span><span class="p">.</span><span class="n">years</span>
+<span class="kd">val</span> <span class="py">amountGBP2</span> <span class="p">=</span> <span class="n">wallet</span><span class="p">.</span><span class="nf">convert</span><span class="p">(</span><span class="nc">Currency</span><span class="p">.</span><span class="nc">GBP</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+<span class="nf">require</span><span class="p">(</span><span class="n">amountGBP1</span> <span class="p">!=</span> <span class="n">amountGBP2</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </div>

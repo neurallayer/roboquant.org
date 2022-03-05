@@ -9,7 +9,7 @@ TIP: If you like to learn more by being hands-on, there are several ready to use
 
 
 == Reading Guide
-You can select any item from the menu on the left to get more information about that topic. Content that is formatted like `SomeName`, represents a real Kotlin class, interface, method or attribute. The package name is typically omitted.
+You can select any item from the menu to get more information about that topic. Content that is formatted like `SomeName`, represents a real Kotlin class, interface, method or attribute. The package name is typically omitted.
 
 All the used code snippets are actually real compilable and runnable code. However, the required import statements are not shown to improve readability.
 
@@ -41,17 +41,17 @@ Receives the generated signals and creates the orders. If you need to create ord
 
 * `Broker`
 +
-Receives the created orders by the policy and process them. Any open orders will also be processed until they are closed. After this step, it will return an updated account that reflects the latest state.
+Receives the created orders by the policy and process them. Any open orders will be processed until they are closed. After this step, it will return an updated account that reflects the latest state.
 
 * `Metric`
 +
-Receives the last state of the account and calculates various metrics that are of interest to determine the progress and results of the run so far. However, the metric doesn't store the results, that is the responsibility of the MetricsLogger.
+Receives the latest state of the account and calculates various metrics that are of interest to determine the progress and results of the run so far. However, the metric doesn't store the results, that is the responsibility of the MetricsLogger.
 
 * `MetricsLogger`
 +
 Stores and/or logs the metric values, so you can inspect them at a later time.
 
-== Developing a strategy
+== Developing your strategy
 Developing a new strategy and validate it during a back-test is a straight forward process. The code snippet below shows the different steps that you have to take to develop and run your strategy.
 
 [source, kotlin,  subs="attributes,verbatim"]
@@ -69,10 +69,10 @@ val roboquant = Roboquant(strategy, metric) //<4>
 val feed = CSVFeed("./data/us") //<5>
 roboquant.run(feed) //<6>
 ----
-<1> Develop a new strategy based on some idea you have. This can be done either from scratch or by assembling existing building blocks. In many cases, this is the only real software development required.
+<1> Develop a new strategy based on some idea you have. This can be done either from scratch or by assembling existing building blocks. In many cases, this is the only real software development required. See also xref:../strategy/index.adoc[Strategy] for more details.
 <2> Create an instance of your strategy.
 <3> Instantiate the metrics you want to use to evaluate the performance of your strategy.
-<4> Create an instance of Roboquant (the engine) with the strategy and metric(s) as parameters.
+<4> Create an instance of Roboquant (the engine) with the strategy and metric(s) as parameters to the constructor.
 <5> Pick the data feed you want to use to test your strategy.
 <6> Run the back test using the data feed you just created.
 

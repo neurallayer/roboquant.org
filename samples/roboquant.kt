@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 import org.roboquant.Roboquant
 import org.roboquant.brokers.sim.SimBroker
 import org.roboquant.common.ParallelJobs

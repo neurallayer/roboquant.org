@@ -7,14 +7,14 @@ There are 4 distinct stages that you go through when you develop, test and run a
 
 image::four_stages.png[]
 
-Each stage has its own purpose and benefits. Two important rules to adhere to are:
+Each stage has its own purpose and benefits. There are two important rules to adhere to:
 
 . If possible at all, don't skip a stage. Every stage has its purpose in order to end up with a well performing and robust trading strategy.
 . And perhaps more important, if you are not happy about the performance in a later stage, go back to the first stage. Often minor changes to the code can have major impact on the results and should be thoroughly tested at every stage.
 
-Roboquant support all 4 stages and requires minimal changes to your code to move from one stage to the next. Your strategy and policy should not change at all between stages, and only the selected data feeds and broker differ between certain stages.
+Roboquant support all 4 stages and requires minimal changes to your code when you move from one stage to the next. Your strategy and policy should not change at all between stages, and only the selected data feeds and broker differ between stages.
 
-The following table shows the differences in each stage:
+The following table shows the used `Broker` and `Feed` in the different stage:
 
 |===
 |Stage |Broker |Feed

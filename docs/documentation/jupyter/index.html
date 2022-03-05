@@ -6,7 +6,7 @@
     <meta name="description" content="roboquant algo-trading framework" />
     <meta name="keywords" content="trading Kotlin algo roboquant">
     <meta name="theme-color" content="#3296C8">
-    <title>roboquant - Metrics Logger</title>
+    <title>roboquant - Jupyter Notebooks</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
     <!-- Font awesome icons-->
@@ -40,7 +40,7 @@
                             </div>
                              <div class="col-lg-8">
                                  <div class="col h-100">
-                                    <h1 class="font-weight-light mt-1 doc">Metrics Logger</h1>
+                                    <h1 class="font-weight-light mt-1 doc">Jupyter Notebooks</h1>
                                  </div>
                              </div>
                          </div>
@@ -106,14 +106,14 @@
                  <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
-        <details open>
+        <details >
             <summary>metrics</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/metrics/index.html" class="nav-link">Metrics</a></li>
                  <li class="nav-item"><a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a></li>
             </ul>
         </details>
-        <details >
+        <details open>
             <summary>jupyter</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/jupyter/charts.html" class="nav-link">Charts</a></li>
@@ -146,62 +146,62 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>A <code>MetricsLogger</code> receives the calculated metric values at the end of each step and then stores and/or logs these values.</p>
+<p>Since developing an algorithmic trading strategy requires a lot of experimentation and testing, an interactive development environment like Jupyter Notebooks is ideal. Especially in the beginning phase it can help to progress a lot quicker.</p>
+</div>
+<div class="paragraph">
+<p>Roboquant is designed to be used in both your own standalone application, and in Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without too much ceremony and there are many charts included out-of-the-box that makes it easier to interpreter what is going on during a <code>run</code>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_standard_loggers">Standard Loggers</h2>
+<h2 id="_usage">Usage</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_memorylogger">MemoryLogger</h3>
 <div class="paragraph">
-<p>This is the default logger used if no other logger is configured. It stores all the recorded values in memory and
-allows them to be queried afterwards. It also comes with a progress-bar that shows how much time is remaining during
-a run.</p>
+<p>Using roboquant in a Kotlin Jupyter Notebook requires just a single command:</p>
 </div>
-<div class="paragraph">
-<p>This logger is very useful if you are testing your approach in a Jupyter Notebook or another interactive development
-environment.</p>
-</div>
-<div class="listingblock">
+<div class="literalblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">logger</span> <span class="p">=</span> <span class="nc">MemoryLogger</span><span class="p">()</span>
-<span class="kd">val</span> <span class="py">keys</span> <span class="p">=</span> <span class="n">logger</span><span class="p">.</span><span class="n">metricNames</span>
-<span class="kd">val</span> <span class="py">data</span> <span class="p">=</span> <span class="n">logger</span><span class="p">.</span><span class="nf">getMetric</span><span class="p">(</span><span class="n">keys</span><span class="p">.</span><span class="nf">first</span><span class="p">())</span></code></pre>
+<pre>%use roboquant</pre>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_silentlogger">SilentLogger</h3>
 <div class="paragraph">
-<p>This logger just silently ignores all metrics and is mostly useful for unit tests</p>
+<p>This will automatically load the roboquant library (it will actually load three roboquant modules: core, extra and crypt) and import most packages from the core module. If you run <code>Welcome()</code> in a notebook cell, you&#8217;ll see the version of roboquant you are using together with other information about the environment you are in.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_infologger">InfoLogger</h3>
-<div class="paragraph">
-<p>Logs metrics using the built-in Logger.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_consolelogger">ConsoleLogger</h3>
-<div class="paragraph">
-<p>Logs the metrics to the console using a simple "println" statement.</p>
-</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Chromium based browsers perform best, especially when you plot charts with many data points.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_custom_loggers">Custom Loggers</h2>
+<h2 id="_jupyter_lab_vs_jupyter_classic">Jupyter Lab vs Jupyter Classic</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You can implement also your own MetricsLogger, for example if you want to store values into a database or have a custom file format that you want to use.</p>
+<p>The rendering required for Jupyter Lab is slightly different from for Jupyter Lab.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"></code></pre>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_importing_packages">Importing packages</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, most of the core roboquant packages are imported. But the packages of the crypto and extra modules are not by default included.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using_external_libraries">Using external libraries</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You are not limited to using roboquant libraries only. In fact, you can use any Java or Kotlin library that is published.</p>
 </div>
 </div>
 </div>

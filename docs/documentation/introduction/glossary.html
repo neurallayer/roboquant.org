@@ -64,19 +64,19 @@
                  <li class="nav-item"><a href="/documentation/introduction/design.html" class="nav-link">Design Decisions</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>installation</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/installation/index.html" class="nav-link">Install roboquant</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>roboquant</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/roboquant/index.html" class="nav-link">Roboquant</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>feed</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/feed/index.html" class="nav-link">Feed</a></li>
@@ -84,21 +84,21 @@
                  <li class="nav-item"><a href="/documentation/feed/avro.html" class="nav-link">Avro Feed</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>strategy</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/strategy/index.html" class="nav-link">Strategy</a></li>
                  <li class="nav-item"><a href="/documentation/strategy/signal.html" class="nav-link">Signal</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>policy</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/policy/index.html" class="nav-link">Policy</a></li>
                  <li class="nav-item"><a href="/documentation/policy/order.html" class="nav-link">Orders</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>broker</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/broker/index.html" class="nav-link">Broker</a></li>
@@ -106,14 +106,28 @@
                  <li class="nav-item"><a href="/documentation/broker/buyingpower.html" class="nav-link">Buying Power</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
             <summary>metrics</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/metrics/index.html" class="nav-link">Metrics</a></li>
                  <li class="nav-item"><a href="/documentation/metrics/metrics_logger.html" class="nav-link">Metrics Logger</a></li>
             </ul>
         </details>
-        <details close>
+        <details >
+            <summary>jupyter</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/jupyter/charts.html" class="nav-link">Charts</a></li>
+                 <li class="nav-item"><a href="/documentation/jupyter/index.html" class="nav-link">Jupyter Notebooks</a></li>
+            </ul>
+        </details>
+        <details >
+            <summary>multimarkets</summary>
+            <ul class="nav flex-column">
+                 <li class="nav-item"><a href="/documentation/multimarkets/currencies.html" class="nav-link">Currencies</a></li>
+                 <li class="nav-item"><a href="/documentation/multimarkets/time.html" class="nav-link">Time</a></li>
+            </ul>
+        </details>
+        <details >
             <summary>integration</summary>
             <ul class="nav flex-column">
                  <li class="nav-item"><a href="/documentation/integration/index.html" class="nav-link">Overview</a></li>
@@ -133,10 +147,11 @@
 <h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This page provides an overview of the different concepts used within roboquant and their meaning.</p>
+<p>This page provides an overview of the different concepts used within the documentation, their meaning and how it is translated into a software construct.</p>
 </div>
 <table class="tableblock frame-all grid-all fit-content">
 <colgroup>
+<col>
 <col>
 <col>
 </colgroup>
@@ -144,96 +159,116 @@
 <tr>
 <th class="tableblock halign-left valign-top">Concept</th>
 <th class="tableblock halign-left valign-top">Meaning</th>
+<th class="tableblock halign-left valign-top">Construct</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock"><strong>Stages</strong></p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>Stages</strong></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Back Testing</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Testing of a strategy and policy using historic data and the simulated broker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Testing of a strategy and policy using historic data and a simulated broker</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Live Testing</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Testing of a strategy and policy using live data and the simulated broker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Testing of a strategy and policy using live data and a simulated broker</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paper Trading</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Testing of a strategy and policy using live data and the paper trading account of a real broker</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Live Trading</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Running of a strategy and policy using live data and a live trading account of a real broker</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Run</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The run of any of the above stages</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The execution of the any of the 4 stages</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Method of Roboquant</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock"><strong>Components</strong></p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>Components</strong></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Feed</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Functionality responsible for generating Events</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Event</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Piece of information that is available at a certain moment in time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Strategy</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Functionality responsible for generating <code>Signals</code> based on <code>Events</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Policy</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Functionality responsible for generating <code>Orders</code> based on <code>Signals</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Functionality responsible for generating <code>Orders</code>, typically based on <code>Signals</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Metric</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Functionality that capture and/or calculates information during a run</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock"><strong>Time</strong></p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>Time</strong></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Timeframe</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">(Limited) time period that has a start and end time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(Limited) time period that has a start and end time of the type <code>Instant</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Timeline</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">list of sorted times</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list of sorted times, where each time is an instance on the <code>Instant</code> type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock"><strong>Money</strong></p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>Money</strong></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Amount</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">monetary value denoted in a single currency</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wallet</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">collection of amounts, so it can contain multiple currency</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Exchange Rates</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">set of rates that allows for the conversion between currencies</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Equity</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">total of cash and portfolio positions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Combined total of cash and portfolio positions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute of Account</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Buying Power</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Total amount available for trading</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute of Account</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Realized PnL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Made Profit or Loss as part of a transaction, and so reflected in the cash balance of the account</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Made Profit or Loss as part of a trade, and so also reflected in the cash balance of the account</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute of Trade</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Unrealized PnL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Profit or Loss based on the current market prices but not yet materialized since the position within the portfolio is not yet closed. So this is NOT yet reflected in the cash balance.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute of Position</p></td>
 </tr>
 </tbody>
 </table>

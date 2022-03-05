@@ -1,11 +1,11 @@
-<#assign sections = ["introduction",  "installation", "roboquant", "feed", "strategy", "policy", "broker", "metrics", "integration"]>
+<#assign sections = ["introduction",  "installation", "roboquant", "feed", "strategy", "policy", "broker", "metrics", "jupyter", "multimarkets", "integration"]>
 <nav id="sidebar">
     <h3>Documentation</h3>
     <#list sections as section>
         <#if content.uri?starts_with("documentation/" + section)>
             <#assign state="open" />
         <#else>
-            <#assign state="close" />
+            <#assign state="" />
         </#if>
         <details ${state}>
             <summary>${section}</summary>
