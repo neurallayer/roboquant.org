@@ -44,16 +44,17 @@ include::{sourcefile}[tag=priceaction]
 == Included Feeds
 Roboquant includes several `Feed` implementations out of the box:
 
-* CSVFeed that can process CSV files stored somewhere on your local machine. You read more about it xref:csv.adoc[here]
-* AvroFeed that can process an Avro file stored somewhere on your local machine. . You read more about them xref:avro.adoc[here]
+* CSVFeed that can process CSV files stored somewhere on your local machine.You read more about it xref:csv.adoc[here]
+* AvroFeed that can process an Avro file stored somewhere on your local machine.. You read more about them xref:avro.adoc[here]
 * RandomWalk that (as the name suggests) generates random price actions for random assets.
-* Integration with third party data providers that make their data available through an API. See also the xref:../integration/index.adoc[integration documentation]
+* Integration with third party data providers that make their data available through an API.See also the xref:../integration/index.adoc[integration documentation]
 
 
+[#_custom_feeds]
 == Custom Feeds
-If you have a data source that is not yet covered by roboquant, you can implement your own `Feed`. The main method to implement is the `play` method that will put the available events on the channel.
+If you have a data source that is not yet covered by roboquant, you can implement your own `Feed`.The main method to implement is the `play` method that will put the available events on the channel.
 
-[source, kotlin]
+[source,kotlin]
 ----
 interface Feed {
 

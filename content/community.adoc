@@ -12,10 +12,13 @@ If you find a bug or know of a great feature to add to roboquant, best to raise 
 TIP: if you want to contribute, this is a great place to check what still needs to be done and ask for advice what to work on.
 
 == icon:reddit[1x] Reddit
-For more general chat and questions about roboquant and trading strategies, there is a reddit channel.Since documentation is still lacking, this is a good to find out more.Join the https://www.reddit.com/r/roboquant/[r/roboquant] subreddit.
+For more general chat and questions about roboquant and trading strategies, there is a reddit channel.Since documentation is still lacking, this is a good to find out more. Join the https://www.reddit.com/r/roboquant/[r/roboquant] subreddit.
+
+== icon:slack[1x] Slack
+If you want to contribute to the code base, Slack is where most development related discussions are happening. Join the https://roboquant.slack.com[roboquant] Slack workspace.
 
 == icon:twitter[1x] Twitter
-Follow roboquant news on Twitter to stay up to date on updates and new versions of the software: https://twitter.com/roboquant_news[@roboquant_news].There will be an automatic tweet generated whenever there a push of new functionality to the source repository.
+Follow roboquant news on Twitter to stay up to date on updates and new versions of the software: https://twitter.com/roboquant_news[@roboquant_news]. There will be an automatic tweet generated whenever there a push of new functionality to the source repository.
 
 == icon:briefcase[1x] Professional Support
 If you require professional support or would like to get in contact otherwise, please email us at info@neurallayer.com

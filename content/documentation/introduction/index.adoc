@@ -3,7 +3,7 @@
 :source-highlighter: rouge
 :jbake-date: 2020-01-31
 
-Welcome to the roboquant™ documentation. Just like the roboquant software, the documentation is also open source. So if you find mistakes or want to contribute, head over to the https://github.com/neurallayer/roboquant.org[documentation repository] where you can find the source.
+Welcome to the roboquant™ documentation. Just like the roboquant software, the documentation is also open source. So if you find mistakes or want to contribute, head over to the https://github.com/neurallayer/roboquant.org[GitHub documentation repository] where you can find the source.
 
 TIP: If you like to learn more by being hands-on, there are several ready to use tutorials in Jupyter Notebook format that you can try out. To find out more, go to: https://github.com/neurallayer/roboquant-notebook/tree/main[Tutorial Notebooks]
 

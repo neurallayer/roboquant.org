@@ -55,6 +55,7 @@ of separate modules:
 
 The modular approach allows people with limited hardware resources to only load the modules they required.
 
+
 == Time handling
 When testing strategies that trade simultaneously in multiple time-zones, like stocks in New York and London, it is key to have proper time management. Otherwise, you run the risk that your strategy performs very well but only because it can peep into the future due to faulty handling of time-zones.
 

@@ -13,8 +13,9 @@ There are three types of integrations available within roboquant with 3rd partie
 
 In some cases a single 3rd party provides all three types of functionality (like Interactive Brokers or Alpaca), or sometimes they are just specialised for a subset (like IEX Cloud that only provides historic and live data feeds).
 
-You can combine several of these 3rd parties together in a single run, for example the data feeds from IEX Cloud and the broker
-functionality from Alpaca.
+You can combine several of these 3rd parties together in a single run, for example the data feeds from IEX Cloud and the broker functionality from Alpaca.
+
+One of the design principles is that roboquant tries to avoid exposing 3rd party API's directly and typically wraps them in roboquant equivalent types. This makes it easier to switch between different providers and also reduces the learning curve.
 
 == Modules & Packages
 The third party integrations have their own modules and are not part of the `roboquant-core` module:
