@@ -81,7 +81,7 @@
                 </div>
             </section>
 
-            <section class="py-3" id="sample">
+            <section class="py-3" id="integration">
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">3rd Party Integration</h2></div>

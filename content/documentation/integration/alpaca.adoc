@@ -32,7 +32,7 @@ include::{sourcefile}[tag=alpacahistoric]
 ----
 
 == Live Data
-Next to historic data, Alpaca also provdes live data feeds.
+Next to historic data, Alpaca also provides live data feeds.
 
 [source, kotlin, indent=0]
 ----
