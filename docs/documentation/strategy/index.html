@@ -167,7 +167,7 @@
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// Predefined EMACrossover</span>
-    <span class="kd">val</span> <span class="py">strategy1</span> <span class="p">=</span> <span class="nc">EMACrossover</span><span class="p">.</span><span class="nf">longTerm</span><span class="p">()</span>
+    <span class="kd">val</span> <span class="py">strategy1</span> <span class="p">=</span> <span class="nc">EMACrossover</span><span class="p">.</span><span class="nc">EMA_12_26</span>
 
     <span class="c1">// Own defined look-back periods</span>
     <span class="kd">val</span> <span class="py">strategy2</span> <span class="p">=</span> <span class="nc">EMACrossover</span><span class="p">(</span><span class="n">fastPeriod</span> <span class="p">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">slowPeriod</span> <span class="p">=</span> <span class="mi">50</span><span class="p">)</span></code></pre>
@@ -191,14 +191,14 @@
     <span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">TAStrategy</span><span class="p">(</span><span class="n">longTerm</span><span class="p">)</span>
 
     <span class="c1">// When to generate a BUY signal</span>
-    <span class="n">strategy</span><span class="p">.</span><span class="nf">buy</span> <span class="p">{</span> <span class="n">candles</span> <span class="p">-&gt;</span>
-        <span class="n">ta</span><span class="p">.</span><span class="nf">cdlMorningStar</span><span class="p">(</span><span class="n">candles</span><span class="p">)</span> <span class="p">||</span> <span class="n">ta</span><span class="p">.</span><span class="nf">cdl3WhiteSoldiers</span><span class="p">(</span><span class="n">candles</span><span class="p">)</span>
+    <span class="n">strategy</span><span class="p">.</span><span class="nf">buy</span> <span class="p">{</span> <span class="n">series</span> <span class="p">-&gt;</span>
+        <span class="nf">cdlMorningStar</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="p">||</span> <span class="nf">cdl3WhiteSoldiers</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
     <span class="p">}</span>
 
     <span class="c1">// When to generate a SELL signal</span>
-    <span class="n">strategy</span><span class="p">.</span><span class="nf">sell</span> <span class="p">{</span> <span class="n">candles</span> <span class="p">-&gt;</span>
-        <span class="n">ta</span><span class="p">.</span><span class="nf">cdl3BlackCrows</span><span class="p">(</span><span class="n">candles</span><span class="p">)</span> <span class="p">||</span> <span class="p">(</span><span class="n">ta</span><span class="p">.</span><span class="nf">cdl2Crows</span><span class="p">(</span><span class="n">candles</span><span class="p">)</span> <span class="p">&amp;&amp;</span>
-                <span class="n">ta</span><span class="p">.</span><span class="nf">sma</span><span class="p">(</span><span class="n">candles</span><span class="p">.</span><span class="n">close</span><span class="p">,</span> <span class="n">shortTerm</span><span class="p">)</span> <span class="p">&lt;</span> <span class="n">ta</span><span class="p">.</span><span class="nf">sma</span><span class="p">(</span><span class="n">candles</span><span class="p">.</span><span class="n">close</span><span class="p">,</span> <span class="n">longTerm</span><span class="p">))</span>
+    <span class="n">strategy</span><span class="p">.</span><span class="nf">sell</span> <span class="p">{</span> <span class="n">series</span> <span class="p">-&gt;</span>
+        <span class="nf">cdl3BlackCrows</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="p">||</span> <span class="p">(</span><span class="nf">cdl2Crows</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="p">&amp;&amp;</span>
+                <span class="nf">sma</span><span class="p">(</span><span class="n">series</span><span class="p">.</span><span class="n">close</span><span class="p">,</span> <span class="n">shortTerm</span><span class="p">)</span> <span class="p">&lt;</span> <span class="nf">sma</span><span class="p">(</span><span class="n">series</span><span class="p">.</span><span class="n">close</span><span class="p">,</span> <span class="n">longTerm</span><span class="p">))</span>
     <span class="p">}</span></code></pre>
 </div>
 </div>

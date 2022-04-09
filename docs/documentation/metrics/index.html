@@ -146,10 +146,10 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Metrics allow yuo to monitor the progress of a run and get the necessary insights how a strategy is performing. Metrics are not limited to back testing and can also be used both during live testing and trading.</p>
+<p>Metrics allow you to monitor the progress of a <code>run</code> and get the necessary insights how a strategy is performing. Metrics are not limited to back testing and can also be used both during live testing and paper trading.</p>
 </div>
 <div class="paragraph">
-<p>The configured metrics are invoked at the end of each step in a run. A single metric can return multiple values, each value having a unique name. Metrics only calculate the values, the storing and/or logging of these values is done by a <code>MetricsLogger</code>.</p>
+<p>The configured metrics are invoked at each step in a run. A single metric can return multiple values, each value having a unique name. Metrics only calculate the values, the storing and/or logging of these values is done by a <code>MetricsLogger</code>.</p>
 </div>
 </div>
 </div>
@@ -157,7 +157,7 @@
 <h2 id="_standard_metrics">Standard Metrics</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are several standard metrics that come with roboquant and can be captured during a run.</p>
+<p>There are several common metrics included with roboquant that can be easily added to your run:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -166,8 +166,10 @@
 <span class="kd">val</span> <span class="py">metric3</span> <span class="p">=</span> <span class="nc">ProgressMetric</span><span class="p">()</span>
 <span class="kd">val</span> <span class="py">metric4</span> <span class="p">=</span> <span class="nc">VWAPMetric</span><span class="p">()</span>
 <span class="kd">val</span> <span class="py">metric5</span> <span class="p">=</span> <span class="nc">SharpRatio</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">metric6</span> <span class="p">=</span> <span class="nc">PNL</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">metric7</span> <span class="p">=</span> <span class="nc">AlphaBeta</span><span class="p">(</span><span class="n">sp500Asset</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
 
-<span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">metric1</span><span class="p">,</span> <span class="n">metric2</span><span class="p">,</span> <span class="n">metric3</span><span class="p">,</span> <span class="n">metric4</span><span class="p">,</span> <span class="n">metric5</span><span class="p">)</span></code></pre>
+<span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">metric1</span><span class="p">,</span> <span class="n">metric2</span><span class="p">,</span> <span class="n">metric3</span><span class="p">,</span> <span class="n">metric4</span><span class="p">,</span> <span class="n">metric5</span><span class="p">,</span> <span class="n">metric6</span><span class="p">,</span> <span class="n">metric7</span><span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock tip">
@@ -177,7 +179,7 @@
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-if metrics calculations are very compute intensive and you don&#8217;t require them at each step, you can wrap them in a <code>MetricsScheduler</code> and configure when they should be invoked.
+if metrics are very compute intensive, and you don&#8217;t require them at each step, you can wrap them in a <code>MetricsScheduler</code> and configure when they should run.
 </td>
 </tr>
 </table>

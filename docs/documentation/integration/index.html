@@ -240,29 +240,35 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="properties"><span class="c"># Uncomment the following two lines and change the values for Alpaca API access
-</span><span class="py">APCA_API_KEY_ID</span><span class="p">=</span><span class="s">your_api_key_id</span>
-<span class="py">APCA_API_SECRET_KEY</span><span class="p">=</span><span class="s">your_api_secret_key</span>
+<pre class="rouge highlight"><code data-lang="properties"><span class="c"># This property file contains environment settings that will be made available in roboquant
+# Many data providers and brokers require authentication and this is one of the ways to provide those credentials
+#
+# If you store credentials in here, make sure other people don't have access to it and for example don't version control
+# it to a public repo by mistake.
+</span>
+<span class="c"># Sample entry
+</span><span class="py">sample.public.key</span><span class="p">=</span><span class="s">some_key_value</span>
+<span class="py">sample.secret.key</span><span class="p">=</span><span class="s">another_key_value</span>
 
+<span class="c"># Uncomment the following two lines and change the values for Alpaca API access
+# alpaca.public.key=your_api_key_id
+# alpaca.secret.key=your_api_secret_key
+</span>
 <span class="c"># Uncomment the following two lines and change values for IEX Cloud access
-</span><span class="py">IEX_PUBLIC_KEY</span><span class="p">=</span><span class="s">your_publishable_key</span>
-<span class="py">IEX_SECRET_KEY</span><span class="p">=</span><span class="s">your_secret_key</span>
-
+# iex.public.key=your_publishable_key
+# iex.secret.key=your_secret_key
+</span>
 <span class="c"># Uncomment the following line and change the value for Alpha Vantage access
-</span><span class="py">ALPHA_VANTAGE_API_KEY</span><span class="p">=</span><span class="s">your_api_key</span>
-
+# alphavantage.key=your_api_key
+</span>
 <span class="c"># Uncomment the following two lines and change the values for Binance access
-</span><span class="py">BINANCE_API_KEY</span><span class="p">=</span><span class="s">your_key</span>
-<span class="py">BINANCE_API_SECRET</span><span class="p">=</span><span class="s">you_secret</span>
-
+# binance.public.key=your_key
+# binance.secret.key=you_secret
+</span>
 <span class="c"># Uncomment the following two lines and change the values for OANDA access
-</span><span class="py">OANDA_ACCOUNT_ID</span><span class="p">=</span><span class="s">your_account</span>
-<span class="py">OANDA_API_KEY</span><span class="p">=</span><span class="s">your_key</span>
-
-<span class="c"># Uncomment the following lines for email authentication
-</span><span class="py">mail.host</span><span class="p">=</span><span class="s">email_host</span>
-<span class="py">mail.username</span><span class="p">=</span><span class="s">your_email_username</span>
-<span class="py">mail.password</span><span class="p">=</span><span class="s">your_email_password</span></code></pre>
+# oanda.account=your_account
+# oanda.key=your_key
+</span></code></pre>
 </div>
 </div>
 </div>

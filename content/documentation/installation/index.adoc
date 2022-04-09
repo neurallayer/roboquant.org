@@ -7,7 +7,7 @@ There are two ways to use roboquant that determines how to install it:
 * As a library in your own Kotlin or Java application. If you plan to develop large and complex trading strategies, this is the good approach since you have the full power of an IDE like IntelliJ IDEA at your disposal. Also, when you plan to run your strategy 24x7, it might be more robust to do so as a standalone application rather than inside a Jupyter Notebook.
 
 == Jupyter Notebook
-If you have already Docker installed, all it takes is a single command to have a fully functional Jupyter Lab environment available:
+If you have already Docker installed, all it takes is a single command to have a fully functional Jupyter Lab environment available where you can try new strategies and also have many charts available to visualize the results:
 
 [source,shell]
 ----
@@ -43,7 +43,7 @@ implementation group: 'org.roboquant', name: 'roboquant-core', version: '[the ve
 
 Next to the roboquant-core module, the following additional modules are available for inclusion in your application:
 
-* *roboquant-jupyter* Adds extra support Jupyter notebook, most noticeable a charting solution
+* *roboquant-jupyter* Adds support for Jupyter notebooks, most noticeable a charting solution
 * *roboquant-ta* Add extra technical analysis indicators and strategies
 * *roboquant-crypto* Adds support for most of today's most popular crypto exchanges
 * *roboquant-extra* Adds out-of-the-box integrations with 3rd party brokers and data providers.

@@ -4,7 +4,7 @@
 :sourcefile: ../../../samples/jupyter.kt
 :jbake-date: 2020-01-31
 
-Roboquant uses the excellent https://echarts.apache.org[Apache ECharts] JavaScript library to render the actual charts in your browser. All charts are interactive, meaning you can zoom into areas of interest, and you can often filter on values of interest. There is a toolbar at the right top of each chart that allows for additional functionality, like downloading the chart or seeing the raw data.
+Roboquant uses the excellent https://echarts.apache.org[Apache ECharts] JavaScript library to render charts in your browser. All charts are interactive, meaning you can zoom into areas of interest, and you can often filter on values of interest. There is a toolbar at the right top of each chart that allows for additional functionality, like downloading the chart or seeing the raw data.
 
 
 == Design Philosophy

@@ -308,13 +308,13 @@ of separate modules:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Roboquant isn&#8217;t setup to be a ledger and does not require the same accuracy when it comes to trading data. The native Double type provides enough precision for any trading purpose and there is no need to use (the much slower and memory hungry) BigDecimal type.</p>
+<p>Roboquant isn&#8217;t setup to be a financial ledger and in general trading applications don&#8217;t require this accuracy. The native Java Double type provides enough precision for most algo-trading purposes and there is no need to use (the much slower and more memory hungry) BigDecimal type. The only area where roboquant uses more precise calculation is when dealing with volume and quantities.</p>
 </li>
 <li>
 <p>The data Feed API supports data that is kept in-memory as well data that is stored on disk and only accessed when required. This allows for running back test where the test data doesn&#8217;t fit in memory or running back-tests on machines with limited memory. In fact roboquant can be used on a JVM with only 512 MB of heap allocated.</p>
 </li>
 <li>
-<p>Many of the builtin features support multithreading to speedup processing. For example the CSV parser can parse CSV files in parallel so even directories with thousands of CSV files can be parsed in seconds.</p>
+<p>Many of the builtin features use multithreading to speedup processing. For example the CSV parser parses CSV files in parallel so even directories with thousands of CSV files can be parsed in seconds.</p>
 </li>
 <li>
 <p>Avoid (auto)boxing, so the JVM can access these variables directly. This means where possible use native types and not the wrapper one. See <a href="https://docs.oracle.com/javase/1.5.0/docs/guide/language/autoboxing.html">background</a></p>
@@ -344,10 +344,13 @@ of separate modules:</p>
 <p>Extensive error logging to alert possible issues, including data quality</p>
 </li>
 <li>
+<p>Immutable data classes (when appropriate)</p>
+</li>
+<li>
 <p>Assert/requires to validate input parameters</p>
 </li>
 <li>
-<p>Good unit test suite that covers most of the code base</p>
+<p>Good unit test suite that covers most of the code base (&gt; 90%)</p>
 </li>
 <li>
 <p>Proven third party libraries</p>

@@ -195,7 +195,7 @@
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">OANDALiveFeed</span><span class="p">()</span>
-<span class="n">feed</span><span class="p">.</span><span class="nf">subscribePrices</span><span class="p">(</span><span class="s">"EUR_USD"</span><span class="p">,</span> <span class="s">"USD_JPY"</span><span class="p">,</span> <span class="s">"GBP_USD"</span><span class="p">)</span>
+<span class="n">feed</span><span class="p">.</span><span class="nf">subscribePriceBar</span><span class="p">(</span><span class="s">"EUR_USD"</span><span class="p">,</span> <span class="s">"USD_JPY"</span><span class="p">,</span> <span class="s">"GBP_USD"</span><span class="p">)</span>
 
 <span class="kd">val</span> <span class="py">tf</span> <span class="p">=</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="nf">next</span><span class="p">(</span><span class="mi">120</span><span class="p">.</span><span class="n">minutes</span><span class="p">)</span>
 <span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span><span class="n">tf</span><span class="p">)</span></code></pre>
