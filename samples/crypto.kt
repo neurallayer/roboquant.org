@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "UNUSED_PARAMETER", "UNUSED_VARIABLE")
 
 import org.roboquant.binance.BinanceHistoricFeed
 import org.roboquant.common.Timeframe

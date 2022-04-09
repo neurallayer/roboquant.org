@@ -1,4 +1,4 @@
-@file:Suppress("unused", "UnnecessaryVariable")
+@file:Suppress("unused", "UnnecessaryVariable", "UNUSED_PARAMETER", "UNUSED_VARIABLE")
 
 import org.roboquant.Roboquant
 import org.roboquant.brokers.Account

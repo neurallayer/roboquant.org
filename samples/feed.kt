@@ -1,4 +1,4 @@
-@file:Suppress("unused", "ControlFlowWithEmptyBody")
+@file:Suppress("unused", "ControlFlowWithEmptyBody", "UNUSED_PARAMETER", "UNUSED_VARIABLE")
 
 import org.roboquant.Roboquant
 import org.roboquant.binance.BinanceLiveFeed
