@@ -68,11 +68,11 @@ But the fact remains that all internal logic relies only on the Instant type in 
 == Performance
 With data sets growing, it is important that a strategy can still be quickly evaluated and tuned when required. If this develop-test cycle becomes too slow, it is nearly impossible to create high performing strategies.
 
-* Roboquant isn't setup to be a ledger and does not require the same accuracy when it comes to trading data. The native Double type provides enough precision for any trading purpose and there is no need to use (the much slower and memory hungry) BigDecimal type.
+* Roboquant isn't setup to be a financial ledger and in general trading applications don't require this accuracy. The native Java Double type provides enough precision for most algo-trading purposes and there is no need to use (the much slower and more memory hungry) BigDecimal type. The only area where roboquant uses more precise calculation is when dealing with volume and quantities.
 
 * The data Feed API supports data that is kept in-memory as well data that is stored on disk and only accessed when required. This allows for running back test where the test data doesn't fit in memory or running back-tests on machines with limited memory. In fact roboquant can be used on a JVM with only 512 MB of heap allocated.
 
-* Many of the builtin features support multithreading to speedup processing. For example the CSV parser can parse CSV files in parallel so even directories with thousands of CSV files can be parsed in seconds.
+* Many of the builtin features use multithreading to speedup processing. For example the CSV parser parses CSV files in parallel so even directories with thousands of CSV files can be parsed in seconds.
 
 * Avoid (auto)boxing, so the JVM can access these variables directly. This means where possible use native types and not the wrapper one. See https://docs.oracle.com/javase/1.5.0/docs/guide/language/autoboxing.html[background]
 
@@ -84,6 +84,7 @@ Even more important than performance, is reliability when it comes to trading so
 * All components can log information that is then available for audit and tracing
 * Type and null checks where possible to leverage the compiler to identify possible mistakes
 * Extensive error logging to alert possible issues, including data quality
+* Immutable data classes (when appropriate)
 * Assert/requires to validate input parameters
-* Good unit test suite that covers most of the code base
+* Good unit test suite that covers most of the code base (> 90%)
 * Proven third party libraries

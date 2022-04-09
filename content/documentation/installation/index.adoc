@@ -43,7 +43,9 @@ implementation group: 'org.roboquant', name: 'roboquant-core', version: '[the ve
 
 Next to the roboquant-core module, the following additional modules are available for inclusion in your application:
 
-* *roboquant-crypto* Adds support for many of today's most popular crypto exchanges
+* *roboquant-jupyter* Adds extra support Jupyter notebook, most noticeable a charting solution
+* *roboquant-ta* Add extra technical analysis indicators and strategies
+* *roboquant-crypto* Adds support for most of today's most popular crypto exchanges
 * *roboquant-extra* Adds out-of-the-box integrations with 3rd party brokers and data providers.
 * *roboquant-ibkr* Adds out-of-the-box integrations with Interactive Brokers
 

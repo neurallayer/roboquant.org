@@ -4,19 +4,19 @@
 :sourcefile: ../../../samples/metrics.kt
 :jbake-date: 2020-01-31
 
-Metrics allow yuo to monitor the progress of a run and get the necessary insights how a strategy is performing. Metrics are not limited to back testing and can also be used both during live testing and trading.
+Metrics allow you to monitor the progress of a run and get the necessary insights how a strategy is performing. Metrics are not limited to back testing and can also be used both during live testing and trading.
 
 The configured metrics are invoked at the end of each step in a run. A single metric can return multiple values, each value having a unique name. Metrics only calculate the values, the storing and/or logging of these values is done by a `MetricsLogger`.
 
 == Standard Metrics
-There are several standard metrics that come with roboquant and can be captured during a run.
+There are several common metrics included with roboquant that can be easily added to your run:
 
 [source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=standard]
 ----
 
-TIP: if metrics calculations are very compute intensive and you don't require them at each step, you can wrap them in a `MetricsScheduler` and configure when they should be invoked.
+TIP: if metrics are very compute intensive, and you don't require them at each step, you can wrap them in a `MetricsScheduler` and configure when they should run.
 
 == Custom Metrics
 You can develop your own metrics. The easiest way to do so is to extend the SimpleMetric class. All you have to do is implement that `calc` method and return `MetricResults`, which is just a typealias for `Map<String,Number>`

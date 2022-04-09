@@ -19,7 +19,7 @@ There is a 5-point scale used for the rating part of a signal:
 NOTE: a hold rating is not the same as no signal. Only generate hold signals if you think the asset will perform market conform. If your strategy has no idea about the performance of an asset, don't generate a signal at all.
 
 
-## Simple Signals
+== Simple Signals
 
 [source, kotlin]
 ----
@@ -27,7 +27,7 @@ NOTE: a hold rating is not the same as no signal. Only generate hold signals if 
     val signal = Signal(apple, Rating.BUY)
 ----
 
-## Advanced Signals
+== Advanced Signals
 Besides the mandatory Rating and Asset, a signal can optionally contain the following attributes (with their default values):
 
     val asset: Asset,

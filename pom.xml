@@ -12,7 +12,7 @@
 		<kotlin.code.style>official</kotlin.code.style>
 		<kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
 		<kotlin.compiler.incremental>false</kotlin.compiler.incremental>
-		<kotlin.version>1.6.10</kotlin.version>
+		<kotlin.version>1.6.20</kotlin.version>
 		<roboquant.version>0.9-SNAPSHOT</roboquant.version>
 	</properties>
 
@@ -90,6 +90,16 @@
 	<dependencies>
 		<dependency>
 			<artifactId>roboquant-core</artifactId>
+			<groupId>org.roboquant</groupId>
+			<version>${roboquant.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>roboquant-ta</artifactId>
+			<groupId>org.roboquant</groupId>
+			<version>${roboquant.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>roboquant-jupyter</artifactId>
 			<groupId>org.roboquant</groupId>
 			<version>${roboquant.version}</version>
 		</dependency>

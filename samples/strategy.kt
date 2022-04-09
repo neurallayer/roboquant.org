@@ -1,4 +1,5 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "UNUSED_PARAMETER", "UNUSED_VARIABLE")
+
 
 import org.roboquant.RunPhase
 import org.roboquant.common.Asset
@@ -7,12 +8,13 @@ import org.roboquant.common.mean
 import org.roboquant.common.min
 import org.roboquant.feeds.Event
 import org.roboquant.strategies.*
+import org.roboquant.ta.TAStrategy
 
 fun ema() {
 
     // tag::ema[]
     // Predefined EMACrossover
-    val strategy1 = EMACrossover.longTerm()
+    val strategy1 = EMACrossover.EMA_12_26
 
     // Own defined look-back periods
     val strategy2 = EMACrossover(fastPeriod = 20, slowPeriod = 50)
@@ -61,14 +63,14 @@ fun ta() {
     val strategy = TAStrategy(longTerm)
 
     // When to generate a BUY signal
-    strategy.buy { candles ->
-        ta.cdlMorningStar(candles) || ta.cdl3WhiteSoldiers(candles)
+    strategy.buy { series ->
+        cdlMorningStar(series) || cdl3WhiteSoldiers(series)
     }
 
     // When to generate a SELL signal
-    strategy.sell { candles ->
-        ta.cdl3BlackCrows(candles) || (ta.cdl2Crows(candles) &&
-                ta.sma(candles.close, shortTerm) < ta.sma(candles.close, longTerm))
+    strategy.sell { series ->
+        cdl3BlackCrows(series) || (cdl2Crows(series) &&
+                sma(series.close, shortTerm) < sma(series.close, longTerm))
     }
     // end::ta[]
 

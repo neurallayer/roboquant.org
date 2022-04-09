@@ -38,7 +38,7 @@ fun oandaHistoricFeed() {
 fun oandaLiveFeed() {
     // tag::oandalive[]
     val feed = OANDALiveFeed()
-    feed.subscribePrices("EUR_USD", "USD_JPY", "GBP_USD")
+    feed.subscribePriceBar("EUR_USD", "USD_JPY", "GBP_USD")
 
     val tf = Timeframe.next(120.minutes)
     roboquant.run(feed,tf)
