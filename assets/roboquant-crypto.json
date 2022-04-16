@@ -9,7 +9,8 @@
   ],
   "dependencies": [
     "org.roboquant:roboquant-jupyter:$v",
-    "org.roboquant:roboquant-ta:$v"
+    "org.roboquant:roboquant-ta:$v",
+    "org.roboquant:roboquant-crypto:$v"
   ],
   "imports" : [
     "org.roboquant.*",
@@ -27,6 +28,8 @@
     "org.roboquant.policies.*",
     "org.roboquant.jupyter.*",
     "org.roboquant.ta.*",
+    "org.roboquant.binance.*",
+    "org.roboquant.xchange.*",
     "java.time.Period",
     "java.time.Instant",
     "java.time.temporal.ChronoUnit"

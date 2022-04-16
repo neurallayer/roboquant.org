@@ -9,7 +9,8 @@
   ],
   "dependencies": [
     "org.roboquant:roboquant-jupyter:$v",
-    "org.roboquant:roboquant-ta:$v"
+    "org.roboquant:roboquant-ta:$v",
+    "org.roboquant:roboquant-extra:$v"
   ],
   "imports" : [
     "org.roboquant.*",
