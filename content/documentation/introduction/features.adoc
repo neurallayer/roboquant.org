@@ -7,7 +7,7 @@ This page list the main features of roboquant for each key area: Fast, Flexible,
 It also provides a short overview of how roboquant compares to some other popular algo-trading software.
 
 == Fast
-Nowadays, there is so much more data available than ever before. It would be a lost opportunity not being able to leverage this data to develop smarter and better performing strategies. Roboquant can work seamlessly with these large data-sets:
+Nowadays, there is so much more data available than ever before. It would be a lost opportunity not being able to use this data to develop smarter and better performing strategies. Roboquant can work seamlessly with these large data-sets:
 
 * [x] Fully utilize modern hardware, like large multicore machines
 * [x] Highly tuned back-test engine so the engine itself will not become the bottleneck
@@ -34,7 +34,7 @@ Flexible also means roboquant is fully modular and can be extended:
 * [x] Add new type of data feeds ranging from price feeds and fundamental data to unstructured data like images
 * [x] Support for custom order types
 
-== Easy
+== Friendly
 Developing trading algorithms requires a lot of different skills. You need to know of course a lot about trading itself, but also programming and even a bit of statistics comes in handy. Roboquant tries to cater for both experienced and less experienced user.
 
 === Trading specific Domain Model
@@ -58,7 +58,7 @@ One of the hardest (and most overlooked aspect) of algorithmic trading is order 
 Because of this, roboquant separates the generation of signals (Strategy) from the actual orders (Policy).This allows algo-traders to focus on the generation of signals and pick the order management that fits the risk profile and trading style.And if full control over portfolio- and order-management is required, it is still available.
 
 === Batteries included
-* [x] Over 200 technical indicators that are very easy to use in your own strategies
+* [x] Over 150 technical indicators that are easy to use in your own strategies
 * [x] Powerful charts when running back-tests in a Jupyter Notebook
 * [x] Support for many back-testing approaches, like for walk-forwards and random samples
 * [x] Pluggable metrics you can use to see how a strategy is performing
@@ -88,9 +88,10 @@ The following table provide a short overview of how the features of roboquant st
 |Active Development|&check;| &check;| &cross;| &check;
 |Multi Currency| &check;|  &cross;| &cross;| &cross;
 |Crypto Exchanges| &check;|  &check;| &cross;| &check;
-|Complex Order Types| &check;| &check;| &cross;| &cross;
+|Advanced Order Types| &check;| &check;| &cross;| &cross;
 |Multi Region| &check;|  &cross;| &cross;|&check;
 |Performance| high| low| mid| high
 |Code base| small| midsize| large| very large
 |Jupyter Notebook| &check;|  &check;| &check;| &cross;
+|Completely Free| &check;|  &check;| &cross;| &cross;
 |===
