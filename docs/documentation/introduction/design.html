@@ -308,7 +308,7 @@ of separate modules:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Roboquant isn&#8217;t setup to be a financial ledger and in general trading applications don&#8217;t require this accuracy. The native Java Double type provides enough precision for most algo-trading purposes and there is no need to use (the much slower and more memory hungry) BigDecimal type. The only area where roboquant uses more precise calculation is when dealing with volume and quantities.</p>
+<p>Roboquant isn&#8217;t setup to be a financial ledger and in general trading applications don&#8217;t require this accuracy. The native Java Double type provides enough precision for most algo-trading purposes and there is no need to use (the much slower and more memory hungry) BigDecimal type. The area where roboquant uses more precise calculation is when dealing with order and position sizes.</p>
 </li>
 <li>
 <p>The data Feed API supports data that is kept in-memory as well data that is stored on disk and only accessed when required. This allows for running back test where the test data doesn&#8217;t fit in memory or running back-tests on machines with limited memory. In fact roboquant can be used on a JVM with only 512 MB of heap allocated.</p>

@@ -209,7 +209,7 @@ several configuration properties that influence its behavior.</p>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyDefaultPolicy</span><span class="p">(</span><span class="k">private</span> <span class="kd">val</span> <span class="py">percentage</span><span class="p">:</span><span class="nc">Double</span> <span class="p">=</span> <span class="mf">0.05</span><span class="p">)</span> <span class="p">:</span> <span class="nc">DefaultPolicy</span><span class="p">()</span> <span class="p">{</span>
 
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">createOrder</span><span class="p">(</span><span class="n">signal</span><span class="p">:</span> <span class="nc">Signal</span><span class="p">,</span> <span class="n">qty</span><span class="p">:</span> <span class="nc">Double</span><span class="p">,</span> <span class="n">price</span><span class="p">:</span> <span class="nc">Double</span><span class="p">):</span> <span class="nc">Order</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">createOrder</span><span class="p">(</span><span class="n">signal</span><span class="p">:</span> <span class="nc">Signal</span><span class="p">,</span> <span class="n">qty</span><span class="p">:</span> <span class="nc">Size</span><span class="p">,</span> <span class="n">price</span><span class="p">:</span> <span class="nc">Double</span><span class="p">):</span> <span class="nc">Order</span><span class="p">?</span> <span class="p">{</span>
         <span class="c1">// We don't short and  all other sell/exit orders are covered by the bracket order</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">qty</span> <span class="p">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="k">null</span>
 
@@ -217,7 +217,7 @@ several configuration properties that influence its behavior.</p>
         <span class="k">return</span> <span class="nc">BracketOrder</span><span class="p">(</span>
             <span class="nc">MarketOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="n">qty</span><span class="p">),</span>
             <span class="nc">TrailOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="p">-</span><span class="n">qty</span><span class="p">,</span> <span class="n">percentage</span><span class="p">/</span><span class="mf">2.0</span><span class="p">),</span>
-            <span class="nc">StopOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="p">-</span><span class="n">qty</span><span class="p">,</span> <span class="n">price</span><span class="p">*</span> <span class="p">(</span><span class="mi">1</span> <span class="p">-</span> <span class="n">percentage</span><span class="p">))</span>
+            <span class="nc">StopOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="p">-</span><span class="n">qty</span><span class="p">,</span> <span class="n">price</span> <span class="p">*</span> <span class="p">(</span><span class="mi">1</span> <span class="p">-</span> <span class="n">percentage</span><span class="p">))</span>
         <span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>

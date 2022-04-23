@@ -54,12 +54,12 @@
                      <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are two ways to use roboquant and develop trading strategies:</p>
+<p>There are two different ways to use roboquant and develop trading strategies:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Interactively in a <em>Jupyter Notebook</em>. If you want to be up and running quickly, this is the best approach. Additionally, you get many charts out-of-the-box that help you to understand how the strategy is performing.</p>
+<p>Interactively in a <em>Jupyter Notebook</em>. If you want to be up and running quickly, this is the easiest approach. Additionally, you get many charts out-of-the-box that help you to understand how the strategy is performing.</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="img/jupyter-lab.png" alt="screenshot" width="400">
@@ -67,7 +67,7 @@
 </div>
 </li>
 <li>
-<p>As a library in your <em>standalone Kotlin or Java application</em>. If you plan to develop large and complex trading strategies, this is the good approach since you have the full power of an IDE like IntelliJ IDEA at your disposal.</p>
+<p>As a library in your <em>standalone Kotlin or Java application</em>. If you plan to develop large and complex trading strategies, this is a good approach since you&#8217;ll have the full power of an IDE like IntelliJ IDEA at your disposal.</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="img/idea.png" alt="screenshot" width="400">
@@ -79,7 +79,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_jupyter_notebook">Jupyter Notebook</h2>
+<h2 id="_install_jupyter_notebook">Install Jupyter Notebook</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>If you have already Docker installed on your local machine, all it takes is a single command to have a fully functional Jupyter Notebook environment available.</p>
@@ -111,36 +111,47 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_standalone_application">Standalone application</h2>
+<h2 id="_install_a_module">Install a module</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Just add <strong>roboquant-core</strong> as a dependency to your build tool, like Maven or Gradle. Next to roboquant-core, the following additional modules are available for inclusion in your application:</p>
+<p>Just add <code>roboquant</code> as a dependency to your build tool, like Maven or Gradle. Regular versions of the Roboquant modules are published to Maven Central and snapshots are published to OSS Sonatype (<a href="https://s01.oss.sonatype.org/content/repositories/snapshots" class="bare">https://s01.oss.sonatype.org/content/repositories/snapshots</a>).</p>
+</div>
+<div class="paragraph">
+<p>The following modules are available for inclusion in your application:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>roboquant-crypto</strong> Adds support for many of today&#8217;s most popular crypto exchanges</p>
+<p><code>roboquant</code>: the core module of the platform <span class="image"><img src="https://img.shields.io/nexus/s/org.roboquant/roboquant?server=https%3A%2F%2Fs01.oss.sonatype.org" alt="Sonatype Nexus (Snapshots)"></span> <span class="image"><img src="https://img.shields.io/maven-central/v/org.roboquant/roboquant" alt="Maven Central"></span></p>
 </li>
 <li>
-<p><strong>roboquant-extra</strong> Adds out-of-the-box integrations with 3rd party brokers and data providers</p>
+<p><code>roboquant-crypto</code>: support for many of today&#8217;s popular crypto exchanges <span class="image"><img src="https://img.shields.io/nexus/s/org.roboquant/roboquant-crypto?server=https%3A%2F%2Fs01.oss.sonatype.org" alt="Sonatype Nexus (Snapshots)"></span> <span class="image"><img src="https://img.shields.io/maven-central/v/org.roboquant/roboquant-crypto" alt="Maven Central"></span></p>
 </li>
 <li>
-<p><strong>roboquant-ml</strong> Adds machine learning capabilities to roboquant. This is a very large module due to the dependencies
-on third party libraries like Tensorflow</p>
+<p><code>roboquant-extra</code>: integrations with 3rd party brokers and market data providers <span class="image"><img src="https://img.shields.io/nexus/s/org.roboquant/roboquant-extra?server=https%3A%2F%2Fs01.oss.sonatype.org" alt="Sonatype Nexus (Snapshots)"></span> <span class="image"><img src="https://img.shields.io/maven-central/v/org.roboquant/roboquant-extra" alt="Maven Central"></span></p>
+</li>
+<li>
+<p><code>roboquant-ibkr</code>: integration with Interactive Brokers <span class="image"><img src="https://img.shields.io/nexus/s/org.roboquant/roboquant-ibkr?server=https%3A%2F%2Fs01.oss.sonatype.org" alt="Sonatype Nexus (Snapshots)"></span> <span class="image"><img src="https://img.shields.io/maven-central/v/org.roboquant/roboquant-ibkr" alt="Maven Central"></span></p>
+</li>
+<li>
+<p><code>roboquant-ta</code>: over 150 technical analysis indicators and strategies <span class="image"><img src="https://img.shields.io/nexus/s/org.roboquant/roboquant-ta?server=https%3A%2F%2Fs01.oss.sonatype.org" alt="Sonatype Nexus (Snapshots)"></span> <span class="image"><img src="https://img.shields.io/maven-central/v/org.roboquant/roboquant-ta" alt="Maven Central"></span></p>
+</li>
+<li>
+<p><code>roboquant-jupyter</code> additional Jupyter Notebook functionality like charting <span class="image"><img src="https://img.shields.io/nexus/s/org.roboquant/roboquant-jupyter?server=https%3A%2F%2Fs01.oss.sonatype.org" alt="Sonatype Nexus (Snapshots)"></span> <span class="image"><img src="https://img.shields.io/maven-central/v/org.roboquant/roboquant-jupyter" alt="Maven Central"></span></p>
 </li>
 </ul>
 </div>
 <div class="sect2">
 <h3 id="_maven">Maven</h3>
 <div class="paragraph">
-<p>Include the following snippet in your pom.xml file in the dependencies section:</p>
+<p>Add the following snippet to your pom.xml file in the dependencies section:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.roboquant<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>roboquant-core<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>the version<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>roboquant<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>VERSION<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
@@ -152,7 +163,7 @@ on third party libraries like Tensorflow</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code>implementation group: 'org.roboquant', name: 'roboquant-core', version: 'the version'</code></pre>
+<pre class="rouge highlight"><code>implementation group: 'org.roboquant', name: 'roboquant', version: 'VERSION'</code></pre>
 </div>
 </div>
 </div>

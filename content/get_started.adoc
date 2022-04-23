@@ -6,18 +6,18 @@
 :imagesdir: img/
 :source-highlighter: rouge
 
-There are two ways to use roboquant and develop trading strategies:
+There are two different ways to use roboquant and develop trading strategies:
 
-. Interactively in a _Jupyter Notebook_. If you want to be up and running quickly, this is the best approach. Additionally, you get many charts out-of-the-box that help you to understand how the strategy is performing.
+. Interactively in a _Jupyter Notebook_. If you want to be up and running quickly, this is the easiest approach. Additionally, you get many charts out-of-the-box that help you to understand how the strategy is performing.
 +
 image::jupyter-lab.png[alt="screenshot", width="400", align="center"]
 
-. As a library in your _standalone Kotlin or Java application_. If you plan to develop large and complex trading strategies, this is the good approach since you have the full power of an IDE like IntelliJ IDEA at your disposal.
+. As a library in your _standalone Kotlin or Java application_. If you plan to develop large and complex trading strategies, this is a good approach since you'll have the full power of an IDE like IntelliJ IDEA at your disposal.
 +
 image::idea.png[alt="screenshot", width="400", align="center"]
 
 
-== Jupyter Notebook
+== Install Jupyter Notebook
 
 If you have already Docker installed on your local machine, all it takes is a single command to have a fully functional Jupyter Notebook environment available.
 
@@ -35,23 +35,27 @@ If you don't want to install anything locally, you can use a publicly hosted env
 * Launch the notebooks right now on MyBinder.org by clicking image:https://mybinder.org/badge_logo.svg[Binder,link=https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/tutorials]
 * Go to https://datalore.jetbrains.com/[JetBrains Datalore]. It has excellent support for Kotlin notebooks and has a free tier available if you just want to try roboquant out.
 
-== Standalone application
-Just add *roboquant-core* as a dependency to your build tool, like Maven or Gradle. Next to roboquant-core, the following additional modules are available for inclusion in your application:
+== Install a module
+Just add `roboquant` as a dependency to your build tool, like Maven or Gradle. Regular versions of the Roboquant modules are published to Maven Central and snapshots are published to OSS Sonatype (https://s01.oss.sonatype.org/content/repositories/snapshots).
 
-* *roboquant-crypto* Adds support for many of today's most popular crypto exchanges
-* *roboquant-extra* Adds out-of-the-box integrations with 3rd party brokers and data providers
-* *roboquant-ml* Adds machine learning capabilities to roboquant. This is a very large module due to the dependencies
-on third party libraries like Tensorflow
+The following modules are available for inclusion in your application:
+
+* `roboquant`: the core module of the platform image:https://img.shields.io/nexus/s/org.roboquant/roboquant?server=https%3A%2F%2Fs01.oss.sonatype.org[Sonatype Nexus (Snapshots)] image:https://img.shields.io/maven-central/v/org.roboquant/roboquant[Maven Central]
+* `roboquant-crypto`: support for many of today's popular crypto exchanges image:https://img.shields.io/nexus/s/org.roboquant/roboquant-crypto?server=https%3A%2F%2Fs01.oss.sonatype.org[Sonatype Nexus (Snapshots)] image:https://img.shields.io/maven-central/v/org.roboquant/roboquant-crypto[Maven Central]
+* `roboquant-extra`: integrations with 3rd party brokers and market data providers image:https://img.shields.io/nexus/s/org.roboquant/roboquant-extra?server=https%3A%2F%2Fs01.oss.sonatype.org[Sonatype Nexus (Snapshots)] image:https://img.shields.io/maven-central/v/org.roboquant/roboquant-extra[Maven Central]
+* `roboquant-ibkr`: integration with Interactive Brokers image:https://img.shields.io/nexus/s/org.roboquant/roboquant-ibkr?server=https%3A%2F%2Fs01.oss.sonatype.org[Sonatype Nexus (Snapshots)] image:https://img.shields.io/maven-central/v/org.roboquant/roboquant-ibkr[Maven Central]
+* `roboquant-ta`: over 150 technical analysis indicators and strategies image:https://img.shields.io/nexus/s/org.roboquant/roboquant-ta?server=https%3A%2F%2Fs01.oss.sonatype.org[Sonatype Nexus (Snapshots)] image:https://img.shields.io/maven-central/v/org.roboquant/roboquant-ta[Maven Central]
+* `roboquant-jupyter` additional Jupyter Notebook functionality like charting image:https://img.shields.io/nexus/s/org.roboquant/roboquant-jupyter?server=https%3A%2F%2Fs01.oss.sonatype.org[Sonatype Nexus (Snapshots)] image:https://img.shields.io/maven-central/v/org.roboquant/roboquant-jupyter[Maven Central]
 
 === Maven
-Include the following snippet in your pom.xml file in the dependencies section:
+Add the following snippet to your pom.xml file in the dependencies section:
 
 [source,xml]
 ----
 <dependency>
     <groupId>org.roboquant</groupId>
-    <artifactId>roboquant-core</artifactId>
-    <version>the version</version>
+    <artifactId>roboquant</artifactId>
+    <version>VERSION</version>
 </dependency>
 ----
 
@@ -60,9 +64,8 @@ Include the following line in your build.gradle script:
 
 [source]
 ----
-implementation group: 'org.roboquant', name: 'roboquant-core', version: 'the version'
+implementation group: 'org.roboquant', name: 'roboquant', version: 'VERSION'
 ----
-
 
 == Building from source
 First start with cloning the roboquant GitHub repository to your local disk. The quickest way to be up and running is then to install IntelliJ IDEA (either the free community edition or the paid Ultimate version) and open the directory you just cloned. IntelliJ IDEA will recognize it as Kotlin/Maven project, and you can build it and run test directly from the IDE.

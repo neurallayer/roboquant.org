@@ -13,7 +13,7 @@
 		<kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
 		<kotlin.compiler.incremental>false</kotlin.compiler.incremental>
 		<kotlin.version>1.6.20</kotlin.version>
-		<roboquant.version>0.9-SNAPSHOT</roboquant.version>
+		<roboquant.version>0.9.0-SNAPSHOT</roboquant.version>
 	</properties>
 
 	<build>
@@ -81,15 +81,23 @@
 					</execution>
 				</executions>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
 
-		</plugins>
+        </plugins>
 
 
 	</build>
 
 	<dependencies>
 		<dependency>
-			<artifactId>roboquant-core</artifactId>
+			<artifactId>roboquant</artifactId>
 			<groupId>org.roboquant</groupId>
 			<version>${roboquant.version}</version>
 		</dependency>

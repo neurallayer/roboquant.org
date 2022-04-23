@@ -196,10 +196,11 @@ there is no explicit notion of BUY or SELL orders in roboquant. A BUY order is j
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">order</span> <span class="p">=</span> <span class="nc">BracketOrder</span><span class="p">(</span>
-        <span class="nc">MarketOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">),</span> <span class="c1">// main order</span>
-        <span class="nc">LimitOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="p">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">price</span> <span class="p">*</span> <span class="mf">1.05</span><span class="p">),</span> <span class="c1">// take profit order</span>
-        <span class="nc">StopOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="p">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">price</span> <span class="p">*</span> <span class="mf">0.95</span><span class="p">)</span> <span class="c1">// stop loss order</span>
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">size</span> <span class="p">=</span> <span class="nc">Size</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="kd">val</span> <span class="py">order</span> <span class="p">=</span> <span class="nc">BracketOrder</span><span class="p">(</span>
+        <span class="nc">MarketOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="n">size</span><span class="p">),</span> <span class="c1">// main order</span>
+        <span class="nc">LimitOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="p">-</span><span class="n">size</span><span class="p">,</span> <span class="n">price</span> <span class="p">*</span> <span class="mf">1.05</span><span class="p">),</span> <span class="c1">// take profit order</span>
+        <span class="nc">StopOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="p">-</span><span class="n">size</span><span class="p">,</span> <span class="n">price</span> <span class="p">*</span> <span class="mf">0.95</span><span class="p">)</span> <span class="c1">// stop loss order</span>
     <span class="p">)</span></code></pre>
 </div>
 </div>
@@ -260,7 +261,7 @@ always make sure to only use order types during back testing that are also suppo
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// Simple custom order type</span>
-    <span class="kd">class</span> <span class="nc">MyOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nc">Asset</span><span class="p">,</span> <span class="kd">val</span> <span class="py">quantity</span><span class="p">:</span> <span class="nc">Double</span><span class="p">,</span> <span class="kd">val</span> <span class="py">customProperty</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">id</span><span class="p">:</span><span class="nc">Int</span> <span class="p">=</span> <span class="nf">nextId</span><span class="p">())</span> <span class="p">:</span> <span class="nc">Order</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
+    <span class="kd">class</span> <span class="nc">MyOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nc">Asset</span><span class="p">,</span> <span class="kd">val</span> <span class="py">quantity</span><span class="p">:</span> <span class="nc">Size</span><span class="p">,</span> <span class="kd">val</span> <span class="py">customProperty</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">id</span><span class="p">:</span><span class="nc">Int</span> <span class="p">=</span> <span class="nf">nextId</span><span class="p">())</span> <span class="p">:</span> <span class="nc">Order</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
 
     <span class="c1">// Define a handler for your custom order type.</span>
     <span class="c1">// This is only required if you want your order to be supported by the SimBroker</span>

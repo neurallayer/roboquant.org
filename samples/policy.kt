@@ -7,6 +7,7 @@ import org.roboquant.brokers.sim.ExecutionEngine
 import org.roboquant.brokers.sim.Pricing
 import org.roboquant.brokers.sim.TradeOrderHandler
 import org.roboquant.common.Asset
+import org.roboquant.common.Size
 import org.roboquant.feeds.Event
 import org.roboquant.orders.*
 import org.roboquant.policies.DefaultPolicy
@@ -30,7 +31,7 @@ class MyPolicy : Policy {
 // tag::default[]
 class MyDefaultPolicy(private val percentage:Double = 0.05) : DefaultPolicy() {
 
-    override fun createOrder(signal: Signal, qty: Double, price: Double): Order? {
+    override fun createOrder(signal: Signal, qty: Size, price: Double): Order? {
         // We don't short and  all other sell/exit orders are covered by the bracket order
         if (qty < 0) return null
 
@@ -38,7 +39,7 @@ class MyDefaultPolicy(private val percentage:Double = 0.05) : DefaultPolicy() {
         return BracketOrder(
             MarketOrder(asset, qty),
             TrailOrder(asset, -qty, percentage/2.0),
-            StopOrder(asset, -qty, price* (1 - percentage))
+            StopOrder(asset, -qty, price * (1 - percentage))
         )
     }
 }
@@ -92,10 +93,11 @@ fun orders(signals: List<Signal>) {
 
 fun bracketOrder(asset: Asset, price: Double) {
     // tag::bracketOrder[]
+    val size = Size(10)
     val order = BracketOrder(
-        MarketOrder(asset, 10.0), // main order
-        LimitOrder(asset, -10.0, price * 1.05), // take profit order
-        StopOrder(asset, -10.0, price * 0.95) // stop loss order
+        MarketOrder(asset, size), // main order
+        LimitOrder(asset, -size, price * 1.05), // take profit order
+        StopOrder(asset, -size, price * 0.95) // stop loss order
     )
     // end::bracketOrder[]
 }
@@ -107,7 +109,7 @@ fun customOrder() {
     // tag::customOrder[]
 
     // Simple custom order type
-    class MyOrder(asset: Asset, val quantity: Double, val customProperty: Int, id:Int = nextId()) : Order(asset, id)
+    class MyOrder(asset: Asset, val quantity: Size, val customProperty: Int, id:Int = nextId()) : Order(asset, id)
 
     // Define a handler for your custom order type.
     // This is only required if you want your order to be supported by the SimBroker
