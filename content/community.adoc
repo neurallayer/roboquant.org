@@ -11,11 +11,12 @@ If you find a bug or know of a great feature to add to roboquant, best to raise 
 
 TIP: if you want to contribute, this is a great place to check what still needs to be done and ask for advice what to work on.
 
-== icon:reddit[1x] Reddit
-For more general chat and questions about roboquant and trading strategies, there is a reddit channel.Since documentation is still lacking, this is a good to find out more. Join the https://www.reddit.com/r/roboquant/[r/roboquant] subreddit.
+== icon:users[1x] Discord
+Roboquant has its own Discord server with various channels to discuss algo-trading in general and to get help on developing your own strategies using the roboquant platform.
 
-== icon:slack[1x] Slack
-If you want to contribute to the code base, Slack is where most development related discussions are happening. Join the https://roboquant.slack.com[roboquant] Slack workspace.
+Since the roboquant documentation is still lacking in certain areas, this is a great place to ask questions and find out more.
+
+Invite link: https://discord.gg/Vt9wgNjSzw[join roboquant]
 
 == icon:twitter[1x] Twitter
 Follow roboquant news on Twitter to stay up to date on updates and new versions of the software: https://twitter.com/roboquant_news[@roboquant_news]. There will be an automatic tweet generated whenever there a push of new functionality to the source repository.

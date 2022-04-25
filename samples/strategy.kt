@@ -8,7 +8,7 @@ import org.roboquant.common.mean
 import org.roboquant.common.min
 import org.roboquant.feeds.Event
 import org.roboquant.strategies.*
-import org.roboquant.ta.TAStrategy
+import org.roboquant.ta.TaLibStrategy
 
 fun ema() {
 
@@ -60,7 +60,7 @@ fun ta() {
     val longTerm = 50
 
     // Make sure the TAStrategy collects enough data for the used indicators to work
-    val strategy = TAStrategy(longTerm)
+    val strategy = TaLibStrategy(longTerm)
 
     // When to generate a BUY signal
     strategy.buy { series ->
