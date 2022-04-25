@@ -188,7 +188,7 @@
     <span class="kd">val</span> <span class="py">longTerm</span> <span class="p">=</span> <span class="mi">50</span>
 
     <span class="c1">// Make sure the TAStrategy collects enough data for the used indicators to work</span>
-    <span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">TAStrategy</span><span class="p">(</span><span class="n">longTerm</span><span class="p">)</span>
+    <span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">TaLibStrategy</span><span class="p">(</span><span class="n">longTerm</span><span class="p">)</span>
 
     <span class="c1">// When to generate a BUY signal</span>
     <span class="n">strategy</span><span class="p">.</span><span class="nf">buy</span> <span class="p">{</span> <span class="n">series</span> <span class="p">-&gt;</span>
