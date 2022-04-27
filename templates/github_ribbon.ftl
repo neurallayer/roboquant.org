@@ -1,2 +1,0 @@
-<link rel="stylesheet" href="/css/gh-fork-ribbon.min.css" />
-<a class="github-fork-ribbon" href="https://github.com/neurallayer/roboquant" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
