@@ -4,7 +4,7 @@
 
 	<groupId>org.roboquant</groupId>
 	<artifactId>roboquant-org</artifactId>
-	<version>0.9.0-SNAPSHOT</version>
+	<version>0.9.2</version>
 	<name>roboquant-org</name>
 
 	<properties>
@@ -13,7 +13,7 @@
 		<kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
 		<kotlin.compiler.incremental>false</kotlin.compiler.incremental>
 		<kotlin.version>1.6.21</kotlin.version>
-		<roboquant.version>0.9.0-SNAPSHOT</roboquant.version>
+		<roboquant.version>0.9.3-SNAPSHOT</roboquant.version>
 	</properties>
 
 	<repositories>
@@ -24,7 +24,7 @@
 	</repositories>
 
 	<build>
-		<directory>${project.basedir}/docs</directory>
+		<directory>${project.basedir}/build</directory>
 		<plugins>
 			<plugin>
 				<groupId>org.jbake</groupId>

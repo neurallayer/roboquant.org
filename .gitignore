@@ -4,6 +4,7 @@
 *.cache
 jbake_sample_sqlite.db
 output
+build
 *.dylib
 .DS_Store
 *.class

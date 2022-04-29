@@ -7,7 +7,7 @@
 Broker is an interface that has two types of implementations:
 
 1. The SimBroker, which is a simulation of a real brokers and can be used during back-test and live-test.
-2. Integrations with real brokers/exchanges, using their paper-trading and live-trading platforms to do the actual order execution and broker implementation in roboquant is just a proxy.
+2. Integrations with real brokers/exchanges, using their paper-trading and live-trading platforms to do the actual order execution. In this case the `Broker` implementation in roboquant is just a proxy.
 
 This section of the documentation covers the SimBroker. But if you want to know about integration with real brokers, check out the section about integration.
 
