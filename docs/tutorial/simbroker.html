@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="roboquant algo-trading framework" />
+    <meta name="keywords" content="trading Kotlin algo roboquant">
+    <meta name="theme-color" content="#3296C8">
+    <title>roboquant - Simulated Broker</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+    <!-- Font awesome icons-->
+    <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link href="/css/rouge_github.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/documentation.html">Documentation</a></li>
+                <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
+                <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/neurallayer/roboquant" target="_blank">
+                    <span class="icon"><i class="fa fa-github fa-1x"></i></span> GitHub
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+              <header class="masthead bg-primary text-white text-center">
+                     <div class="container px-5 my-1">
+                         <div class="row gx-5">
+                            <div class="col-lg-4 mb-5 mb-lg-0">
+                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Simulated Broker</h1>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </header>
+
+            <section class="py-5">
+                <div class="container px-5 my-1">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+ <nav id="sidebar" class="navbar fixed-left sticky-top">
+
+    <ul class="list-unstyled">
+    <span class="navbar-brand">Content</span>
+    
+
+
+
+               <li class="nav-item"><a href="/tutorial/index.html" class="nav-link">Welcome</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/install.html" class="nav-link">Installation</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/roboquant.html" class="nav-link">Roboquant</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/feed.html" class="nav-link">Feed</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/simbroker.html" class="nav-link">Simulated Broker</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/metrics.html" class="nav-link">Metrics</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/strategy.html" class="nav-link">Strategy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/policy.html" class="nav-link">Policy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/orders.html" class="nav-link">Orders</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/domain.html" class="nav-link">Domain Model</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/jupyter.html" class="nav-link">Jupyter Notebooks</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/integration.html" class="nav-link">Integration</a></li>
+
+
+    </ul>
+</nav>
+                         </div>
+                        <div class="col-lg-8">
+                            <div class="col h-100">
+                                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>You use the <code>SimBroker</code> class (short for Simulated Broker) both for the back testing and live testing stages. See also the <a href="../background/four_stages.html">four stages</a> for more background about the different stages when developing trading strategies.</p>
+</div>
+<div class="paragraph">
+<p>SimBroker can simulate a wide range of brokers and the exchanges. Besides several configuration parameters that are available, the behavior can
+further be extended by providing custom models for trading, fee and account modelling.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_define">Define</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The main usage of the <code>SimBroker</code> is surprisingly simple. It contains one property and one method (next to the default Component interface methods)</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the property is <code>account</code>, which hold all the exposed state, like cash, portfolio, trades and orders.</p>
+</li>
+<li>
+<p>the method is <code>place(orders: List&lt;Order&gt;, event: Event)</code> which enables you to place orders at this broker.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Normally you don&#8217;t invoke the <code>place</code> method directly, but use <code>roboquant.run</code> method to run a trading strategy and it
+will call the <code>place</code> method as part of its flow.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_order_handling">Order Handling</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When an order is placed at the SimBroker, it only gets processed once there is a known price for the underlying asset. Till an event happens that has that price available, the order will remain in its INITIAL state.</p>
+</div>
+<div class="paragraph">
+<p>Any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted (so it is in open state). So an order in INITIAL state cannot expire and time based TIF only start counting after it has been accepted.</p>
+</div>
+<div class="paragraph">
+<p>Any open orders will be processed based on FIFO, so older open orders are processed first. Exception to this rule are cancellation orders that are always processed before other order types.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_initial_deposit">Initial Deposit</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit.</p>
+</div>
+<div class="paragraph">
+<p>Typically, the initial deposit is denoted in a single currency, like a <strong>$50,000.00 USD</strong> account. But this is not a hard requirement and in with the <code>SimBroker</code> you can use multi-currency initial deposits if you like.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_account">Account</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>Account</code> object contains all the exposed state of a broker and is identical between the simulated broker and real brokers.</p>
+</div>
+<div class="paragraph">
+<p>It contains the following key attributes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>base currency to use</p>
+</li>
+<li>
+<p>cash balance</p>
+</li>
+<li>
+<p>portfolio with all the (open) positions</p>
+</li>
+<li>
+<p>trades that contain all the trade executions that happened so far</p>
+</li>
+<li>
+<p>orders, both active orders and closed orders</p>
+</li>
+<li>
+<p>amount of buying power available for trading</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Buying Power</div>
+<div class="paragraph">
+<p>Always use the <code>buyingPower</code> property if you want to know how much money is remaining for trading. Especially when having a Margin Account, you shouldn&#8217;t rely on the <code>cash</code> property, since that doesn&#8217;t take into account any margin or leverage you might have.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_custom_models">Custom Models</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Custom models are a way to further customize the behavior of <code>SimBroker</code>. The following two types of models can implemented if the default ones that comes with roboquant are not sufficient.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Cost models: the transaction related cost like slippage and fees/commissions. It is important to notice that if you don&#8217;t take these type of cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading.</p>
+</li>
+<li>
+<p>Buying power models: the different types of funding of an account, like a Cash or Margin account.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_limitations">Limitations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Like any simulation, SimBroker also has limitations compared to a real life trading. It is important to realize this and take appropriate actions where possible:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The default cost calculations become less realistic if you trade large amount compared to overall daily volume. Don&#8217;t underestimate the transaction cost like spread, slippage and commissions and rather be too pessimistic.</p>
+</li>
+<li>
+<p>Order types might behave slightly different between SimBroker and different real brokers. If possible at all, also perform paper trading to see if your solution still performs as expected.</p>
+</li>
+<li>
+<p>The buying power and margin calculations might differ. Be on the safe side and use a higher margin requirement in the SimBroker than required.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_account_models">Account Models</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Account models allow to model the amount of Buying power for different types of accounts, like a Cash Account or Margin Account when using the SimBroker. Buying Power represents the amount available for trading.</p>
+</div>
+<div class="paragraph">
+<p>Out of the box roboquant comes with several models that cather for common account types:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Cash accounts, that don&#8217;t have leverage or margin available</p>
+</li>
+<li>
+<p>Margin account, that have configurable margin and leverage</p>
+</li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="_cash_accounts">Cash Accounts</h3>
+<div class="paragraph">
+<p>Cash accounts can be modelled using the <code>CashAccount</code>. This model is also the default if you don&#8217;t provide a BuyingPowerModel when instantiating a <a href="simbroker.html">SimBroker</a>.</p>
+</div>
+<div class="paragraph">
+<p><code>CashBuyingPowerModel</code> only basis the buying power on the available cash, and no margin is calculated and no leverage is used..</p>
+</div>
+<div class="paragraph">
+<p>The below table shows an example using the default CashBuyingPowerModel when trading in different currencies, EUR and USD in this case.</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">Time</th>
+<th class="tableblock halign-left valign-top">Action</th>
+<th class="tableblock halign-right valign-top">Cash</th>
+<th class="tableblock halign-right valign-top">Portfolio</th>
+<th class="tableblock halign-right valign-top">Margin</th>
+<th class="tableblock halign-right valign-top">Equity</th>
+<th class="tableblock halign-right valign-top">Buying Power</th>
+<th class="tableblock halign-right valign-top">Unrealized PnL</th>
+<th class="tableblock halign-right valign-top">Realized PnL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">open account with €10,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€10,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€10,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€10,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">buy ABC 40 @ €100</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€6,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€4,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€10,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€6,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">price ABC drops to €75</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€6,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€3,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€9,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€6,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-€1,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sell ABC -40 @ €75</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€ 9,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€ 9,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€9,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-€1,000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">buy XYZ 25 @ $200</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€9,000 -$5,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$5,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€9,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€4,500</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-€1,000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">price XYZ raises to $240</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€9,000 -$5,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$6,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€9,000 $1,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€4,500</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$1,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-€1,000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sell XYZ -25 @ $240</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€9,000 $1,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€9,000 $1,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">€9,900</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-€1,000 $1,000</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_margin_accounts">Margin Accounts</h3>
+<div class="paragraph">
+<p>Margin based accounts can be modelled using the <code>MarginAccount</code>. This model supports:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Initial margin (aka leverage)</p>
+</li>
+<li>
+<p>Maintenance margin, with support for different values for long and short positions</p>
+</li>
+<li>
+<p>Minimum amount of required equity that cannot be used as margin</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>All margin calculations are based on the equity of the account, and not only the cash. And although in the below tables the (maintenance) margin is shown, it is actually not exposed. Only the Buying Power value is available through the account object.</p>
+</div>
+<div class="paragraph">
+<p>The logic of calculating the buying power looks roughly like this (excluding open orders):</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>long value = long positions * maintance margin long
+short value = short positions * maintance margin short
+excess margin = equity - long value - short value - minimum equity
+buying power = excess margin * ( 1 / initial margin)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following table shows an example for long trading with margin account in a Japanese Yen, using the following (default) values:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>initial margin: 50%</p>
+</li>
+<li>
+<p>maintenance margin: 30% (both for long and short positions)</p>
+</li>
+<li>
+<p>no minimum equity is required</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Also, there are no commissions or other cost associated with the transactions. This is not a recommended approach, but just used here to make it a bit simpler to comprehend.</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">Time</th>
+<th class="tableblock halign-left valign-top">Action</th>
+<th class="tableblock halign-right valign-top">Cash</th>
+<th class="tableblock halign-right valign-top">Portfolio</th>
+<th class="tableblock halign-right valign-top">Margin</th>
+<th class="tableblock halign-right valign-top">Equity</th>
+<th class="tableblock halign-right valign-top">Buying Power</th>
+<th class="tableblock halign-right valign-top">Unrealized PnL</th>
+<th class="tableblock halign-right valign-top">Realized PnL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">open account with ¥1,000,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥1,000,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥1,000,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥2,000,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">buy ABC 500 @ ¥1,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥500,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥500,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥150,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥1,000,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥1,700,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ABC drops to ¥500</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥500,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥250,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥75,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥750,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥1,350,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-¥250,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">buy ABC 2000 @ ¥500</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-¥500,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥1,250,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥375,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥750,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥750,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-¥250,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ABC drops to ¥400</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-¥500,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥1,000,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥300,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥500,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥400,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-¥500,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sell ABC -2500 @ ¥400</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥500,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥500,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">¥1,000,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-¥500,000</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following table shows another example, but this time shorting on a USD margin account. It uses the same default values for the margin calculations as the above table.</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">Time</th>
+<th class="tableblock halign-left valign-top">Action</th>
+<th class="tableblock halign-right valign-top">Cash</th>
+<th class="tableblock halign-right valign-top">Portfolio</th>
+<th class="tableblock halign-right valign-top">Margin</th>
+<th class="tableblock halign-right valign-top">Equity</th>
+<th class="tableblock halign-right valign-top">Buying Power</th>
+<th class="tableblock halign-right valign-top">Unrealized PnL</th>
+<th class="tableblock halign-right valign-top">Realized PnL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">open account with $20,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$20,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$20,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$40,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sell XYZ -50 @ $200</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$30,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-$10,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$3,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$20,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$34,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">price XYZ raises to $300</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$30,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-$15,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$4,500</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$15,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$21,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-$5,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sell XYZ -50 @ $300</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$45,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-$30,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$9,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$15,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$12,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-$5,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">buy XYZ 100 @ $300</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$15,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$15,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">$30,000</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">-$5,000</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_order_rules">Order Rules</h3>
+<div class="paragraph">
+<p>The following rules apply when taken into account open orders when calculating the buying power:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>until an order is accepted, it doesn&#8217;t impact margin or buying power.</p>
+</li>
+<li>
+<p>open orders that reduce a position, don’t require buying power. So you can always close a position, both short and long positions.</p>
+</li>
+<li>
+<p>Once an order has been accepted and is in an open state, it will not be cancelled due to lack of buying power.</p>
+</li>
+<li>
+<p>An order is closed state will not impact margin or buying power (so similar to INITIAL state)</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+not all rules are currently implemented yet.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+<footer class="bg-dark py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; roboquant.org 2021</div></div>
+            <div class="col-auto">
+                <a class="link-light small" href="/community.html">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>

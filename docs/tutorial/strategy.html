@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="roboquant algo-trading framework" />
+    <meta name="keywords" content="trading Kotlin algo roboquant">
+    <meta name="theme-color" content="#3296C8">
+    <title>roboquant - Strategy</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+    <!-- Font awesome icons-->
+    <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link href="/css/rouge_github.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/documentation.html">Documentation</a></li>
+                <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
+                <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/neurallayer/roboquant" target="_blank">
+                    <span class="icon"><i class="fa fa-github fa-1x"></i></span> GitHub
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+              <header class="masthead bg-primary text-white text-center">
+                     <div class="container px-5 my-1">
+                         <div class="row gx-5">
+                            <div class="col-lg-4 mb-5 mb-lg-0">
+                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Strategy</h1>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </header>
+
+            <section class="py-5">
+                <div class="container px-5 my-1">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+ <nav id="sidebar" class="navbar fixed-left sticky-top">
+
+    <ul class="list-unstyled">
+    <span class="navbar-brand">Content</span>
+    
+
+
+
+               <li class="nav-item"><a href="/tutorial/index.html" class="nav-link">Welcome</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/install.html" class="nav-link">Installation</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/roboquant.html" class="nav-link">Roboquant</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/feed.html" class="nav-link">Feed</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/simbroker.html" class="nav-link">Simulated Broker</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/metrics.html" class="nav-link">Metrics</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/strategy.html" class="nav-link">Strategy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/policy.html" class="nav-link">Policy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/orders.html" class="nav-link">Orders</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/domain.html" class="nav-link">Domain Model</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/jupyter.html" class="nav-link">Jupyter Notebooks</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/integration.html" class="nav-link">Integration</a></li>
+
+
+    </ul>
+</nav>
+                         </div>
+                        <div class="col-lg-8">
+                            <div class="col h-100">
+                                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <code>Strategy</code> is likely the place where you do most software development. It is responsible for generating signals based on the events it receives.</p>
+</div>
+<div class="paragraph">
+<p>Since a <code>Strategy</code> has only access to an <code>Event</code> and not an <code>Account</code>, it has no knowledge of concepts like orders, open positions or buying power. As a consequence a <code>Stategy</code> is a generic component that can be easily shared or re-used if required.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_standard_strategies">Standard Strategies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are several commonly used strategies included with roboquant.</p>
+</div>
+<div class="sect2">
+<h3 id="_emacrossover">EMACrossover</h3>
+<div class="paragraph">
+<p>Uses two exponential moving averages and whenever they cross over a BUY or SELL signal is generated</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// Predefined EMACrossover</span>
+    <span class="kd">val</span> <span class="py">strategy1</span> <span class="p">=</span> <span class="nc">EMACrossover</span><span class="p">.</span><span class="nc">EMA_12_26</span>
+
+    <span class="c1">// Own defined look-back periods</span>
+    <span class="kd">val</span> <span class="py">strategy2</span> <span class="p">=</span> <span class="nc">EMACrossover</span><span class="p">(</span><span class="n">fastPeriod</span> <span class="p">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">slowPeriod</span> <span class="p">=</span> <span class="mi">50</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tastrategy">TAStrategy</h3>
+<div class="paragraph">
+<p>TAStrategy is short for Technical Analysis Strategy and is a convenient way of using the <code>ta-lib</code> indicators in a strategy by defining the BUY and/or SELL condition.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ta-lib</code> comes with over 200 indicators and these can be combined anyway you like in a TAStrategy.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">shortTerm</span> <span class="p">=</span> <span class="mi">30</span>
+    <span class="kd">val</span> <span class="py">longTerm</span> <span class="p">=</span> <span class="mi">50</span>
+
+    <span class="c1">// Make sure the TAStrategy collects enough data for the used indicators to work</span>
+    <span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">TaLibStrategy</span><span class="p">(</span><span class="n">longTerm</span><span class="p">)</span>
+
+    <span class="c1">// When to generate a BUY signal</span>
+    <span class="n">strategy</span><span class="p">.</span><span class="nf">buy</span> <span class="p">{</span> <span class="n">series</span> <span class="p">-&gt;</span>
+        <span class="nf">cdlMorningStar</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="p">||</span> <span class="nf">cdl3WhiteSoldiers</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">// When to generate a SELL signal</span>
+    <span class="n">strategy</span><span class="p">.</span><span class="nf">sell</span> <span class="p">{</span> <span class="n">series</span> <span class="p">-&gt;</span>
+        <span class="nf">cdl3BlackCrows</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="p">||</span> <span class="p">(</span><span class="nf">cdl2Crows</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="p">&amp;&amp;</span>
+                <span class="nf">sma</span><span class="p">(</span><span class="n">series</span><span class="p">.</span><span class="n">close</span><span class="p">,</span> <span class="n">shortTerm</span><span class="p">)</span> <span class="p">&lt;</span> <span class="nf">sma</span><span class="p">(</span><span class="n">series</span><span class="p">.</span><span class="n">close</span><span class="p">,</span> <span class="n">longTerm</span><span class="p">))</span>
+    <span class="p">}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rsistrategy">RSIStrategy</h3>
+<div class="paragraph">
+<p>Strategy using the Relative Strength Index of an asset to generate signals. RSI measures the magnitude of recent price changes to evaluate overbought or oversold conditions in the price of a stock or other asset.</p>
+</div>
+<div class="paragraph">
+<p>If the RSI raise above the configured high threshold (default 70), a sell signal will be generated. And if the RSI falls below the configured low threshold (default 30), a buy signal will be generated.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// Default thresholds values</span>
+    <span class="kd">val</span> <span class="py">strategy1</span> <span class="p">=</span> <span class="nc">RSIStrategy</span><span class="p">()</span>
+
+    <span class="c1">// Own defined thresholds</span>
+    <span class="kd">val</span> <span class="py">strategy2</span> <span class="p">=</span> <span class="nc">RSIStrategy</span><span class="p">(</span><span class="n">lowThreshold</span> <span class="p">=</span> <span class="mf">25.0</span><span class="p">,</span> <span class="n">highThreshold</span> <span class="p">=</span> <span class="mf">75.0</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_nosignalstrategy">NoSignalStrategy</h3>
+<div class="paragraph">
+<p>This strategy doesn&#8217;t perform any action and will never generate a signal. If you develop all your logic in a Policy and don&#8217;t require a strategy, use this strategy when you create a <code>Roboquant</code> instance. See also <a href="#_policy_based_strategies">Policy based Strategies</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_combining_strategies">Combining Strategies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>Roboquant</code> constructor takes only a single strategy as its parameter. However, it is easy to combine multiple strategies in your using a simple composition pattern.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">CombinedStrategy</span><span class="p">(</span><span class="n">strategy1</span><span class="p">,</span> <span class="n">strategy2</span><span class="p">)</span>
+    <span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_extending_strategies">Extending Strategies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Next to the standard strategies, there are also strategies that can be the foundation for your own strategy. You extend these classes and add your own logic on top of them. These base strategies typically take care of some repetitive task and make it a quicker to develop your own strategies.</p>
+</div>
+<div class="paragraph">
+<p>A useful base strategies is <code>HistoricPriceStrategy</code>. This strategy collects historic prices for a predefined look-back period before invoking your method.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">class</span> <span class="nc">MyStrategy1</span><span class="p">(</span><span class="n">lookBack</span><span class="p">:</span><span class="nc">Int</span><span class="p">=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">:</span> <span class="nc">HistoricPriceStrategy</span><span class="p">(</span><span class="n">lookBack</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">generate</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nc">Asset</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nc">DoubleArray</span><span class="p">):</span> <span class="nc">Signal</span><span class="p">?</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">when</span> <span class="p">{</span>
+                <span class="n">data</span><span class="p">.</span><span class="nf">last</span><span class="p">()</span> <span class="p">==</span> <span class="n">data</span><span class="p">.</span><span class="nf">max</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">Signal</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="nc">Rating</span><span class="p">.</span><span class="nc">BUY</span><span class="p">)</span>
+                <span class="n">data</span><span class="p">.</span><span class="nf">last</span><span class="p">()</span> <span class="p">==</span> <span class="n">data</span><span class="p">.</span><span class="nf">min</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">Signal</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="nc">Rating</span><span class="p">.</span><span class="nc">SELL</span><span class="p">)</span>
+                <span class="k">else</span> <span class="p">-&gt;</span> <span class="k">null</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_custom_strategies">Custom Strategies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you develop your own <code>Strategy</code>, you will need to implement at least the <code>generate</code> method that is defined in the <code>Strategy</code> interface. This method should return zero or more Signals.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyStrategy</span> <span class="p">:</span> <span class="nc">Strategy</span> <span class="p">{</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">generate</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="nc">TODO</span><span class="p">(</span><span class="s">"Not yet implemented"</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s see how a trend-following <code>Strategy</code> would look like that would:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>generate a BUY-signal every time the current price is more than 5% higher than the previous price for a given <code>Asset</code></p>
+</li>
+<li>
+<p>and a SELL-signal if it is more than 5% lower</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyStrategy2</span> <span class="p">:</span> <span class="nc">Strategy</span> <span class="p">{</span>
+
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">previousPrices</span> <span class="p">=</span> <span class="n">mutableMapOf</span><span class="p">&lt;</span><span class="nc">Asset</span><span class="p">,</span> <span class="nc">Double</span><span class="p">&gt;()</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">generate</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">signals</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;()</span>
+        <span class="k">for</span> <span class="p">((</span><span class="n">asset</span><span class="p">,</span> <span class="n">priceAction</span><span class="p">)</span> <span class="k">in</span> <span class="n">event</span><span class="p">.</span><span class="n">prices</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="kd">val</span> <span class="py">currentPrice</span> <span class="p">=</span> <span class="n">priceAction</span><span class="p">.</span><span class="nf">getPrice</span><span class="p">()</span>
+            <span class="kd">val</span> <span class="py">previousPrice</span> <span class="p">=</span> <span class="n">previousPrices</span><span class="p">.</span><span class="nf">getOrDefault</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="n">currentPrice</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">currentPrice</span> <span class="p">&gt;</span> <span class="mf">1.05</span> <span class="p">*</span> <span class="n">previousPrice</span><span class="p">)</span>
+                <span class="n">signals</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nc">Signal</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="nc">Rating</span><span class="p">.</span><span class="nc">BUY</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">currentPrice</span> <span class="p">&lt;</span> <span class="mf">0.95</span> <span class="p">*</span> <span class="n">previousPrice</span><span class="p">)</span>
+                <span class="n">signals</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nc">Signal</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="nc">Rating</span><span class="p">.</span><span class="nc">SELL</span><span class="p">))</span>
+
+            <span class="n">previousPrices</span><span class="p">[</span><span class="n">asset</span><span class="p">]</span> <span class="p">=</span> <span class="n">currentPrice</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">signals</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Make sure we clear the previous prices when reset</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">reset</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">previousPrices</span><span class="p">.</span><span class="nf">clear</span><span class="p">()</span>
+    <span class="p">}</span>
+
+<span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see a Strategy can maintain state, the <code>previousPrices</code> in the above example.You have to ensure you reset the state when a <code>Component</code> lifecycle event is called, like the <code>start</code> method in the above example.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_policy_based_strategies">Policy based Strategies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are use cases that require a strategy not only to have access to the event but also to the account.These type of strategies can be implemented in roboquant, but they should be implemented as a policy and not strategy.Some reasons you might want to use a policy:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Access to the Account instance is required, for example to re-balance a portfolio</p>
+</li>
+<li>
+<p>Directly generate orders instead of signals</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>See the <a href="policy.html">policy documentation</a> for more details.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_signals">Signals</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A signal is the outcome of a strategy and is modelled closely after the ratings given by ratings agencies. The two mandatory parts of a signal are:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The asset that the signal applies for</p>
+</li>
+<li>
+<p>A rating for that same asset</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>There is a 5-point scale used for the rating part of a signal:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Buy: Also known as strong buy and "on the recommended list". Buy is a recommendation to purchase a specific security.</p>
+</li>
+<li>
+<p>Sell: Also known as strong sell, it&#8217;s a recommendation to sell a security or to liquidate an asset.</p>
+</li>
+<li>
+<p>Hold: In general terms, a company with a hold recommendation is expected to perform at the same pace as comparable companies or in-line with the market.</p>
+</li>
+<li>
+<p>Underperform: A recommendation that means a stock is expected to do slightly worse than the overall stock market return. Underperform can also be expressed as "moderate sell," "weak hold" and "underweight."</p>
+</li>
+<li>
+<p>Outperform: Also known as "moderate buy," "accumulate" and "overweight." Outperform is an analyst recommendation meaning a stock is expected to do slightly better than the market return.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+a hold rating is not the same as no signal. Only generate hold signals if you think the asset will perform market conform. If your strategy has no idea about the performance of an asset, don&#8217;t generate a signal at all.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_simple_signals">Simple Signals</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// apple is of the type Asset</span>
+    <span class="kd">val</span> <span class="py">signal</span> <span class="p">=</span> <span class="nc">Signal</span><span class="p">(</span><span class="n">apple</span><span class="p">,</span> <span class="nc">Rating</span><span class="p">.</span><span class="nc">BUY</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_advanced_signals">Advanced Signals</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Besides the mandatory Rating and Asset, a signal can optionally contain the following attributes (with their default values):</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>val asset: Asset,
+val rating: Rating,
+val type: SignalType = SignalType.BOTH,
+val takeProfit: Double = Double.NaN,
+val stopLoss: Double = Double.NaN,
+val probability: Double = Double.NaN,
+val source: String = ""</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is up to the <a href="../policy/index.html">policy</a> how to use these attributes when generating the orders.</p>
+</div>
+</div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+<footer class="bg-dark py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; roboquant.org 2021</div></div>
+            <div class="col-auto">
+                <a class="link-light small" href="/community.html">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>

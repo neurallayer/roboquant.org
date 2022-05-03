@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="roboquant algo-trading framework" />
+    <meta name="keywords" content="trading Kotlin algo roboquant">
+    <meta name="theme-color" content="#3296C8">
+    <title>roboquant - Metrics</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+    <!-- Font awesome icons-->
+    <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link href="/css/rouge_github.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/documentation.html">Documentation</a></li>
+                <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
+                <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/neurallayer/roboquant" target="_blank">
+                    <span class="icon"><i class="fa fa-github fa-1x"></i></span> GitHub
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+              <header class="masthead bg-primary text-white text-center">
+                     <div class="container px-5 my-1">
+                         <div class="row gx-5">
+                            <div class="col-lg-4 mb-5 mb-lg-0">
+                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Metrics</h1>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </header>
+
+            <section class="py-5">
+                <div class="container px-5 my-1">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+ <nav id="sidebar" class="navbar fixed-left sticky-top">
+
+    <ul class="list-unstyled">
+    <span class="navbar-brand">Content</span>
+    
+
+
+
+               <li class="nav-item"><a href="/tutorial/index.html" class="nav-link">Welcome</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/install.html" class="nav-link">Installation</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/roboquant.html" class="nav-link">Roboquant</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/feed.html" class="nav-link">Feed</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/simbroker.html" class="nav-link">Simulated Broker</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/metrics.html" class="nav-link">Metrics</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/strategy.html" class="nav-link">Strategy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/policy.html" class="nav-link">Policy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/orders.html" class="nav-link">Orders</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/domain.html" class="nav-link">Domain Model</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/jupyter.html" class="nav-link">Jupyter Notebooks</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/integration.html" class="nav-link">Integration</a></li>
+
+
+    </ul>
+</nav>
+                         </div>
+                        <div class="col-lg-8">
+                            <div class="col h-100">
+                                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Metrics allow you to monitor the progress of a <code>run</code> and get the necessary insights how a strategy is performing. Metrics are not limited to back testing and can also be used both during live testing and paper trading.</p>
+</div>
+<div class="paragraph">
+<p>The configured metrics are invoked at each step in a run. A single metric can return multiple values, each value having a unique name. Metrics only calculate the values, the storing and/or logging of these values is done by a <code>MetricsLogger</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_standard_metrics">Standard Metrics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are several common metrics included with roboquant that can be easily added to your <code>Roboquant</code> instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">metric1</span> <span class="p">=</span> <span class="nc">AccountSummary</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">metric2</span> <span class="p">=</span> <span class="nc">PortfolioExposure</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">metric3</span> <span class="p">=</span> <span class="nc">ProgressMetric</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">metric4</span> <span class="p">=</span> <span class="nc">VWAPMetric</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">metric5</span> <span class="p">=</span> <span class="nc">SharpRatio</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">metric6</span> <span class="p">=</span> <span class="nc">PNL</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">metric7</span> <span class="p">=</span> <span class="nc">AlphaBeta</span><span class="p">(</span><span class="n">sp500Asset</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
+
+<span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">metric1</span><span class="p">,</span> <span class="n">metric2</span><span class="p">,</span> <span class="n">metric3</span><span class="p">,</span> <span class="n">metric4</span><span class="p">,</span> <span class="n">metric5</span><span class="p">,</span> <span class="n">metric6</span><span class="p">,</span> <span class="n">metric7</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+if metrics are very compute intensive, and you don&#8217;t require them at each step, you can wrap them in a <code>MetricsScheduler</code> and configure when they should run.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_custom_metrics">Custom Metrics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can develop your own metrics. The easiest way to do so is to extend the SimpleMetric class. All you have to do is implement that <code>calc</code> method and return <code>MetricResults</code>, which is just a typealias for <code>Map&lt;String,Number&gt;</code></p>
+</div>
+<div class="paragraph">
+<p>In the <code>calc</code> function you have access to both the account object and the event. Metrics also implement the <code>Component</code> interface, so can keep state in a metric if required and clean it when a Component lifecycle method is invoked.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyMetric</span> <span class="p">:</span> <span class="nc">SimpleMetric</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">calc</span><span class="p">(</span><span class="n">account</span><span class="p">:</span> <span class="nc">Account</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">MetricResults</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nf">mapOf</span><span class="p">(</span><span class="s">"metricName1"</span> <span class="n">to</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s">"metricName2"</span> <span class="n">to</span> <span class="mf">2.0</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="p">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_metrics_loggers">Metrics Loggers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <code>MetricsLogger</code> receives the calculated metric values at each step and then stores and/or logs these values.</p>
+</div>
+<div class="sect2">
+<h3 id="_memorylogger">MemoryLogger</h3>
+<div class="paragraph">
+<p>This is the default logger used if no other logger is configured. It stores all the recorded values in memory and
+allows them to be queried afterwards. It also comes with a progress-bar that shows how much time is remaining during
+a run.</p>
+</div>
+<div class="paragraph">
+<p>This logger is very useful if you are testing your approach in a Jupyter Notebook or another interactive development
+environment.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">metric1</span> <span class="p">=</span> <span class="nc">AccountSummary</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">metric2</span> <span class="p">=</span> <span class="nc">PortfolioExposure</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">metric3</span> <span class="p">=</span> <span class="nc">ProgressMetric</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">metric4</span> <span class="p">=</span> <span class="nc">VWAPMetric</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">metric5</span> <span class="p">=</span> <span class="nc">SharpRatio</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">metric6</span> <span class="p">=</span> <span class="nc">PNL</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">metric7</span> <span class="p">=</span> <span class="nc">AlphaBeta</span><span class="p">(</span><span class="n">sp500Asset</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
+
+<span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">metric1</span><span class="p">,</span> <span class="n">metric2</span><span class="p">,</span> <span class="n">metric3</span><span class="p">,</span> <span class="n">metric4</span><span class="p">,</span> <span class="n">metric5</span><span class="p">,</span> <span class="n">metric6</span><span class="p">,</span> <span class="n">metric7</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_silentlogger">SilentLogger</h3>
+<div class="paragraph">
+<p>This logger just silently ignores all metrics and is mostly useful for unit tests</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_infologger">InfoLogger</h3>
+<div class="paragraph">
+<p>Logs metrics using the built-in Logger.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_consolelogger">ConsoleLogger</h3>
+<div class="paragraph">
+<p>Logs the metrics to the console using a simple "println" statement.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_custom_loggers">Custom Loggers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can implement also your own MetricsLogger, for example if you want to store values into a database or have a custom file format that you want to use.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"></code></pre>
+</div>
+</div>
+</div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+<footer class="bg-dark py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; roboquant.org 2021</div></div>
+            <div class="col-auto">
+                <a class="link-light small" href="/community.html">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>

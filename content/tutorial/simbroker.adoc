@@ -1,0 +1,155 @@
+= Simulated Broker
+:source-highlighter: rouge
+:sourcefile: ../../samples/simbroker.kt
+:jbake-date: 2020-08-01
+
+You use the `SimBroker` class (short for Simulated Broker) both for the back testing and live testing stages. See also the xref:../background/four_stages.adoc[four stages] for more background about the different stages when developing trading strategies.
+
+SimBroker can simulate a wide range of brokers and the exchanges. Besides several configuration parameters that are available, the behavior can
+further be extended by providing custom models for trading, fee and account modelling.
+
+== Define
+The main usage of the `SimBroker` is surprisingly simple. It contains one property and one method (next to the default Component interface methods)
+
+- the property is `account`, which hold all the exposed state, like cash, portfolio, trades and orders.
+- the method is `place(orders: List<Order>, event: Event)` which enables you to place orders at this broker.
+
+Normally you don't invoke the `place` method directly, but use `roboquant.run` method to run a trading strategy and it
+will call the `place` method as part of its flow.
+
+
+== Order Handling
+When an order is placed at the SimBroker, it only gets processed once there is a known price for the underlying asset. Till an event happens that has that price available, the order will remain in its INITIAL state.
+
+Any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted (so it is in open state). So an order in INITIAL state cannot expire and time based TIF only start counting after it has been accepted.
+
+Any open orders will be processed based on FIFO, so older open orders are processed first. Exception to this rule are cancellation orders that are always processed before other order types.
+
+== Initial Deposit
+The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit.
+
+Typically, the initial deposit is denoted in a single currency, like a *$50,000.00 USD* account. But this is not a hard requirement and in with the `SimBroker` you can use multi-currency initial deposits if you like.
+
+== Account
+The `Account` object contains all the exposed state of a broker and is identical between the simulated broker and real brokers.
+
+It contains the following key attributes:
+
+- base currency to use
+- cash balance
+- portfolio with all the (open) positions
+- trades that contain all the trade executions that happened so far
+- orders, both active orders and closed orders
+- amount of buying power available for trading
+
+.Buying Power
+****
+Always use the `buyingPower` property if you want to know how much money is remaining for trading. Especially when having a Margin Account, you shouldn't rely on the `cash` property, since that doesn't take into account any margin or leverage you might have.
+****
+
+== Custom Models
+Custom models are a way to further customize the behavior of `SimBroker`. The following two types of models can implemented if the default ones that comes with roboquant are not sufficient.
+
+- Cost models: the transaction related cost like slippage and fees/commissions. It is important to notice that if you don't take these type of cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading.
+
+- Buying power models: the different types of funding of an account, like a Cash or Margin account.
+
+== Limitations
+
+Like any simulation, SimBroker also has limitations compared to a real life trading. It is important to realize this and take appropriate actions where possible:
+
+1. The default cost calculations become less realistic if you trade large amount compared to overall daily volume. Don't underestimate the transaction cost like spread, slippage and commissions and rather be too pessimistic.
+2. Order types might behave slightly different between SimBroker and different real brokers. If possible at all, also perform paper trading to see if your solution still performs as expected.
+3. The buying power and margin calculations might differ. Be on the safe side and use a higher margin requirement in the SimBroker than required.
+
+
+== Account Models
+Account models allow to model the amount of Buying power for different types of accounts, like a Cash Account or Margin Account when using the SimBroker. Buying Power represents the amount available for trading.
+
+Out of the box roboquant comes with several models that cather for common account types:
+
+1. Cash accounts, that don't have leverage or margin available
+2. Margin account, that have configurable margin and leverage
+
+=== Cash Accounts
+Cash accounts can be modelled using the `CashAccount`. This model is also the default if you don't provide a BuyingPowerModel when instantiating a xref:simbroker.adoc[SimBroker].
+
+`CashBuyingPowerModel` only basis the buying power on the available cash, and no margin is calculated and no leverage is used..
+
+The below table shows an example using the default CashBuyingPowerModel when trading in different currencies, EUR and USD in this case.
+
+[%autowidth, cols="^,<,>,>,>,>,>,>,>"]
+|===
+|Time |Action |Cash |Portfolio |Margin |Equity |Buying Power |Unrealized PnL |Realized PnL
+
+|1 |open account with €10,000|€10,000|0|0|€10,000|€10,000|0|0
+|2 |buy ABC 40 @ €100|€6,000|€4,000|0|€10,000|€6,000|0|0
+|3 |price ABC drops to €75|€6,000|€3,000|0|€9,000|€6,000| -€1,000|0
+|4 |sell ABC -40 @ €75|€ 9,000|0|0|€ 9,000|€9,000|0| -€1,000
+|5 |buy XYZ 25 @ $200|€9,000 -$5,000|$5,000|0|€9,000|€4,500|0| -€1,000
+|6 |price XYZ raises to $240|€9,000 -$5,000|$6,000|0|€9,000 $1,000|€4,500|$1,000| -€1,000
+|7 |sell XYZ -25 @ $240|€9,000 $1,000|0|0|€9,000 $1,000|€9,900|0| -€1,000 $1,000
+|===
+
+
+=== Margin Accounts
+Margin based accounts can be modelled using the `MarginAccount`. This model supports:
+
+1. Initial margin (aka leverage)
+2. Maintenance margin, with support for different values for long and short positions
+3. Minimum amount of required equity that cannot be used as margin
+
+All margin calculations are based on the equity of the account, and not only the cash. And although in the below tables the (maintenance) margin is shown, it is actually not exposed. Only the Buying Power value is available through the account object.
+
+The logic of calculating the buying power looks roughly like this (excluding open orders):
+
+      long value = long positions * maintance margin long
+      short value = short positions * maintance margin short
+      excess margin = equity - long value - short value - minimum equity
+      buying power = excess margin * ( 1 / initial margin)
+
+The following table shows an example for long trading with margin account in a Japanese Yen, using the following (default) values:
+
+- initial margin: 50%
+- maintenance margin: 30% (both for long and short positions)
+- no minimum equity is required
+
+Also, there are no commissions or other cost associated with the transactions. This is not a recommended approach, but just used here to make it a bit simpler to comprehend.
+
+[%autowidth, cols="^,<,>,>,>,>,>,>,>"]
+|===
+|Time |Action |Cash |Portfolio |Margin |Equity |Buying Power |Unrealized PnL |Realized PnL
+
+|1 |open account with ¥1,000,000|¥1,000,000|0|0|¥1,000,000|¥2,000,000|0|0
+|2 |buy ABC 500 @ ¥1,000|¥500,000|¥500,000|¥150,000|¥1,000,000|¥1,700,000|0|0
+|3 |ABC drops to ¥500|¥500,000|¥250,000|¥75,000|¥750,000|¥1,350,000|-¥250,000|0
+|4 |buy ABC 2000 @ ¥500|-¥500,000|¥1,250,000|¥375,000|¥750,000|¥750,000|-¥250,000|0
+|5 |ABC drops to ¥400|-¥500,000|¥1,000,000|¥300,000|¥500,000|¥400,000|-¥500,000|0
+|6 |sell ABC -2500 @ ¥400|¥500,000|0|0|¥500,000|¥1,000,000|0|-¥500,000
+|===
+
+The following table shows another example, but this time shorting on a USD margin account. It uses the same default values for the margin calculations as the above table.
+
+[%autowidth, cols="^,<,>,>,>,>,>,>,>"]
+|===
+|Time |Action |Cash |Portfolio |Margin |Equity |Buying Power |Unrealized PnL |Realized PnL
+
+|1 |open account with $20,000|$20,000|0|0|$20,000|$40,000|0|0
+|2 |sell XYZ -50 @ $200|$30,000|-$10,000|$3,000|$20,000|$34,000|0|0
+|3 |price XYZ raises to $300|$30,000|-$15,000|$4,500|$15,000|$21,000|-$5,000|0
+|5 |sell XYZ -50 @ $300|$45,000|-$30,000|$9,000|$15,000|$12,000|-$5,000|0
+|6 |buy XYZ 100 @ $300|$15,000|0|0|$15,000|$30,000|0|-$5,000
+|===
+
+
+=== Order Rules
+
+The following rules apply when taken into account open orders when calculating the buying power:
+
+- until an order is accepted, it doesn't impact margin or buying power.
+- open orders that reduce a position, don’t require buying power. So you can always close a position, both short and long positions.
+- Once an order has been accepted and is in an open state, it will not be cancelled due to lack of buying power.
+- An order is closed state will not impact margin or buying power (so similar to INITIAL state)
+
+NOTE: not all rules are currently implemented yet.
+

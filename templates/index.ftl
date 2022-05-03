@@ -40,7 +40,7 @@
                                 The following code snippet shows all the key ingredients required to run a back test.
                                 <br><br>
                                 <#include "snippet.ftl">
-                                <form action="/get_started.html">
+                                <form action="/tutorial/install.html">
                                 <button class="btn btn-outline-dark" id="install_software" type="submit">Get the software</button>
                                 </form>
                             </div>

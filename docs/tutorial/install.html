@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="roboquant algo-trading framework" />
+    <meta name="keywords" content="trading Kotlin algo roboquant">
+    <meta name="theme-color" content="#3296C8">
+    <title>roboquant - Installation</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+    <!-- Font awesome icons-->
+    <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link href="/css/rouge_github.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/documentation.html">Documentation</a></li>
+                <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
+                <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/neurallayer/roboquant" target="_blank">
+                    <span class="icon"><i class="fa fa-github fa-1x"></i></span> GitHub
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+              <header class="masthead bg-primary text-white text-center">
+                     <div class="container px-5 my-1">
+                         <div class="row gx-5">
+                            <div class="col-lg-4 mb-5 mb-lg-0">
+                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Installation</h1>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </header>
+
+            <section class="py-5">
+                <div class="container px-5 my-1">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+ <nav id="sidebar" class="navbar fixed-left sticky-top">
+
+    <ul class="list-unstyled">
+    <span class="navbar-brand">Content</span>
+    
+
+
+
+               <li class="nav-item"><a href="/tutorial/index.html" class="nav-link">Welcome</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/install.html" class="nav-link">Installation</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/roboquant.html" class="nav-link">Roboquant</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/feed.html" class="nav-link">Feed</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/simbroker.html" class="nav-link">Simulated Broker</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/metrics.html" class="nav-link">Metrics</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/strategy.html" class="nav-link">Strategy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/policy.html" class="nav-link">Policy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/orders.html" class="nav-link">Orders</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/domain.html" class="nav-link">Domain Model</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/jupyter.html" class="nav-link">Jupyter Notebooks</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/integration.html" class="nav-link">Integration</a></li>
+
+
+    </ul>
+</nav>
+                         </div>
+                        <div class="col-lg-8">
+                            <div class="col h-100">
+                                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are two different ways to install and use roboquant:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Interactively in a <em>Jupyter Notebook</em>. If you want to be up and running quickly, this is the easiest approach. Also, if you are less experienced software developer, this is a good starting point. Additionally, you get many charts out-of-the-box that help you to understand how the strategy is performing.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../img/jupyter-lab.png" alt="screenshot" width="400">
+</div>
+</div>
+</li>
+<li>
+<p>As a library in your <em>standalone Kotlin or Java application</em>. If you plan to develop large and complex trading strategies, this is a good approach since you&#8217;ll have the full power of an IDE like IntelliJ IDEA at your disposal.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../img/idea.png" alt="screenshot" width="400">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_jupyter_notebook">Install Jupyter Notebook</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you have already Docker installed on your local machine, all it takes is a single command to have a fully functional Jupyter Notebook environment available.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">docker run <span class="nt">--rm</span> <span class="nt">-p</span> 8888:8888 roboquant/jupyter</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, this will start a new Jupyter-Lab environment and disposes of it as soon as you stop the container. The installation comes with several notebooks included that demonstrate how to develop and run your own strategies.</p>
+</div>
+<div class="paragraph">
+<p>If you don&#8217;t have Docker yet installed on your computer, check out <a href="https://www.docker.com/get-started">Docker get started</a> and download Docker for Desktop from there. If you are running Linux, then your distribution likely already has Docker or Podman included.</p>
+</div>
+<div class="paragraph">
+<p>If you don&#8217;t want to install anything locally, you can use a publicly hosted environment:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Launch the notebooks right now on MyBinder.org by clicking <span class="image"><a class="image" href="https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/tutorials" target="_blank" rel="noopener"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a></span></p>
+</li>
+<li>
+<p>Go to <a href="https://datalore.jetbrains.com/">JetBrains Datalore</a>. It has excellent support for Kotlin notebooks and has a free tier available if you just want to try roboquant out.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_a_roboquant_library">Install a roboquant library</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Just add <code>roboquant</code> as a dependency to your build tool, like Maven or Gradle. Regular versions of the Roboquant modules are published to Maven Central and snapshots are published to OSS Sonatype (<a href="https://s01.oss.sonatype.org/content/repositories/snapshots" class="bare">https://s01.oss.sonatype.org/content/repositories/snapshots</a>).</p>
+</div>
+<div class="paragraph">
+<p>The latest available versions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>beta release: <span class="image"><img src="https://img.shields.io/maven-central/v/org.roboquant/roboquant" alt="Maven Central"></span></p>
+</li>
+<li>
+<p>snapshot release: <span class="image"><img src="https://img.shields.io/nexus/s/org.roboquant/roboquant?server=https%3A%2F%2Fs01.oss.sonatype.org" alt="Sonatype Nexus (Snapshots)"></span></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following modules are available for inclusion in your application:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>roboquant</code>: the core module of the platform</p>
+</li>
+<li>
+<p><code>roboquant-crypto</code>: support for many of today&#8217;s popular crypto exchanges</p>
+</li>
+<li>
+<p><code>roboquant-extra</code>: integrations with 3rd party brokers and market data providers</p>
+</li>
+<li>
+<p><code>roboquant-ibkr</code>: integration with Interactive Brokers</p>
+</li>
+<li>
+<p><code>roboquant-ta</code>: over 150 technical analysis indicators and strategies</p>
+</li>
+<li>
+<p><code>roboquant-jupyter</code> additional Jupyter Notebook functionality like charting</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_maven">Maven</h3>
+<div class="paragraph">
+<p>Add the following snippet to your pom.xml file in the dependencies section:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.roboquant<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>roboquant<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>VERSION<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gradle">Gradle</h3>
+<div class="paragraph">
+<p>Include the following line in your build.gradle script:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code>implementation group: 'org.roboquant', name: 'roboquant', version: 'VERSION'</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_from_source">Building from source</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>First start with cloning the roboquant GitHub repository to your local disk. The quickest way to be up and running is then to install IntelliJ IDEA (either the free community edition or the paid Ultimate version) and open the directory you just cloned. IntelliJ IDEA will recognize it as Kotlin/Maven project, and you can build it and run test directly from the IDE.</p>
+</div>
+<div class="paragraph">
+<p>You can also use a plain text editor of course. Roboquant uses a setup and directory structure that removes much of the ceremony often found in many Java/Kotlin projects. So no need to go 10 directories deep to locate the source file you were looking for.</p>
+</div>
+<div class="paragraph">
+<p>Roboquant uses Maven for the build process and assuming you already have this installed, building the libraries locally, is as easy as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">mvn build</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The build and install is tested using JDK 17 runtime, however the generated libraries are targeted against JDK 11 in order to provide greater compatibilty for projects that still use older versions of the JDK.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you plan to make many changes and updates to the source code, checkout the <a href="https://github.com/apache/maven-mvnd">Maven Deamon</a> project that provides much faster builds.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_interactive_brokers">Interactive Brokers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Unfortuatly we are not allowed to redistribute the Interactive Brokers Java client, so you&#8217;ll have to download the TwsApi.jar file yourself. You can download version <code>10.15</code> from here: <a href="https://interactivebrokers.github.io/#" class="bare">https://interactivebrokers.github.io/#</a> and within the downloaded archive file you&#8217;ll find the required <code>TwsApi.jar</code>.</p>
+</div>
+<div class="paragraph">
+<p>Then install the jar file in the local Maven repository on your machine using the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">mvn <span class="nb">install</span>:install-file <span class="nt">-Dfile</span><span class="o">=</span>TwsApi.jar <span class="nt">-DgroupId</span><span class="o">=</span>com.interactivebrokers <span class="nt">-DartifactId</span><span class="o">=</span>tws-api <span class="nt">-Dversion</span><span class="o">=</span>10.15 <span class="nt">-Dpackaging</span><span class="o">=</span>jar</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If this artefact cannot be found in your local Maven repository during a build, the module <code>roboquant-ibkr</code> will automatically be skipped. So if you don&#8217;t require integration with Interactive Brokers for your trading, you can skip this step.</p>
+</div>
+</div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+<footer class="bg-dark py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; roboquant.org 2021</div></div>
+            <div class="col-auto">
+                <a class="link-light small" href="/community.html">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>

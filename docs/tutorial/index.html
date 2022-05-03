@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="roboquant algo-trading framework" />
+    <meta name="keywords" content="trading Kotlin algo roboquant">
+    <meta name="theme-color" content="#3296C8">
+    <title>roboquant - Welcome</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+    <!-- Font awesome icons-->
+    <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link href="/css/rouge_github.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/documentation.html">Documentation</a></li>
+                <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
+                <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/neurallayer/roboquant" target="_blank">
+                    <span class="icon"><i class="fa fa-github fa-1x"></i></span> GitHub
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+              <header class="masthead bg-primary text-white text-center">
+                     <div class="container px-5 my-1">
+                         <div class="row gx-5">
+                            <div class="col-lg-4 mb-5 mb-lg-0">
+                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Welcome</h1>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </header>
+
+            <section class="py-5">
+                <div class="container px-5 my-1">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+ <nav id="sidebar" class="navbar fixed-left sticky-top">
+
+    <ul class="list-unstyled">
+    <span class="navbar-brand">Content</span>
+    
+
+
+
+               <li class="nav-item"><a href="/tutorial/index.html" class="nav-link">Welcome</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/install.html" class="nav-link">Installation</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/roboquant.html" class="nav-link">Roboquant</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/feed.html" class="nav-link">Feed</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/simbroker.html" class="nav-link">Simulated Broker</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/metrics.html" class="nav-link">Metrics</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/strategy.html" class="nav-link">Strategy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/policy.html" class="nav-link">Policy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/orders.html" class="nav-link">Orders</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/domain.html" class="nav-link">Domain Model</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/jupyter.html" class="nav-link">Jupyter Notebooks</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/integration.html" class="nav-link">Integration</a></li>
+
+
+    </ul>
+</nav>
+                         </div>
+                        <div class="col-lg-8">
+                            <div class="col h-100">
+                                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Welcome to the roboquant™ tutorial. Just like the roboquant software, the documentation is also open source. So if you find mistakes or want to contribute, head over to the <a href="https://github.com/neurallayer/roboquant.org">GitHub documentation repository</a> where you can find the source.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reading_guide">Reading Guide</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can select any item from the menu to get more information about that topic. Content that is formatted like <code>SomeName</code>, represents a real Kotlin class, interface, method or attribute. The package name is typically omitted. All the used code snippets are compilable and runnable code. However, the required import statements are not shown to improve readability.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_main_components">Main components</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Perhaps the most important part of using roboquant is to understand the sequence of steps and the responsibility each component has in this flow. The following diagram provides an overview of the main components and the type of data they consume and produce.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="main_flow.png" alt="main flow">
+</div>
+</div>
+<div class="paragraph">
+<p>The role and responsibilities of each of the components are as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Roboquant</code></p>
+<div class="paragraph">
+<p>The engine of the platform that performs the actual run and orchestrate the interaction between the components. The engine supports all <a href="../background/four_stages.html">4 stages</a> of developing a trading strategy with minimal changes to your code. This is also the only component that is a concrete Class and not an Interface and not designed to be swapped out for a custom implementation.</p>
+</div>
+</li>
+<li>
+<p><code>Feed</code></p>
+<div class="paragraph">
+<p>Provides the data needed for testing and trading in the form of events. A feed can represent both historic and live data and is not restricted to pricing information only. A feed delivers its data in the form of events.</p>
+</div>
+</li>
+<li>
+<p><code>Broker</code></p>
+<div class="paragraph">
+<p>Receives the created orders by the policy and process them. Any open orders will be processed until they are closed. After this step, it will return an updated account that reflects the latest state.</p>
+</div>
+</li>
+<li>
+<p><code>Metric</code></p>
+<div class="paragraph">
+<p>Receives the latest state of the account and calculates various metrics that are of interest to determine the progress and results of the run so far.</p>
+</div>
+</li>
+<li>
+<p><code>MetricsLogger</code></p>
+<div class="paragraph">
+<p>Stores and/or logs the metric values, so you can inspect them at a later time.</p>
+</div>
+</li>
+<li>
+<p><code>Strategy</code></p>
+<div class="paragraph">
+<p>Receives the event and generates zero or more signals. A signal is a rating for a certain asset, like a BUY rating for stock XYZ. So the strategy doesn&#8217;t create orders, that is the responsibility of the next component, the policy.</p>
+</div>
+</li>
+<li>
+<p><code>Policy</code></p>
+<div class="paragraph">
+<p>Receives the generated signals and creates the orders. If you need to create orders that are not based on signals, this is also the place to do so, for example re-balance your portfolio at regular intervals. Check the <a href="features.html#_order_management">features documentation</a> why it is smart to separate this from your strategy logic.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_developing_your_strategy">Developing your strategy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Developing a new strategy and validate it during a back-test is a straight forward process. The code snippet below shows the different steps that you have to take to develop and run your strategy.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyStrategy</span> <span class="p">:</span> <span class="nc">Strategy</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">generate</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="c1">// your code goes here</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">MyStrategy</span><span class="p">()</span> <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="kd">val</span> <span class="py">metric</span> <span class="p">=</span> <span class="nc">AccountSummary</span><span class="p">()</span> <i class="conum" data-value="3"></i><b>(3)</b>
+<span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
+
+<span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">CSVFeed</span><span class="p">(</span><span class="s">"./data/us"</span><span class="p">)</span> <i class="conum" data-value="5"></i><b>(5)</b>
+<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span> <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Develop a new strategy based on some idea you have. This can be done either from scratch or by assembling existing building blocks. In many cases, this is the only real software development required. See also <a href="strategy.html">Strategy</a> for more details.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Create an instance of your strategy.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Instantiate the metrics you want to use to evaluate the performance of your strategy.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Create an instance of Roboquant (the engine) with the strategy and metric(s) as parameters to the constructor.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Pick the data feed you want to use to test your strategy.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Run the back test using the data feed you just created.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The roboquant platform is very flexible and provides many more options than the above example shows. You can easily change almost any aspect of the platform if the default behavior doesn&#8217;t suit your needs.</p>
+</div>
+</div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+<footer class="bg-dark py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; roboquant.org 2021</div></div>
+            <div class="col-auto">
+                <a class="link-light small" href="/community.html">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>

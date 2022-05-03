@@ -31,15 +31,15 @@ class MyPolicy : Policy {
 // tag::default[]
 class MyDefaultPolicy(private val percentage:Double = 0.05) : DefaultPolicy() {
 
-    override fun createOrder(signal: Signal, qty: Size, price: Double): Order? {
+    override fun createOrder(signal: Signal, size: Size, price: Double): Order? {
         // We don't short and  all other sell/exit orders are covered by the bracket order
-        if (qty < 0) return null
+        if (size < 0) return null
 
         val asset = signal.asset
         return BracketOrder(
-            MarketOrder(asset, qty),
-            TrailOrder(asset, -qty, percentage/2.0),
-            StopOrder(asset, -qty, price * (1 - percentage))
+            MarketOrder(asset, size),
+            TrailOrder(asset, -size, percentage/2.0),
+            StopOrder(asset, -size, price * (1 - percentage))
         )
     }
 }
@@ -83,8 +83,8 @@ fun orders(signals: List<Signal>) {
     // tag::orders[]
     val orders = mutableListOf<Order>()
     for (signal in signals) {
-        val qty = if (signal.rating.isPositive) 100.0 else -100.0
-        val order = MarketOrder(signal.asset, qty)
+        val size = if (signal.rating.isPositive) 100.0 else -100.0
+        val order = MarketOrder(signal.asset, size)
         orders.add(order)
     }
     // end::orders[]

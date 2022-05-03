@@ -1,0 +1,138 @@
+= Jupyter Notebooks
+:source-highlighter: rouge
+:icons: font
+:sourcefile: ../../samples/jupyter.kt
+:jbake-date: 2020-02-01
+
+Since developing an algorithmic trading strategy requires a lot of experimentation and testing, an interactive development environment like Jupyter Notebooks is ideal. Especially in the beginning phase it can help to progress a lot quicker.
+
+Roboquant is designed to be used in both your own standalone application, and in Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without too much ceremony and there are many charts included out-of-the-box that makes it easier to interpreter what is going on during a `run`.
+
+== Usage
+Using roboquant in a Kotlin Jupyter Notebook requires just a single command:
+
+    %use roboquant
+
+This will automatically load the roboquant library (it will actually load three roboquant modules: core, extra and crypt) and import most packages from the core module. If you run `Welcome()` in a notebook cell, you'll see the version of roboquant you are using together with other information about the environment you are in.
+
+TIP: Chromium based browsers perform best, especially when you plot charts with many data points.
+
+
+== Jupyter Lab vs Jupyter Classic
+The rendering required for Jupyter Lab is slightly different from for Jupyter Lab.
+
+
+== Importing packages
+By default, most of the core roboquant packages are imported. But the packages of the crypto and extra modules are not by default included.
+
+
+== Using external libraries
+You are not limited to using roboquant libraries only. In fact, you can use any Java or Kotlin library that is published.
+
+
+
+== Charts
+Roboquant uses the excellent https://echarts.apache.org[Apache ECharts] JavaScript library to render charts in your browser. All charts are interactive, meaning you can zoom into areas of interest, and you can often filter on values of interest. There is a toolbar at the right top of each chart that allows for additional functionality, like downloading the chart or seeing the raw data.
+
+
+=== Design Philosophy
+In order to build robust and well performing trading algorithms, often you need to diversify across assets and asset classes. So a lot of the visualization is focused on providing insights on what is happening in such scenario and less in plotting the metrics a single asset only.
+
+All the charts are tailored for roboquant usage and are not a generic plotting library. So typically with just one line of code, you plot a very feature rich chart. However, adding a new custom chart is not much work, see also <<_custom_charts>>
+
+=== Global settings
+There are several global settings that will apply to all charts:
+
+* if you have to plot a lot of samples (> 500,000) your browser can become unresponsive. To avoid this problem, you can limit the number of samples send to the browser. The default is no limits.
+* you can change the theme used to draw the charts. The default is "auto" when it will try to detect the theme from your Jupyter Lab environment and use that.
+
+[source, kotlin]
+----
+include::{sourcefile}[tag=global]
+----
+
+=== General usage
+If the chart instance is the last statement of a notebook cell, it will get rendered automatically.
+
+[source, kotlin]
+----
+include::{sourcefile}[tag=use1]
+----
+
+If however if it is not the last statement, you'll need to invoke the `render()` method. This is also the way to plot multiple charts.
+
+[source, kotlin]
+----
+include::{sourcefile}[tag=use2]
+----
+
+=== PriceBarCart
+
+image::https://roboquant.org/img/prices.png[]
+
+Main features of this chart include:
+
+* shows the PriceBar actions (also referred to a candlesticks) for a certain `Asset` in a `Feed`
+* provides an overview of the volume in the same chart (if the feed has this information)
+* can handle large amounts of candles, and you can easily zoom into smaller timeframes to see more details
+* you can plot trades for the same asset in the same chart to see when they were created.
+
+[source, kotlin]
+----
+include::{sourcefile}[tag=priceBarChart]
+----
+
+=== PriceChart
+Similar to the functionality offered by a PriceBarChart, but this chart displays a single price and not a candlestick. As a result it can be used to plot any type of `PriceAction` and not only a PriceBar. So if you have a feed with order books data or trade prices, this is the chart to use.
+
+[source, kotlin]
+----
+include::{sourcefile}[tag=priceChart]
+----
+
+
+NOTE: currently, you can only plot a single asset at a time. This might change in the future.
+
+=== PriceCorrelationChart
+Plots the Pearson correlation ofa set of assets using the prices found in the provided `Feed`. You can optionally specify the period to take into account.
+
+image::https://roboquant.org/img/correlation.png[]
+
+----
+include::{sourcefile}[tag=correlation]
+----
+
+=== MetricChart
+Plots a metric from that has been captured during runs. If the metric data covers multiple runs, like in a walk-forward back test, each run will be plotted as its own series.
+
+image::https://roboquant.org/img/walkforward.png[]
+
+=== CalendarChart
+Plots a metric over one or more year calendar, using color coding (heatmap) to indicate how each individual day performed. If you quickly want to see which days had the highest and lowest PNL, this is a great chart to use.
+
+image::https://roboquant.org/img/calendar.png[]
+
+=== OrderChart
+Plots all the placed orders.
+
+
+== TradeChart
+Plots all the executed trades from a run.
+
+image::https://roboquant.org/img/trades.png[]
+
+
+=== AssetAllocation
+
+
+[#_custom_charts]
+=== Custom Charts
+Developing your own chart is not difficult.Have a look at source code of one of the included charts as inspiration.If you think your chart would also be useful for other traders, consider creating a PR to get it included.
+
+
+
+
+
+
+
+

@@ -1,0 +1,64 @@
+= Roboquant
+:source-highlighter: rouge
+:icons: font
+:sourcefile: ../../samples/roboquant.kt
+:jbake-date: 2020-10-01
+
+The `Roboquant` class (org.roboquant.Roboquant) is the engine of the platform, not to be confused with roboquant™ (all small letters) which is the name of the platform itself. An instance of the `Roboquant` class orchestrates the interaction between all the components and performs the actual runs.
+
+== Define
+You are only required to provide a strategy when creating a new instance of Roboquant. So the bare minimum would be:
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=basic]
+----
+
+The following default values will then be used:
+
+* No metrics will be captured at all
+* The `SimBroker` will be used as the broker with its default settings
+* The `DefaultPolicy` will be the policy used
+* The `MemoryLogger` for logging the metrics (although without any metrics captured, there is not much to log)
+
+Each of these defaults can be overwritten with a different implementation when you instantiate a `Roboquant`, as the following code snippet shows:
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=complete]
+----
+
+== Run
+After you have created an instance of roboquant and have a xref:../feed/index.adoc[feed] created, you can start a run. the same `run` method is used for all the different stages, from back testing to live trading (see also xref:../introduction/four_stages.adoc[4 stages])
+
+In the most simple form, you provide a feed as a parameter. In this case, all the events available in the feed will be used in the run.
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=run]
+----
+
+If you provide a live feed, it would run forever. However, you can restrict the run to a certain timeframe, again you can use this for a historical feed and a live feed alike.
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=run2]
+----
+
+You can invoke a run multiple times, for example for different timeframes. The following code shows how to perform a walk-forward back test of two-year cycle:
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=run3]
+----
+
+== Running in Parallel
+If you have a lot of back test to run, you can run them in parallel and leverage all the cores on your computer to expedite the process. Roboquant scales almost linear with the number of available cores, and it only requires a few extra lines of code.
+
+The following example shows how to run a walk forward in parallel. By reusing the same logger instance, all results will be stored in a single instance and can be easily compared afterwards.
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=runParallel]
+----
+

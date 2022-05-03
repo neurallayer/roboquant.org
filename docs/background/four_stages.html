@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="roboquant algo-trading framework" />
+    <meta name="keywords" content="trading Kotlin algo roboquant">
+    <meta name="theme-color" content="#3296C8">
+    <title>roboquant - The 4 Stages</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+    <!-- Font awesome icons-->
+    <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link href="/css/rouge_github.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/documentation.html">Documentation</a></li>
+                <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
+                <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/neurallayer/roboquant" target="_blank">
+                    <span class="icon"><i class="fa fa-github fa-1x"></i></span> GitHub
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+              <header class="masthead bg-primary text-white text-center">
+                     <div class="container px-5 my-1">
+                         <div class="row gx-5">
+                            <div class="col-lg-4 mb-5 mb-lg-0">
+                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">The 4 Stages</h1>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </header>
+
+            <section class="py-5">
+                <div class="container px-5 my-1">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+ <nav id="sidebar" class="navbar fixed-left sticky-top">
+
+    <ul class="list-unstyled">
+    <span class="navbar-brand">Content</span>
+    
+
+                 <li class="nav-item"><a href="/background/index.html" class="nav-link">Background</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 <li class="nav-item"><a href="/background/features.html" class="nav-link">Features</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 <li class="nav-item"><a href="/background/four_stages.html" class="nav-link">The 4 Stages</a></li>
+
+
+
+
+    </ul>
+</nav>
+                         </div>
+                        <div class="col-lg-8">
+                            <div class="col h-100">
+                                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are 4 distinct stages that you go through when you develop, test and run a new trading strategy. The below diagram shows the stages and the order in which they are executed:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="four_stages.png" alt="four stages">
+</div>
+</div>
+<div class="paragraph">
+<p>Each stage has its own specific purpose and benefits. There are two important rules to adhere to:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If possible at all, don&#8217;t skip a stage. Every stage has its purpose in order to end up with a well performing and robust trading strategy.</p>
+</li>
+<li>
+<p>And perhaps more important, if you are not happy about the performance in a later stage, go back to the first stage. Often minor changes to the code can have major impact on the results and should be thoroughly tested at every stage.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Roboquant support all 4 stages and requires minimal changes to your code when you move from one stage to the next. Your strategy and policy should not change at all between stages, and only the selected data feeds and broker differ between stages.</p>
+</div>
+<div class="paragraph">
+<p>The following table shows the used <code>Broker</code> and <code>Feed</code> in the different stage:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Stage</th>
+<th class="tableblock halign-left valign-top">Broker</th>
+<th class="tableblock halign-left valign-top">Feed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Back Testing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SimBroker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Historic data feeds</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Live Testing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SimBroker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Live data feeds</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Paper Trading</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Real broker using demo account</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Live data feeds</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Live Trading</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Real broker using live account</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Live data feeds</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_stage_1_back_testing">Stage 1: Back Testing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this stage you&#8217;ll use <strong>historic data</strong> and the <strong>SimBroker</strong> to test your strategy and policy.</p>
+</div>
+<div class="paragraph">
+<p>You can of course run a single back test over the complete timeline of historic data. But roboquant makes it easy to also run walk forward and randomly sampled time-frames. This gives you better insights into the performance under different regimes.</p>
+</div>
+<div class="paragraph">
+<p>It is very important to get as many insights as possible about the overall performance and behavior, so you know what to expect and also what not expect when you finally will go live.</p>
+</div>
+<div class="paragraph">
+<p>This is also the only stage where you should develop and modify your strategy and policy. If you are not happy with the performance at a later stage, you should return this first stage and make the changes there. If for example you would like to use circuit-breakers during live trading to get some extra peace of mind, you should already include this logic during back testing.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+configure the SimBroker similar to the live trading account and broker you are going to use. Provide realistic cost and starting account balance, so you don&#8217;t get a too optimistic outlook on the overall cost. In general is it preferable to be conservative and define a higher cost structure at this stage then the other way around.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_stage_2_live_testing">Stage 2: Live Testing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this stage you use <strong>live data</strong> and the <strong>SimBroker</strong> to test your strategy and policy. The main purpose is to validate if your strategy is still performing well on unseen data.</p>
+</div>
+<div class="paragraph">
+<p>It is very easy to over fit your strategy during back testing, and this stage provides some confirmation if that is the case. That being said, often you cannot run this stage for as long as required to have a perfect insight into over fitting, so this is an indication at best.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+roboquant can use any combination of data feed and broker. So you don&#8217;t need to restrict yourself to data feed from your broker. There might be better and/or cheaper alternatives available.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_stage_3_paper_trading">Stage 3: Paper Trading</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this stage you use <strong>live data</strong> with a <strong>paper trading or demo account</strong> to test your strategy and policy. The main purpose is to validate if your policy is still performing well using a different broker implementation. For example, are the order generated by the policy fully supported and behave as expected.</p>
+</div>
+<div class="paragraph">
+<p>This stage is where you validate the robustness of your approach and get extra confirmation that it is ready to go live. If you don&#8217;t have a solid policy in place that handles all conditions, you should not go to the live trading stage.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+this will only work if your broker offers decent paper trading simulation. But if you are serious about algo-trading, you should only settle on brokers that offer realistic paper trading functionality.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_stage_4_live_trading">Stage 4: Live Trading</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this stage you&#8217;ll use <strong>live data</strong> and the <strong>live trading account</strong> to run your strategy and policy and now real money is at stake. And although we are not at a testing stage, you will need to closely monitor the performance and take appropriate actions. One reason is that even paper trading is a just simulation and cannot fully prepare for what will happen during live trading.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+it is easier than you think to create a solution that goes haywire and for example generates too many orders. If this happens, you can quickly lose all your money due to transaction- and other types of cost.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+<footer class="bg-dark py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; roboquant.org 2021</div></div>
+            <div class="col-auto">
+                <a class="link-light small" href="/community.html">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>

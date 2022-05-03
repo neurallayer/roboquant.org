@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="roboquant algo-trading framework" />
+    <meta name="keywords" content="trading Kotlin algo roboquant">
+    <meta name="theme-color" content="#3296C8">
+    <title>roboquant - Jupyter Notebooks</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+    <!-- Font awesome icons-->
+    <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link href="/css/rouge_github.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/documentation.html">Documentation</a></li>
+                <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
+                <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/neurallayer/roboquant" target="_blank">
+                    <span class="icon"><i class="fa fa-github fa-1x"></i></span> GitHub
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+              <header class="masthead bg-primary text-white text-center">
+                     <div class="container px-5 my-1">
+                         <div class="row gx-5">
+                            <div class="col-lg-4 mb-5 mb-lg-0">
+                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Jupyter Notebooks</h1>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </header>
+
+            <section class="py-5">
+                <div class="container px-5 my-1">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+ <nav id="sidebar" class="navbar fixed-left sticky-top">
+
+    <ul class="list-unstyled">
+    <span class="navbar-brand">Content</span>
+    
+
+
+
+               <li class="nav-item"><a href="/tutorial/index.html" class="nav-link">Welcome</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/install.html" class="nav-link">Installation</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/roboquant.html" class="nav-link">Roboquant</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/feed.html" class="nav-link">Feed</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/simbroker.html" class="nav-link">Simulated Broker</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/metrics.html" class="nav-link">Metrics</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/strategy.html" class="nav-link">Strategy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/policy.html" class="nav-link">Policy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/orders.html" class="nav-link">Orders</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/domain.html" class="nav-link">Domain Model</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/jupyter.html" class="nav-link">Jupyter Notebooks</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/integration.html" class="nav-link">Integration</a></li>
+
+
+    </ul>
+</nav>
+                         </div>
+                        <div class="col-lg-8">
+                            <div class="col h-100">
+                                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Since developing an algorithmic trading strategy requires a lot of experimentation and testing, an interactive development environment like Jupyter Notebooks is ideal. Especially in the beginning phase it can help to progress a lot quicker.</p>
+</div>
+<div class="paragraph">
+<p>Roboquant is designed to be used in both your own standalone application, and in Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without too much ceremony and there are many charts included out-of-the-box that makes it easier to interpreter what is going on during a <code>run</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usage">Usage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Using roboquant in a Kotlin Jupyter Notebook requires just a single command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>%use roboquant</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will automatically load the roboquant library (it will actually load three roboquant modules: core, extra and crypt) and import most packages from the core module. If you run <code>Welcome()</code> in a notebook cell, you&#8217;ll see the version of roboquant you are using together with other information about the environment you are in.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Chromium based browsers perform best, especially when you plot charts with many data points.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_jupyter_lab_vs_jupyter_classic">Jupyter Lab vs Jupyter Classic</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The rendering required for Jupyter Lab is slightly different from for Jupyter Lab.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_importing_packages">Importing packages</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, most of the core roboquant packages are imported. But the packages of the crypto and extra modules are not by default included.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using_external_libraries">Using external libraries</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You are not limited to using roboquant libraries only. In fact, you can use any Java or Kotlin library that is published.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_charts">Charts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Roboquant uses the excellent <a href="https://echarts.apache.org">Apache ECharts</a> JavaScript library to render charts in your browser. All charts are interactive, meaning you can zoom into areas of interest, and you can often filter on values of interest. There is a toolbar at the right top of each chart that allows for additional functionality, like downloading the chart or seeing the raw data.</p>
+</div>
+<div class="sect2">
+<h3 id="_design_philosophy">Design Philosophy</h3>
+<div class="paragraph">
+<p>In order to build robust and well performing trading algorithms, often you need to diversify across assets and asset classes. So a lot of the visualization is focused on providing insights on what is happening in such scenario and less in plotting the metrics a single asset only.</p>
+</div>
+<div class="paragraph">
+<p>All the charts are tailored for roboquant usage and are not a generic plotting library. So typically with just one line of code, you plot a very feature rich chart. However, adding a new custom chart is not much work, see also <a href="#_custom_charts">Custom Charts</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_global_settings">Global settings</h3>
+<div class="paragraph">
+<p>There are several global settings that will apply to all charts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>if you have to plot a lot of samples (&gt; 500,000) your browser can become unresponsive. To avoid this problem, you can limit the number of samples send to the browser. The default is no limits.</p>
+</li>
+<li>
+<p>you can change the theme used to draw the charts. The default is "auto" when it will try to detect the theme from your Jupyter Lab environment and use that.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="nc">Chart</span><span class="p">.</span><span class="n">maxSamples</span> <span class="p">=</span> <span class="mi">100_000</span>
+    <span class="nc">Chart</span><span class="p">.</span><span class="n">theme</span> <span class="p">=</span> <span class="s">"auto"</span> <span class="c1">// auto, dark, light</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_general_usage">General usage</h3>
+<div class="paragraph">
+<p>If the chart instance is the last statement of a notebook cell, it will get rendered automatically.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// If last line, will get plotted</span>
+    <span class="nc">MetricChart</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If however if it is not the last statement, you&#8217;ll need to invoke the <code>render()</code> method. This is also the way to plot multiple charts.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// Plot the correlation matrix over different timeframes</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">timeframe</span> <span class="k">in</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="nf">past</span><span class="p">(</span><span class="mi">20</span><span class="p">.</span><span class="n">years</span><span class="p">).</span><span class="nf">split</span><span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="n">years</span><span class="p">))</span>
+        <span class="nc">PriceCorrelationChart</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">assets</span><span class="p">,</span> <span class="n">timeframe</span><span class="p">).</span><span class="nf">render</span><span class="p">()</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pricebarcart">PriceBarCart</h3>
+<div class="imageblock">
+<div class="content">
+<img src="https://roboquant.org/img/prices.png" alt="prices">
+</div>
+</div>
+<div class="paragraph">
+<p>Main features of this chart include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>shows the PriceBar actions (also referred to a candlesticks) for a certain <code>Asset</code> in a <code>Feed</code></p>
+</li>
+<li>
+<p>provides an overview of the volume in the same chart (if the feed has this information)</p>
+</li>
+<li>
+<p>can handle large amounts of candles, and you can easily zoom into smaller timeframes to see more details</p>
+</li>
+<li>
+<p>you can plot trades for the same asset in the same chart to see when they were created.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">trades</span> <span class="p">=</span> <span class="n">roboquant</span><span class="p">.</span><span class="n">broker</span><span class="p">.</span><span class="n">account</span><span class="p">.</span><span class="n">trades</span>
+
+    <span class="c1">// Plot the first asset from the feed and also all the trades for that same asset</span>
+    <span class="nc">PriceBarChart</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">feed</span><span class="p">.</span><span class="n">assets</span><span class="p">.</span><span class="nf">first</span><span class="p">(),</span> <span class="n">trades</span> <span class="p">=</span> <span class="n">trades</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pricechart">PriceChart</h3>
+<div class="paragraph">
+<p>Similar to the functionality offered by a PriceBarChart, but this chart displays a single price and not a candlestick. As a result it can be used to plot any type of <code>PriceAction</code> and not only a PriceBar. So if you have a feed with order books data or trade prices, this is the chart to use.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// Plot how Apple performed during the 2008 financial crisis</span>
+    <span class="kd">val</span> <span class="py">apple</span> <span class="p">=</span> <span class="n">feed</span><span class="p">.</span><span class="n">assets</span><span class="p">.</span><span class="nf">getBySymbol</span><span class="p">(</span><span class="s">"AAPL"</span><span class="p">)</span>
+    <span class="nc">PriceChart</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">apple</span><span class="p">,</span> <span class="n">timeframe</span> <span class="p">=</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="n">financialCrisis2008</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+currently, you can only plot a single asset at a time. This might change in the future.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pricecorrelationchart">PriceCorrelationChart</h3>
+<div class="paragraph">
+<p>Plots the Pearson correlation ofa set of assets using the prices found in the provided <code>Feed</code>. You can optionally specify the period to take into account.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://roboquant.org/img/correlation.png" alt="correlation">
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    val assets = feed.assets.take(10)
+    PriceCorrelationChart(feed, assets, timeframe = Timeframe.past(2.years))</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_metricchart">MetricChart</h3>
+<div class="paragraph">
+<p>Plots a metric from that has been captured during runs. If the metric data covers multiple runs, like in a walk-forward back test, each run will be plotted as its own series.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://roboquant.org/img/walkforward.png" alt="walkforward">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_calendarchart">CalendarChart</h3>
+<div class="paragraph">
+<p>Plots a metric over one or more year calendar, using color coding (heatmap) to indicate how each individual day performed. If you quickly want to see which days had the highest and lowest PNL, this is a great chart to use.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://roboquant.org/img/calendar.png" alt="calendar">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_orderchart">OrderChart</h3>
+<div class="paragraph">
+<p>Plots all the placed orders.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tradechart">TradeChart</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Plots all the executed trades from a run.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://roboquant.org/img/trades.png" alt="trades">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_assetallocation">AssetAllocation</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_custom_charts">Custom Charts</h3>
+<div class="paragraph">
+<p>Developing your own chart is not difficult.Have a look at source code of one of the included charts as inspiration.If you think your chart would also be useful for other traders, consider creating a PR to get it included.</p>
+</div>
+</div>
+</div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+<footer class="bg-dark py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; roboquant.org 2021</div></div>
+            <div class="col-auto">
+                <a class="link-light small" href="/community.html">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>

@@ -1,10 +1,9 @@
 @file:Suppress("unused", "UNUSED_PARAMETER", "UNUSED_VARIABLE")
 
 
-import org.roboquant.RunPhase
+import org.roboquant.Roboquant
 import org.roboquant.common.Asset
 import org.roboquant.common.max
-import org.roboquant.common.mean
 import org.roboquant.common.min
 import org.roboquant.feeds.Event
 import org.roboquant.strategies.*
@@ -42,8 +41,8 @@ fun extending() {
 
         override fun generate(asset: Asset, data: DoubleArray): Signal? {
             return when {
-                data.max() > data.mean() * 2 -> Signal(asset, Rating.BUY)
-                data.min() > data.mean() / 2 -> Signal(asset, Rating.SELL)
+                data.last() == data.max() -> Signal(asset, Rating.BUY)
+                data.last() == data.min() -> Signal(asset, Rating.SELL)
                 else -> null
             }
         }
@@ -52,6 +51,15 @@ fun extending() {
 
     // end::extend[]
 }
+
+
+fun composition(strategy1: Strategy, strategy2: Strategy) {
+    // tag::composition[]
+    val strategy = CombinedStrategy(strategy1, strategy2)
+    val roboquant = Roboquant(strategy)
+    // end::composition[]
+}
+
 
 fun ta() {
 
@@ -96,16 +104,23 @@ class MyStrategy2 : Strategy {
     override fun generate(event: Event): List<Signal> {
         val signals = mutableListOf<Signal>()
         for ((asset, priceAction) in event.prices) {
+
             val currentPrice = priceAction.getPrice()
             val previousPrice = previousPrices.getOrDefault(asset, currentPrice)
-            if (currentPrice > 1.05 * previousPrice) signals.add(Signal(asset, Rating.BUY))
-            if (currentPrice < 0.95 * previousPrice) signals.add(Signal(asset, Rating.SELL))
+
+            if (currentPrice > 1.05 * previousPrice)
+                signals.add(Signal(asset, Rating.BUY))
+
+            if (currentPrice < 0.95 * previousPrice)
+                signals.add(Signal(asset, Rating.SELL))
+
             previousPrices[asset] = currentPrice
         }
         return signals
     }
 
-    override fun start(runPhase: RunPhase) {
+    // Make sure we clear the previous prices when reset
+    override fun reset() {
         previousPrices.clear()
     }
 

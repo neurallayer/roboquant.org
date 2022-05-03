@@ -32,11 +32,12 @@ fun complete() {
     val myPolicy = DefaultPolicy()
     val metric1 = AccountSummary()
     val metric2 = ProgressMetric()
+    val metric3 = ProgressMetric()
     val myLogger  = MemoryLogger()
     // tag::complete[]
     val roboquant = Roboquant(
         strategy,
-        metric1, metric2,
+        metric1, metric2, metric3,
         policy = myPolicy,
         broker = myBroker,
         logger = myLogger)

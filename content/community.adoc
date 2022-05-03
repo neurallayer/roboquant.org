@@ -11,7 +11,7 @@ Roboquant has its own Discord server with various channels to discuss algo-tradi
 
 Since the roboquant documentation is still lacking in certain areas, this is a great place to ask questions and find out more about the platform.
 
-Invite link: https://discord.gg/Vt9wgNjSzw[join roboquant]
+Invite link: https://discord.gg/Vt9wgNjSzw[join roboquant, window=_target]
 
 
 == icon:github[1x] GitHub

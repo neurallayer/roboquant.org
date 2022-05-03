@@ -2,142 +2,74 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
         <loc>https://roboquant.org/community.html</loc>
-        <lastmod>2022-05-01</lastmod>
+        <lastmod>2022-05-03</lastmod>
+    </url>
+    <url>
+        <loc>https://roboquant.org/documentation.html</loc>
+        <lastmod>2022-05-03</lastmod>
     </url>
     <url>
         <loc>https://roboquant.org/screenshots.html</loc>
-        <lastmod>2022-04-29</lastmod>
+        <lastmod>2022-05-03</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/get_started.html</loc>
-        <lastmod>2022-04-22</lastmod>
+        <loc>https://roboquant.org/background/index.html</loc>
+        <lastmod>2020-12-01</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/installation/index.html</loc>
-        <lastmod>2022-04-09</lastmod>
+        <loc>https://roboquant.org/tutorial/index.html</loc>
+        <lastmod>2020-12-01</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/roboquant/index.html</loc>
-        <lastmod>2022-02-05</lastmod>
+        <loc>https://roboquant.org/tutorial/install.html</loc>
+        <lastmod>2020-11-01</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/broker/index.html</loc>
-        <lastmod>2020-12-20</lastmod>
+        <loc>https://roboquant.org/tutorial/roboquant.html</loc>
+        <lastmod>2020-10-01</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/broker/simbroker.html</loc>
-        <lastmod>2020-03-21</lastmod>
+        <loc>https://roboquant.org/tutorial/feed.html</loc>
+        <lastmod>2020-09-01</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/broker/buyingpower.html</loc>
-        <lastmod>2020-01-31</lastmod>
+        <loc>https://roboquant.org/tutorial/simbroker.html</loc>
+        <lastmod>2020-08-01</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/feed/index.html</loc>
-        <lastmod>2020-01-31</lastmod>
+        <loc>https://roboquant.org/tutorial/metrics.html</loc>
+        <lastmod>2020-07-01</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/integration/index.html</loc>
-        <lastmod>2020-01-31</lastmod>
+        <loc>https://roboquant.org/background/features.html</loc>
+        <lastmod>2020-06-01</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/introduction/index.html</loc>
-        <lastmod>2020-01-31</lastmod>
+        <loc>https://roboquant.org/tutorial/strategy.html</loc>
+        <lastmod>2020-06-01</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/jupyter/charts.html</loc>
-        <lastmod>2020-01-31</lastmod>
+        <loc>https://roboquant.org/tutorial/policy.html</loc>
+        <lastmod>2020-05-01</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/jupyter/index.html</loc>
-        <lastmod>2020-01-31</lastmod>
+        <loc>https://roboquant.org/tutorial/orders.html</loc>
+        <lastmod>2020-04-01</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/metrics/index.html</loc>
-        <lastmod>2020-01-31</lastmod>
+        <loc>https://roboquant.org/tutorial/domain.html</loc>
+        <lastmod>2020-03-01</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/multimarkets/currencies.html</loc>
-        <lastmod>2020-01-31</lastmod>
+        <loc>https://roboquant.org/tutorial/jupyter.html</loc>
+        <lastmod>2020-02-01</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/multimarkets/time.html</loc>
-        <lastmod>2020-01-31</lastmod>
+        <loc>https://roboquant.org/background/four_stages.html</loc>
+        <lastmod>2020-01-01</lastmod>
     </url>
     <url>
-        <loc>https://roboquant.org/documentation/policy/index.html</loc>
-        <lastmod>2020-01-31</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/strategy/index.html</loc>
-        <lastmod>2020-01-31</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/integration/alpaca.html</loc>
-        <lastmod>2020-01-29</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/integration/ibkr.html</loc>
-        <lastmod>2020-01-25</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/integration/iex.html</loc>
-        <lastmod>2020-01-22</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/introduction/four_stages.html</loc>
-        <lastmod>2020-01-21</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/integration/oanda.html</loc>
-        <lastmod>2020-01-20</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/integration/yahoo.html</loc>
-        <lastmod>2020-01-20</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/introduction/events.html</loc>
-        <lastmod>2020-01-20</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/integration/alphavantage.html</loc>
-        <lastmod>2020-01-19</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/integration/crypto.html</loc>
-        <lastmod>2020-01-15</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/introduction/features.html</loc>
-        <lastmod>2020-01-15</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/introduction/glossary.html</loc>
-        <lastmod>2020-01-15</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/metrics/metrics_logger.html</loc>
-        <lastmod>2020-01-15</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/policy/order.html</loc>
-        <lastmod>2020-01-15</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/strategy/signal.html</loc>
-        <lastmod>2020-01-15</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/feed/csv.html</loc>
-        <lastmod>2020-01-11</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/introduction/design.html</loc>
-        <lastmod>2020-01-10</lastmod>
-    </url>
-    <url>
-        <loc>https://roboquant.org/documentation/feed/avro.html</loc>
-        <lastmod>2020-01-09</lastmod>
+        <loc>https://roboquant.org/tutorial/integration.html</loc>
+        <lastmod>2020-01-01</lastmod>
     </url>
 </urlset>

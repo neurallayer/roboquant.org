@@ -1,21 +1,21 @@
-<#assign sections = ["introduction",  "installation", "roboquant", "feed", "strategy", "policy", "broker", "metrics", "jupyter", "multimarkets", "integration"]>
-<nav id="sidebar">
-    <h3>Documentation</h3>
-    <#list sections as section>
-        <#if content.uri?starts_with("documentation/" + section)>
-            <#assign state="open" />
-        <#else>
-            <#assign state="" />
+ <nav id="sidebar" class="navbar fixed-left sticky-top">
+
+    <ul class="list-unstyled">
+    <span class="navbar-brand">Content</span>
+    <#list docs as doc>
+
+        <#if content.uri?starts_with("tutorial/")>
+            <#if doc.uri?starts_with("tutorial/")>
+               <li class="nav-item"><a href="/${doc.uri}" class="nav-link">${doc.title}</a></li>
+            </#if>
         </#if>
-        <details ${state}>
-            <summary>${section}</summary>
-            <ul class="nav flex-column">
-                <#list docs as doc>
-                     <#if doc.uri?starts_with("documentation/" + section)>
+
+        <#if content.uri?starts_with("background/")>
+            <#if doc.uri?starts_with("background/")>
                  <li class="nav-item"><a href="/${doc.uri}" class="nav-link">${doc.title}</a></li>
-                     </#if>
-                </#list>
-            </ul>
-        </details>
+            </#if>
+        </#if>
+
     </#list>
+    </ul>
 </nav>
