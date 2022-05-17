@@ -1,6 +1,7 @@
 @file:Suppress("unused", "UNUSED_PARAMETER", "UNUSED_VARIABLE")
 
 import org.roboquant.Roboquant
+import org.roboquant.brokers.Account
 import org.roboquant.brokers.sim.SimBroker
 import org.roboquant.common.ParallelJobs
 import org.roboquant.common.Timeframe
@@ -11,6 +12,7 @@ import org.roboquant.feeds.HistoricFeed
 import org.roboquant.feeds.LiveFeed
 import org.roboquant.feeds.random.RandomWalk
 import org.roboquant.jupyter.MetricChart
+import org.roboquant.jupyter.TradeChart
 import org.roboquant.logging.MemoryLogger
 import org.roboquant.metrics.AccountSummary
 import org.roboquant.metrics.ProgressMetric
@@ -25,6 +27,12 @@ fun basic() {
     // end::basic[]
 }
 
+
+fun tradeChart(account: Account) {
+    // tag::tradeChart[]
+    TradeChart(account.trades)
+    // end::tradeChart[]
+}
 
 fun complete() {
     val strategy  = EMACrossover()

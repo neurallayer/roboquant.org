@@ -8,47 +8,72 @@ You use the `SimBroker` class (short for Simulated Broker) both for the back tes
 SimBroker can simulate a wide range of brokers and the exchanges. Besides several configuration parameters that are available, the behavior can
 further be extended by providing custom models for trading, fee and account modelling.
 
-== Define
-The main usage of the `SimBroker` is surprisingly simple. It contains one property and one method (next to the default Component interface methods)
+== Usage
+The instantiation of a `SimBroker` is surprisingly simple.
 
-- the property is `account`, which hold all the exposed state, like cash, portfolio, trades and orders.
-- the method is `place(orders: List<Order>, event: Event)` which enables you to place orders at this broker.
 
-Normally you don't invoke the `place` method directly, but use `roboquant.run` method to run a trading strategy and it
-will call the `place` method as part of its flow.
+
+[source, kotlin]
+----
+include::{sourcefile}[tag=basic]
+----
+
+NOTE: This is also the configuration you get when you create an instance of `Roboquant` and don't specify a broker at all.
+
+However, you can overwrite the default values. Common use cases are:
+
+* you don't trade in USD but in some other currency
+* you want to simulate a `MarginAccount` and not the default `CashAccount`
+* you want to apply custom fees and pricing logic
+
+[source, kotlin]
+----
+include::{sourcefile}[tag=extra]
+----
+
+The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit.Typically, the initial deposit is denoted in a single currency, like a *$50,000.00 USD* account. But this is not a hard requirement and in with the `SimBroker` you can use multi-currency initial deposits if you prefer. However, there is always only one `baseCurrency`
 
 
 == Order Handling
 When an order is placed at the SimBroker, it only gets processed once there is a known price for the underlying asset. Till an event happens that has that price available, the order will remain in its INITIAL state.
 
-Any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted (so it is in open state). So an order in INITIAL state cannot expire and time based TIF only start counting after it has been accepted.
+Any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted. So an order in INITIAL state will not expire and time based TIF only start counting after it has been accepted.
 
-Any open orders will be processed based on FIFO, so older open orders are processed first. Exception to this rule are cancellation orders that are always processed before other order types.
+Any open orders will be processed based on FIFO (first-in-first-out) basis, so older open orders are processed first. Exception to this rule are modify orders that are always processed before regular order types. The most common modify orders are a `CancelOrder` and an `UpdateOrder`.
 
-== Initial Deposit
-The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit.
-
-Typically, the initial deposit is denoted in a single currency, like a *$50,000.00 USD* account. But this is not a hard requirement and in with the `SimBroker` you can use multi-currency initial deposits if you like.
 
 == Account
-The `Account` object contains all the exposed state of a broker and is identical between the simulated broker and real brokers.
+`broker.account` property returns an Account object. This `Account` object contains a snapshot of the exposed state of a broker and is identical between the simulated broker and real brokers. The object is guaranteed not to change, what also implies if you want an updated version you need to invoke `broker.account` again.
 
-It contains the following key attributes:
+The `Account` object contains the following key properties:
 
-- base currency to use
-- cash balance
-- portfolio with all the (open) positions
+- base currency of the account
+- total cash balance (represents the credit cash - any loan Value)
+- portfolio with all the open positions
 - trades that contain all the trade executions that happened so far
-- orders, both active orders and closed orders
-- amount of buying power available for trading
+- orders, both active open orders and closed orders
+- total amount of buying power available for trading (denoted in the base currency of the account)
+
+.Equity
+****
+Equity is key attribute to monitor if you want to see how your account is performing. The following two equations hold true when using SimBroker to run a back test:
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=equity]
+----
+
+****
+
+
 
 .Buying Power
 ****
-Always use the `buyingPower` property if you want to know how much money is remaining for trading. Especially when having a Margin Account, you shouldn't rely on the `cash` property, since that doesn't take into account any margin or leverage you might have.
+Always use the `buyingPower` property if you want to know how much money is remaining for trading. Especially when using a Margin Account, you shouldn't rely on the `cash` property, since that doesn't take into account any margin or leverage you might have.
 ****
 
 == Custom Models
-Custom models are a way to further customize the behavior of `SimBroker`. The following two types of models can implemented if the default ones that comes with roboquant are not sufficient.
+Custom models are a way to further customize the behavior of `SimBroker`. The following two types of models can be implemented if the default ones that comes with roboquant are not sufficient.
 
 - Cost models: the transaction related cost like slippage and fees/commissions. It is important to notice that if you don't take these type of cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading.
 
@@ -74,7 +99,7 @@ Out of the box roboquant comes with several models that cather for common accoun
 === Cash Accounts
 Cash accounts can be modelled using the `CashAccount`. This model is also the default if you don't provide a BuyingPowerModel when instantiating a xref:simbroker.adoc[SimBroker].
 
-`CashBuyingPowerModel` only basis the buying power on the available cash, and no margin is calculated and no leverage is used..
+`CashBuyingPowerModel` only basis the buying power on the available cash, and no margin is calculated and no leverage is used.
 
 The below table shows an example using the default CashBuyingPowerModel when trading in different currencies, EUR and USD in this case.
 

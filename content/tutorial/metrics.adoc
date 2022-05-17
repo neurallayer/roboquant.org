@@ -19,7 +19,7 @@ include::{sourcefile}[tag=standard]
 TIP: if metrics are very compute intensive, and you don't require them at each step, you can wrap them in a `MetricsScheduler` and configure when they should run.
 
 == Custom Metrics
-You can develop your own metrics. The easiest way to do so is to extend the SimpleMetric class. All you have to do is implement that `calc` method and return `MetricResults`, which is just a typealias for `Map<String,Number>`
+You can develop your own metrics. The easiest way to do so is to extend the SimpleMetric class. All you have to do is implement that `calc` method and return `MetricResults`, which is just a `typealias` for `Map<String,Number>`
 
 In the `calc` function you have access to both the account object and the event. Metrics also implement the `Component` interface, so can keep state in a metric if required and clean it when a Component lifecycle method is invoked.
 

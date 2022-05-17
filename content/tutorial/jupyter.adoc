@@ -59,7 +59,7 @@ If the chart instance is the last statement of a notebook cell, it will get rend
 include::{sourcefile}[tag=use1]
 ----
 
-If however if it is not the last statement, you'll need to invoke the `render()` method. This is also the way to plot multiple charts.
+However, if the chart instance is not the last statement in a cell, you'll need to invoke the `render()` method. This is also the way to plot multiple charts.
 
 [source, kotlin]
 ----

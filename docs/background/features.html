@@ -113,7 +113,7 @@
                                 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Roboquant has 4 main objectives that determine most features: Fast, Flexible, Friendly and Free.</p>
+<p>Roboquant has 4 main objectives that determine most features: Fast, Flexible, Friendly and Free. All the features listed on this page can be directly linked to one of these objectives.</p>
 </div>
 </div>
 </div>
@@ -126,10 +126,10 @@
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-check-square-o"></i> Fully utilize modern hardware, like large multicore machines</p>
+<p><i class="fa fa-check-square-o"></i> Use of multi-threading and coroutines to fully utilize modern hardware, like large multicore machines</p>
 </li>
 <li>
-<p><i class="fa fa-check-square-o"></i> Optimized back-test engine so the engine itself will not become the bottleneck</p>
+<p><i class="fa fa-check-square-o"></i> Optimized and fine-tuned back-test engine so the engine itself will not become the bottleneck</p>
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> Run multiple back-test in parallel</p>
@@ -205,7 +205,16 @@
 <div class="sect2">
 <h3 id="_trading_specific_domain_model">Trading specific Domain Model</h3>
 <div class="paragraph">
-<p>Rather than having a generic framework where you still have to code a lot to make it usable, roboquant approach is that of a trading specific model. For example, if you want to plot a chart, you don&#8217;t first have to mangle data to make it consumable by the chart. In roboquant the charts understand the key domain concepts like Account, Trades and Metrics and can plot these directly.</p>
+<p>Rather than having a generic framework where you still have to code a lot to make it usable, roboquant approach is that of a trading specific domain model.</p>
+</div>
+<div class="paragraph">
+<p>For example, you can easily work with monetary amounts</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">wallet</span> <span class="p">=</span> <span class="mi">100</span><span class="p">.</span><span class="nc">EUR</span> <span class="p">+</span> <span class="mi">20</span><span class="p">.</span><span class="nc">USD</span> <span class="p">+</span> <span class="mi">1_000</span><span class="p">.</span><span class="nc">JPY</span>
+<span class="n">wallet</span><span class="p">.</span><span class="nf">convert</span><span class="p">(</span><span class="nc">USD</span><span class="p">)</span></code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -231,7 +240,15 @@ Notebook.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Once you code base grow too large for a notebook, the exact same code can be used in a traditional IDE.</p>
+<p>Another example, if you want to plot a chart, you don&#8217;t first have to mangle data to make it consumable by the chart. In roboquant the charts understand the key domain concepts like Account, Trades and Metrics and can plot these directly.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="nc">TradeChart</span><span class="p">(</span><span class="n">account</span><span class="p">.</span><span class="n">trades</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once you code base grows too large for a notebook, the same code can be used in a traditional IDE.</p>
 </div>
 </div>
 <div class="sect2">
@@ -283,7 +300,7 @@ Notebook.</p>
 <div class="content">
 <div class="title">Deep Learning</div>
 <div class="paragraph">
-<p>For inspiration look at what quality training data did for deep learning networks and the progress in recent years. By having a standardized sets of data that are known to be of good quality and representative, it became much easier to compare different network architectures and continue to improve those that shows promise.</p>
+<p>For inspiration look at what quality training data did for deep learning networks and the progress in recent years. By having a standardized sets of data that are known to be of good quality and representative, it became much easier to compare different network architectures and continue to improve those that showed most promise.</p>
 </div>
 <div class="paragraph">
 <p>The same hopefully can also be achieved in the algo-trading world, so we can easily validate claims.</p>
@@ -296,7 +313,10 @@ Notebook.</p>
 <h2 id="_feature_comparison">Feature Comparison</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The following table provide a short overview of how the features of roboquant stack up to some alternative algo-trading frameworks. Of course, we are not completely objective, so we recommend trying them out yourself and see which one suits you best.</p>
+<p>The following table provide a short overview of how the features of roboquant stack up to some alternative algo-trading frameworks.</p>
+</div>
+<div class="paragraph">
+<p>Of course, we are not completely objective, so we recommend trying them out for yourself and see which one suits you best.</p>
 </div>
 <table class="tableblock frame-ends grid-all stretch table">
 <colgroup>
@@ -327,21 +347,21 @@ Notebook.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Live Testing</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&cross;</p></td>
+<td class="tableblock halign-center valign-top"></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paper Trading</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&cross;</p></td>
+<td class="tableblock halign-center valign-top"></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Live Trading</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&cross;</p></td>
+<td class="tableblock halign-center valign-top"></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
 </tr>
 <tr>
@@ -361,36 +381,36 @@ Notebook.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Active Development</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&cross;</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-center valign-top"></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Multi Currency</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&cross;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&cross;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&cross;</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-center valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Crypto Exchanges</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&cross;</p></td>
+<td class="tableblock halign-center valign-top"></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Advanced Order Types</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&cross;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&cross;</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-center valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Multi Region</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&cross;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&cross;</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-center valign-top"></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
 </tr>
 <tr>
@@ -412,14 +432,14 @@ Notebook.</p>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&cross;</p></td>
+<td class="tableblock halign-center valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Completely Free</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&check;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&cross;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&cross;</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-center valign-top"></td>
 </tr>
 </tbody>
 </table>

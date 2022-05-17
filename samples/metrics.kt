@@ -18,7 +18,9 @@ fun standard(strategy: Strategy, sp500Asset: Asset) {
     val metric6 = PNL()
     val metric7 = AlphaBeta(sp500Asset, 250)
 
-    val roboquant = Roboquant(strategy, metric1, metric2, metric3, metric4, metric5, metric6, metric7)
+    val roboquant = Roboquant(
+        strategy, metric1, metric2, metric3, metric4, metric5, metric6, metric7
+    )
     // end::standard[]
 }
 

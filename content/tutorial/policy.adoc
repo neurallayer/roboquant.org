@@ -25,7 +25,7 @@ CAUTION: If there is one thing that prevents many from going live with a strateg
 == Out-of-the-box policies
 
 === DefaultPolicy
-As the name already suggests, this is the default policy that will be used if no other policy is specified when create an isntance of the `Roboquant` class. It provides several configuration properties that influence its behavior.
+As the name already suggests, this is the default policy that will be used if no other policy is specified when create an instance of the `Roboquant` class. It provides several configuration properties that influence its behavior.
 
 You can also easily extend the DefaultPolicy to create your own order types.
 

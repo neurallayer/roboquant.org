@@ -13,7 +13,7 @@ There are several types of integrations available with 3rd parties:
 
 In some cases a single 3rd party provides all types of functionality, or sometimes they are just specialised for a subset. You can combine several of these 3rd parties together in a single run, for example use a data feed from one provider and the broker functionality from another one.
 
-One of the design principles is that roboquant tries to avoid exposing 3rd party API's directly and typically wraps them in roboquant equivalent types. This makes it easier to switch between different providers and also reduces the learning curve.
+One of the design principles is that roboquant tries to avoid exposing 3rd party APIs directly and typically wraps them in roboquant equivalent types. This makes it easier to switch between different providers and also reduces the learning curve.
 
 == Modules & Packages
 The third party integrations have their own modules and are not part of the core `roboquant` module:
@@ -33,7 +33,7 @@ import org.roboquant.oanda.*
 
 
 == Configuration
-When you want to integrate with a 3rd party, you most likely require credentials to gain access to their API's. Often this is in the form of an API key and secret. You can of course embed these credentials directly in your source code, however roboquant offers better and more secure alternatives.
+When you want to integrate with a 3rd party, you most likely require credentials to gain access to their APIs. Often this is in the form of an API key and secret. You can of course embed these credentials directly in your source code, however roboquant offers better and more secure alternatives.
 
 The following list shows the steps how roboquant resolves these configuration parameters:
 

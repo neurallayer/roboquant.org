@@ -131,24 +131,57 @@ further be extended by providing custom models for trading, fee and account mode
 </div>
 </div>
 <div class="sect1">
-<h2 id="_define">Define</h2>
+<h2 id="_usage">Usage</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The main usage of the <code>SimBroker</code> is surprisingly simple. It contains one property and one method (next to the default Component interface methods)</p>
+<p>The instantiation of a <code>SimBroker</code> is surprisingly simple.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">broker</span> <span class="p">=</span> <span class="nc">SimBroker</span><span class="p">()</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+This is also the configuration you get when you create an instance of <code>Roboquant</code> and don&#8217;t specify a broker at all.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>However, you can overwrite the default values. Common use cases are:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>the property is <code>account</code>, which hold all the exposed state, like cash, portfolio, trades and orders.</p>
+<p>you don&#8217;t trade in USD but in some other currency</p>
 </li>
 <li>
-<p>the method is <code>place(orders: List&lt;Order&gt;, event: Event)</code> which enables you to place orders at this broker.</p>
+<p>you want to simulate a <code>MarginAccount</code> and not the default <code>CashAccount</code></p>
+</li>
+<li>
+<p>you want to apply custom fees and pricing logic</p>
 </li>
 </ul>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">broker</span> <span class="p">=</span> <span class="nc">SimBroker</span><span class="p">(</span>
+        <span class="n">initialDeposit</span> <span class="p">=</span> <span class="nc">Wallet</span><span class="p">(</span><span class="mi">10_000</span><span class="p">.</span><span class="nc">EUR</span><span class="p">),</span>
+        <span class="n">baseCurrency</span> <span class="p">=</span> <span class="nc">Currency</span><span class="p">.</span><span class="nc">EUR</span><span class="p">,</span>
+        <span class="n">feeModel</span> <span class="p">=</span> <span class="nc">PercentageFeeModel</span><span class="p">(),</span>
+        <span class="n">accountModel</span> <span class="p">=</span> <span class="nc">MarginAccount</span><span class="p">(),</span>
+        <span class="n">pricingEngine</span> <span class="p">=</span> <span class="nc">SpreadPricingEngine</span><span class="p">()</span>
+    <span class="p">)</span></code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p>Normally you don&#8217;t invoke the <code>place</code> method directly, but use <code>roboquant.run</code> method to run a trading strategy and it
-will call the <code>place</code> method as part of its flow.</p>
+<p>The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit.Typically, the initial deposit is denoted in a single currency, like a <strong>$50,000.00 USD</strong> account. But this is not a hard requirement and in with the <code>SimBroker</code> you can use multi-currency initial deposits if you prefer. However, there is always only one <code>baseCurrency</code></p>
 </div>
 </div>
 </div>
@@ -159,21 +192,10 @@ will call the <code>place</code> method as part of its flow.</p>
 <p>When an order is placed at the SimBroker, it only gets processed once there is a known price for the underlying asset. Till an event happens that has that price available, the order will remain in its INITIAL state.</p>
 </div>
 <div class="paragraph">
-<p>Any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted (so it is in open state). So an order in INITIAL state cannot expire and time based TIF only start counting after it has been accepted.</p>
+<p>Any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted. So an order in INITIAL state will not expire and time based TIF only start counting after it has been accepted.</p>
 </div>
 <div class="paragraph">
-<p>Any open orders will be processed based on FIFO, so older open orders are processed first. Exception to this rule are cancellation orders that are always processed before other order types.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_initial_deposit">Initial Deposit</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit.</p>
-</div>
-<div class="paragraph">
-<p>Typically, the initial deposit is denoted in a single currency, like a <strong>$50,000.00 USD</strong> account. But this is not a hard requirement and in with the <code>SimBroker</code> you can use multi-currency initial deposits if you like.</p>
+<p>Any open orders will be processed based on FIFO (first-in-first-out) basis, so older open orders are processed first. Exception to this rule are modify orders that are always processed before regular order types. The most common modify orders are a <code>CancelOrder</code> and an <code>UpdateOrder</code>.</p>
 </div>
 </div>
 </div>
@@ -181,38 +203,57 @@ will call the <code>place</code> method as part of its flow.</p>
 <h2 id="_account">Account</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>Account</code> object contains all the exposed state of a broker and is identical between the simulated broker and real brokers.</p>
+<p><code>broker.account</code> property returns an Account object. This <code>Account</code> object contains a snapshot of the exposed state of a broker and is identical between the simulated broker and real brokers. The object is guaranteed not to change, what also implies if you want an updated version you need to invoke <code>broker.account</code> again.</p>
 </div>
 <div class="paragraph">
-<p>It contains the following key attributes:</p>
+<p>The <code>Account</code> object contains the following key properties:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>base currency to use</p>
+<p>base currency of the account</p>
 </li>
 <li>
-<p>cash balance</p>
+<p>total cash balance (represents the credit cash - any loan Value)</p>
 </li>
 <li>
-<p>portfolio with all the (open) positions</p>
+<p>portfolio with all the open positions</p>
 </li>
 <li>
 <p>trades that contain all the trade executions that happened so far</p>
 </li>
 <li>
-<p>orders, both active orders and closed orders</p>
+<p>orders, both active open orders and closed orders</p>
 </li>
 <li>
-<p>amount of buying power available for trading</p>
+<p>total amount of buying power available for trading (denoted in the base currency of the account)</p>
 </li>
 </ul>
 </div>
 <div class="sidebarblock">
 <div class="content">
+<div class="title">Equity</div>
+<div class="paragraph">
+<p>Equity is key attribute to monitor if you want to see how your account is performing. The following two equations hold true when using SimBroker to run a back test:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="c1">// Current state</span>
+<span class="kd">val</span> <span class="py">equity1</span> <span class="p">=</span> <span class="n">account</span><span class="p">.</span><span class="n">cash</span> <span class="p">+</span> <span class="n">account</span><span class="p">.</span><span class="n">portfolio</span><span class="p">.</span><span class="n">marketValue</span>
+
+<span class="c1">// Sum of all changes</span>
+<span class="kd">val</span> <span class="py">equity2</span> <span class="p">=</span> <span class="n">initialDeposit</span> <span class="p">+</span> <span class="n">account</span><span class="p">.</span><span class="n">trades</span><span class="p">.</span><span class="n">realizedPNL</span> <span class="p">+</span> <span class="n">account</span><span class="p">.</span><span class="n">positions</span><span class="p">.</span><span class="n">unrealizedPNL</span>
+
+<span class="nf">assert</span><span class="p">(</span><span class="n">equity1</span> <span class="p">==</span> <span class="n">equity2</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
 <div class="title">Buying Power</div>
 <div class="paragraph">
-<p>Always use the <code>buyingPower</code> property if you want to know how much money is remaining for trading. Especially when having a Margin Account, you shouldn&#8217;t rely on the <code>cash</code> property, since that doesn&#8217;t take into account any margin or leverage you might have.</p>
+<p>Always use the <code>buyingPower</code> property if you want to know how much money is remaining for trading. Especially when using a Margin Account, you shouldn&#8217;t rely on the <code>cash</code> property, since that doesn&#8217;t take into account any margin or leverage you might have.</p>
 </div>
 </div>
 </div>
@@ -222,7 +263,7 @@ will call the <code>place</code> method as part of its flow.</p>
 <h2 id="_custom_models">Custom Models</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Custom models are a way to further customize the behavior of <code>SimBroker</code>. The following two types of models can implemented if the default ones that comes with roboquant are not sufficient.</p>
+<p>Custom models are a way to further customize the behavior of <code>SimBroker</code>. The following two types of models can be implemented if the default ones that comes with roboquant are not sufficient.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -282,7 +323,7 @@ will call the <code>place</code> method as part of its flow.</p>
 <p>Cash accounts can be modelled using the <code>CashAccount</code>. This model is also the default if you don&#8217;t provide a BuyingPowerModel when instantiating a <a href="simbroker.html">SimBroker</a>.</p>
 </div>
 <div class="paragraph">
-<p><code>CashBuyingPowerModel</code> only basis the buying power on the available cash, and no margin is calculated and no leverage is used..</p>
+<p><code>CashBuyingPowerModel</code> only basis the buying power on the available cash, and no margin is calculated and no leverage is used.</p>
 </div>
 <div class="paragraph">
 <p>The below table shows an example using the default CashBuyingPowerModel when trading in different currencies, EUR and USD in this case.</p>

@@ -1,15 +1,17 @@
 = Features
 :jbake-type: doc
 :icons: font
+:source-highlighter: rouge
+:sourcefile: ../../samples/features.kt
 :jbake-date: 2020-06-01
 
-Roboquant has 4 main objectives that determine most features: Fast, Flexible, Friendly and Free.
+Roboquant has 4 main objectives that determine most features: Fast, Flexible, Friendly and Free. All the features listed on this page can be directly linked to one of these objectives.
 
 == Fast
 Nowadays, there is so much more data available than ever before. It would be a lost opportunity not being able to use this data to develop smarter and better performing strategies. Roboquant can work seamlessly with these large data-sets:
 
-* [x] Fully utilize modern hardware, like large multicore machines
-* [x] Optimized back-test engine so the engine itself will not become the bottleneck
+* [x] Use of multi-threading and coroutines to fully utilize modern hardware, like large multicore machines
+* [x] Optimized and fine-tuned back-test engine so the engine itself will not become the bottleneck
 * [x] Run multiple back-test in parallel
 * [x] Very fast CSV parsing, allowing to process directories full of CSV files in just seconds
 * [x] Support for file formats like Apache Avro™ to further reduce parsing overhead and easily share data sets
@@ -37,7 +39,15 @@ Flexible also means roboquant is fully modular and can be extended:
 Developing trading algorithms requires a lot of different skills. You need to know of course a lot about trading itself, but also programming and even a bit of statistics comes in handy. Roboquant tries to cater for both experienced and less experienced users and make it as user-friendly as possible without sacrificing the other objectives.
 
 === Trading specific Domain Model
-Rather than having a generic framework where you still have to code a lot to make it usable, roboquant approach is that of a trading specific model. For example, if you want to plot a chart, you don't first have to mangle data to make it consumable by the chart. In roboquant the charts understand the key domain concepts like Account, Trades and Metrics and can plot these directly.
+Rather than having a generic framework where you still have to code a lot to make it usable, roboquant approach is that of a trading specific domain model.
+
+For example, you can easily work with monetary amounts
+
+[source,kotlin,indent=0]
+----
+include::{sourcefile}[tag=friendly1]
+----
+
 
 === Interactive Development
 Roboquant can be run inside a Jupyter Notebook which provides a very easy entry for people who might find a full-blown development environment too much hassle.A lot of effort went into designing an API that is very easy to use from a
@@ -48,7 +58,14 @@ Notebook.
 * [x] Many charts out of the box that provides insights into the feeds and the results of a run
 * [x] Sensible defaults for many arguments, so you don't have to specify them all the time
 
-Once you code base grow too large for a notebook, the exact same code can be used in a traditional IDE.
+Another example, if you want to plot a chart, you don't first have to mangle data to make it consumable by the chart. In roboquant the charts understand the key domain concepts like Account, Trades and Metrics and can plot these directly.
+
+[source,kotlin,indent=0]
+----
+include::{sourcefile}[tag=friendly2]
+----
+
+Once you code base grows too large for a notebook, the same code can be used in a traditional IDE.
 
 [#_order_management]
 === Order Management
@@ -71,13 +88,15 @@ But it doesn't stop at the software. For real progress also data has to become f
 
 .Deep Learning
 ****
-For inspiration look at what quality training data did for deep learning networks and the progress in recent years. By having a standardized sets of data that are known to be of good quality and representative, it became much easier to compare different network architectures and continue to improve those that shows promise.
+For inspiration look at what quality training data did for deep learning networks and the progress in recent years. By having a standardized sets of data that are known to be of good quality and representative, it became much easier to compare different network architectures and continue to improve those that showed most promise.
 
 The same hopefully can also be achieved in the algo-trading world, so we can easily validate claims.
 ****
 
 == Feature Comparison
-The following table provide a short overview of how the features of roboquant stack up to some alternative algo-trading frameworks. Of course, we are not completely objective, so we recommend trying them out yourself and see which one suits you best.
+The following table provide a short overview of how the features of roboquant stack up to some alternative algo-trading frameworks.
+
+Of course, we are not completely objective, so we recommend trying them out for yourself and see which one suits you best.
 
 [frame=ends]
 [.table]
@@ -86,20 +105,20 @@ The following table provide a short overview of how the features of roboquant st
 |Feature |roboquant |Backtrader | Zipline| Lean (QuantConnect)
 
 |Back Testing|&check;| &check;|  &check;| &check;
-|Live Testing|&check;| &check;|  &cross;| &check;
-|Paper Trading|&check;| &check;| &cross;| &check;
-|Live Trading| &check;| &check;| &cross;| &check;
+|Live Testing|&check;| &check;|  | &check;
+|Paper Trading|&check;| &check;| | &check;
+|Live Trading| &check;| &check;| | &check;
 |Primary Language| Kotlin| Python| Python| C#
 |License| Apache| GPL| Apache| Apache
-|Active Development|&check;| &check;| &cross;| &check;
-|Multi Currency| &check;|  &cross;| &cross;| &cross;
-|Crypto Exchanges| &check;|  &check;| &cross;| &check;
-|Advanced Order Types| &check;| &check;| &cross;| &cross;
-|Multi Region| &check;|  &cross;| &cross;|&check;
+|Active Development|&check;| | | &check;
+|Multi Currency| &check;|  | | 
+|Crypto Exchanges| &check;| &check;| | &check;
+|Advanced Order Types| &check;| &check;| | 
+|Multi Region| &check;|  | |&check;
 |Performance| high| low| mid| high
 |Code base| small| midsize| large| very large
-|Jupyter Notebook| &check;|  &check;| &check;| &cross;
-|Completely Free| &check;|  &check;| &cross;| &cross;
+|Jupyter Notebook| &check;|  &check;| &check;| 
+|Completely Free| &check;|  &check;| | 
 |===
 
 
