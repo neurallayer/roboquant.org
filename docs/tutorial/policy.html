@@ -244,7 +244,7 @@ If there is one thing that prevents many from going live with a strategy, it is 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">act</span><span class="p">(</span><span class="n">signals</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;,</span> <span class="n">account</span><span class="p">:</span> <span class="nc">Account</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;</span> <span class="p">{</span>
         <span class="kd">val</span> <span class="py">orders</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;()</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">signal</span> <span class="k">in</span> <span class="n">signals</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">val</span> <span class="py">qty</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">rating</span><span class="p">.</span><span class="n">isPositive</span><span class="p">)</span> <span class="mf">100.0</span> <span class="k">else</span> <span class="p">-</span><span class="mf">100.0</span>
+            <span class="kd">val</span> <span class="py">qty</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">rating</span><span class="p">.</span><span class="n">isPositive</span><span class="p">)</span> <span class="mi">100</span> <span class="k">else</span> <span class="p">-</span><span class="mi">100</span>
             <span class="kd">val</span> <span class="py">order</span> <span class="p">=</span> <span class="nc">MarketOrder</span><span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">asset</span><span class="p">,</span> <span class="n">qty</span><span class="p">)</span>
             <span class="n">orders</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
         <span class="p">}</span>
@@ -262,10 +262,62 @@ If there is one thing that prevents many from going live with a strategy, it is 
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">act</span><span class="p">(</span><span class="n">signals</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;,</span> <span class="n">account</span><span class="p">:</span> <span class="nc">Account</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">signals</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span>
-            <span class="kd">val</span> <span class="py">qty</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">rating</span><span class="p">.</span><span class="n">isPositive</span><span class="p">)</span> <span class="mf">100.0</span> <span class="k">else</span> <span class="p">-</span><span class="mf">100.0</span>
+            <span class="kd">val</span> <span class="py">qty</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">rating</span><span class="p">.</span><span class="n">isPositive</span><span class="p">)</span> <span class="mi">100</span> <span class="k">else</span> <span class="p">-</span><span class="mi">100</span>
             <span class="nc">MarketOrder</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">asset</span><span class="p">,</span> <span class="n">qty</span><span class="p">)</span>
         <span class="p">}</span>
     <span class="p">}</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following example is more realistic and shows an implementation that calculates the ATR (Average True Range) that is then used to set the limit amount in a Limit Order.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyPolicy3</span><span class="p">(</span>
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">atrPercentage</span><span class="p">:</span> <span class="nc">Double</span> <span class="p">=</span> <span class="mf">0.01</span><span class="p">,</span>
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">atrPeriod</span> <span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">5</span>
+<span class="p">)</span> <span class="p">:</span> <span class="nc">DefaultPolicy</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">// map that contains the ATR per asset</span>
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">atrs</span> <span class="p">=</span> <span class="n">mutableMapOf</span><span class="p">&lt;</span><span class="nc">Asset</span><span class="p">,</span> <span class="nc">ATR</span><span class="p">&gt;()</span>
+
+    <span class="cm">/**
+     * Update the ATR for all the assets in the event
+     */</span>
+    <span class="k">private</span> <span class="k">fun</span> <span class="nf">updateAtrs</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">event</span><span class="p">.</span><span class="n">actions</span><span class="p">.</span><span class="n">filterIsInstance</span><span class="p">&lt;</span><span class="nc">PriceBar</span><span class="p">&gt;().</span><span class="nf">forEach</span> <span class="p">{</span>
+            <span class="kd">val</span> <span class="py">atr</span> <span class="p">=</span> <span class="n">atrs</span><span class="p">.</span><span class="nf">getOrPut</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">asset</span><span class="p">)</span> <span class="p">{</span> <span class="nc">ATR</span><span class="p">(</span><span class="n">atrPeriod</span><span class="p">)</span> <span class="p">}</span>
+            <span class="n">atr</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">act</span><span class="p">(</span><span class="n">signals</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;,</span> <span class="n">account</span><span class="p">:</span> <span class="nc">Account</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;</span> <span class="p">{</span>
+        <span class="nf">updateAtrs</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">super</span><span class="p">.</span><span class="nf">act</span><span class="p">(</span><span class="n">signals</span><span class="p">,</span> <span class="n">account</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="cm">/**
+     * Create limit BUY and SELL orders with the limit based on the ATR of the asset
+     */</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">createOrder</span><span class="p">(</span><span class="n">signal</span><span class="p">:</span> <span class="nc">Signal</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nc">Size</span><span class="p">,</span> <span class="n">price</span><span class="p">:</span> <span class="nc">Double</span><span class="p">):</span> <span class="nc">Order</span><span class="p">?</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">atr</span> <span class="p">=</span> <span class="n">atrs</span><span class="p">[</span><span class="n">signal</span><span class="p">.</span><span class="n">asset</span><span class="p">]</span>
+
+        <span class="c1">// Only return an order if we know the ATR</span>
+        <span class="k">return</span> <span class="k">if</span> <span class="p">(</span><span class="n">atr</span> <span class="p">!=</span> <span class="k">null</span> <span class="p">&amp;&amp;</span> <span class="n">atr</span><span class="p">.</span><span class="nf">isReady</span><span class="p">())</span> <span class="p">{</span>
+            <span class="kd">val</span> <span class="py">direction</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">size</span> <span class="p">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="mi">1</span> <span class="k">else</span> <span class="p">-</span><span class="mi">1</span>
+            <span class="kd">val</span> <span class="py">limit</span> <span class="p">=</span> <span class="n">price</span> <span class="p">-</span> <span class="n">direction</span> <span class="p">*</span> <span class="n">atr</span><span class="p">.</span><span class="nf">calc</span><span class="p">()</span> <span class="p">*</span> <span class="n">atrPercentage</span>
+            <span class="nc">LimitOrder</span><span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">asset</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">null</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">reset</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">atrs</span><span class="p">.</span><span class="nf">clear</span><span class="p">()</span>
+        <span class="k">super</span><span class="p">.</span><span class="nf">reset</span><span class="p">()</span>
+    <span class="p">}</span>
+
 <span class="p">}</span></code></pre>
 </div>
 </div>
