@@ -9,11 +9,13 @@ import org.roboquant.brokers.sim.TradeOrderHandler
 import org.roboquant.common.Asset
 import org.roboquant.common.Size
 import org.roboquant.feeds.Event
+import org.roboquant.feeds.PriceBar
 import org.roboquant.orders.*
 import org.roboquant.policies.DefaultPolicy
 import org.roboquant.policies.Policy
 import org.roboquant.strategies.NoSignalStrategy
 import org.roboquant.strategies.Signal
+import org.roboquant.strategies.utils.ATR
 import java.time.Instant
 
 // tag::basic[]
@@ -52,7 +54,7 @@ class MyNaivePolicy : Policy {
     override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
         val orders = mutableListOf<Order>()
         for (signal in signals) {
-            val qty = if (signal.rating.isPositive) 100.0 else -100.0
+            val qty = if (signal.rating.isPositive) 100 else -100
             val order = MarketOrder(signal.asset, qty)
             orders.add(order)
         }
@@ -66,12 +68,61 @@ class MyNaivePolicy2 : Policy {
 
     override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
         return signals.map {
-            val qty = if (it.rating.isPositive) 100.0 else -100.0
+            val qty = if (it.rating.isPositive) 100 else -100
             MarketOrder(it.asset, qty)
         }
     }
 }
 // end::naive2[]
+
+
+// tag::custom3[]
+class MyPolicy3(
+    private val atrPercentage: Double = 0.01,
+    private val atrPeriod : Int = 5
+) : DefaultPolicy() {
+
+    // map that contains the ATR per asset
+    private val atrs = mutableMapOf<Asset, ATR>()
+
+    /**
+     * Update the ATR for all the assets in the event
+     */
+    private fun updateAtrs(event: Event) {
+        event.actions.filterIsInstance<PriceBar>().forEach {
+            val atr = atrs.getOrPut(it.asset) { ATR(atrPeriod) }
+            atr.add(it)
+        }
+    }
+
+    override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
+        updateAtrs(event)
+        return super.act(signals, account, event)
+    }
+
+    /**
+     * Create limit BUY and SELL orders with the limit based on the ATR of the asset
+     */
+    override fun createOrder(signal: Signal, size: Size, price: Double): Order? {
+        val atr = atrs[signal.asset]
+
+        // Only return an order if we know the ATR
+        return if (atr != null && atr.isReady()) {
+            val direction = if (size > 0) 1 else -1
+            val limit = price - direction * atr.calc() * atrPercentage
+            LimitOrder(signal.asset, size, limit)
+        } else {
+            null
+        }
+    }
+
+    override fun reset() {
+        atrs.clear()
+        super.reset()
+    }
+
+}
+// end::custom3[]
 
 fun noStrategy(myAdvancedPolicy:Policy) {
     // tag::advanced[]
@@ -83,7 +134,7 @@ fun orders(signals: List<Signal>) {
     // tag::orders[]
     val orders = mutableListOf<Order>()
     for (signal in signals) {
-        val size = if (signal.rating.isPositive) 100.0 else -100.0
+        val size = if (signal.rating.isPositive) 100 else -100
         val order = MarketOrder(signal.asset, size)
         orders.add(order)
     }

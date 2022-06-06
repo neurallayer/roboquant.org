@@ -62,6 +62,15 @@ Or using the more concise Kotlin way of doing things:
 include::{sourcefile}[tag=naive2]
 ----
 
+
+The following example is more realistic and shows an implementation that calculates the ATR (Average True Range) that is then used to set the limit amount in a Limit Order.
+[source, kotlin]
+----
+include::{sourcefile}[tag=custom3]
+----
+
+
+
 When developing custom policies, they should not only be robust and deal with corner-cases, but they should also be explainable. Back-testing over large amounts of data is already challenging enough without having a Policy in place which behavior is very difficult to wrap your head around. So the KISS design principle (Keep It Simple, Stupid) applies to Policies.
 
 == Advanced Policies

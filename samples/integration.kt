@@ -30,7 +30,7 @@ fun oandaHistoricFeed() {
     // tag::oandahistoric[]
     val feed = OANDAHistoricFeed()
     val tf = Timeframe.past(2.days)
-    feed.retrieveCandles("EUR_USD", "USD_JPY", "GBP_USD", timeframe = tf)
+    feed.retrieve("EUR_USD", "USD_JPY", "GBP_USD", timeframe = tf)
     // end::oandahistoric[]
 }
 
@@ -59,7 +59,7 @@ fun alpacaHistoricFeed() {
     // tag::alpacahistoric[]
     val feed = AlpacaHistoricFeed()
     val tf = Timeframe.past(100.days)
-    feed.retrieveBars("AAPL", "IBM", timeframe = tf)
+    feed.retrieve("AAPL", "IBM", timeframe = tf)
     // end::alpacahistoric[]
 }
 
@@ -68,7 +68,7 @@ fun alpacaHistoricFeed() {
 fun iexHistoricFeed() {
     // tag::iexhistoric[]
     val feed = IEXHistoricFeed()
-    feed.retrievePriceBar("AAPL", "IBM", range = Range.FIVE_YEARS)
+    feed.retrieve("AAPL", "IBM", range = Range.FIVE_YEARS)
     // end::iexhistoric[]
 }
 
