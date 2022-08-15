@@ -9,19 +9,19 @@ There are several ways to find put out more about roboquant.
 == Tutorial
 A comprehensive xref:tutorial/index.adoc[tutorial], well suited if you are new to roboquant. It comes with many code samples to get you started.
 
-== Background
-Click xref:background/index.adoc[here] to find out why roboquant was created in the first place and some key benefits.
+== Explanation
+Click xref:background/index.adoc[here] to find out why _roboquant_ was created in the first place and some key benefits.
 
-== Howto Notebooks
+== How-to Notebooks
 These notebooks focus on achieving a particular task, like how to integrate with Binance and use its data to run back-tests.
-You can run them either on your local machine, or use an online notebook provider like MyBinder.org to run them.
+You can run the notebooks on your local machine or use an online notebook provider like MyBinder.org to run them.
 
 To find out more, go to https://github.com/neurallayer/roboquant-notebook/tree/main[GitHub]. Or if you just want to try it without any installation, go to image:https://mybinder.org/badge_logo.svg[Binder,link=https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/tutorials]
 
 == API reference
-The roboquant code API (work in progress).
+The _roboquant_ code API (work in progress).
 
 == Community Help
-Head over to the roboquant Discord Server if you have questions. If you have not yet joined: https://discord.gg/Vt9wgNjSzw[join roboquant, window=_target]
+Head over to the _roboquant_ Discord Server if you have questions. If you have not yet joined: https://discord.gg/Vt9wgNjSzw[join roboquant, window=_target]
 
 

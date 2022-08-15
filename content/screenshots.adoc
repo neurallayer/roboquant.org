@@ -5,9 +5,9 @@
 :imagesdir: img/
 :icons: font
 
-When working in a Jupyter Notebook, roboquant comes with several types of charts that help to understand how the strategy is behaving. This pages shows some examples of those charts. The charts in a Notebook are also interactive, allowing you to zoom in areas of interest of filter only those values you want to see.
+When working in a Jupyter Notebook, _roboquant_ comes with several types of charts that help to understand how the strategy is behaving. This pages shows some examples of those charts. The charts in a Notebook are also interactive, allowing you to zoom in areas of interest or filter only those values you want to see.
 
-TIP: You can try out these charts yourself, since they all come from the https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/tutorials/charts.ipynb[charts notebook, window=_target].
+TIP: You can try these charts yourself right now in your browser, since they all come from the https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/tutorials/charts.ipynb[charts notebook, window=_target].
 
 == Walk forward
 Plot a metric during a walk-forward test to provide insight into the performance of the strategy during different timeframes. Here we plot the account equity (= cash + positions) and that provides insights how a strategy performs during different timeframes. Clearly we can see that the strategy wasn't profitable during every timeframe.

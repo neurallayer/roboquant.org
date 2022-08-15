@@ -33,9 +33,9 @@ If you don't have Docker yet installed on your computer, check out https://www.d
 If you don't want to install anything locally, you can use a publicly hosted environment:
 
 * Launch the notebooks right now on MyBinder.org by clicking image:https://mybinder.org/badge_logo.svg[Binder,link=https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/tutorials,window=_blank]
-* Go to https://datalore.jetbrains.com/[JetBrains Datalore]. It has excellent support for Kotlin notebooks and has a free tier available if you just want to try roboquant out.
+* Go to https://datalore.jetbrains.com/[JetBrains Datalore]. It has excellent support for Kotlin notebooks and has a free tier available if you just want to try _roboquant_ out.
 
-== Install a roboquant library
+== Install a _roboquant_ library
 Just add `roboquant` as a dependency to your build tool, like Maven or Gradle. Regular versions of the Roboquant modules are published to Maven Central and snapshots are published to OSS Sonatype (https://s01.oss.sonatype.org/content/repositories/snapshots).
 
 The latest available versions:
@@ -73,7 +73,7 @@ implementation group: 'org.roboquant', name: 'roboquant', version: 'VERSION'
 ----
 
 == Building from source
-First start with cloning the roboquant GitHub repository to your local disk. The quickest way to be up and running is then to install IntelliJ IDEA (either the free community edition or the paid Ultimate version) and open the directory you just cloned. IntelliJ IDEA will recognize it as Kotlin/Maven project, and you can build it and run test directly from the IDE.
+First start with cloning the _roboquant_ GitHub repository to your local disk. The quickest way to be up and running is then to install IntelliJ IDEA (either the free community edition or the paid Ultimate version) and open the directory you just cloned. IntelliJ IDEA will recognize it as Kotlin/Maven project, and you can build it and run test directly from the IDE.
 
 You can also use a plain text editor of course. Roboquant uses a setup and directory structure that removes much of the ceremony often found in many Java/Kotlin projects. So no need to go 10 directories deep to locate the source file you were looking for.
 

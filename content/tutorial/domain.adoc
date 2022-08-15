@@ -5,14 +5,14 @@
 :icons: font
 
 
-Besides components like Strategy and Policy, roboquant also comes with a number of domain specific classes that make it easier to implement robust trading strategies.
+Besides components like Strategy and Policy, _roboquant_ also comes with a number of domain specific classes that make it easier to implement robust trading strategies.
 
 
 == Money
-In order to make it easier to develop in a multi-currency setup, roboquant introduces a number of domain classes: <<Currency>>, <<Amount>>, <<Wallet>> and <<ExchangeRates>> that will help.
+In order to make it easier to develop in a multi-currency setup, _roboquant_ introduces a number of domain classes: <<Currency>>, <<Amount>>, <<Wallet>> and <<ExchangeRates>> that will help.
 
 === Currency
-The roboquant `Currency` class represents any type of currency. It follows closely the interface that comes with the standard  Java Currency class, but is independent of it. The main reason is that the Java implementation doesn't support cryptocurrencies while the roboquant implementation supports any type of currency.
+The _roboquant_ `Currency` class represents any type of currency. It follows closely the interface that comes with the standard  Java Currency class, but is independent of it. The main reason is that the Java implementation doesn't support cryptocurrencies while the _roboquant_ implementation supports any type of currency.
 
 Also, several common currencies are predefined, to make it easier to work with.
 
@@ -58,7 +58,7 @@ include::{sourcefile}[tag=er]
 
 
 == Time
-In order to make it easier to trade in a multi-regions, roboquant introduces a number of domain classes: <<Timeline>>, <<Timeframe>>, <<ZonedPeriod>>.
+In order to make it easier to trade in a multi-regions, _roboquant_ introduces a number of domain classes: <<Timeline>>, <<Timeframe>>, <<ZonedPeriod>>.
 
 Internally all time in stored in `Instant` type and so can always be easily compared, regardless from which timezone the information originated from. The `Event` for example exposes its time attribute as an `Instant`.
 
@@ -81,5 +81,5 @@ When dealing with time duration, there are actual two types of duration in Java/
 1. `Period` which you use for days and longer and is timezone sensitive
 2. `Duration` which you use for days and shorted and is not timezone sensitive
 
-The ZonedPeriod in roboquant makes this a single implementation.
+The ZonedPeriod in _roboquant_ makes this a single implementation.
 

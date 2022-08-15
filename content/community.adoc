@@ -7,9 +7,9 @@
 There are several ways to get into contact, ask questions, contribute, and share your experience regarding roboquant.
 
 == icon:users[1x] Discord
-Roboquant has its own Discord server with various channels to discuss algo-trading in general and to get help on developing your own strategies using the roboquant platform.
+_Roboquant_ has its own Discord server with various channels to discuss algo-trading in general and to get help on developing your own strategies using the _roboquant_ platform.
 
-Since the roboquant documentation is still lacking in certain areas, this is a great place to ask questions and find out more about the platform.
+Since the _roboquant_ documentation is still lacking in certain areas, this is a great place to ask questions and find out more about the platform.
 
 Invite link: https://discord.gg/Vt9wgNjSzw[join roboquant, window=_target]
 

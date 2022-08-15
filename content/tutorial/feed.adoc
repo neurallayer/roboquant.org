@@ -7,7 +7,7 @@ A feed is responsible for delivering the data that is required to test and run s
 
 A Feed can be used to deliver historic and live data. A feed wraps its information in an event and put that event on a EventChannel. This is all done asynchronously from rest of the trading logic. And although an `EventChannel` is used to deliver the events, this channel is normally only directly accessed by the `Roboquant` instance. A strategy will be passed just the plain Event object.
 
-To read more why roboquant has selected this event-driven approach, read this xref:../introduction/events.adoc[introduction on event-driven software].
+To read more why _roboquant_ has selected this event-driven approach, read this xref:../introduction/events.adoc[introduction on event-driven software].
 
 == Event
 An `Event` instance contains all the data that happens at a certain point in time. It contains the following two attributes
@@ -76,7 +76,7 @@ include::{sourcefile}[tag=play]
 == CSV Feed
 CSV files are one of the most common used file formats for storing historic price data. However, since there is no standard defined, they differ a lot depending on where you downloaded them from. Additionally, they often lack some required meta-data, like the currency of the price or exchange they ar traded.
 
-The `CSVFeed` class in roboquant offers several configuration options to cater to these differences, allowing you to parse almost all CSV files found on the internet.
+The `CSVFeed` class in _roboquant_ offers several configuration options to cater to these differences, allowing you to parse almost all CSV files found on the internet.
 
 === Basic usage
 The simplest usage is to provide the directory that contains the CSV files and the CSVFeed will try to parse them based on defaults and the content it finds.
@@ -122,7 +122,7 @@ Apache Avro™ is a data serialization system. Avro provides:
 * A compact, fast, binary data format.
 * A container file, to store persistent data.
 
-Avro files make it easy to store large amount of data in a single file and efficiently use it during back testing. The AvroFeed implementation of roboquant only loads data in memory when it is required, so very large datasets can be used without having to worry about memory issues.
+Avro files make it easy to store large amount of data in a single file and efficiently use it during back testing. The AvroFeed implementation of _roboquant_ only loads data in memory when it is required, so very large datasets can be used without having to worry about memory issues.
 
 Also since the Avro Feed uses a single file, it is easier to distribute than for example directories full of CSV files.
 

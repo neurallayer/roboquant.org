@@ -22,6 +22,24 @@ fun ema() {
 }
 
 
+fun simpleSignal(apple: Asset) {
+    // tag::simpleSignal[]
+    // apple is of the type Asset
+    val signal = Signal(apple, Rating.BUY)
+    // end::simpleSignal[]
+}
+
+
+fun allSignalAttributes(asset: Asset, rating: Rating) {
+    // tag::attrSignal[]
+    val type: SignalType = SignalType.BOTH
+    val takeProfit: Double = Double.NaN
+    val stopLoss: Double = Double.NaN
+    val probability: Double = Double.NaN
+    val source: String = ""
+    Signal(asset, rating, type, takeProfit, stopLoss, probability, source)
+    // end::attrSignal[]
+}
 
 fun rsi() {
 

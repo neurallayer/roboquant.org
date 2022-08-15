@@ -39,7 +39,7 @@ TIF sets an execution policy for an order under which conditions the order remai
 . Time based, defining how long the order stays valid. Two common ones are GTD (Good Till Day) and GTC (Good Till Cancelled)
 . Fill based, defining under which fill conditions the order stays valid. A common one if FOK (Fill Or Kill)
 
-The default TIF for orders in roboquant used if none is explicitly specified, is GTC (Good Till Cancelled).
+The default TIF for orders in _roboquant_ used if none is explicitly specified, is GTC (Good Till Cancelled).
 
 
 == Custom Order Types

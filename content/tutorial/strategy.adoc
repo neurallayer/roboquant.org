@@ -4,26 +4,26 @@
 :sourcefile: ../../samples/strategy.kt
 :jbake-date: 2020-06-01
 
+== Introduction
 A `Strategy` is likely the place where you do most software development. It is responsible for generating signals based on the events it receives.
 
-Since a `Strategy` only has access to an `Event` and not an `Account`, it has no knowledge of concepts like orders, open positions or buying power. As a consequence a `Stategy` is a generic component that can be easily shared or re-used if required.
+Since a `Strategy` only has access to the `Event` of a `Feed` and not the `Account`, it has no knowledge of concepts like orders, open positions or buying power. As a consequence a `Strategy` is a generic component that can be easily shared or re-used if required.
 
 == Standard Strategies
-There are several commonly used strategies included with roboquant.
+There are several commonly used strategies included with _roboquant_. This section highlight some of them, and using them is a great way to get started.
 
 === EMACrossover
-Uses two exponential moving averages and whenever they cross over a BUY or SELL signal is generated
+Uses two exponential moving averages and whenever they cross over, a BUY or SELL signal is generated
 
 [source, kotlin]
 ----
 include::{sourcefile}[tag=ema]
 ----
 
+=== TaLibStrategy
+`TaLibStrategy` is short for Technical Analysis Strategy and is a convenient way of using the `ta-lib` indicators in a strategy by defining the BUY and/or SELL condition.
 
-=== TAStrategy
-TAStrategy is short for Technical Analysis Strategy and is a convenient way of using the `ta-lib` indicators in a strategy by defining the BUY and/or SELL condition.
-
-The `ta-lib` comes with over 200 indicators and these can be combined anyway you like in a TAStrategy.
+The `ta-lib` comes with over 150 indicators and these can be combined anyway you like in a `TaLibStrategy`.
 
 [source, kotlin]
 ----
@@ -96,7 +96,6 @@ See the xref:policy.adoc[policy documentation] for more details.
 
 
 == Signals
-
 A signal is the outcome of a strategy and is modelled closely after the ratings given by ratings agencies. The two mandatory parts of a signal are:
 
 1. The asset that the signal applies for
@@ -117,19 +116,15 @@ NOTE: a hold rating is not the same as no signal. Only generate hold signals if 
 
 [source, kotlin]
 ----
-    // apple is of the type Asset
-    val signal = Signal(apple, Rating.BUY)
+include::{sourcefile}[tag=simpleSignal]
 ----
 
 == Advanced Signals
 Besides the mandatory Rating and Asset, a signal can optionally contain the following attributes (with their default values):
 
-    val asset: Asset,
-    val rating: Rating,
-    val type: SignalType = SignalType.BOTH,
-    val takeProfit: Double = Double.NaN,
-    val stopLoss: Double = Double.NaN,
-    val probability: Double = Double.NaN,
-    val source: String = ""
+[source, kotlin]
+----
+include::{sourcefile}[tag=attrSignal]
+----
 
 It is up to the xref:../policy/index.adoc[policy] how to use these attributes when generating the orders.

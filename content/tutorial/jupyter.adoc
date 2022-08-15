@@ -9,11 +9,11 @@ Since developing an algorithmic trading strategy requires a lot of experimentati
 Roboquant is designed to be used in both your own standalone application, and in Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without too much ceremony and there are many charts included out-of-the-box that makes it easier to interpreter what is going on during a `run`.
 
 == Usage
-Using roboquant in a Kotlin Jupyter Notebook requires just a single command:
+Using _roboquant_ in a Kotlin Jupyter Notebook requires just a single command:
 
     %use roboquant
 
-This will automatically load the roboquant library (it will actually load three roboquant modules: core, extra and crypt) and import most packages from the core module. If you run `Welcome()` in a notebook cell, you'll see the version of roboquant you are using together with other information about the environment you are in.
+This will automatically load the _roboquant_ library (it will actually load three _roboquant_ modules: core, extra and crypt) and import most packages from the core module. If you run `Welcome()` in a notebook cell, you'll see the version of _roboquant_ you are using together with other information about the environment you are in.
 
 TIP: Chromium based browsers perform best, especially when you plot charts with many data points.
 
@@ -23,11 +23,11 @@ The rendering required for Jupyter Lab is slightly different from for Jupyter La
 
 
 == Importing packages
-By default, most of the core roboquant packages are imported. But the packages of the crypto and extra modules are not by default included.
+By default, most of the core _roboquant_ packages are imported. But the packages of the crypto and extra modules are not by default included.
 
 
 == Using external libraries
-You are not limited to using roboquant libraries only. In fact, you can use any Java or Kotlin library that is published.
+You are not limited to using _roboquant_ libraries only. In fact, you can use any Java or Kotlin library that is published.
 
 
 
@@ -38,7 +38,7 @@ Roboquant uses the excellent https://echarts.apache.org[Apache ECharts] JavaScri
 === Design Philosophy
 In order to build robust and well performing trading algorithms, often you need to diversify across assets and asset classes. So a lot of the visualization is focused on providing insights on what is happening in such scenario and less in plotting the metrics a single asset only.
 
-All the charts are tailored for roboquant usage and are not a generic plotting library. So typically with just one line of code, you plot a very feature rich chart. However, adding a new custom chart is not much work, see also <<_custom_charts>>
+All the charts are tailored for _roboquant_ usage and are not a generic plotting library. So typically with just one line of code, you plot a very feature rich chart. However, adding a new custom chart is not much work, see also <<_custom_charts>>
 
 === Global settings
 There are several global settings that will apply to all charts:

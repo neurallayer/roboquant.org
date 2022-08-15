@@ -3,6 +3,7 @@
 :icons: font
 :jbake-date: 2020-01-01
 
+== Introduction
 There are 4 distinct stages that you go through when you develop, test and run a new trading strategy. The below diagram shows the stages and the order in which they are executed:
 
 image::four_stages.png[]
@@ -12,7 +13,7 @@ Each stage has its own specific purpose and benefits. There are two important ru
 . If possible at all, don't skip a stage. Every stage has its purpose in order to end up with a well performing and robust trading strategy.
 . And perhaps more important, if you are not happy about the performance in a later stage, go back to the first stage. Often minor changes to the code can have major impact on the results and should be thoroughly tested at every stage.
 
-Roboquant support all 4 stages and requires minimal changes to your code when you move from one stage to the next. Your strategy and policy should not change at all between stages, and only the selected data feeds and broker differ between stages.
+_Roboquant_ support all 4 stages and requires minimal changes to your code when you move from one stage to the next. Your strategy and policy should not change at all between stages, and only the selected data feeds and broker differ between stages.
 
 The following table shows the used `Broker` and `Feed` in the different stage:
 
@@ -29,7 +30,7 @@ The following table shows the used `Broker` and `Feed` in the different stage:
 == Stage 1: Back Testing
 In this stage you'll use *historic data* and the *SimBroker* to test your strategy and policy.
 
-You can of course run a single back test over the complete timeline of historic data. But roboquant makes it easy to also run walk forward and randomly sampled time-frames. This gives you better insights into the performance under different regimes.
+You can of course run a single back test over the complete timeline of historic data. But _roboquant_ makes it easy to also run walk forward and randomly sampled time-frames. This gives you better insights into the performance under different regimes.
 
 It is very important to get as many insights as possible about the overall performance and behavior, so you know what to expect and also what not expect when you finally will go live.
 
@@ -42,7 +43,7 @@ In this stage you use *live data* and the *SimBroker* to test your strategy and 
 
 It is very easy to over fit your strategy during back testing, and this stage provides some confirmation if that is the case. That being said, often you cannot run this stage for as long as required to have a perfect insight into over fitting, so this is an indication at best.
 
-TIP: roboquant can use any combination of data feed and broker. So you don't need to restrict yourself to data feed from your broker. There might be better and/or cheaper alternatives available.
+TIP: _roboquant_ can use any combination of data feed and broker. So you don't need to restrict yourself to data feed from your broker. There might be better and/or cheaper alternatives available.
 
 == Stage 3: Paper Trading
 In this stage you use *live data* with a *paper trading or demo account* to test your strategy and policy. The main purpose is to validate if your policy is still performing as expected using a different broker implementation.

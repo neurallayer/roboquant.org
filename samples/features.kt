@@ -1,12 +1,11 @@
 @file:Suppress("unused", "UNUSED_PARAMETER", "UNUSED_VARIABLE")
 
-import org.roboquant.brokers.Account
+import org.roboquant.brokers.Broker
 import org.roboquant.common.Currency.Companion.USD
 import org.roboquant.common.EUR
 import org.roboquant.common.JPY
 import org.roboquant.common.USD
 import org.roboquant.jupyter.TradeChart
-
 
 
 fun friendly1() {
@@ -17,8 +16,9 @@ fun friendly1() {
 }
 
 
-fun friendly2(account: Account) {
+fun friendly2(broker: Broker) {
     // tag::friendly2[]
+    val account = broker.account
     TradeChart(account.trades)
     // end::friendly2[]
 }
