@@ -53,10 +53,9 @@
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0">
+ <h3 class="navbar-brand">Content</h3>
  <nav id="sidebar" class="navbar fixed-left sticky-top">
-
     <ul class="list-unstyled">
-    <span class="navbar-brand">Content</span>
     
 
 
@@ -119,7 +118,8 @@
                          </div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <div id="preamble">
+                                <div class="sect1">
+<h2 id="_usage">Usage</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Since developing an algorithmic trading strategy requires a lot of experimentation and testing, an interactive development environment like Jupyter Notebooks is ideal. Especially in the beginning phase it can help to progress a lot quicker.</p>
@@ -127,13 +127,8 @@
 <div class="paragraph">
 <p>Roboquant is designed to be used in both your own standalone application, and in Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without too much ceremony and there are many charts included out-of-the-box that makes it easier to interpreter what is going on during a <code>run</code>.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_usage">Usage</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Using roboquant in a Kotlin Jupyter Notebook requires just a single command:</p>
+<p>Using <em>roboquant</em> in a Kotlin Jupyter Notebook requires just a single command:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -141,7 +136,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>This will automatically load the roboquant library (it will actually load three roboquant modules: core, extra and crypt) and import most packages from the core module. If you run <code>Welcome()</code> in a notebook cell, you&#8217;ll see the version of roboquant you are using together with other information about the environment you are in.</p>
+<p>This will automatically load the <em>roboquant</em> library (it will actually load three <em>roboquant</em> modules: core, extra and crypt) and import most packages from the core module. If you run <code>Welcome()</code> in a notebook cell, you&#8217;ll see the version of <em>roboquant</em> you are using together with other information about the environment you are in.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -169,7 +164,7 @@ Chromium based browsers perform best, especially when you plot charts with many 
 <h2 id="_importing_packages">Importing packages</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>By default, most of the core roboquant packages are imported. But the packages of the crypto and extra modules are not by default included.</p>
+<p>By default, most of the core <em>roboquant</em> packages are imported. But the packages of the crypto and extra modules are not by default included.</p>
 </div>
 </div>
 </div>
@@ -177,7 +172,7 @@ Chromium based browsers perform best, especially when you plot charts with many 
 <h2 id="_using_external_libraries">Using external libraries</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You are not limited to using roboquant libraries only. In fact, you can use any Java or Kotlin library that is published.</p>
+<p>You are not limited to using <em>roboquant</em> libraries only. In fact, you can use any Java or Kotlin library that is published.</p>
 </div>
 </div>
 </div>
@@ -193,7 +188,7 @@ Chromium based browsers perform best, especially when you plot charts with many 
 <p>In order to build robust and well performing trading algorithms, often you need to diversify across assets and asset classes. So a lot of the visualization is focused on providing insights on what is happening in such scenario and less in plotting the metrics a single asset only.</p>
 </div>
 <div class="paragraph">
-<p>All the charts are tailored for roboquant usage and are not a generic plotting library. So typically with just one line of code, you plot a very feature rich chart. However, adding a new custom chart is not much work, see also <a href="#_custom_charts">Custom Charts</a></p>
+<p>All the charts are tailored for <em>roboquant</em> usage and are not a generic plotting library. So typically with just one line of code, you plot a very feature rich chart. However, adding a new custom chart is not much work, see also <a href="#_custom_charts">Custom Charts</a></p>
 </div>
 </div>
 <div class="sect2">

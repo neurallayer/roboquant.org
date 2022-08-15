@@ -65,11 +65,11 @@ fun run() {
 
 fun run2(feed1: HistoricFeed, feed2: LiveFeed, roboquant: Roboquant ) {
     // tag::run2[]
-    // Historical feed example
+    // Historical feed run example
     val timeframe = Timeframe.fromYears(2015, 2020)
     roboquant.run(feed1, timeframe)
 
-    // Live feed example
+    // Live feed run example
     val timeframe2 = Timeframe.next(120.minutes)
     roboquant.run(feed2, timeframe2)
     // end::run2[]
@@ -101,16 +101,17 @@ fun runParallel(feed: Feed) {
             // Create a new roboquant instance for each job
             val roboquant = Roboquant(EMACrossover(), AccountSummary(), logger = logger)
 
-            // Give the run a unique name so the metrics can be easily identified
+            // Give the run a unique identifiable name
+            // Otherwise a unique name will be generated for each name
             roboquant.run(feed, period, runName = "run-$period")
         }
     }
 
-    // Wait till all jobs are finished
+    // Wait until all the jobs are finished
     jobs.joinAllBlocking()
 
-    // If you are in Jupyter Notebook you can plot the metrics
-    val data = logger.getMetric("account.equity")
-    MetricChart(data)
+    // If you are in Jupyter Notebook you can easily plot a metric for all the runs
+    val equity = logger.getMetric("account.equity")
+    MetricChart(equity)
     // end::runParallel[]
 }

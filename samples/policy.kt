@@ -1,4 +1,4 @@
-@file:Suppress("unused", "UnnecessaryVariable", "UNUSED_PARAMETER", "UNUSED_VARIABLE")
+@file:Suppress("unused", "UnnecessaryVariable", "UNUSED_VARIABLE")
 
 import org.roboquant.Roboquant
 import org.roboquant.brokers.Account
@@ -163,7 +163,7 @@ fun customOrder() {
     class MyOrder(asset: Asset, val quantity: Size, val customProperty: Int, id:Int = nextId()) : Order(asset, id)
 
     // Define a handler for your custom order type.
-    // This is only required if you want your order to be supported by the SimBroker
+    // This is required if you want your order to be supported by the SimBroker
     class MyOrderHandler(val order: MyOrder) : TradeOrderHandler {
 
         override var state = OrderState(order)
@@ -179,7 +179,7 @@ fun customOrder() {
             // Calculate the price to use
             val price = pricing.marketPrice(order.quantity)
 
-            // Set the state to COMPLETED. As long as the state is not closed, this handler stay active.
+            // Set the state to be COMPLETED. As long as the state is not in a Closed state, this handler stays active.
             state = OrderState(order, OrderStatus.COMPLETED, time, time)
 
             // Return the executions

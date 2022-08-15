@@ -1,4 +1,4 @@
-@file:Suppress("unused", "ControlFlowWithEmptyBody", "UNUSED_PARAMETER", "UNUSED_VARIABLE")
+@file:Suppress("unused", "ControlFlowWithEmptyBody", "UNUSED_VARIABLE")
 
 import org.roboquant.Roboquant
 import org.roboquant.binance.BinanceLiveFeed
@@ -40,7 +40,7 @@ fun play() {
     // tag::play[]
     suspend fun play(channel: EventChannel) {
         for (i in 1..100) {
-            val actions = listOf<Action>() // replace with real actions
+            val actions = emptyList<Action>() // replace with real actions
             val now = Instant.now()
             val event = Event(actions, now)
             channel.send(event)

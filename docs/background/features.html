@@ -53,10 +53,9 @@
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0">
+ <h3 class="navbar-brand">Content</h3>
  <nav id="sidebar" class="navbar fixed-left sticky-top">
-
     <ul class="list-unstyled">
-    <span class="navbar-brand">Content</span>
     
 
                  <li class="nav-item"><a href="/background/index.html" class="nav-link">Background</a></li>
@@ -110,10 +109,11 @@
                          </div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <div id="preamble">
+                                <div class="sect1">
+<h2 id="_the_4_main_objectives">The 4 main objectives</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Roboquant has 4 main objectives that determine most features: Fast, Flexible, Friendly and Free. All the features listed on this page can be directly linked to one of these objectives.</p>
+<p>Roboquant has 4 main objectives that determine most of its features: <strong><a href="#_fast">Fast</a></strong>, <strong><a href="#_flexible">Flexible</a></strong>, <strong><a href="#_friendly">Friendly</a></strong> and <strong><a href="#_free">Free</a></strong>. All the features listed on this page can be directly linked to one of these 4 objectives.</p>
 </div>
 </div>
 </div>
@@ -135,7 +135,7 @@
 <p><i class="fa fa-check-square-o"></i> Run multiple back-test in parallel</p>
 </li>
 <li>
-<p><i class="fa fa-check-square-o"></i> Very fast CSV parsing, allowing to process directories full of CSV files in just seconds</p>
+<p><i class="fa fa-check-square-o"></i> Very fast parallel CSV parsing, allowing to process directories full of CSV files in just seconds</p>
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> Support for file formats like Apache Avro™ to further reduce parsing overhead and easily share data sets</p>
@@ -159,7 +159,7 @@
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-check-square-o"></i> Support for trading assets in different currencies at the same time.</p>
+<p><i class="fa fa-check-square-o"></i> Support for trading assets in different currencies at the same time</p>
 </li>
 <li>
 <p><i class="fa fa-check-square-o"></i> Roboquant comes out of the box with ready to use currency converters</p>
@@ -174,12 +174,12 @@
 <p><i class="fa fa-check-square-o"></i> Support for simple trading strategies and advanced machine learning based approaches</p>
 </li>
 <li>
-<p><i class="fa fa-check-square-o"></i> Support for simple and complex order types</p>
+<p><i class="fa fa-check-square-o"></i> Support for simple and advanced order types</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Flexible also means roboquant is fully modular and can be extended:</p>
+<p>Flexible also means <em>roboquant</em> is fully modular and can be extended:</p>
 </div>
 <div class="ulist checklist">
 <ul class="checklist">
@@ -205,10 +205,7 @@
 <div class="sect2">
 <h3 id="_trading_specific_domain_model">Trading specific Domain Model</h3>
 <div class="paragraph">
-<p>Rather than having a generic framework where you still have to code a lot to make it usable, roboquant approach is that of a trading specific domain model.</p>
-</div>
-<div class="paragraph">
-<p>For example, you can easily work with monetary amounts</p>
+<p>Rather than having a generic framework where you still have to code a lot to make it usable, <em>roboquant</em> approach is that of a trading specific domain model. For example, you can easily work with monetary amounts:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -220,11 +217,13 @@
 <div class="sect2">
 <h3 id="_interactive_development">Interactive Development</h3>
 <div class="paragraph">
-<p>Roboquant can be run inside a Jupyter Notebook which provides a very easy entry for people who might find a full-blown development environment too much hassle.A lot of effort went into designing an API that is very easy to use from a
-Notebook.</p>
+<p>Roboquant can be run inside a Jupyter Notebook which provides an easy entry for people who might find a full-blown development environment too much hassle.A lot of effort went into designing an API that is easy to use from a Notebook.</p>
 </div>
 <div class="ulist checklist">
 <ul class="checklist">
+<li>
+<p><i class="fa fa-check-square-o"></i> Many charts out of the box that provides insights into the feeds and the results of a run</p>
+</li>
 <li>
 <p><i class="fa fa-check-square-o"></i> Graceful introduction of complexity.In other words: simple things should be simple, complex things should be possible</p>
 </li>
@@ -232,19 +231,17 @@ Notebook.</p>
 <p><i class="fa fa-check-square-o"></i> Many convenience methods to get results with minimal amount of coding</p>
 </li>
 <li>
-<p><i class="fa fa-check-square-o"></i> Many charts out of the box that provides insights into the feeds and the results of a run</p>
-</li>
-<li>
 <p><i class="fa fa-check-square-o"></i> Sensible defaults for many arguments, so you don&#8217;t have to specify them all the time</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Another example, if you want to plot a chart, you don&#8217;t first have to mangle data to make it consumable by the chart. In roboquant the charts understand the key domain concepts like Account, Trades and Metrics and can plot these directly.</p>
+<p>Another example, if you want to plot a chart, you don&#8217;t first have to mangle data to make it consumable by the chart. In <em>roboquant</em> the charts understand the key domain concepts like Account, Trades and Metrics and can plot these directly.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="nc">TradeChart</span><span class="p">(</span><span class="n">account</span><span class="p">.</span><span class="n">trades</span><span class="p">)</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">account</span> <span class="p">=</span> <span class="n">broker</span><span class="p">.</span><span class="n">account</span>
+<span class="nc">TradeChart</span><span class="p">(</span><span class="n">account</span><span class="p">.</span><span class="n">trades</span><span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -254,10 +251,10 @@ Notebook.</p>
 <div class="sect2">
 <h3 id="_order_management">Order Management</h3>
 <div class="paragraph">
-<p>One of the hardest (and most overlooked aspect) of algorithmic trading is order management, especially when your goal is to bring it to a live trading environment.There are so many things that potentially can go wrong and will cost you real money.It is a real endeavor to translate signals into actual orders and manage these outstanding orders.</p>
+<p>One of the hardest (and most overlooked) aspect of algorithmic trading is order management, especially when your goal is a robust live trading environment. There are so many things that potentially can go wrong and will cost you real money. It is a real endeavor to translate signals into actual orders and manage these outstanding orders.</p>
 </div>
 <div class="paragraph">
-<p>Because of this, roboquant separates the generation of signals (Strategy) from the actual orders (Policy).This allows algo-traders to focus on the generation of signals and pick the order management that fits the risk profile and trading style.And if full control over portfolio- and order-management is required, it is still available.</p>
+<p>Because of this, <em>roboquant</em> separates the generation of signals (Strategy) from the actual orders (Policy). This allows algo-traders to focus on the generation of signals and pick the order management that fits the risk profile and trading style. And if full control over portfolio- and order-management is required, it is still available.</p>
 </div>
 </div>
 <div class="sect2">
@@ -291,19 +288,19 @@ Notebook.</p>
 <h2 id="_free">Free</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In order to build the best environment for algo-trading possible, it is important to make sure this environment is free for anyone to use, contribute and improve on. That is why roboquant is developed under the permissive Apache 2.0 license and welcomes people to contribute.</p>
+<p>In order to build the best platform for algo-trading possible, we think it is important to make sure this platform is free for anyone to use, contribute and improve upon. That is why <em>roboquant</em> is developed under the permissive Apache 2.0 license and welcomes people to contribute.</p>
 </div>
 <div class="paragraph">
-<p>But it doesn&#8217;t stop at the software. For real progress also data has to become freely available so performance of various strategies can be more easily compared.</p>
+<p>But it doesn&#8217;t stop at the software. For real progress also data has to become freely available so performance of various strategies can be more easily compared. This is still very much work in progress, but for sure on the agenda of <em>roboquant</em>.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="title">Deep Learning</div>
+<div class="title">Deep Learning Datasets</div>
 <div class="paragraph">
-<p>For inspiration look at what quality training data did for deep learning networks and the progress in recent years. By having a standardized sets of data that are known to be of good quality and representative, it became much easier to compare different network architectures and continue to improve those that showed most promise.</p>
+<p>For inspiration, look at what quality training data did for progress of AI in recent years. By having standardized sets of data that are known to be of good quality and representative, it became much easier to compare different network architectures and continue to improve those that showed the best performance.</p>
 </div>
 <div class="paragraph">
-<p>The same hopefully can also be achieved in the algo-trading world, so we can easily validate claims.</p>
+<p>The same can hopefully also be achieved in the algo-trading world, so we can easily compare strategies and reproduce results.</p>
 </div>
 </div>
 </div>
@@ -313,7 +310,7 @@ Notebook.</p>
 <h2 id="_feature_comparison">Feature Comparison</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The following table provide a short overview of how the features of roboquant stack up to some alternative algo-trading frameworks.</p>
+<p>The following table provide a short overview of how the features of <em>roboquant</em> stack up to some alternative algo-trading frameworks.</p>
 </div>
 <div class="paragraph">
 <p>Of course, we are not completely objective, so we recommend trying them out for yourself and see which one suits you best.</p>
@@ -443,9 +440,6 @@ Notebook.</p>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>.</p>
-</div>
 </div>
 </div>
                             </div>

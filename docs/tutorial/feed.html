@@ -53,10 +53,9 @@
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0">
+ <h3 class="navbar-brand">Content</h3>
  <nav id="sidebar" class="navbar fixed-left sticky-top">
-
     <ul class="list-unstyled">
-    <span class="navbar-brand">Content</span>
     
 
 
@@ -119,16 +118,17 @@
                          </div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <div id="preamble">
+                                <div class="sect1">
+<h2 id="_what_is_a_feed">What is a feed</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A feed is responsible for delivering the data that is required to test and run strategies. There are no restrictions on the type of data that a Feed can emit. It can be a simple as a stock prices or as complex as a satellite image.</p>
+<p>A feed is responsible for delivering the data that is required to test and run strategies. There are no restrictions on the type of data that a Feed can emit. It can be a simple as a stock prices or as complex as a satellite images.</p>
 </div>
 <div class="paragraph">
-<p>A Feed can be used to deliver historic and live data. A feed wraps its information in an event and put that event on a EventChannel. This is all done asynchronously from rest of the trading logic. And although an <code>EventChannel</code> is used to deliver the events, this channel is normally only directly accessed by the <code>Roboquant</code> instance. A strategy will be passed just the plain Event object.</p>
+<p>A Feed is used to deliver historic and live data. A feed wraps its information in an <code>Event</code> and put that <code>Event</code> on an <code>EventChannel</code>. This is all done asynchronously from rest of the trading logic. And although an <code>EventChannel</code> is used to deliver the events, this channel is normally only directly accessed by the <code>Roboquant</code> instance. A strategy will be passed just the plain <code>Event</code> object.</p>
 </div>
 <div class="paragraph">
-<p>To read more why roboquant has selected this event-driven approach, read this <a href="../introduction/events.html">introduction on event-driven software</a>.</p>
+<p>To read more why <em>roboquant</em> has selected this event-driven approach, read this <a href="../introduction/events.html">introduction on event-driven software</a>.</p>
 </div>
 </div>
 </div>
@@ -144,17 +144,17 @@
 <p>The <code>time</code> attribute when the information within the event became available.</p>
 </li>
 <li>
-<p>The list of all the <code>actions</code> at that time</p>
+<p>The list of all the <code>Action</code> instances at that time. This can be a mixed list of <code>Action</code> types. A single <code>Event</code> can contain prices, satellite images and social media news at the same time.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>Events are always delivered in chronological order.</p>
+<p>Events are always expected to be delivered in chronological order.</p>
 </div>
 <div class="sect2">
 <h3 id="_time">Time</h3>
 <div class="paragraph">
-<p>The time in an event is of the type Instant. It is very important that the time in the event reflects when the actions in that same event became available, not when they happened. Typically, there is some delay between when something occurred and when it is published.</p>
+<p>The time in an event is of the type Instant. It is very important that the time in the event reflects when the actions in that same event became available, not when they happened. Typically, there is some delay between when something occurred and when it is published. An event should reflect the delivered time.</p>
 </div>
 <div class="paragraph">
 <p>For example when you want to use unemployment numbers as part of your feed, you should use the time when they are published, and you have access to them, not the last day of the period they cover. Otherwise, your strategy is looking into the future during back testing and can make decisions based on information it will never have in live trading.</p>
@@ -166,10 +166,10 @@
 <p>Action is an abstraction for any type of information that can be made available in an event.</p>
 </div>
 <div class="paragraph">
-<p>An action can range from price actions, like price-bars and order-book snapshots, to social media content or even satellite images. There is no commonality between actions, and you can add any type of actions you like to the platform. The only requirements is that they implement the empty interface <code>Action</code></p>
+<p>An action can range from price actions, like price-bars and order-book snapshots, to social media content or images. There is no commonality between actions, and you can add any type of actions you like to the platform. The only requirements is that they implement the empty interface <code>Action</code>.</p>
 </div>
 <div class="paragraph">
-<p>It is up to the strategy to filter for the action types it is interested in, for example:</p>
+<p>It is up to the strategy to filter for the action types it is interested in. For example if your strategy would require <code>PriceBar</code> (candlestick) data, you could use the following pattern to filter this type:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -179,7 +179,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>There are however a few helper methods in Event to access PriceActions that are of interest of many strategies:</p>
+<p>There are also a few helper methods in the <code>Event</code> to access prices, since these are of interest of many strategies:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -223,7 +223,7 @@
 <h2 id="_custom_feeds">Custom Feeds</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you have a data source that is not yet covered by roboquant, you can implement your own <code>Feed</code>.The main method to implement is the <code>play</code> method that will put the available events on the channel.</p>
+<p>If you have a data source that is not yet covered by roboquant, you can implement your own <code>Feed</code>.The main method to implement is the <code>play</code> method that will put the available events on the <code>EventChannel</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -237,13 +237,13 @@
 </div>
 </div>
 <div class="paragraph">
-<p>The following implementation of the <code>play</code> method sends out 100 empty events, empty meaning an event without any actions included. In case the EventChannel is full, the <code>channel.send</code> method will be blocking.</p>
+<p>The following dummy implementation of the <code>play</code> method sends out 100 empty events, empty meaning an event without any actions included. In case the EventChannel is full, the <code>channel.send</code> method will be blocking.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="kotlin"><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">play</span><span class="p">(</span><span class="n">channel</span><span class="p">:</span> <span class="nc">EventChannel</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">..</span><span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">val</span> <span class="py">actions</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">&lt;</span><span class="nc">Action</span><span class="p">&gt;()</span> <span class="c1">// replace with real actions</span>
+        <span class="kd">val</span> <span class="py">actions</span> <span class="p">=</span> <span class="n">emptyList</span><span class="p">&lt;</span><span class="nc">Action</span><span class="p">&gt;()</span> <span class="c1">// replace with real actions</span>
         <span class="kd">val</span> <span class="py">now</span> <span class="p">=</span> <span class="nc">Instant</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span>
         <span class="kd">val</span> <span class="py">event</span> <span class="p">=</span> <span class="nc">Event</span><span class="p">(</span><span class="n">actions</span><span class="p">,</span> <span class="n">now</span><span class="p">)</span>
         <span class="n">channel</span><span class="p">.</span><span class="nf">send</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
@@ -260,7 +260,7 @@
 <p>CSV files are one of the most common used file formats for storing historic price data. However, since there is no standard defined, they differ a lot depending on where you downloaded them from. Additionally, they often lack some required meta-data, like the currency of the price or exchange they ar traded.</p>
 </div>
 <div class="paragraph">
-<p>The <code>CSVFeed</code> class in roboquant offers several configuration options to cater to these differences, allowing you to parse almost all CSV files found on the internet.</p>
+<p>The <code>CSVFeed</code> class in <em>roboquant</em> offers several configuration options to cater to these differences, allowing you to parse almost all CSV files found on the internet.</p>
 </div>
 <div class="sect2">
 <h3 id="_basic_usage">Basic usage</h3>
@@ -343,7 +343,7 @@ Convert the CSV files to an AvroFeed, that way you have the best of both worlds:
 </ul>
 </div>
 <div class="paragraph">
-<p>Avro files make it easy to store large amount of data in a single file and efficiently use it during back testing. The AvroFeed implementation of roboquant only loads data in memory when it is required, so very large datasets can be used without having to worry about memory issues.</p>
+<p>Avro files make it easy to store large amount of data in a single file and efficiently use it during back testing. The AvroFeed implementation of <em>roboquant</em> only loads data in memory when it is required, so very large datasets can be used without having to worry about memory issues.</p>
 </div>
 <div class="paragraph">
 <p>Also since the Avro Feed uses a single file, it is easier to distribute than for example directories full of CSV files.</p>

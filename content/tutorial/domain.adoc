@@ -4,15 +4,14 @@
 :jbake-date: 2020-03-01
 :icons: font
 
-
-Besides components like Strategy and Policy, _roboquant_ also comes with a number of domain specific classes that make it easier to implement robust trading strategies.
-
+== Approach
+Besides components like `Strategy` and `Policy`, _roboquant_ also comes with a number of domain specific classes that make it easier to implement robust trading strategies.
 
 == Money
-In order to make it easier to develop in a multi-currency setup, _roboquant_ introduces a number of domain classes: <<Currency>>, <<Amount>>, <<Wallet>> and <<ExchangeRates>> that will help.
+In order to make it easier to develop solutions in a multi-currency setup, _roboquant_ introduces a number of money-related domain classes: <<Currency>>, <<Amount>>, <<Wallet>> and <<ExchangeRates>> that will help.
 
 === Currency
-The _roboquant_ `Currency` class represents any type of currency. It follows closely the interface that comes with the standard  Java Currency class, but is independent of it. The main reason is that the Java implementation doesn't support cryptocurrencies while the _roboquant_ implementation supports any type of currency.
+The _roboquant_ `Currency` class represents any type of currency. It follows closely the interface that comes with the standard Java Currency class, but is independent of it. The main reason is that the Java implementation doesn't support cryptocurrencies while the _roboquant_ implementation supports any type of currency.
 
 Also, several common currencies are predefined, to make it easier to work with.
 
@@ -29,7 +28,7 @@ An amount can hold the value for a single currency. You can create a new `Amount
 include::{sourcefile}[tag=amount]
 ----
 
-NOTE: Amounts store their values internally as Doubles and not BigDecimals. For (simulated) trading the potential loss of precision is not an issue and the benefits are much better performance and lower memory consumption.
+NOTE: Amounts store their values internally as a `Double` and not a `BigDecimal`. For (simulated) trading the potential loss of precision is not an issue and the benefits are improved performance and lower memory consumption.
 
 === Wallet
 A `Wallet` can hold amounts of multiple currencies at the same time. You can create a new `Wallet` by using its constructor, or by adding multiple amounts together. You can also deposit and withdraw amounts in a wallet. A `Wallet` instance is mutable.

@@ -53,10 +53,9 @@
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0">
+ <h3 class="navbar-brand">Content</h3>
  <nav id="sidebar" class="navbar fixed-left sticky-top">
-
     <ul class="list-unstyled">
-    <span class="navbar-brand">Content</span>
     
 
 
@@ -181,7 +180,7 @@ This is also the configuration you get when you create an instance of <code>Robo
 </div>
 </div>
 <div class="paragraph">
-<p>The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit.Typically, the initial deposit is denoted in a single currency, like a <strong>$50,000.00 USD</strong> account. But this is not a hard requirement and in with the <code>SimBroker</code> you can use multi-currency initial deposits if you prefer. However, there is always only one <code>baseCurrency</code></p>
+<p>The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit. Typically, the initial deposit is denoted in a single currency, like a <strong>$50,000.00 USD</strong> account. But this is not a hard requirement and in with the <code>SimBroker</code> you can use multi-currency initial deposits if you prefer. However, there is always only one <code>baseCurrency</code>.</p>
 </div>
 </div>
 </div>
@@ -189,10 +188,10 @@ This is also the configuration you get when you create an instance of <code>Robo
 <h2 id="_order_handling">Order Handling</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When an order is placed at the SimBroker, it only gets processed once there is a known price for the underlying asset. Till an event happens that has that price available, the order will remain in its INITIAL state.</p>
+<p>When an order is placed at the SimBroker, it only gets processed once there is a known price for the underlying asset. Till an event happens that has that price info available, the order will remain in its <code>INITIAL</code> state.</p>
 </div>
 <div class="paragraph">
-<p>Any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted. So an order in INITIAL state will not expire and time based TIF only start counting after it has been accepted.</p>
+<p>Any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted. So an order in <code>INITIAL</code> state will not expire and time based TIF only start counting after it has been accepted.</p>
 </div>
 <div class="paragraph">
 <p>Any open orders will be processed based on FIFO (first-in-first-out) basis, so older open orders are processed first. Exception to this rule are modify orders that are always processed before regular order types. The most common modify orders are a <code>CancelOrder</code> and an <code>UpdateOrder</code>.</p>
@@ -234,7 +233,7 @@ This is also the configuration you get when you create an instance of <code>Robo
 <div class="content">
 <div class="title">Equity</div>
 <div class="paragraph">
-<p>Equity is key attribute to monitor if you want to see how your account is performing. The following two equations hold true when using SimBroker to run a back test:</p>
+<p>Equity is key attribute to monitor if you want to see how your account is performing. The following two equations hold true when using SimBroker when running a back test:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -253,7 +252,7 @@ This is also the configuration you get when you create an instance of <code>Robo
 <div class="content">
 <div class="title">Buying Power</div>
 <div class="paragraph">
-<p>Always use the <code>buyingPower</code> property if you want to know how much money is remaining for trading. Especially when using a Margin Account, you shouldn&#8217;t rely on the <code>cash</code> property, since that doesn&#8217;t take into account any margin or leverage you might have.</p>
+<p>Always use the <code>buyingPower</code> property if you want to know how much money is remaining for trading. Especially when using a <code>MarginAccount</code>, you shouldn&#8217;t rely on the <code>cash</code> property, since that doesn&#8217;t take into account any margin or leverage you might have.</p>
 </div>
 </div>
 </div>
@@ -263,7 +262,7 @@ This is also the configuration you get when you create an instance of <code>Robo
 <h2 id="_custom_models">Custom Models</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Custom models are a way to further customize the behavior of <code>SimBroker</code>. The following two types of models can be implemented if the default ones that comes with roboquant are not sufficient.</p>
+<p>Custom models are a way to further customize the behavior of <code>SimBroker</code>. The following two types of models can be implemented if the default ones that comes with <em>roboquant</em> are not sufficient.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -286,13 +285,13 @@ This is also the configuration you get when you create an instance of <code>Robo
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The default cost calculations become less realistic if you trade large amount compared to overall daily volume. Don&#8217;t underestimate the transaction cost like spread, slippage and commissions and rather be too pessimistic.</p>
+<p>The default cost calculations become less realistic if you trade large amount compared to overall daily volume. As a rule of thumb: don&#8217;t underestimate the transaction cost like spread, slippage and commissions and better be too pessimistic.</p>
 </li>
 <li>
 <p>Order types might behave slightly different between SimBroker and different real brokers. If possible at all, also perform paper trading to see if your solution still performs as expected.</p>
 </li>
 <li>
-<p>The buying power and margin calculations might differ. Be on the safe side and use a higher margin requirement in the SimBroker than required.</p>
+<p>The buying power and margin calculations might differ. Be on the safe side and use a higher margin requirement in the SimBroker than required by your broker.</p>
 </li>
 </ol>
 </div>
@@ -305,12 +304,12 @@ This is also the configuration you get when you create an instance of <code>Robo
 <p>Account models allow to model the amount of Buying power for different types of accounts, like a Cash Account or Margin Account when using the SimBroker. Buying Power represents the amount available for trading.</p>
 </div>
 <div class="paragraph">
-<p>Out of the box roboquant comes with several models that cather for common account types:</p>
+<p>Out of the box <em>roboquant</em> comes with several models that cather for common account types:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Cash accounts, that don&#8217;t have leverage or margin available</p>
+<p>Cash accounts, that don&#8217;t have any leverage or margin available</p>
 </li>
 <li>
 <p>Margin account, that have configurable margin and leverage</p>
@@ -323,7 +322,7 @@ This is also the configuration you get when you create an instance of <code>Robo
 <p>Cash accounts can be modelled using the <code>CashAccount</code>. This model is also the default if you don&#8217;t provide a BuyingPowerModel when instantiating a <a href="simbroker.html">SimBroker</a>.</p>
 </div>
 <div class="paragraph">
-<p><code>CashBuyingPowerModel</code> only basis the buying power on the available cash, and no margin is calculated and no leverage is used.</p>
+<p><code>CashBuyingPowerModel</code> only base the buying power on the available cash, and no margin is calculated and no leverage is used. So cash and buyng power are equal, however cash can contain multiple currencies while the buying power is always converted to the base currency of the account.</p>
 </div>
 <div class="paragraph">
 <p>The below table shows an example using the default CashBuyingPowerModel when trading in different currencies, EUR and USD in this case.</p>

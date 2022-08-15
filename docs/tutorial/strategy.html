@@ -53,10 +53,9 @@
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0">
+ <h3 class="navbar-brand">Content</h3>
  <nav id="sidebar" class="navbar fixed-left sticky-top">
-
     <ul class="list-unstyled">
-    <span class="navbar-brand">Content</span>
     
 
 
@@ -119,13 +118,14 @@
                          </div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <div id="preamble">
+                                <div class="sect1">
+<h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A <code>Strategy</code> is likely the place where you do most software development. It is responsible for generating signals based on the events it receives.</p>
 </div>
 <div class="paragraph">
-<p>Since a <code>Strategy</code> only has access to an <code>Event</code> and not an <code>Account</code>, it has no knowledge of concepts like orders, open positions or buying power. As a consequence a <code>Stategy</code> is a generic component that can be easily shared or re-used if required.</p>
+<p>Since a <code>Strategy</code> only has access to the <code>Event</code> of a <code>Feed</code> and not the <code>Account</code>, it has no knowledge of concepts like orders, open positions or buying power. As a consequence a <code>Strategy</code> is a generic component that can be easily shared or re-used if required.</p>
 </div>
 </div>
 </div>
@@ -133,12 +133,12 @@
 <h2 id="_standard_strategies">Standard Strategies</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are several commonly used strategies included with roboquant.</p>
+<p>There are several commonly used strategies included with <em>roboquant</em>. This section highlight some of them, and using them is a great way to get started.</p>
 </div>
 <div class="sect2">
 <h3 id="_emacrossover">EMACrossover</h3>
 <div class="paragraph">
-<p>Uses two exponential moving averages and whenever they cross over a BUY or SELL signal is generated</p>
+<p>Uses two exponential moving averages and whenever they cross over, a BUY or SELL signal is generated</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -151,12 +151,12 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_tastrategy">TAStrategy</h3>
+<h3 id="_talibstrategy">TaLibStrategy</h3>
 <div class="paragraph">
-<p>TAStrategy is short for Technical Analysis Strategy and is a convenient way of using the <code>ta-lib</code> indicators in a strategy by defining the BUY and/or SELL condition.</p>
+<p><code>TaLibStrategy</code> is short for Technical Analysis Strategy and is a convenient way of using the ta-lib indicators in a strategy by defining the BUY and/or SELL condition.</p>
 </div>
 <div class="paragraph">
-<p>The <code>ta-lib</code> comes with over 200 indicators and these can be combined anyway you like in a TAStrategy.</p>
+<p>The ta-lib library comes with over 150 indicators and these can be combined anyway you like in a <code>TaLibStrategy</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -308,7 +308,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see a Strategy can maintain state, the <code>previousPrices</code> in the above example.You have to ensure you reset the state when a <code>Component</code> lifecycle event is called, like the <code>start</code> method in the above example.</p>
+<p>As you can see a Strategy can maintain state, the <code>previousPrices</code> in the above example. You have to ensure you reset the state when a <code>Component</code> lifecycle event is called, like the <code>reset</code> method in the above example.</p>
 </div>
 </div>
 </div>
@@ -316,7 +316,7 @@
 <h2 id="_policy_based_strategies">Policy based Strategies</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are use cases that require a strategy not only to have access to the event but also to the account.These type of strategies can be implemented in roboquant, but they should be implemented as a policy and not strategy.Some reasons you might want to use a policy:</p>
+<p>There are use cases that require a strategy not only to have access to an <code>Event</code> but also to the <code>Account</code>. These type of strategies can be implemented in roboquant, but they should be implemented as a policy and not strategy. Some reasons you might need to use a policy:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -337,12 +337,12 @@
 <h2 id="_signals">Signals</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A signal is the outcome of a strategy and is modelled closely after the ratings given by ratings agencies. The two mandatory parts of a signal are:</p>
+<p>A <code>Signal</code> is the outcome of a strategy and is modelled closely after the ratings given by ratings agencies. The two mandatory parts of a <code>Signal</code> are:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The asset that the signal applies for</p>
+<p>The asset that the signal applies for, like a particular stock</p>
 </li>
 <li>
 <p>A rating for that same asset</p>
@@ -350,24 +350,24 @@
 </ol>
 </div>
 <div class="paragraph">
-<p>There is a 5-point scale used for the rating part of a signal:</p>
+<p>There is a 5-point scale used for the <code>Rating</code> of a <code>Signal</code>:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Buy: Also known as strong buy and "on the recommended list". Buy is a recommendation to purchase a specific security.</p>
+<p><code>BUY</code>: Also known as strong buy and "on the recommended list". Buy is a recommendation to purchase a specific security.</p>
 </li>
 <li>
-<p>Sell: Also known as strong sell, it&#8217;s a recommendation to sell a security or to liquidate an asset.</p>
+<p><code>SELL</code>: Also known as strong sell, it&#8217;s a recommendation to sell a security or to liquidate an asset.</p>
 </li>
 <li>
-<p>Hold: In general terms, a company with a hold recommendation is expected to perform at the same pace as comparable companies or in-line with the market.</p>
+<p><code>HOLD</code>: In general terms, a company with a hold recommendation is expected to perform at the same pace as comparable companies or in-line with the market.</p>
 </li>
 <li>
-<p>Underperform: A recommendation that means a stock is expected to do slightly worse than the overall stock market return. Underperform can also be expressed as "moderate sell," "weak hold" and "underweight."</p>
+<p><code>UNDERPERFORM</code>: A recommendation that means a stock is expected to do slightly worse than the overall stock market return. Underperform can also be expressed as "moderate sell," "weak hold" and "underweight."</p>
 </li>
 <li>
-<p>Outperform: Also known as "moderate buy," "accumulate" and "overweight." Outperform is an analyst recommendation meaning a stock is expected to do slightly better than the market return.</p>
+<p><code>OUTPERFORM</code>: Also known as "moderate buy," "accumulate" and "overweight." Outperform is an analyst recommendation meaning a stock is expected to do slightly better than the market return.</p>
 </li>
 </ul>
 </div>
@@ -402,15 +402,14 @@ a hold rating is not the same as no signal. Only generate hold signals if you th
 <div class="paragraph">
 <p>Besides the mandatory Rating and Asset, a signal can optionally contain the following attributes (with their default values):</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>val asset: Asset,
-val rating: Rating,
-val type: SignalType = SignalType.BOTH,
-val takeProfit: Double = Double.NaN,
-val stopLoss: Double = Double.NaN,
-val probability: Double = Double.NaN,
-val source: String = ""</pre>
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">type</span><span class="p">:</span> <span class="nc">SignalType</span> <span class="p">=</span> <span class="nc">SignalType</span><span class="p">.</span><span class="nc">BOTH</span>
+    <span class="kd">val</span> <span class="py">takeProfit</span><span class="p">:</span> <span class="nc">Double</span> <span class="p">=</span> <span class="nc">Double</span><span class="p">.</span><span class="nc">NaN</span>
+    <span class="kd">val</span> <span class="py">stopLoss</span><span class="p">:</span> <span class="nc">Double</span> <span class="p">=</span> <span class="nc">Double</span><span class="p">.</span><span class="nc">NaN</span>
+    <span class="kd">val</span> <span class="py">probability</span><span class="p">:</span> <span class="nc">Double</span> <span class="p">=</span> <span class="nc">Double</span><span class="p">.</span><span class="nc">NaN</span>
+    <span class="kd">val</span> <span class="py">source</span><span class="p">:</span> <span class="nc">String</span> <span class="p">=</span> <span class="s">""</span>
+    <span class="nc">Signal</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="n">rating</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span> <span class="n">takeProfit</span><span class="p">,</span> <span class="n">stopLoss</span><span class="p">,</span> <span class="n">probability</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="paragraph">

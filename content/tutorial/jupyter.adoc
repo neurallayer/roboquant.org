@@ -4,11 +4,11 @@
 :sourcefile: ../../samples/jupyter.kt
 :jbake-date: 2020-02-01
 
+== Usage
 Since developing an algorithmic trading strategy requires a lot of experimentation and testing, an interactive development environment like Jupyter Notebooks is ideal. Especially in the beginning phase it can help to progress a lot quicker.
 
 Roboquant is designed to be used in both your own standalone application, and in Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without too much ceremony and there are many charts included out-of-the-box that makes it easier to interpreter what is going on during a `run`.
 
-== Usage
 Using _roboquant_ in a Kotlin Jupyter Notebook requires just a single command:
 
     %use roboquant
@@ -30,10 +30,8 @@ By default, most of the core _roboquant_ packages are imported. But the packages
 You are not limited to using _roboquant_ libraries only. In fact, you can use any Java or Kotlin library that is published.
 
 
-
 == Charts
 Roboquant uses the excellent https://echarts.apache.org[Apache ECharts] JavaScript library to render charts in your browser. All charts are interactive, meaning you can zoom into areas of interest, and you can often filter on values of interest. There is a toolbar at the right top of each chart that allows for additional functionality, like downloading the chart or seeing the raw data.
-
 
 === Design Philosophy
 In order to build robust and well performing trading algorithms, often you need to diversify across assets and asset classes. So a lot of the visualization is focused on providing insights on what is happening in such scenario and less in plotting the metrics a single asset only.

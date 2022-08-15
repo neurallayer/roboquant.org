@@ -1,4 +1,4 @@
-@file:Suppress("unused", "UNUSED_PARAMETER", "UNUSED_VARIABLE")
+@file:Suppress("unused")
 
 import org.roboquant.brokers.Broker
 import org.roboquant.common.Currency.Companion.USD

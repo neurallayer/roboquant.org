@@ -1,4 +1,4 @@
-@file:Suppress("unused", "UNUSED_PARAMETER", "UNUSED_VARIABLE")
+@file:Suppress("unused", "UNUSED_VARIABLE")
 
 import org.roboquant.brokers.ECBExchangeRates
 import org.roboquant.common.*
@@ -41,12 +41,17 @@ fun wallet() {
 
 fun exchangeRates() {
     // tag::er[]
+    // Load the exchange rates as published by the ECB (European Central Bank)
     Config.exchangeRates = ECBExchangeRates.fromWeb()
     val amountEUR = 20.EUR
     val amountUSD = amountEUR.convert(Currency.USD)
 
     val wallet = 20.USD + 1000.JPY
+
+    // Convert wallet based on today's exchange rates
     val amountGBP1 = wallet.convert(Currency.GBP)
+
+    // Convert wallet based on two years ago exchange rates
     val time = Instant.now() - 2.years
     val amountGBP2 = wallet.convert(Currency.GBP, time)
     require(amountGBP1 != amountGBP2)

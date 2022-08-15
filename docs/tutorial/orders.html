@@ -53,10 +53,9 @@
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0">
+ <h3 class="navbar-brand">Content</h3>
  <nav id="sidebar" class="navbar fixed-left sticky-top">
-
     <ul class="list-unstyled">
-    <span class="navbar-brand">Content</span>
     
 
 
@@ -140,10 +139,10 @@ in place is that real brokers only have limited support for multi-asset orders a
 <h2 id="_creating_orders">Creating Orders</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>Policy</code> that is used for a <code>run</code> is responsible for creating the orders. This can be based on the received signals from the <code>Strategy</code>, but can also be done for other reasons (like for example cyclic portfolio re-balancing)</p>
+<p>The <code>Policy</code> that is used during a <code>run</code> is responsible for creating the orders. This can be based on the received signals from the <code>Strategy</code>, but can also be done for other reasons (like for example cyclic portfolio re-balancing)</p>
 </div>
 <div class="paragraph">
-<p>An example on how to convert a list of <code>Signal</code> into a list of <code>MarketOrder</code>:</p>
+<p>An example on how to convert a list of signals into a list of (market) orders:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -211,7 +210,7 @@ always make sure to only use order types during back testing that are also suppo
 </ol>
 </div>
 <div class="paragraph">
-<p>The default TIF for orders in roboquant used if none is explicitly specified, is GTC (Good Till Cancelled).</p>
+<p>The default TIF for orders in <em>roboquant</em> used if none is explicitly specified, is GTC (Good Till Cancelled).</p>
 </div>
 </div>
 </div>
@@ -240,7 +239,7 @@ always make sure to only use order types during back testing that are also suppo
     <span class="kd">class</span> <span class="nc">MyOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nc">Asset</span><span class="p">,</span> <span class="kd">val</span> <span class="py">quantity</span><span class="p">:</span> <span class="nc">Size</span><span class="p">,</span> <span class="kd">val</span> <span class="py">customProperty</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">id</span><span class="p">:</span><span class="nc">Int</span> <span class="p">=</span> <span class="nf">nextId</span><span class="p">())</span> <span class="p">:</span> <span class="nc">Order</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
 
     <span class="c1">// Define a handler for your custom order type.</span>
-    <span class="c1">// This is only required if you want your order to be supported by the SimBroker</span>
+    <span class="c1">// This is required if you want your order to be supported by the SimBroker</span>
     <span class="kd">class</span> <span class="nc">MyOrderHandler</span><span class="p">(</span><span class="kd">val</span> <span class="py">order</span><span class="p">:</span> <span class="nc">MyOrder</span><span class="p">)</span> <span class="p">:</span> <span class="nc">TradeOrderHandler</span> <span class="p">{</span>
 
         <span class="k">override</span> <span class="kd">var</span> <span class="py">state</span> <span class="p">=</span> <span class="nc">OrderState</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
@@ -256,7 +255,7 @@ always make sure to only use order types during back testing that are also suppo
             <span class="c1">// Calculate the price to use</span>
             <span class="kd">val</span> <span class="py">price</span> <span class="p">=</span> <span class="n">pricing</span><span class="p">.</span><span class="nf">marketPrice</span><span class="p">(</span><span class="n">order</span><span class="p">.</span><span class="n">quantity</span><span class="p">)</span>
 
-            <span class="c1">// Set the state to COMPLETED. As long as the state is not closed, this handler stay active.</span>
+            <span class="c1">// Set the state to be COMPLETED. As long as the state is not in a Closed state, this handler stays active.</span>
             <span class="n">state</span> <span class="p">=</span> <span class="nc">OrderState</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="nc">OrderStatus</span><span class="p">.</span><span class="nc">COMPLETED</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
 
             <span class="c1">// Return the executions</span>

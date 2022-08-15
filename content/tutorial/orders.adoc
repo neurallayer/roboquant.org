@@ -13,9 +13,9 @@ All orders refer to a single asset, including advanced order types like BracketO
 in place is that real brokers only have limited support for multi-asset orders and this could lead to issues that are only discovered during live trading. Additionally, it makes back testing difficult if the price for one asset is known but not for the other.
 
 == Creating Orders
-The `Policy` that is used for a `run` is responsible for creating the orders. This can be based on the received signals from the `Strategy`, but can also be done for other reasons (like for example cyclic portfolio re-balancing)
+The `Policy` that is used during a `run` is responsible for creating the orders. This can be based on the received signals from the `Strategy`, but can also be done for other reasons (like for example cyclic portfolio re-balancing)
 
-An example on how to convert a list of `Signal` into a list of `MarketOrder`:
+An example on how to convert a list of signals into a list of (market) orders:
 
 [source, kotlin]
 ----
@@ -40,7 +40,6 @@ TIF sets an execution policy for an order under which conditions the order remai
 . Fill based, defining under which fill conditions the order stays valid. A common one if FOK (Fill Or Kill)
 
 The default TIF for orders in _roboquant_ used if none is explicitly specified, is GTC (Good Till Cancelled).
-
 
 == Custom Order Types
 Orders can be extended with your own order types if the ones that come out of the box are not sufficient. The steps required to make to use yor own order types are:

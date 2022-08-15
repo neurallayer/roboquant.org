@@ -53,10 +53,9 @@
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0">
+ <h3 class="navbar-brand">Content</h3>
  <nav id="sidebar" class="navbar fixed-left sticky-top">
-
     <ul class="list-unstyled">
-    <span class="navbar-brand">Content</span>
     
 
                  <li class="nav-item"><a href="/background/index.html" class="nav-link">Background</a></li>
@@ -110,18 +109,11 @@
                          </div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>This section provides an overview of the high level design choices, and the rational why they were made. It is provided mainly as background information. And it can also help to decide if roboquant is the right algo-trading platform for you.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
+                                <div class="sect1">
 <h2 id="_why_develop_a_new_platform">Why develop a new platform</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Before we started to develop roboquant, we looked at existing frameworks and platforms to see if these could fit the bill. However, for our use-cases none of them checked the boxes that we required:</p>
+<p>Before we started to develop roboquant, we looked at existing frameworks and platforms to see if these could fit the bill. However, for our use-cases none of them checked all the boxes that we required:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -135,12 +127,15 @@
 <p>Support many asset classes including cryptocurrencies</p>
 </li>
 <li>
-<p>Solid live trading, including support for advanced order types to reduce risk</p>
+<p>Solid live trading, including support for advanced order types to further reduce risk</p>
 </li>
 <li>
 <p>Support for trading in multiple markets in different regions at the same time</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Some of these might be unique to our situation, but since we believe that others might profit from these features we decided to open source the platform and make it available for free.</p>
 </div>
 </div>
 </div>
@@ -168,18 +163,18 @@
 <p>Access to the huge Java ecosystem with libraries available for almost any task at hand</p>
 </li>
 <li>
-<p>Excellent for building robust software, a necessity when developing complex trading strategies and your own money at risk</p>
+<p>Excellent for building robust software, a necessity in our opinion when developing complex trading strategies and your own money at risk</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>One often heard question is <strong>Why didn&#8217;t you choose Python instead?</strong> Truth be told, we would have loved to be able to use Python. However, during the prototype phase of roboquant we discovered that the performance was lacking too much for our use-cases. In some scenarios the performance was over 100x slower. This was including using libraries like Numpy and Pandas and even some Cython to speedup processing. One problem is that in back testing many things cannot be vectorized.</p>
+<p>One often heard question is <strong>Why didn&#8217;t you choose Python instead?</strong> Truth be told, we would have loved to be able to use Python. However, during the prototype phase of <em>roboquant</em> we discovered that the performance was lacking too much for our use-cases. In some scenarios the performance was over 100x slower. This was including using libraries like Numpy and Pandas and even some Cython to speedup processing. One problem is that in back testing many things cannot be vectorized and these fast libraries like Numpy are no longer a good match.</p>
 </div>
 <div class="paragraph">
 <p>The main reason for this lackluster performance is not only that Python is an interpreted language, but also the fact that it is has a single threaded runtime that makes it difficult and inefficient to use all the cores found on modern CPU&#8217;s.</p>
 </div>
 <div class="paragraph">
-<p>The good news is that if you really want to stick with Python, there are plenty of alternatives available. For example, you could have a look at Backtrader, pyalgotrade or zipline. But we recommend to give roboquant and Kotlin a try, and we are confident you will not regret that decision.</p>
+<p>The good news is that if you really want to stick with Python, there are plenty of alternatives available. For example, you could have a look at Backtrader, pyalgotrade or zipline. But we recommend to give <em>roboquant</em> and Kotlin a try, and we are confident you will not regret that decision.</p>
 </div>
 </div>
 </div>
@@ -187,10 +182,10 @@
 <h2 id="_interactive_and_traditional_development">Interactive and traditional development</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>From the start we developed <em>roboquant</em> to be used either as a library included in your application or interactively from a Jupyter Notebook. The various APIs have been designed so that they support both use-cases.</p>
+<p>From the start we developed <em>roboquant</em> to be used either as a library included in your standalone application or interactively from a Jupyter Notebook. The various APIs have been designed so that they support both use-cases equally well.</p>
 </div>
 <div class="paragraph">
-<p>Where many Java based applications require a lot of ceremony to implement even the simplest piece of functionality, <em>roboquant</em> it designed to remove most of that. Especially in a Jupyter notebook environment, it is very easy to get started. Because of this the API exposed by roboquant follows certain rules:</p>
+<p>Where some Kotlin/Java based applications require a lot of ceremony to implement even the simplest piece of functionality, <em>roboquant</em> it designed to remove most of that. Especially in a Jupyter notebook environment, it is very easy to get started. Because of this the API exposed by <em>roboquant</em> follows certain rules:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -223,7 +218,7 @@
 <p>When testing strategies that trade simultaneously in multiple time-zones, like stocks in New York and London, it is key to have proper time management. Otherwise, you run the risk that your strategy performs very well but only because it can peep into the future due to faulty handling of time-zones.</p>
 </div>
 <div class="paragraph">
-<p>Because of that, roboquant internally only uses the Java Instant type to represent a moment in time. So all time events can be easily compared without having to consider time zones.</p>
+<p>Because of that, <em>roboquant</em> internally only uses the Java Instant type to represent a moment in time. So all time events can be easily compared without having to consider time zones.</p>
 </div>
 <div class="paragraph">
 <p>When importing data, there is functionality to convert the data from timezone specific value towards the Instant type. When displaying time related information, it can be converted back the other way around if desired.</p>
@@ -242,10 +237,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Roboquant isn&#8217;t setup to be a financial ledger and in general trading applications don&#8217;t require this accuracy. The native Java Double type provides enough precision for most algo-trading purposes and there is no need to use (the much slower and more memory hungry) BigDecimal type. The area where roboquant uses more precise calculation is when dealing with order and position sizes.</p>
+<p>Roboquant isn&#8217;t setup to be a financial ledger and in general trading applications don&#8217;t require this accuracy. The native Java Double type provides enough precision for most algo-trading purposes and there is no need to use (the much slower and more memory hungry) BigDecimal type. The area where <em>roboquant</em> uses more precise calculation is when dealing with order and position sizes.</p>
 </li>
 <li>
-<p>The data Feed API supports data that is kept in-memory as well data that is stored on disk and only accessed when required. This allows for running back test where the test data doesn&#8217;t fit in memory or running back-tests on machines with limited memory. In fact roboquant can be used on a JVM with only 512 MB of heap allocated.</p>
+<p>The data Feed API supports data that is kept in-memory as well data that is stored on disk and only accessed when required. This allows for running back test where the test data doesn&#8217;t fit in memory or running back-tests on machines with limited memory. In fact <em>roboquant</em> can be used on a JVM with only 512 MB of heap allocated.</p>
 </li>
 <li>
 <p>Many of the builtin features use multithreading to speedup processing. For example the CSV parser parses CSV files in parallel so even directories with thousands of CSV files can be parsed in seconds.</p>
@@ -284,16 +279,12 @@
 <p>Assert/requires to validate input parameters</p>
 </li>
 <li>
-<p>Good unit test suite that covers most of the code base (&gt; 90%)</p>
+<p>Good unit test suite with more than 300 unit tests that covers most of the code base (&gt; 90%)</p>
 </li>
 <li>
 <p>Proven third party libraries</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>This page list the main features of roboquant for each key area: Fast, Flexible, Easy, and Free.
-It also provides a short overview of how roboquant compares to some other popular algo-trading software.</p>
 </div>
 </div>
 </div>
@@ -309,7 +300,7 @@ It also provides a short overview of how roboquant compares to some other popula
 <div class="ulist">
 <ul>
 <li>
-<p>Reuse - roboquant uses the same event-driven approach for all <a href="four_stages.html">4 stages</a> of developing trading strategies, ensuring minimal friction when moving from one stage to the next.</p>
+<p>Reuse - <em>roboquant</em> uses the same event-driven approach for all <a href="four_stages.html">4 stages</a> of developing trading strategies, ensuring minimal friction when moving from one stage to the next.</p>
 </li>
 <li>
 <p>Avoid Lookahead - With an event-driven test, it is unlikely that the strategy will actually peep into the future since at the time of making any decision in the code, the future data is not yet available.</p>
@@ -325,10 +316,10 @@ It also provides a short overview of how roboquant compares to some other popula
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>They are more complex to implement and test. That is why using platform like roboquant makes a lot of sense, since much of the heavy lifting is done by the platform.</p>
+<p>They are more complex to implement and test. That is why using platform like <em>roboquant</em> makes a lot of sense, since much of the heavy lifting is done by the platform.</p>
 </li>
 <li>
-<p>They can be slower to execute compared to a vectorised system. But by using Kotlin and a highly optimized engine, roboquant is actually faster than other algo-trading platforms.</p>
+<p>They can be slower to execute compared to a vectorised system. But by using Kotlin and a highly optimized engine, <em>roboquant</em> is actually faster than other algo-trading platforms.</p>
 </li>
 </ol>
 </div>

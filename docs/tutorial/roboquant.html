@@ -53,10 +53,9 @@
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0">
+ <h3 class="navbar-brand">Content</h3>
  <nav id="sidebar" class="navbar fixed-left sticky-top">
-
     <ul class="list-unstyled">
-    <span class="navbar-brand">Content</span>
     
 
 
@@ -119,18 +118,14 @@
                          </div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <div id="preamble">
+                                <div class="sect1">
+<h2 id="_create">Create</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>Roboquant</code> class (org.roboquant.Roboquant) is the engine of the platform, not to be confused with roboquant™ (all small letters) which is the name of the platform itself. An instance of the <code>Roboquant</code> class orchestrates the interaction between all the components and performs the actual runs.</p>
+<p>The <code>Roboquant</code> class (org.roboquant.Roboquant) is the engine of the platform, not to be confused with <em>roboquant</em> (all small letters) which is the name of the platform itself. An instance of the <code>Roboquant</code> class orchestrates the interaction between all the components and performs the actual runs.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_define">Define</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>You are only required to provide a strategy when creating a new instance of Roboquant. So the bare minimum would be:</p>
+<p>You are only required to provide a strategy when creating a new instance of <em>Roboquant</em>. So the bare minimum to get a working instance would look something like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -153,7 +148,7 @@
 <p>The <code>DefaultPolicy</code> will be the policy used</p>
 </li>
 <li>
-<p>The <code>MemoryLogger</code> for logging the metrics (although without any metrics captured, there is not much to log)</p>
+<p>The <code>MemoryLogger</code> for logging the metrics (although without any metrics to capture, there is not much to log)</p>
 </li>
 </ul>
 </div>
@@ -176,10 +171,22 @@
 <h2 id="_run">Run</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>After you have created an instance of roboquant and have a <a href="../feed/index.html">feed</a> created, you can start a run. the same <code>run</code> method is used for all the different stages, from back testing to live trading (see also <a href="../introduction/four_stages.html">4 stages</a>)</p>
+<p>After you have created an instance of the <code>Roboquant</code> class and have a <a href="../feed/index.html">data feed</a>, you can start the run.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The same <code>run</code> method is used for all the different stages, from back testing to live trading. See also <a href="../introduction/four_stages.html">the 4 stages</a> for more details about these stages.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>In the most simple form, you provide a feed as a parameter. In this case, all the events available in the feed will be used in the run.</p>
+<p>In the most simple form, you only need to provide a feed as the argument. In this case, all the events available in the feed will be used in the run.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -187,21 +194,21 @@
 </div>
 </div>
 <div class="paragraph">
-<p>If you provide a live feed, it would run forever. However, you can restrict the run to a certain timeframe, again you can use this for a historical feed and a live feed alike.</p>
+<p>If you provide a live feed, it would potentially run forever. However, you can restrict the run to a certain timeframe, again you can use this for a historical feed and a live feed alike.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="c1">// Historical feed example</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="c1">// Historical feed run example</span>
 <span class="kd">val</span> <span class="py">timeframe</span> <span class="p">=</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="nf">fromYears</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)</span>
 <span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed1</span><span class="p">,</span> <span class="n">timeframe</span><span class="p">)</span>
 
-<span class="c1">// Live feed example</span>
+<span class="c1">// Live feed run example</span>
 <span class="kd">val</span> <span class="py">timeframe2</span> <span class="p">=</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="nf">next</span><span class="p">(</span><span class="mi">120</span><span class="p">.</span><span class="n">minutes</span><span class="p">)</span>
 <span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed2</span><span class="p">,</span> <span class="n">timeframe2</span><span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You can invoke a run multiple times, for example for different timeframes. The following code shows how to perform a walk-forward back test of two-year cycle:</p>
+<p>You can invoke a run multiple times, for example with different timeframes. The following code shows how to use this to perform a walk-forward back test of two-year periods:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -218,7 +225,7 @@
 <h2 id="_running_in_parallel">Running in Parallel</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you have a lot of back test to run, you can run them in parallel and leverage all the cores on your computer to expedite the process. Roboquant scales almost linear with the number of available cores, and it only requires a few extra lines of code.</p>
+<p>If you want to run many back-test, you can run them in parallel and leverage all the cores on your computer to expedite the process. <em>Roboquant</em> scales almost linear with the number of available cores, and it only requires a few extra lines of code.</p>
 </div>
 <div class="paragraph">
 <p>The following example shows how to run a walk forward in parallel. By reusing the same logger instance, all results will be stored in a single instance and can be easily compared afterwards.</p>
@@ -234,17 +241,18 @@
         <span class="c1">// Create a new roboquant instance for each job</span>
         <span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="nc">EMACrossover</span><span class="p">(),</span> <span class="nc">AccountSummary</span><span class="p">(),</span> <span class="n">logger</span> <span class="p">=</span> <span class="n">logger</span><span class="p">)</span>
 
-        <span class="c1">// Give the run a unique name so the metrics can be easily identified</span>
+        <span class="c1">// Give the run a unique identifiable name</span>
+        <span class="c1">// Otherwise a unique name will be generated for each name</span>
         <span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">runName</span> <span class="p">=</span> <span class="s">"run-$period"</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="c1">// Wait till all jobs are finished</span>
+<span class="c1">// Wait until all the jobs are finished</span>
 <span class="n">jobs</span><span class="p">.</span><span class="nf">joinAllBlocking</span><span class="p">()</span>
 
-<span class="c1">// If you are in Jupyter Notebook you can plot the metrics</span>
-<span class="kd">val</span> <span class="py">data</span> <span class="p">=</span> <span class="n">logger</span><span class="p">.</span><span class="nf">getMetric</span><span class="p">(</span><span class="s">"account.equity"</span><span class="p">)</span>
-<span class="nc">MetricChart</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code></pre>
+<span class="c1">// If you are in Jupyter Notebook you can easily plot a metric for all the runs</span>
+<span class="kd">val</span> <span class="py">equity</span> <span class="p">=</span> <span class="n">logger</span><span class="p">.</span><span class="nf">getMetric</span><span class="p">(</span><span class="s">"account.equity"</span><span class="p">)</span>
+<span class="nc">MetricChart</span><span class="p">(</span><span class="n">equity</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </div>

@@ -21,9 +21,9 @@ include::{sourcefile}[tag=ema]
 ----
 
 === TaLibStrategy
-`TaLibStrategy` is short for Technical Analysis Strategy and is a convenient way of using the `ta-lib` indicators in a strategy by defining the BUY and/or SELL condition.
+`TaLibStrategy` is short for Technical Analysis Strategy and is a convenient way of using the ta-lib indicators in a strategy by defining the BUY and/or SELL condition.
 
-The `ta-lib` comes with over 150 indicators and these can be combined anyway you like in a `TaLibStrategy`.
+The ta-lib library comes with over 150 indicators and these can be combined anyway you like in a `TaLibStrategy`.
 
 [source, kotlin]
 ----
@@ -82,12 +82,12 @@ Now let's see how a trend-following `Strategy` would look like that would:
 include::{sourcefile}[tag=naive]
 ----
 
-As you can see a Strategy can maintain state, the `previousPrices` in the above example.You have to ensure you reset the state when a `Component` lifecycle event is called, like the `start` method in the above example.
+As you can see a Strategy can maintain state, the `previousPrices` in the above example. You have to ensure you reset the state when a `Component` lifecycle event is called, like the `reset` method in the above example.
 
 
 [#_policy_based_strategies]
 == Policy based Strategies
-There are use cases that require a strategy not only to have access to the event but also to the account.These type of strategies can be implemented in roboquant, but they should be implemented as a policy and not strategy.Some reasons you might want to use a policy:
+There are use cases that require a strategy not only to have access to an `Event` but also to the `Account`. These type of strategies can be implemented in roboquant, but they should be implemented as a policy and not strategy. Some reasons you might need to use a policy:
 
 * Access to the Account instance is required, for example to re-balance a portfolio
 * Directly generate orders instead of signals
@@ -96,18 +96,18 @@ See the xref:policy.adoc[policy documentation] for more details.
 
 
 == Signals
-A signal is the outcome of a strategy and is modelled closely after the ratings given by ratings agencies. The two mandatory parts of a signal are:
+A `Signal` is the outcome of a strategy and is modelled closely after the ratings given by ratings agencies. The two mandatory parts of a `Signal` are:
 
-1. The asset that the signal applies for
+1. The asset that the signal applies for, like a particular stock
 2. A rating for that same asset
 
-There is a 5-point scale used for the rating part of a signal:
+There is a 5-point scale used for the `Rating` of a `Signal`:
 
-* Buy: Also known as strong buy and "on the recommended list". Buy is a recommendation to purchase a specific security.
-* Sell: Also known as strong sell, it's a recommendation to sell a security or to liquidate an asset.
-* Hold: In general terms, a company with a hold recommendation is expected to perform at the same pace as comparable companies or in-line with the market.
-* Underperform: A recommendation that means a stock is expected to do slightly worse than the overall stock market return. Underperform can also be expressed as "moderate sell," "weak hold" and "underweight."
-* Outperform: Also known as "moderate buy," "accumulate" and "overweight." Outperform is an analyst recommendation meaning a stock is expected to do slightly better than the market return.
+* `BUY`: Also known as strong buy and "on the recommended list". Buy is a recommendation to purchase a specific security.
+* `SELL`: Also known as strong sell, it's a recommendation to sell a security or to liquidate an asset.
+* `HOLD`: In general terms, a company with a hold recommendation is expected to perform at the same pace as comparable companies or in-line with the market.
+* `UNDERPERFORM`: A recommendation that means a stock is expected to do slightly worse than the overall stock market return. Underperform can also be expressed as "moderate sell," "weak hold" and "underweight."
+* `OUTPERFORM`: Also known as "moderate buy," "accumulate" and "overweight." Outperform is an analyst recommendation meaning a stock is expected to do slightly better than the market return.
 
 NOTE: a hold rating is not the same as no signal. Only generate hold signals if you think the asset will perform market conform. If your strategy has no idea about the performance of an asset, don't generate a signal at all.
 

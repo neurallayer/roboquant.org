@@ -1,7 +1,6 @@
+ <h3 class="navbar-brand">Content</h3>
  <nav id="sidebar" class="navbar fixed-left sticky-top">
-
     <ul class="list-unstyled">
-    <span class="navbar-brand">Content</span>
     <#list docs as doc>
 
         <#if content.uri?starts_with("tutorial/")>

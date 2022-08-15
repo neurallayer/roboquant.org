@@ -12,7 +12,6 @@ further be extended by providing custom models for trading, fee and account mode
 The instantiation of a `SimBroker` is surprisingly simple.
 
 
-
 [source, kotlin]
 ----
 include::{sourcefile}[tag=basic]
@@ -31,13 +30,13 @@ However, you can overwrite the default values. Common use cases are:
 include::{sourcefile}[tag=extra]
 ----
 
-The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit.Typically, the initial deposit is denoted in a single currency, like a *$50,000.00 USD* account. But this is not a hard requirement and in with the `SimBroker` you can use multi-currency initial deposits if you prefer. However, there is always only one `baseCurrency`
+The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit. Typically, the initial deposit is denoted in a single currency, like a *$50,000.00 USD* account. But this is not a hard requirement and in with the `SimBroker` you can use multi-currency initial deposits if you prefer. However, there is always only one `baseCurrency`.
 
 
 == Order Handling
-When an order is placed at the SimBroker, it only gets processed once there is a known price for the underlying asset. Till an event happens that has that price available, the order will remain in its INITIAL state.
+When an order is placed at the SimBroker, it only gets processed once there is a known price for the underlying asset. Till an event happens that has that price info available, the order will remain in its `INITIAL` state.
 
-Any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted. So an order in INITIAL state will not expire and time based TIF only start counting after it has been accepted.
+Any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted. So an order in `INITIAL` state will not expire and time based TIF only start counting after it has been accepted.
 
 Any open orders will be processed based on FIFO (first-in-first-out) basis, so older open orders are processed first. Exception to this rule are modify orders that are always processed before regular order types. The most common modify orders are a `CancelOrder` and an `UpdateOrder`.
 
@@ -56,7 +55,7 @@ The `Account` object contains the following key properties:
 
 .Equity
 ****
-Equity is key attribute to monitor if you want to see how your account is performing. The following two equations hold true when using SimBroker to run a back test:
+Equity is key attribute to monitor if you want to see how your account is performing. The following two equations hold true when using SimBroker when running a back test:
 
 [source, kotlin, indent=0]
 ----
@@ -66,10 +65,9 @@ include::{sourcefile}[tag=equity]
 ****
 
 
-
 .Buying Power
 ****
-Always use the `buyingPower` property if you want to know how much money is remaining for trading. Especially when using a Margin Account, you shouldn't rely on the `cash` property, since that doesn't take into account any margin or leverage you might have.
+Always use the `buyingPower` property if you want to know how much money is remaining for trading. Especially when using a `MarginAccount`, you shouldn't rely on the `cash` property, since that doesn't take into account any margin or leverage you might have.
 ****
 
 == Custom Models
@@ -83,9 +81,9 @@ Custom models are a way to further customize the behavior of `SimBroker`. The fo
 
 Like any simulation, SimBroker also has limitations compared to a real life trading. It is important to realize this and take appropriate actions where possible:
 
-1. The default cost calculations become less realistic if you trade large amount compared to overall daily volume. Don't underestimate the transaction cost like spread, slippage and commissions and rather be too pessimistic.
+1. The default cost calculations become less realistic if you trade large amount compared to overall daily volume. As a rule of thumb: don't underestimate the transaction cost like spread, slippage and commissions and better be too pessimistic.
 2. Order types might behave slightly different between SimBroker and different real brokers. If possible at all, also perform paper trading to see if your solution still performs as expected.
-3. The buying power and margin calculations might differ. Be on the safe side and use a higher margin requirement in the SimBroker than required.
+3. The buying power and margin calculations might differ. Be on the safe side and use a higher margin requirement in the SimBroker than required by your broker.
 
 
 == Account Models
@@ -93,13 +91,13 @@ Account models allow to model the amount of Buying power for different types of 
 
 Out of the box _roboquant_ comes with several models that cather for common account types:
 
-1. Cash accounts, that don't have leverage or margin available
+1. Cash accounts, that don't have any leverage or margin available
 2. Margin account, that have configurable margin and leverage
 
 === Cash Accounts
 Cash accounts can be modelled using the `CashAccount`. This model is also the default if you don't provide a BuyingPowerModel when instantiating a xref:simbroker.adoc[SimBroker].
 
-`CashBuyingPowerModel` only basis the buying power on the available cash, and no margin is calculated and no leverage is used.
+`CashBuyingPowerModel` only base the buying power on the available cash, and no margin is calculated and no leverage is used. So cash and buyng power are equal, however cash can contain multiple currencies while the buying power is always converted to the base currency of the account.
 
 The below table shows an example using the default CashBuyingPowerModel when trading in different currencies, EUR and USD in this case.
 
@@ -165,7 +163,6 @@ The following table shows another example, but this time shorting on a USD margi
 |5 |sell XYZ -50 @ $300|$45,000|-$30,000|$9,000|$15,000|$12,000|-$5,000|0
 |6 |buy XYZ 100 @ $300|$15,000|0|0|$15,000|$30,000|0|-$5,000
 |===
-
 
 === Order Rules
 

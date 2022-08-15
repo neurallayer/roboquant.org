@@ -7,7 +7,7 @@ fun memoryLogger() {
     // tag::standard[]
     val logger = MemoryLogger()
     val keys = logger.metricNames
-    val data = logger.getMetric(keys.first())
+    val metric = logger.getMetric(keys.first())
     // end::standard[]
 }
 

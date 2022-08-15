@@ -53,10 +53,9 @@
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0">
+ <h3 class="navbar-brand">Content</h3>
  <nav id="sidebar" class="navbar fixed-left sticky-top">
-
     <ul class="list-unstyled">
-    <span class="navbar-brand">Content</span>
     
 
 
@@ -119,18 +118,19 @@
                          </div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <div id="preamble">
+                                <div class="sect1">
+<h2 id="_what_is_a_policy">What is a policy</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A <code>Policy</code> is responsible for creating the orders that will be placed at the broker. The most common use-case is that a <code>Policy</code> does this based on the signals it receives from a <code>Strategy</code>, but there are other use-cases.</p>
 </div>
 <div class="paragraph">
-<p>A good <code>Policy</code> is key in making your solution as robust as possible. Key things to consider when implementing a new policy:</p>
+<p>A good <code>Policy</code> implementation is key in making your solution as robust as possible. Key things to consider when implementing a new policy:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>What is a good allocation strategy</p>
+<p>What is a good allocation strategy, so how much of your cash do you allocate to a certain asset</p>
 </li>
 <li>
 <p>What order types to create</p>
@@ -142,7 +142,7 @@
 <p>How to limit the maximum number of orders send to a broker (circuit breaker)</p>
 </li>
 <li>
-<p>How to deal with conflicting signals from a strategy</p>
+<p>How to deal with conflicting signals from strategies</p>
 </li>
 <li>
 <p>How to handle yo-yo signals (buy-sell-buy-sell) in a short timeframe</p>
@@ -270,7 +270,7 @@ If there is one thing that prevents many from going live with a strategy, it is 
 </div>
 </div>
 <div class="paragraph">
-<p>The following example is more realistic and shows an implementation that calculates the ATR (Average True Range) that is then used to set the limit amount in a Limit Order.</p>
+<p>The following example is more realistic and shows an implementation that calculates the ATR (Average True Range) that is than used to set the limit amount in a Limit Order.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -322,7 +322,7 @@ If there is one thing that prevents many from going live with a strategy, it is 
 </div>
 </div>
 <div class="paragraph">
-<p>When developing custom policies, they should not only be robust and deal with corner-cases, but they should also be explainable. Back-testing over large amounts of data is already challenging enough without having a Policy in place which behavior is very difficult to wrap your head around. So the KISS design principle (Keep It Simple, Stupid) applies to Policies.</p>
+<p>When developing custom policies, they should not only be robust and deal with corner-cases, but they should also be explainable. Back-testing over large amounts of data is already challenging enough without having a <code>Policy</code> in place which behavior is very difficult to wrap your head around. So the KISS design principle (Keep It Simple, Stupid) applies to policies.</p>
 </div>
 </div>
 </div>
@@ -335,15 +335,15 @@ If there is one thing that prevents many from going live with a strategy, it is 
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Re-balancing your portfolio at regular intervals (like monthly) based on some risk profile.</p>
+<p>Re-balancing your portfolio at regular intervals (like monthly) based on some risk profile. Since a <code>Strategy</code> doesn&#8217;t have access to an <code>Account</code> and there for also not to a <code>Portfolio</code>, this need to be done in a <code>Policy</code>.</p>
 </li>
 <li>
-<p>Advanced machine learning techniques like reinforcement learning that train the algorithm to directly create orders based on events (and not signals).</p>
+<p>Advanced machine learning techniques like reinforcement learning that train the algorithm to directly create orders based on events (and not create intermediate signals).</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>In these cases you don&#8217;t require a Strategy and implement all the logic in the Policy instead. You can use the <code>NoSignalStrategy</code> as strategy that doesn&#8217;t perform any action.</p>
+<p>In these cases you don&#8217;t require a <code>Strategy</code> and implement all the logic in the <code>Policy</code> instead. You can use the <code>NoSignalStrategy</code> as strategy that doesn&#8217;t perform any action.</p>
 </div>
 <div class="listingblock">
 <div class="content">

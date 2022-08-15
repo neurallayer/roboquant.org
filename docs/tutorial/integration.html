@@ -53,10 +53,9 @@
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0">
+ <h3 class="navbar-brand">Content</h3>
  <nav id="sidebar" class="navbar fixed-left sticky-top">
-
     <ul class="list-unstyled">
-    <span class="navbar-brand">Content</span>
     
 
 
@@ -144,7 +143,7 @@
 <p>In some cases a single 3rd party provides all types of functionality, or sometimes they are just specialised for a subset. You can combine several of these 3rd parties together in a single run, for example use a data feed from one provider and the broker functionality from another one.</p>
 </div>
 <div class="paragraph">
-<p>One of the design principles is that roboquant tries to avoid exposing 3rd party APIs directly and typically wraps them in roboquant equivalent types. This makes it easier to switch between different providers and also reduces the learning curve.</p>
+<p>One of the design principles is that <em>roboquant</em> tries to avoid exposing 3rd party APIs directly and typically wraps them in <em>roboquant</em> equivalent types. This makes it easier to switch between different providers and also reduces the learning curve.</p>
 </div>
 </div>
 </div>
@@ -184,10 +183,10 @@
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When you want to integrate with a 3rd party, you most likely require credentials to gain access to their APIs. Often this is in the form of an API key and secret. You can of course embed these credentials directly in your source code, however roboquant offers better and more secure alternatives.</p>
+<p>When you want to integrate with a 3rd party, you most likely require credentials to gain access to their APIs. Often this is in the form of an API key and secret. You can of course embed these credentials directly in your source code, however <em>roboquant</em> offers better and more secure alternatives.</p>
 </div>
 <div class="paragraph">
-<p>The following list shows the steps how roboquant resolves these configuration parameters:</p>
+<p>The following list shows the steps how <em>roboquant</em> resolves these configuration parameters:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -345,7 +344,7 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-roboquant is open source software that is developed independently of these 3rd party companies. There are no direct or indirect ties to any of these companies.
+<em>roboquant</em> is open source software that is developed independently of these 3rd party companies. There are no direct or indirect ties to any of these companies.
 </td>
 </tr>
 </table>
@@ -359,7 +358,7 @@ roboquant is open source software that is developed independently of these 3rd p
 <p>Adding integration with a 3rd party is not hard. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library that is available, this could take as little as a few hours to a few days. You can read more about the Feed interface that you need to implement right <a href="../feed/index.html#_custom_feeds">here</a></p>
 </div>
 <div class="paragraph">
-<p>Integrating with a new broker is also not hard but requires more effort. The most amount of work will be the translation of object exposes by the broker versus those used by roboquant. For example an Order in roboquant might be slightly different from an Order expected by the client library of the broker and a conversion needs to happen.</p>
+<p>Integrating with a new broker is also not hard but requires more effort. The most amount of work will be the translation of object exposes by the broker versus those used by roboquant. For example an Order in <em>roboquant</em> might be slightly different from an Order expected by the client library of the broker and a conversion needs to happen.</p>
 </div>
 <div class="paragraph">
 <p>For both custom Feed and Broker integrations, it is recommended to first look at some existing integrations and use them as a starting point. And if you have questions, you can always reach out via one of the channels mentioned on the <a href="../community.html">community page</a></p>

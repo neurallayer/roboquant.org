@@ -53,10 +53,9 @@
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5 mb-lg-0">
+ <h3 class="navbar-brand">Content</h3>
  <nav id="sidebar" class="navbar fixed-left sticky-top">
-
     <ul class="list-unstyled">
-    <span class="navbar-brand">Content</span>
     
 
 
@@ -119,15 +118,16 @@
                          </div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <div id="preamble">
+                                <div class="sect1">
+<h2 id="_two_approaches">Two approaches</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are two different ways to install and use roboquant:</p>
+<p>There are two different ways to install and use <em>roboquant</em>:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Interactively in a <em>Jupyter Notebook</em>. If you want to be up and running quickly, this is the easiest approach. Also, if you are less experienced software developer, this is a good starting point. Additionally, you get many charts out-of-the-box that help you to understand how the strategy is performing.</p>
+<p>Interactively in a <strong>Jupyter Notebook</strong>. If you want to be up and running quickly, this is the easiest approach. Also, if you are less experienced software developer, this is a good starting point. Additionally, you get many charts out-of-the-box that help you to understand how the strategy is performing.</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../img/jupyter-lab.png" alt="screenshot" width="400">
@@ -135,7 +135,7 @@
 </div>
 </li>
 <li>
-<p>As a library in your <em>standalone Kotlin or Java application</em>. If you plan to develop large and complex trading strategies, this is a good approach since you&#8217;ll have the full power of an IDE like IntelliJ IDEA at your disposal.</p>
+<p>As a library in your <strong>standalone Kotlin or Java application</strong>. If you plan to develop large and complex trading strategies, this is a good approach since you&#8217;ll have the full power of an IDE like IntelliJ IDEA at your disposal.</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../img/idea.png" alt="screenshot" width="400">
@@ -150,7 +150,7 @@
 <h2 id="_install_jupyter_notebook">Install Jupyter Notebook</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you have already Docker installed on your local machine, all it takes is a single command to have a fully functional Jupyter Notebook environment available.</p>
+<p>If you have already Docker installed on your local machine, all it takes is a single command to have a fully functional Jupyter Notebook environment available that is ready to use.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -158,13 +158,13 @@
 </div>
 </div>
 <div class="paragraph">
-<p>By default, this will start a new Jupyter-Lab environment and disposes of it as soon as you stop the container. The installation comes with several notebooks included that demonstrate how to develop and run your own strategies.</p>
+<p>By default, this will start a new Jupyter-Lab environment and disposes of it as soon as you stop the container. The installation comes with several how-to notebooks included that demonstrate how to develop and run your own strategies.</p>
 </div>
 <div class="paragraph">
 <p>If you don&#8217;t have Docker yet installed on your computer, check out <a href="https://www.docker.com/get-started">Docker get started</a> and download Docker for Desktop from there. If you are running Linux, then your distribution likely already has Docker or Podman included.</p>
 </div>
 <div class="paragraph">
-<p>If you don&#8217;t want to install anything locally, you can use a publicly hosted environment:</p>
+<p>If you don&#8217;t want to install anything locally, you can use a publicly hosted notebook environment:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -172,14 +172,14 @@
 <p>Launch the notebooks right now on MyBinder.org by clicking <span class="image"><a class="image" href="https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/tutorials" target="_blank" rel="noopener"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a></span></p>
 </li>
 <li>
-<p>Go to <a href="https://datalore.jetbrains.com/">JetBrains Datalore</a>. It has excellent support for Kotlin notebooks and has a free tier available if you just want to try roboquant out.</p>
+<p>Go to <a href="https://datalore.jetbrains.com/">JetBrains Datalore</a>. It has excellent support for Kotlin notebooks and has a free tier available if you just want to try <em>roboquant</em> out.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_install_a_roboquant_library">Install a roboquant library</h2>
+<h2 id="_install_the_roboquant_library">Install the <em>roboquant</em> library</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Just add <code>roboquant</code> as a dependency to your build tool, like Maven or Gradle. Regular versions of the Roboquant modules are published to Maven Central and snapshots are published to OSS Sonatype (<a href="https://s01.oss.sonatype.org/content/repositories/snapshots" class="bare">https://s01.oss.sonatype.org/content/repositories/snapshots</a>).</p>
@@ -190,7 +190,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>beta release: <span class="image"><img src="https://img.shields.io/maven-central/v/org.roboquant/roboquant" alt="Maven Central"></span></p>
+<p>regular release: <span class="image"><img src="https://img.shields.io/maven-central/v/org.roboquant/roboquant" alt="Maven Central"></span></p>
 </li>
 <li>
 <p>snapshot release: <span class="image"><img src="https://img.shields.io/nexus/s/org.roboquant/roboquant?server=https%3A%2F%2Fs01.oss.sonatype.org" alt="Sonatype Nexus (Snapshots)"></span></p>
@@ -254,7 +254,7 @@
 <h2 id="_building_from_source">Building from source</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>First start with cloning the roboquant GitHub repository to your local disk. The quickest way to be up and running is then to install IntelliJ IDEA (either the free community edition or the paid Ultimate version) and open the directory you just cloned. IntelliJ IDEA will recognize it as Kotlin/Maven project, and you can build it and run test directly from the IDE.</p>
+<p>First start with cloning the <em>roboquant</em> GitHub repository to your local disk. The quickest way to be up and running is then to install IntelliJ IDEA (either the free community edition or the paid Ultimate version) and open the directory you just cloned. IntelliJ IDEA will recognize it as Kotlin/Maven project, and you can build it and run test directly from the IDE.</p>
 </div>
 <div class="paragraph">
 <p>You can also use a plain text editor of course. Roboquant uses a setup and directory structure that removes much of the ceremony often found in many Java/Kotlin projects. So no need to go 10 directories deep to locate the source file you were looking for.</p>
@@ -277,7 +277,7 @@
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-If you plan to make many changes and updates to the source code, checkout the <a href="https://github.com/apache/maven-mvnd">Maven Darmon</a> project that provides much faster builds.
+If you plan to make many changes and updates to the source code, checkout the <a href="https://github.com/apache/maven-mvnd">Maven Daemon</a> project that provides much faster builds.
 </td>
 </tr>
 </table>
