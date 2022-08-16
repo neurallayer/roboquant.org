@@ -127,4 +127,4 @@ Besides the mandatory Rating and Asset, a signal can optionally contain the foll
 include::{sourcefile}[tag=attrSignal]
 ----
 
-It is up to the xref:../policy/index.adoc[policy] how to use these attributes when generating the orders.
+It is up to the xref:policy.adoc[policy] how to use these attributes when generating the orders.

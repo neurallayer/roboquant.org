@@ -8,7 +8,7 @@ A feed is responsible for delivering the data that is required to test and run s
 
 A Feed is used to deliver historic and live data. A feed wraps its information in an `Event` and put that `Event` on an `EventChannel`. This is all done asynchronously from rest of the trading logic. And although an `EventChannel` is used to deliver the events, this channel is normally only directly accessed by the `Roboquant` instance. A strategy will be passed just the plain `Event` object.
 
-To read more why _roboquant_ has selected this event-driven approach, read this xref:../background/events.adoc[introduction on event-driven software].
+To read more why _roboquant_ has selected this event-driven approach, read this xref:../background/features.adoc[introduction on event-driven software].
 
 == Event
 An `Event` instance contains all the data that happens at a certain point in time. It contains the following two attributes
@@ -48,7 +48,7 @@ Roboquant includes several `Feed` implementations out of the box:
 * CSVFeed that can process CSV files stored somewhere on your local machine.
 * AvroFeed that can process an Avro file stored somewhere on your local machine.
 * RandomWalk that (as the name suggests) generates random price actions for random assets.
-* Integration with third party data providers that make their data available through an API. See also the xref:../integration/index.adoc[integration documentation]
+* Integration with third party data providers that make their data available through an API. See also the xref:integration.adoc[integration documentation]
 
 
 [#_custom_feeds]
