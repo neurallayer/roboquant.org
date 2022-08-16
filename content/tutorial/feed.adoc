@@ -8,7 +8,7 @@ A feed is responsible for delivering the data that is required to test and run s
 
 A Feed is used to deliver historic and live data. A feed wraps its information in an `Event` and put that `Event` on an `EventChannel`. This is all done asynchronously from rest of the trading logic. And although an `EventChannel` is used to deliver the events, this channel is normally only directly accessed by the `Roboquant` instance. A strategy will be passed just the plain `Event` object.
 
-To read more why _roboquant_ has selected this event-driven approach, read this xref:../introduction/events.adoc[introduction on event-driven software].
+To read more why _roboquant_ has selected this event-driven approach, read this xref:../background/events.adoc[introduction on event-driven software].
 
 == Event
 An `Event` instance contains all the data that happens at a certain point in time. It contains the following two attributes
@@ -53,17 +53,11 @@ Roboquant includes several `Feed` implementations out of the box:
 
 [#_custom_feeds]
 == Custom Feeds
-If you have a data source that is not yet covered by roboquant, you can implement your own `Feed`.The main method to implement is the `play` method that will put the available events on the `EventChannel`.
+If you have a data source that is not yet covered by roboquant, you can implement your own `Feed`. The main method to implement is the `play` method that will put the available events on the `EventChannel`.
 
-[source,kotlin]
+[source, kotlin, indent=0]
 ----
-interface Feed {
-
-    val timeFrame: TimeFrame
-        get() = TimeFrame.FULL
-
-    suspend fun play(channel: EventChannel)
-}
+include::{sourcefile}[tag=interface]
 ----
 
 The following dummy implementation of the `play` method sends out 100 empty events, empty meaning an event without any actions included. In case the EventChannel is full, the `channel.send` method will be blocking.

@@ -6,10 +6,7 @@ import org.roboquant.common.Asset
 import org.roboquant.common.Timeframe
 import org.roboquant.common.hours
 import org.roboquant.common.summary
-import org.roboquant.feeds.Action
-import org.roboquant.feeds.Event
-import org.roboquant.feeds.EventChannel
-import org.roboquant.feeds.PriceBar
+import org.roboquant.feeds.*
 import org.roboquant.feeds.avro.AvroFeed
 import org.roboquant.feeds.avro.AvroUtil
 import org.roboquant.feeds.csv.CSVFeed
@@ -18,6 +15,21 @@ import org.roboquant.strategies.EMACrossover
 import java.time.Instant
 
 val roboquant = Roboquant(EMACrossover())
+
+
+fun feedInterface() {
+    // tag::interface[]
+    class MYFeed : Feed {
+
+        val timeFrame: Timeframe
+            get() = Timeframe.INFINITE
+
+        override suspend fun play(channel: EventChannel) {
+            TODO() // Your code goes here
+        }
+    }
+    // end::interface[]
+}
 
 fun test() {
     // tag::basic[]

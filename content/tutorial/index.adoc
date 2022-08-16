@@ -1,11 +1,12 @@
 = Welcome
 :icons: font
+:sourcefile: ../../samples/index.kt
 :source-highlighter: rouge
 :jbake-date: 2020-12-01
 
-Welcome to the roboquant™ tutorial. Just like the _roboquant_ software, the documentation is also open source. So if you find mistakes or want to contribute, head over to the https://github.com/neurallayer/roboquant.org[GitHub documentation repository] where you can find the source.
-
 == Reading Guide
+Welcome to the _roboquant_ tutorial. Just like the _roboquant_ software, the documentation is also open source. So if you find mistakes or want to contribute, head over to the https://github.com/neurallayer/roboquant.org[GitHub documentation repository] where you can find the source.
+
 You can select any item from the menu to get more information about that topic. Content that is formatted like `SomeName`, represents a real Kotlin class, interface, method or attribute. The package name is typically omitted. All the used code snippets are compilable and runnable code. However, the required import statements are not shown to improve readability.
 
 == Main components
@@ -48,18 +49,7 @@ Developing a new strategy and validate it during a back-test is a straight forwa
 
 [source, kotlin,  subs="attributes,verbatim"]
 ----
-class MyStrategy : Strategy { // <1>
-    override fun generate(event: Event): List<Signal> {
-        // your code goes here
-    }
-}
-
-val strategy = MyStrategy() // <2>
-val metric = AccountSummary() //<3>
-val roboquant = Roboquant(strategy, metric) //<4>
-
-val feed = CSVFeed("./data/us") //<5>
-roboquant.run(feed) //<6>
+include::{sourcefile}[tag=overview]
 ----
 <1> Develop a new strategy based on some idea you have. This can be done either from scratch or by assembling existing building blocks. In many cases, this is the only real software development required. See also xref:strategy.adoc[Strategy] for more details.
 <2> Create an instance of your strategy.

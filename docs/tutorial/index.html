@@ -118,16 +118,12 @@
                          </div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>Welcome to the roboquant™ tutorial. Just like the <em>roboquant</em> software, the documentation is also open source. So if you find mistakes or want to contribute, head over to the <a href="https://github.com/neurallayer/roboquant.org">GitHub documentation repository</a> where you can find the source.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
+                                <div class="sect1">
 <h2 id="_reading_guide">Reading Guide</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Welcome to the <em>roboquant</em> tutorial. Just like the <em>roboquant</em> software, the documentation is also open source. So if you find mistakes or want to contribute, head over to the <a href="https://github.com/neurallayer/roboquant.org">GitHub documentation repository</a> where you can find the source.</p>
+</div>
 <div class="paragraph">
 <p>You can select any item from the menu to get more information about that topic. Content that is formatted like <code>SomeName</code>, represents a real Kotlin class, interface, method or attribute. The package name is typically omitted. All the used code snippets are compilable and runnable code. However, the required import statements are not shown to improve readability.</p>
 </div>
@@ -203,18 +199,18 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MyStrategy</span> <span class="p">:</span> <span class="nc">Strategy</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">generate</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;</span> <span class="p">{</span>
-        <span class="c1">// your code goes here</span>
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">class</span> <span class="nc">MyStrategy</span> <span class="p">:</span> <span class="nc">Strategy</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">generate</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nc">Event</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Signal</span><span class="p">&gt;</span> <span class="p">{</span>
+            <span class="nc">TODO</span><span class="p">()</span> <span class="c1">// Your code goes here</span>
+        <span class="p">}</span>
     <span class="p">}</span>
-<span class="p">}</span>
 
-<span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">MyStrategy</span><span class="p">()</span> <i class="conum" data-value="2"></i><b>(2)</b>
-<span class="kd">val</span> <span class="py">metric</span> <span class="p">=</span> <span class="nc">AccountSummary</span><span class="p">()</span> <i class="conum" data-value="3"></i><b>(3)</b>
-<span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
+    <span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">MyStrategy</span><span class="p">()</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="kd">val</span> <span class="py">metric</span> <span class="p">=</span> <span class="nc">AccountSummary</span><span class="p">()</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
 
-<span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">CSVFeed</span><span class="p">(</span><span class="s">"./data/us"</span><span class="p">)</span> <i class="conum" data-value="5"></i><b>(5)</b>
-<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span> <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
+    <span class="kd">val</span> <span class="py">feed</span> <span class="p">=</span> <span class="nc">CSVFeed</span><span class="p">(</span><span class="s">"./data/us"</span><span class="p">)</span> <i class="conum" data-value="5"></i><b>(5)</b>
+    <span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span> <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">

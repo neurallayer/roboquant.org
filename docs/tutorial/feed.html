@@ -128,7 +128,7 @@
 <p>A Feed is used to deliver historic and live data. A feed wraps its information in an <code>Event</code> and put that <code>Event</code> on an <code>EventChannel</code>. This is all done asynchronously from rest of the trading logic. And although an <code>EventChannel</code> is used to deliver the events, this channel is normally only directly accessed by the <code>Roboquant</code> instance. A strategy will be passed just the plain <code>Event</code> object.</p>
 </div>
 <div class="paragraph">
-<p>To read more why <em>roboquant</em> has selected this event-driven approach, read this <a href="../introduction/events.html">introduction on event-driven software</a>.</p>
+<p>To read more why <em>roboquant</em> has selected this event-driven approach, read this <a href="../background/events.html">introduction on event-driven software</a>.</p>
 </div>
 </div>
 </div>
@@ -223,16 +223,18 @@
 <h2 id="_custom_feeds">Custom Feeds</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you have a data source that is not yet covered by roboquant, you can implement your own <code>Feed</code>.The main method to implement is the <code>play</code> method that will put the available events on the <code>EventChannel</code>.</p>
+<p>If you have a data source that is not yet covered by roboquant, you can implement your own <code>Feed</code>. The main method to implement is the <code>play</code> method that will put the available events on the <code>EventChannel</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">interface</span> <span class="nc">Feed</span> <span class="p">{</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">MYFeed</span> <span class="p">:</span> <span class="nc">Feed</span> <span class="p">{</span>
 
-    <span class="kd">val</span> <span class="py">timeFrame</span><span class="p">:</span> <span class="nc">TimeFrame</span>
-        <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="nc">TimeFrame</span><span class="p">.</span><span class="nc">FULL</span>
+    <span class="kd">val</span> <span class="py">timeFrame</span><span class="p">:</span> <span class="nc">Timeframe</span>
+        <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="nc">INFINITE</span>
 
-    <span class="k">suspend</span> <span class="k">fun</span> <span class="nf">play</span><span class="p">(</span><span class="n">channel</span><span class="p">:</span> <span class="nc">EventChannel</span><span class="p">)</span>
+    <span class="k">override</span> <span class="k">suspend</span> <span class="k">fun</span> <span class="nf">play</span><span class="p">(</span><span class="n">channel</span><span class="p">:</span> <span class="nc">EventChannel</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nc">TODO</span><span class="p">()</span> <span class="c1">// Your code goes here</span>
+    <span class="p">}</span>
 <span class="p">}</span></code></pre>
 </div>
 </div>

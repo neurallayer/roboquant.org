@@ -29,9 +29,9 @@ include::{sourcefile}[tag=complete]
 ----
 
 == Run
-After you have created an instance of the `Roboquant` class and have a xref:../feed/index.adoc[data feed], you can start the run.
+After you have created an instance of the `Roboquant` class and have a xref:./feed.adoc[data feed], you can start the run.
 
-NOTE: The same `run` method is used for all the different stages, from back testing to live trading. See also xref:../introduction/four_stages.adoc[the 4 stages] for more details about these stages.
+NOTE: The same `run` method is used for all the different stages, from back testing to live trading. See also xref:../background/four_stages.adoc[the 4 stages] for more details about these stages.
 
 In the most simple form, you only need to provide a feed as the argument. In this case, all the events available in the feed will be used in the run.
 
