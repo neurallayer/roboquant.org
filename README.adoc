@@ -1,31 +1,37 @@
 = roboquant website
 :icons: font
 
-This repo contains the content for the roboquant.org website. It uses JBake as the generator for the static website and AsciiDoc for most of the content. All the Kotlin code samples used in the documentation are in the samples directory and are compiled to make sure they are correct and still up to date.
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+image:https://github.com/neurallayer/roboquant.org/actions/workflows/gh-pages.yml/badge.svg[Automated Deploy,link=https://github.com/neurallayer/roboquant.org/actions/workflows/gh-pages.yml]
+image:https://img.shields.io/github/languages/code-size/neurallayer/roboquant.org[GitHub code size in bytes]
+image:https://img.shields.io/badge/license-Apache%202-blue.svg[APL v2,link=http://www.apache.org/licenses/LICENSE-2.0.html]
+image:https://img.shields.io/github/issues/neurallayer/roboquant.org/bug?color=red&label=bugs[GitHub issues by-label]
+image:https://img.shields.io/github/issues/neurallayer/roboquant.org/enhancement?color=yellow&label=enhancements[GitHub issues by-label]
+image:https://img.shields.io/github/last-commit/neurallayer/roboquant.org[GitHub last commit]
+image:https://img.shields.io/github/commit-activity/m/neurallayer/roboquant.org[GitHub commit activity]
+
+This repo contains the content for the roboquant.org website. It uses JBake as the generator for the static website and AsciiDoc for most of the documentation. All the Kotlin code samples used in the documentation are in the samples directory and are compiled to make sure they are correct and still up to date.
 
 Check the roboquant site at https://roboquant.org[roboquant.org]
 
 == Build
-Not the JBake default output directory is used, but rather the ```docs``` directory. The reason for this is that the website is hosted on GitHub Pages and right now only / or /docs can serve as the content root and not other directories.
-
-To generate the website, run:
+To generate the website (output will be in the ./build directory), run:
 
 [source,shell]
 ----
 mvn jbake:generate
 ----
 
-or if you have JBake installed, you can run:
+NOTE: If you are on Apple Silicon (the M1 processor), the default JBake installation won't work. But the JBake Maven plugin used in this project has an upgraded version of the OrientDB library that should work (but not very well tested).
 
-[source,shell]
-----
-rm -rf docs
-jbake . docs
-----
-
-NOTE: If you are on Apple Silicon (the M1 processor), the default JBake installation won't work. But there is a patch available that uses SQLLite under the hood and works. You can get it at: https://github.com/mhberger/jbake/tree/mhb/sqlite-2021-05-30[JBake SQLLite Patched]
-
-To develop, you can run: 
+To interactively develop, you can run:
 
 [source,shell]
 ----
@@ -33,4 +39,4 @@ mvn jbake:inline
 ----
 
 == Other
-If you want to fork this for your own website, please be aware that some templates still has some hard coded content in there that you need to replace.
+If you want to fork this for your own website, please be aware that some templates still have hard coded content in there that you want to replace.
