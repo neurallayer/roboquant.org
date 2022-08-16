@@ -218,7 +218,7 @@ If you add two amounts together you&#8217;ll always get a new <code>Wallet</code
 <p>The <code>Config.exchangeRates</code> property is used by the components to perform the actual conversion. So you can change this property and all code from now on will use this new implementation.</p>
 </div>
 <div class="paragraph">
-<p>The <code>ExchangeRates</code> interface also supports different rates at different moments in time, but it depends on the actual implementation if the provided time parameter is taken into consideration. One of the implementations that comes out of the box with roboquant, is the <code>ECBExchangeRates</code> which contains daily exchange rates for most fiat currencies from the year 2000 onwards.</p>
+<p>The <code>ExchangeRates</code> interface also supports different rates at different moments in time, but it depends on the actual implementation if the provided time parameter is taken into consideration. One of the implementations that comes out of the box with <em>roboquant</em>, is the <code>ECBExchangeRates</code> which contains daily exchange rates for most fiat currencies from the year 2000 onwards.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -262,7 +262,7 @@ If you add two amounts together you&#8217;ll always get a new <code>Wallet</code
 <p><code>Timeframe</code> represents a period of time with a start-time (inclusive) and an end-time (exclusive).</p>
 </div>
 <div class="paragraph">
-<p>It is used throughout roboquant, but one particular use-case is that you can restrict a <code>run</code> to a particular timeframe. So instead of one large run over all the events in a <code>Feed</code>, you can have multiple smaller runs. The <code>Timeframe</code> has several helper methods that makes it easier to split a timeframe into smaller parts.</p>
+<p>It is used throughout <em>roboquant</em>, but one particular use-case is that you can restrict a <code>run</code> to a particular timeframe. So instead of one large run over all the events in a <code>Feed</code>, you can have multiple smaller runs. The <code>Timeframe</code> has several helper methods that makes it easier to split a timeframe into smaller parts.</p>
 </div>
 <div class="listingblock">
 <div class="content">

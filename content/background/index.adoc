@@ -5,7 +5,7 @@
 
 
 == Why develop a new platform
-Before we started to develop roboquant, we looked at existing frameworks and platforms to see if these could fit the bill. However, for our use-cases none of them checked all the boxes that we required:
+Before we started to develop _roboquant_, we looked at existing frameworks and platforms to see if these could fit the bill. However, for our use-cases none of them checked all the boxes that we required:
 
 * Deal with large volumes of data and run extensive back-tests
 * Trade assets in multiple currencies at the same time
@@ -94,4 +94,4 @@ Although event-driven systems come with the above benefits, they traditionally s
 
 . They can be slower to execute compared to a vectorised system. But by using Kotlin and a highly optimized engine, _roboquant_ is actually faster than other algo-trading platforms.
 
-To find out more about how Events and Actions are implemented in roboquant, check out the documentation on xref:../tutorial/feed.adoc[feeds].
+To find out more about how Events and Actions are implemented in _roboquant_, check out the documentation on xref:../tutorial/feed.adoc[feeds].

@@ -53,7 +53,7 @@ Roboquant includes several `Feed` implementations out of the box:
 
 [#_custom_feeds]
 == Custom Feeds
-If you have a data source that is not yet covered by roboquant, you can implement your own `Feed`. The main method to implement is the `play` method that will put the available events on the `EventChannel`.
+If you have a data source that is not yet covered by _roboquant_, you can implement your own `Feed`. The main method to implement is the `play` method that will put the available events on the `EventChannel`.
 
 [source, kotlin, indent=0]
 ----

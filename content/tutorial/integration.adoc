@@ -44,7 +44,7 @@ The following list shows the steps how _roboquant_ resolves these configuration 
 . If the credentials are set in a property file called "dotenv" in the working directory use these, otherwise go to next step.
 . If the credentials are set in a property file called ".env" in the $HOME/.roboquant directory use these, otherwise go to next step.
 
-The following provides an overview of the used properties in roboquant
+The following provides an overview of the used properties in _roboquant_
 
 [source, properties, indent=0]
 ----
@@ -76,6 +76,6 @@ NOTE: _roboquant_ is open source software that is developed independently of the
 == Adding new 3rd party integrations
 Adding integration with a 3rd party is not hard. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library that is available, this could take as little as a few hours to a few days. You can read more about the Feed interface that you need to implement right xref:feed.adoc#_custom_feeds[here]
 
-Integrating with a new broker is also not hard but requires more effort. The most amount of work will be the translation of object exposes by the broker versus those used by roboquant. For example an Order in _roboquant_ might be slightly different from an Order expected by the client library of the broker and a conversion needs to happen.
+Integrating with a new broker is also not hard but requires more effort. The most amount of work will be the translation of object exposes by the broker versus those used by _roboquant_. For example an Order in _roboquant_ might be slightly different from an Order expected by the client library of the broker and a conversion needs to happen.
 
 For both custom Feed and Broker integrations, it is recommended to first look at some existing integrations and use them as a starting point. And if you have questions, you can always reach out via one of the channels mentioned on the xref:../community.adoc[community page]

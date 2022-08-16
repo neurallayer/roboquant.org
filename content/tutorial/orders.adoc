@@ -22,7 +22,7 @@ An example on how to convert a list of signals into a list of (market) orders:
 include::{sourcefile}[tag=orders]
 ----
 
-NOTE: there is no explicit notion of BUY or SELL orders in roboquant. A BUY order is just any order with a positive size and a SELL order has a negative size. But other than that, they are equal and created the same way.
+NOTE: there is no explicit notion of BUY or SELL orders in _roboquant_. A BUY order is just any order with a positive size and a SELL order has a negative size. But other than that, they are equal and created the same way.
 
 Most advanced order types are often constructed using multiple `SingleOrder` types. The following snippet shows how to instantiate a BracketOrder with three individual SingleOrders.
 

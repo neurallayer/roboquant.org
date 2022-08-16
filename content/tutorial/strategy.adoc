@@ -87,7 +87,7 @@ As you can see a Strategy can maintain state, the `previousPrices` in the above 
 
 [#_policy_based_strategies]
 == Policy based Strategies
-There are use cases that require a strategy not only to have access to an `Event` but also to the `Account`. These type of strategies can be implemented in roboquant, but they should be implemented as a policy and not strategy. Some reasons you might need to use a policy:
+There are use cases that require a strategy not only to have access to an `Event` but also to the `Account`. These type of strategies can be implemented in _roboquant_, but they should be implemented as a policy and not strategy. Some reasons you might need to use a policy:
 
 * Access to the Account instance is required, for example to re-balance a portfolio
 * Directly generate orders instead of signals
