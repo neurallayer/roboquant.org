@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="roboquant algo-trading framework" />
+    <meta name="keywords" content="trading Kotlin algo roboquant">
+    <meta name="theme-color" content="#3296C8">
+    <title>roboquant - Integration</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+    <!-- Font awesome icons-->
+    <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link href="/css/rouge_github.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/documentation.html">Documentation</a></li>
+                <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
+                <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/neurallayer/roboquant" target="_blank">
+                    <span class="icon"><i class="fa fa-github fa-1x"></i></span> GitHub
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+              <header class="masthead bg-primary text-white text-center">
+                     <div class="container px-5 my-1">
+                         <div class="row gx-5">
+                            <div class="col-lg-4 mb-5 mb-lg-0">
+                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Integration</h1>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </header>
+
+            <section class="py-5">
+                <div class="container px-5 my-1">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+ <h3 class="navbar-brand">Content</h3>
+ <nav id="sidebar" class="navbar fixed-left sticky-top">
+    <ul class="list-unstyled">
+    
+
+
+
+               <li class="nav-item"><a href="/tutorial/index.html" class="nav-link">Welcome</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/install.html" class="nav-link">Installation</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/roboquant.html" class="nav-link">Roboquant</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/feed.html" class="nav-link">Feed</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/simbroker.html" class="nav-link">Simulated Broker</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/metrics.html" class="nav-link">Metrics</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/strategy.html" class="nav-link">Strategy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/policy.html" class="nav-link">Policy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/orders.html" class="nav-link">Orders</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/domain.html" class="nav-link">Domain Model</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/jupyter.html" class="nav-link">Jupyter Notebooks</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/integration.html" class="nav-link">Integration</a></li>
+
+
+    </ul>
+</nav>
+                         </div>
+                        <div class="col-lg-8">
+                            <div class="col h-100">
+                                <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are several types of integrations available with 3rd parties:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Historic data feeds</p>
+</li>
+<li>
+<p>Live data feeds</p>
+</li>
+<li>
+<p>Brokers implementations</p>
+</li>
+<li>
+<p>Exchange rates</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In some cases a single 3rd party provides all types of functionality, or sometimes they are just specialised for a subset. You can combine several of these 3rd parties together in a single run, for example use a data feed from one provider and the broker functionality from another one.</p>
+</div>
+<div class="paragraph">
+<p>One of the design principles is that <em>roboquant</em> tries to avoid exposing 3rd party APIs directly and typically wraps them in <em>roboquant</em> equivalent types. This makes it easier to switch between different providers and also reduces the learning curve.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_modules_packages">Modules &amp; Packages</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The third party integrations have their own modules and are not part of the core <code>roboquant</code> module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>roboquant-extra for the "traditional" broker and data feed providers</p>
+</li>
+<li>
+<p>roboquant-crypto for cryptocurrency related 3rd parties</p>
+</li>
+<li>
+<p>roboquant-ibkr for Interactive Brokers</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Include these modules in your Maven or Gradle build. Except <code>roboquant-ibkr</code>, they are by default included in the Jupyter Notebooks.</p>
+</div>
+<div class="paragraph">
+<p>In order to use the 3rd party integration, you&#8217;ll first have to import the package. All third party integration have their own package directly under <code>org.roboquant</code>. So you can import all the required classes for OANDA as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="k">import</span> <span class="nn">org.roboquant.oanda.*</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration">Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you want to integrate with a 3rd party, you most likely require credentials to gain access to their APIs. Often this is in the form of an API key and secret. You can of course embed these credentials directly in your source code, however <em>roboquant</em> offers better and more secure alternatives.</p>
+</div>
+<div class="paragraph">
+<p>The following list shows the steps how <em>roboquant</em> resolves these configuration parameters:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If the credentials are provided directly in the code when calling the API use these, otherwise go to next step.</p>
+</li>
+<li>
+<p>If the credentials are provided as startup parameter to the JVM with the -D syntax use these, otherwise go to next step.</p>
+</li>
+<li>
+<p>If the credentials are set as system environment variable (export MY_KEY="some value") use these, otherwise go to next step.</p>
+</li>
+<li>
+<p>If the credentials are set in a property file called ".env" in the working directory use these, otherwise go to next step.</p>
+</li>
+<li>
+<p>If the credentials are set in a property file called "dotenv" in the working directory use these, otherwise go to next step.</p>
+</li>
+<li>
+<p>If the credentials are set in a property file called ".env" in the $HOME/.roboquant directory use these, otherwise go to next step.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following provides an overview of the used properties in <em>roboquant</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="properties"><span class="c"># This property file contains environment settings that will be made available in roboquant
+# Many data providers and brokers require authentication and this is one of the ways to provide those credentials
+#
+# If you store credentials in here, make sure other people don't have access to it and for example don't version control
+# it to a public repo by mistake.
+</span>
+<span class="c"># Sample entry
+</span><span class="py">sample.public.key</span><span class="p">=</span><span class="s">some_key_value</span>
+<span class="py">sample.secret.key</span><span class="p">=</span><span class="s">another_key_value</span>
+
+<span class="c"># Uncomment the following two lines and change the values for Alpaca API access
+# alpaca.public.key=your_api_key_id
+# alpaca.secret.key=your_api_secret_key
+</span>
+<span class="c"># Uncomment the following two lines and change values for IEX Cloud access
+# iex.public.key=your_publishable_key
+# iex.secret.key=your_secret_key
+</span>
+<span class="c"># Uncomment the following line and change the value for Alpha Vantage access
+# alphavantage.key=your_api_key
+</span>
+<span class="c"># Uncomment the following two lines and change the values for Binance access
+# binance.public.key=your_key
+# binance.secret.key=you_secret
+</span>
+<span class="c"># Uncomment the following two lines and change the values for OANDA access
+# oanda.account=your_account
+# oanda.key=your_key
+</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_supported_3rd_parties">Supported 3rd parties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following table shows which 3rd parties are supported out of the box and what functionality the integration offers:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">3rd party</th>
+<th class="tableblock halign-center valign-top">Historic feed</th>
+<th class="tableblock halign-center valign-top">Live feed</th>
+<th class="tableblock halign-center valign-top">Broker</th>
+<th class="tableblock halign-center valign-top">Exchange rates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interactive Brokers</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alpaca</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OANDA</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IEX Cloud</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-center valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yahoo Finance</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-center valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alpha Vantage</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-center valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Binance</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Crypto Exchanges</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-center valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ECB</p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">✓</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<em>roboquant</em> is open source software that is developed independently of these 3rd party companies. There are no direct or indirect ties to any of these companies.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adding_new_3rd_party_integrations">Adding new 3rd party integrations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Adding integration with a 3rd party is not hard. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library that is available, this could take as little as a few hours to a few days. You can read more about the Feed interface that you need to implement right <a href="feed.html#_custom_feeds">here</a></p>
+</div>
+<div class="paragraph">
+<p>Integrating with a new broker is also not hard but requires more effort. The most amount of work will be the translation of object exposes by the broker versus those used by <em>roboquant</em>. For example an Order in <em>roboquant</em> might be slightly different from an Order expected by the client library of the broker and a conversion needs to happen.</p>
+</div>
+<div class="paragraph">
+<p>For both custom Feed and Broker integrations, it is recommended to first look at some existing integrations and use them as a starting point. And if you have questions, you can always reach out via one of the channels mentioned on the <a href="../community.html">community page</a></p>
+</div>
+</div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+<footer class="bg-dark py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; roboquant.org 2021</div></div>
+            <div class="col-auto">
+                <a class="link-light small" href="/community.html">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>

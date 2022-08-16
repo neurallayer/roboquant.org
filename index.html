@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="roboquant algo-trading framework" />
+    <meta name="keywords" content="trading Kotlin algo roboquant">
+    <meta name="theme-color" content="#3296C8">
+    <title>roboquant</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+    <!-- Font awesome icons-->
+    <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link href="/css/rouge_github.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+    <body class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/documentation.html">Documentation</a></li>
+                <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
+                <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/neurallayer/roboquant" target="_blank">
+                    <span class="icon"><i class="fa fa-github fa-1x"></i></span> GitHub
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+            <!-- Header-->
+            <header class="masthead bg-primary text-white text-center">
+                <div class="container d-flex align-items-center flex-column">
+                    <!-- Masthead Banner Image-->
+                    <img class="masthead-banner mb-2" src="/img/banner.png" alt="roboquant banner">
+                </div>
+            </header>
+
+            <section class="py-3" id="intro">
+                <div class="container px-5 my-1">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">What is roboquant</h2></div>
+                        <div class="col-lg-8">
+                            <div class="col h-100">
+                                Roboquant™ is an open source algorithmic trading platform written in Kotlin. It is very fast, flexible, user-friendly and completely free to use.
+                                <br><br>
+                                It is designed for anyone serious about algo-trading. So whether you are a beginning retail trader or an established trading firm,
+                                roboquant can help you to quickly develop fully automated trading strategies. No promises of making lots of
+                                 profit without doing the hard work, just a great foundation for building your strategies.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-3" id="sample">
+                <div class="container px-5 my-1">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">Simple to get started</h2></div>
+                        <div class="col-lg-8">
+                            <div class="col h-100">
+                                A lot of attention went into making sure roboquant is easy to use, especially for less experienced developers.
+                                The following code snippet shows all the key ingredients required to run a back test.
+                                <br><br>
+<pre class="kotlin">
+<span class="pl-k">val</span> strategy <span class="pl-k">=</span> <span class="pl-en">EMACrossover</span>()
+<span class="pl-k">val</span> metric <span class="pl-k">=</span> <span class="pl-en">AccountSummary</span>()
+<span class="pl-k">val</span> roboquant <span class="pl-k">=</span> <span class="pl-en">Roboquant</span>(strategy, metric)
+
+<span class="pl-k">val</span> feed <span class="pl-k">=</span> <span class="pl-en">CSVFeed</span>(<span class="pl-s"><span class="pl-pds">"</span>data/US<span class="pl-pds">"</span></span>)
+roboquant.<span class="pl-c1">run</span>(feed)
+</pre>                                <form action="/tutorial/install.html">
+                                <button class="btn btn-outline-dark" id="install_software" type="submit">Get the software</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features section-->
+            <section class="py-3" id="features">
+                <div class="container px-5 my-3">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">Main Features</h2></div>
+                        <div class="col-lg-8">
+                            <div class="row gx-5 row-cols-1 row-cols-md-2">
+                                <div class="col mb-3 h-100">
+                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-2"><span> Fast </span></div>
+                                    <p class="mb-0">Run back tests over large historic data sets in seconds. Run multiple tests at the same time, fully utilizing modern multicore CPU's.</p>
+                                </div>
+                                <div class="col mb-3 h-100">
+                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-2"><span> Flexible </span></div>
+                                    <p class="mb-0">Trade assets of different currencies, markets, and asset classes at the same time. Support for cryptocurrencies as wel a traditional asset classes. Plugin new data feeds and brokers as required.</p>
+                                </div>
+                                <div class="col mb-3 h-100">
+                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-2"><span> Friendly </span></div>
+                                    <p class="mb-0">Develop your strategies interactively in Jupyter notebooks. Batteries are included with over 150+ technical indicators and many custom types of charts to visualize the results.</p>
+                                </div>
+                                <div class="col mb-3 h-100">
+                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-2"><span> Free </span></div>
+                                    <p class="mb-0">Available under the permissive Apache 2.0 license with the source code available on GitHub. Contributions are highly appreciated.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-3" id="integration">
+                <div class="container px-5 my-1">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">3rd Party Integration</h2></div>
+                        <div class="col-lg-8">
+                            <div class="col h-100">
+An algo-trading platform requires integration with 3rd party brokers and data providers in order to be useful.
+So roboquant comes out-of-the-box with several integrations included:
+
+<div class="col-lg-12">
+<div class="col h-100">
+    <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/alpaca.jpg" alt="alpaca">
+    <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/binance.jpg" alt="binance">
+    <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/iex-cloud.jpg" alt="IEX Cloud">
+    <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/interactive-brokers.jpg" alt="Interactive Brokers">
+    <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/yahoo-finance.jpg" alt="Yahoo Finance">
+    <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/alpha-vantage.png" alt="Alpha Vantage">
+    <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/oanda.jpeg" alt="Alpha Vantage">
+</div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+<footer class="bg-dark py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; roboquant.org 2021</div></div>
+            <div class="col-auto">
+                <a class="link-light small" href="/community.html">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>

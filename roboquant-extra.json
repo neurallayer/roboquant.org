@@ -1,0 +1,36 @@
+{
+  "description": "Algorithmic trading platform written in Kotlin",
+  "link": "https://roboquant.org",
+  "properties": {
+    "v": "0.9.5-SNAPSHOT"
+  },
+  "repositories": [
+    "https://s01.oss.sonatype.org/content/repositories/snapshots"
+  ],
+  "dependencies": [
+    "org.roboquant:roboquant-jupyter:$v",
+    "org.roboquant:roboquant-ta:$v",
+    "org.roboquant:roboquant-extra:$v"
+  ],
+  "imports" : [
+    "org.roboquant.*",
+    "org.roboquant.logging.*",
+    "org.roboquant.common.*",
+    "org.roboquant.metrics.*",
+    "org.roboquant.strategies.*",
+    "org.roboquant.orders.*",
+    "org.roboquant.feeds.*",
+    "org.roboquant.feeds.csv.*",
+    "org.roboquant.feeds.avro.*",
+    "org.roboquant.feeds.random.*",
+    "org.roboquant.brokers.sim.*",
+    "org.roboquant.brokers.*",
+    "org.roboquant.policies.*",
+    "org.roboquant.jupyter.*",
+    "org.roboquant.ta.*",
+    "java.time.Period",
+    "java.time.Instant",
+    "java.time.temporal.ChronoUnit"
+  ]
+}
+

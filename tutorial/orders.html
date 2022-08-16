@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="roboquant algo-trading framework" />
+    <meta name="keywords" content="trading Kotlin algo roboquant">
+    <meta name="theme-color" content="#3296C8">
+    <title>roboquant - Orders</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+    <!-- Font awesome icons-->
+    <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link href="/css/rouge_github.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/documentation.html">Documentation</a></li>
+                <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
+                <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/neurallayer/roboquant" target="_blank">
+                    <span class="icon"><i class="fa fa-github fa-1x"></i></span> GitHub
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+              <header class="masthead bg-primary text-white text-center">
+                     <div class="container px-5 my-1">
+                         <div class="row gx-5">
+                            <div class="col-lg-4 mb-5 mb-lg-0">
+                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Orders</h1>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </header>
+
+            <section class="py-5">
+                <div class="container px-5 my-1">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+ <h3 class="navbar-brand">Content</h3>
+ <nav id="sidebar" class="navbar fixed-left sticky-top">
+    <ul class="list-unstyled">
+    
+
+
+
+               <li class="nav-item"><a href="/tutorial/index.html" class="nav-link">Welcome</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/install.html" class="nav-link">Installation</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/roboquant.html" class="nav-link">Roboquant</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/feed.html" class="nav-link">Feed</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/simbroker.html" class="nav-link">Simulated Broker</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/metrics.html" class="nav-link">Metrics</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/strategy.html" class="nav-link">Strategy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/policy.html" class="nav-link">Policy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/orders.html" class="nav-link">Orders</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/domain.html" class="nav-link">Domain Model</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/jupyter.html" class="nav-link">Jupyter Notebooks</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/integration.html" class="nav-link">Integration</a></li>
+
+
+    </ul>
+</nav>
+                         </div>
+                        <div class="col-lg-8">
+                            <div class="col h-100">
+                                <div class="sect1">
+<h2 id="_order_types">Order Types</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Roboquant comes out of the box with support for different types of orders. The following diagram shows which orders are supported and also their class relationship to each other.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="order_types.png" alt="order types">
+</div>
+</div>
+<div class="paragraph">
+<p>All orders refer to a single asset, including advanced order types like BracketOrders. The reason for putting this restriction
+in place is that real brokers only have limited support for multi-asset orders and this could lead to issues that are only discovered during live trading. Additionally, it makes back testing difficult if the price for one asset is known but not for the other.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_creating_orders">Creating Orders</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>Policy</code> that is used during a <code>run</code> is responsible for creating the orders. This can be based on the received signals from the <code>Strategy</code>, but can also be done for other reasons (like for example cyclic portfolio re-balancing)</p>
+</div>
+<div class="paragraph">
+<p>An example on how to convert a list of signals into a list of (market) orders:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">orders</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;()</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">signal</span> <span class="k">in</span> <span class="n">signals</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">size</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">rating</span><span class="p">.</span><span class="n">isPositive</span><span class="p">)</span> <span class="mi">100</span> <span class="k">else</span> <span class="p">-</span><span class="mi">100</span>
+        <span class="kd">val</span> <span class="py">order</span> <span class="p">=</span> <span class="nc">MarketOrder</span><span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">asset</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+        <span class="n">orders</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+    <span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+there is no explicit notion of BUY or SELL orders in <em>roboquant</em>. A BUY order is just any order with a positive size and a SELL order has a negative size. But other than that, they are equal and created the same way.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Most advanced order types are often constructed using multiple <code>SingleOrder</code> types. The following snippet shows how to instantiate a BracketOrder with three individual SingleOrders.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">size</span> <span class="p">=</span> <span class="nc">Size</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="kd">val</span> <span class="py">order</span> <span class="p">=</span> <span class="nc">BracketOrder</span><span class="p">(</span>
+        <span class="nc">MarketOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="n">size</span><span class="p">),</span> <span class="c1">// main order</span>
+        <span class="nc">LimitOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="p">-</span><span class="n">size</span><span class="p">,</span> <span class="n">price</span> <span class="p">*</span> <span class="mf">1.05</span><span class="p">),</span> <span class="c1">// take profit order</span>
+        <span class="nc">StopOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="p">-</span><span class="n">size</span><span class="p">,</span> <span class="n">price</span> <span class="p">*</span> <span class="mf">0.95</span><span class="p">)</span> <span class="c1">// stop loss order</span>
+    <span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+always make sure to only use order types during back testing that are also supported by the broker you want to use for live trading. Also be aware the way these advanced order types are exactly executed might differ between brokers.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tif_time_in_force">TIF (Time In Force)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>TIF sets an execution policy for an order under which conditions the order remains valid. Roughly speaking, there are two types of TIF:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Time based, defining how long the order stays valid. Two common ones are GTD (Good Till Day) and GTC (Good Till Cancelled)</p>
+</li>
+<li>
+<p>Fill based, defining under which fill conditions the order stays valid. A common one if FOK (Fill Or Kill)</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The default TIF for orders in <em>roboquant</em> used if none is explicitly specified, is GTC (Good Till Cancelled).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_custom_order_types">Custom Order Types</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Orders can be extended with your own order types if the ones that come out of the box are not sufficient. The steps required to make to use yor own order types are:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Extend the <code>Order</code> abstract class</p>
+</li>
+<li>
+<p>If you want to use these orders also in back testing, you&#8217;ll also need to implement and register an OrderHandler</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>After that, you can use this new order type in your policy just like any of the included order types.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// Simple custom order type</span>
+    <span class="kd">class</span> <span class="nc">MyOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nc">Asset</span><span class="p">,</span> <span class="kd">val</span> <span class="py">quantity</span><span class="p">:</span> <span class="nc">Size</span><span class="p">,</span> <span class="kd">val</span> <span class="py">customProperty</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">id</span><span class="p">:</span><span class="nc">Int</span> <span class="p">=</span> <span class="nf">nextId</span><span class="p">())</span> <span class="p">:</span> <span class="nc">Order</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
+
+    <span class="c1">// Define a handler for your custom order type.</span>
+    <span class="c1">// This is required if you want your order to be supported by the SimBroker</span>
+    <span class="kd">class</span> <span class="nc">MyOrderHandler</span><span class="p">(</span><span class="kd">val</span> <span class="py">order</span><span class="p">:</span> <span class="nc">MyOrder</span><span class="p">)</span> <span class="p">:</span> <span class="nc">TradeOrderHandler</span> <span class="p">{</span>
+
+        <span class="k">override</span> <span class="kd">var</span> <span class="py">state</span> <span class="p">=</span> <span class="nc">OrderState</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">execute</span><span class="p">(</span><span class="n">pricing</span><span class="p">:</span> <span class="nc">Pricing</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="nc">Instant</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Execution</span><span class="p">&gt;</span> <span class="p">{</span>
+
+            <span class="c1">// Set state to accepted</span>
+            <span class="n">state</span> <span class="p">=</span> <span class="nc">OrderState</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="nc">OrderStatus</span><span class="p">.</span><span class="nc">ACCEPTED</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+
+            <span class="c1">// some logic for the order type</span>
+            <span class="c1">// ....</span>
+
+            <span class="c1">// Calculate the price to use</span>
+            <span class="kd">val</span> <span class="py">price</span> <span class="p">=</span> <span class="n">pricing</span><span class="p">.</span><span class="nf">marketPrice</span><span class="p">(</span><span class="n">order</span><span class="p">.</span><span class="n">quantity</span><span class="p">)</span>
+
+            <span class="c1">// Set the state to be COMPLETED. As long as the state is not in a Closed state, this handler stays active.</span>
+            <span class="n">state</span> <span class="p">=</span> <span class="nc">OrderState</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="nc">OrderStatus</span><span class="p">.</span><span class="nc">COMPLETED</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+
+            <span class="c1">// Return the executions</span>
+            <span class="k">return</span> <span class="nf">listOf</span><span class="p">(</span><span class="nc">Execution</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">order</span><span class="p">.</span><span class="n">quantity</span><span class="p">,</span> <span class="n">price</span><span class="p">))</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+    <span class="c1">// Register the handler</span>
+    <span class="nc">ExecutionEngine</span><span class="p">.</span><span class="n">register</span><span class="p">&lt;</span><span class="nc">MyOrder</span><span class="p">&gt;</span> <span class="p">{</span> <span class="nc">MyOrderHandler</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="p">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+<footer class="bg-dark py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; roboquant.org 2021</div></div>
+            <div class="col-auto">
+                <a class="link-light small" href="/community.html">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>

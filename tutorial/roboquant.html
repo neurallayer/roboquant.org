@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="roboquant algo-trading framework" />
+    <meta name="keywords" content="trading Kotlin algo roboquant">
+    <meta name="theme-color" content="#3296C8">
+    <title>roboquant - Roboquant</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+    <!-- Font awesome icons-->
+    <link href="/css/asciidoctor.css" rel="stylesheet" />
+    <link href="/css/rouge_github.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/documentation.html">Documentation</a></li>
+                <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
+                <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/neurallayer/roboquant" target="_blank">
+                    <span class="icon"><i class="fa fa-github fa-1x"></i></span> GitHub
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+              <header class="masthead bg-primary text-white text-center">
+                     <div class="container px-5 my-1">
+                         <div class="row gx-5">
+                            <div class="col-lg-4 mb-5 mb-lg-0">
+                            </div>
+                             <div class="col-lg-8">
+                                 <div class="col h-100">
+                                    <h1 class="font-weight-light mt-1 doc">Roboquant</h1>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </header>
+
+            <section class="py-5">
+                <div class="container px-5 my-1">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+ <h3 class="navbar-brand">Content</h3>
+ <nav id="sidebar" class="navbar fixed-left sticky-top">
+    <ul class="list-unstyled">
+    
+
+
+
+               <li class="nav-item"><a href="/tutorial/index.html" class="nav-link">Welcome</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/install.html" class="nav-link">Installation</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/roboquant.html" class="nav-link">Roboquant</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/feed.html" class="nav-link">Feed</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/simbroker.html" class="nav-link">Simulated Broker</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/metrics.html" class="nav-link">Metrics</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/strategy.html" class="nav-link">Strategy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/policy.html" class="nav-link">Policy</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/orders.html" class="nav-link">Orders</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/domain.html" class="nav-link">Domain Model</a></li>
+
+
+
+               <li class="nav-item"><a href="/tutorial/jupyter.html" class="nav-link">Jupyter Notebooks</a></li>
+
+
+
+
+
+
+               <li class="nav-item"><a href="/tutorial/integration.html" class="nav-link">Integration</a></li>
+
+
+    </ul>
+</nav>
+                         </div>
+                        <div class="col-lg-8">
+                            <div class="col h-100">
+                                <div class="sect1">
+<h2 id="_create">Create</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>Roboquant</code> class (org.roboquant.Roboquant) is the engine of the platform, not to be confused with <em>roboquant</em> (all small letters) which is the name of the platform itself. An instance of the <code>Roboquant</code> class orchestrates the interaction between all the components and performs the actual runs.</p>
+</div>
+<div class="paragraph">
+<p>You are only required to provide a strategy when creating a new instance of <em>Roboquant</em>. So the bare minimum to get a working instance would look something like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">strategy</span>  <span class="p">=</span> <span class="nc">EMACrossover</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following default values will then be used:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>No metrics will be captured at all</p>
+</li>
+<li>
+<p>The <code>SimBroker</code> will be used as the broker with its default settings</p>
+</li>
+<li>
+<p>The <code>DefaultPolicy</code> will be the policy used</p>
+</li>
+<li>
+<p>The <code>MemoryLogger</code> for logging the metrics (although without any metrics to capture, there is not much to log)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each of these defaults can be overwritten with a different implementation when you instantiate a <code>Roboquant</code>, as the following code snippet shows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span>
+    <span class="n">strategy</span><span class="p">,</span>
+    <span class="n">metric1</span><span class="p">,</span> <span class="n">metric2</span><span class="p">,</span> <span class="n">metric3</span><span class="p">,</span>
+    <span class="n">policy</span> <span class="p">=</span> <span class="n">myPolicy</span><span class="p">,</span>
+    <span class="n">broker</span> <span class="p">=</span> <span class="n">myBroker</span><span class="p">,</span>
+    <span class="n">logger</span> <span class="p">=</span> <span class="n">myLogger</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run">Run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After you have created an instance of the <code>Roboquant</code> class and have a <a href="feed.html">data feed</a>, you can start the run.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The same <code>run</code> method is used for all the different stages, from back testing to live trading. See also <a href="../background/four_stages.html">the 4 stages</a> for more details about these stages.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In the most simple form, you only need to provide a feed as the argument. In this case, all the events available in the feed will be used in the run.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you provide a live feed, it would potentially run forever. However, you can restrict the run to a certain timeframe, again you can use this for a historical feed and a live feed alike.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="c1">// Historical feed run example</span>
+<span class="kd">val</span> <span class="py">timeframe</span> <span class="p">=</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="nf">fromYears</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)</span>
+<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed1</span><span class="p">,</span> <span class="n">timeframe</span><span class="p">)</span>
+
+<span class="c1">// Live feed run example</span>
+<span class="kd">val</span> <span class="py">timeframe2</span> <span class="p">=</span> <span class="nc">Timeframe</span><span class="p">.</span><span class="nf">next</span><span class="p">(</span><span class="mi">120</span><span class="p">.</span><span class="n">minutes</span><span class="p">)</span>
+<span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed2</span><span class="p">,</span> <span class="n">timeframe2</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can invoke a run multiple times, for example with different timeframes. The following code shows how to use this to perform a walk-forward back test of two-year periods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">timeframe</span> <span class="p">=</span> <span class="n">feed</span><span class="p">.</span><span class="n">timeframe</span>
+<span class="n">timeframe</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="n">years</span><span class="p">).</span><span class="nf">forEach</span> <span class="p">{</span>
+    <span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">it</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">roboquant</span><span class="p">.</span><span class="n">broker</span><span class="p">.</span><span class="n">account</span><span class="p">.</span><span class="n">equityAmount</span><span class="p">)</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_running_in_parallel">Running in Parallel</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you want to run many back-test, you can run them in parallel and leverage all the cores on your computer to expedite the process. <em>Roboquant</em> scales almost linear with the number of available cores, and it only requires a few extra lines of code.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows how to run a walk forward in parallel. By reusing the same logger instance, all results will be stored in a single instance and can be easily compared afterwards.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">timeframe</span> <span class="p">=</span> <span class="n">feed</span><span class="p">.</span><span class="n">timeframe</span>
+<span class="kd">val</span> <span class="py">logger</span> <span class="p">=</span> <span class="nc">MemoryLogger</span><span class="p">(</span><span class="n">showProgress</span> <span class="p">=</span> <span class="k">false</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">jobs</span> <span class="p">=</span> <span class="nc">ParallelJobs</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">period</span> <span class="k">in</span> <span class="n">timeframe</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="n">years</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">jobs</span><span class="p">.</span><span class="nf">add</span> <span class="p">{</span>
+        <span class="c1">// Create a new roboquant instance for each job</span>
+        <span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="nc">EMACrossover</span><span class="p">(),</span> <span class="nc">AccountSummary</span><span class="p">(),</span> <span class="n">logger</span> <span class="p">=</span> <span class="n">logger</span><span class="p">)</span>
+
+        <span class="c1">// Give the run a unique identifiable name</span>
+        <span class="c1">// Otherwise a unique name will be generated for each name</span>
+        <span class="n">roboquant</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">runName</span> <span class="p">=</span> <span class="s">"run-$period"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Wait until all the jobs are finished</span>
+<span class="n">jobs</span><span class="p">.</span><span class="nf">joinAllBlocking</span><span class="p">()</span>
+
+<span class="c1">// If you are in Jupyter Notebook you can easily plot a metric for all the runs</span>
+<span class="kd">val</span> <span class="py">equity</span> <span class="p">=</span> <span class="n">logger</span><span class="p">.</span><span class="nf">getMetric</span><span class="p">(</span><span class="s">"account.equity"</span><span class="p">)</span>
+<span class="nc">MetricChart</span><span class="p">(</span><span class="n">equity</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+<footer class="bg-dark py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; roboquant.org 2021</div></div>
+            <div class="col-auto">
+                <a class="link-light small" href="/community.html">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>
