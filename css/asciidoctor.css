@@ -162,7 +162,7 @@ table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoo
 .clearfix:before, .clearfix:after, .float-group:before, .float-group:after { content: " "; display: table; }
 .clearfix:after, .float-group:after { clear: both; }
 
-*:not(pre) > code { font-size: 0.9375em; padding: 1px 3px 0; white-space: nowrap; background-color: #f2f2f2; border: 1px solid #cccccc; -webkit-border-radius: 4px; border-radius: 4px; text-shadow: none; }
+*:not(pre) > code { padding: 1px 3px 0; white-space: nowrap; background-color: #f2f2f2; border: 1px solid #ddd; -webkit-border-radius: 4px; border-radius: 4px; text-shadow: none; }
 
 /*pre, pre > code { line-height: 1.4; color: inherit; font-family: Consolas, "Liberation Mono", Courier, monospace; font-weight: normal; }*/
 

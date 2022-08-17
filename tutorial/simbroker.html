@@ -457,12 +457,12 @@ This is also the configuration you get when you create an instance of <code>Robo
 <div class="paragraph">
 <p>The logic of calculating the buying power looks roughly like this (excluding open orders):</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>long value = long positions * maintance margin long
+<pre class="rouge highlight"><code>long value = long positions * maintance margin long
 short value = short positions * maintance margin short
 excess margin = equity - long value - short value - minimum equity
-buying power = excess margin * ( 1 / initial margin)</pre>
+buying power = excess margin * ( 1 / initial margin)</code></pre>
 </div>
 </div>
 <div class="paragraph">

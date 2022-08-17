@@ -124,7 +124,7 @@
 <p>Metrics allow you to monitor the progress of a <code>run</code> and get the necessary insights how a strategy is performing. Metrics are not limited to back testing and can also be used both during live testing and paper trading.</p>
 </div>
 <div class="paragraph">
-<p>The configured metrics are invoked at each step in a run. A single metric can return multiple values, each value having a unique name. Metrics only calculate the values, the storing and/or logging of these values is done by a <code>MetricsLogger</code>.</p>
+<p>The configured metrics are invoked at each step in a run. A single metric can return multiple values, each value having it own a unique name. Metrics only calculate the values, the storing and/or logging of these values is done by a <code>MetricsLogger</code>.</p>
 </div>
 </div>
 </div>
@@ -146,7 +146,17 @@
 
 <span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span>
     <span class="n">strategy</span><span class="p">,</span> <span class="n">metric1</span><span class="p">,</span> <span class="n">metric2</span><span class="p">,</span> <span class="n">metric3</span><span class="p">,</span> <span class="n">metric4</span><span class="p">,</span> <span class="n">metric5</span><span class="p">,</span> <span class="n">metric6</span><span class="p">,</span> <span class="n">metric7</span>
-<span class="p">)</span></code></pre>
+<span class="p">)</span>
+
+<span class="c1">// ... run code goes here ...</span>
+
+<span class="c1">// You can always find out which metrics are available after a run</span>
+<span class="kd">val</span> <span class="py">logger</span> <span class="p">=</span> <span class="n">roboquant</span><span class="p">.</span><span class="n">logger</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">logger</span><span class="p">.</span><span class="n">metricNames</span><span class="p">)</span>
+
+<span class="c1">// And easily plot a metric</span>
+<span class="kd">val</span> <span class="py">equity</span> <span class="p">=</span> <span class="n">logger</span><span class="p">.</span><span class="nf">getMetric</span><span class="p">(</span><span class="s">"account.equity"</span><span class="p">)</span>
+<span class="nc">MetricChart</span><span class="p">(</span><span class="n">equity</span><span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock tip">
@@ -214,7 +224,17 @@ environment.</p>
 
 <span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span>
     <span class="n">strategy</span><span class="p">,</span> <span class="n">metric1</span><span class="p">,</span> <span class="n">metric2</span><span class="p">,</span> <span class="n">metric3</span><span class="p">,</span> <span class="n">metric4</span><span class="p">,</span> <span class="n">metric5</span><span class="p">,</span> <span class="n">metric6</span><span class="p">,</span> <span class="n">metric7</span>
-<span class="p">)</span></code></pre>
+<span class="p">)</span>
+
+<span class="c1">// ... run code goes here ...</span>
+
+<span class="c1">// You can always find out which metrics are available after a run</span>
+<span class="kd">val</span> <span class="py">logger</span> <span class="p">=</span> <span class="n">roboquant</span><span class="p">.</span><span class="n">logger</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">logger</span><span class="p">.</span><span class="n">metricNames</span><span class="p">)</span>
+
+<span class="c1">// And easily plot a metric</span>
+<span class="kd">val</span> <span class="py">equity</span> <span class="p">=</span> <span class="n">logger</span><span class="p">.</span><span class="nf">getMetric</span><span class="p">(</span><span class="s">"account.equity"</span><span class="p">)</span>
+<span class="nc">MetricChart</span><span class="p">(</span><span class="n">equity</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </div>

@@ -163,7 +163,7 @@
 <pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">shortTerm</span> <span class="p">=</span> <span class="mi">30</span>
     <span class="kd">val</span> <span class="py">longTerm</span> <span class="p">=</span> <span class="mi">50</span>
 
-    <span class="c1">// Make sure the TAStrategy collects enough data for the used indicators to work</span>
+    <span class="c1">// Make sure the TAStrategy collects enough data for all the used indicators to work</span>
     <span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">TaLibStrategy</span><span class="p">(</span><span class="n">longTerm</span><span class="p">)</span>
 
     <span class="c1">// When to generate a BUY signal</span>
@@ -209,7 +209,7 @@
 <h2 id="_combining_strategies">Combining Strategies</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>Roboquant</code> constructor takes only a single strategy as its parameter. However, it is easy to combine multiple strategies in your using a simple composition pattern.</p>
+<p>The <code>Roboquant</code> constructor takes only a single strategy as its parameter. However, it is easy to combine multiple strategies in your run using the composition pattern.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -226,12 +226,19 @@
 <p>Next to the standard strategies, there are also strategies that can be the foundation for your own strategy. You extend these classes and add your own logic on top of them. These base strategies typically take care of some repetitive task and make it a quicker to develop your own strategies.</p>
 </div>
 <div class="paragraph">
-<p>A useful base strategies is <code>HistoricPriceStrategy</code>. This strategy collects historic prices for a predefined look-back period before invoking your method.</p>
+<p>A useful base strategies is <code>HistoricPriceStrategy</code>. This strategy collects historic prices for a predefined look-back period before invoking your method. That way you don&#8217;t have to deal with some of the complexity that comes with an event-based trading engine.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">class</span> <span class="nc">MyStrategy1</span><span class="p">(</span><span class="n">lookBack</span><span class="p">:</span><span class="nc">Int</span><span class="p">=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">:</span> <span class="nc">HistoricPriceStrategy</span><span class="p">(</span><span class="n">lookBack</span><span class="p">)</span> <span class="p">{</span>
+<pre class="rouge highlight"><code data-lang="kotlin">    <span class="cm">/**
+     * Trend following strategy
+     */</span>
+    <span class="kd">class</span> <span class="nc">MyStrategy1</span><span class="p">(</span><span class="n">lookBack</span><span class="p">:</span><span class="nc">Int</span><span class="p">=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">:</span> <span class="nc">HistoricPriceStrategy</span><span class="p">(</span><span class="n">lookBack</span><span class="p">)</span> <span class="p">{</span>
 
+        <span class="cm">/**
+         * This will only be invoked once there is enough historic data available as specified
+         * by the lookBack parameter
+         */</span>
         <span class="k">override</span> <span class="k">fun</span> <span class="nf">generate</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nc">Asset</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nc">DoubleArray</span><span class="p">):</span> <span class="nc">Signal</span><span class="p">?</span> <span class="p">{</span>
             <span class="k">return</span> <span class="k">when</span> <span class="p">{</span>
                 <span class="n">data</span><span class="p">.</span><span class="nf">last</span><span class="p">()</span> <span class="p">==</span> <span class="n">data</span><span class="p">.</span><span class="nf">max</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">Signal</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="nc">Rating</span><span class="p">.</span><span class="nc">BUY</span><span class="p">)</span>
