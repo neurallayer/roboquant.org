@@ -17,7 +17,7 @@ The `Policy` that is used during a `run` is responsible for creating the orders.
 
 An example on how to convert a list of signals into a list of (market) orders:
 
-[source, kotlin]
+[source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=orders]
 ----
@@ -26,7 +26,7 @@ NOTE: there is no explicit notion of BUY or SELL orders in _roboquant_. A BUY or
 
 Most advanced order types are often constructed using multiple `SingleOrder` types. The following snippet shows how to instantiate a BracketOrder with three individual SingleOrders.
 
-[source, kotlin]
+[source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=bracketOrder]
 ----
@@ -49,7 +49,7 @@ Orders can be extended with your own order types if the ones that come out of th
 
 After that, you can use this new order type in your policy just like any of the included order types.
 
-[source, kotlin]
+[source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=customOrder]
 ----

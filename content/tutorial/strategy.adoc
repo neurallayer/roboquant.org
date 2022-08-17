@@ -15,7 +15,7 @@ There are several commonly used strategies included with _roboquant_. This secti
 === EMACrossover
 Uses two exponential moving averages and whenever they cross over, a BUY or SELL signal is generated
 
-[source, kotlin]
+[source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=ema]
 ----
@@ -25,7 +25,7 @@ include::{sourcefile}[tag=ema]
 
 The ta-lib library comes with over 150 indicators and these can be combined anyway you like in a `TaLibStrategy`.
 
-[source, kotlin]
+[source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=ta]
 ----
@@ -35,7 +35,7 @@ Strategy using the Relative Strength Index of an asset to generate signals. RSI 
 
 If the RSI raise above the configured high threshold (default 70), a sell signal will be generated. And if the RSI falls below the configured low threshold (default 30), a buy signal will be generated.
 
-[source, kotlin]
+[source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=rsi]
 ----
@@ -48,7 +48,7 @@ This strategy doesn't perform any action and will never generate a signal. If yo
 The `Roboquant` constructor takes only a single strategy as its parameter. However, it is easy to combine multiple strategies in your run using the composition pattern.
 
 
-[source, kotlin]
+[source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=composition]
 ----
@@ -58,7 +58,7 @@ Next to the standard strategies, there are also strategies that can be the found
 
 A useful base strategies is `HistoricPriceStrategy`. This strategy collects historic prices for a predefined look-back period before invoking your method. That way you don't have to deal with some of the complexity that comes with an event-based trading engine.
 
-[source, kotlin]
+[source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=extend]
 ----
@@ -67,7 +67,7 @@ include::{sourcefile}[tag=extend]
 == Custom Strategies
 When you develop your own `Strategy`, you will need to implement at least the `generate` method that is defined in the `Strategy` interface. This method should return zero or more Signals.
 
-[source, kotlin]
+[source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=basic]
 ----
@@ -77,7 +77,7 @@ Now let's see how a trend-following `Strategy` would look like that would:
 - generate a BUY-signal every time the current price is more than 5% higher than the previous price for a given `Asset`
 - and a SELL-signal if it is more than 5% lower
 
-[source,kotlin]
+[source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=naive]
 ----
@@ -114,7 +114,7 @@ NOTE: a hold rating is not the same as no signal. Only generate hold signals if 
 
 == Simple Signals
 
-[source, kotlin]
+[source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=simpleSignal]
 ----
@@ -122,7 +122,7 @@ include::{sourcefile}[tag=simpleSignal]
 == Advanced Signals
 Besides the mandatory Rating and Asset, a signal can optionally contain the following attributes (with their default values):
 
-[source, kotlin]
+[source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=attrSignal]
 ----

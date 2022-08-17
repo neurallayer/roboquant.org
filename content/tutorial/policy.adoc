@@ -51,20 +51,20 @@ include::{sourcefile}[tag=basic]
 
 So a very naive and not robust implementation could look something like this:
 
-[source, kotlin]
+[source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=naive]
 ----
 
 Or using the more concise Kotlin way of doing things:
-[source, kotlin]
+[source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=naive2]
 ----
 
 
 The following example is more realistic and shows an implementation that calculates the ATR (Average True Range) that is than used to set the limit amount in a Limit Order.
-[source, kotlin]
+[source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=custom3]
 ----
@@ -79,7 +79,7 @@ Most commonly a `Policy` is used to transform signals it receives from the `Stra
 
 In these cases you don't require a `Strategy` and implement all the logic in the `Policy` instead. You can use the `NoSignalStrategy` as strategy that doesn't perform any action.
 
-[source, kotlin]
+[source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=advanced]
 ----

@@ -12,7 +12,7 @@ further be extended by providing custom models for trading, fee and account mode
 The instantiation of a `SimBroker` is surprisingly simple.
 
 
-[source, kotlin]
+[source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=basic]
 ----
@@ -25,7 +25,7 @@ However, you can overwrite the default values. Common use cases are:
 * you want to simulate a `MarginAccount` and not the default `CashAccount`
 * you want to apply custom fees and pricing logic
 
-[source, kotlin]
+[source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=extra]
 ----

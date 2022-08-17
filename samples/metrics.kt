@@ -1,10 +1,12 @@
 @file:Suppress("unused", "UNUSED_VARIABLE")
 
 import org.roboquant.Roboquant
+import org.roboquant.RunInfo
 import org.roboquant.brokers.Account
 import org.roboquant.common.Asset
 import org.roboquant.feeds.Event
 import org.roboquant.jupyter.MetricChart
+import org.roboquant.logging.MetricsLogger
 import org.roboquant.metrics.*
 import org.roboquant.strategies.Strategy
 
@@ -45,3 +47,16 @@ class MyMetric : SimpleMetric() {
 
 }
 // end::simple[]
+
+
+fun test123() {
+    // tag::customLogger[]
+    class ConsoleLogger : MetricsLogger {
+
+        override fun log(results: MetricResults, info: RunInfo) {
+            println("$results @ $info")
+        }
+
+    }
+// end::customLogger[]
+}
