@@ -19,10 +19,10 @@
                         <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">What is roboquant</h2></div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                Roboquant™ is an open source algorithmic trading platform written in Kotlin. It is very fast, flexible, user-friendly and completely free to use.
+                                <em>Roboquant</em> is an open source algorithmic trading platform written in Kotlin. It is very fast, flexible, user-friendly and completely free to use.
                                 <br><br>
                                 It is designed for anyone serious about algo-trading. So whether you are a beginning retail trader or an established trading firm,
-                                roboquant can help you to quickly develop fully automated trading strategies. No promises of making lots of
+                                <em>roboquant</em> can help you to quickly develop fully automated trading strategies. No promises of making lots of
                                  profit without doing the hard work, just a great foundation for building your strategies.
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                         <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">Simple to get started</h2></div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                A lot of attention went into making sure roboquant is easy to use, especially for less experienced developers.
+                                A lot of attention went into making sure <em>roboquant</em> is easy to use, especially for less experienced developers.
                                 The following code snippet shows all the key ingredients required to run a back test.
                                 <br><br>
                                 <#include "snippet.ftl">

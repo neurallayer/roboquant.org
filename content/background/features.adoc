@@ -101,19 +101,19 @@ Of course, we are not completely objective, so we recommend trying them out for 
 |===
 |Feature |roboquant |Backtrader | Zipline| Lean (QuantConnect)
 
-|Back Testing|&check;| &check;|  &check;| &check;
-|Live Testing|&check;| &check;|  | &check;
+|Back Testing|&check;| &check;| &check;| &check;
+|Live Testing|&check;| &check;| | &check;
 |Paper Trading|&check;| &check;| | &check;
 |Live Trading| &check;| &check;| | &check;
 |Primary Language| Kotlin| Python| Python| C#
 |License| Apache| GPL| Apache| Apache
 |Active Development|&check;| | | &check;
-|Multi Currency| &check;|  | | 
+|Multi Currency| &check;| | |
 |Crypto Exchanges| &check;| &check;| | &check;
 |Advanced Order Types| &check;| &check;| | 
-|Multi Region| &check;|  | |&check;
+|Multi Region| &check;| | |&check;
 |Performance| high| low| mid| high
 |Code base| small| midsize| large| very large
-|Jupyter Notebook| &check;|  &check;| &check;| 
-|Completely Free| &check;|  &check;| | 
+|Jupyter Notebook| &check;| &check;| &check;|
+|Completely Free| &check;| &check;| |
 |===

@@ -55,8 +55,15 @@ fun rsi() {
 
 fun extending() {
     // tag::extend[]
+    /**
+     * Trend following strategy
+     */
     class MyStrategy1(lookBack:Int= 10) : HistoricPriceStrategy(lookBack) {
 
+        /**
+         * This will only be invoked once there is enough historic data available as specified
+         * by the lookBack parameter
+         */
         override fun generate(asset: Asset, data: DoubleArray): Signal? {
             return when {
                 data.last() == data.max() -> Signal(asset, Rating.BUY)
@@ -85,7 +92,7 @@ fun ta() {
     val shortTerm = 30
     val longTerm = 50
 
-    // Make sure the TAStrategy collects enough data for the used indicators to work
+    // Make sure the TAStrategy collects enough data for all the used indicators to work
     val strategy = TaLibStrategy(longTerm)
 
     // When to generate a BUY signal

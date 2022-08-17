@@ -126,10 +126,13 @@ All margin calculations are based on the equity of the account, and not only the
 
 The logic of calculating the buying power looks roughly like this (excluding open orders):
 
-      long value = long positions * maintance margin long
-      short value = short positions * maintance margin short
-      excess margin = equity - long value - short value - minimum equity
-      buying power = excess margin * ( 1 / initial margin)
+[source]
+----
+long value = long positions * maintance margin long
+short value = short positions * maintance margin short
+excess margin = equity - long value - short value - minimum equity
+buying power = excess margin * ( 1 / initial margin)
+----
 
 The following table shows an example for long trading with margin account in a Japanese Yen, using the following (default) values:
 

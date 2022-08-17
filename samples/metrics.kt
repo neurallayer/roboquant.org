@@ -4,6 +4,7 @@ import org.roboquant.Roboquant
 import org.roboquant.brokers.Account
 import org.roboquant.common.Asset
 import org.roboquant.feeds.Event
+import org.roboquant.jupyter.MetricChart
 import org.roboquant.metrics.*
 import org.roboquant.strategies.Strategy
 
@@ -21,6 +22,16 @@ fun standard(strategy: Strategy, sp500Asset: Asset) {
     val roboquant = Roboquant(
         strategy, metric1, metric2, metric3, metric4, metric5, metric6, metric7
     )
+
+    // ... run code goes here ...
+
+    // You can always find out which metrics are available after a run
+    val logger = roboquant.logger
+    println(logger.metricNames)
+
+    // And easily plot a metric
+    val equity = logger.getMetric("account.equity")
+    MetricChart(equity)
     // end::standard[]
 }
 

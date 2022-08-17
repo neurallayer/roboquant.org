@@ -3,7 +3,6 @@
 :icons: font
 :jbake-date: 2020-12-01
 
-
 == Why develop a new platform
 Before we started to develop _roboquant_, we looked at existing frameworks and platforms to see if these could fit the bill. However, for our use-cases none of them checked all the boxes that we required:
 
@@ -13,7 +12,7 @@ Before we started to develop _roboquant_, we looked at existing frameworks and p
 * Solid live trading, including support for advanced order types to further reduce risk
 * Support for trading in multiple markets in different regions at the same time
 
-Some of these might be unique to our situation, but since we believe that others might profit from these features we decided to open source the platform and make it available for free.
+Some of these might be unique to our situation, but since we believe that others might also benefit from the platform we decided to open source it and make it available for free to everyone.
 
 == Why use Kotlin
 There are many computer languages available to choose from. After having developed several prototypes in different languages, we decided to go with Kotlin. Some main benefits being:
@@ -84,7 +83,7 @@ Event-driven algo-trading platforms provide several advantages over a vectorised
 
 * Reuse - _roboquant_ uses the same event-driven approach for all xref:four_stages.adoc[4 stages] of developing trading strategies, ensuring minimal friction when moving from one stage to the next.
 
-* Avoid Lookahead - With an event-driven test, it is unlikely that the strategy will actually peep into the future since at the time of making any decision in the code, the future data is not yet available.
+* Avoid Lookahead - With event-driven back-tests, it is unlikely that the strategy will actually peep into the future since at the time of making any decision in the code, the future data is not yet available.
 
 * Robustness - Live trading is by definition event-driven. So by using the same approach during back testing, it ensures you got have to address use-cases that otherwise wouldn't show up until it is too late.
 

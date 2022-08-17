@@ -11,12 +11,14 @@ Roboquant is designed to be used in both your own standalone application, and in
 
 Using _roboquant_ in a Kotlin Jupyter Notebook requires just a single command:
 
-    %use roboquant
+[source]
+----
+%use roboquant
+----
 
-This will automatically load the _roboquant_ library (it will actually load three _roboquant_ modules: core, extra and crypt) and import most packages from the core module. If you run `Welcome()` in a notebook cell, you'll see the version of _roboquant_ you are using together with other information about the environment you are in.
+This will automatically load the _roboquant_ library (it will actually load three _roboquant_ modules: core, extra and crypt) and import most commonly used packages from the core module. If you run `Welcome()` in a notebook cell, you'll see the version of _roboquant_ you are using together with other information about the environment you are in.
 
 TIP: Chromium based browsers perform best, especially when you plot charts with many data points.
-
 
 == Jupyter Lab vs Jupyter Classic
 The rendering required for Jupyter Lab is slightly different from for Jupyter Lab.

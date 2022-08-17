@@ -6,7 +6,7 @@
 
 Metrics allow you to monitor the progress of a `run` and get the necessary insights how a strategy is performing. Metrics are not limited to back testing and can also be used both during live testing and paper trading.
 
-The configured metrics are invoked at each step in a run. A single metric can return multiple values, each value having a unique name. Metrics only calculate the values, the storing and/or logging of these values is done by a `MetricsLogger`.
+The configured metrics are invoked at each step in a run. A single metric can return multiple values, each value having it own a unique name. Metrics only calculate the values, the storing and/or logging of these values is done by a `MetricsLogger`.
 
 == Standard Metrics
 There are several common metrics included with _roboquant_ that can be easily added to your `Roboquant` instance:

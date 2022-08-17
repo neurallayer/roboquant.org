@@ -20,7 +20,7 @@ The role and responsibilities of each of the components are as follows:
 +
 The engine of the platform that performs the actual run and orchestrate the interaction between the components. The engine supports all xref:../background/four_stages.adoc[4 stages] of developing a trading strategy with minimal changes to your code. This is also the only component that is a concrete Class and not an Interface and not designed to be swapped out for a custom implementation.
 
-*  `Feed`
+* `Feed`
 +
 Provides the data needed for testing and trading in the form of events. A feed can represent both historic and live data and is not restricted to pricing information only. A feed delivers its data in the form of events.
 
@@ -47,7 +47,7 @@ Receives the generated signals and creates the orders. If you need to create ord
 == Developing your strategy
 Developing a new strategy and validate it during a back-test is a straight forward process. The code snippet below shows the different steps that you have to take to develop and run your strategy.
 
-[source, kotlin,  subs="attributes,verbatim"]
+[source, kotlin, subs="attributes,verbatim"]
 ----
 include::{sourcefile}[tag=overview]
 ----

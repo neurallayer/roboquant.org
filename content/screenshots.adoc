@@ -5,9 +5,10 @@
 :imagesdir: img/
 :icons: font
 
-When working in a Jupyter Notebook, _roboquant_ comes with several types of charts that help to understand how the strategy is behaving. This pages shows some examples of those charts. The charts in a Notebook are also interactive, allowing you to zoom in areas of interest or filter only those values you want to see.
+== Jupyter Notebook charts
+When working in a Jupyter Notebook environment, _roboquant_ comes with several types of charts that can help to understand how a strategy is behaving. This page shows some examples of those charts. The charts in a Notebook are also interactive, allowing you to zoom in areas of interest or filter only those values you want to see.
 
-TIP: You can try these charts yourself right now in your browser, since they all come from the https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/tutorials/charts.ipynb[charts notebook, window=_target].
+TIP: You can try these charts yourself right now in your browser without any installation, since they all come from the https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/tutorials/charts.ipynb[charts notebook, window=_target].
 
 == Walk forward
 Plot a metric during a walk-forward test to provide insight into the performance of the strategy during different timeframes. Here we plot the account equity (= cash + positions) and that provides insights how a strategy performs during different timeframes. Clearly we can see that the strategy wasn't profitable during every timeframe.
@@ -17,13 +18,13 @@ image::walkforward.png[alt="screenshot"]
 Like most charts in _roboquant_, you can zoom into areas of interest. You can do so with the slider at the bottom of the chart or use the zoom option from the toolbox at the top right.
 
 == Random Samples
-An even more extensive back-test is to run the experiment over randomly sampled timeframes of a fixed duration. In this example we selected the duration to be 250 trading days. We then plot the results of all samples and this provide a good view of the maximum profit or loss of the strategy during for a certain duration.
+An even more extensive back-test is to run the experiment over randomly sampled timeframes of a fixed duration. In this example we selected the duration to be 250 trading days. We then plot the results of all samples and this provide a good view of the maximum profit/loss a strategy could generate during for the 250 days.
 
 image::randomsamples.png[alt="screenshot"]
 
 == Trades
 Trades provide an overview of the trades for all the assets made during a certain time period.
-It can plot different aspects of a trade like the fee or volume. But one of the most useful ones is the realized profit and  loss.
+It can plot different aspects of a trade like the fee or volume. But one of the most useful ones is the realized profit and loss.
 
 image::trades.png[alt="screenshot"]
 

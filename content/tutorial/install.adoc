@@ -67,7 +67,7 @@ Add the following snippet to your pom.xml file in the dependencies section:
 === Gradle
 Include the following line in your build.gradle script:
 
-[source]
+[source, groovy]
 ----
 implementation group: 'org.roboquant', name: 'roboquant', version: 'VERSION'
 ----
@@ -79,7 +79,7 @@ You can also use a plain text editor of course. Roboquant uses a setup and direc
 
 Roboquant uses Maven for the build process and assuming you already have this installed, building the libraries locally, is as easy as:
 
-[source,shell]
+[source, shell]
 ----
 mvn build
 ----
