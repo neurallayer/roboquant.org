@@ -137,7 +137,7 @@ further be extended by providing custom models for trading, fee and account mode
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">broker</span> <span class="p">=</span> <span class="nc">SimBroker</span><span class="p">()</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">broker</span> <span class="p">=</span> <span class="nc">SimBroker</span><span class="p">()</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -170,13 +170,13 @@ This is also the configuration you get when you create an instance of <code>Robo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">broker</span> <span class="p">=</span> <span class="nc">SimBroker</span><span class="p">(</span>
-        <span class="n">initialDeposit</span> <span class="p">=</span> <span class="nc">Wallet</span><span class="p">(</span><span class="mi">10_000</span><span class="p">.</span><span class="nc">EUR</span><span class="p">),</span>
-        <span class="n">baseCurrency</span> <span class="p">=</span> <span class="nc">Currency</span><span class="p">.</span><span class="nc">EUR</span><span class="p">,</span>
-        <span class="n">feeModel</span> <span class="p">=</span> <span class="nc">PercentageFeeModel</span><span class="p">(),</span>
-        <span class="n">accountModel</span> <span class="p">=</span> <span class="nc">MarginAccount</span><span class="p">(),</span>
-        <span class="n">pricingEngine</span> <span class="p">=</span> <span class="nc">SpreadPricingEngine</span><span class="p">()</span>
-    <span class="p">)</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">broker</span> <span class="p">=</span> <span class="nc">SimBroker</span><span class="p">(</span>
+    <span class="n">initialDeposit</span> <span class="p">=</span> <span class="nc">Wallet</span><span class="p">(</span><span class="mi">10_000</span><span class="p">.</span><span class="nc">EUR</span><span class="p">),</span>
+    <span class="n">baseCurrency</span> <span class="p">=</span> <span class="nc">Currency</span><span class="p">.</span><span class="nc">EUR</span><span class="p">,</span>
+    <span class="n">feeModel</span> <span class="p">=</span> <span class="nc">PercentageFeeModel</span><span class="p">(),</span>
+    <span class="n">accountModel</span> <span class="p">=</span> <span class="nc">MarginAccount</span><span class="p">(),</span>
+    <span class="n">pricingEngine</span> <span class="p">=</span> <span class="nc">SpreadPricingEngine</span><span class="p">()</span>
+<span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -718,8 +718,49 @@ not all rules are currently implemented yet.
         </div>
     </div>
 </footer>
-<!-- Bootstrap core JS-->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
+
+<script >
+    window.onload = function() {
+        var pre = document.getElementsByTagName('pre');
+        for (var i = 0; i < pre.length; i++) {
+            var b = document.createElement('button');
+            b.className = 'clipboard';
+            b.textContent = 'Copy';
+            if (pre[i].childNodes.length === 1 && pre[i].childNodes[0].nodeType === 3) {
+                var div = document.createElement('div');
+                div.textContent = pre[i].textContent;
+                pre[i].textContent = '';
+                pre[i].appendChild(div);
+            }
+            pre[i].appendChild(b);
+        }
+        var clipboard = new ClipboardJS('.clipboard', {
+           target: function(b) {
+                var p = b.parentNode;
+                if (p.className.includes("highlight")) {
+                    var elems = p.getElementsByTagName("code");
+                    if (elems.length > 0)
+                        return elems[0];
+                }
+                return p.childNodes[0];
+            }
+        });
+        clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.textContent = 'Copied';
+            setTimeout(function() {
+                e.trigger.textContent = 'Copy';
+            }, 2000);
+        });
+        clipboard.on('error', function(e) {
+            console.error('Action:', e.action, e);
+            console.error('Trigger:', e.trigger);
+        });
+    };
+</script>
 
     </body>
 </html>

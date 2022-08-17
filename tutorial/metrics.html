@@ -199,15 +199,17 @@ if metrics are very compute intensive, and you don&#8217;t require them at each 
 <h2 id="_metrics_loggers">Metrics Loggers</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A <code>MetricsLogger</code> receives the calculated metric values at each step and then stores and/or logs these values.</p>
+<p>A metrics loggers receives the calculated metric values at each step and then stores and/or logs these values. They all implement the <code>MetricsLogger</code> interface.</p>
 </div>
-<div class="sect2">
-<h3 id="_memorylogger">MemoryLogger</h3>
 <div class="paragraph">
-<p>This is the default logger used if no other logger is configured. It stores all the recorded values in memory and
+<p>The following metric loggers come out of the box:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>MemoryLogger</code>: this is the default logger used if no other logger is configured. It stores all the recorded values in memory and
 allows them to be queried afterwards. It also comes with a progress-bar that shows how much time is remaining during
 a run.</p>
-</div>
 <div class="paragraph">
 <p>This logger is very useful if you are testing your approach in a Jupyter Notebook or another interactive development
 environment.</p>
@@ -237,36 +239,33 @@ environment.</p>
 <span class="nc">MetricChart</span><span class="p">(</span><span class="n">equity</span><span class="p">)</span></code></pre>
 </div>
 </div>
+</li>
+<li>
+<p><code>SilentLogger</code>: this logger just silently ignores all metrics and is mostly useful for unit tests</p>
+</li>
+<li>
+<p><code>InfoLogger</code>: logs metrics using the built-in Logger.</p>
+</li>
+<li>
+<p><code>ConsoleLogger</code>: logs the metrics to the console using a simple "println" statement.</p>
+</li>
+</ul>
 </div>
 <div class="sect2">
-<h3 id="_silentlogger">SilentLogger</h3>
+<h3 id="_custom_loggers">Custom Loggers</h3>
 <div class="paragraph">
-<p>This logger just silently ignores all metrics and is mostly useful for unit tests</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_infologger">InfoLogger</h3>
-<div class="paragraph">
-<p>Logs metrics using the built-in Logger.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_consolelogger">ConsoleLogger</h3>
-<div class="paragraph">
-<p>Logs the metrics to the console using a simple "println" statement.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_custom_loggers">Custom Loggers</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>You can implement also your own MetricsLogger, for example if you want to store values into a database or have a custom file format that you want to use.</p>
+<p>You can also implement your own metrics logger, for example if you want to store values into a database or have a custom file format that you want to use. The following example shows a minimal example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin"></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">class</span> <span class="nc">ConsoleLogger</span> <span class="p">:</span> <span class="nc">MetricsLogger</span> <span class="p">{</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">log</span><span class="p">(</span><span class="n">results</span><span class="p">:</span> <span class="nc">MetricResults</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="nc">RunInfo</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"$results @ $info"</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="p">}</span></code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -288,8 +287,49 @@ environment.</p>
         </div>
     </div>
 </footer>
-<!-- Bootstrap core JS-->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
+
+<script >
+    window.onload = function() {
+        var pre = document.getElementsByTagName('pre');
+        for (var i = 0; i < pre.length; i++) {
+            var b = document.createElement('button');
+            b.className = 'clipboard';
+            b.textContent = 'Copy';
+            if (pre[i].childNodes.length === 1 && pre[i].childNodes[0].nodeType === 3) {
+                var div = document.createElement('div');
+                div.textContent = pre[i].textContent;
+                pre[i].textContent = '';
+                pre[i].appendChild(div);
+            }
+            pre[i].appendChild(b);
+        }
+        var clipboard = new ClipboardJS('.clipboard', {
+           target: function(b) {
+                var p = b.parentNode;
+                if (p.className.includes("highlight")) {
+                    var elems = p.getElementsByTagName("code");
+                    if (elems.length > 0)
+                        return elems[0];
+                }
+                return p.childNodes[0];
+            }
+        });
+        clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.textContent = 'Copied';
+            setTimeout(function() {
+                e.trigger.textContent = 'Copy';
+            }, 2000);
+        });
+        clipboard.on('error', function(e) {
+            console.error('Action:', e.action, e);
+            console.error('Trigger:', e.trigger);
+        });
+    };
+</script>
 
     </body>
 </html>

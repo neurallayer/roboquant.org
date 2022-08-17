@@ -506,3 +506,27 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 .conum:not([data-value]):empty { display: none; }
 
 .literalblock > .content > pre, .listingblock > .content > pre { -webkit-border-radius: 0; border-radius: 0.25rem; }
+
+.listingblock:hover .clipboard {
+    display: block;
+}
+
+.clipboard {
+    display: none;
+    border: 0;
+    border-radius: 0.25rem;
+    font-size: .75em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 6px;
+    color: #888;
+    position: absolute;
+    top: .425rem;
+    right: .5rem;
+    background: transparent;
+}
+
+.clipboard:hover, .clipboard:focus, .clipboard:active {
+    outline: 0;
+    background-color: #ddd;
+}

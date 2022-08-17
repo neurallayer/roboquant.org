@@ -142,11 +142,11 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// Predefined EMACrossover</span>
-    <span class="kd">val</span> <span class="py">strategy1</span> <span class="p">=</span> <span class="nc">EMACrossover</span><span class="p">.</span><span class="nc">EMA_12_26</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="c1">// Predefined EMACrossover</span>
+<span class="kd">val</span> <span class="py">strategy1</span> <span class="p">=</span> <span class="nc">EMACrossover</span><span class="p">.</span><span class="nc">EMA_12_26</span>
 
-    <span class="c1">// Own defined look-back periods</span>
-    <span class="kd">val</span> <span class="py">strategy2</span> <span class="p">=</span> <span class="nc">EMACrossover</span><span class="p">(</span><span class="n">fastPeriod</span> <span class="p">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">slowPeriod</span> <span class="p">=</span> <span class="mi">50</span><span class="p">)</span></code></pre>
+<span class="c1">// Own defined look-back periods</span>
+<span class="kd">val</span> <span class="py">strategy2</span> <span class="p">=</span> <span class="nc">EMACrossover</span><span class="p">(</span><span class="n">fastPeriod</span> <span class="p">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">slowPeriod</span> <span class="p">=</span> <span class="mi">50</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </div>
@@ -160,22 +160,22 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">shortTerm</span> <span class="p">=</span> <span class="mi">30</span>
-    <span class="kd">val</span> <span class="py">longTerm</span> <span class="p">=</span> <span class="mi">50</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">shortTerm</span> <span class="p">=</span> <span class="mi">30</span>
+<span class="kd">val</span> <span class="py">longTerm</span> <span class="p">=</span> <span class="mi">50</span>
 
-    <span class="c1">// Make sure the TAStrategy collects enough data for all the used indicators to work</span>
-    <span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">TaLibStrategy</span><span class="p">(</span><span class="n">longTerm</span><span class="p">)</span>
+<span class="c1">// Make sure the TAStrategy collects enough data for all the used indicators to work</span>
+<span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">TaLibStrategy</span><span class="p">(</span><span class="n">longTerm</span><span class="p">)</span>
 
-    <span class="c1">// When to generate a BUY signal</span>
-    <span class="n">strategy</span><span class="p">.</span><span class="nf">buy</span> <span class="p">{</span> <span class="n">series</span> <span class="p">-&gt;</span>
-        <span class="nf">cdlMorningStar</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="p">||</span> <span class="nf">cdl3WhiteSoldiers</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
-    <span class="p">}</span>
+<span class="c1">// When to generate a BUY signal</span>
+<span class="n">strategy</span><span class="p">.</span><span class="nf">buy</span> <span class="p">{</span> <span class="n">series</span> <span class="p">-&gt;</span>
+    <span class="nf">cdlMorningStar</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="p">||</span> <span class="nf">cdl3WhiteSoldiers</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+<span class="p">}</span>
 
-    <span class="c1">// When to generate a SELL signal</span>
-    <span class="n">strategy</span><span class="p">.</span><span class="nf">sell</span> <span class="p">{</span> <span class="n">series</span> <span class="p">-&gt;</span>
-        <span class="nf">cdl3BlackCrows</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="p">||</span> <span class="p">(</span><span class="nf">cdl2Crows</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="p">&amp;&amp;</span>
-                <span class="nf">sma</span><span class="p">(</span><span class="n">series</span><span class="p">.</span><span class="n">close</span><span class="p">,</span> <span class="n">shortTerm</span><span class="p">)</span> <span class="p">&lt;</span> <span class="nf">sma</span><span class="p">(</span><span class="n">series</span><span class="p">.</span><span class="n">close</span><span class="p">,</span> <span class="n">longTerm</span><span class="p">))</span>
-    <span class="p">}</span></code></pre>
+<span class="c1">// When to generate a SELL signal</span>
+<span class="n">strategy</span><span class="p">.</span><span class="nf">sell</span> <span class="p">{</span> <span class="n">series</span> <span class="p">-&gt;</span>
+    <span class="nf">cdl3BlackCrows</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="p">||</span> <span class="p">(</span><span class="nf">cdl2Crows</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="p">&amp;&amp;</span>
+            <span class="nf">sma</span><span class="p">(</span><span class="n">series</span><span class="p">.</span><span class="n">close</span><span class="p">,</span> <span class="n">shortTerm</span><span class="p">)</span> <span class="p">&lt;</span> <span class="nf">sma</span><span class="p">(</span><span class="n">series</span><span class="p">.</span><span class="n">close</span><span class="p">,</span> <span class="n">longTerm</span><span class="p">))</span>
+<span class="p">}</span></code></pre>
 </div>
 </div>
 </div>
@@ -189,11 +189,11 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// Default thresholds values</span>
-    <span class="kd">val</span> <span class="py">strategy1</span> <span class="p">=</span> <span class="nc">RSIStrategy</span><span class="p">()</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="c1">// Default thresholds values</span>
+<span class="kd">val</span> <span class="py">strategy1</span> <span class="p">=</span> <span class="nc">RSIStrategy</span><span class="p">()</span>
 
-    <span class="c1">// Own defined thresholds</span>
-    <span class="kd">val</span> <span class="py">strategy2</span> <span class="p">=</span> <span class="nc">RSIStrategy</span><span class="p">(</span><span class="n">lowThreshold</span> <span class="p">=</span> <span class="mf">25.0</span><span class="p">,</span> <span class="n">highThreshold</span> <span class="p">=</span> <span class="mf">75.0</span><span class="p">)</span></code></pre>
+<span class="c1">// Own defined thresholds</span>
+<span class="kd">val</span> <span class="py">strategy2</span> <span class="p">=</span> <span class="nc">RSIStrategy</span><span class="p">(</span><span class="n">lowThreshold</span> <span class="p">=</span> <span class="mf">25.0</span><span class="p">,</span> <span class="n">highThreshold</span> <span class="p">=</span> <span class="mf">75.0</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </div>
@@ -213,8 +213,8 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">CombinedStrategy</span><span class="p">(</span><span class="n">strategy1</span><span class="p">,</span> <span class="n">strategy2</span><span class="p">)</span>
-    <span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">)</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">strategy</span> <span class="p">=</span> <span class="nc">CombinedStrategy</span><span class="p">(</span><span class="n">strategy1</span><span class="p">,</span> <span class="n">strategy2</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">roboquant</span> <span class="p">=</span> <span class="nc">Roboquant</span><span class="p">(</span><span class="n">strategy</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </div>
@@ -230,24 +230,24 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin">    <span class="cm">/**
-     * Trend following strategy
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="cm">/**
+ * Trend following strategy
+ */</span>
+<span class="kd">class</span> <span class="nc">MyStrategy1</span><span class="p">(</span><span class="n">lookBack</span><span class="p">:</span><span class="nc">Int</span><span class="p">=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">:</span> <span class="nc">HistoricPriceStrategy</span><span class="p">(</span><span class="n">lookBack</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="cm">/**
+     * This will only be invoked once there is enough historic data available as specified
+     * by the lookBack parameter
      */</span>
-    <span class="kd">class</span> <span class="nc">MyStrategy1</span><span class="p">(</span><span class="n">lookBack</span><span class="p">:</span><span class="nc">Int</span><span class="p">=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">:</span> <span class="nc">HistoricPriceStrategy</span><span class="p">(</span><span class="n">lookBack</span><span class="p">)</span> <span class="p">{</span>
-
-        <span class="cm">/**
-         * This will only be invoked once there is enough historic data available as specified
-         * by the lookBack parameter
-         */</span>
-        <span class="k">override</span> <span class="k">fun</span> <span class="nf">generate</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nc">Asset</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nc">DoubleArray</span><span class="p">):</span> <span class="nc">Signal</span><span class="p">?</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="k">when</span> <span class="p">{</span>
-                <span class="n">data</span><span class="p">.</span><span class="nf">last</span><span class="p">()</span> <span class="p">==</span> <span class="n">data</span><span class="p">.</span><span class="nf">max</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">Signal</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="nc">Rating</span><span class="p">.</span><span class="nc">BUY</span><span class="p">)</span>
-                <span class="n">data</span><span class="p">.</span><span class="nf">last</span><span class="p">()</span> <span class="p">==</span> <span class="n">data</span><span class="p">.</span><span class="nf">min</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">Signal</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="nc">Rating</span><span class="p">.</span><span class="nc">SELL</span><span class="p">)</span>
-                <span class="k">else</span> <span class="p">-&gt;</span> <span class="k">null</span>
-            <span class="p">}</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">generate</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nc">Asset</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nc">DoubleArray</span><span class="p">):</span> <span class="nc">Signal</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">when</span> <span class="p">{</span>
+            <span class="n">data</span><span class="p">.</span><span class="nf">last</span><span class="p">()</span> <span class="p">==</span> <span class="n">data</span><span class="p">.</span><span class="nf">max</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">Signal</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="nc">Rating</span><span class="p">.</span><span class="nc">BUY</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">.</span><span class="nf">last</span><span class="p">()</span> <span class="p">==</span> <span class="n">data</span><span class="p">.</span><span class="nf">min</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">Signal</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="nc">Rating</span><span class="p">.</span><span class="nc">SELL</span><span class="p">)</span>
+            <span class="k">else</span> <span class="p">-&gt;</span> <span class="k">null</span>
         <span class="p">}</span>
+    <span class="p">}</span>
 
-    <span class="p">}</span></code></pre>
+<span class="p">}</span></code></pre>
 </div>
 </div>
 </div>
@@ -397,8 +397,8 @@ a hold rating is not the same as no signal. Only generate hold signals if you th
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// apple is of the type Asset</span>
-    <span class="kd">val</span> <span class="py">signal</span> <span class="p">=</span> <span class="nc">Signal</span><span class="p">(</span><span class="n">apple</span><span class="p">,</span> <span class="nc">Rating</span><span class="p">.</span><span class="nc">BUY</span><span class="p">)</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="c1">// apple is of the type Asset</span>
+<span class="kd">val</span> <span class="py">signal</span> <span class="p">=</span> <span class="nc">Signal</span><span class="p">(</span><span class="n">apple</span><span class="p">,</span> <span class="nc">Rating</span><span class="p">.</span><span class="nc">BUY</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </div>
@@ -411,12 +411,12 @@ a hold rating is not the same as no signal. Only generate hold signals if you th
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">type</span><span class="p">:</span> <span class="nc">SignalType</span> <span class="p">=</span> <span class="nc">SignalType</span><span class="p">.</span><span class="nc">BOTH</span>
-    <span class="kd">val</span> <span class="py">takeProfit</span><span class="p">:</span> <span class="nc">Double</span> <span class="p">=</span> <span class="nc">Double</span><span class="p">.</span><span class="nc">NaN</span>
-    <span class="kd">val</span> <span class="py">stopLoss</span><span class="p">:</span> <span class="nc">Double</span> <span class="p">=</span> <span class="nc">Double</span><span class="p">.</span><span class="nc">NaN</span>
-    <span class="kd">val</span> <span class="py">probability</span><span class="p">:</span> <span class="nc">Double</span> <span class="p">=</span> <span class="nc">Double</span><span class="p">.</span><span class="nc">NaN</span>
-    <span class="kd">val</span> <span class="py">source</span><span class="p">:</span> <span class="nc">String</span> <span class="p">=</span> <span class="s">""</span>
-    <span class="nc">Signal</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="n">rating</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span> <span class="n">takeProfit</span><span class="p">,</span> <span class="n">stopLoss</span><span class="p">,</span> <span class="n">probability</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">type</span><span class="p">:</span> <span class="nc">SignalType</span> <span class="p">=</span> <span class="nc">SignalType</span><span class="p">.</span><span class="nc">BOTH</span>
+<span class="kd">val</span> <span class="py">takeProfit</span><span class="p">:</span> <span class="nc">Double</span> <span class="p">=</span> <span class="nc">Double</span><span class="p">.</span><span class="nc">NaN</span>
+<span class="kd">val</span> <span class="py">stopLoss</span><span class="p">:</span> <span class="nc">Double</span> <span class="p">=</span> <span class="nc">Double</span><span class="p">.</span><span class="nc">NaN</span>
+<span class="kd">val</span> <span class="py">probability</span><span class="p">:</span> <span class="nc">Double</span> <span class="p">=</span> <span class="nc">Double</span><span class="p">.</span><span class="nc">NaN</span>
+<span class="kd">val</span> <span class="py">source</span><span class="p">:</span> <span class="nc">String</span> <span class="p">=</span> <span class="s">""</span>
+<span class="nc">Signal</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="n">rating</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span> <span class="n">takeProfit</span><span class="p">,</span> <span class="n">stopLoss</span><span class="p">,</span> <span class="n">probability</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -441,8 +441,49 @@ a hold rating is not the same as no signal. Only generate hold signals if you th
         </div>
     </div>
 </footer>
-<!-- Bootstrap core JS-->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
+
+<script >
+    window.onload = function() {
+        var pre = document.getElementsByTagName('pre');
+        for (var i = 0; i < pre.length; i++) {
+            var b = document.createElement('button');
+            b.className = 'clipboard';
+            b.textContent = 'Copy';
+            if (pre[i].childNodes.length === 1 && pre[i].childNodes[0].nodeType === 3) {
+                var div = document.createElement('div');
+                div.textContent = pre[i].textContent;
+                pre[i].textContent = '';
+                pre[i].appendChild(div);
+            }
+            pre[i].appendChild(b);
+        }
+        var clipboard = new ClipboardJS('.clipboard', {
+           target: function(b) {
+                var p = b.parentNode;
+                if (p.className.includes("highlight")) {
+                    var elems = p.getElementsByTagName("code");
+                    if (elems.length > 0)
+                        return elems[0];
+                }
+                return p.childNodes[0];
+            }
+        });
+        clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.textContent = 'Copied';
+            setTimeout(function() {
+                e.trigger.textContent = 'Copy';
+            }, 2000);
+        });
+        clipboard.on('error', function(e) {
+            console.error('Action:', e.action, e);
+            console.error('Trigger:', e.trigger);
+        });
+    };
+</script>
 
     </body>
 </html>

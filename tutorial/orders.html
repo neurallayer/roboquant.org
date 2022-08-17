@@ -146,12 +146,12 @@ in place is that real brokers only have limited support for multi-asset orders a
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">orders</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;()</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">signal</span> <span class="k">in</span> <span class="n">signals</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">val</span> <span class="py">size</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">rating</span><span class="p">.</span><span class="n">isPositive</span><span class="p">)</span> <span class="mi">100</span> <span class="k">else</span> <span class="p">-</span><span class="mi">100</span>
-        <span class="kd">val</span> <span class="py">order</span> <span class="p">=</span> <span class="nc">MarketOrder</span><span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">asset</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-        <span class="n">orders</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
-    <span class="p">}</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">orders</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="nc">Order</span><span class="p">&gt;()</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">signal</span> <span class="k">in</span> <span class="n">signals</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">size</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">rating</span><span class="p">.</span><span class="n">isPositive</span><span class="p">)</span> <span class="mi">100</span> <span class="k">else</span> <span class="p">-</span><span class="mi">100</span>
+    <span class="kd">val</span> <span class="py">order</span> <span class="p">=</span> <span class="nc">MarketOrder</span><span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">asset</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">orders</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+<span class="p">}</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -171,12 +171,12 @@ there is no explicit notion of BUY or SELL orders in <em>roboquant</em>. A BUY o
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin">    <span class="kd">val</span> <span class="py">size</span> <span class="p">=</span> <span class="nc">Size</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-    <span class="kd">val</span> <span class="py">order</span> <span class="p">=</span> <span class="nc">BracketOrder</span><span class="p">(</span>
-        <span class="nc">MarketOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="n">size</span><span class="p">),</span> <span class="c1">// main order</span>
-        <span class="nc">LimitOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="p">-</span><span class="n">size</span><span class="p">,</span> <span class="n">price</span> <span class="p">*</span> <span class="mf">1.05</span><span class="p">),</span> <span class="c1">// take profit order</span>
-        <span class="nc">StopOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="p">-</span><span class="n">size</span><span class="p">,</span> <span class="n">price</span> <span class="p">*</span> <span class="mf">0.95</span><span class="p">)</span> <span class="c1">// stop loss order</span>
-    <span class="p">)</span></code></pre>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">size</span> <span class="p">=</span> <span class="nc">Size</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">order</span> <span class="p">=</span> <span class="nc">BracketOrder</span><span class="p">(</span>
+    <span class="nc">MarketOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="n">size</span><span class="p">),</span> <span class="c1">// main order</span>
+    <span class="nc">LimitOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="p">-</span><span class="n">size</span><span class="p">,</span> <span class="n">price</span> <span class="p">*</span> <span class="mf">1.05</span><span class="p">),</span> <span class="c1">// take profit order</span>
+    <span class="nc">StopOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="p">-</span><span class="n">size</span><span class="p">,</span> <span class="n">price</span> <span class="p">*</span> <span class="mf">0.95</span><span class="p">)</span> <span class="c1">// stop loss order</span>
+<span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock tip">
@@ -235,37 +235,37 @@ always make sure to only use order types during back testing that are also suppo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="kotlin">    <span class="c1">// Simple custom order type</span>
-    <span class="kd">class</span> <span class="nc">MyOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nc">Asset</span><span class="p">,</span> <span class="kd">val</span> <span class="py">quantity</span><span class="p">:</span> <span class="nc">Size</span><span class="p">,</span> <span class="kd">val</span> <span class="py">customProperty</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">id</span><span class="p">:</span><span class="nc">Int</span> <span class="p">=</span> <span class="nf">nextId</span><span class="p">())</span> <span class="p">:</span> <span class="nc">Order</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="c1">// Simple custom order type</span>
+<span class="kd">class</span> <span class="nc">MyOrder</span><span class="p">(</span><span class="n">asset</span><span class="p">:</span> <span class="nc">Asset</span><span class="p">,</span> <span class="kd">val</span> <span class="py">quantity</span><span class="p">:</span> <span class="nc">Size</span><span class="p">,</span> <span class="kd">val</span> <span class="py">customProperty</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">id</span><span class="p">:</span><span class="nc">Int</span> <span class="p">=</span> <span class="nf">nextId</span><span class="p">())</span> <span class="p">:</span> <span class="nc">Order</span><span class="p">(</span><span class="n">asset</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
 
-    <span class="c1">// Define a handler for your custom order type.</span>
-    <span class="c1">// This is required if you want your order to be supported by the SimBroker</span>
-    <span class="kd">class</span> <span class="nc">MyOrderHandler</span><span class="p">(</span><span class="kd">val</span> <span class="py">order</span><span class="p">:</span> <span class="nc">MyOrder</span><span class="p">)</span> <span class="p">:</span> <span class="nc">TradeOrderHandler</span> <span class="p">{</span>
+<span class="c1">// Define a handler for your custom order type.</span>
+<span class="c1">// This is required if you want your order to be supported by the SimBroker</span>
+<span class="kd">class</span> <span class="nc">MyOrderHandler</span><span class="p">(</span><span class="kd">val</span> <span class="py">order</span><span class="p">:</span> <span class="nc">MyOrder</span><span class="p">)</span> <span class="p">:</span> <span class="nc">TradeOrderHandler</span> <span class="p">{</span>
 
-        <span class="k">override</span> <span class="kd">var</span> <span class="py">state</span> <span class="p">=</span> <span class="nc">OrderState</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+    <span class="k">override</span> <span class="kd">var</span> <span class="py">state</span> <span class="p">=</span> <span class="nc">OrderState</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
 
-        <span class="k">override</span> <span class="k">fun</span> <span class="nf">execute</span><span class="p">(</span><span class="n">pricing</span><span class="p">:</span> <span class="nc">Pricing</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="nc">Instant</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Execution</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">execute</span><span class="p">(</span><span class="n">pricing</span><span class="p">:</span> <span class="nc">Pricing</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="nc">Instant</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Execution</span><span class="p">&gt;</span> <span class="p">{</span>
 
-            <span class="c1">// Set state to accepted</span>
-            <span class="n">state</span> <span class="p">=</span> <span class="nc">OrderState</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="nc">OrderStatus</span><span class="p">.</span><span class="nc">ACCEPTED</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+        <span class="c1">// Set state to accepted</span>
+        <span class="n">state</span> <span class="p">=</span> <span class="nc">OrderState</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="nc">OrderStatus</span><span class="p">.</span><span class="nc">ACCEPTED</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
 
-            <span class="c1">// some logic for the order type</span>
-            <span class="c1">// ....</span>
+        <span class="c1">// some logic for the order type</span>
+        <span class="c1">// ....</span>
 
-            <span class="c1">// Calculate the price to use</span>
-            <span class="kd">val</span> <span class="py">price</span> <span class="p">=</span> <span class="n">pricing</span><span class="p">.</span><span class="nf">marketPrice</span><span class="p">(</span><span class="n">order</span><span class="p">.</span><span class="n">quantity</span><span class="p">)</span>
+        <span class="c1">// Calculate the price to use</span>
+        <span class="kd">val</span> <span class="py">price</span> <span class="p">=</span> <span class="n">pricing</span><span class="p">.</span><span class="nf">marketPrice</span><span class="p">(</span><span class="n">order</span><span class="p">.</span><span class="n">quantity</span><span class="p">)</span>
 
-            <span class="c1">// Set the state to be COMPLETED. As long as the state is not in a Closed state, this handler stays active.</span>
-            <span class="n">state</span> <span class="p">=</span> <span class="nc">OrderState</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="nc">OrderStatus</span><span class="p">.</span><span class="nc">COMPLETED</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+        <span class="c1">// Set the state to be COMPLETED. As long as the state is not in a Closed state, this handler stays active.</span>
+        <span class="n">state</span> <span class="p">=</span> <span class="nc">OrderState</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="nc">OrderStatus</span><span class="p">.</span><span class="nc">COMPLETED</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
 
-            <span class="c1">// Return the executions</span>
-            <span class="k">return</span> <span class="nf">listOf</span><span class="p">(</span><span class="nc">Execution</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">order</span><span class="p">.</span><span class="n">quantity</span><span class="p">,</span> <span class="n">price</span><span class="p">))</span>
-        <span class="p">}</span>
-
+        <span class="c1">// Return the executions</span>
+        <span class="k">return</span> <span class="nf">listOf</span><span class="p">(</span><span class="nc">Execution</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">order</span><span class="p">.</span><span class="n">quantity</span><span class="p">,</span> <span class="n">price</span><span class="p">))</span>
     <span class="p">}</span>
 
-    <span class="c1">// Register the handler</span>
-    <span class="nc">ExecutionEngine</span><span class="p">.</span><span class="n">register</span><span class="p">&lt;</span><span class="nc">MyOrder</span><span class="p">&gt;</span> <span class="p">{</span> <span class="nc">MyOrderHandler</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="p">}</span></code></pre>
+<span class="p">}</span>
+
+<span class="c1">// Register the handler</span>
+<span class="nc">ExecutionEngine</span><span class="p">.</span><span class="n">register</span><span class="p">&lt;</span><span class="nc">MyOrder</span><span class="p">&gt;</span> <span class="p">{</span> <span class="nc">MyOrderHandler</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="p">}</span></code></pre>
 </div>
 </div>
 </div>
@@ -287,8 +287,49 @@ always make sure to only use order types during back testing that are also suppo
         </div>
     </div>
 </footer>
-<!-- Bootstrap core JS-->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
+
+<script >
+    window.onload = function() {
+        var pre = document.getElementsByTagName('pre');
+        for (var i = 0; i < pre.length; i++) {
+            var b = document.createElement('button');
+            b.className = 'clipboard';
+            b.textContent = 'Copy';
+            if (pre[i].childNodes.length === 1 && pre[i].childNodes[0].nodeType === 3) {
+                var div = document.createElement('div');
+                div.textContent = pre[i].textContent;
+                pre[i].textContent = '';
+                pre[i].appendChild(div);
+            }
+            pre[i].appendChild(b);
+        }
+        var clipboard = new ClipboardJS('.clipboard', {
+           target: function(b) {
+                var p = b.parentNode;
+                if (p.className.includes("highlight")) {
+                    var elems = p.getElementsByTagName("code");
+                    if (elems.length > 0)
+                        return elems[0];
+                }
+                return p.childNodes[0];
+            }
+        });
+        clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.textContent = 'Copied';
+            setTimeout(function() {
+                e.trigger.textContent = 'Copy';
+            }, 2000);
+        });
+        clipboard.on('error', function(e) {
+            console.error('Action:', e.action, e);
+            console.error('Trigger:', e.trigger);
+        });
+    };
+</script>
 
     </body>
 </html>
