@@ -28,7 +28,8 @@
 	</repositories>
 
 	<build>
-		<directory>${project.basedir}/build</directory>
+		<sourceDirectory>${project.basedir}/samples</sourceDirectory>
+		<directory>${project.basedir}/target</directory>
 		<plugins>
 			<plugin>
 				<groupId>org.jbake</groupId>
@@ -36,7 +37,7 @@
 				<version>0.3.4</version>
 				<configuration>
 				    <inputDirectory>${project.basedir}</inputDirectory>
-				    <outputDirectory>${project.build.directory}</outputDirectory>
+				    <outputDirectory>${project.basedir}/build</outputDirectory>
 				</configuration>
 				<executions>
 					<execution>
@@ -53,12 +54,6 @@
 						<groupId>com.orientechnologies</groupId>
 						<artifactId>orientdb-core</artifactId>
 						<version>3.1.16</version>
-					</dependency>
-
-					<dependency>
-						<groupId>org.asciidoctor</groupId>
-						<artifactId>asciidoctorj</artifactId>
-						<version>2.4.3</version>
 					</dependency>
 
 					<!-- AsciiDoc content support -->

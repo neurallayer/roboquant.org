@@ -17,16 +17,22 @@ image:https://img.shields.io/github/issues/neurallayer/roboquant.org/enhancement
 image:https://img.shields.io/github/last-commit/neurallayer/roboquant.org[GitHub last commit]
 image:https://img.shields.io/github/commit-activity/m/neurallayer/roboquant.org[GitHub commit activity]
 
-This repo contains the content for the roboquant.org website. It uses JBake as the generator for the static website and AsciiDoc for most of the documentation. All the Kotlin code samples used in the documentation are in the samples directory and are compiled to make sure they are correct and still up to date.
+This repo contains the content for the roboquant.org website. It uses JBake as the generator for the static website and AsciiDoc for most of the documentation. All the Kotlin code samples used in the documentation are in the samples directory and can be compiled to make sure they are correct and still up to date.
 
 Check the roboquant site at https://roboquant.org[roboquant.org]
 
 == Build
-To generate the website (output will be in the ./build directory), run:
+To generate the website (output will be in the `./build directory)`, run:
 
 [source,shell]
 ----
 mvn jbake:generate
+----
+
+If you also want to validate if the included code snippets (found in the `./samples` directory) still compile, you can run:
+[source,shell]
+----
+mvn compile
 ----
 
 NOTE: If you are on Apple Silicon (the M1 processor), the default JBake installation won't work. But the JBake Maven plugin used in this project has an upgraded version of the OrientDB library that should work (but not very well tested).
@@ -37,6 +43,10 @@ To interactively develop, you can run:
 ----
 mvn jbake:inline
 ----
+
+== Deploy
+The https://roboquant.org site is actually a GitHub Pages website. Using the action as defined in `.github/workflows/gh-pages.yml`, the static content for the website is automatically generated and deployed after each new push on the main branch. So there is no need for a manual step to update the website after a change has been committed to this repository.
+
 
 == Other
 If you want to fork this for your own website, please be aware that some templates still have hard coded content in there that you want to replace.

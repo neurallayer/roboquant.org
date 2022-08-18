@@ -12,19 +12,19 @@ import org.roboquant.ta.TaLibStrategy
 fun ema() {
 
     // tag::ema[]
-    // Predefined EMACrossover
+    // Use a EMACrossover with predefined look-back periods
     val strategy1 = EMACrossover.EMA_12_26
 
-    // Own defined look-back periods
+    // Use a EMACrossover with custom look-back periods
     val strategy2 = EMACrossover(fastPeriod = 20, slowPeriod = 50)
     // end::ema[]
 
 }
 
 
-fun simpleSignal(apple: Asset) {
+fun simpleSignal() {
     // tag::simpleSignal[]
-    // apple is of the type Asset
+    val apple = Asset("AAPL")
     val signal = Signal(apple, Rating.BUY)
     // end::simpleSignal[]
 }
@@ -78,9 +78,9 @@ fun extending() {
 }
 
 
-fun composition(strategy1: Strategy, strategy2: Strategy) {
+fun composition(strategy1: Strategy, strategy2: Strategy, strategy3: Strategy) {
     // tag::composition[]
-    val strategy = CombinedStrategy(strategy1, strategy2)
+    val strategy = CombinedStrategy(strategy1, strategy2, strategy3)
     val roboquant = Roboquant(strategy)
     // end::composition[]
 }
@@ -92,7 +92,8 @@ fun ta() {
     val shortTerm = 30
     val longTerm = 50
 
-    // Make sure the TAStrategy collects enough data for all the used indicators to work
+    // Make sure the strategy collects enough data
+    // for all the used indicators to work correctly
     val strategy = TaLibStrategy(longTerm)
 
     // When to generate a BUY signal
@@ -109,47 +110,49 @@ fun ta() {
 
 }
 
+fun customStrategy1() {
+    // tag::basic[]
+    class MyStrategy : Strategy {
 
-// tag::basic[]
-class MyStrategy : Strategy {
-
-    override fun generate(event: Event): List<Signal> {
-        TODO("Not yet implemented")
-    }
-
-}
-// end::basic[]
-
-
-// tag::naive[]
-class MyStrategy2 : Strategy {
-
-    private val previousPrices = mutableMapOf<Asset, Double>()
-
-    override fun generate(event: Event): List<Signal> {
-        val signals = mutableListOf<Signal>()
-        for ((asset, priceAction) in event.prices) {
-
-            val currentPrice = priceAction.getPrice()
-            val previousPrice = previousPrices.getOrDefault(asset, currentPrice)
-
-            if (currentPrice > 1.05 * previousPrice)
-                signals.add(Signal(asset, Rating.BUY))
-
-            if (currentPrice < 0.95 * previousPrice)
-                signals.add(Signal(asset, Rating.SELL))
-
-            previousPrices[asset] = currentPrice
+        override fun generate(event: Event): List<Signal> {
+            TODO("Not yet implemented")
         }
-        return signals
-    }
 
-    // Make sure we clear the previous prices when reset
-    override fun reset() {
-        previousPrices.clear()
     }
-
+// end::basic[]
 }
-// end::naive[]
+
+fun customStrategy2() {
+    // tag::naive[]
+    class MyStrategy : Strategy {
+
+        private val previousPrices = mutableMapOf<Asset, Double>()
+
+        override fun generate(event: Event): List<Signal> {
+            val signals = mutableListOf<Signal>()
+            for ((asset, priceAction) in event.prices) {
+
+                val currentPrice = priceAction.getPrice()
+                val previousPrice = previousPrices.getOrDefault(asset, currentPrice)
+
+                if (currentPrice > 1.05 * previousPrice)
+                    signals.add(Signal(asset, Rating.BUY))
+
+                if (currentPrice < 0.95 * previousPrice)
+                    signals.add(Signal(asset, Rating.SELL))
+
+                previousPrices[asset] = currentPrice
+            }
+            return signals
+        }
+
+        // Make sure we clear the previous prices when reset
+        override fun reset() {
+            previousPrices.clear()
+        }
+
+    }
+    // end::naive[]
+}
 
 

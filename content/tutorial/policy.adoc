@@ -7,16 +7,16 @@
 == What is a policy
 A `Policy` is responsible for creating the orders that will be placed at the broker. The most common use-case is that a `Policy` does this based on the signals it receives from a `Strategy`, but there are other use-cases.
 
-A good `Policy` implementation is key in making your solution as robust as possible. Key things to consider when implementing a new policy:
+A good `Policy` implementation is key in making your solution as robust as possible. Important things to consider when implementing a policy:
 
-* What is a good allocation strategy, so how much of your cash do you allocate to a certain asset
+* What is a good allocation strategy, so how much of your buying power do you allocate to a certain asset
 * What order types to create
 * How to handle new orders when there are still open orders (for the same asset)
 * How to limit the maximum number of orders send to a broker (circuit breaker)
 * How to deal with conflicting signals from strategies
 * How to handle yo-yo signals (buy-sell-buy-sell) in a short timeframe
-* How to manage risk and exposure
-* How to ensure there is still enough balance left to place an order
+* How to manage overall risk and exposure when volatility changes
+* How to ensure there is still enough buying power left to avoid margin calls
 
 ****
 CAUTION: If there is one thing that prevents many from going live with a strategy, it is that there is not a robust policy in place that handles all the possible edge-cases. The logic required in a robust policy is anything but trivial and should incorporate an extensive testing period.
@@ -63,7 +63,7 @@ include::{sourcefile}[tag=naive2]
 ----
 
 
-The following example is more realistic and shows an implementation that calculates the ATR (Average True Range) that is than used to set the limit amount in a Limit Order.
+The following example is more realistic and shows an implementation that calculates the ATR (Average True Range) that is than used to set the limit amount in a Limit Order. This example use the `DefaultPolicy` as its base class that will take care of much of the logic like sizing and dealing with concurrent orders.
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=custom3]
