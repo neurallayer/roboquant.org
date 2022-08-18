@@ -24,18 +24,16 @@ The time in an event is of the type Instant. It is very important that the time 
 For example when you want to use unemployment numbers as part of your feed, you should use the time when they are published, and you have access to them, not the last day of the period they cover. Otherwise, your strategy is looking into the future during back testing and can make decisions based on information it will never have in live trading.
 
 === Action
-Action is an abstraction for any type of information that can be made available in an event.
+Action is an abstraction for any type of information that can be made available in an event. An action can range from price actions, like price-bars and order-book snapshots, to social media content or images.
 
-An action can range from price actions, like price-bars and order-book snapshots, to social media content or images. There is no commonality between actions, and you can add any type of actions you like to the platform. The only requirements is that they implement the empty interface `Action`.
-
-It is up to the strategy to filter for the action types it is interested in. For example if your strategy would require `PriceBar` (candlestick) data, you could use the following pattern to filter this type:
+There is no commonality between actions, and you can add any type of actions you like to the platform. The only requirements is that they implement the empty interface `Action`. It is up to the strategy to filter for the action types it is interested in. For example if your strategy would require `PriceBar` (candlestick) data, you could use the following pattern to filter this type:
 
 [source, kotlin, indent=0]
 ----
 include::{sourcefile}[tag=event]
 ----
 
-There are also a few helper methods in the `Event` to access prices, since these are of interest of many strategies:
+There are also a few helper methods in the `Event` class to access prices, since these are of interest of many strategies:
 
 [source, kotlin, indent=0]
 ----

@@ -1,4 +1,4 @@
-= Metrics
+= Metrics & Loggers
 :icons: font
 :source-highlighter: rouge
 :sourcefile: ../../samples/metrics.kt
@@ -28,22 +28,19 @@ In the `calc` function you have access to both the account object and the event.
 include::{sourcefile}[tag=simple]
 ----
 
-
 == Metrics Loggers
 A metrics loggers receives the calculated metric values at each step and then stores and/or logs these values. They all implement the `MetricsLogger` interface.
 
 The following metric loggers come out of the box:
 
-- `MemoryLogger`: this is the default logger used if no other logger is configured. It stores all the recorded values in memory and
-allows them to be queried afterwards. It also comes with a progress-bar that shows how much time is remaining during
+- `MemoryLogger`: this is the default logger used if no other logger is configured. It stores all the recorded values in memory and allows them to be queried afterwards. It also comes with an optional progress-bar that shows how much time is remaining during
 a run.
 +
-This logger is very useful if you are testing your approach in a Jupyter Notebook or another interactive development
-environment.
+This logger is especially useful if you are using a Jupyter Notebook and after a run want to directly plot some metrics.
 +
 [source,kotlin,indent=0]
 ----
-include::{sourcefile}[tag=standard]
+include::{sourcefile}[tag=memoryLogger]
 ----
 
 - `SilentLogger`: this logger just silently ignores all calculated metric values and is mostly useful for unit tests

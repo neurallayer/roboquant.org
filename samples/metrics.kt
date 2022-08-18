@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "UNUSED_VARIABLE" , "UNUSED_PARAMETER")
 
 import org.roboquant.Roboquant
 import org.roboquant.RunInfo
@@ -9,6 +9,7 @@ import org.roboquant.jupyter.MetricChart
 import org.roboquant.logging.MetricsLogger
 import org.roboquant.metrics.*
 import org.roboquant.strategies.Strategy
+import java.time.Instant
 
 
 fun standard(strategy: Strategy, sp500Asset: Asset) {
@@ -24,9 +25,12 @@ fun standard(strategy: Strategy, sp500Asset: Asset) {
     val roboquant = Roboquant(
         strategy, metric1, metric2, metric3, metric4, metric5, metric6, metric7
     )
+    // end::standard[]
+}
 
-    // ... run code goes here ...
 
+fun memoryLogger(roboquant: Roboquant) {
+    // tag::memoryLogger[]
     // You can always find out which metrics are available after a run
     val logger = roboquant.logger
     println(logger.metricNames)
@@ -34,9 +38,8 @@ fun standard(strategy: Strategy, sp500Asset: Asset) {
     // And easily plot a metric in a notebook
     val equity = logger.getMetric("account.equity")
     MetricChart(equity)
-    // end::standard[]
+    // end::memoryLogger[]
 }
-
 
 // tag::simple[]
 class MyMetric : SimpleMetric() {
@@ -49,14 +52,20 @@ class MyMetric : SimpleMetric() {
 // end::simple[]
 
 
+
+
 fun exampleCustomLogger() {
+    class Database { fun store(key: String, value: Number, time: Instant) {} }
+
     // tag::customLogger[]
     class MyConsoleLogger : MetricsLogger {
 
+        private val database = Database()
+
         override fun log(results: MetricResults, info: RunInfo) {
-            println("$results @ $info")
+            for ((key, value) in results) database.store(key, value, info.time)
         }
 
     }
-// end::customLogger[]
+    // end::customLogger[]
 }

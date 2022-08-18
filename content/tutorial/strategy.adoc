@@ -1,4 +1,4 @@
-= Strategy
+= Strategy & Signals
 :source-highlighter: rouge
 :icons: font
 :sourcefile: ../../samples/strategy.kt
@@ -7,7 +7,7 @@
 == Introduction
 A `Strategy` is likely the place where you do most software development. It is responsible for generating signals based on the events it receives.
 
-Since a `Strategy` only has access to the `Event` of a `Feed` and not the `Account`, it has no knowledge of concepts like orders, open positions or buying power. As a consequence a `Strategy` is a generic component that can be easily shared or re-used if required.
+Since a `Strategy` only has access to an `Event` and not the `Account`, it has no knowledge of concepts like orders, open positions or buying power. As a consequence a `Strategy` is a generic component that can be easily shared or re-used if required.
 
 == Standard Strategies
 There are several commonly used strategies included with _roboquant_. This section highlight some of them, and using them is a great way to get started.
@@ -109,8 +109,7 @@ There is a 5-point scale used for the `Rating` of a `Signal`:
 * `UNDERPERFORM`: A recommendation that means a stock is expected to do slightly worse than the overall stock market return. Underperform can also be expressed as "moderate sell," "weak hold" and "underweight."
 * `OUTPERFORM`: Also known as "moderate buy," "accumulate" and "overweight." Outperform is an analyst recommendation meaning a stock is expected to do slightly better than the market return.
 
-NOTE: a hold rating is not the same as no signal. Only generate hold signals if you think the asset will perform market conform. If your strategy has no idea about the performance of an asset, don't generate a signal at all.
-
+NOTE: a `HOLD` rating is not the same as no signal. Only generate hold signals if you think the asset will perform market conform. If your strategy gives no clear indication about the future performance of an asset, don't generate a signal at all.
 
 == Simple Signals
 
@@ -127,4 +126,4 @@ Besides the mandatory Rating and Asset, a signal can optionally contain the foll
 include::{sourcefile}[tag=attrSignal]
 ----
 
-It is up to the xref:policy.adoc[policy] how to use these attributes when generating the orders.
+It is up to the xref:policy.adoc[policy] how/if to use these attributes when generating the orders. But for example the probability could be used to determine the sizing of the order, a high probability means a larger size.
