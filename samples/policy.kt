@@ -130,7 +130,7 @@ fun noStrategy(myAdvancedPolicy:Policy) {
     // end::advanced[]
 }
 
-fun orders(signals: List<Signal>) {
+fun signal2order(signals: List<Signal>) {
     // tag::orders[]
     val orders = mutableListOf<Order>()
     for (signal in signals) {

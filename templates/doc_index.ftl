@@ -1,5 +1,4 @@
- <h3 class="navbar-brand">Content</h3>
- <nav id="sidebar" class="navbar fixed-left sticky-top">
+<nav id="sidebar" class="navbar fixed-left sticky-top">
     <ul class="list-unstyled">
     <#list docs as doc>
 

@@ -16,7 +16,7 @@ There are several common metrics included with _roboquant_ that can be easily ad
 include::{sourcefile}[tag=standard]
 ----
 
-TIP: if metrics are very compute intensive, and you don't require them at each step, you can wrap them in a `MetricsScheduler` and configure when they should run.
+TIP: if a metric is very compute intensive, and you don't require it at each step, you can wrap it in a `MetricsScheduler` and configure when it should be invoked.
 
 == Custom Metrics
 You can develop your own metrics. The easiest way to do so is to extend the SimpleMetric class. All you have to do is implement that `calc` method and return `MetricResults`, which is just a `typealias` for `Map<String,Number>`
@@ -46,11 +46,11 @@ environment.
 include::{sourcefile}[tag=standard]
 ----
 
-- `SilentLogger`: this logger just silently ignores all metrics and is mostly useful for unit tests
+- `SilentLogger`: this logger just silently ignores all calculated metric values and is mostly useful for unit tests
 
-- `InfoLogger`: logs metrics using the built-in Logger.
+- `InfoLogger`: logs metrics using the built-in logger at INFO level.
 
-- `ConsoleLogger`: logs the metrics to the console using a simple "println" statement.
+- `ConsoleLogger`: logs the metrics to the console using a simple `println` statement.
 
 === Custom Loggers
 You can also implement your own metrics logger, for example if you want to store values into a database or have a custom file format that you want to use. The following example shows a minimal example:

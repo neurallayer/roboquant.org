@@ -22,9 +22,9 @@ An example on how to convert a list of signals into a list of (market) orders:
 include::{sourcefile}[tag=orders]
 ----
 
-NOTE: there is no explicit notion of BUY or SELL orders in _roboquant_. A BUY order is just any order with a positive size and a SELL order has a negative size. But other than that, they are equal and created the same way.
+NOTE: there is no explicit notion of BUY or SELL order in _roboquant_. A BUY order is just any order with a positive size and a SELL order has a negative size. But other than that, they are equal and created the same way.
 
-Most advanced order types are often constructed using multiple `SingleOrder` types. The following snippet shows how to instantiate a BracketOrder with three individual SingleOrders.
+Most advanced order types are often constructed using multiple `SingleOrder` types. The following snippet shows how to instantiate a BracketOrder using three individual SingleOrders.
 
 [source, kotlin,indent=0]
 ----
@@ -39,7 +39,7 @@ TIF sets an execution policy for an order under which conditions the order remai
 . Time based, defining how long the order stays valid. Two common ones are GTD (Good Till Day) and GTC (Good Till Cancelled)
 . Fill based, defining under which fill conditions the order stays valid. A common one if FOK (Fill Or Kill)
 
-The default TIF for orders in _roboquant_ used if none is explicitly specified, is GTC (Good Till Cancelled).
+The default TIF for orders in _roboquant_ used if none is explicitly specified, is GTC (Good Till Cancelled). All TIF policies are only becoming active once an `Order` has been `ACCEPTED` (so not anymore in its `INITIAL` state)
 
 == Custom Order Types
 Orders can be extended with your own order types if the ones that come out of the box are not sufficient. The steps required to make to use yor own order types are:

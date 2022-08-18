@@ -12,7 +12,7 @@ further be extended by providing custom models for trading, fee and account mode
 The instantiation of a `SimBroker` is surprisingly simple.
 
 
-[source, kotlin,indent=0]
+[source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=basic]
 ----
@@ -30,7 +30,7 @@ However, you can overwrite the default values. Common use cases are:
 include::{sourcefile}[tag=extra]
 ----
 
-The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit. Typically, the initial deposit is denoted in a single currency, like a *$50,000.00 USD* account. But this is not a hard requirement and in with the `SimBroker` you can use multi-currency initial deposits if you prefer. However, there is always only one `baseCurrency`.
+The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit. Typically, the initial deposit is denoted in a single currency, like a *$50,000.00 USD* account. But this is not a hard requirement and with the `SimBroker` you can use multi-currency initial deposits if you prefer. However, there is always only one `baseCurrency`.
 
 
 == Order Handling

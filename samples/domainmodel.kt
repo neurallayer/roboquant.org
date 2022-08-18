@@ -57,3 +57,20 @@ fun exchangeRates() {
     require(amountGBP1 != amountGBP2)
     // end::er[]
 }
+
+
+fun timeFrame() {
+    // tag::tf[]
+    // Parse a string
+    val tf1 = Timeframe.parse("2019-01-01", "2020-01-01")
+
+    // Add to years to the timeframe
+    val tf2 = tf1 + 2.years
+
+    // Split timeframe in 31 days periods
+    val tf3 = tf2.split(31.days) // result is List<Timeframe>
+
+    // Use a predefined timeframes
+    val tf4 = Timeframe.financialCrisis2008
+    // end::tf[]
+}

@@ -47,7 +47,7 @@ Receives the generated signals and creates the orders. If you need to create ord
 == Developing your strategy
 Developing a new strategy and validate it during a back-test is a straight forward process. The code snippet below shows the different steps that you have to take to develop and run your strategy.
 
-[source, kotlin, subs="attributes,verbatim"]
+[source, kotlin, subs="attributes,verbatim", indent=0]
 ----
 include::{sourcefile}[tag=overview]
 ----

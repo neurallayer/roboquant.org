@@ -1,11 +1,13 @@
 = Domain Model
 :source-highlighter: rouge
-:sourcefile: ../../samples/currencies.kt
+:sourcefile: ../../samples/domainmodel.kt
 :jbake-date: 2020-03-01
 :icons: font
 
 == Approach
-Besides components like `Strategy` and `Policy`, _roboquant_ also comes with a number of domain specific classes that make it easier to implement robust trading strategies.
+Besides core-components like `Strategy` and `Policy`, _roboquant_ also comes with a number of domain specific classes that make it easier to implement robust trading strategies. The two main focus areas are money related entities and time related entities.
+
+This approach makes it very easy to deal with these entities without much code. This is also where many of the Kotlin language features come in handy with support for operator overloading and extension functions.
 
 == Money
 In order to make it easier to develop solutions in a multi-currency setup, _roboquant_ introduces a number of money-related domain classes: <<Currency>>, <<Amount>>, <<Wallet>> and <<ExchangeRates>> that will help.
@@ -71,7 +73,7 @@ It is used throughout _roboquant_, but one particular use-case is that you can r
 
 [source,kotlin,indent=0]
 ----
-include::{sourcefile}[tag=amount]
+include::{sourcefile}[tag=tf]
 ----
 
 === ZonedPeriod

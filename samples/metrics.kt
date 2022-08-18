@@ -31,7 +31,7 @@ fun standard(strategy: Strategy, sp500Asset: Asset) {
     val logger = roboquant.logger
     println(logger.metricNames)
 
-    // And easily plot a metric
+    // And easily plot a metric in a notebook
     val equity = logger.getMetric("account.equity")
     MetricChart(equity)
     // end::standard[]
@@ -49,9 +49,9 @@ class MyMetric : SimpleMetric() {
 // end::simple[]
 
 
-fun test123() {
+fun exampleCustomLogger() {
     // tag::customLogger[]
-    class ConsoleLogger : MetricsLogger {
+    class MyConsoleLogger : MetricsLogger {
 
         override fun log(results: MetricResults, info: RunInfo) {
             println("$results @ $info")
