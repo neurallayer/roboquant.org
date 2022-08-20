@@ -9,6 +9,7 @@ So <em>roboquant</em> comes out-of-the-box with several integrations included:
     <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/interactive-brokers.jpg" alt="Interactive Brokers">
     <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/yahoo-finance.jpg" alt="Yahoo Finance">
     <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/alpha-vantage.png" alt="Alpha Vantage">
-    <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/oanda.jpeg" alt="Alpha Vantage">
+    <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/oanda.jpg" alt="Alpha Vantage">
+    <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/polygon.jpg" alt="Polygon.io">
 </div>
 </div>
