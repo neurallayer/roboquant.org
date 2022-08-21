@@ -86,16 +86,16 @@ mvn build
 
 The build and install is tested using JDK 17 runtime, however the generated libraries are targeted against JDK 11 in order to provide greater compatibility for projects that still use older versions of the JDK.
 
-TIP: If you plan to make many changes and updates to the source code, checkout the https://github.com/apache/maven-mvnd[Maven Daemon] project that provides much faster builds.
+TIP: If you plan to make regualr changes and updates to the source code, checkout the https://github.com/apache/maven-mvnd[Maven Daemon] project that provides faster builds. Additionally, you can set the Kotlin incremental compiler property to true (in the main `pom.xml`).
 
 == Interactive Brokers
-Unfortunately we are not allowed to redistribute the Interactive Brokers Java client, so you'll have to download the TwsApi.jar file yourself. You can download version `10.15` from here: https://interactivebrokers.github.io/# and within the downloaded archive file you'll find the required `TwsApi.jar`.
+Unfortunately we are not allowed to redistribute the Interactive Brokers Java client, so you'll have to download the TwsApi.jar file yourself. You can download version `10.17` from here: https://interactivebrokers.github.io and within the downloaded archive file you'll find the required `TwsApi.jar`.
 
-Then install the jar file in the local Maven repository on your machine using the following command:
+Then install the jar file in your local Maven repository on your machine using the following command:
 
 [source, shell]
 ----
-mvn install:install-file -Dfile=TwsApi.jar -DgroupId=com.interactivebrokers -DartifactId=tws-api -Dversion=10.15 -Dpackaging=jar
+mvn install:install-file -Dfile=TwsApi.jar -DgroupId=com.interactivebrokers -DartifactId=tws-api -Dversion=10.17 -Dpackaging=jar
 ----
 
-If this artefact cannot be found in your local Maven repository during a build, the module `roboquant-ibkr` will automatically be skipped. So if you don't require integration with Interactive Brokers for your trading, you can skip this step.
+If this artefact cannot be found in your local Maven repository during a build, the module `roboquant-ibkr` will automatically be skipped. So if you don't require integration with Interactive Brokers for your trading, you can skip this step all together.

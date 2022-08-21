@@ -5,7 +5,6 @@ import org.roboquant.metrics.AccountSummary
 import org.roboquant.strategies.Signal
 import org.roboquant.strategies.Strategy
 
-
 fun overview() {
 
     // tag::overview[]
@@ -19,7 +18,7 @@ fun overview() {
     val metric = AccountSummary() //<3>
     val roboquant = Roboquant(strategy, metric) //<4>
 
-    val feed = CSVFeed("./data/us") //<5>
+    val feed = CSVFeed("./data/stocks") //<5>
     roboquant.run(feed) //<6>
     // end::overview[]
 }

@@ -25,16 +25,13 @@ fun use2(feed: HistoricFeed, assets: List<Asset>) {
 }
 
 
-
 fun global() {
     // tag::global[]
-    Chart.maxSamples = 100_000
+    Chart.maxSamples = 100_000 // Max samples to use when drawing a chart
     Chart.theme = "auto" // auto, dark, light
+    Chart.debug = true // Generate console.log statements, default is false
     // end::global[]
 }
-
-
-
 
 
 fun priceBarChart(feed: HistoricFeed, roboquant: Roboquant) {
@@ -45,7 +42,6 @@ fun priceBarChart(feed: HistoricFeed, roboquant: Roboquant) {
     PriceBarChart(feed, feed.assets.first(), trades = trades)
     // end::priceBarChart[]
 }
-
 
 
 fun priceChart(feed: HistoricFeed, roboquant: Roboquant) {
