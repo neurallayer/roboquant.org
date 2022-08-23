@@ -48,7 +48,9 @@ include::{sourcefile}[tag=friendly1]
 ----
 
 === Interactive Development
-Roboquant can be run inside a Jupyter Notebook which provides an easy entry for people who might find a full-blown development environment too much hassle.A lot of effort went into designing an API that is easy to use from a Notebook.
+Roboquant can be run inside a Jupyter Notebook which makes it easy to explore and experiment different ideas. Any code you developed in the notebook, you can at a later stage be used in a standalone application if you want to move to live trading.
+
+A lot of effort went into designing an API that is easy to use from a Notebook and add features that make sense in the context of algo-trading:
 
 * [x] Many charts out of the box that provides insights into the feeds and the results of a run
 * [x] Graceful introduction of complexity.In other words: simple things should be simple, complex things should be possible

@@ -31,7 +31,6 @@ In order to use the 3rd party integration, you'll first have to import the packa
 import org.roboquant.oanda.*
 ----
 
-
 == Configuration
 When you want to integrate with a 3rd party, you most likely require credentials to gain access to their APIs. Often this is in the form of an API key and secret. You can of course embed these credentials directly in your source code, however _roboquant_ offers better and more secure alternatives.
 
@@ -51,7 +50,6 @@ The following provides an overview of the used properties in _roboquant_
 include::{dotenvfile}[]
 ----
 
-
 == Supported 3rd parties
 The following table shows which 3rd parties are supported out of the box and what functionality the integration offers:
 
@@ -69,7 +67,6 @@ The following table shows which 3rd parties are supported out of the box and wha
 |Crypto Exchanges|✓|✓|✓|
 |ECB||||✓
 |===
-
 
 NOTE: _roboquant_ is open source software that is developed independently of these 3rd party companies. There are no direct or indirect ties to any of these companies.
 

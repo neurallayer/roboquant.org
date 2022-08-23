@@ -4,12 +4,12 @@
 :sourcefile: ../../samples/metrics.kt
 :jbake-date: 2020-07-01
 
-Metrics allow you to monitor the progress of a `run` and get the necessary insights how a strategy is performing. Metrics are not limited to back testing and can also be used both during live testing and paper trading.
+Metrics allow you to monitor the progress of a `run` and get the necessary insights how a strategy is performing. Metrics are not limited to back testing and can also be used during live testing and paper trading and live trading.
 
-The configured metrics are invoked at each step in a run. A single metric can return multiple values, each value having it own a unique name. Metrics only calculate the values, the storing and/or logging of these values is done by a `MetricsLogger`.
+By default, the configured metrics are invoked at each step in a run. A single metric can return multiple values, each value having it own a unique name. Metrics only calculate the values, the storing and/or logging of these values is done by a `MetricsLogger`.
 
 == Standard Metrics
-There are several common metrics included with _roboquant_ that can be easily added to your `Roboquant` instance:
+There are several common metrics included with _roboquant_ that can be added to your `Roboquant` instance:
 
 [source,kotlin,indent=0]
 ----
@@ -31,7 +31,7 @@ include::{sourcefile}[tag=simple]
 == Metrics Loggers
 A metrics loggers receives the calculated metric values at each step and then stores and/or logs these values. They all implement the `MetricsLogger` interface.
 
-The following metric loggers come out of the box:
+The following metric loggers are available out of the box:
 
 - `MemoryLogger`: this is the default logger used if no other logger is configured. It stores all the recorded values in memory and allows them to be queried afterwards. It also comes with an optional progress-bar that shows how much time is remaining during
 a run.

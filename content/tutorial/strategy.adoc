@@ -13,7 +13,7 @@ Since a `Strategy` only has access to an `Event` and not the `Account`, it has n
 There are several commonly used strategies included with _roboquant_. This section highlight some of them, and using them is a great way to get started.
 
 === EMACrossover
-Uses two exponential moving averages and whenever they cross over, a BUY or SELL signal is generated
+This strategy uses two exponential moving averages and whenever they cross over, a BUY or SELL signal is generated
 
 [source, kotlin,indent=0]
 ----
@@ -96,19 +96,17 @@ See the xref:policy.adoc[policy documentation] for more details.
 
 
 == Signals
-A `Signal` is the outcome of a strategy and is modelled closely after the ratings given by ratings agencies. The two mandatory parts of a `Signal` are:
+A `Signal` is the outcome of a strategy and is modelled closely after the ratings given by ratings agencies. The two mandatory attributes of a `Signal` are:
 
-1. The asset that the signal applies for, like a particular stock
-2. A rating for that same asset
-
-There is a 5-point scale used for the `Rating` of a `Signal`:
+1. The asset for which the signal applies, like a particular stock
+2. A rating for that same asset. There is a 5-point scale used for the `Rating` of a `Signal`:
 
 * `BUY`: Also known as strong buy and "on the recommended list". Buy is a recommendation to purchase a specific security.
 * `SELL`: Also known as strong sell, it's a recommendation to sell a security or to liquidate an asset.
 * `HOLD`: In general terms, a company with a hold recommendation is expected to perform at the same pace as comparable companies or in-line with the market.
 * `UNDERPERFORM`: A recommendation that means a stock is expected to do slightly worse than the overall stock market return. Underperform can also be expressed as "moderate sell," "weak hold" and "underweight."
 * `OUTPERFORM`: Also known as "moderate buy," "accumulate" and "overweight." Outperform is an analyst recommendation meaning a stock is expected to do slightly better than the market return.
-
++
 NOTE: a `HOLD` rating is not the same as no signal. Only generate hold signals if you think the asset will perform market conform. If your strategy gives no clear indication about the future performance of an asset, don't generate a signal at all.
 
 == Simple Signals
@@ -119,7 +117,7 @@ include::{sourcefile}[tag=simpleSignal]
 ----
 
 == Advanced Signals
-Besides the mandatory Rating and Asset, a signal can optionally contain the following attributes (with their default values):
+Besides the mandatory Rating and Asset attributes, a signal can optionally contain the following attributes (with their default values):
 
 [source, kotlin,indent=0]
 ----

@@ -4,9 +4,9 @@
 :jbake-date: 2020-09-01
 
 == What is a feed
-A feed is responsible for delivering the data that is required to test and run strategies. There are no restrictions on the type of data that a Feed can emit. It can be a simple as a stock prices or as complex as a satellite images.
+A feed is responsible for delivering the data that is needed to test and run strategies. There are no restrictions on the type of data that a `Feed` can emit. It can be a simple as a stock prices or as complex as a satellite images. A Feed is used to deliver historic and live data.
 
-A Feed is used to deliver historic and live data. A feed wraps its information in an `Event` and put that `Event` on an `EventChannel`. This is all done asynchronously from rest of the trading logic. And although an `EventChannel` is used to deliver the events, this channel is normally only directly accessed by the `Roboquant` instance. A strategy will be passed just the plain `Event` object.
+A feed wraps its information in an `Event` and puts that `Event` on an `EventChannel`. This is all done asynchronously from rest of the trading logic. And although an `EventChannel` is used to deliver the events, this channel is normally only directly accessed by internal logic. A xref:strategy.adoc[strategy] will be passed just the plain `Event` object.
 
 To read more why _roboquant_ has selected this event-driven approach, read this xref:../background/features.adoc[introduction on event-driven software].
 

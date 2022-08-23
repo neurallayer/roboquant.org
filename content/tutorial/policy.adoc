@@ -5,7 +5,7 @@
 :jbake-date: 2020-05-01
 
 == What is a policy
-A `Policy` is responsible for creating the orders that will be placed at the broker. The most common use-case is that a `Policy` does this based on the signals it receives from a `Strategy`, but there are other use-cases.
+The `Policy` component is responsible for creating the orders that will be placed at the broker. The most common use-case is that a `Policy` does this based on the signals it receives from a `Strategy` (but there are other use-cases).
 
 A good `Policy` implementation is key in making your solution as robust as possible. Important things to consider when implementing a policy:
 
@@ -19,7 +19,7 @@ A good `Policy` implementation is key in making your solution as robust as possi
 * How to ensure there is still enough buying power left to avoid margin calls
 
 ****
-CAUTION: If there is one thing that prevents many from going live with a strategy, it is that there is not a robust policy in place that handles all the possible edge-cases. The logic required in a robust policy is anything but trivial and should incorporate an extensive testing period.
+CAUTION: If there is one thing that prevents algo-traders from going live with a strategy, it is that there is not a robust policy in place that handles all the possible edge-cases. The logic required in a robust policy is anything but trivial and should incorporate an extensive testing period.
 ****
 
 == Out-of-the-box policies
@@ -27,7 +27,7 @@ CAUTION: If there is one thing that prevents many from going live with a strateg
 === DefaultPolicy
 As the name already suggests, this is the default policy that will be used if no other policy is specified when create an instance of the `Roboquant` class. It provides several configuration properties that influence its behavior.
 
-You can also easily extend the DefaultPolicy to create your own order types.
+You can also easily extend the DefaultPolicy to and overwrite some methods for example to create your own order types.
 
 [source, kotlin]
 ----
