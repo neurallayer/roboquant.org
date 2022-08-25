@@ -5,7 +5,7 @@
 :jbake-date: 2020-05-01
 
 == What is a policy
-The `Policy` component is responsible for creating the orders that will be placed at the broker. The most common use-case is that a `Policy` does this based on the signals it receives from a `Strategy` (but there are other use-cases).
+The `Policy` is responsible for creating the orders that will be placed at the broker. The most common use-case is that a `Policy` does this based on the signals it receives from a `Strategy` (but there are other use-cases).
 
 A good `Policy` implementation is key in making your solution as robust as possible. Important things to consider when implementing a policy:
 

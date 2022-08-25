@@ -43,11 +43,11 @@ fun memoryLogger(roboquant: Roboquant) {
 
 fun staticExample() {
     // tag::simple[]
-    class MyMetric : SimpleMetric() {
+    class MyMetric : Metric {
 
         private val asset = Asset("AAPL")
 
-        override fun calc(account: Account, event: Event): MetricResults {
+        override fun calculate(account: Account, event: Event): MetricResults {
             val metric1 = account.buyingPower.value
             val metric2 = event.getPrice(asset) ?: Double.NaN
             return mapOf("buyingpower" to metric1, "appleprice" to metric2)

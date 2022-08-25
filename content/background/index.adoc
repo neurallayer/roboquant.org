@@ -68,7 +68,6 @@ With data sets growing, it is important that a strategy can still be quickly eva
 == Reliability
 Even more important than performance, is reliability when it comes to trading software.
 
-* All components can log information that is then available for audit and tracing
 * Type and null checks where possible to leverage the compiler to identify possible mistakes
 * Extensive error logging to alert possible issues, including data quality
 * Immutable data classes (when appropriate)

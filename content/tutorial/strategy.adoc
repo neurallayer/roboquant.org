@@ -82,7 +82,7 @@ Now let's see how a trend-following `Strategy` would look like that would:
 include::{sourcefile}[tag=naive]
 ----
 
-As you can see a Strategy can maintain state, the `previousPrices` in the above example. You have to ensure you reset the state when a `Component` lifecycle event is called, like the `reset` method in the above example.
+As you can see a Strategy can maintain state, the `previousPrices` in the above example. You have to ensure you reset the state when a `Lifecycle` event is called, like the `reset` method in the above example.
 
 
 [#_policy_based_strategies]

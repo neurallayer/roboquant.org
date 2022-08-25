@@ -9,7 +9,7 @@ Metrics allow you to monitor the progress of a `run` and get the necessary insig
 By default, the configured metrics are invoked at each step in a run. A single metric can return multiple values, each value having it own a unique name. Metrics only calculate the values, the storing and/or logging of these values is done by a `MetricsLogger`.
 
 == Standard Metrics
-There are several common metrics included with _roboquant_ that can be added to your `Roboquant` instance:
+There are several commonly used metrics included with _roboquant_ that can be added to your `Roboquant` instance:
 
 [source,kotlin,indent=0]
 ----
@@ -19,9 +19,9 @@ include::{sourcefile}[tag=standard]
 TIP: if a metric is very compute intensive, and you don't require it at each step, you can wrap it in a `MetricsScheduler` and configure when it should be invoked.
 
 == Custom Metrics
-You can develop your own metrics. The easiest way to do so is to extend the SimpleMetric class. All you have to do is implement that `calc` method and return `MetricResults`, which is a `typealias` for `Map<String,Number>`
+You can also develop your own metrics. All you have to do is implement the `calculate` method from the `Metric` interface and return `MetricResults`, which is a `typealias` for `Map<String,Number>`. If you don't have any results, return an `emptyMap()`
 
-In the `calc` function you have access to both the `Account` object and the `Event`. Metrics also implement the `Component` interface, so can keep state in a metric if required and clean it when a Component lifecycle method is invoked.
+In the `calculate` function you have access to both the `Account` object and the `Event`. Metrics also implement the `Lifecycle` interface, so you can keep state in a metric if required and clean it when a lifecycle method is invoked.
 
 [source,kotlin,indent=0]
 ----
@@ -29,7 +29,7 @@ include::{sourcefile}[tag=simple]
 ----
 
 == Metrics Loggers
-A metrics loggers receives the calculated metric values at each step and then stores and/or logs these values. They all implement the `MetricsLogger` interface.
+A metrics loggers receives the metric values at each step and then stores and/or logs these values. They all implement the `MetricsLogger` interface.
 
 The following metric loggers are available out of the box:
 
