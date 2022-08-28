@@ -30,6 +30,7 @@ fun simpleSignal() {
 }
 
 
+@Suppress("RedundantExplicitType")
 fun allSignalAttributes(asset: Asset, rating: Rating) {
     // tag::attrSignal[]
     val type: SignalType = SignalType.BOTH
