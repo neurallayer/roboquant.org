@@ -90,7 +90,7 @@ asset.exchange = AEB
 asset.currency = EUR
 
 file.extension = csv
-file.skip = ABN.csv ASML.csv
+file.skip = ABC.csv XYZ.csv
 ----
 
 === Memory Constraints
@@ -140,7 +140,7 @@ TIP: If you work a lot with directories full of CSV files, you can convert them 
 
 The nice thing is that the recording also works with live feeds. So you can record a live feed for a specified timeframe and then use it from then on in your own back test.
 
-The following example shows how you can record 4 hours worth of Bitcoin-USDT price-bars from the Binance exchange.
+The following example shows how you can record 4 hours worth of Bitcoin price-bars from the Binance exchange.
 
 [source, kotlin, indent=0]
 ----
