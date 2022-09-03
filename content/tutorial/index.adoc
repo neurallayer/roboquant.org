@@ -13,39 +13,46 @@ Welcome to the _roboquant_ tutorial. Just like the _roboquant_ software, the doc
 * All the used code snippets are compilable and runnable code. However, the required import statements are not shown to improve readability.
 
 == Main components
-Perhaps the most important part of using _roboquant_ is to understand the sequence of steps and the responsibility each component has in this flow. The following diagram provides an overview of the main components and the type of data they consume and produce.
+Perhaps the most important part of using _roboquant_ is to understand the sequence of steps and the responsibility each component has in this flow. The following diagram provides a logical overview of the main components and the type of data they consume and produce.
 
-image::main_flow.png[]
+image::main_flow_simplified.png[]
 
 The role and responsibilities of each of the components are as follows:
 
 * `Roboquant`
 +
-The engine of the platform that performs the actual run and orchestrate the interaction between the components. The engine supports all xref:../background/four_stages.adoc[4 stages] of developing a trading strategy with minimal changes to your code. This is also the only component that is a concrete Class and not an Interface and not designed to be swapped out for a custom implementation.
+The engine of the platform that performs the actual run and orchestrate the interaction between the components. The engine supports all xref:../background/four_stages.adoc[4 stages] of developing a trading strategy with minimal changes to your code. This is also the only component that is a concrete `class` and not an `interface` and not designed to be swapped out for a custom implementation.
 
 * `Feed`
 +
-Provides the data needed for testing and trading in the form of events. A feed can represent both historic and live data and is not restricted to pricing information only. A feed delivers its data in the form of events.
-
-* `Broker`
-+
-Receives the created orders by the policy and process them. Any open orders will be processed until they are closed. After this step, it will return an updated account that reflects the latest state.
-
-* `Metric`
-+
-Receives the latest state of the account and calculates various metrics that are of interest to determine the progress and results of the run so far.
-
-* `MetricsLogger`
-+
-Stores and/or logs the metric values, so you can inspect them at a later time.
+Provides the data needed for testing and trading in the form of events. A feed can represent both historic and live data and is not restricted to pricing information only. A feed delivers its data in the form of events on a channel.
 
 * `Strategy`
 +
-Receives the event and generates zero or more signals. A signal is a rating for a certain asset, like a BUY rating for stock XYZ. So the strategy doesn't create orders, that is the responsibility of the next component, the policy.
+Receives the event and generates zero or more signals. A `Signal` is a `Rating` for a certain asset, like a BUY rating for stock XYZ. So the strategy doesn't create orders, that is the responsibility of the next component, the policy.
 
 * `Policy`
 +
-Receives the generated signals and creates the orders. If you need to create orders that are not based on signals, this is also the place to do so, for example re-balance your portfolio at regular intervals. Check the xref:../background/features.adoc#_order_management[features] why it is smart to separate this from your strategy logic.
+Receives the generated signals and creates the actual orders. If you need to create orders that are not based on signals, this is also the place to do so, for example re-balance your portfolio at regular intervals. Check the xref:../background/features.adoc#_order_management[features] why it is smart to separate this from your strategy logic.
+
+* `Broker`
++
+Receives the newly created orders by the policy and process them. Any open orders received in previous steps will also be processed until they are closed. After the processing of hte orders, it will return an updated account that reflects the latest state.
+
+* `Metric`
++
+Receives the latest state of the account and calculates various metrics that are of interest to determine the progress and results of the run so far. These results are then handed over to the `MetricsLogger` that will store and/or log the metric values, so you can inspect them at a later time.
+
+
+== Implementation details
+The actual implementation is a bot more elaborate. Especially the order of the components in the actual implementation might not be what you expected.
+
+But there it a good reason it is done this way, it is now almost impossible to "look into the future" with your strategy since the broker will always first observe a new event. So the signals and orders you create based on event at time~t~, will only be processed by the broker based on event at time~t+1~.
+
+The following diagram shows the actual interactions with their real method names and parameters between the components.
+
+image::main_flow.png[]
+
 
 == Developing your strategy
 Developing a new strategy and validate it during a back-test is a straight forward process. The code snippet below shows the different steps that you have to take to develop and run your strategy.

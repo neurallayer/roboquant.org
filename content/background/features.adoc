@@ -68,9 +68,9 @@ Once you code base grows too large for a notebook, the same code can be used in 
 
 [#_order_management]
 === Order Management
-One of the hardest (and most overlooked) aspect of algorithmic trading is order management, especially when your goal is a robust live trading environment. There are so many things that potentially can go wrong and will cost you real money. It is a real endeavor to translate signals into actual orders and manage these outstanding orders.
+One of the hardest (and most overlooked) aspect of algorithmic trading is order management, especially when your goal is to come to a robust live trading environment. There are many things that potentially can go wrong and will cost you real money. It is a real endeavor to translate signals into actual orders and manage these outstanding orders.
 
-Because of this, _roboquant_ separates the generation of signals (Strategy) from the actual orders (Policy). This allows algo-traders to focus on the generation of signals and pick the order management that fits the risk profile and trading style. And if full control over portfolio- and order-management is required, it is still available.
+Because of this, _roboquant_ separates the generation of signals (Strategy) from the actual orders (Policy). This allows algo-traders to focus on the generation of signals and pick the order management that fits their risk profile and trading style. And if full control over portfolio- and order-management is required, it is still available.
 
 === Batteries included
 * [x] Over 150 technical indicators that are easy to use in your own strategies

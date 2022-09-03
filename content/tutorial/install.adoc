@@ -30,12 +30,10 @@ By default, this will start a new Jupyter-Lab environment and disposes of it as 
 
 If you don't have Docker yet installed on your computer, check out https://www.docker.com/get-started[Docker get started] and download Docker for Desktop from there. If you are running Linux, then your distribution likely already has Docker included.
 
-If you don't want to install anything locally, you can use a publicly hosted notebook environment:
 
-* Launch the notebooks right now on MyBinder.org by clicking image:https://mybinder.org/badge_logo.svg[Binder,link=https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/tutorials,window=_blank]
-* Go to https://datalore.jetbrains.com/[JetBrains Datalore]. It has excellent support for Kotlin notebooks and has a free tier available if you just want to try _roboquant_ out.
+TIP: If you don't want to install anything locally, you can use a publicly hosted notebook environment. Launch the notebooks right now on MyBinder.org by clicking image:https://mybinder.org/badge_logo.svg[Binder,link=https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/tutorials,window=_blank]
 
-== Install the _roboquant_ library
+== Install the _roboquant_ libraries
 Just add `roboquant` as a dependency to your build tool, like Maven or Gradle. Regular versions of the Roboquant modules are published to Maven Central and snapshots are published to OSS Sonatype (https://s01.oss.sonatype.org/content/repositories/snapshots).
 
 The latest available versions:
