@@ -23,6 +23,7 @@ fun amount() {
     val amount4 = 50.USD * 2 // simple calculation
     require(amount4 == amount3)
 
+    // display using the common number of decimals for that currency
     println(amount1.formatValue())
     // end::amount[]
 }

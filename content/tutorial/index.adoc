@@ -45,16 +45,16 @@ Receives the latest state of the account and calculates various metrics that are
 
 
 == Implementation details
-The actual implementation is a bot more elaborate. Especially the order of the components in the actual implementation might not be what you expected.
+The actual implementation is a bit more elaborate. Especially the order of the components in the actual implementation might not be what you expected.
 
-But there it a good reason it is done this way, it is now almost impossible to "look into the future" with your strategy since the broker will always first observe a new event. So the signals and orders you create based on event at time~t~, will only be processed by the broker based on event at time~t+1~.
+But there it a good reason it is done this way, it is now almost impossible to "look into the future" with your strategy since the broker will always first observe a new event. So the signals and orders you create based on event at time~t~, will only be processed by the broker based on an event at time~t+1~.
 
 The following diagram shows the actual interactions with their real method names and parameters between the components.
 
 image::main_flow.png[]
 
 
-== Developing your strategy
+== Developing your oqn strategy
 Developing a new strategy and validate it during a back-test is a straight forward process. The code snippet below shows the different steps that you have to take to develop and run your strategy.
 
 [source, kotlin, subs="attributes,verbatim", indent=0]

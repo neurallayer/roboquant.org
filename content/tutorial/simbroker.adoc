@@ -5,12 +5,10 @@
 
 You use the `SimBroker` class (short for Simulated Broker) both for the back testing and live testing stages. See also the xref:../background/four_stages.adoc[four stages] for more background about the different stages when developing trading strategies.
 
-SimBroker can simulate a wide range of brokers and the exchanges. Besides several configuration parameters that are available, the behavior can
-further be extended by providing custom models for trading, fee and account modelling.
+SimBroker can simulate a wide range of brokers and the exchanges. Besides several configuration parameters that are available, the behavior can be further extended by providing custom models for trading, fee and account modelling.
 
 == Usage
 The instantiation of a `SimBroker` is surprisingly simple.
-
 
 [source,kotlin,indent=0]
 ----
@@ -24,6 +22,9 @@ However, you can overwrite the default values. Common use cases are:
 * you don't trade in USD but in some other currency
 * you want to simulate a `MarginAccount` and not the default `CashAccount`
 * you want to apply custom fees and pricing logic
+
+
+So a more custom version of the SimBroker can be instantiated using:
 
 [source, kotlin,indent=0]
 ----
@@ -55,7 +56,7 @@ The `Account` object contains the following key properties:
 
 .Equity
 ****
-Equity is key attribute to monitor if you want to see how your account is performing. The following two equations hold true when using SimBroker when running a back test:
+Equity is key metric to monitor if you want to see how your account is performing. The following two equations hold true when using SimBroker when running a back test:
 
 [source, kotlin, indent=0]
 ----

@@ -36,10 +36,10 @@ fun usageExtra() {
 fun equity(account: Account, initialDeposit: Wallet) {
     // tag::equity[]
 
-    // Current state
+    // Current value of cash + portfolio
     val equity1 = account.cash + account.portfolio.marketValue
 
-    // Sum of all changes
+    // Sum of initial deposit + all the changes
     val equity2 = initialDeposit + account.trades.realizedPNL + account.positions.unrealizedPNL
 
     assert(equity1 == equity2)

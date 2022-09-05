@@ -33,6 +33,27 @@ If you don't have Docker yet installed on your computer, check out https://www.d
 
 TIP: If you don't want to install anything locally, you can use a publicly hosted notebook environment. Launch the notebooks right now on MyBinder.org by clicking image:https://mybinder.org/badge_logo.svg[Binder,link=https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/tutorials,window=_blank]
 
+=== AWS SageMaker
+The AWS SageMaker notebook instances don't have Kotlin support enabled by default. But there is an easy way to add it the first time an instance is created. You can add a `lifecycle` script that will be run when the environment is created and in our case add the Kotlin kernel.
+
+When creating a new notebook instance from the SageMaker menu, open the `additional configuration` option and select `create new lifecycle configuration` from the lifecycle configuration dropdown. Then add the following snippet to the `Create notebook` tab.
+
+[source,shell]
+----
+#!/bin/bash
+set -eux
+
+# This script installs a JDK and Kotlin kernel.
+sudo -u ec2-user -i <<'EOF'
+source /home/ec2-user/anaconda3/bin/activate JupyterSystemEnv
+conda install -y openjdk
+conda install -y -c jetbrains kotlin-jupyter-kernel
+source /home/ec2-user/anaconda3/bin/deactivate
+EOF
+----
+
+This has been tested with the platform identifier set to "Amazon Linux 2/Jupyter Lab 1" and "Give users root access to the notebook" enabled (default).
+
 == Install the _roboquant_ libraries
 Just add `roboquant` as a dependency to your build tool, like Maven or Gradle. Regular versions of the Roboquant modules are published to Maven Central and snapshots are published to OSS Sonatype (https://s01.oss.sonatype.org/content/repositories/snapshots).
 

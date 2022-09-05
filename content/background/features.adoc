@@ -114,7 +114,7 @@ Of course, we are not completely objective, so we recommend trying them out for 
 |Crypto Exchanges| &check;| &check;| | &check;
 |Advanced Order Types| &check;| &check;| | 
 |Multi Region| &check;| | |&check;
-|Performance| high| low| mid| high
+|Performance| high| low| low| mid
 |Code base| small| midsize| large| very large
 |Jupyter Notebook| &check;| &check;| &check;|
 |Completely Free| &check;| &check;| |
