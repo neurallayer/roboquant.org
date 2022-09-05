@@ -23,11 +23,11 @@ fun usageBasic() {
 fun usageExtra() {
     // tag::extra[]
     val broker = SimBroker(
-        initialDeposit = Wallet(10_000.EUR),
-        baseCurrency = Currency.EUR,
-        feeModel = PercentageFeeModel(),
-        accountModel = MarginAccount(),
-        pricingEngine = SpreadPricingEngine()
+        initialDeposit = Wallet(10_000.EUR), // How much to initially deposit into account
+        baseCurrency = Currency.EUR, // Currency to use for reporting
+        feeModel = PercentageFeeModel(), // Logic to use to calculate fees, commissions, etc
+        accountModel = MarginAccount(), // Cash or Margin account
+        pricingEngine = SpreadPricingEngine() // Logic to use to calculate the price for a trade
     )
     // end::extra[]
 }
