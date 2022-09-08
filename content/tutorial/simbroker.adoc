@@ -74,7 +74,18 @@ Always use the `buyingPower` property if you want to know how much money is rema
 == Custom Models
 Custom models are a way to further customize the behavior of `SimBroker`. The following two types of models can be implemented if the default ones that comes with _roboquant_ are not sufficient.
 
-- Cost models: the transaction related cost like slippage and fees/commissions. It is important to notice that if you don't take these type of cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading.
+- Cost models: the transaction related cost like slippage and fees/commissions. It is important to notice that if you don't take these type of cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading. Cost to take into consideration:
+
+    . Transaction & commission fees
+    . Margin interest rates
+    . Spread (difference between buy and sell price)
+    . Slippage (large orders will require multiple trades against different prices)
+    . Currency exchange rates
+    . Storage & custodial fees
+    . Borrowing cost when shorting
+    . Interest rates for cash balances
+    . Option exercise fees
+
 
 - Buying power models: the different types of funding of an account, like a Cash or Margin account.
 

@@ -1,0 +1,60 @@
+= Choosing a broker
+:jbake-type: doc
+:icons: font
+:source-highlighter: rouge
+:jbake-date: 2020-01-01
+
+== Criteria
+Selecting a broker is an important decision when starting to develop algo-trading software. The following criteria can help to make the right decision:
+
+. Reliable.
++
+Select a broker that have a proven track record and is known to be reliable company that has a low counterparty risk. This is really a hygiene factor but should not be overlooked. This also implies:
++
+* It easy to get your money in and out. There are still "brokers" (read scams) that will happily take your money but make it almost impossible to get it out.
+* The broker is transparent how trades are executed, for example do they sell order flows.
+* They tell you how they earn their money. Many brokers advertise "no transaction fees" on their homepage but only show many additional costs somewhere hidden on their website.
++
+Brokers that are offering trading in classic asset classes like stocks, often are more regulated. And although this is no
+guarantee, there are fewer scams than in for example the crypto world which is less regulated.
+
+. High Available
++
+You need stable IT systems at your broker, even when markets are very volatile. Nothing is more damaging than not being able to close positions when you are loosing money.
+
+. Stable APIs
++
+Stable and well-designed APIs that allow you to trade how you want and offer access to the same functionality as you have via a UI.
+
+. Access to markets
++
+Have access to asset classes and markets that you want to trade in. And in order to be able to diversify later on, it is a benefit to have access to more markets than originally planned.
+
+. Paper trading functionality
++
+Before going live, it is good practice to first test your software with a paper-trading or demo account of the same broker. And the closer the paper trading is to live trading, the better you'll be prepared. See also the xref:four_stages.adoc[4 stages] of developing and testing your strategy.
+
+. Rich set of order types
++
+This makes it easier to create robust trading software since the order type takes care of some automatic behavior like take profit or stop loss. Some brokers additionally provide the user with control over the order routing, making it possible to further optimize order management.
+
+
+
+TIP: Check online communities like Reddit for experience of other traders with a particular broker or exchange. Or post your question on the _roboquant_ discord channel. And remember, “if it sounds too good to be true, it probably is”.
+
+== Overview
+The following table provides an overview of some of the more well known brokers and exchanges that provide APIs. It is provided as a reference and doesn't imply a recommendation for any of the mentioned companies. Do your own homework before selecting a broker that serves your needs best.
+
+[frame=ends]
+[.table]
+[cols="<,^,^,^,^,<"]
+|===
+|Broker |Supported footnote:[out of the box support by _roboquant_] |Asset classes | Availability| Startfootnote:[start date as a broker] | Remarks
+
+|IBKR|&check;| stocks, options, bonds, futures, forex, crypto, funds| Worldwide| 1993 |Access to many asset classes and countries
+|Alpaca|&check;| stocks, options, crypto| Worldwide| 2018| API first broker
+|Tradier|| stocks, options, crypto| Worldwide| 2013|
+|OANDA| &check;| forex, commodity, crypto| Worldwide| 1999
+|Binance| &check;| crypto| Worldwide| 2017| Largest crypto exchange, but countries start to ban them
+|===
+
