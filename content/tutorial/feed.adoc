@@ -11,10 +11,10 @@ A feed wraps its information in an `Event` and puts that `Event` on an `EventCha
 To read more why _roboquant_ has selected this event-driven approach, read this xref:../background/features.adoc[introduction on event-driven software].
 
 == Event
-An `Event` instance contains all the data that happens at a certain point in time. It contains the following two attributes
+An `Event` instance contains all the data that happens at a certain point in <<Time>>. It contains the following two attributes
 
 . The `time` attribute when the information within the event became available.
-. The list of all the `Action` instances at that time. This can be a mixed list of `Action` types. A single `Event` can contain prices, satellite images and social media news at the same time.
+. The list of all the <<Action>> instances at that time. This can be a mixed list of classes that implement the `Action` interface. A single `Event` can contain prices, satellite images and social media news at the same time.
 
 Events are always expected to be delivered in chronological order.
 
@@ -24,7 +24,7 @@ The time in an event is of the type Instant. It is very important that the time 
 For example when you want to use unemployment numbers as part of your feed, you should use the time when they are published, and you have access to them, not the last day of the period they cover. Otherwise, your strategy is looking into the future during back testing and can make decisions based on information it will never have in live trading.
 
 === Action
-Action is an abstraction for any type of information that can be made available in an event. An action can range from price actions, like price-bars and order-book snapshots, to social media content or images.
+Action is an abstraction for any type of information that can be made available in an <<Event>>. An action can range from price actions, like price-bars and order-book snapshots, to social media content or images.
 
 There is no commonality between actions, and you can add any type of actions you like to the platform. The only requirements is that they implement the empty interface `Action`. It is up to the strategy to filter for the action types it is interested in. For example if your strategy would require `PriceBar` (candlestick) data, you could use the following pattern to filter this type:
 
@@ -33,12 +33,13 @@ There is no commonality between actions, and you can add any type of actions you
 include::{sourcefile}[tag=event]
 ----
 
-There are also a few helper methods in the `Event` class to access prices, since these are of interest of many strategies:
+There are also a few helper methods in the `Event` class to make access to prices more convenient, since these are of interest of many strategies:
 
 [source, kotlin, indent=0]
 ----
 include::{sourcefile}[tag=priceaction]
 ----
+
 
 == Included Feeds
 Roboquant includes several `Feed` implementations out of the box:

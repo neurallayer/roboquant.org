@@ -9,13 +9,13 @@ import org.roboquant.brokers.sim.TradeOrderHandler
 import org.roboquant.common.Asset
 import org.roboquant.common.Size
 import org.roboquant.feeds.Event
-import org.roboquant.feeds.PriceBar
+import org.roboquant.metrics.MetricResults
 import org.roboquant.orders.*
 import org.roboquant.policies.DefaultPolicy
 import org.roboquant.policies.Policy
 import org.roboquant.strategies.NoSignalStrategy
 import org.roboquant.strategies.Signal
-import org.roboquant.strategies.utils.ATR
+import org.roboquant.ta.TaLibMetric
 import java.time.Instant
 
 // tag::basic[]
@@ -54,8 +54,8 @@ fun naivePolicy1() {
         override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
             val orders = mutableListOf<Order>()
             for (signal in signals) {
-                val qty = if (signal.rating.isPositive) 100 else -100
-                val order = MarketOrder(signal.asset, qty)
+                val size = if (signal.rating.isPositive) 100 else -100
+                val order = MarketOrder(signal.asset, size)
                 orders.add(order)
             }
             return orders
@@ -70,8 +70,8 @@ fun naivePolicy2() {
 
         override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
             return signals.map {
-                val qty = if (it.rating.isPositive) 100 else -100
-                MarketOrder(it.asset, qty)
+                val size = if (it.rating.isPositive) 100 else -100
+                MarketOrder(it.asset, size)
             }
         }
     }
@@ -80,39 +80,35 @@ fun naivePolicy2() {
 
 fun customPolicy() {
     // tag::custom3[]
-    class MyPolicy(
-        private val atrPercentage: Double = 0.01,
-        private val atrPeriod: Int = 5
-    ) : DefaultPolicy() {
+    /**
+     * Custom Policy that extends the DefaultPolicy and captures the ATR (Average True Range) using the TaLibMetric. It
+     * then uses the ATR to set the limit amount of a LimitOrder.
+     */
+    class SmartLimitPolicy(private val atrPercentage: Double = 0.02, private val atrPeriod: Int) : DefaultPolicy() {
 
-        // map that contains the ATR per asset
-        private val atrs = mutableMapOf<Asset, ATR>()
-
-        /**
-         * Update the ATR for all the assets in the event
-         */
-        private fun updateAtrs(event: Event) {
-            event.actions.filterIsInstance<PriceBar>().forEach {
-                val atr = atrs.getOrPut(it.asset) { ATR(atrPeriod) }
-                atr.add(it)
-            }
-        }
+        // use TaLibMetric to calculate the ATR values
+        private val atr = TaLibMetric("atr", atrPeriod + 1) { atr(it, atrPeriod) }
+        private var atrMetrics: MetricResults = emptyMap()
 
         override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
-            updateAtrs(event)
+            // Update the metrics and store the results, so we have them available when the
+            // createOrder is invoked.
+            atrMetrics = atr.calculate(account, event)
+
+            // Call the regular DefaultPolicy processing
             return super.act(signals, account, event)
         }
 
         /**
-         * Create limit BUY and SELL orders with the limit based on the ATR of the asset
+         * Override the default behavior of creating a simple MarkerOrder. Create limit BUY and SELL orders with the
+         * actual limit based on the ATR of the underlying asset.
          */
         override fun createOrder(signal: Signal, size: Size, price: Double): Order? {
-            val atr = atrs[signal.asset]
-
-            // Only return an order if we know the ATR
-            return if (atr != null && atr.isReady()) {
+            val metricName = "atr.${signal.asset.symbol.lowercase()}"
+            val value = atrMetrics[metricName]
+            return if (value != null) {
                 val direction = if (size > 0) 1 else -1
-                val limit = price - direction * atr.calc() * atrPercentage
+                val limit = price - direction * value * atrPercentage
                 LimitOrder(signal.asset, size, limit)
             } else {
                 null
@@ -120,10 +116,9 @@ fun customPolicy() {
         }
 
         override fun reset() {
-            atrs.clear()
+            atr.reset()
             super.reset()
         }
-
     }
     // end::custom3[]
 }
@@ -164,10 +159,10 @@ fun customOrder() {
     // tag::customOrder[]
 
     // Simple custom order type
-    class MyOrder(asset: Asset, val quantity: Size, val customProperty: Int, id:Int = nextId()) : Order(asset, id)
+    class MyOrder(asset: Asset, val size: Size, val customProperty: Int, id:Int = nextId()) : Order(asset, id)
 
     // Define a handler for your custom order type.
-    // This is required if you want your order to be supported by the SimBroker
+    // This is only required if you want your order to be supported by the SimBroker
     class MyOrderHandler(val order: MyOrder) : TradeOrderHandler {
 
         override var state = OrderState(order)
@@ -181,13 +176,13 @@ fun customOrder() {
             // ....
 
             // Calculate the price to use
-            val price = pricing.marketPrice(order.quantity)
+            val price = pricing.marketPrice(order.size)
 
             // Set the state to be COMPLETED. As long as the state is not in a Closed state, this handler stays active.
             state = OrderState(order, OrderStatus.COMPLETED, time, time)
 
             // Return the executions
-            return listOf(Execution(order, order.quantity, price))
+            return listOf(Execution(order, order.size, price))
         }
 
     }

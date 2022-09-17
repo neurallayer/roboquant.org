@@ -72,8 +72,6 @@
 
 				</dependencies>
 			</plugin>
-
-
 			<plugin>
 				<groupId>org.jetbrains.kotlin</groupId>
 				<artifactId>kotlin-maven-plugin</artifactId>
@@ -109,13 +107,10 @@
                     <target>11</target>
                 </configuration>
             </plugin>
-
         </plugins>
-
 	</build>
 
 	<dependencies>
-
 		<dependency>
 			<artifactId>roboquant</artifactId>
 			<groupId>org.roboquant</groupId>
@@ -146,7 +141,6 @@
 			<artifactId>kotlin-stdlib</artifactId>
 			<version>${kotlin.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.jetbrains.kotlinx</groupId>
 			<artifactId>kotlin-jupyter-api</artifactId>

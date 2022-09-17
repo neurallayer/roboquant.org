@@ -39,9 +39,8 @@ Where some Kotlin/Java based applications require a lot of ceremony to implement
 * Use sensible defaults for method parameters where possible
 * Use informative toString() implementations and explanatory exception messages
 * Provide overloaded convenience methods if it makes life easier for the user of the API
-* Use a flat package structure, so any import is simple to remember
+* Use a flat package structure, so import statements are simple to remember
 * Leverage type inference where possible so no additional type info needs to be provided
-
 
 == Time handling
 When testing strategies that trade simultaneously in multiple time-zones, like stocks in New York and London, it is key to have proper time management. Otherwise, you run the risk that your strategy performs very well but only because it can peep into the future due to faulty handling of time-zones.
@@ -66,13 +65,14 @@ With data sets growing, it is important that a strategy can still be quickly eva
 * Overall the latency is kept very low when processing a new event and generating a signal and order. So it is feasible to create fast, low latency (sub-second) trading strategies.
 
 == Reliability
-Even more important than performance, is reliability when it comes to trading software.
+Even more important than performance, is reliability when it comes to trading software. So _roboquant_ takes several quality assurance measures in order to catch as many bugs as possible before the software is released:
 
 * Type and null checks where possible to leverage the compiler to identify possible mistakes
+* Good unit test suite with more than 300 unit tests that covers most of the code base (> 90%)
+* Using several code analysis tools: Detekt, Sonarcloud.io and CheckMarx (IntelliJ IDEA builtin).
 * Extensive error logging to alert possible issues, including data quality
 * Immutable data classes (when appropriate)
 * Assert/requires to validate input parameters
-* Good unit test suite with more than 300 unit tests that covers most of the code base (> 90%)
 * Proven third party libraries
 
 == Why an event-driven approach?

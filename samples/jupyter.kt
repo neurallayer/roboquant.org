@@ -1,4 +1,4 @@
-@file:Suppress("unused", "UNUSED_PARAMETER", "UNUSED_VARIABLE")
+@file:Suppress("unused", "UNUSED_PARAMETER")
 
 import org.roboquant.Roboquant
 import org.roboquant.common.Asset
