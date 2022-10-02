@@ -8,11 +8,11 @@ import org.roboquant.brokers.sim.Pricing
 import org.roboquant.brokers.sim.TradeOrderHandler
 import org.roboquant.common.Asset
 import org.roboquant.common.Size
+import org.roboquant.common.days
 import org.roboquant.feeds.Event
 import org.roboquant.metrics.MetricResults
 import org.roboquant.orders.*
-import org.roboquant.policies.DefaultPolicy
-import org.roboquant.policies.Policy
+import org.roboquant.policies.*
 import org.roboquant.strategies.NoSignalStrategy
 import org.roboquant.strategies.Signal
 import org.roboquant.ta.TaLibMetric
@@ -30,18 +30,29 @@ class MyPolicy : Policy {
 // end::basic[]
 
 
+private fun chainedPolicies() {
+    // tag::chaining[]
+    val policy = DefaultPolicy().resolve(SignalResolution.NO_CONFLICTS) // remove signals
+        .oneOrderPerAsset() // remove orders
+        .circuitBreaker(10, 1.days) // remove orders
+    // end::chaining[]
+}
+
+
 // tag::default[]
-class MyDefaultPolicy(private val percentage:Double = 0.05) : DefaultPolicy() {
+class MyDefaultPolicy() : DefaultPolicy() {
 
     override fun createOrder(signal: Signal, size: Size, price: Double): Order? {
-        // We don't short and  all other sell/exit orders are covered by the bracket order
+        // We don't short in this example and exit orders are already covered by the bracket order
         if (size < 0) return null
 
         val asset = signal.asset
+
+        // Create a bracket order with an additional take-profit and stop-loss defined
         return BracketOrder(
-            MarketOrder(asset, size),
-            TrailOrder(asset, -size, percentage/2.0),
-            StopOrder(asset, -size, price * (1 - percentage))
+            LimitOrder(asset, size, price), // limit order at current price
+            TrailOrder(asset, -size, 0.05), // 5% trail order
+            StopOrder(asset, -size, price * 0.98) // stop order 2% under current price
         )
     }
 }
@@ -123,7 +134,7 @@ fun customPolicy() {
     // end::custom3[]
 }
 
-fun noStrategy(myAdvancedPolicy:Policy) {
+fun noStrategy(myAdvancedPolicy: Policy) {
     // tag::advanced[]
     val roboquant = Roboquant(NoSignalStrategy(), policy = myAdvancedPolicy)
     // end::advanced[]
@@ -153,13 +164,12 @@ fun bracketOrder(asset: Asset, price: Double) {
 }
 
 
-
 fun customOrder() {
 
     // tag::customOrder[]
 
     // Simple custom order type
-    class MyOrder(asset: Asset, val size: Size, val customProperty: Int, id:Int = nextId()) : Order(asset, id)
+    class MyOrder(asset: Asset, val size: Size, val customProperty: Int, id: Int = nextId()) : Order(asset, id)
 
     // Define a handler for your custom order type.
     // This is only required if you want your order to be supported by the SimBroker

@@ -35,6 +35,18 @@ include::{sourcefile}[tag=default]
 ----
 
 
+=== Chaining
+There are several extension methods available that can add functionality to any type of policy by creating a chain of policies in which each policy has a particular tasks. Typically, the extension methods perform one of two tasks:
+
+1. Remove signals before the next policy is invoked
+2. Remove orders before they are handed to the broker
+
+[source, kotlin]
+----
+include::{sourcefile}[tag=chaining]
+----
+
+
 == Fractional Order sizes
 Roboquant doesn't make assumptions on the permitted order- and position-sizes. They are not limited to integers only and so there is no restriction on using a broker that supports fractional trading. Since it is the Policy that create the orders, here you can also put any type of order size logic yuo require.
 

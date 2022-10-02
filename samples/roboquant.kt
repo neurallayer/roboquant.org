@@ -102,8 +102,8 @@ fun runParallel(feed: Feed) {
             val roboquant = Roboquant(EMACrossover(), AccountSummary(), logger = logger)
 
             // Give the run a unique identifiable name
-            // Otherwise a unique name will be generated for each name
-            roboquant.run(feed, period, runName = "run-$period")
+            // Otherwise a unique name will be generated for each run
+            roboquant.run(feed, period, name = "run-$period")
         }
     }
 

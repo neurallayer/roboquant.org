@@ -35,7 +35,7 @@ fun test() {
     // tag::basic[]
     val feed = CSVFeed("data/test")
     roboquant.run(feed)
-    feed.assets.summary().log()
+    println(feed.assets.summary())
     // end::basic[]
 }
 

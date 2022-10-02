@@ -49,7 +49,7 @@ fun oandaLiveFeed() {
 fun oandaBroker() {
     // tag::oandabroker[]
     val broker = OANDABroker()
-    broker.account.summary().log()
+    println(broker.account.summary())
     // end::oandabroker[]
 }
 
@@ -95,6 +95,6 @@ fun alpacaLiveFeed() {
 fun alpacaBroker() {
     // tag::alpacabroker[]
     val broker = AlpacaBroker()
-    broker.account.summary().log()
+    println(broker.account.summary())
     // end::alpacabroker[]
 }

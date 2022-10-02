@@ -19,6 +19,17 @@ Nowadays, there is so much more data available than ever before. It would be a l
 * [x] Support for lazy loading of data, so memory doesn't become a constraint
 * [x] Several very fast algorithms out of the box
 
+.Performance Test
+****
+To give an idea what performance can be achieved on moderate hardware (Apple MacBook Pro, JDK 17): running a complete back test containing more than 1 million price-bars using an EMA-Crossover strategy takes *180 milliseconds*.
+
+You can easily reproduce it on your own hardware:
+
+[source,kotlin,indent=0]
+----
+include::{sourcefile}[tag=performance]
+----
+****
 
 == Flexible
 Flexible means being able to trade at different markets at different parts in the world. This implies:
