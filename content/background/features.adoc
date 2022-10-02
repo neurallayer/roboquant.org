@@ -126,7 +126,7 @@ Of course, we are not completely objective, so we recommend trying them out for 
 |Advanced Order Types| &check;| &check;| | 
 |Multi Region| &check;| | |&check;
 |Performance| high| low| low| mid
-|Code base| small| midsize| large| very large
+|Code base| small| small| medium| large
 |Jupyter Notebook| &check;| &check;| &check;|
 |Completely Free| &check;| &check;| |
 |===
