@@ -40,7 +40,7 @@ private fun chainedPolicies() {
 
 
 // tag::default[]
-class MyDefaultPolicy() : DefaultPolicy() {
+class MyDefaultPolicy : DefaultPolicy() {
 
     override fun createOrder(signal: Signal, size: Size, price: Double): Order? {
         // We don't short in this example and exit orders are already covered by the bracket order
@@ -185,10 +185,10 @@ fun customOrder() {
             // some logic for the order type
             // ....
 
-            // Calculate the price to use
+            // Get the price to use for the execution
             val price = pricing.marketPrice(order.size)
 
-            // Set the state to be COMPLETED. As long as the state is not in a Closed state, this handler stays active.
+            // Set the state to be COMPLETED. As long as the state is not in a CLOSED state, the handler stays active.
             state = OrderState(order, OrderStatus.COMPLETED, time, time)
 
             // Return the executions

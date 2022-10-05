@@ -18,8 +18,8 @@ image::jupyter-lab.png[alt="screenshot", width="400", align="center"]
 image::idea.png[alt="screenshot", width="400", align="center"]
 
 
-== Install Jupyter Notebook
-If you have already Docker installed on your local machine, all it takes is a single command to have a fully functional Jupyter Notebook environment available that is ready to use.
+== Run Jupyter Notebook
+If you have already Docker installed on your local machine, all it takes is a single command to have a fully functional Jupyter Notebook environment with _roboquant_ available that is ready to use.
 
 [source,shell]
 ----
@@ -107,9 +107,7 @@ root
         src/test/kotlin
 ----
 
-All source code is written in Kotlin, so there are no Java or other language source files.
-
-Roboquant uses Maven for the build process and assuming you already have this installed, building the libraries locally, is as easy as:
+All source code is written in Kotlin, so there are no Java or other language source files. Roboquant uses Maven for the build process and assuming you already have this installed, building the libraries locally, is as easy as:
 
 [source, shell]
 ----

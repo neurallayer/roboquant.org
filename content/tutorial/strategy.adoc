@@ -7,7 +7,7 @@
 == Introduction
 A `Strategy` is likely the place where you do most software development. It is responsible for generating signals based on the events it receives.
 
-Since a `Strategy` only has access to an `Event` and not the `Account`, it has no knowledge of concepts like orders, open positions or buying power. As a consequence a `Strategy` is a generic component that can be easily shared or re-used if required.
+Since a `Strategy` only has access to an `Event` and not the `Account`, it has no knowledge of things like orders, open positions or buying power. As a consequence a `Strategy` is a generic component that can be easily shared or re-used if required.
 
 == Standard Strategies
 There are several commonly used strategies included with _roboquant_. This section highlight some of them, and using them is a great way to get started.

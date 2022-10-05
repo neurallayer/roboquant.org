@@ -17,6 +17,7 @@ import org.roboquant.logging.MemoryLogger
 import org.roboquant.metrics.AccountSummary
 import org.roboquant.metrics.ProgressMetric
 import org.roboquant.policies.DefaultPolicy
+import org.roboquant.strategies.CombinedStrategy
 import org.roboquant.strategies.EMACrossover
 
 
@@ -50,6 +51,17 @@ fun complete() {
         broker = myBroker,
         logger = myLogger)
     // end::complete[]
+}
+
+
+
+fun combined() {
+    // tag::combined[]
+    val strategy1 = EMACrossover.EMA_12_26
+    val strategy2 = EMACrossover.EMA_5_15
+    val strategy = CombinedStrategy(strategy1, strategy2)
+    val roboquant = Roboquant(strategy)
+    // end::combined[]
 }
 
 

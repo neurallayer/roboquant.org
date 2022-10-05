@@ -54,7 +54,7 @@ The following diagram shows the actual interactions with their real method names
 image::main_flow.png[]
 
 
-== Developing your oqn strategy
+== Developing your own strategy
 Developing a new strategy and validate it during a back-test is a straight forward process. The code snippet below shows the different steps that you have to take to develop and run your strategy.
 
 [source, kotlin, subs="attributes,verbatim", indent=0]

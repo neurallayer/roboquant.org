@@ -19,9 +19,9 @@ include::{sourcefile}[tag=standard]
 TIP: if a metric is very compute intensive, and you don't require it at each step, you can wrap it in a `MetricsScheduler` and configure when it should be invoked.
 
 == Custom Metrics
-You can also develop your own metrics. All you have to do is implement the `calculate` method from the `Metric` interface and return `MetricResults`, which is a `typealias` for `Map<String,Number>`. If you don't have any results, return an `emptyMap()`
+You can also develop your own metrics. All you have to do is implement the `calculate` method from the `Metric` interface and return `MetricResults`, which is just a `typealias` for `Map<String, Double>`. Metrics also implement the `Lifecycle` interface, so you can keep state in a metric if required and clean it when a lifecycle method is invoked.
 
-In the `calculate` function you have access to both the `Account` object and the `Event`. Metrics also implement the `Lifecycle` interface, so you can keep state in a metric if required and clean it when a lifecycle method is invoked.
+If you don't have any results at a certain step, you should return an `emptyMap()`. In the `calculate` function you have access to both the `Account` and the `Event` object.
 
 [source,kotlin,indent=0]
 ----
@@ -29,7 +29,7 @@ include::{sourcefile}[tag=simple]
 ----
 
 == Metrics Loggers
-A metrics loggers receives the metric values at each step and then stores and/or logs these values. They all implement the `MetricsLogger` interface.
+A metrics logger receives the metric values at each step and then stores and/or logs these values. All implement the `MetricsLogger` interface.
 
 The following metric loggers are available out of the box:
 

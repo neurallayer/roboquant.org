@@ -1,7 +1,9 @@
 @file:Suppress("unused", "UNUSED_VARIABLE")
 
+import org.roboquant.Roboquant
 import org.roboquant.brokers.ECBExchangeRates
 import org.roboquant.common.*
+import org.roboquant.feeds.Feed
 import java.time.Instant
 
 
@@ -70,8 +72,23 @@ fun timeFrame() {
 
     // Split timeframe in 31 days periods
     val tf3 = tf2.split(31.days) // result is List<Timeframe>
-
-    // Use a predefined timeframes
-    val tf4 = Timeframe.financialCrisis2008
     // end::tf[]
+}
+
+
+
+private fun predefined(roboquant: Roboquant, feed: Feed) {
+    // tag::predefined[]
+    val timeFrames = listOf(
+        Timeframe.blackMonday1987,
+        Timeframe.financialCrisis2008,
+        Timeframe.coronaCrash2020,
+        Timeframe.flashCrash2010,
+        Timeframe.tenYearBullMarket2009,
+    )
+
+    timeFrames.forEach {
+        roboquant.run(feed, it)
+    }
+    // end::predefined[]
 }

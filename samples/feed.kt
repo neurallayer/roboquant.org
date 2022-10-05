@@ -93,7 +93,7 @@ fun avroCaptureLive() {
 
 
 
-fun predefined() {
+private fun predefined() {
     // tag::predefined[]
     val feed1 = AvroFeed.sp500() // S&P500 for 5 years
     val feed2 = AvroFeed.usTest() // 6 popular US stocks for last 60 years
