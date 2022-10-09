@@ -21,7 +21,7 @@ Nowadays, there is so much more data available than ever before. It would be a l
 
 .Performance Test
 ****
-To give an idea what performance can be achieved on moderate hardware (Apple MacBook Pro, JDK 17): running a complete back test containing more than 1 million price-bars using an EMA-Crossover strategy takes *180 milliseconds*.
+To give an idea what performance can be achieved on moderate hardware (Apple MacBook Pro, JDK 17): running a complete back test containing more than 1 million price-bars using an EMA-Crossover strategy takes less than *180 milliseconds*.
 
 You can easily reproduce it on your own hardware:
 
@@ -30,6 +30,25 @@ You can easily reproduce it on your own hardware:
 include::{sourcefile}[tag=performance]
 ----
 ****
+
+The following table shows the order of magnitude that the different parts of the system has been designed for:
+
+[frame=ends]
+[.table]
+[cols="<,^, <"]
+|===
+|Aspect |Size |Description
+
+|Assets|100k|the number of unique assets used in a run. For example every stock or option-contract is a unique asset
+|Open Positions|10k|the number of open positions in a portfolio during a run
+|Created Orders|1M|the number of orders created during a run
+|Trades|1M|the number of trades generated during a run
+|Cash currencies|100|the number of currencies in cash balances
+|Published Events|100M|the total number of event during a run
+|Actions|100B|the total number of actions (like candlesticks) used during a run
+|Exchanges|1K|the number of exchanges defined
+|===
+
 
 == Flexible
 Flexible means being able to trade at different markets at different parts in the world. This implies:

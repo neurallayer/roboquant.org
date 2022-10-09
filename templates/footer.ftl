@@ -1,7 +1,7 @@
 <footer class="bg-dark py-4 mt-auto">
     <div class="container px-5">
         <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; roboquant.org 2021-2022</div></div>
+            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; roboquant.org 2022</div></div>
             <div class="col-auto">
                 <a class="link-light small" href="/community.html">Contact</a>
             </div>
@@ -14,24 +14,24 @@
 
 <script >
     window.onload = function() {
-        var pre = document.getElementsByTagName('pre');
-        for (var i = 0; i < pre.length; i++) {
-            var b = document.createElement('button');
+        const pre = document.getElementsByTagName('pre');
+        for (let i = 0; i < pre.length; i++) {
+            const b = document.createElement('button');
             b.className = 'clipboard';
             b.textContent = 'Copy';
             if (pre[i].childNodes.length === 1 && pre[i].childNodes[0].nodeType === 3) {
-                var div = document.createElement('div');
+                const div = document.createElement('div');
                 div.textContent = pre[i].textContent;
                 pre[i].textContent = '';
                 pre[i].appendChild(div);
             }
             pre[i].appendChild(b);
         }
-        var clipboard = new ClipboardJS('.clipboard', {
-           target: function(b) {
-                var p = b.parentNode;
+        const clipboard = new ClipboardJS('.clipboard', {
+            target: function (b) {
+                const p = b.parentNode;
                 if (p.className.includes("highlight")) {
-                    var elems = p.getElementsByTagName("code");
+                    const elems = p.getElementsByTagName("code");
                     if (elems.length > 0)
                         return elems[0];
                 }

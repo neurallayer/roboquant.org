@@ -10,20 +10,20 @@ import org.roboquant.common.years
 import org.roboquant.feeds.Feed
 import org.roboquant.feeds.HistoricFeed
 import org.roboquant.feeds.LiveFeed
-import org.roboquant.feeds.random.RandomWalk
+import org.roboquant.feeds.random.RandomWalkFeed
 import org.roboquant.jupyter.MetricChart
 import org.roboquant.jupyter.TradeChart
 import org.roboquant.logging.MemoryLogger
-import org.roboquant.metrics.AccountSummary
+import org.roboquant.metrics.AccountMetric
 import org.roboquant.metrics.ProgressMetric
 import org.roboquant.policies.DefaultPolicy
 import org.roboquant.strategies.CombinedStrategy
-import org.roboquant.strategies.EMACrossover
+import org.roboquant.strategies.EMAStrategy
 
 
 fun basic() {
     // tag::basic[]
-    val strategy  = EMACrossover()
+    val strategy  = EMAStrategy()
     val roboquant = Roboquant(strategy)
     // end::basic[]
 }
@@ -36,17 +36,16 @@ fun tradeChart(account: Account) {
 }
 
 fun complete() {
-    val strategy  = EMACrossover()
+    val strategy  = EMAStrategy()
     val myBroker = SimBroker()
     val myPolicy = DefaultPolicy()
-    val metric1 = AccountSummary()
+    val metric1 = AccountMetric()
     val metric2 = ProgressMetric()
-    val metric3 = ProgressMetric()
     val myLogger  = MemoryLogger()
     // tag::complete[]
     val roboquant = Roboquant(
         strategy,
-        metric1, metric2, metric3,
+        metric1, metric2,
         policy = myPolicy,
         broker = myBroker,
         logger = myLogger)
@@ -57,8 +56,8 @@ fun complete() {
 
 fun combined() {
     // tag::combined[]
-    val strategy1 = EMACrossover.EMA_12_26
-    val strategy2 = EMACrossover.EMA_5_15
+    val strategy1 = EMAStrategy.EMA_12_26
+    val strategy2 = EMAStrategy.EMA_5_15
     val strategy = CombinedStrategy(strategy1, strategy2)
     val roboquant = Roboquant(strategy)
     // end::combined[]
@@ -67,8 +66,8 @@ fun combined() {
 
 
 fun run() {
-    val roboquant = Roboquant(EMACrossover())
-    val feed = RandomWalk.lastYears()
+    val roboquant = Roboquant(EMAStrategy())
+    val feed = RandomWalkFeed.lastYears()
     // tag::run[]
     roboquant.run(feed)
     // end::run[]
@@ -111,7 +110,7 @@ fun runParallel(feed: Feed) {
     for (period in timeframe.split(2.years)) {
         jobs.add {
             // Create a new roboquant instance for each job
-            val roboquant = Roboquant(EMACrossover(), AccountSummary(), logger = logger)
+            val roboquant = Roboquant(EMAStrategy(), AccountMetric(), logger = logger)
 
             // Give the run a unique identifiable name
             // Otherwise a unique name will be generated for each run

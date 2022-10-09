@@ -1,16 +1,15 @@
 @file:Suppress("unused", "UNUSED_VARIABLE")
 
-import org.roboquant.brokers.Account
-import org.roboquant.brokers.marketValue
-import org.roboquant.brokers.realizedPNL
+import org.roboquant.brokers.*
 import org.roboquant.brokers.sim.MarginAccount
 import org.roboquant.brokers.sim.PercentageFeeModel
 import org.roboquant.brokers.sim.SimBroker
 import org.roboquant.brokers.sim.SpreadPricingEngine
-import org.roboquant.brokers.unrealizedPNL
 import org.roboquant.common.Currency
 import org.roboquant.common.EUR
 import org.roboquant.common.Wallet
+import org.roboquant.feeds.Event
+import org.roboquant.orders.Order
 
 
 fun usageBasic() {
@@ -20,6 +19,15 @@ fun usageBasic() {
 }
 
 
+
+fun usageBasic2(broker: Broker) {
+    // tag::basic2[]
+    val orders = emptyList<Order>()
+    val event = Event.empty()
+    val account = broker.place(orders, event)
+    // end::basic2[]
+}
+
 fun usageExtra() {
     // tag::extra[]
     val broker = SimBroker(
@@ -27,7 +35,7 @@ fun usageExtra() {
         baseCurrency = Currency.EUR, // Currency to use for reporting
         feeModel = PercentageFeeModel(), // Logic to use to calculate fees, commissions, etc
         accountModel = MarginAccount(), // Cash or Margin account
-        pricingEngine = SpreadPricingEngine() // Logic to use to calculate the price for a trade
+        pricingEngine = SpreadPricingEngine() // Logic to use to determine the price for a trade
     )
     // end::extra[]
 }
@@ -35,9 +43,8 @@ fun usageExtra() {
 
 fun equity(account: Account, initialDeposit: Wallet) {
     // tag::equity[]
-
-    // Current value of cash + portfolio
-    val equity1 = account.cash + account.portfolio.marketValue
+    // Sum of cash balance + portfolio
+    val equity1 = account.cash + account.positions.marketValue
 
     // Sum of initial deposit + all the changes
     val equity2 = initialDeposit + account.trades.realizedPNL + account.positions.unrealizedPNL

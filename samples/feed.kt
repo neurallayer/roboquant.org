@@ -11,10 +11,8 @@ import org.roboquant.feeds.avro.AvroFeed
 import org.roboquant.feeds.avro.AvroUtil
 import org.roboquant.feeds.csv.CSVFeed
 import org.roboquant.feeds.csv.LazyCSVFeed
-import org.roboquant.strategies.EMACrossover
 import java.time.Instant
 
-val roboquant = Roboquant(EMACrossover())
 
 
 fun feedInterface() {
@@ -31,7 +29,7 @@ fun feedInterface() {
     // end::interface[]
 }
 
-fun test() {
+fun test(roboquant: Roboquant) {
     // tag::basic[]
     val feed = CSVFeed("data/test")
     roboquant.run(feed)
@@ -40,7 +38,7 @@ fun test() {
 }
 
 
-fun testLazy() {
+fun testLazy(roboquant: Roboquant) {
     // tag::lazy[]
     val feed = LazyCSVFeed("data/test")
     roboquant.run(feed)

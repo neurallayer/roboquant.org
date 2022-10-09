@@ -14,13 +14,13 @@ import java.time.Instant
 
 fun standard(strategy: Strategy, sp500Asset: Asset) {
     // tag::standard[]
-    val metric1 = AccountSummary()
-    val metric2 = PortfolioExposure()
+    val metric1 = AccountMetric()
+    val metric2 = ExposureMetric()
     val metric3 = ProgressMetric()
     val metric4 = VWAPMetric()
-    val metric5 = SharpRatio()
-    val metric6 = PNL()
-    val metric7 = AlphaBeta(sp500Asset, 250)
+    val metric5 = SharpRatioMetric()
+    val metric6 = PNLMetric()
+    val metric7 = AlphaBetaMetric(sp500Asset, 250)
 
     val roboquant = Roboquant(
         strategy, metric1, metric2, metric3, metric4, metric5, metric6, metric7

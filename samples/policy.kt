@@ -33,7 +33,7 @@ class MyPolicy : Policy {
 private fun chainedPolicies() {
     // tag::chaining[]
     val policy = DefaultPolicy().resolve(SignalResolution.NO_CONFLICTS) // remove signals
-        .oneOrderPerAsset() // remove orders
+        .singleOrder() // remove orders
         .circuitBreaker(10, 1.days) // remove orders
     // end::chaining[]
 }
@@ -167,7 +167,6 @@ fun bracketOrder(asset: Asset, price: Double) {
 fun customOrder() {
 
     // tag::customOrder[]
-
     // Simple custom order type
     class MyOrder(asset: Asset, val size: Size, val customProperty: Int, id: Int = nextId()) : Order(asset, id)
 
@@ -199,6 +198,5 @@ fun customOrder() {
 
     // Register the handler
     ExecutionEngine.register<MyOrder> { MyOrderHandler(it) }
-
     // end::customOrder[]
 }

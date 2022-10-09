@@ -49,27 +49,21 @@
 					</execution>
 				</executions>
 				<dependencies>
-
 					<dependency>
 						<groupId>com.orientechnologies</groupId>
 						<artifactId>orientdb-core</artifactId>
 						<version>3.1.16</version>
 					</dependency>
-
-					<!-- AsciiDoc content support -->
 					<dependency>
 			            <groupId>org.asciidoctor</groupId>
 			            <artifactId>asciidoctorj</artifactId>
 			            <version>2.4.3</version>
 			        </dependency>
-
-			        <!-- Freemarker template support -->
 			        <dependency>
             			<groupId>org.freemarker</groupId>
             			<artifactId>freemarker</artifactId>
             			<version>2.3.31</version>
         			</dependency>
-
 				</dependencies>
 			</plugin>
 			<plugin>

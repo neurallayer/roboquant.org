@@ -12,11 +12,11 @@ import org.roboquant.ta.TaLibStrategy
 fun ema() {
 
     // tag::ema[]
-    // Use a EMACrossover with predefined look-back periods
-    val strategy1 = EMACrossover.EMA_12_26
+    // Use a EMA Crossover Strategy with predefined look-back periods
+    val strategy1 = EMAStrategy.EMA_12_26
 
-    // Use a EMACrossover with custom look-back periods
-    val strategy2 = EMACrossover(fastPeriod = 20, slowPeriod = 50)
+    // Use a EMA Crossover Strategy custom look-back periods
+    val strategy2 = EMAStrategy(fastPeriod = 20, slowPeriod = 50)
     // end::ema[]
 
 }

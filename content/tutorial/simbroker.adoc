@@ -42,35 +42,6 @@ Any TIF (Time In Force) enforcement of order execution will only start after an 
 Any open orders will be processed based on FIFO (first-in-first-out) basis, so older open orders are processed first. Exception to this rule are modify orders that are always processed before regular order types. The most common modify orders are a `CancelOrder` and an `UpdateOrder`.
 
 
-== Account
-`broker.account` property returns an Account object. This `Account` object contains a snapshot of the exposed state of a broker and is identical between the simulated broker and real brokers. The object is guaranteed not to change, what also implies if you want an updated version you need to invoke `broker.account` again.
-
-The `Account` object contains the following key properties:
-
-- base currency of the account
-- total cash balance (represents the credit cash - any loan Value)
-- portfolio with all the open positions
-- trades that contain all the trade executions that happened so far
-- orders, both active open orders and closed orders
-- total amount of buying power available for trading (denoted in the base currency of the account)
-
-.Equity
-****
-Equity is key metric to monitor if you want to see how your account is performing. The following two equations hold true when using SimBroker when running a back test:
-
-[source, kotlin, indent=0]
-----
-include::{sourcefile}[tag=equity]
-----
-
-****
-
-
-.Buying Power
-****
-Always use the `buyingPower` property if you want to know how much money is remaining for trading. Especially when using a `MarginAccount`, you shouldn't rely on the `cash` property, since that doesn't take into account any margin or leverage you might have.
-****
-
 == Custom Models
 Custom models are a way to further customize the behavior of `SimBroker`. The following two types of models can be implemented if the default ones that comes with _roboquant_ are not sufficient.
 
@@ -90,13 +61,11 @@ Custom models are a way to further customize the behavior of `SimBroker`. The fo
 - Buying power models: the different types of funding of an account, like a Cash or Margin account.
 
 == Limitations
-
 Like any simulation, SimBroker also has limitations compared to a real life trading. It is important to realize this and take appropriate actions where possible:
 
-1. The default cost calculations become less realistic if you trade large amount compared to overall daily volume. As a rule of thumb: don't underestimate the transaction cost like spread, slippage and commissions and better be too pessimistic.
-2. Order types might behave slightly different between SimBroker and different real brokers. If possible at all, also perform paper trading to see if your solution still performs as expected.
-3. The buying power and margin calculations might differ. Be on the safe side and use a higher margin requirement in the SimBroker than required by your broker.
-
+1. The default cost calculations become less realistic if you trade large sizes compared to overall daily volume. As a rule of thumb: don't underestimate the additional costs like spread, slippage and commissions and better be on the safe side.
+2. Order types might behave slightly different between SimBroker and different real brokers. If possible, perform paper trading to see if your solution still performs as expected.
+3. The buying power and margin calculations might differ. Again, be on the safe side and use a higher margin requirement in the SimBroker than required by your real broker.
 
 == Account Models
 Account models allow to model the amount of Buying power for different types of accounts, like a Cash Account or Margin Account when using the SimBroker. Buying Power represents the amount available for trading.

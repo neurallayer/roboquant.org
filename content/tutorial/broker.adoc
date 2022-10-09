@@ -1,0 +1,56 @@
+= Broker
+:icons: font
+:source-highlighter: rouge
+:sourcefile: ../../samples/simbroker.kt
+:jbake-date: 2020-08-01
+
+== What is a broker
+A broker receives orders and processes them. The outcome of this processing is an updated `Account`. There are two types of broker implementations:
+
+1. SimBroker: simulates a broker and the trading that happens on an exchange.
+2. Third party brokers: implementations that integrate with a real broker like IBKR, Alpaca or Binance.
+
+These two types implement the same `Broker` interface. Normally during back-testing and live-testing you'll use the SimBroker, and during paper-trading and live-trading you'll use a real broker. The main method is:
+
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=basic2]
+----
+
+
+WARNING: broker implementations can differ in what order types and assets are supported. So when moving from SimBroker to a real broker, validate if the behavior is still as expected.
+
+== Account
+`broker.account` property returns an Account object. This `Account` object contains a snapshot of the exposed state of a broker and is identical between the simulated broker and real brokers. The object is guaranteed not to change, what also implies if you want an updated version you need to invoke `broker.account` again.
+
+The `Account` object contains the following key properties:
+
+- base currency of the account, used when converting a Wallet into a single-currency Amount
+- total cash balance (represents the credit cash - loan value)
+- the open positions
+- trades that contain all the trade executions that happened so far
+- orders, both open orders and closed orders
+- total amount of buying power available for trading (denoted in the base currency of the account)
+
+TIP: Always use the `buyingPower` property if you want to know how much money is remaining for trading. Especially when using a `MarginAccount`, you shouldn't rely on the `cash` property, since that doesn't take into account any margin or leverage you might have.
+
+.Equity
+****
+Equity is key metric to monitor if you want to see how your account is performing during a run. The following two equations hold true when using SimBroker when running a back test:
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=equity]
+----
+****
+
+== Out of the box available brokers
+The following `Broker` implementations are available:
+
+image::broker.png[]
+
+See also xref:simbroker.adoc[SimBroker] and xref:integration.adoc[Integration] for more details how to use these brokers.
+
+
+

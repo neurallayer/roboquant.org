@@ -12,7 +12,7 @@ Since a `Strategy` only has access to an `Event` and not the `Account`, it has n
 == Standard Strategies
 There are several commonly used strategies included with _roboquant_. This section highlight some of them, and using them is a great way to get started.
 
-=== EMACrossover
+=== EMAStrategy
 This strategy uses two exponential moving averages and whenever they cross over, a BUY or SELL signal is generated
 
 [source, kotlin,indent=0]
@@ -44,8 +44,8 @@ include::{sourcefile}[tag=rsi]
 This strategy doesn't perform any action and will never generate a signal. If you develop all your logic in a Policy and don't require a strategy, use this strategy when you create a `Roboquant` instance. See also <<_policy_based_strategies>>
 
 
-== Combining Strategies
-The `Roboquant` constructor takes only a single strategy as its parameter. However, it is easy to combine multiple strategies in your run using the composition pattern.
+=== CombinedStrategy
+The `Roboquant` constructor takes only a single strategy as its argument. However, it is easy to combine multiple strategies in your run using the `CombinedStrategy` class.
 
 
 [source, kotlin,indent=0]
@@ -117,11 +117,11 @@ include::{sourcefile}[tag=simpleSignal]
 ----
 
 == Advanced Signals
-Besides the mandatory Rating and Asset attributes, a signal can optionally contain the following attributes (with their default values):
+Besides the mandatory Rating and Asset attributes of a signal instance, a signal can optionally contain the following attributes (with their default values):
 
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=attrSignal]
 ----
 
-It is up to the xref:policy.adoc[policy] how/if to use these attributes when generating the orders. But for example the probability could be used to determine the sizing of the order, a high probability means a larger size.
+It is up to the xref:policy.adoc[policy] how/if to use these attributes when generating the orders. But for example the probability could be used to determine the sizing of the order, a high probability implies a larger size.

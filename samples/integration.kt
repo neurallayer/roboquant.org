@@ -1,5 +1,6 @@
 @file:Suppress("unused")
 
+import org.roboquant.Roboquant
 import org.roboquant.alpaca.AlpacaBroker
 import org.roboquant.alpaca.AlpacaHistoricFeed
 import org.roboquant.alpaca.AlpacaLiveFeed
@@ -35,7 +36,7 @@ fun oandaHistoricFeed() {
 }
 
 
-fun oandaLiveFeed() {
+fun oandaLiveFeed(roboquant: Roboquant) {
     // tag::oandalive[]
     val feed = OANDALiveFeed()
     feed.subscribePriceBar("EUR_USD", "USD_JPY", "GBP_USD")
@@ -81,7 +82,7 @@ fun iexLiveFeed() {
 }
 
 
-fun alpacaLiveFeed() {
+fun alpacaLiveFeed(roboquant: Roboquant) {
     // tag::alpacalive[]
     val feed = AlpacaLiveFeed()
     feed.subscribe("AAPL", "IBM")
