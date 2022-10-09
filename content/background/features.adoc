@@ -40,7 +40,7 @@ The following table shows the order of magnitude that the different parts of the
 |Aspect |Size |Description
 
 |Assets|100k|the number of unique assets used in a run. For example every stock or option-contract is a unique asset
-|Open Positions|10k|the number of open positions in a portfolio during a run
+|Open Positions|10k|the number of open positions during a run
 |Created Orders|1M|the number of orders created during a run
 |Trades|1M|the number of trades generated during a run
 |Cash currencies|100|the number of currencies in cash balances
@@ -100,7 +100,7 @@ Once you code base grows too large for a notebook, the same code can be used in 
 === Order Management
 One of the hardest (and most overlooked) aspect of algorithmic trading is order management, especially when your goal is to come to a robust live trading environment. There are many things that potentially can go wrong and will cost you real money. It is a real endeavor to translate signals into actual orders and manage these outstanding orders.
 
-Because of this, _roboquant_ separates the generation of signals (Strategy) from the actual orders (Policy). This allows algo-traders to focus on the generation of signals and pick the order management that fits their risk profile and trading style. And if full control over portfolio- and order-management is required, it is still available.
+Because of this, _roboquant_ separates the generation of signals (Strategy) from the actual orders (Policy). This allows algo-traders to focus on the generation of signals and pick the order management that fits their risk profile and trading style. And if full control over position- and order-management is required, it is still available.
 
 === Batteries included
 * [x] Over 150 technical indicators that are easy to use in your own strategies

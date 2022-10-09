@@ -122,7 +122,7 @@ image::https://roboquant.org/img/trades.png[]
 Similar to TradeChart, but this one plots all the placed orders. In general trades contain more info (like realized pnl), so the TradeChart might be more useful.
 
 === AssetAllocation
-Show the asset allocation breakdown of your portfolio.
+Show the asset allocation breakdown of your positions.
 
 image::https://roboquant.org/img/assets.png[]
 

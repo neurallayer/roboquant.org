@@ -43,7 +43,7 @@ fun usageExtra() {
 
 fun equity(account: Account, initialDeposit: Wallet) {
     // tag::equity[]
-    // Sum of cash balance + portfolio
+    // Sum of cash balances + open positions
     val equity1 = account.cash + account.positions.marketValue
 
     // Sum of initial deposit + all the changes

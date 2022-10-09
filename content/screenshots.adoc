@@ -17,8 +17,8 @@ image::walkforward.png[alt="screenshot"]
 
 Like most charts in _roboquant_, you can zoom into areas of interest. You can do so with the slider at the bottom of the chart or use the zoom option from the toolbox at the top right.
 
-== Random Samples
-An even more extensive back-test is to run the experiment over randomly sampled timeframes of a fixed duration. In this example we selected the duration to be 250 trading days. We then plot the results of all samples and this provide a good view of the maximum profit/loss a strategy could generate during for the 250 days.
+== Monte Carlo simulation
+An even more extensive back-test is to run the experiment over randomly sampled timeframes of a fixed duration. In this example we selected the duration to be 250 trading days. We then plot the results of all samples and this provide a good view of the distribution of the profit/loss a strategy could generate over 250 days timeframe.
 
 image::randomsamples.png[alt="screenshot"]
 
@@ -40,7 +40,7 @@ Another interesting visualization is the correlation matrix that shows how diffe
 image::correlation.png[alt="screenshot"]
 
 == Asset Allocation
-See the asset allocation within the portfolio. If assets are denoted in different currencies, this will convert to the base currency of the account.
+See the asset allocation within the open positions. If assets are denoted in different currencies, this will convert to the base currency of the account.
 
 image::assets.png[alt="screenshot"]
 
