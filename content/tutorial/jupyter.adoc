@@ -42,10 +42,7 @@ In order to build robust and well performing trading algorithms, often you need 
 All the charts are tailored for _roboquant_ usage and are not a generic plotting library. So typically with just one line of code, you plot a very feature rich chart. However, adding a new custom chart is not much work, see also <<_custom_charts>>
 
 === Global settings
-There are several global settings that will apply to all charts:
-
-* if you have to plot a lot of samples (> 500,000) your browser can become unresponsive. To avoid this problem, you can limit the number of samples send to the browser. The default is no limits.
-* you can change the theme used to draw the charts. The default is "auto" when it will try to detect the theme from your Jupyter Lab environment and use that.
+If you have to plot a lot of samples (> 500,000), your browser can become unresponsive. To avoid this problem, you can limit the number of samples send to the browser. The default is no limits.
 
 [source, kotlin]
 ----
