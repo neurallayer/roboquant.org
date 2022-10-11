@@ -43,10 +43,8 @@ include::{sourcefile}[tag=rsi]
 === NoSignalStrategy
 This strategy doesn't perform any action and will never generate a signal. If you develop all your logic in a Policy and don't require a strategy, use this strategy when you create a `Roboquant` instance. See also <<_policy_based_strategies>>
 
-
 === CombinedStrategy
 The `Roboquant` constructor takes only a single strategy as its argument. However, it is easy to combine multiple strategies in your run using the `CombinedStrategy` class.
-
 
 [source, kotlin,indent=0]
 ----
@@ -54,10 +52,21 @@ include::{sourcefile}[tag=composition]
 ----
 
 == Extending Strategies
-Next to the standard strategies, there are also strategies that can be the foundation for your own strategy. You extend these classes and add your own logic on top of them. These base strategies typically take care of some repetitive task and make it a quicker to develop your own strategies.
+Next to the standard strategies, there are also strategies included that can be the foundation for your own strategy. You extend these classes and add your own logic to them. These base strategies take care of some repetitive task and make it a quicker to develop your own strategies.
 
+=== SingleAssetStrategy
+This is an ideal base class if you only care about a single asset.
+
+
+=== HistoricPriceStrategy
 A useful base strategies is `HistoricPriceStrategy`. This strategy collects historic prices for a predefined look-back period before invoking your method. That way you don't have to deal with some of the complexity that comes with an event-based trading engine.
 
+You can:
+
+* Override the `generateSignal` method if you want full control on the signal that is created.
+* Override the `generateRating` method if the default Signal is fine, and you only need to provide the rating.
+
+The following code shows both an example of implementations:
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=extend]

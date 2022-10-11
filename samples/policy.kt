@@ -32,9 +32,10 @@ class MyPolicy : Policy {
 
 private fun chainedPolicies() {
     // tag::chaining[]
-    val policy = DefaultPolicy().resolve(SignalResolution.NO_CONFLICTS) // remove signals
-        .singleOrder() // remove orders
-        .circuitBreaker(10, 1.days) // remove orders
+    val policy = DefaultPolicy()
+        .resolve(SignalResolution.NO_CONFLICTS) // remove conflicting signals
+        .singleOrder() // remove multiple (open) orders for the same asset
+        .circuitBreaker(10, 1.days) // remove orders if there are too many
     // end::chaining[]
 }
 

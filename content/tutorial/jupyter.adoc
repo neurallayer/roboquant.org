@@ -5,7 +5,7 @@
 :jbake-date: 2020-02-01
 
 == Usage
-Since developing an algorithmic trading strategy requires a lot of experimentation and testing, an interactive development environment like Jupyter Notebooks is ideal. Especially in the beginning phase it can help to progress a lot quicker.
+Since developing an algorithmic trading strategy requires a lot of experimentation and testing, an interactive development environment like Jupyter Notebooks is ideal. Especially in the beginning phase, it can help to progress a lot quicker.
 
 Roboquant is designed to be used in both your own standalone application, and in Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without much ceremony and there are many charts included out-of-the-box that makes it easier to interpreter what is going on during a `run`.
 
@@ -23,9 +23,9 @@ TIP: Chromium based browsers perform best, especially when you plot charts with 
 
 
 == Importing packages
-By default, most of the core _roboquant_ packages are imported. But the packages of the crypto and extra modules are not by default included.
+By default, most of the core _roboquant_ packages are imported. But the packages of the crypto and extra modules are not by default included. So for these you need to add the appropriate import statement.
 
-But you are not limited to using _roboquant_ libraries only. In fact, you can use any Java or Kotlin library that is published in some repository or is available on the local file system.
+But you are not limited to using _roboquant_ libraries only. In fact, you can use any Java or Kotlin library that is published on some repository or is available on the local file system.
 
 [source]
 ----
@@ -121,8 +121,8 @@ image::https://roboquant.org/img/trades.png[]
 === OrderChart
 Similar to TradeChart, but this one plots all the placed orders. In general trades contain more info (like realized pnl), so the TradeChart might be more useful.
 
-=== AssetAllocation
-Show the asset allocation breakdown of your positions.
+=== AssetAllocationChart
+Show the asset allocation of your positions, so how much have you exposed to the different assets.
 
 image::https://roboquant.org/img/assets.png[]
 

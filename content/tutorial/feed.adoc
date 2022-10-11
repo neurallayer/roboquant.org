@@ -46,13 +46,12 @@ There are also a few helper methods in the `Event` class to make access to price
 include::{sourcefile}[tag=priceaction]
 ----
 
-
 == Included Feeds
 Roboquant includes several `Feed` implementations out of the box:
 
-* CSVFeed that can process CSV files stored somewhere on your local machine.
-* AvroFeed that can process an Avro file stored somewhere on your local machine.
-* RandomWalk that (as the name suggests) generates random price actions for random assets.
+* `CSVFeed` that can process CSV files stored somewhere on your local machine.
+* `AvroFeed` that can process an Avro file stored somewhere on your local machine.
+* `RandomWalkFeed` that (as the name suggests) generates random price actions for random assets.
 * Integration with third party data providers that make their data available through an API. See also the xref:integration.adoc[integration documentation]
 
 

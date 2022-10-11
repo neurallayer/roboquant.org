@@ -56,19 +56,31 @@ fun rsi() {
 
 fun extending() {
     // tag::extend[]
-    /**
-     * Trend following strategy
-     */
     class MyStrategy1(lookBack:Int= 10) : HistoricPriceStrategy(lookBack) {
 
         /**
-         * This will only be invoked once there is enough historic data available as specified
-         * by the lookBack parameter
+         * this method should return a Signal or null. Signal can contain
+         * additional attributes to the ones shown in this example.
          */
-        override fun generate(asset: Asset, data: DoubleArray): Signal? {
+        override fun generateSignal(asset: Asset, data: DoubleArray): Signal? {
             return when {
                 data.last() == data.max() -> Signal(asset, Rating.BUY)
                 data.last() == data.min() -> Signal(asset, Rating.SELL)
+                else -> null
+            }
+        }
+
+    }
+
+    class MyStrategy2(lookBack:Int= 10) : HistoricPriceStrategy(lookBack) {
+
+        /**
+         * this method should return a Rating or null.
+         */
+        override fun generateRating(data: DoubleArray): Rating? {
+            return when {
+                data.last() == data.max() -> Rating.BUY
+                data.last() == data.min() -> Rating.SELL
                 else -> null
             }
         }
