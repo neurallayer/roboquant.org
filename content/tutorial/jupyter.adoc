@@ -36,6 +36,12 @@ But you are not limited to using _roboquant_ libraries only. In fact, you can us
 == Charts
 Roboquant uses the excellent https://echarts.apache.org[Apache ECharts] JavaScript library to render charts in your browser. All charts are interactive, meaning you can zoom into areas of interest, and you can often filter on values of interest. There is a toolbar at the right top of each chart that allows for additional functionality, like downloading the chart or seeing the raw data.
 
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=overview]
+----
+
+
 === Design Philosophy
 In order to build robust and well performing trading algorithms, often you need to diversify across assets and asset classes. So a lot of the visualization is focused on providing insights on what is happening in such scenario and less in plotting the metrics a single asset only.
 
