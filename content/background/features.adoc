@@ -21,7 +21,7 @@ Nowadays, there is so much more data available than ever before. It would be a l
 
 .Performance Test
 ****
-To give an idea what performance can be achieved on moderate hardware (Apple MacBook Pro, JDK 17): running a complete back test containing more than 1 million price-bars using an EMA-Crossover strategy takes less than *180 milliseconds*.
+To give an idea what performance can be achieved on moderate hardware (Apple MacBook Pro, JDK 17): running a complete back test containing 1 million price-bars using an EMA-Crossover strategy takes less than *200 milliseconds*.
 
 You can easily reproduce it on your own hardware:
 
@@ -31,7 +31,14 @@ include::{sourcefile}[tag=performance]
 ----
 ****
 
-The following table shows the order of magnitude that the different parts of the system has been designed for:
+or if you have the _roboquant_ source code installed, you can use the following `maven` command:
+
+[source, shell]
+----
+mvn test -Dtest=PerformanceTest -pl roboquant -DTEST_PERFORMANCE=true
+----
+
+The following table shows the order of magnitude that the different parts of the system has been optimized for:
 
 [frame=ends]
 [.table]
@@ -39,14 +46,14 @@ The following table shows the order of magnitude that the different parts of the
 |===
 |Aspect |Size |Description
 
-|Assets|100k|the number of unique assets used in a run. For example every stock or option-contract is a unique asset
-|Open Positions|10k|the number of open positions during a run
-|Created Orders|1M|the number of orders created during a run
-|Trades|1M|the number of trades generated during a run
-|Cash currencies|100|the number of currencies in cash balances
-|Published Events|100M|the total number of event during a run
-|Actions|100B|the total number of actions (like candlesticks) used during a run
-|Exchanges|1K|the number of exchanges defined
+|Assets|50k|the number of unique assets used in a run. For example every stock or option-contract is a unique asset
+|Open Positions|5k|the number of open positions during a run
+|Created Orders|100k|the number of orders created during a run
+|Trades|100k|the number of trades generated during a run
+|Cash currencies|50|the number of currencies in cash balances
+|Published Events|10M|the total number of events during a run
+|Actions|1B|the total number of actions (like candlesticks) used during a run
+|Exchanges|100|the number of exchanges defined
 |===
 
 
@@ -63,7 +70,7 @@ Flexible means being able to trade at different markets at different parts in th
 Flexible also means _roboquant_ is fully modular and can be extended:
 
 * [x] Integrate with 3rd party brokers and exchanges
-* [x] Add new type of data feeds ranging from price feeds and fundamental data to unstructured data like images
+* [x] Add new types of data feeds ranging from price feeds and fundamental data to unstructured data like images
 * [x] Support for custom order types
 
 == Friendly

@@ -7,23 +7,29 @@
 == Usage
 Since developing an algorithmic trading strategy requires a lot of experimentation and testing, an interactive development environment like Jupyter Notebooks is ideal. Especially in the beginning phase, it can help to progress a lot quicker.
 
-Roboquant is designed to be used in both your own standalone application, and in Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without much ceremony and there are many charts included out-of-the-box that makes it easier to interpreter what is going on during a `run`.
+Roboquant is designed to be used in both your own standalone application, and in Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without much ceremony and there are many charts included that makes it easier to interpreter what is going on during a `run`.
 
 Using _roboquant_ in a Kotlin Jupyter Notebook requires just a single command:
 
 [source]
 ----
 %use @http://roboquant.org/roboquant.json
-Welcome()
 ----
 
-This will automatically load the _roboquant_ library (it will actually load three _roboquant_ modules: core, extra and crypt) and import most commonly used packages from the core module. If you run `Welcome()` in a notebook cell, you'll see the version of _roboquant_ you are using together with other information about the environment you are in.
+This will automatically load the _roboquant_ library (it will actually load three _roboquant_ modules: core, extra and crypt) and import most commonly used packages from the core module.
+
+If you run `Welcome()` in a notebook cell afterwards, you'll see the version of _roboquant_ you are using together with other information about the environment you are in.
+
+[source]
+----
+Welcome()
+----
 
 TIP: Chromium based browsers perform best, especially when you plot charts with many data points.
 
 
 == Importing packages
-By default, most of the core _roboquant_ packages are imported. But the packages of the crypto and extra modules are not by default included. So for these you need to add the appropriate import statement.
+By default, most of the core _roboquant_ packages are imported. But the packages of the `roboquant-crypto` and `roboquant-extra` modules are not by default included. So for these you need to add the appropriate import statement.
 
 But you are not limited to using _roboquant_ libraries only. In fact, you can use any Java or Kotlin library that is published on some repository or is available on the local file system.
 

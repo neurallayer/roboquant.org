@@ -60,7 +60,7 @@ With data sets growing, it is important that a strategy can still be quickly eva
 
 * Many of the builtin features use multithreading to speedup processing. For example the CSV parser parses CSV files in parallel so even directories with thousands of CSV files can be parsed in seconds.
 
-* Avoid (auto)boxing, so the JVM can access these variables directly. This means where possible use native types and not the wrapper one. See https://docs.oracle.com/javase/1.5.0/docs/guide/language/autoboxing.html[background]
+* Avoid (auto)boxing, so the JVM can access these variables directly. This means where possible use native types and not the wrapper one. See https://docs.oracle.com/javase/1.5.0/docs/guide/language/autoboxing.html[background^]
 
 * Overall the latency is kept very low when processing a new event and generating a signal and order. So it is feasible to create fast, low latency (sub-second) trading strategies.
 

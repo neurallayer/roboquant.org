@@ -9,6 +9,22 @@ import org.roboquant.feeds.Event
 import org.roboquant.strategies.*
 import org.roboquant.ta.TaLibStrategy
 
+
+
+private fun intro() {
+
+    class MyStrategy : Strategy {
+
+        // tag::intro[]
+        override fun generate(event: Event): List<Signal> {
+        // end::intro[]
+           TODO("Not yet implemented")
+        }
+    }
+
+
+}
+
 fun ema() {
 
     // tag::ema[]
