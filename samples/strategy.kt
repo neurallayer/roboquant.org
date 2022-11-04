@@ -21,20 +21,16 @@ private fun intro() {
            TODO("Not yet implemented")
         }
     }
-
-
 }
 
 fun ema() {
-
     // tag::ema[]
     // Use a EMA Crossover Strategy with predefined look-back periods
-    val strategy1 = EMAStrategy.EMA_12_26
+    val strategy1 = EMAStrategy.PERIODS_12_26
 
-    // Use a EMA Crossover Strategy custom look-back periods
+    // Use an EMA Crossover Strategy custom look-back periods
     val strategy2 = EMAStrategy(fastPeriod = 20, slowPeriod = 50)
     // end::ema[]
-
 }
 
 
@@ -102,7 +98,6 @@ fun extending() {
         }
 
     }
-
     // end::extend[]
 }
 
@@ -148,7 +143,7 @@ fun customStrategy1() {
         }
 
     }
-// end::basic[]
+    // end::basic[]
 }
 
 fun customStrategy2() {

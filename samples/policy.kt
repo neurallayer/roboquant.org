@@ -51,9 +51,9 @@ class MyDefaultPolicy : DefaultPolicy() {
 
         // Create a bracket order with an additional take-profit and stop-loss defined
         return BracketOrder(
-            LimitOrder(asset, size, price), // limit order at current price
-            TrailOrder(asset, -size, 0.05), // 5% trail order
-            StopOrder(asset, -size, price * 0.98) // stop order 2% under current price
+            LimitOrder(asset, size, price), // limit order at current price for entry
+            TrailOrder(asset, -size, 0.05), // 5% trail order for take profit
+            StopOrder(asset, -size, price * 0.98) // stop loss order 2% under current price
         )
     }
 }

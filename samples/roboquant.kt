@@ -56,8 +56,8 @@ fun complete() {
 
 fun combined() {
     // tag::combined[]
-    val strategy1 = EMAStrategy.EMA_12_26
-    val strategy2 = EMAStrategy.EMA_5_15
+    val strategy1 = EMAStrategy.PERIODS_12_26
+    val strategy2 = EMAStrategy.PERIODS_50_200
     val strategy = CombinedStrategy(strategy1, strategy2)
     val roboquant = Roboquant(strategy)
     // end::combined[]
