@@ -6,7 +6,7 @@ import org.roboquant.common.Currency.Companion.USD
 import org.roboquant.common.EUR
 import org.roboquant.common.JPY
 import org.roboquant.common.USD
-import org.roboquant.feeds.random.RandomWalkFeed
+import org.roboquant.feeds.RandomWalkFeed
 import org.roboquant.jupyter.TradeChart
 import org.roboquant.logging.SilentLogger
 import org.roboquant.metrics.ProgressMetric

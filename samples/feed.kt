@@ -7,8 +7,6 @@ import org.roboquant.common.Timeframe
 import org.roboquant.common.hours
 import org.roboquant.common.summary
 import org.roboquant.feeds.*
-import org.roboquant.feeds.avro.AvroFeed
-import org.roboquant.feeds.avro.AvroUtil
 import org.roboquant.feeds.csv.CSVFeed
 import org.roboquant.feeds.csv.LazyCSVFeed
 import java.time.Instant
@@ -71,7 +69,7 @@ fun avro(roboquant: Roboquant) {
 fun avroCapture() {
     // tag::avrocapture[]
     val feed = CSVFeed("some/path/")
-    AvroUtil.record(feed, "myfile.avro")
+    AvroFeed.record(feed, "myfile.avro")
 
     // Later you can use the same file in a AvroFeed
     val feed2 = AvroFeed("myfile.avro")
@@ -84,7 +82,7 @@ fun avroCaptureLive() {
     val feed = BinanceLiveFeed()
     feed.subscribePriceBar("BTCUSDT")
     val timeframe = Timeframe.next(4.hours)
-    AvroUtil.record(feed, "bitcoin.avro", timeframe)
+    AvroFeed.record(feed, "bitcoin.avro", timeframe)
     // end::avrocapturelive[]
 }
 

@@ -10,7 +10,7 @@ import org.roboquant.common.years
 import org.roboquant.feeds.Feed
 import org.roboquant.feeds.HistoricFeed
 import org.roboquant.feeds.LiveFeed
-import org.roboquant.feeds.random.RandomWalkFeed
+import org.roboquant.feeds.RandomWalkFeed
 import org.roboquant.jupyter.MetricChart
 import org.roboquant.jupyter.TradeChart
 import org.roboquant.logging.MemoryLogger
