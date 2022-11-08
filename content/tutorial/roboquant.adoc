@@ -18,7 +18,7 @@ The following default values will be used if you don't provide additional parame
 
 * No metrics will be captured at all
 * The `SimBroker` will be used as the broker with its default settings
-* The `DefaultPolicy` will be the policy used
+* The `FlexPolicy` will be the policy used
 * The `MemoryLogger` for logging the metrics (although without any metrics to capture, there is not much to log)
 
 Each of these defaults can be overwritten with a different implementation when you instantiate a `Roboquant`, as the following code snippet demonstrates:

@@ -24,10 +24,10 @@ CAUTION: If there is one thing that prevents algo-traders from going live with a
 
 == Out-of-the-box policies
 
-=== DefaultPolicy
-As the name already suggests, this is the default policy that will be used if no other policy is specified when create an instance of the `Roboquant` class. It provides several configuration properties that influence its behavior.
+=== FlexPolicy
+This is the default policy that will be used if no other policy is specified when create an instance of the `Roboquant` class. It provides several configuration properties that influence its behavior.
 
-You can also easily extend the DefaultPolicy to and overwrite some methods for example to create your own order types.
+You can also easily extend the FlexPolicy and overwrite some of its methods. For example to create your own order types you would implement something like this:
 
 [source, kotlin]
 ----
@@ -50,7 +50,7 @@ include::{sourcefile}[tag=chaining]
 == Fractional Order sizes
 Roboquant doesn't make assumptions on the permitted order- and position-sizes. They are not limited to integers only and so there is no restriction on using a broker that supports fractional trading. Since it is the Policy that create the orders, here you can also put any type of order size logic yuo require.
 
-To make it even easier, there is an OrderSizer interface with default implementations you can reuse.
+TIP: The `FlexPolicy` allows you to specify the number of decimals for sizing calculations, allowing to easily enable fractional orders.
 
 
 == Custom Policies
@@ -75,7 +75,7 @@ include::{sourcefile}[tag=naive2]
 ----
 
 
-The following example is more realistic and shows an implementation that calculates the ATR (Average True Range) that is than used to set the limit amount in a Limit Order. This example use the `DefaultPolicy` as its base class that will take care of much of the logic like sizing and dealing with concurrent orders.
+The following example is more realistic and shows an implementation that calculates the ATR (Average True Range) that is than used to set the limit amount in a Limit Order. This example use the `FlexPolicy` as its base class that will take care of much of the logic like sizing and dealing with concurrent orders.
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=custom3]

@@ -138,7 +138,7 @@
 		<dependency>
 			<groupId>org.jetbrains.kotlinx</groupId>
 			<artifactId>kotlin-jupyter-api</artifactId>
-			<version>0.11.0-74</version>
+			<version>0.11.0-170</version>
 		</dependency>
 	</dependencies>
 

@@ -10,12 +10,12 @@ import org.roboquant.common.Asset
 import org.roboquant.common.Size
 import org.roboquant.common.days
 import org.roboquant.feeds.Event
-import org.roboquant.metrics.MetricResults
 import org.roboquant.orders.*
 import org.roboquant.policies.*
 import org.roboquant.strategies.NoSignalStrategy
 import org.roboquant.strategies.Signal
-import org.roboquant.ta.TaLibMetric
+import org.roboquant.strategies.utils.MultiAssetPriceBarSeries
+import org.roboquant.ta.TaLib
 import java.time.Instant
 
 // tag::basic[]
@@ -32,16 +32,16 @@ class MyPolicy : Policy {
 
 private fun chainedPolicies() {
     // tag::chaining[]
-    val policy = DefaultPolicy()
-        .resolve(SignalResolution.NO_CONFLICTS) // remove conflicting signals
+    val policy = MyPolicy()
+        .resolve(SignalResolution.NO_CONFLICTS) // remove all conflicting signals
         .singleOrder() // remove multiple (open) orders for the same asset
-        .circuitBreaker(10, 1.days) // remove orders if there are too many
+        .circuitBreaker(10, 1.days) // stop orders if there are too many created
     // end::chaining[]
 }
 
 
 // tag::default[]
-class MyDefaultPolicy : DefaultPolicy() {
+class MyFlexPolicy : FlexPolicy() {
 
     override fun createOrder(signal: Signal, size: Size, price: Double): Order? {
         // We don't short in this example and exit orders are already covered by the bracket order
@@ -90,45 +90,50 @@ fun naivePolicy2() {
     // end::naive2[]
 }
 
-fun customPolicy() {
+
+fun customPolicy2() {
     // tag::custom3[]
     /**
-     * Custom Policy that extends the DefaultPolicy and captures the ATR (Average True Range) using the TaLibMetric. It
-     * then uses the ATR to set the limit amount of a LimitOrder.
+     * Custom Policy that extends the FlexPolicy and uses the ATR (Average True Range)
+     * to set the limit amount of a LimitOrder.
      */
-    class SmartLimitPolicy(private val atrPercentage: Double = 0.02, private val atrPeriod: Int) : DefaultPolicy() {
+    class SmartLimitPolicy(val atrPercentage: Double = 0.02, val window: Int = 5) : FlexPolicy() {
 
-        // use TaLibMetric to calculate the ATR values
-        private val atr = TaLibMetric("atr", atrPeriod + 1) { atr(it, atrPeriod) }
-        private var atrMetrics: MetricResults = emptyMap()
+        // Keep track of historic prices per asset
+        private var prices = MultiAssetPriceBarSeries(window + 1)
+
+        // Use TaLib for calculation of the ATR
+        private val taLib = TaLib()
 
         override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
-            // Update the metrics and store the results, so we have them available when the
-            // createOrder is invoked.
-            atrMetrics = atr.calculate(account, event)
+            // Update prices, so we have them available when the createOrder is invoked.
+            prices.add(event)
 
-            // Call the regular DefaultPolicy processing
+            // Call the regular signal processing
             return super.act(signals, account, event)
         }
 
         /**
-         * Override the default behavior of creating a simple MarkerOrder. Create limit BUY and SELL orders with the
-         * actual limit based on the ATR of the underlying asset.
+         * Override the default behavior of creating a simple MarkerOrder. Create limit BUY and
+         * SELL orders with the actual limit based on the ATR of the underlying asset.
          */
         override fun createOrder(signal: Signal, size: Size, price: Double): Order? {
-            val metricName = "atr.${signal.asset.symbol.lowercase()}"
-            val value = atrMetrics[metricName]
-            return if (value != null) {
-                val direction = if (size > 0) 1 else -1
-                val limit = price - direction * value * atrPercentage
-                LimitOrder(signal.asset, size, limit)
-            } else {
-                null
-            }
+            val asset = signal.asset
+
+            // Don't create an order if we don't have enough data yet to calculate the ATR
+            if (! prices.isAvailable(asset)) return null
+
+            // We set a limit based on the ATR. The higher the ATR, the more the limit price
+            // will be distanced from the current price.
+            val priceBarSeries = prices.getSeries(asset)
+            val atr = taLib.atr(priceBarSeries, window)
+            val limit = price - size.sign * atr * atrPercentage
+
+            return LimitOrder(asset, size, limit)
         }
 
         override fun reset() {
-            atr.reset()
+            prices.clear()
             super.reset()
         }
     }

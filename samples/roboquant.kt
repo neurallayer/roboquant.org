@@ -16,7 +16,7 @@ import org.roboquant.jupyter.TradeChart
 import org.roboquant.logging.MemoryLogger
 import org.roboquant.metrics.AccountMetric
 import org.roboquant.metrics.ProgressMetric
-import org.roboquant.policies.DefaultPolicy
+import org.roboquant.policies.FlexPolicy
 import org.roboquant.strategies.CombinedStrategy
 import org.roboquant.strategies.EMAStrategy
 
@@ -38,7 +38,7 @@ fun tradeChart(account: Account) {
 fun complete() {
     val strategy  = EMAStrategy()
     val myBroker = SimBroker()
-    val myPolicy = DefaultPolicy()
+    val myPolicy = FlexPolicy()
     val metric1 = AccountMetric()
     val metric2 = ProgressMetric()
     val myLogger  = MemoryLogger()
