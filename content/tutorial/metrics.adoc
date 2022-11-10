@@ -4,7 +4,7 @@
 :sourcefile: ../../samples/metrics.kt
 :jbake-date: 2020-07-01
 
-Metrics allow you to monitor the progress of a `run` and get the necessary insights how a strategy is performing. Metrics are not limited to back testing and can also be used during live testing and paper trading and live trading.
+Metrics allow you to monitor the progress of a `run` and get the necessary insights how a strategy is performing. Metrics are not limited to back testing and can also be used during live testing, paper trading and live trading.
 
 By default, the configured metrics are invoked at each step in a run. A single metric can return multiple values, each value having it own a unique name. Metrics only calculate the values, the storing and/or logging of these values is done by a `MetricsLogger`.
 

@@ -13,7 +13,7 @@
   ],
   "imports" : [
     "org.roboquant.*",
-    "org.roboquant.logging.*",
+    "org.roboquant.loggers.*",
     "org.roboquant.common.*",
     "org.roboquant.metrics.*",
     "org.roboquant.strategies.*",

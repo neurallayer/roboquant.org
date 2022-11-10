@@ -13,7 +13,7 @@ import org.roboquant.feeds.LiveFeed
 import org.roboquant.feeds.RandomWalkFeed
 import org.roboquant.jupyter.MetricChart
 import org.roboquant.jupyter.TradeChart
-import org.roboquant.logging.MemoryLogger
+import org.roboquant.loggers.MemoryLogger
 import org.roboquant.metrics.AccountMetric
 import org.roboquant.metrics.ProgressMetric
 import org.roboquant.policies.FlexPolicy

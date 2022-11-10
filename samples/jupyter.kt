@@ -9,7 +9,7 @@ import org.roboquant.common.years
 import org.roboquant.feeds.Feed
 import org.roboquant.feeds.HistoricFeed
 import org.roboquant.jupyter.*
-import org.roboquant.logging.MetricsEntry
+import org.roboquant.loggers.MetricsEntry
 
 fun use1(data: List<MetricsEntry>) {
     // tag::use1[]

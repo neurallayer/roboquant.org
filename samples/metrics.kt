@@ -6,7 +6,7 @@ import org.roboquant.brokers.Account
 import org.roboquant.common.Asset
 import org.roboquant.feeds.Event
 import org.roboquant.jupyter.MetricChart
-import org.roboquant.logging.MetricsLogger
+import org.roboquant.loggers.MetricsLogger
 import org.roboquant.metrics.*
 import org.roboquant.strategies.Strategy
 import java.time.Instant
@@ -21,9 +21,10 @@ fun standard(strategy: Strategy, sp500Asset: Asset) {
     val metric5 = SharpRatioMetric()
     val metric6 = PNLMetric()
     val metric7 = AlphaBetaMetric(sp500Asset, 250)
+    val metric8 = ScorecardMetric()
 
     val roboquant = Roboquant(
-        strategy, metric1, metric2, metric3, metric4, metric5, metric6, metric7
+        strategy, metric1, metric2, metric3, metric4, metric5, metric6, metric7, metric8
     )
     // end::standard[]
 }
