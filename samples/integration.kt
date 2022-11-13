@@ -60,7 +60,7 @@ fun alpacaHistoricFeed() {
     // tag::alpacahistoric[]
     val feed = AlpacaHistoricFeed()
     val tf = Timeframe.past(100.days)
-    feed.retrieve("AAPL", "IBM", timeframe = tf)
+    feed.retrieveStockPriceBars("AAPL", "IBM", timeframe = tf)
     // end::alpacahistoric[]
 }
 
@@ -85,7 +85,7 @@ fun iexLiveFeed() {
 fun alpacaLiveFeed(roboquant: Roboquant) {
     // tag::alpacalive[]
     val feed = AlpacaLiveFeed()
-    feed.subscribe("AAPL", "IBM")
+    feed.subscribeStocks("AAPL", "IBM")
 
     val tf = Timeframe.next(120.minutes)
     roboquant.run(feed,tf)
