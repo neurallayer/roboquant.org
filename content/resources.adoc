@@ -1,0 +1,60 @@
+= Resources
+:jbake-type: page
+:jbake-status: published
+:jbake-heading: testing leads to failure, and failure leads to understanding
+:icons: font
+
+== Learning
+
+=== PodCast
+The provided links are pointing to Apple Podcast shows, but typically the same podcasts can also be found on many other podcast platforms.
+
+- https://podcasts.apple.com/nl/podcast/better-system-trader/id985870258[Better System Trader] - all about systematic trading
+
+- https://podcasts.apple.com/nl/podcast/chat-with-traders/id957265404[Chat with Traders] - several episodes and interviews with algo traders
+
+- https://podcasts.apple.com/nl/podcast/top-traders-unplugged/id888420325[Top Traders Unplugged] - rule based investment in the context of trend following strategies
+
+- https://podcasts.apple.com/nl/podcast/patrick-boyle-on-finance/id1547740313[Patrick Boyle on Finance] - general background and insights often on trending financial topics.
+
+- https://podcasts.apple.com/nl/podcast/flirting-with-models/id1402620531?l=en[Flirting with Models] - explores systematic investment strategies, ranging from value to momentum and merger arbitrage to managed futures.
+
+- https://podcasts.apple.com/nl/podcast/roots-report/id1573504444?l=en[Roots Reports] - discuss recent developments in the market
+
+- https://podcasts.apple.com/nl/podcast/the-quant-financial-engineering-podcast/id1216248445?l=en[Quant/Financial Engineering] - discuss the latest trends in Data analytics, Asset Management, Blockchain, Risk Management.
+
+- https://podcasts.apple.com/nl/podcast/confessions-of-a-market-maker/id1467786723?l=en[Confessions of a Market Maker] - educational trading experience, coupled with entertaining stories
+
+=== Books
+When looking for books to learn more about (algo-)trading, it is highly recommended to look for books that focus on the foundation. So books that explain how to develop and test a strategy, what are good metrics to monitor and what are possible pitfalls. Books (or people for that matter) that promise strategies that make a lot of profit, should be best avoided (IMHO).
+
+- Machine Learning for Algorithmic Trading: Predictive models to extract signals from market and alternative data for systematic trading strategies with Python - Stefan Jansen
++
+This book explains how many machine learning techniques can be applied to algo-trading. It doesn't focus on only a single technique like deep learning, but touches many techniques instead. For example, it has some good content for Bayesian ML.
++
+This is also a great book for someone with a good software developer background. Like the subtitle states this book uses Python to illustrate many examples (and even has a GitHub repo). However, you'll require decent understanding of Python and commonly used libraries to be able to translate this into Kotlin.
+
+- Advances in Financial Machine Learning - Marcos Lopez de Prado
++
+This book has several innovative ideas about different approaches to algo-trading. And although the code-snippets that are included are written in Python, the underlying theory is applicable to any implementation. Also, this book contains some good information about how easy it is for your approach to developing a strategy to look into the future without realizing it.
+
+- Trading Systems - Emilio Tomasini
++
+A good book for a beginner that has plenty of pragmatic tips how to build, test, optimise and implement robustness trading systems. There is some AmiBroker code included, but even without understanding this, you can easily follow the book.
+
+- Automated Stock Trading Systems: A Systematic Approach for Traders to Make Money in Bull, Bear and Sideways Markets - Laurens Bensdorp
++
+Easy to understand and follow with extra attention on how to diversify your portfolio using different strategies. Book describes several concrete strategies and how to combine them to achieve better performance in different market conditions.
+
+- Systematic Trading - Robert Carver
++
+Robert Carver is a regular guest at the podcast `Top Traders Unplugged` and has written several books about systematic trading. He has also written his own software (open-source), that implement these systematic rules in code. padpad
+
+
+- Algorithmic Trading - Ernest P. Chan
+This book does not try to sell you trading strategies, but teaches you the methods and underlying discipline to achieve good strategies. There are code snippets included that are written in Matlab, which are not too hard to understand and can be easily translated into another computer language.
+
+
+
+
+

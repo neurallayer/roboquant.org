@@ -91,11 +91,10 @@ fun avroCaptureLive() {
 
 private fun predefined() {
     // tag::predefined[]
-    val feed1 = AvroFeed.sp500() // S&P500 for 5 years
-    val feed2 = AvroFeed.usTest() // 6 popular US stocks for last 60 years
+    val feed1 = AvroFeed.sp500() // S&P500 with daily PriceBar data
+    val feed2 = AvroFeed.sp500Quotes() // S&P500 with PriceQuote data
     // end::predefined[]
 }
-
 
 
 fun testEvent(event: Event) {
