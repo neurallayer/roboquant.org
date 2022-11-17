@@ -154,7 +154,10 @@ include::{sourcefile}[tag=avrocapturelive]
 ----
 
 === Default AvroFeeds
-Roboquant comes with a few default AvroFeeds. The main benefit is that you can quickly test if your code is working without having to download and set up your own feeds.
+Roboquant comes with a few default AvroFeeds. The main benefit is that you can quickly test if your code is working without having to download or set up your own feeds. There are two feeds available:
+
+1. A feed with daily `PriceBar` market data for the S&P 500 stocks for the last 2.5 years
+2. A feed with 5 minutes of price quotes, again for the S&P 500 stocks
 
 [source, kotlin, indent=0]
 ----

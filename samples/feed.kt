@@ -12,7 +12,6 @@ import org.roboquant.feeds.csv.LazyCSVFeed
 import java.time.Instant
 
 
-
 fun feedInterface() {
     // tag::interface[]
     class MYFeed : Feed {
@@ -82,12 +81,9 @@ fun avroCaptureLive() {
     val feed = BinanceLiveFeed()
     feed.subscribePriceBar("BTCUSDT")
     val timeframe = Timeframe.next(4.hours)
-    AvroFeed.record(feed, "bitcoin.avro", timeframe)
+    AvroFeed.record(feed, "bitcoin.avro", timeframe = timeframe)
     // end::avrocapturelive[]
 }
-
-
-
 
 private fun predefined() {
     // tag::predefined[]
@@ -95,7 +91,6 @@ private fun predefined() {
     val feed2 = AvroFeed.sp500Quotes() // S&P500 with PriceQuote data
     // end::predefined[]
 }
-
 
 fun testEvent(event: Event) {
     // tag::event[]
@@ -114,7 +109,7 @@ fun testPriceAction(event: Event) {
     }
 
     // get the first price for a particular asset
-    val price:Double? = event.getPrice(Asset("XYZ"))
+    val price: Double? = event.getPrice(Asset("XYZ"))
     // end::priceaction[]
 }
 
