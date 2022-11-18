@@ -9,16 +9,24 @@
 == Two approaches
 There are two different ways to install and use _roboquant_:
 
-. Interactively in a *Jupyter Notebook*. If you want to be up and running quickly, this is the easiest approach. Also, if you are less experienced software developer, this is a good starting point. Additionally, you get many charts out-of-the-box that help you to understand how the strategy is performing.
-+
-image::jupyter-lab.png[alt="screenshot", width="400", align="center"]
+[.float-group]
+--
+image::jupyter-lab.png[alt="screenshot", width="400", float="left"]
+Interactively in a *Jupyter Notebook*. If you want to be up and running quickly, this is the easiest approach. Additionally, you get many charts out-of-the-box that help you to understand how the strategy is performing.
+--
 
-. As a library in your *standalone Kotlin or Java application*. If you plan to develop large and complex trading strategies, this is a good approach since you'll have the full power of an IDE like IntelliJ IDEA at your disposal.
-+
-image::idea.png[alt="screenshot", width="400", align="center"]
-
+[.float-group]
+--
+image::idea.png[alt="screenshot", width="400", float="right"]
+As a library in your *standalone Kotlin or Java application*. If you plan to develop large and complex trading strategies, this is a good approach since you'll have the full power of an IDE like IntelliJ IDEA at your disposal.
+--
 
 == Run Jupyter Notebook
+If you don't want to install anything on your local machine, you can try any of the included notebooks right now by clicking on one of the two following badges:
+
+. Jupyter Classic: image:https://mybinder.org/badge_logo.svg[Binder,link=https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=tree/notebooks/,window=_blank]
+. Jupyter Lab: image:https://mybinder.org/badge_logo.svg[Binder,link=https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/notebooks/,window=_blank]
+
 If you have already Docker installed on your local machine, all it takes is a single command to have a fully functional Jupyter Notebook environment with _roboquant_ available that is ready to use.
 
 [source,shell]
@@ -38,8 +46,6 @@ docker run --rm -p 8888:8888 -e JUPYTER_TOKEN="my-secret" docker.io/roboquant/ju
 ----
 
 If you don't have Docker yet installed on your computer, check out https://www.docker.com/get-started[Docker get started^] and download Docker for Desktop from there. If you are running Linux, then your distribution likely already has Docker or Podman included.
-
-TIP: If you don't want to install anything locally, you can use a public hosted notebook environment. Launch the notebooks right now on MyBinder.org by clicking image:https://mybinder.org/badge_logo.svg[Binder,link=https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/tutorials,window=_blank]
 
 === AWS SageMaker
 The AWS SageMaker notebook instances don't have Kotlin support enabled by default. But there is an easy way to add it the first time an instance is created. You can add a `lifecycle` script that will be run when the environment is created and in our case adds the Kotlin kernel.
