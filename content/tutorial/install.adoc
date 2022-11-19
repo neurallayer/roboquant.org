@@ -11,13 +11,14 @@ There are two different ways to install and use _roboquant_:
 
 [.float-group]
 --
-image::jupyter-lab.png[alt="screenshot", width="400", float="left"]
+image::jupyter-lab.png[width="500", float="left"]
 Interactively in a *Jupyter Notebook*. If you want to be up and running quickly, this is the easiest approach. Additionally, you get many charts out-of-the-box that help you to understand how the strategy is performing.
 --
+{empty} +
 
 [.float-group]
 --
-image::idea.png[alt="screenshot", width="400", float="right"]
+image::idea.png[width="500", float="right"]
 As a library in your *standalone Kotlin or Java application*. If you plan to develop large and complex trading strategies, this is a good approach since you'll have the full power of an IDE like IntelliJ IDEA at your disposal.
 --
 

@@ -60,11 +60,12 @@ The following table shows which 3rd parties are supported out of the box and wha
 |Interactive Brokers|✓|✓|✓|✓
 |Alpaca|✓|✓|✓|
 |OANDA|✓|✓|✓|✓
+|Polygon.io|✓|✓||
 |IEX Cloud|✓|✓||
 |Yahoo Finance|✓|||
 |Alpha Vantage|✓|||
 |Binance|✓|✓|✓|
-|Crypto Exchanges|✓|✓|✓|
+|XChange (60+ crypto exchanges)|✓|✓|✓|
 |ECB||||✓
 |===
 
