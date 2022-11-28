@@ -156,8 +156,8 @@ include::{sourcefile}[tag=avrocapturelive]
 === Default AvroFeeds
 Roboquant comes with a few default AvroFeeds. The main benefit is that you can quickly test if your code is working without having to download or set up your own feeds. There are two feeds available:
 
-1. A feed with daily `PriceBar` market data for the S&P 500 stocks for the last 2.5 years
-2. A feed with 5 minutes of price quotes, again for the S&P 500 stocks
+1. A feed with daily `PriceBar` market data for the S&P 500 stocks for the last few years
+2. A feed with few minutes of price quotes, again for the S&P 500 stocks
 
 [source, kotlin, indent=0]
 ----
@@ -166,4 +166,4 @@ include::{sourcefile}[tag=predefined]
 
 In the future there will be more default AvroFeeds that you can use, also depending on the feedback from the community. Likely candidates that are currently missing are FOREX feeds and cryptocurrency feeds.
 
-WARNING: these default feeds should not be relied on for serious back testing.
+WARNING: these default feeds should not be relied on for serious back testing. They just serve to quickly run a back test and see if your strategy and policy are behaving as expected.

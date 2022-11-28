@@ -25,7 +25,6 @@
     "org.roboquant.policies.*",
     "org.roboquant.jupyter.*",
     "org.roboquant.ta.*",
-    "java.time.Period",
     "java.time.Instant",
     "java.time.temporal.ChronoUnit"
   ]

@@ -2,7 +2,7 @@
 :source-highlighter: rouge
 :icons: font
 :jbake-date: 2020-04-01
-:sourcefile: ../../samples/policy.kt
+:sourcefile: ../../samples/orders.kt
 
 == Order Types
 Roboquant comes out of the box with support for different types of orders. The following diagram shows which orders are supported and also their class relationship to each other.
@@ -48,8 +48,8 @@ The default TIF for orders in _roboquant_ if none is explicitly specified, is GT
 == Custom Order Types
 Orders can be extended with your own order types if the ones that come out of the box are not sufficient. The steps required to make to use yor own order types are:
 
-. Extend the `Order` abstract class
-. If you want to use these orders also in back testing, you'll also need to implement and register an OrderHandler
+. Extend one of the two `CreateOrder` or `ModifyOrder` abstract classes
+. If you want to use these orders also in back testing, you'll also need to implement and register an `OrderExecutor`
 
 After that, you can use this new order type in your policy just like any of the included order types.
 

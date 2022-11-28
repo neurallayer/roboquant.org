@@ -72,7 +72,26 @@ fun timeFrame() {
 
     // Split timeframe in 31 days periods
     val tf3 = tf2.split(31.days) // result is List<Timeframe>
+
+    // Create 100 random timeframes, each of 3 months duration
+    val tf4 = tf2.sample(3.months, 100) // result is List<Timeframe>
     // end::tf[]
+}
+
+
+fun tradingPeriod(roboquant: Roboquant, feed: Feed) {
+    // tag::tradingperiod[]
+    val now = Instant.now()
+    val tomorrow = now + 1.days
+    val nextWeek = now + 1.weeks
+
+    // Create a back-test 6 months before and after the Black Monday
+    val timeframe = Timeframe.blackMonday1987
+    val backTestPeriod = timeframe.extend(6.months)
+
+    // Run a strategy for the 8 hours
+    roboquant.run(feed, Timeframe.next(8.hours))
+    // end::tradingperiod[]
 }
 
 

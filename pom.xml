@@ -12,8 +12,8 @@
 		<kotlin.code.style>official</kotlin.code.style>
 		<kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
 		<kotlin.compiler.incremental>false</kotlin.compiler.incremental>
-		<kotlin.version>1.7.21</kotlin.version>
-		<roboquant.version>0.9.7</roboquant.version>
+		<kotlin.version>1.8.0-Beta</kotlin.version>
+		<roboquant.version>0.9.8-SNAPSHOT</roboquant.version>
 	</properties>
 
 	<repositories>

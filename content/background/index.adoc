@@ -56,13 +56,13 @@ With data sets growing, it is important that a strategy can still be quickly eva
 
 * Roboquant isn't setup to be a financial ledger and in general trading applications don't require this accuracy. The native Java Double type provides enough precision for most algo-trading purposes and there is no need to use (the much slower and more memory hungry) BigDecimal type. The area where _roboquant_ uses more precise calculation is when dealing with order and position sizes.
 
-* The data Feed API supports data that is kept in-memory as well data that is stored on disk and only accessed when required. This allows for running back test where the test data doesn't fit in memory or running back-tests on machines with limited memory. In fact _roboquant_ can be used on a JVM with only 512 MB of heap allocated.
+* The data Feed API supports data that is kept in-memory as well data that is stored on disk and only accessed when required. This allows for running back test where the test data doesn't fit in memory or running back-tests on machines with limited memory. In fact _roboquant_ can be used on a JVM with only 200 MB of heap allocated.
 
 * Many of the builtin features use multithreading to speedup processing. For example the CSV parser parses CSV files in parallel so even directories with thousands of CSV files can be parsed in seconds.
 
 * Avoid (auto)boxing, so the JVM can access these variables directly. This means where possible use native types and not the wrapper one. See https://docs.oracle.com/javase/1.5.0/docs/guide/language/autoboxing.html[background^]
 
-* Overall the latency is kept very low when processing a new event and generating a signal and order. So it is feasible to create fast, low latency (sub-second) trading strategies.
+* Overall the latency is kept very low when processing a new event and generating orders. So it is feasible to create fast, low latency (milliseconds) trading strategies.
 
 == Reliability
 Even more important than performance, is reliability when it comes to trading software. So _roboquant_ takes several quality assurance measures in order to catch as many bugs as possible before the software is released:

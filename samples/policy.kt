@@ -2,11 +2,6 @@
 
 import org.roboquant.Roboquant
 import org.roboquant.brokers.Account
-import org.roboquant.brokers.sim.Execution
-import org.roboquant.brokers.sim.ExecutionEngine
-import org.roboquant.brokers.sim.Pricing
-import org.roboquant.brokers.sim.TradeOrderHandler
-import org.roboquant.common.Asset
 import org.roboquant.common.Size
 import org.roboquant.common.days
 import org.roboquant.feeds.Event
@@ -14,9 +9,8 @@ import org.roboquant.orders.*
 import org.roboquant.policies.*
 import org.roboquant.strategies.NoSignalStrategy
 import org.roboquant.strategies.Signal
-import org.roboquant.strategies.utils.MultiAssetPriceBarSeries
+import org.roboquant.ta.MultiAssetPriceBarSeries
 import org.roboquant.ta.TaLib
-import java.time.Instant
 
 // tag::basic[]
 class MyPolicy : Policy {
@@ -34,7 +28,6 @@ private fun chainedPolicies() {
     // tag::chaining[]
     val policy = MyPolicy()
         .resolve(SignalResolution.NO_CONFLICTS) // remove all conflicting signals
-        .singleOrder() // remove multiple (open) orders for the same asset
         .circuitBreaker(10, 1.days) // stop orders if there are too many created
     // end::chaining[]
 }
@@ -97,10 +90,10 @@ fun customPolicy2() {
      * Custom Policy that extends the FlexPolicy and uses the ATR (Average True Range)
      * to set the limit amount of a LimitOrder.
      */
-    class SmartLimitPolicy(val atrPercentage: Double = 0.02, val window: Int = 5) : FlexPolicy() {
+    class SmartLimitPolicy(val atrPercentage: Double = 0.02, val windowSize: Int = 5) : FlexPolicy() {
 
         // Keep track of historic prices per asset
-        private var prices = MultiAssetPriceBarSeries(window + 1)
+        private var prices = MultiAssetPriceBarSeries(windowSize + 1)
 
         // Use TaLib for calculation of the ATR
         private val taLib = TaLib()
@@ -121,12 +114,12 @@ fun customPolicy2() {
             val asset = signal.asset
 
             // Don't create an order if we don't have enough data yet to calculate the ATR
-            if (! prices.isAvailable(asset)) return null
+            if (! prices.isFilled(asset)) return null
 
             // We set a limit based on the ATR. The higher the ATR, the more the limit price
             // will be distanced from the current price.
             val priceBarSeries = prices.getSeries(asset)
-            val atr = taLib.atr(priceBarSeries, window)
+            val atr = taLib.atr(priceBarSeries, windowSize)
             val limit = price - size.sign * atr * atrPercentage
 
             return LimitOrder(asset, size, limit)
@@ -157,52 +150,3 @@ fun signal2order(signals: List<Signal>) {
     // end::orders[]
 }
 
-
-fun bracketOrder(asset: Asset, price: Double) {
-    // tag::bracketOrder[]
-    val size = Size(10)
-    val order = BracketOrder(
-        MarketOrder(asset, size), // main order
-        LimitOrder(asset, -size, price * 1.05), // take profit order
-        StopOrder(asset, -size, price * 0.95) // stop loss order
-    )
-    // end::bracketOrder[]
-}
-
-
-fun customOrder() {
-
-    // tag::customOrder[]
-    // Simple custom order type
-    class MyOrder(asset: Asset, val size: Size, val customProperty: Int, id: Int = nextId()) : Order(asset, id)
-
-    // Define a handler for your custom order type.
-    // This is only required if you want your order to be supported by the SimBroker
-    class MyOrderHandler(val order: MyOrder) : TradeOrderHandler {
-
-        override var state = OrderState(order)
-
-        override fun execute(pricing: Pricing, time: Instant): List<Execution> {
-
-            // Set state to accepted
-            state = OrderState(order, OrderStatus.ACCEPTED, time)
-
-            // some logic for the order type
-            // ....
-
-            // Get the price to use for the execution
-            val price = pricing.marketPrice(order.size)
-
-            // Set the state to be COMPLETED. As long as the state is not in a CLOSED state, the handler stays active.
-            state = OrderState(order, OrderStatus.COMPLETED, time, time)
-
-            // Return the executions
-            return listOf(Execution(order, order.size, price))
-        }
-
-    }
-
-    // Register the handler
-    ExecutionEngine.register<MyOrder> { MyOrderHandler(it) }
-    // end::customOrder[]
-}

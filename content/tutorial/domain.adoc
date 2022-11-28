@@ -59,17 +59,17 @@ include::{sourcefile}[tag=er]
 
 
 == Time
-In order to make it easier to trade in a multi-regions, _roboquant_ introduces a number of domain classes: <<Timeline>>, <<Timeframe>>, <<ZonedPeriod>>.
+In order to make it easier to trade in a multi-regions, _roboquant_ introduces a number of domain classes: <<Timeline>>, <<Timeframe>>, <<TradingPeriod>>.
 
-Internally all time in stored in `Instant` type and so can always be easily compared, regardless from which timezone the information originated from. The `Event` for example exposes its time attribute as an `Instant`.
+Internally all time in stored in `Instant` type and so can always be easily compared, regardless from which timezone the information originated. The `Event` for example exposes its time attribute as an `Instant`.
 
 === Timeline
 Timeline is a list of `Instant` instances ordered in chronological order. For example a historical feed has a timeline, which represents all the moments in time that the feed has data available. A timeline has zero or more elements, but is always finite.
 
 === Timeframe
-`Timeframe` represents a period of time with a start-time (inclusive) and an end-time (exclusive).
+`Timeframe` represents a period of time with a start-time (inclusive) and an end-time (inclusive or exclusive).
 
-It is used throughout _roboquant_, but one particular use-case is that you can restrict a `run` to a particular timeframe. So instead of one large run over all the events in a `Feed`, you can have multiple smaller runs. The `Timeframe` has several helper methods that makes it easier to split a timeframe into smaller parts.
+It is used throughout _roboquant_, but one particular use-case is that you can restrict a `run` to a particular timeframe. So instead of one large run over all the events in a `Feed`, you can have multiple smaller runs. The `Timeframe` has several helper methods that makes it easier to split a timeframe into these smaller parts.
 
 [source,kotlin,indent=0]
 ----
@@ -83,11 +83,17 @@ There is also a set of predefined timeframes for significant events in history o
 include::{sourcefile}[tag=predefined]
 ----
 
-=== ZonedPeriod
+=== TradingPeriod
 When dealing with time duration, there are actual two types of duration in Java/Kotlin:
 
 1. `Period` which you use for days and longer and is timezone sensitive
 2. `Duration` which you use for days and shorted and is not timezone sensitive
 
-The ZonedPeriod in _roboquant_ makes this a single implementation.
+The TradingPeriod in _roboquant_ unifies this into a single implementation and allowing you
+to do things like:
+
+[source,kotlin,indent=0]
+----
+include::{sourcefile}[tag=tradingperiod]
+----
 

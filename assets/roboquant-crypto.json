@@ -28,7 +28,6 @@
     "org.roboquant.ta.*",
     "org.roboquant.binance.*",
     "org.roboquant.xchange.*",
-    "java.time.Period",
     "java.time.Instant",
     "java.time.temporal.ChronoUnit"
   ]
