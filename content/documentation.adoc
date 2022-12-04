@@ -4,26 +4,17 @@
 :jbake-heading: testing leads to failure, and failure leads to understanding
 :icons: font
 
-== Introduction
-There are several ways to learn more about _roboquant_. We use the documentation approach as first introduced by Divio and now adopted by many projects to split the documentation in 4 different sections:
-
-. Tutorial - learning oriented documentation
-. Background - understanding oriented documentation
-. How-to - problem oriented documentation
-. Reference - information oriented documentation
-
-If you are interested to find out more about this approach, you can visit the https://documentation.divio.com/introduction/#making-documentation-work[Divio website]
 
 == Tutorial
-A comprehensive xref:tutorial/index.adoc[tutorial], well suited if you are new to _roboquant_. It comes with many code samples to get you started.
-
-== Background
-Click xref:background/index.adoc[here] to find out why _roboquant_ was created in the first place and some key features and benefits. It will also provide an overview of the xref:background/four_stages.adoc[4 stages] process of developing robust trading strategies.
+A comprehensive xref:tutorial/index.adoc[tutorial], well suited if you are new to _roboquant_ or just want to understand the core concepts. It comes with many code samples to get you started and explains how to develop your own strategies.
 
 == How-to
-The how-to notebooks focus on achieving a particular task, like how to integrate with Binance or how to use technical indicators in your strategy. You can run the notebooks on your local machine or use an online notebook provider like MyBinder.org to run them.
+A series of how-to notebooks focus on achieving a particular task, like how to integrate with Binance or how to use technical indicators in your strategy. You can run the notebooks on your local machine or use a free online environment like MyBinder.org to run them.
 
-To find out more, go to https://github.com/neurallayer/roboquant-notebook/tree/main[GitHub]. Or if you just want to try it without any installation, go to image:https://mybinder.org/badge_logo.svg[Binder,link=https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/tutorials]
+To find out more, go to https://github.com/neurallayer/roboquant-notebook/tree/main[GitHub], or if you just want to try it without any installation, click  image:https://mybinder.org/badge_logo.svg[Binder,link=https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=tree/notebooks/, window=_blank]
+
+== Background info
+Click xref:background/index.adoc[here] to find out why _roboquant_ was created in the first place and some key features and benefits. It will also provide an overview of the xref:background/four_stages.adoc[4 stages] process of developing robust trading strategies.
 
 == Reference
 The _roboquant_ source code documentation (work in progress).

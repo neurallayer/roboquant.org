@@ -7,10 +7,6 @@ import org.roboquant.alpaca.AlpacaLiveFeed
 import org.roboquant.common.Timeframe
 import org.roboquant.common.days
 import org.roboquant.common.minutes
-import org.roboquant.iexcloud.IEXCloudHistoricFeed
-import org.roboquant.iexcloud.IEXCloudLiveFeed
-import org.roboquant.iexcloud.Interval
-import org.roboquant.iexcloud.Range
 import org.roboquant.oanda.OANDABroker
 import org.roboquant.oanda.OANDAHistoricFeed
 import org.roboquant.oanda.OANDALiveFeed
@@ -63,22 +59,6 @@ fun alpacaHistoricFeed() {
     // end::alpacahistoric[]
 }
 
-
-
-fun iexHistoricFeed() {
-    // tag::iexhistoric[]
-    val feed = IEXCloudHistoricFeed()
-    feed.retrieve("AAPL", "IBM", range = Range.FIVE_YEARS)
-    // end::iexhistoric[]
-}
-
-
-fun iexLiveFeed() {
-    // tag::iexlive[]
-    val feed = IEXCloudLiveFeed()
-    feed.subscribeQuotes("IBM", "AAPL", interval = Interval.ONE_MINUTE)
-    // end::iexlive[]
-}
 
 
 fun alpacaLiveFeed(roboquant: Roboquant) {

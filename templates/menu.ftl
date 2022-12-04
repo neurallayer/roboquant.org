@@ -7,6 +7,7 @@
                 <li class="nav-item"><a class="nav-link" href="/documentation.html">Documentation</a></li>
                 <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
                 <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
+                <li class="nav-item"><a class="nav-link" href="/resources.html">Resources</a></li>
                 <li class="nav-item"><a class="nav-link" href="https://github.com/neurallayer/roboquant" target="_blank">
                     <span class="icon"><i class="fa fa-github fa-1x"></i></span> GitHub
                 </a></li>

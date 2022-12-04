@@ -61,7 +61,6 @@ The following table shows which 3rd parties are supported out of the box and wha
 |Alpaca|✓|✓|✓|
 |OANDA|✓|✓|✓|✓
 |Polygon.io|✓|✓||
-|IEX Cloud|✓|✓||
 |Yahoo Finance|✓|||
 |Alpha Vantage|✓|||
 |Binance|✓|✓|✓|

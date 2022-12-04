@@ -12,7 +12,8 @@
                                 <img class="mb-2 masthead-avatar" src="/img/avatar.png" alt="${config.site} avatar">
                             </div>
                             <div class="col-lg-8">
-                                <h3 class="masthead-subheading font-weight-light mt-5">${content.heading}</h3>
+                                <h1 class="font-weight-light mt-2">${content.title}</h1>
+                                <h4 class="masthead-subheading font-weight-light mt-2">${content.heading}</h4>
                             </div>
                          </div>
                      </div>
@@ -20,7 +21,6 @@
             <!-- Page content-->
             <section class="py-3">
                 <div class="container-sm px-5 my-5">
-                     <h1>${content.title}</h1>
                      ${content.body}
                </div>
             </section>

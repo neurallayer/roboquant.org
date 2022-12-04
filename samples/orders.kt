@@ -12,9 +12,9 @@ fun bracketOrder(asset: Asset, price: Double) {
     // tag::bracketOrder[]
     val size = Size(10)
     val order = BracketOrder(
-        MarketOrder(asset, size), // main order
-        LimitOrder(asset, -size, price * 1.05), // take profit order
-        StopOrder(asset, -size, price * 0.95) // stop loss order
+        MarketOrder(asset, size), // entry order
+        LimitOrder(asset, -size, price * 1.05), // take profit exit order
+        StopOrder(asset, -size, price * 0.95) // stop loss exit order
     )
     // end::bracketOrder[]
 }
@@ -36,8 +36,15 @@ fun customCreateOrder() {
 
         override var status = OrderStatus.INITIAL
 
-        // Cannot be cancelled
-        override fun cancel(time: Instant) = false
+        // Our order type can be cancelled
+        override fun cancel(time: Instant) : Boolean {
+            return if (status.open) {
+                status = OrderStatus.CANCELLED
+                true
+            } else {
+                false
+            }
+        }
 
         // Cannot be updated
         override fun update(order: CreateOrder, time: Instant) = false
@@ -52,7 +59,7 @@ fun customCreateOrder() {
             // Get the price to use for the execution
             val price = pricing.marketPrice(order.size)
 
-            // the logic for the order type
+            // the logic for the custom order type
             // ....
 
             // Set the state to be COMPLETED once done.

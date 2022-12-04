@@ -48,7 +48,7 @@ In the most basic form, you provide a feed as single the argument to the `run` m
 include::{sourcefile}[tag=run]
 ----
 
-However, you can restrict a run to a certain timeframe. Especially useful for live feeds, that would otherwise run forever. But it also comes in handy when using historic data and you want to perform multiple runs over different times.
+However, you can restrict a run to a certain timeframe. Especially useful for live feeds, that would otherwise run forever. But it also comes in handy when using historic data, and you want to perform multiple runs over different times.
 
 [source, kotlin, indent=0]
 ----

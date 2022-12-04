@@ -1,0 +1,10 @@
+= Correlation
+:jbake-type: screenshotitem
+:jbake-status: published
+:jbake-heading: we can chart our future clearly only when we know the path that led to the present
+:imagesdir: img/
+:icons: font
+
+Another interesting visualization is the correlation matrix that shows how different assets are correlated to each other over a certain period of time.
+
+image::correlation.png[alt="screenshot"]

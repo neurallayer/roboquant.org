@@ -1,7 +1,7 @@
 = Screenshots
 :jbake-type: page
 :jbake-status: published
-:jbake-heading: We can chart our future clearly only when we know the path that led to the present
+:jbake-heading: we can chart our future clearly only when we know the path that led to the present
 :imagesdir: img/
 :icons: font
 

@@ -1,0 +1,11 @@
+= Walk forward
+:jbake-type: screenshotitem
+:jbake-status: published
+:imagesdir: img/
+:icons: font
+
+Plot a metric during a walk-forward test to provide insight into the performance of the strategy during different timeframes. Here we plot the account equity (= cash + positions) and that provides insights how a strategy performs during different timeframes. Clearly we can see that the strategy wasn't profitable during every timeframe.
+
+image::walkforward.png[alt="screenshot"]
+
+Like most charts in _roboquant_, you can zoom into areas of interest. You can do so with the slider at the bottom of the chart or use the zoom option from the toolbox at the top right.

@@ -1,0 +1,10 @@
+= Candlestick
+:jbake-type: screenshotitem
+:jbake-status: published
+:imagesdir: img/
+:icons: font
+
+You can see when certain trades were executed in relation to the price of that asset at the same time.
+Especially for strategies based only on price actions this helps to validate if trades occurred when expected.
+
+image::prices.png[alt="screenshot"]

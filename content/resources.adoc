@@ -1,9 +1,11 @@
 = Resources
 :jbake-type: page
 :jbake-status: published
-:jbake-heading: testing leads to failure, and failure leads to understanding
+:jbake-heading: if you personalize losses, you can't trade
 :icons: font
 :imagesdir: img/books
+
+Developing algo-trading skills is a major endeavor, and this page lists some resources that can help with it. These resources are not limited to _roboquant_ and could benefit any algo-trading development.
 
 == Podcasts
 This section provides an overview of some popular podcasts about (algo-)trading. The provided links are pointing to Apple Podcast shows, but typically the same podcasts can also be found on most other podcasting platforms.

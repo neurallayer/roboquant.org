@@ -16,13 +16,13 @@
             <section class="pt-3" id="intro">
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
-                        <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">What is roboquant</h2></div>
+                        <div class="col-lg-4 mb-1 mb-lg-0"><h2 class="fw-bolder mb-0">What is roboquant</h2></div>
                         <div class="col-lg-8">
                             <div class="col h-100">
                                 <p><em>Roboquant</em> is an open source algorithmic trading platform written in Kotlin. It is very fast, flexible, user-friendly and completely free to use.</p>
                                 <p>It is designed for anyone serious about algo-trading. So whether you are a beginning retail trader or an established trading firm,
-                                <em>roboquant</em> can help you to quickly develop fully automated trading strategies. No promises of making lots of
-                                 profit without doing the hard work, just a great foundation for building your strategies.</p>
+                                <em>roboquant</em> can help you to quickly develop fully automated trading strategies. No false promises of making lots of
+                                 profit without doing the hard work, just a great foundation for building your own strategies.</p>
                             </div>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
             <section class="py-3" id="sample">
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
-                        <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">Simple to get started</h2></div>
+                        <div class="col-lg-4 mb-1 mb-lg-0"><h2 class="fw-bolder mb-0">Simple to get started</h2></div>
                         <div class="col-lg-8">
                             <div class="col h-100">
                                 A lot of attention went into making sure <em>roboquant</em> is easy to use, especially for less experienced developers.
@@ -52,7 +52,7 @@
             <section class="pb-3" id="features">
                 <div class="container px-5 my-3">
                     <div class="row gx-5">
-                        <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">Main Features</h2></div>
+                        <div class="col-lg-4 mb-1 mb-lg-0"><h2 class="fw-bolder mb-0">Main Features</h2></div>
                         <div class="col-lg-8">
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
                                 <div class="col mb-3 h-100">
@@ -80,7 +80,7 @@
             <section class="pb-3" id="integration">
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
-                        <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">3rd Party Integration</h2></div>
+                        <div class="col-lg-4 mb-1 mb-lg-0"><h2 class="fw-bolder mb-0">3rd Party Integration</h2></div>
                         <div class="col-lg-8">
                             <div class="col h-100">
                                 <#include "integration.ftl">

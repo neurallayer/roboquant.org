@@ -1,7 +1,7 @@
 = Community
 :jbake-type: page
 :jbake-status: published
-:jbake-heading: testing leads to failure, and failure leads to understanding
+:jbake-heading: the four most dangerous words in investing are: this time it's different
 :icons: font
 
 There are several ways to get into contact, ask questions, contribute, and share your experience regarding _roboquant_.

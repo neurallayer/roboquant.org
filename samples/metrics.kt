@@ -18,7 +18,7 @@ fun standard(strategy: Strategy, sp500Asset: Asset) {
     val metric2 = ExposureMetric()
     val metric3 = ProgressMetric()
     val metric4 = VWAPMetric()
-    val metric5 = SharpRatioMetric()
+    val metric5 = ReturnsMetric()
     val metric6 = PNLMetric()
     val metric7 = AlphaBetaMetric(sp500Asset, 250)
     val metric8 = ScorecardMetric()
