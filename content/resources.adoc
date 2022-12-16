@@ -1,102 +1,11 @@
 = Resources
-:jbake-type: page
+:jbake-type: collection
 :jbake-status: published
 :jbake-heading: if you personalize losses, you can't trade
 :icons: font
-:imagesdir: img/books
+:items: resources
 
 Developing algo-trading skills is a major endeavor, and this page lists some resources that can help with it. These resources are not limited to _roboquant_ and could benefit any algo-trading development.
-
-== Podcasts
-This section provides an overview of some popular podcasts about (algo-)trading. The provided links are pointing to Apple Podcast shows, but typically the same podcasts can also be found on most other podcasting platforms.
-
-- https://podcasts.apple.com/nl/podcast/better-system-trader/id985870258[Better System Trader] - Great podcast about systematic trading. Since often there is supporting visual content, you might want to watch the episodes on their https://www.youtube.com/@BetterSystemTraderPodcast[YouTube channel].
-
-- https://podcasts.apple.com/nl/podcast/chat-with-traders/id957265404[Chat with Traders] - several episodes and interviews with algo traders. Especially the discussed pitfalls of going live with fully automated trading systems I found very are helpful.
-+
-Click this link to find out which episodes might be of most interest to algo-traders: https://chatwithtraders.com/tag/algorithmic-trading/[algo-trading episodes]
-
-- https://podcasts.apple.com/nl/podcast/top-traders-unplugged/id888420325[Top Traders Unplugged] - rule based investment in the context of trend following strategies. There are some very experienced traders on this show, and they share a lot of useful tips and best practices.
-+
-An additional benefit for beginning algo-traders is that their trend following rules they are not that hard to translate into executable code.
-
-- https://podcasts.apple.com/nl/podcast/patrick-boyle-on-finance/id1547740313[Patrick Boyle on Finance] - good background information on trending financial events. Besides providing excellent insights into these hot topics, I really enjoy the dry humor in these podcasts.
-+
-For example checkout this episode: https://podcasts.apple.com/nl/podcast/patrick-boyle-on-finance/id1547740313?i=1000518760107[The Bitcoin Green Revolution - Is Cathie Wood Right About Bitcoin?]
-
-- https://podcasts.apple.com/nl/podcast/flirting-with-models/id1402620531?l=en[Flirting with Models] - explores systematic investment strategies, ranging from value to momentum and merger arbitrage to managed futures. Nice thing about this podcast is that there are many types of guests interviewed, ranging from traditional fund managers to retail crypto traders.
-
-- https://podcasts.apple.com/nl/podcast/roots-report/id1573504444?l=en[Roots Report] - discuss recent developments in the financial market on a weekly basis. If you don't have the time to stay up to date with the latest financial news, this is an easy way to catch-up.
-
-- https://podcasts.apple.com/nl/podcast/the-quant-financial-engineering-podcast/id1216248445?l=en[Quant/Financial Engineering] - discuss the latest trends in Data analytics, Asset Management, Blockchain and Risk Management. If you are interested in the application of machine learning, definitely listen to this podcast.
-
-- https://podcasts.apple.com/nl/podcast/confessions-of-a-market-maker/id1467786723?l=en[Confessions of a Market Maker] - educational trading experience, coupled with some entertaining stories. Not that much focus on trading automation, but good content on trading in different asset classes with knowledgeable guests.
-
-== Books
-When looking for books to learn more about (algo-)trading, it is recommended to look for books that focus on the foundation. So books that explain how to develop and test a strategy, what are good metrics to monitor and what are possible pitfalls. Books (or people for that matter) that promise strategies that make a lot of profit, should be best avoided (IMHO).
-
-[.float-group]
---
-image::machinelearning.jpeg[width="200", float="left"]
-*Machine Learning for Algorithmic Trading* - Stefan Jansen
-
-This book explains how different machine learning techniques can be applied to algo-trading. It doesn't focus on only a single technique like deep learning, but touches many techniques instead. For example, it has some good content for Bayesian machine learning.
-
-Because of the all the different techniques described, this book is over 800 pages long. If you want to start using machine learning in your strategies, this book is a must-have in my honest opinion. Content wise nothing to complain, but the thing I was not so keen about is the print quality, especially the images.
---
-[.float-group]
---
-image::advances.jpeg[width="200", float="right"]
-*Advances in Financial Machine Learning* - Marcos Lopez de Prado
-
-This book has several innovative ideas about different approaches to algo-trading. And although the code-snippets that are included are written in Python, the underlying theory is applicable to any implementation. Also, this book contains some good information about how easy it is for your approach to developing a strategy to look into the future without realizing it.
-
-Marcos Lopez de Prado als has some good YouTube videos where he explains much of the same theory. So check those out first if you are not sure yet about buying this book.
---
-
-[.float-group]
---
-image::trading.jpeg[width="200", float="left"]
-*Trading Systems* - Emilio Tomasini
-
-A good book for a beginner that has plenty of pragmatic tips how to build, test, optimise and implement robustness trading systems. There is some AmiBroker code included, but even without understanding this, you can still follow along.
-
-If you are new to statistics, this book also has some good introduction on how to deal with forecasts in the context of uncertainty.
---
-
-[.float-group]
---
-image::automated.jpeg[width="200", float="right"]
-*Automated Stock Trading Systems* - Laurens Bensdorp
-
-Easy to understand and follow with extra attention on how to diversify your portfolio using different strategies. The book also describes 7 concrete strategies and the rules that need to be implemented for each of these strategies. The strategies are not hard to understand and are a mix of trend-following and mean-reversion.
-
-This book doesn't contain any code snippets. But I would argue implementing some strategies yourself from scratch, is a great learning experience.
-
-Like many other "Amazon printed" books, the images are not great. But in this case fortunately they are not that important to understand the content.
---
-
-[.float-group]
---
-image::systematic.jpeg[width="200", float="left"]
-
-*Systematic Trading* - Robert Carver
-
-Robert Carver is a regular guest at the podcast `Top Traders Unplugged` and has written several good books, of which this is one.
-
-He develops his own algo-trading software (available under open-source) and that shows. There are enough details in the book to actual implement the strategies in your own code. If anything, due to the high density of information, some chapters require multiple reads before grasping everything.
---
-
-[.float-group]
---
-image::algorithmic.jpeg[width="200", float="right"]
-*Algorithmic Trading* - Ernest P. Chan
-
-This book does not try to sell you trading strategies, but teaches you the methods and underlying discipline to achieve good strategies. There are code snippets written in Matlab, which are not too hard to understand (especially if you have some background in math or other computer languages).
-
-This book is more theoretical than some others books on this list. But that is also a major plus; it means it will stay relevant for longer, and not be outdated as quick.
---
-
 
 
 

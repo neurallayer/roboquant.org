@@ -4,7 +4,7 @@
 :sourcefile: ../../samples/roboquant.kt
 :jbake-date: 2020-10-01
 
-== Create
+== Create an Instance
 The `Roboquant` class (org.roboquant.Roboquant) is the engine of the platform, not to be confused with _roboquant_ (all small letters) which is the name of the platform itself. An instance of the `Roboquant` class orchestrates the interaction between the components and performs the actual runs.
 
 You are only required to provide a strategy when creating a new instance of _Roboquant_. So the bare minimum to get a working instance would look something like this:

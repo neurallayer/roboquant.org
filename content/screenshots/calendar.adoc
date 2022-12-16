@@ -1,7 +1,7 @@
-= Daily calendar
-:jbake-type: screenshotitem
+= Daily Calendar
+:jbake-type: item
 :jbake-status: published
-:imagesdir: img/
+:imagesdir: ../img/
 :icons: font
 
 Plot a metric for each day of the year to see how it performed over time.

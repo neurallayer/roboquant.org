@@ -1,7 +1,7 @@
-= Asset allocation
-:jbake-type: screenshotitem
+= Asset Allocation
+:jbake-type: item
 :jbake-status: published
-:imagesdir: img/
+:imagesdir: ../img/
 :icons: font
 
 See the asset allocation within the open positions. If assets are denoted in different currencies, this will convert to the base currency of the account.

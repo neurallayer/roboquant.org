@@ -1,8 +1,8 @@
-= Monte Carlo simulation
-:jbake-type: screenshotitem
+= Monte Carlo
+:jbake-type: item
 :jbake-status: published
 :jbake-heading: we can chart our future clearly only when we know the path that led to the present
-:imagesdir: img/
+:imagesdir: ../img/
 :icons: font
 
 An even more extensive back-test is to run the experiment over randomly sampled timeframes of a fixed duration. In this example we selected the duration to be 250 trading days. We then plot the results of all samples and this provide a good view of the distribution of the profit/loss a strategy could generate over 250 days timeframe.

@@ -1,7 +1,7 @@
 = Trades
-:jbake-type: screenshotitem
+:jbake-type: item
 :jbake-status: published
-:imagesdir: img/
+:imagesdir: ../img/
 :icons: font
 
 Trades provide an overview of the trades for all the assets made during a certain time period.

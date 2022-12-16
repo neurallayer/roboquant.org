@@ -3,7 +3,7 @@
 :sourcefile: ../../samples/simbroker.kt
 :jbake-date: 2020-08-01
 
-You use the `SimBroker` class (short for Simulated Broker) both for the back testing and live testing stages. See also the xref:../background/four_stages.adoc[four stages] for more background about the different stages when developing trading strategies.
+You use the `SimBroker` class (short for Simulated Broker) both for the back testing and forward testing stages. See also the xref:../background/four_stages.adoc[four stages] for more background about the different stages when developing trading strategies.
 
 SimBroker can simulate a wide range of brokers and the exchanges. Besides several configuration parameters that are available, the behavior can be further extended by providing custom models for trading, fee and account modelling.
 

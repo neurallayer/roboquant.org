@@ -21,7 +21,7 @@ The following table shows the used `Broker` and `Feed` in the different stages:
 |Stage |Broker |Feed
 
 |Back Testing|SimBroker|Historic data feeds
-|Live Testing|SimBroker|Live data feeds
+|Forward Testing|SimBroker|Live data feeds
 |Paper Trading|Real broker using a demo account|Live data feeds
 |Live Trading|Real broker using a live account|Live data feeds
 |===
@@ -38,12 +38,12 @@ This is also the only stage where you should develop and modify your strategy an
 
 TIP: configure the `SimBroker` similar to the live trading account and broker you are planning to use. Configure realistic cost and initial deposit, so you don't get a too optimistic outlook on the overall cost. In general is it preferable to be conservative side and define a higher cost structure at this stage then the other way around.
 
-== Stage 2: Live Testing
-In this stage you use *live data* and the `SimBroker` to test your `Strategy` and `Policy`. The main purpose is to validate if your `Strategy` is still performing well on unseen data.
+== Stage 2: Forward Testing
+In this stage you use *live data* and the `SimBroker` to test your `Strategy` and `Policy`. The main purpose of this stage is to validate if your `Strategy` is still performing well on unseen data.
 
 It is very easy to over fit your `Strategy` during back testing, and this stage provides some confirmation if that is the case. That being said, often you cannot run this stage for as long as required to have a perfect insight into over fitting, so this is an indication at best.
 
-TIP: _roboquant_ can use any combination of data feed and broker. So you don't need to restrict yourself to data feed from your broker. There might be better and/or cheaper alternatives available.
+TIP: _roboquant_ can use any combination of data feed and broker. So you don't need to restrict yourself to a data feed from your broker. There might be better and/or cheaper alternatives available.
 
 == Stage 3: Paper Trading
 In this stage you use *live data* with a *paper trading or demo account* to test your `Strategy` and `Policy`. The main purpose is to validate if your `Policy` is still performing as expected using a different `Broker` implementation.

@@ -3,6 +3,7 @@
 :icons: font
 :source-highlighter: rouge
 :jbake-date: 2020-01-01
+:jbake-status: draft
 
 == Criteria
 Selecting a broker is an important decision when starting to develop algo-trading software. The following criteria can help to make the right decision:

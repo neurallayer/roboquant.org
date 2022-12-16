@@ -1,7 +1,7 @@
-= Walk forward
-:jbake-type: screenshotitem
+= Walk Forward
+:jbake-type: item
 :jbake-status: published
-:imagesdir: img/
+:imagesdir: ../img/
 :icons: font
 
 Plot a metric during a walk-forward test to provide insight into the performance of the strategy during different timeframes. Here we plot the account equity (= cash + positions) and that provides insights how a strategy performs during different timeframes. Clearly we can see that the strategy wasn't profitable during every timeframe.

@@ -7,21 +7,21 @@
               <header class="masthead bg-primary text-white text-center">
                      <div class="container px-5 my-1">
                          <div class="row gx-5">
-                            <div class="col-lg-4 mb-5 mb-lg-0">
+                            <div class="col-lg-4 mb-2 mb-lg-0">
                             </div>
                              <div class="col-lg-8">
                                  <div class="col h-100">
-                                    <h1 class="font-weight-light mt-1 doc">${content.title}</h1>
+                                    <h1 class="fw-light mt-1 doc">${content.title}</h1>
                                  </div>
                              </div>
                          </div>
                      </div>
                  </header>
 
-            <section class="py-5">
+            <section class="py-2">
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
-                        <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="col-lg-4 mb-2 mb-lg-0">
                             <#include "doc_index.ftl">
                          </div>
                         <div class="col-lg-8">

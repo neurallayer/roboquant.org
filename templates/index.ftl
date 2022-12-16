@@ -9,7 +9,7 @@
             <header class="masthead bg-primary text-white text-center">
                 <div class="container d-flex align-items-center flex-column">
                     <!-- Masthead Banner Image-->
-                    <img class="masthead-banner mb-2" src="/img/banner.png" alt="${config.site} banner">
+                    <img class="masthead-banner mb-1" src="/img/banner.png" alt="${config.site} banner">
                 </div>
             </header>
 

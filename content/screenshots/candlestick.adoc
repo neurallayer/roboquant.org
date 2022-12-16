@@ -1,7 +1,7 @@
 = Candlestick
-:jbake-type: screenshotitem
+:jbake-type: item
 :jbake-status: published
-:imagesdir: img/
+:imagesdir: ../img/
 :icons: font
 
 You can see when certain trades were executed in relation to the price of that asset at the same time.

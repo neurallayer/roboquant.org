@@ -1,0 +1,29 @@
+= Postcasts
+:jbake-type: item
+:jbake-status: published
+:icons: font
+:imagesdir: img/books
+
+This section provides an overview of some popular podcasts about (algo-)trading. The provided links are pointing to Apple Podcast shows, but typically the same podcasts can also be found on most other podcasting platforms.
+
+- https://podcasts.apple.com/nl/podcast/better-system-trader/id985870258[Better System Trader] - Great podcast about systematic trading. Since often there is supporting visual content, you might want to watch the episodes on their https://www.youtube.com/@BetterSystemTraderPodcast[YouTube channel].
+
+- https://podcasts.apple.com/nl/podcast/chat-with-traders/id957265404[Chat with Traders] - several episodes and interviews with algo traders. Especially the discussed pitfalls of going live with fully automated trading systems I found very are helpful.
++
+Click this link to find out which episodes might be of most interest to algo-traders: https://chatwithtraders.com/tag/algorithmic-trading/[algo-trading episodes]
+
+- https://podcasts.apple.com/nl/podcast/top-traders-unplugged/id888420325[Top Traders Unplugged] - rule based investment in the context of trend following strategies. There are some very experienced traders on this show, and they share a lot of useful tips and best practices.
++
+An additional benefit for beginning algo-traders is that their trend following rules they are not that hard to translate into executable code.
+
+- https://podcasts.apple.com/nl/podcast/patrick-boyle-on-finance/id1547740313[Patrick Boyle on Finance] - good background information on trending financial events. Besides providing excellent insights into these hot topics, I really enjoy the dry humor in these podcasts.
++
+For example checkout this episode: https://podcasts.apple.com/nl/podcast/patrick-boyle-on-finance/id1547740313?i=1000518760107[The Bitcoin Green Revolution - Is Cathie Wood Right About Bitcoin?]
+
+- https://podcasts.apple.com/nl/podcast/flirting-with-models/id1402620531?l=en[Flirting with Models] - explores systematic investment strategies, ranging from value to momentum and merger arbitrage to managed futures. Nice thing about this podcast is that there are many types of guests interviewed, ranging from traditional fund managers to retail crypto traders.
+
+- https://podcasts.apple.com/nl/podcast/roots-report/id1573504444?l=en[Roots Report] - discuss recent developments in the financial market on a weekly basis. If you don't have the time to stay up to date with the latest financial news, this is an easy way to catch-up.
+
+- https://podcasts.apple.com/nl/podcast/the-quant-financial-engineering-podcast/id1216248445?l=en[Quant/Financial Engineering] - discuss the latest trends in Data analytics, Asset Management, Blockchain and Risk Management. If you are interested in the application of machine learning, definitely listen to this podcast.
+
+- https://podcasts.apple.com/nl/podcast/confessions-of-a-market-maker/id1467786723?l=en[Confessions of a Market Maker] - educational trading experience, coupled with some entertaining stories. Not that much focus on trading automation, but good content on trading in different asset classes with knowledgeable guests.

@@ -9,7 +9,7 @@ import org.roboquant.orders.*
 import org.roboquant.policies.*
 import org.roboquant.strategies.NoSignalStrategy
 import org.roboquant.strategies.Signal
-import org.roboquant.ta.MultiAssetPriceBarSeries
+import org.roboquant.ta.PriceBarSeries
 import org.roboquant.ta.TaLib
 
 // tag::basic[]
@@ -93,14 +93,14 @@ fun customPolicy2() {
     class SmartLimitPolicy(val atrPercentage: Double = 0.02, val windowSize: Int = 5) : FlexPolicy() {
 
         // Keep track of historic prices per asset
-        private var prices = MultiAssetPriceBarSeries(windowSize + 1)
+        private var prices = PriceBarSeries(windowSize + 1)
 
         // Use TaLib for calculation of the ATR
         private val taLib = TaLib()
 
         override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
             // Update prices, so we have them available when the createOrder is invoked.
-            prices.add(event)
+            prices.addAll(event)
 
             // Call the regular signal processing
             return super.act(signals, account, event)
@@ -113,13 +113,12 @@ fun customPolicy2() {
         override fun createOrder(signal: Signal, size: Size, price: Double): Order? {
             val asset = signal.asset
 
-            // Don't create an order if we don't have enough data yet to calculate the ATR
-            if (! prices.isFilled(asset)) return null
-
             // We set a limit based on the ATR. The higher the ATR, the more the limit price
             // will be distanced from the current price.
-            val priceBarSeries = prices.getSeries(asset)
-            val atr = taLib.atr(priceBarSeries, windowSize)
+            val priceBarSerie = prices.getValue(asset)
+            if (! priceBarSerie.isFull()) return null
+
+            val atr = taLib.atr(priceBarSerie, windowSize)
             val limit = price - size.sign * atr * atrPercentage
 
             return LimitOrder(asset, size, limit)

@@ -1,7 +1,7 @@
-= Box plot
-:jbake-type: screenshotitem
+= Box Plot
+:jbake-type: item
 :jbake-status: published
-:imagesdir: img/
+:imagesdir: ../img/
 :icons: font
 
 Box plot aggregates a metric over a time interval so the different values for certain quantiles can be easily spotted.

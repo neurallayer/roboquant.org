@@ -1,0 +1,70 @@
+= Market Data Providers
+:jbake-type: item
+:jbake-status: published
+:icons: font
+
+The following table provides an overview of popular market data providers, both free as well as paid ones.
+
+[frame=ends]
+[.table]
+[cols="<,<,^,^,^,^,<"]
+|===
+|Provider|Asset Types|API|Historic|Realtime Delayed|Realtime|Pricing model
+
+|Polygon
+|US Stocks, Options & crypto
+|&check;|&check;|&check;|&check;
+|Fee per month
+
+|Yahoo Finance
+|US Stocks
+|&check;|&check;|&check;|
+|Free
+
+|Alpha Vantage
+|US stocks, fundamental, forex, crypto and economic indicators
+|&check;|&check;||
+|Fee based on API calls per minute
+
+|Stooq
+|US stocks, UK stocks, World stocks, macroeconomic indicators
+||&check;||
+|Free
+
+|Alpaca
+|US Stocks & Crypto
+|&check;|&check;|&check;|&check;
+|Fee per month
+
+|Databento
+|US Stocks L3
+||&check;||
+|Fee per download
+
+|Dukascopy
+|Forex, Commodities, CFD
+||&check;||
+|Free
+
+|Binance
+|Crypto
+|&check;|&check;|&check;|&check;
+|Free
+
+|IEX Exchange
+|IEX traded US stocks L3
+||&check;||
+|Free
+
+|Kaggle
+|Various datasets
+||&check;||
+|Free
+
+|===
+
+
+
+
+
+
