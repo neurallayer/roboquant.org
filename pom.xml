@@ -4,7 +4,7 @@
 
 	<groupId>org.roboquant</groupId>
 	<artifactId>roboquant-org</artifactId>
-	<version>0.9.9-SNAPSHOT</version>
+	<version>0.9.9</version>
 	<name>roboquant-org</name>
 
 	<properties>
