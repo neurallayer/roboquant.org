@@ -14,7 +14,7 @@ import org.roboquant.strategies.EMAStrategy
 import kotlin.system.measureTimeMillis
 
 
-fun performance() {
+private fun performance() {
     // tag::performance[]
     // Generate 1.008.000 1-minute price bars
     val feed = RandomWalkFeed.lastDays(days = 7, nAssets = 100)
@@ -30,7 +30,7 @@ fun performance() {
     // end::performance[]
 }
 
-fun friendly1() {
+private fun friendly1() {
     // tag::friendly1[]
     val wallet = 100.EUR + 20.USD + 1_000.JPY
     wallet.convert(USD)
@@ -38,7 +38,7 @@ fun friendly1() {
 }
 
 
-fun friendly2(broker: Broker) {
+private fun friendly2(broker: Broker) {
     // tag::friendly2[]
     val account = broker.account
     TradeChart(account.trades)

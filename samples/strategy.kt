@@ -24,7 +24,7 @@ private fun intro() {
     }
 }
 
-fun ema() {
+private fun ema() {
     // tag::ema[]
     // Use a EMA Crossover Strategy with predefined look-back periods
     val strategy1 = EMAStrategy.PERIODS_12_26
@@ -35,7 +35,7 @@ fun ema() {
 }
 
 
-fun simpleSignal() {
+private fun simpleSignal() {
     // tag::simpleSignal[]
     val apple = Asset("AAPL")
     val signal = Signal(apple, Rating.BUY)
@@ -44,7 +44,7 @@ fun simpleSignal() {
 
 
 @Suppress("RedundantExplicitType")
-fun allSignalAttributes(asset: Asset, rating: Rating) {
+private fun allSignalAttributes(asset: Asset, rating: Rating) {
     // tag::attrSignal[]
     val type: SignalType = SignalType.BOTH
     val takeProfit: Double = Double.NaN
@@ -55,7 +55,7 @@ fun allSignalAttributes(asset: Asset, rating: Rating) {
     // end::attrSignal[]
 }
 
-fun rsi() {
+private fun rsi() {
 
     // tag::rsi[]
     // Default thresholds values
@@ -67,7 +67,7 @@ fun rsi() {
 
 }
 
-fun extending() {
+private fun extending() {
     // tag::extend[]
     class MyStrategy1(lookBack:Int= 10) : HistoricPriceStrategy(lookBack) {
 
@@ -103,7 +103,7 @@ fun extending() {
 }
 
 
-fun composition(strategy1: Strategy, strategy2: Strategy, strategy3: Strategy) {
+private fun composition(strategy1: Strategy, strategy2: Strategy, strategy3: Strategy) {
     // tag::composition[]
     val strategy = CombinedStrategy(strategy1, strategy2, strategy3)
     val roboquant = Roboquant(strategy)
@@ -111,7 +111,7 @@ fun composition(strategy1: Strategy, strategy2: Strategy, strategy3: Strategy) {
 }
 
 
-fun ta() {
+private fun ta() {
 
     // tag::ta[]
     val shortTerm = 30
@@ -135,7 +135,7 @@ fun ta() {
 
 }
 
-fun customStrategy1() {
+private fun customStrategy1() {
     // tag::basic[]
     class MyStrategy : Strategy {
 
@@ -147,7 +147,7 @@ fun customStrategy1() {
     // end::basic[]
 }
 
-fun customStrategy2() {
+private fun customStrategy2() {
     // tag::naive[]
     class MyStrategy : Strategy {
 

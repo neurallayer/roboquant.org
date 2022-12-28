@@ -7,7 +7,7 @@ import org.roboquant.feeds.Feed
 import java.time.Instant
 
 
-fun currency() {
+private fun currency() {
     // tag::currency[]
     Currency.USD
     Currency.BTC
@@ -16,7 +16,7 @@ fun currency() {
 }
 
 
-fun amount() {
+private fun amount() {
     // tag::amount[]
     val amount1 = Amount(Currency.getInstance("USD"), 100.0) // the most code
     val amount2 = Amount(Currency.USD, 100.0) // less code
@@ -30,7 +30,7 @@ fun amount() {
     // end::amount[]
 }
 
-fun wallet() {
+private fun wallet() {
     // tag::wallet[]
     val wallet1 = Wallet(100.EUR, 10.USD)
     wallet1.deposit(200.GBP)
@@ -42,7 +42,7 @@ fun wallet() {
 }
 
 
-fun exchangeRates() {
+private fun exchangeRates() {
     // tag::er[]
     // Load the exchange rates as published by the ECB (European Central Bank)
     Config.exchangeRates = ECBExchangeRates.fromWeb()
@@ -62,7 +62,7 @@ fun exchangeRates() {
 }
 
 
-fun timeFrame() {
+private fun timeFrame() {
     // tag::tf[]
     // Parse a string
     val tf1 = Timeframe.parse("2019-01-01", "2020-01-01")
@@ -79,7 +79,7 @@ fun timeFrame() {
 }
 
 
-fun tradingPeriod(roboquant: Roboquant, feed: Feed) {
+private fun tradingPeriod(roboquant: Roboquant, feed: Feed) {
     // tag::tradingperiod[]
     val now = Instant.now()
     val tomorrow = now + 1.days

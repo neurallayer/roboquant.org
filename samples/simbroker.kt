@@ -19,7 +19,6 @@ fun usageBasic() {
 }
 
 
-
 fun usageBasic2(broker: Broker) {
     // tag::basic2[]
     val orders = emptyList<Order>()
