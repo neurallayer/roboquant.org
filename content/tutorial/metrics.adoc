@@ -4,9 +4,9 @@
 :sourcefile: ../../samples/metrics.kt
 :jbake-date: 2020-07-01
 
-Metrics allow you to monitor the progress of a `run` and get the necessary insights how a strategy is performing. Metrics are not limited to back testing and can also be used during forward testing, paper trading and live trading.
+Metrics allow you to monitor the progress of a `run` and get the necessary insights on how a strategy is performing. Metrics are not limited to back testing and can also be used during forward testing, paper trading and live trading.
 
-By default, the configured metrics are invoked at each step in a run. A single metric can return multiple values, each value having it own a unique name. Metrics only calculate the values, the storing and/or logging of these values is done by a `MetricsLogger`.
+By default, the configured metrics are invoked at each step in a run. A single metric can return multiple values, each value having its own unique name. Metrics only calculate the values, the storing and/or logging of these values is done by a `MetricsLogger`.
 
 == Standard Metrics
 There are several commonly used metrics included with _roboquant_ that can be added to your `Roboquant` instance:
@@ -16,12 +16,12 @@ There are several commonly used metrics included with _roboquant_ that can be ad
 include::{sourcefile}[tag=standard]
 ----
 
-TIP: if a metric is very compute intensive, and you don't require it at each step, you can wrap it in a `MetricsScheduler` and configure when it should be invoked.
+TIP: If a metric is very computationally intensive, and you don't require it at each step, you can wrap it in a `MetricsScheduler` and configure when it should be invoked.
 
 == Custom Metrics
 You can also develop your own metrics. All you have to do is implement the `calculate` method from the `Metric` interface and return `MetricResults`, which is just a `typealias` for `Map<String, Double>`. Metrics also implement the `Lifecycle` interface, so you can keep state in a metric if required and clean it when a lifecycle method is invoked.
 
-If you don't have any results at a certain step, you should return an `emptyMap()`. In the `calculate` function you have access to both the `Account` and the `Event` object.
+If you don't have any results at a certain step, you should return an `emptyMap()`. In the `calculate` function you have access to both the `Account` and the `Event` objects.
 
 [source,kotlin,indent=0]
 ----
@@ -33,10 +33,10 @@ A metrics logger receives the metric values at each step and then stores and/or 
 
 The following metric loggers are available out of the box:
 
-- `MemoryLogger`: this is the default logger used if no other logger is configured. It stores all the recorded values in memory and allows them to be queried afterwards. It also comes with an optional progress-bar that shows how much time is remaining during
+- `MemoryLogger`: this is the default logger used if no other logger is configured. It stores all the recorded values in memory and allows them to be queried afterwards. It also comes with an optional progress bar that shows how much time is left during
 a run.
 +
-This logger is especially useful if you are using a Jupyter Notebook and after a run want to directly plot some metrics.
+This logger is especially useful if you are using a Jupyter Notebook and want to directly plot some metrics after a run.
 +
 [source,kotlin,indent=0]
 ----
@@ -50,7 +50,7 @@ include::{sourcefile}[tag=memoryLogger]
 - `ConsoleLogger`: logs the metrics to the console using the `println` statement.
 
 === Custom Loggers
-You can also implement your own metrics logger, for example if you want to store values into a database or have a custom file format that you want to use. The following example shows a minimal example:
+You can also implement your own metrics logger, for example if you want to store values into a database or have a custom file format that you want to use. The following example shows a minimal implementation:
 
 [source,kotlin,indent=0]
 ----

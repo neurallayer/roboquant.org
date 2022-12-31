@@ -46,7 +46,7 @@ The following startup command has two additional features:
 docker run --rm -p 8888:8888 -e JUPYTER_TOKEN="my-secret" docker.io/roboquant/jupyter
 ----
 
-If you don't have Docker yet installed on your computer, check out https://www.docker.com/get-started[Docker get started^] and download Docker for Desktop from there. If you are running Linux, then your distribution likely already has Docker or Podman included.
+If you don't have Docker yet installed on your computer, check out https://www.docker.com/get-started[Docker get started^] and download Docker Desktop from there. If you are running Linux, then your distribution likely already has Docker or Podman included.
 
 === AWS SageMaker
 The AWS SageMaker notebook instances don't have Kotlin support enabled by default. But there is an easy way to add it the first time an instance is created. You can add a `lifecycle` script that will be run when the environment is created and in our case adds the Kotlin kernel.
@@ -122,7 +122,7 @@ root
         src/test/kotlin
 ----
 
-All source code is written in Kotlin, so there are no Java or other language source files. Roboquant uses Maven for the build process and assuming you already have this installed, building the libraries locally, is as easy as:
+All source code is written in Kotlin, so there are no Java or other language source files. Roboquant uses Maven for the build process and assuming you already have this installed, building the libraries locally is as easy as:
 
 [source, shell]
 ----
@@ -169,4 +169,4 @@ Then install the jar file in your local Maven repository on your machine using t
 mvn install:install-file -Dfile=TwsApi.jar -DgroupId=com.interactivebrokers -DartifactId=tws-api -Dversion=10.17 -Dpackaging=jar
 ----
 
-If this artefact cannot be found in your local Maven repository during a build, the module `roboquant-ibkr` will automatically be skipped. So if you don't require integration with Interactive Brokers for your trading, you can skip this step all together.
+If this artefact cannot be found in your local Maven repository during a build, the module `roboquant-ibkr` will automatically be skipped. So if you don't require integration with Interactive Brokers for your trading, you can skip this step altogether.

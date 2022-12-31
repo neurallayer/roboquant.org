@@ -15,7 +15,7 @@ include::{sourcefile}[tag=intro]
 Since a `Strategy` only has access to an `Event` and not the `Account`, it has no knowledge of things like orders, open positions or buying power. As a consequence a `Strategy` is a generic component that can be easily shared or re-used if required.
 
 == Standard Strategies
-There are several commonly used strategies included with _roboquant_. This section highlight some of them, and using them is a great way to get started.
+There are several commonly used strategies included with _roboquant_. This section highlights some of them, and using them is a great way to get started.
 
 === EMAStrategy
 This strategy uses two exponential moving averages and whenever they cross over, a BUY or SELL signal is generated
@@ -38,7 +38,7 @@ include::{sourcefile}[tag=ta]
 === RSIStrategy
 Strategy using the Relative Strength Index of an asset to generate signals. RSI measures the magnitude of recent price changes to evaluate overbought or oversold conditions in the price of a stock or other asset.
 
-If the RSI raise above the configured high threshold (default 70), a sell signal will be generated. And if the RSI falls below the configured low threshold (default 30), a buy signal will be generated.
+If the RSI raises above the configured high threshold (default 70), a sell signal will be generated. And if the RSI falls below the configured low threshold (default 30), a buy signal will be generated.
 
 [source, kotlin,indent=0]
 ----
@@ -46,7 +46,7 @@ include::{sourcefile}[tag=rsi]
 ----
 
 === NoSignalStrategy
-This strategy doesn't perform any action and will never generate a signal. If you develop all your logic in a Policy and don't require a strategy, use this strategy when you create a `Roboquant` instance. See also <<_policy_based_strategies>>
+This strategy doesn't perform any action and will never generate a signal. If you develop all your logic in a Policy and don't require a strategy, use this strategy when you create a `Roboquant` instance. See also <<_policy_based_strategies>>.
 
 === CombinedStrategy
 The `Roboquant` constructor takes only a single strategy as its argument. However, it is easy to combine multiple strategies in your run using the `CombinedStrategy` class.
@@ -57,21 +57,21 @@ include::{sourcefile}[tag=composition]
 ----
 
 == Extending Strategies
-Next to the standard strategies, there are also strategies included that can be the foundation for your own strategy. You extend these classes and add your own logic to them. These base strategies take care of some repetitive task and make it a quicker to develop your own strategies.
+Next to the standard strategies, there are also strategies included that can be the foundation for your own strategy. You extend these classes and add your own logic to them. These base strategies take care of some repetitive tasks and make it quicker to develop your own strategies.
 
 === SingleAssetStrategy
 This is an ideal base class if you only care about a single asset.
 
 
 === HistoricPriceStrategy
-A useful base strategies is `HistoricPriceStrategy`. This strategy collects historic prices for a predefined look-back period before invoking your method. That way you don't have to deal with some of the complexity that comes with an event-based trading engine.
+A useful base strategy is `HistoricPriceStrategy`. This strategy collects historic prices for a predefined look-back period before invoking your method. That way you don't have to deal with some of the complexity that comes with an event-based trading engine.
 
 You can:
 
 * Override the `generateSignal` method if you want full control on the signal that is created.
 * Override the `generateRating` method if the default Signal is fine, and you only need to provide the rating.
 
-The following code shows both an example of implementations:
+The following code shows an example of each implementation:
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=extend]
@@ -96,12 +96,12 @@ Now let's see how a trend-following `Strategy` would look like that would:
 include::{sourcefile}[tag=naive]
 ----
 
-As you can see a Strategy can maintain state, the `previousPrices` in the above example. You have to ensure you reset the state when a `Lifecycle` event is called, like the `reset` method in the above example.
+As you can see, a Strategy can maintain state, like `previousPrices` in the above example. You have to ensure you reset the state when a `Lifecycle` event is called, like the `reset` method in the above example.
 
 
 [#_policy_based_strategies]
 == Policy based Strategies
-There are use cases that require a strategy not only to have access to an `Event` but also to the `Account`. These type of strategies can be implemented in _roboquant_, but they should be implemented as a policy and not strategy. Some reasons you might need to use a policy:
+There are use cases that require a strategy not only to have access to an `Event` but also to the `Account`. These type of strategies can be implemented in _roboquant_, but they should be implemented as a policy instead. Some reasons you might need to use a policy:
 
 * Access to the Account instance is required, for example to re-balance a portfolio
 * Directly generate orders instead of signals
@@ -110,7 +110,7 @@ See the xref:policy.adoc[policy documentation] for more details.
 
 
 == Signals
-A `Signal` is the outcome of a strategy and is modelled closely after the ratings given by ratings agencies. The two mandatory attributes of a `Signal` are:
+A `Signal` is the outcome of a strategy and is modelled closely after the ratings given by rating agencies. The two mandatory attributes of a `Signal` are:
 
 1. The asset for which the signal applies, like a particular stock
 2. A rating for that same asset. There is a 5-point scale used for the `Rating` of a `Signal`:
@@ -121,7 +121,7 @@ A `Signal` is the outcome of a strategy and is modelled closely after the rating
 * `UNDERPERFORM`: A recommendation that means a stock is expected to do slightly worse than the overall stock market return. Underperform can also be expressed as "moderate sell," "weak hold" and "underweight."
 * `OUTPERFORM`: Also known as "moderate buy," "accumulate" and "overweight." Outperform is an analyst recommendation meaning a stock is expected to do slightly better than the market return.
 +
-NOTE: a `HOLD` rating is not the same as no signal. Only generate hold signals if you think the asset will perform market conform. If your strategy gives no clear indication about the future performance of an asset, don't generate a signal at all.
+NOTE: A `HOLD` rating is not the same as no signal. Only generate hold signals if you think the asset will perform like the market. If your strategy gives no clear indication about the future performance of an asset, don't generate a signal at all.
 
 == Simple Signals
 
@@ -138,4 +138,4 @@ Besides the mandatory Rating and Asset attributes of a signal instance, a signal
 include::{sourcefile}[tag=attrSignal]
 ----
 
-It is up to the xref:policy.adoc[policy] how/if to use these attributes when generating the orders. But for example the probability could be used to determine the sizing of the order, a high probability implies a larger size.
+It is up to the xref:policy.adoc[policy] how/if to use these attributes when generating the orders. But for example, the probability could be used to determine the sizing of the order, a higher probability implying a larger size.
