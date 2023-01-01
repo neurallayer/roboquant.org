@@ -7,7 +7,7 @@
 == Usage
 Since developing an algorithmic trading strategy requires a lot of experimentation and testing, an interactive development environment like Jupyter Notebooks is ideal. Especially in the beginning phase, it can help to progress a lot quicker.
 
-Roboquant is designed to be used in both your own standalone application, and in Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without much ceremony and there are many charts included that makes it easier to interpreter what is going on during a `run`.
+Roboquant is designed to be used in both standalone applications and Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without much ceremony and there are many charts included that make it easier to interpret what is going on during a `run`.
 
 Using _roboquant_ in a Kotlin Jupyter Notebook requires just a single command:
 
@@ -29,9 +29,9 @@ TIP: Chromium based browsers perform best, especially when you plot charts with 
 
 
 == Importing packages
-By default, most of the core _roboquant_ packages are imported. But the packages of the `roboquant-crypto` and `roboquant-extra` modules are not by default included. So for these you need to add the appropriate import statement.
+By default, most of the core _roboquant_ packages are imported. But the packages of the `roboquant-crypto` and `roboquant-extra` modules are not included by default. So for these you need to add the appropriate import statement.
 
-But you are not limited to using _roboquant_ libraries only. In fact, you can use any Java or Kotlin library that is published on some repository or is available on the local file system.
+But you are not limited to using _roboquant_ libraries only. In fact, you can use any Java or Kotlin library that is published on some repository or is available in the local file system.
 
 [source]
 ----
@@ -40,7 +40,7 @@ But you are not limited to using _roboquant_ libraries only. In fact, you can us
 ----
 
 == Charts
-Roboquant uses the excellent https://echarts.apache.org[Apache ECharts] JavaScript library to render charts in your browser. All charts are interactive, meaning you can zoom into areas of interest, and you can often filter on values of interest. There is a toolbar at the right top of each chart that allows for additional functionality, like downloading the chart or seeing the raw data.
+Roboquant uses the excellent https://echarts.apache.org[Apache ECharts] JavaScript library to render charts in your browser. All charts are interactive, meaning you can zoom into areas of interest, and you can often filter by values of interest. There is a toolbar at the top right of each chart that allows for additional functionality, like downloading the chart or seeing the raw data.
 
 [source, kotlin, indent=0]
 ----
@@ -49,12 +49,12 @@ include::{sourcefile}[tag=overview]
 
 
 === Design Philosophy
-In order to build robust and well performing trading algorithms, often you need to diversify across assets and asset classes. So a lot of the visualization is focused on providing insights on what is happening in such scenario and less in plotting the metrics a single asset only.
+In order to build robust and well performing trading algorithms, you often need to diversify across assets and asset classes. So a lot of the visualization is focused on providing insights on what is happening in such scenario and less in plotting the metrics for a single asset only.
 
-All the charts are tailored for _roboquant_ usage and are not a generic plotting library. So typically with just one line of code, you plot a very feature rich chart. However, adding a new custom chart is not much work, see also <<_custom_charts>>
+All the charts are tailored for _roboquant_ usage and are not a generic plotting library. So typically with just one line of code, you plot a very feature rich chart. However, adding a new custom chart is not much work either, see also <<_custom_charts>>.
 
 === Global settings
-If you have to plot a lot of samples (> 500,000), your browser can become unresponsive. To avoid this problem, you can limit the number of samples send to the browser. The default is no limits.
+If you have to plot a lot of samples (> 500,000), your browser can become unresponsive. To avoid this problem, you can limit the number of samples sent to the browser. The default is unlimited.
 
 [source, kotlin]
 ----
@@ -93,14 +93,14 @@ include::{sourcefile}[tag=priceBarChart]
 ----
 
 === PriceChart
-Similar to the functionality offered by a PriceBarChart, but this chart displays a single price and not a candlestick. As a consequence it can be used to plot any type of `PriceAction` and not only a PriceBar. So if you have a feed with order books data or trade prices, this is the chart to use.
+Similar to the functionality offered by a PriceBarChart, but this chart displays a single price and not a candlestick. As a consequence, it can be used to plot any type of `PriceAction` and not only a PriceBar. So if you have a feed with order book data or trade prices, this is the chart to use.
 
 [source, kotlin]
 ----
 include::{sourcefile}[tag=priceChart]
 ----
 
-NOTE: currently, you can only plot a single asset at a time. This might change in the future.
+NOTE: Currently, you can only plot a single asset at a time. This might change in the future.
 
 === PriceCorrelationChart
 Plots the Pearson correlation of a set of assets using the prices found in the provided `Feed`. You can optionally specify the period to take into account.
@@ -117,7 +117,7 @@ Plots any metric that has been captured during one or more runs. If the metric d
 image::https://roboquant.org/img/walkforward.png[]
 
 === CalendarChart
-Plots a metric over on a year calendar, using color coding (heatmap) to indicate how each individual day performed. If you quickly want to see which days had the highest and lowest PNL, this is a great chart to use.
+Plots a metric on a year calendar, using color coding (heatmap) to indicate how each individual day performed. If you quickly want to see which days had the highest and lowest PNL, this is a great chart to use.
 
 image::https://roboquant.org/img/calendar.png[]
 
@@ -131,7 +131,7 @@ image::https://roboquant.org/img/trades.png[]
 Similar to TradeChart, but this one plots all the placed orders. In general trades contain more info (like realized pnl), so the TradeChart might be more useful.
 
 === AssetAllocationChart
-Show the asset allocation of your positions, so how much have you exposed to the different assets.
+Show the asset allocation of your positions, so how much you have exposed to the different assets.
 
 image::https://roboquant.org/img/assets.png[]
 
