@@ -5,7 +5,7 @@
 :icons: font
 
 == Approach
-Besides core-components like `Strategy` and `Policy`, _roboquant_ also comes with a number of domain specific classes that make it easier to implement robust trading strategies. The two main focus areas are money related entities and time related entities.
+Besides core components like `Strategy` and `Policy`, _roboquant_ also comes with a number of domain specific classes that make it easier to implement robust trading strategies. The two main focus areas are money related entities and time related entities.
 
 This approach makes it very easy to deal with these entities without much code. This is also where many of the Kotlin language features come in handy with support for operator overloading and extension functions.
 
@@ -23,7 +23,7 @@ include::{sourcefile}[tag=currency]
 ----
 
 === Amount
-An amount can hold the value for a single currency. You can create a new `Amount` using the constructor. But you can also use the extension functions that are defined commonly used currencies (f.e. 120.EUR). Amounts are just like numbers immutable.
+An amount can hold the value for a single currency. You can create a new `Amount` using the constructor. But you can also use the extension functions that are defined for commonly used currencies (e.g. 120.EUR). Amounts are, just like numbers, immutable.
 
 [source,kotlin,indent=0]
 ----
@@ -49,7 +49,7 @@ NOTE: If you add two amounts together you'll always get a new `Wallet` instance 
 
 The `Config.exchangeRates` property is used by the components to perform the actual conversion. So you can change this property and all code from now on will use this new implementation.
 
-The `ExchangeRates` interface also supports different rates at different moments in time, but it depends on the actual implementation if the provided time parameter is taken into consideration. One of the implementations that comes out of the box with _roboquant_, is the `ECBExchangeRates` which contains daily exchange rates for most fiat currencies from the year 2000 onwards.
+The `ExchangeRates` interface also supports different rates at different moments in time, but it depends on the actual implementation if the provided time parameter is taken into consideration. One of the implementations that comes out of the box with _roboquant_ is the `ECBExchangeRates`, which contains daily exchange rates for most fiat currencies from the year 2000 onwards.
 
 
 [source,kotlin,indent=0]
@@ -59,24 +59,24 @@ include::{sourcefile}[tag=er]
 
 
 == Time
-In order to make it easier to trade in a multi-regions, _roboquant_ introduces a number of domain classes: <<Timeline>>, <<Timeframe>>, <<TradingPeriod>>.
+In order to make it easier to trade in multiple regions, _roboquant_ introduces a number of domain classes: <<Timeline>>, <<Timeframe>>, <<TradingPeriod>>.
 
-Internally all time in stored in `Instant` type and so can always be easily compared, regardless from which timezone the information originated. The `Event` for example exposes its time attribute as an `Instant`.
+Internally all time in stored in `Instant` type and so can always be easily compared, regardless of in which timezone the information originated. `Event`, for example, exposes its time attribute as an `Instant`.
 
 === Timeline
-Timeline is a list of `Instant` instances ordered in chronological order. For example a historical feed has a timeline, which represents all the moments in time that the feed has data available. A timeline has zero or more elements, but is always finite.
+Timeline is a list of `Instant` instances ordered in chronological order. For example, a historical feed has a timeline, which represents all the moments in time for which the feed has data available. A timeline has zero or more elements, but is always finite.
 
 === Timeframe
 `Timeframe` represents a period of time with a start-time (inclusive) and an end-time (inclusive or exclusive).
 
-It is used throughout _roboquant_, but one particular use-case is that you can restrict a `run` to a particular timeframe. So instead of one large run over all the events in a `Feed`, you can have multiple smaller runs. The `Timeframe` has several helper methods that makes it easier to split a timeframe into these smaller parts.
+It is used throughout _roboquant_, but one particular use case is that you can restrict a `run` to a particular timeframe. So instead of one large run over all the events in a `Feed`, you can have multiple smaller runs. The `Timeframe` has several helper methods that make it easier to split a timeframe into smaller parts.
 
 [source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=tf]
 ----
 
-There is also a set of predefined timeframes for significant events in history of trading. This comes in handy if you want to validate the performance of your strategy in a certain type of regime.
+There is also a set of predefined timeframes for significant events in the history of trading. This comes in handy if you want to validate the performance of your strategy in a certain type of regime.
 
 [source,kotlin,indent=0]
 ----
@@ -87,9 +87,9 @@ include::{sourcefile}[tag=predefined]
 When dealing with time duration, there are actual two types of duration in Java/Kotlin:
 
 1. `Period` which you use for days and longer and is timezone sensitive
-2. `Duration` which you use for days and shorted and is not timezone sensitive
+2. `Duration` which you use for days and shorter and is not timezone sensitive
 
-The TradingPeriod in _roboquant_ unifies this into a single implementation and allowing you
+The TradingPeriod in _roboquant_ unifies this into a single implementation, allowing you
 to do things like:
 
 [source,kotlin,indent=0]

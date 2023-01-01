@@ -5,7 +5,7 @@
 :jbake-date: 2020-12-01
 
 == Reading Guide
-Welcome to the _roboquant_ tutorial. Just like the _roboquant_ software, the documentation is also open source. So if you find mistakes or want to contribute, head over to the https://github.com/neurallayer/roboquant.org[GitHub documentation repository] where you can find the source. The documentation is in https://docs.asciidoctor.org/asciidoctor/latest/#relationship-to-asciidoc[AsciiDoc] format, so easy to modify with any editor.
+Welcome to the _roboquant_ tutorial. Just like the _roboquant_ software, the documentation is also open source. So if you find mistakes or want to contribute, head over to the https://github.com/neurallayer/roboquant.org[GitHub documentation repository] where you can find the source. The documentation is in https://docs.asciidoctor.org/asciidoctor/latest/#relationship-to-asciidoc[AsciiDoc] format, so it's easy to modify with any editor.
 
 * You can select a topic from the menu to get more information about that item.
 * Content that is formatted like `SomeName`, represents a real Kotlin class, interface, method or attribute.
@@ -21,7 +21,7 @@ The role and responsibilities of each of the components are as follows:
 
 * `Roboquant`
 +
-The engine of the platform that performs the actual run and orchestrate the interaction between the components. The engine supports all xref:../background/four_stages.adoc[4 stages] of developing a trading strategy with minimal changes to your code. This is also the only component that is a concrete `class` and not an `interface` and not designed to be swapped out for a custom implementation.
+The engine of the platform that performs the actual run and orchestrates the interaction between the components. The engine supports all xref:../background/four_stages.adoc[4 stages] of developing a trading strategy with minimal changes to your code. This is also the only component that is a concrete `class` and not an `interface` and not designed to be swapped out for a custom implementation.
 
 * `Feed`
 +
@@ -33,11 +33,11 @@ Receives the event and generates zero or more signals. A `Signal` is a `Rating` 
 
 * `Policy`
 +
-Receives the generated signals and creates the actual orders. If you need to create orders that are not based on signals, this is also the place to do so, for example re-balance your positions at regular intervals. Check the xref:../background/features.adoc#_order_management[features] why it is smart to separate this from your strategy logic.
+Receives the generated signals and creates the actual orders. If you need to create orders that are not based on signals, this is also the place to do so, for example to re-balance your positions at regular intervals. Check in xref:../background/features.adoc#_order_management[features] why it is smart to separate this from your strategy logic.
 
 * `Broker`
 +
-Receives the newly created orders by the policy and process them. Any open orders received in previous steps will also be processed until they are closed. After the processing of hte orders, it will return an updated account that reflects the latest state.
+Receives the newly created orders by the policy and processes them. Any open orders received in previous steps will also be processed until they are closed. After the processing of the orders, it will return an updated account that reflects the latest state.
 
 * `Metric`
 +
@@ -47,7 +47,7 @@ Receives the latest state of the account and calculates various metrics that are
 == Implementation details
 The actual implementation is a bit more elaborate. Especially the order of the components in the actual implementation might not be what you expected.
 
-But there it a good reason it is done this way. It is to avoid a look-ahead bias since the broker will always observe a new event first. So any signals and orders you create based on event at time~t~, will only be processed by the broker based on an event at time~t+1~.
+But there is a good reason it is done this way: it is now almost impossible to look into the future (look-ahead bias) with your strategy since the broker will always first observe a new event. So the signals and orders you create based on event at time t will only be processed by the broker based on an event at time t+1.
 
 The following diagram shows the actual interactions with their real method names and parameters between the components.
 
@@ -57,7 +57,7 @@ NOTE: Although the above diagram might look complicated, most of the complexity 
 
 
 == Developing your own strategy
-Developing a new strategy and validate it during a back-test is a straight forward process. The code snippet below shows the different steps that you have to take to develop and run your strategy.
+Developing a new strategy and validating it during a back-test is a straightforward process. The code snippet below shows the different steps that you have to take to develop and run your strategy.
 
 [source, kotlin, subs="attributes,verbatim", indent=0]
 ----

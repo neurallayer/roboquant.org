@@ -11,7 +11,7 @@ There are several types of integrations available with 3rd parties:
 * Brokers implementations
 * Exchange rates
 
-In some cases a single 3rd party provides all types of functionality, or sometimes they are just specialised for a subset. You can combine several of these 3rd parties together in a single run, for example use a data feed from one provider and the broker functionality from another one.
+In some cases a single 3rd party provides all types of functionality, or sometimes they are just specialised for a subset. You can combine several of these 3rd parties together in a single run, for example using a data feed from one provider and the broker functionality from another one.
 
 One of the design principles is that _roboquant_ tries to avoid exposing 3rd party APIs directly and typically wraps them in _roboquant_ equivalent types. This makes it easier to switch between different providers and also reduces the learning curve.
 
@@ -22,7 +22,7 @@ The third party integrations have their own modules and are not part of the core
 * roboquant-crypto for cryptocurrency related 3rd parties
 * roboquant-ibkr for Interactive Brokers
 
-Include these modules in your Maven or Gradle build. Except `roboquant-ibkr`, they are by default included in the Jupyter Notebooks.
+Include these modules in your Maven or Gradle build. Except `roboquant-ibkr`, they are included by default in the Jupyter Notebooks.
 
 In order to use the 3rd party integration, you'll first have to import the package. All third party integration have their own package directly under `org.roboquant`. So you can import all the required classes for OANDA as follows:
 
@@ -34,14 +34,14 @@ import org.roboquant.oanda.*
 == Configuration
 When you want to integrate with a 3rd party, you most likely require credentials to gain access to their APIs. Often this is in the form of an API key and secret. You can of course embed these credentials directly in your source code, however _roboquant_ offers better and more secure alternatives.
 
-The following list shows the steps how _roboquant_ resolves these configuration parameters:
+The following list shows the steps _roboquant_ uses to resolve these configuration parameters:
 
-. If the credentials are provided directly in the code when calling the API use these, otherwise go to next step.
-. If the credentials are provided as startup parameter to the JVM with the -D syntax use these, otherwise go to next step.
-. If the credentials are set as system environment variable (export MY_KEY="some value") use these, otherwise go to next step.
-. If the credentials are set in a property file called ".env" in the working directory use these, otherwise go to next step.
-. If the credentials are set in a property file called "dotenv" in the working directory use these, otherwise go to next step.
-. If the credentials are set in a property file called ".env" in the $HOME/.roboquant directory use these, otherwise go to next step.
+. If the credentials are provided directly in the code when calling the API, use these, otherwise go to next step.
+. If the credentials are provided as startup parameter to the JVM with the -D syntax, use these, otherwise go to next step.
+. If the credentials are set as system environment variable (export MY_KEY="some value"), use these, otherwise go to next step.
+. If the credentials are set in a property file called ".env" in the working directory, use these, otherwise go to next step.
+. If the credentials are set in a property file called "dotenv" in the working directory, use these, otherwise go to next step.
+. If the credentials are set in a property file called ".env" in the $HOME/.roboquant directory, use these, otherwise go to next step.
 
 The following provides an overview of the used properties in _roboquant_
 
@@ -71,8 +71,8 @@ The following table shows which 3rd parties are supported out of the box and wha
 NOTE: _roboquant_ is open source software that is developed independently of these 3rd party companies. There are no direct or indirect ties to any of these companies.
 
 == Adding new 3rd party integrations
-Adding integration with a 3rd party is not hard. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library that is available, this could take as little as a few hours to a few days. You can read more about the Feed interface that you need to implement right xref:feed.adoc#_custom_feeds[here]
+Adding integration with a 3rd party is not hard. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library that is available, this could take as little as a few hours to a few days. You can read more about the Feed interface that you need to implement right xref:feed.adoc#_custom_feeds[here].
 
-Integrating with a new broker is also not hard but requires more effort. The most amount of work will be the translation of object exposes by the broker versus those used by _roboquant_. For example an Order in _roboquant_ might be slightly different from an Order expected by the client library of the broker and a conversion needs to happen.
+Integrating with a new broker is not hard either, but requires more effort. The most amount of work will be the translation of object exposed by the broker to those used by _roboquant_. For example an Order in _roboquant_ might be slightly different from an Order expected by the client library of the broker, and then a conversion needs to happen.
 
-For both custom Feed and Broker integrations, it is recommended to first look at some existing integrations and use them as a starting point. And if you have questions, you can always reach out via one of the channels mentioned on the xref:../community.adoc[community page]
+For both custom Feed and Broker integrations, it is recommended to first look at some existing integrations and use them as a starting point. And if you have questions, you can always reach out via one of the channels mentioned on the xref:../community.adoc[community page].

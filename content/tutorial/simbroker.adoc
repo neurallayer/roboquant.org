@@ -6,7 +6,7 @@
 
 You use the `SimBroker` class (short for Simulated Broker) both for the back testing and forward testing stages. See also the xref:../background/four_stages.adoc[four stages] for more background about the different stages when developing trading strategies.
 
-SimBroker can simulate a wide range of brokers and the exchanges. Besides several configuration parameters that are available, the behavior can be further extended by providing custom models for trading, fee and account modelling.
+SimBroker can simulate a wide range of brokers and exchanges. Besides several configuration parameters that are available, the behavior can be further extended by providing custom models for trading, fee and account modelling.
 
 == Usage
 The instantiation of a `SimBroker` is surprisingly simple if the default settings suit your needs:
@@ -37,15 +37,17 @@ The initial deposit is the cash that is deposited at the opening of an account. 
 
 
 == Order Handling
-When an order is placed at the SimBroker, it only gets processed once there is a known price for the underlying asset. Till an event happens that has that price action available, the order will remain in its `INITIAL` state.
+When an order is placed at the SimBroker, it only gets processed once there is a known price for the underlying asset. Till an event happens that has that price info available, the order will remain in the `INITIAL` state.
 
-Any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted. So an order in `INITIAL` state will not expire and time based TIF only start counting after it has been accepted.
+Any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted. So an order in `INITIAL` state will not expire, and time based TIF will only start counting after it has been accepted.
 
-Any open orders will be processed based on FIFO (first-in-first-out) basis, so older open orders are processed first. Exception to this rule are modify orders that are always processed before create order types. The most common modify orders are a `CancelOrder` and an `UpdateOrder`.
+Any open orders will be processed based on FIFO (first-in-first-out) basis, so older open orders are processed first. Exception to this rule are modify orders, that are always processed before regular order types. The most common modify orders are `CancelOrder` and `UpdateOrder`.
 
 
 == Custom Configuration
-Custom models are a way to further customize the behavior of `SimBroker`. It is important to notice that if you don't take these type of cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading.
+Custom models are a way to further configure `SimBroker` and ensure it closely mimics the behavior of your real broker.
+
+It is important to notice that if you don't take these type of cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading.
 
 The following three types of models can be implemented if the default ones that comes with _roboquant_ are not sufficient:
 
@@ -71,7 +73,7 @@ include::{sourcefile}[tag=included]
 
 
 == Limitations
-Like any simulation, SimBroker also has limitations compared to a live trading. It is important to realize this and take appropriate actions where possible:
+Like any simulation, SimBroker also has limitations compared to live trading. It is important to realize this and take appropriate actions where possible:
 
 1. The default cost calculations become less realistic if you trade large sizes compared to overall daily volume. As a rule of thumb: don't underestimate the additional costs like spread, slippage and commissions and better be on the safe side.
 2. Order types might behave slightly different between SimBroker and different real brokers. If possible, perform paper trading to see if your solution still performs as expected.
@@ -80,7 +82,8 @@ Like any simulation, SimBroker also has limitations compared to a live trading. 
 == Account Models
 Account models allow to model the amount of **buying-power** for different types of accounts, like a Cash Account or Margin Account when using the SimBroker. Buying-power represents the amount of money available for trading.
 
-Out of the box _roboquant_ comes with two models that cather for the most common account types:
+
+Out of the box _roboquant_ comes with two models that cater for the most common account types:
 
 1. Cash accounts, that don't have any leverage or margin available
 2. Margin account, that have configurable margin values/
@@ -88,7 +91,7 @@ Out of the box _roboquant_ comes with two models that cather for the most common
 === Cash Accounts
 Cash accounts can be modelled using the `CashAccount`. This model is also the default if you don't provide a BuyingPowerModel when instantiating a xref:simbroker.adoc[SimBroker].
 
-`CashAccount` only base the buying power on the available cash, and no margin is calculated and no leverage is used. So cash and buying power are equal, however cash can contain multiple currencies while the buying power is always converted to the base currency of the account.
+`CashAccount` bases the buying power only on the available cash, and no margin is calculated and no leverage is used. So cash and buying power are equal, however cash can contain multiple currencies while the buying power is always converted to the base currency of the account.
 
 The below table shows an example using the default CashBuyingPowerModel when trading in different currencies, EUR and USD in this case.
 
@@ -159,12 +162,12 @@ The following table shows another example, but this time shorting on a USD margi
 
 === Order Rules
 
-The following rules apply when taken into account open orders when calculating the buying power:
+The following rules apply when taking into account open orders when calculating the buying power:
 
 - until an order is accepted, it doesn't impact margin or buying power.
 - open orders that reduce a position, don’t require buying power. So you can always close a position, both short and long positions.
 - Once an order has been accepted and is in an open state, it will not be cancelled due to lack of buying power.
 - An order in closed state will not impact margin or buying power (so similar to INITIAL state)
 
-NOTE: not all rules are currently implemented yet.
+NOTE: Not all rules are currently implemented yet.
 
