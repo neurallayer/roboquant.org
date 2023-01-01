@@ -46,12 +46,22 @@ private fun simpleSignal() {
 @Suppress("RedundantExplicitType")
 private fun allSignalAttributes(asset: Asset, rating: Rating) {
     // tag::attrSignal[]
+    // Type of signal: ENTRY, EXIT or BOTH
     val type: SignalType = SignalType.BOTH
+
+    // The price when to exit when profitable
     val takeProfit: Double = Double.NaN
+
+    // The price when to exit when unprofitable
     val stopLoss: Double = Double.NaN
+
+    // The probability of this signal being correct
     val probability: Double = Double.NaN
-    val source: String = ""
-    Signal(asset, rating, type, takeProfit, stopLoss, probability, source)
+
+    // An arbitrary string, for example to trace the strategy that generated this signal
+    val tag: String = ""
+
+    Signal(asset, rating, type, takeProfit, stopLoss, probability, tag)
     // end::attrSignal[]
 }
 

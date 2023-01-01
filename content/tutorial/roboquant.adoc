@@ -48,7 +48,7 @@ In the most basic form, you provide a feed as a single the argument to the `run`
 include::{sourcefile}[tag=run]
 ----
 
-However, you can restrict a run to a certain timeframe. This is especially useful for live feeds, that would otherwise run forever. But it also comes in handy when using historic data, and you want to perform multiple runs over different times.
+However, you can restrict a run to a certain timeframe. This is especially useful for live feeds, that would otherwise run forever. But it also comes in handy when using historic data, and you want to perform multiple runs over different timeframes.
 
 [source, kotlin, indent=0]
 ----
@@ -65,7 +65,7 @@ include::{sourcefile}[tag=run3]
 == Running in Parallel
 If you want to run many back-test, you can run them in parallel and leverage all the cores on your computer to expedite the process. _Roboquant_ scales almost linearly with the number of available cores, and it only requires a few extra lines of code.
 
-The following example shows how to run a walk forward in parallel. By reusing the same logger instance, all results will be stored in a single instance and can be easily compared afterwards.
+The following example shows how to run a walk forward in parallel. By reusing the same logger instance, all results will be stored in a single logger instance and can be easily compared afterwards.
 
 [source, kotlin, indent=0]
 ----

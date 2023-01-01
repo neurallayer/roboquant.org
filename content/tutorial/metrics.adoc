@@ -44,9 +44,7 @@ include::{sourcefile}[tag=memoryLogger]
 ----
 
 - `SilentLogger`: this logger just silently ignores all metric values and is mostly useful for unit tests
-
 - `InfoLogger`: logs metrics using the built-in logger at INFO level.
-
 - `ConsoleLogger`: logs the metrics to the console using the `println` statement.
 
 === Custom Loggers

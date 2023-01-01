@@ -18,7 +18,7 @@ Since a `Strategy` only has access to an `Event` and not the `Account`, it has n
 There are several commonly used strategies included with _roboquant_. This section highlights some of them, and using them is a great way to get started.
 
 === EMAStrategy
-This strategy uses two exponential moving averages and whenever they cross over, a BUY or SELL signal is generated
+This strategy uses two exponential moving averages and whenever they cross over, a BUY or SELL signal is generated.
 
 [source, kotlin,indent=0]
 ----
@@ -79,7 +79,7 @@ include::{sourcefile}[tag=extend]
 
 
 == Custom Strategies
-When you develop your own `Strategy`, you will need to implement at least the `generate` method that is defined in the `Strategy` interface. This method should return zero or more Signals.
+When you develop your own `Strategy`, you will need to implement at least the `generate` method that is defined in the `Strategy` interface. This method should return zero or more signals.
 
 [source, kotlin,indent=0]
 ----
@@ -124,6 +124,7 @@ A `Signal` is the outcome of a strategy and is modelled closely after the rating
 NOTE: A `HOLD` rating is not the same as no signal. Only generate hold signals if you think the asset will perform like the market. If your strategy gives no clear indication about the future performance of an asset, don't generate a signal at all.
 
 == Simple Signals
+When instantiating a signal, only the Asset and Rating are required parameters:
 
 [source, kotlin,indent=0]
 ----
@@ -138,4 +139,4 @@ Besides the mandatory Rating and Asset attributes of a signal instance, a signal
 include::{sourcefile}[tag=attrSignal]
 ----
 
-It is up to the xref:policy.adoc[policy] how/if to use these attributes when generating the orders. But for example, the probability could be used to determine the sizing of the order, a higher probability implying a larger size.
+It is up to the xref:policy.adoc[policy] if/how these attributes are used when generating the orders. But for example, the probability could be used to determine the sizing of the order, a higher probability implying a larger size.

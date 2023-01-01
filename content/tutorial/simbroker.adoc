@@ -47,30 +47,29 @@ Any open orders will be processed based on FIFO (first-in-first-out) basis, so o
 == Custom Configuration
 Custom models are a way to further configure `SimBroker` and ensure it closely mimics the behavior of your real broker.
 
-It is important to notice that if you don't take these type of cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading.
+WARNING: if you don't take these type of trading cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading. When in doubt, better to be on the safe side and configure the cost to be slightly higher.
 
 The following three types of models can be implemented if the default ones that comes with _roboquant_ are not sufficient:
 
-. PricingEngine: calculate the price to use for a trade. It can be used to simulate the following type of cost:
+. PricingEngine: calculate the price to use for a trade. It can be used to simulate the following type of trading cost:
     - Spread (difference between buy and sell price)
     - Slippage (large orders will require multiple trades against different prices)
     - Exchange rates
 
-. FeeModels: the transaction related fees and commissions. Cost to take into consideration:
+. FeeModels: the transaction related fees and commissions. Trading cost to take into consideration:
     . Broker commission fees
     . Borrowing cost when shorting
     . Storage & custodial fees
     . Exchange fees and/or rebates
 
-. AccountModel: model the the different types of accounts, like a Cash or Margin account.
+. AccountModel: model the the different types of accounts, like a Cash or Margin account and the amount of buying power available.
 
-Below are the default included models with their configuration parameters:
+Below are the default included models with examples of their configuration parameters:
 
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=included]
 ----
-
 
 == Limitations
 Like any simulation, SimBroker also has limitations compared to live trading. It is important to realize this and take appropriate actions where possible:
