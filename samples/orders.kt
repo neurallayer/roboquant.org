@@ -5,8 +5,19 @@ import org.roboquant.brokers.sim.Pricing
 import org.roboquant.common.Asset
 import org.roboquant.common.Size
 import org.roboquant.orders.*
+import org.roboquant.strategies.Signal
 import java.time.Instant
 
+fun signal2order(signals: List<Signal>) {
+    // tag::orders[]
+    val orders = mutableListOf<Order>()
+    for (signal in signals) {
+        val size = if (signal.rating.isPositive) 100 else -100
+        val order = MarketOrder(signal.asset, size)
+        orders.add(order)
+    }
+    // end::orders[]
+}
 
 fun bracketOrder(asset: Asset, price: Double) {
     // tag::bracketOrder[]

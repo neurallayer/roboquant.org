@@ -137,15 +137,3 @@ fun noStrategy(myAdvancedPolicy: Policy) {
     val roboquant = Roboquant(NoSignalStrategy(), policy = myAdvancedPolicy)
     // end::advanced[]
 }
-
-fun signal2order(signals: List<Signal>) {
-    // tag::orders[]
-    val orders = mutableListOf<Order>()
-    for (signal in signals) {
-        val size = if (signal.rating.isPositive) 100 else -100
-        val order = MarketOrder(signal.asset, size)
-        orders.add(order)
-    }
-    // end::orders[]
-}
-
