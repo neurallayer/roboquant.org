@@ -49,11 +49,21 @@ include::{sourcefile}[tag=rsi]
 This strategy doesn't perform any action and will never generate a signal. If you develop all your logic in a Policy and don't require a strategy, use this strategy when you create a `Roboquant` instance. See also <<_policy_based_strategies>>.
 
 === CombinedStrategy
-The `Roboquant` constructor takes only a single strategy as its argument. However, it is easy to combine multiple strategies in your run using the `CombinedStrategy` class.
+The `Roboquant` constructor takes only a single strategy as its argument. However, it is easy to combine multiple strategies in your run using the `CombinedStrategy` class. This class will invoke each strategy in sequence and return the combined signals in the same order as the strategies are provided. There is no additional signal processing (like for example remove duplicate signals).
 
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=composition]
+----
+
+=== ParallelStrategy
+This is similar to the CombinedStrategy, but this time the strategies are run in parallel and not sequential. The order of returned signals follows the same logic as with a CombinedStrategy.
+
+The main benefit is that this strategy can speedup the processing, assuming the hardware has sufficient CPU resources available.
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=parallel]
 ----
 
 == Extending Strategies
@@ -112,8 +122,8 @@ See the xref:policy.adoc[policy documentation] for more details.
 == Signals
 A `Signal` is the outcome of a strategy and is modelled closely after the ratings given by rating agencies. The two mandatory attributes of a `Signal` are:
 
-1. The asset for which the signal applies, like a particular stock
-2. A rating for that same asset. There is a 5-point scale used for the `Rating` of a `Signal`:
+1. The asset for which the signal applies, like a single stock
+2. A rating for that same asset. A 5-point scale used for the `Rating` of a `Signal`:
 
 * `BUY`: Also known as strong buy and "on the recommended list". Buy is a recommendation to purchase a specific security.
 * `SELL`: Also known as strong sell, it's a recommendation to sell a security or to liquidate an asset.
@@ -124,7 +134,7 @@ A `Signal` is the outcome of a strategy and is modelled closely after the rating
 NOTE: A `HOLD` rating is not the same as no signal. Only generate hold signals if you think the asset will perform like the market. If your strategy gives no clear indication about the future performance of an asset, don't generate a signal at all.
 
 == Simple Signals
-When instantiating a signal, only the Asset and Rating are required parameters:
+When instantiating a Signal, only the Asset and Rating are required parameters and in many cases sufficient:
 
 [source, kotlin,indent=0]
 ----
@@ -139,4 +149,4 @@ Besides the mandatory Rating and Asset attributes of a signal instance, a signal
 include::{sourcefile}[tag=attrSignal]
 ----
 
-It is up to the xref:policy.adoc[policy] if/how these attributes are used when generating the orders. But for example, the probability could be used to determine the sizing of the order, a higher probability implying a larger size.
+It is up to the xref:policy.adoc[policy] if/how these attributes are used when generating the orders. For example, the probability could be used to determine the sizing of the order, a higher probability implying a larger order size.

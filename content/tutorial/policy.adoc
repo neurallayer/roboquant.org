@@ -19,7 +19,7 @@ A good `Policy` implementation is key in making your solution as robust as possi
 * How to ensure there is still enough buying power left to avoid margin calls
 
 ****
-CAUTION: If there is one thing that prevents algo-traders from going live with a strategy, it is that there is not a robust policy in place that handles all the possible edge-cases. The logic required in a robust policy is anything but trivial and should incorporate an extensive testing period.
+CAUTION: If there is one thing that prevents algo-traders from going live, it is that there is not a robust policy in place that handles all the possible edge-cases. The logic required for a robust policy is anything but trivial and should incorporate an extensive testing.
 ****
 
 == Out-of-the-box policies
@@ -27,7 +27,7 @@ CAUTION: If there is one thing that prevents algo-traders from going live with a
 === FlexPolicy
 This is the default policy that will be used if no other policy is specified when creating an instance of the `Roboquant` class. It provides several configuration properties that influence its behavior.
 
-You can also easily extend the FlexPolicy and overwrite some of its methods. For example, to create your own order types you would implement something like this:
+You can also extend the FlexPolicy and overwrite some of its methods. For example, to create your own order types you would implement something like this:
 
 [source, kotlin]
 ----
@@ -48,7 +48,7 @@ include::{sourcefile}[tag=chaining]
 
 
 == Fractional Order sizes
-Roboquant doesn't make assumptions on the allowed order and position sizes. They are not limited to integers only and so there is no restriction on using a broker that supports fractional trading. Since it is the Policy that create the orders, here you can also put any type of order size logic you require.
+Roboquant doesn't make assumptions on the minimal order and position sizes. They are not limited to integers only and so there is no restriction on using a broker that supports fractional trading. Since it is the Policy that create the orders, here you can also put any type of order size logic you require.
 
 TIP: The `FlexPolicy` allows you to specify the number of decimals for sizing calculations, allowing to easily enable fractional orders.
 

@@ -31,13 +31,13 @@ So a more custom configured version of the SimBroker can be instantiated using:
 include::{sourcefile}[tag=extra]
 ----
 
-TIP: if you are trading specific markets, like FOREX, you most likely want to use custom configuration since the default values like those selected for spreads are not representative for those markets.
+TIP: if you are trading specific markets, like FOREX, you most likely want to use customize the configuration since the default values like those selected for spreads are not representative for those type of markets.
 
-The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit. Typically, the initial deposit is denoted in a single currency, like a *$50,000.00 USD* account. But this is not a hard requirement and with the `SimBroker` you can use multi-currency initial deposits if you prefer. However, there is always only one `baseCurrency`.
+The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit. Typically, the initial deposit is denoted in a single currency, like a *$50,000.00 USD* account. But this is not a hard requirement and with `SimBroker` you can use a multi-currency initial deposit if you prefer. However, there is always only one `baseCurrency`.
 
 
 == Order Handling
-When an order is placed at the SimBroker, it only gets processed once there is a known price for the underlying asset. Till an event happens that has that price info available, the order will remain in the `INITIAL` state.
+When an order is placed at the SimBroker, it only gets processed once there is a known price for the underlying asset. Till an event happens that has that price action available, the order will remain in the `INITIAL` state.
 
 Any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted. So an order in `INITIAL` state will not expire, and time based TIF will only start counting after it has been accepted.
 

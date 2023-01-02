@@ -1,4 +1,4 @@
-@file:Suppress("unused", "UNUSED_VARIABLE")
+@file:Suppress("unused", "UNUSED_VARIABLE", "TooManyFunctions")
 
 
 import org.roboquant.Roboquant
@@ -118,6 +118,16 @@ private fun composition(strategy1: Strategy, strategy2: Strategy, strategy3: Str
     val strategy = CombinedStrategy(strategy1, strategy2, strategy3)
     val roboquant = Roboquant(strategy)
     // end::composition[]
+
+
+}
+
+
+private fun composition2(strategy1: Strategy, strategy2: Strategy, strategy3: Strategy) {
+    // tag::parallel[]
+    val strategy = ParallelStrategy(strategy1, strategy2, strategy3)
+    val roboquant = Roboquant(strategy)
+    // end::parallel[]
 }
 
 

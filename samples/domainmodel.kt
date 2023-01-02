@@ -1,9 +1,11 @@
 @file:Suppress("unused", "UNUSED_VARIABLE")
 
 import org.roboquant.Roboquant
+import org.roboquant.brokers.Account
 import org.roboquant.brokers.ECBExchangeRates
 import org.roboquant.common.*
 import org.roboquant.feeds.Feed
+import org.roboquant.orders.MarketOrder
 import java.time.Instant
 
 
@@ -15,6 +17,17 @@ private fun currency() {
     // end::currency[]
 }
 
+
+
+private fun size(bitcoin: Asset, account: Account) {
+    // tag::size[]
+    val size = Size(100) + Size(200)
+    val size2 = Size("100.12")
+
+    val order = MarketOrder(bitcoin, Size("0.01"))
+    val positionSize = account.positions.first().size
+    // end::size[]
+}
 
 private fun amount() {
     // tag::amount[]
