@@ -102,7 +102,7 @@ file.skip = ABC.csv XYZ.csv
 === Memory Constraints
 The default `CSVFeed` loads all the data found in all the files into memory during initialization. The benefit is that after initialization the CSVFeed is very fast when used in back tests. And since you reuse the feed in concurrent back-tests, this becomes even more important when doing extensive back testing.
 
-However, a possible downside is memory usage when working in a memory-contrained environment. So there is also a CSV Feed implementation that only reads the data when required. This is substantial slower, but consumes a lot less memory. It supports the same configuration, the only difference is that you need to use `LazyCSVFeed` instead of the regular `CSVFeed`
+However, a possible downside is memory usage when working in a memory-constrained environment. So there is also a CSV Feed implementation that only reads the data when required. This is substantial slower, but consumes a lot less memory. It supports the same configuration, the only difference is that you need to use `LazyCSVFeed` instead of the regular `CSVFeed`
 
 [source, kotlin, indent=0]
 ----

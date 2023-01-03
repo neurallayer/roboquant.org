@@ -3,8 +3,6 @@
 
 import org.roboquant.Roboquant
 import org.roboquant.common.Asset
-import org.roboquant.common.max
-import org.roboquant.common.min
 import org.roboquant.feeds.Event
 import org.roboquant.strategies.*
 import org.roboquant.ta.*

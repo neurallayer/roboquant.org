@@ -59,7 +59,7 @@ include::{sourcefile}[tag=composition]
 === ParallelStrategy
 This is similar to the CombinedStrategy, but this time the strategies are run in parallel and not sequential. The order of returned signals follows the same logic as with a CombinedStrategy.
 
-The main benefit is that this strategy can speedup the processing, assuming the hardware has sufficient CPU resources available.
+The main benefit is that this strategy can speed up the processing, assuming the hardware has sufficient CPU resources available.
 
 [source, kotlin,indent=0]
 ----

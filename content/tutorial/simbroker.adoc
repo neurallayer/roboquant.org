@@ -62,7 +62,7 @@ The following three types of models can be implemented if the default ones that 
     . Storage & custodial fees
     . Exchange fees and/or rebates
 
-. AccountModel: model the the different types of accounts, like a Cash or Margin account and the amount of buying power available.
+. AccountModel: model the different types of accounts, like a Cash or Margin account and the amount of buying power available.
 
 Below are the default included models with examples of their configuration parameters:
 

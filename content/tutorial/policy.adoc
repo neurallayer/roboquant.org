@@ -87,7 +87,7 @@ When developing custom policies, they should not only be robust and deal with co
 Most commonly, a `Policy` is used to transform signals it receives from the `Strategy` into orders. But there are other use cases where the policy is not using Signals to create orders. Common use cases are:
 
 . Re-balancing your portfolio at regular intervals (like monthly) based on some risk profile. Since a `Strategy` doesn't have access to an `Account` and therefore neither to a `Portfolio`, this needs to be done in a `Policy`.
-. Advanced machine learning techniques like reinforcement learning that train the algorithm to directly create orders based on events (without creaing intermediate signals).
+. Advanced machine learning techniques like reinforcement learning that train the algorithm to directly create orders based on events (without creating intermediate signals).
 
 In these cases you don't require a `Strategy` and implement all the logic in the `Policy` instead. You can use the `NoSignalStrategy` as strategy that doesn't perform any action.
 

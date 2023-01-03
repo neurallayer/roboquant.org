@@ -3,7 +3,7 @@
 :jbake-status: published
 :icons: font
 
-The following table provides an overview of popular market data providers, both free as well as paid ones.
+The following table provides an overview of popular market data providers, free as well as paid ones.
 
 [frame=ends]
 [.table]
