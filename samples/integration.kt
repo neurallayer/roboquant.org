@@ -4,12 +4,14 @@ import org.roboquant.Roboquant
 import org.roboquant.alpaca.AlpacaBroker
 import org.roboquant.alpaca.AlpacaHistoricFeed
 import org.roboquant.alpaca.AlpacaLiveFeed
+import org.roboquant.common.Asset
 import org.roboquant.common.Timeframe
 import org.roboquant.common.days
 import org.roboquant.common.minutes
 import org.roboquant.oanda.OANDABroker
 import org.roboquant.oanda.OANDAHistoricFeed
 import org.roboquant.oanda.OANDALiveFeed
+import org.roboquant.orders.MarketOrder
 import org.roboquant.yahoo.YahooHistoricFeed
 
 
@@ -46,6 +48,10 @@ fun oandaBroker() {
     // tag::oandabroker[]
     val broker = OANDABroker()
     println(broker.account.summary())
+    println(broker.availableAssets)
+
+    val order = MarketOrder(Asset("AAPL"), 100)
+    broker.place(listOf(order))
     // end::oandabroker[]
 }
 
@@ -76,5 +82,9 @@ fun alpacaBroker() {
     // tag::alpacabroker[]
     val broker = AlpacaBroker()
     println(broker.account.summary())
+    println(broker.availableAssets)
+
+    val order = MarketOrder(Asset("AAPL"), 100)
+    broker.place(listOf(order))
     // end::alpacabroker[]
 }

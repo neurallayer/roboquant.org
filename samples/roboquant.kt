@@ -48,7 +48,8 @@ fun complete() {
         metric1, metric2,
         policy = myPolicy,
         broker = myBroker,
-        logger = myLogger)
+        logger = myLogger
+    )
     // end::complete[]
 }
 

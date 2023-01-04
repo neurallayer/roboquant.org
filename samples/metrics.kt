@@ -59,7 +59,6 @@ fun staticExample() {
 }
 
 
-
 fun exampleCustomLogger() {
     class Database { fun store(key: String, value: Number, time: Instant) { TODO() } }
 

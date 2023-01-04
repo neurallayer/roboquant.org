@@ -35,6 +35,7 @@ As you can see, you can provide multiple metrics, but only a single instance of 
 include::{sourcefile}[tag=combined]
 ----
 
+See also the xref:strategy.adoc[strategy page] for more details.
 
 == Run
 After you have created an instance of the `Roboquant` class and have a xref:feed.adoc[data feed], you can start the run.

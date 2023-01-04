@@ -17,7 +17,7 @@ class MyPolicy : Policy {
 
     override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
         val orders = mutableListOf<Order>()
-        // Your code here
+        // Your code goes here
         return orders
     }
 }
@@ -132,8 +132,21 @@ fun customPolicy2() {
     // end::custom3[]
 }
 
-fun noStrategy(myAdvancedPolicy: Policy) {
+fun noStrategy() {
     // tag::advanced[]
-    val roboquant = Roboquant(NoSignalStrategy(), policy = myAdvancedPolicy)
+    class MyPolicy : Policy {
+
+        override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
+            // signals will be an empty list
+            val orders = mutableListOf<Order>()
+            // Your code goes here
+            return orders
+        }
+    }
+
+    val roboquant = Roboquant(
+        NoSignalStrategy(), // will always return an empty list of signals
+        policy = MyPolicy()
+    )
     // end::advanced[]
 }

@@ -64,7 +64,7 @@ fun priceBarChart(feed: HistoricFeed, roboquant: Roboquant) {
     // tag::priceBarChart[]
     val trades = roboquant.broker.account.trades
 
-    // Plot the first asset from the feed and also all the trades for that same asset
+    // Plot the prices of the first asset from a historic feed and also all the trades for that same asset
     PriceBarChart(feed, feed.assets.first(), trades = trades)
     // end::priceBarChart[]
 }
@@ -72,7 +72,6 @@ fun priceBarChart(feed: HistoricFeed, roboquant: Roboquant) {
 
 fun priceChart(feed: HistoricFeed, roboquant: Roboquant) {
     // tag::priceChart[]
-
     // Plot how Apple performed during the 2008 financial crisis
     val apple = feed.assets.getBySymbol("AAPL")
     PriceChart(feed, apple, timeframe = Timeframe.financialCrisis2008)

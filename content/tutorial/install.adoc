@@ -111,8 +111,6 @@ mvn archetype:generate                          \
 -Dversion=0.1-SNAPSHOT
 ----
 
-
-
 === Gradle
 Include the following line in your build.gradle script:
 
@@ -144,7 +142,7 @@ All source code is written in Kotlin, so there are no Java or other language sou
 mvn install
 ----
 
-The build and install is tested using JDK 17 runtime, however the generated libraries are targeted against JDK 11 in order to provide greater compatibility for projects that still use older versions of the JDK.
+The build and install is tested using JDK 17 runtime, however the generated libraries are targeted against JDK 11 in order to provide better compatibility for projects that still use older versions of the JDK.
 
 The following script shows how to get everything build based on a clean Ubuntu 22.04 installation (like the one you can select when starting an AWS EC2 instance)
 
@@ -160,28 +158,27 @@ mvn install
 When the `mvn install` process has successfully finished, you should see something like this:
 [source]
 ----
-[INFO] roboquant parent ................................... SUCCESS [  0.190 s]
-[INFO] roboquant .......................................... SUCCESS [ 50.983 s]
-[INFO] roboquant ta ....................................... SUCCESS [ 25.096 s]
-[INFO] roboquant jupyter .................................. SUCCESS [ 10.988 s]
-[INFO] roboquant extra .................................... SUCCESS [ 11.139 s]
-[INFO] roboquant crypto ................................... SUCCESS [  4.800 s]
+[INFO] roboquant parent ................................... SUCCESS [  1.618 s]
+[INFO] roboquant .......................................... SUCCESS [  6.768 s]
+[INFO] roboquant ta ....................................... SUCCESS [  3.868 s]
+[INFO] roboquant jupyter .................................. SUCCESS [  2.503 s]
+[INFO] roboquant extra .................................... SUCCESS [  2.838 s]
+[INFO] roboquant crypto ................................... SUCCESS [  3.213 s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
 ----
 
 
-TIP: If you plan to make regular changes and updates to the source code, checkout the https://github.com/apache/maven-mvnd[Maven Daemon] project that provides faster builds. Additionally, you can set the Kotlin incremental compiler property to true (in the main `pom.xml`).
+TIP: If you plan to make regular changes and updates to the _roboquant_ source code, checkout the https://github.com/apache/maven-mvnd[Maven Daemon] project that provides faster builds. Additionally, you can set the Kotlin incremental compiler property to true (in the main `pom.xml`).
 
 == Interactive Brokers
-Unfortunately we are not allowed to redistribute the Interactive Brokers Java client, so you'll have to download the TwsApi.jar file yourself. You can download version `10.17` from here: https://interactivebrokers.github.io and within the downloaded archive file you'll find the required `TwsApi.jar`.
+Unfortunately we are not allowed to redistribute the Interactive Brokers Java client, so you'll have to download the TwsApi.jar file yourself. You can download the stable version `10.19` from here: https://interactivebrokers.github.io and within the downloaded archive file you'll find the required `TwsApi.jar`.
 
 Then install the jar file in your local Maven repository on your machine using the following command:
 
 [source, shell]
 ----
-mvn install:install-file -Dfile=TwsApi.jar -DgroupId=com.interactivebrokers -DartifactId=tws-api -Dversion=10.17 -Dpackaging=jar
+mvn install:install-file -Dfile=TwsApi.jar -DgroupId=com.interactivebrokers -DartifactId=tws-api -Dversion=10.19 -Dpackaging=jar
 ----
 
 If this artefact cannot be found in your local Maven repository during a build, the module `roboquant-ibkr` will automatically be skipped. So if you don't require integration with Interactive Brokers for your trading, you can skip this step altogether.

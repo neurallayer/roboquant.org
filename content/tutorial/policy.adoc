@@ -84,7 +84,7 @@ include::{sourcefile}[tag=custom3]
 When developing custom policies, they should not only be robust and deal with corner-cases, but they should also be explainable. Back-testing over large amounts of data is already challenging enough without having a `Policy` in place whose behavior is very difficult to wrap your head around. So the KISS design principle (Keep It Simple, Stupid) applies to policies.
 
 == Advanced Policies
-Most commonly, a `Policy` is used to transform signals it receives from the `Strategy` into orders. But there are other use cases where the policy is not using Signals to create orders. Common use cases are:
+Most commonly, a `Policy` is used to transform signals it receives from the `Strategy` into orders. But there are use cases where the policy is not using Signals to create orders. Common use cases are:
 
 . Re-balancing your portfolio at regular intervals (like monthly) based on some risk profile. Since a `Strategy` doesn't have access to an `Account` and therefore neither to a `Portfolio`, this needs to be done in a `Policy`.
 . Advanced machine learning techniques like reinforcement learning that train the algorithm to directly create orders based on events (without creating intermediate signals).

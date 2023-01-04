@@ -1,26 +1,29 @@
 @file:Suppress("unused", "UNUSED_VARIABLE")
 
 import org.roboquant.brokers.*
+import org.roboquant.common.Asset
 import org.roboquant.common.Wallet
-import org.roboquant.feeds.Event
 import org.roboquant.orders.MarketOrder
-import org.roboquant.orders.Order
 
 
-fun usageBasic2(broker: Broker) {
+fun placeOrder(broker: Broker) {
     // tag::basic[]
-    val orders = emptyList<Order>()
-    val event = Event.empty()
-    val account = broker.place(orders, event)
+    val orders = listOf(
+        MarketOrder(Asset("AAPL"), 100),
+        MarketOrder(Asset("TSLA"), -100),
+    )
+    val account = broker.place(orders)
     // end::basic[]
 }
-
-
 
 
 fun account(broker: Broker) {
     // tag::account[]
     val account = broker.account
+
+    // Print the account
+    println(account.summary())
+    println(account.fullSummary())
 
     // Standard Kotlin
     val winningTrades = account.trades.filter { it.pnl > 0 }
@@ -38,12 +41,16 @@ fun account(broker: Broker) {
 
 fun equity(account: Account, initialDeposit: Wallet) {
     // tag::equity[]
+    // Equity property
+    val equity0 = account.equity
+
     // Sum of cash balances + open positions
     val equity1 = account.cash + account.positions.marketValue
 
     // Sum of initial deposit + all the Profit And Loss
     val equity2 = initialDeposit + account.trades.realizedPNL + account.positions.unrealizedPNL
 
-    assert(equity1 == equity2)
+    assert(equity0 == equity1)
+    assert(equity0 == equity2)
     // end::equity[]
 }

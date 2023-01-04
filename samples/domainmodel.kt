@@ -6,6 +6,7 @@ import org.roboquant.brokers.ECBExchangeRates
 import org.roboquant.common.*
 import org.roboquant.feeds.Feed
 import org.roboquant.orders.MarketOrder
+import java.time.Duration
 import java.time.Instant
 
 
@@ -88,25 +89,33 @@ private fun timeFrame() {
 
     // Create 100 random timeframes, each of 3 months duration
     val tf4 = tf2.sample(3.months, 100) // result is List<Timeframe>
+
+    // Predefined timeframes
+    val tf5 = Timeframe.blackMonday1987
     // end::tf[]
 }
 
 
 private fun tradingPeriod(roboquant: Roboquant, feed: Feed) {
     // tag::tradingperiod[]
+    // Use the TradingPeriod constructor directly
+    val period = TradingPeriod(Duration.ofDays(10L))
+
+    // Use extension methods
+    val oneDay = 1.days
+    val oneHour = 1.hours
+
+    // Calculate using TradingPeriods
     val now = Instant.now()
-    val tomorrow = now + 1.days
-    val nextWeek = now + 1.weeks
+    val tomorrow = now + oneDay
+    val yesterday = now - oneDay
+    val nextHour = now + oneHour
 
-    // Create a back-test 6 months before and after the Black Monday
-    val timeframe = Timeframe.blackMonday1987
-    val backTestPeriod = timeframe.extend(6.months)
-
-    // Run a strategy for the 8 hours
-    roboquant.run(feed, Timeframe.next(8.hours))
+    // Run a forward test for the next 8 hours
+    val timeframe = Timeframe.next(8.hours)
+    roboquant.run(feed, timeframe)
     // end::tradingperiod[]
 }
-
 
 
 private fun predefined(roboquant: Roboquant, feed: Feed) {
