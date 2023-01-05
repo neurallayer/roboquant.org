@@ -5,6 +5,7 @@ import org.roboquant.brokers.Account
 import org.roboquant.brokers.ECBExchangeRates
 import org.roboquant.common.*
 import org.roboquant.feeds.Feed
+import org.roboquant.feeds.csv.CSVFeed
 import org.roboquant.orders.MarketOrder
 import java.time.Duration
 import java.time.Instant
@@ -95,6 +96,17 @@ private fun timeFrame() {
     // end::tf[]
 }
 
+private fun timeline(roboquant: Roboquant) {
+    // tag::timeline[]
+    val feed = CSVFeed("somepath")
+
+    // Split the timeline in chunks of 250
+    // and run back test over them
+    feed.timeline.split(250).forEach {
+        roboquant.run(feed, it)
+    }
+    // end::timeline[]
+}
 
 private fun tradingPeriod(roboquant: Roboquant, feed: Feed) {
     // tag::tradingperiod[]
