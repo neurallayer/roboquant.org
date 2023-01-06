@@ -57,15 +57,6 @@ The `ExchangeRates` interface also supports different rates at different moments
 include::{sourcefile}[tag=er]
 ----
 
-== Size
-Order sizes and position sizes are expressed as an instance of the `Size` class. This class is precise till 8 decimal digits and ensures that there are no rounding errors when for example closing a position.
-
-It is an immutable class, but you can perform simple arithmetic on it. It also caters for fractional trading if desired.
-
-[source,kotlin,indent=0]
-----
-include::{sourcefile}[tag=size]
-----
 
 == Time
 In order to make it easier to trade in multiple regions, _roboquant_ introduces a number of time related domain classes: <<Timeline>>, <<Timeframe>>, <<TradingPeriod>>.
@@ -111,3 +102,20 @@ to do things like:
 include::{sourcefile}[tag=tradingperiod]
 ----
 
+=== Assets & Exchanges
+An asset is linked to an exchange and that exchange has a time-zone associated with it.
+
+[source,kotlin,indent=0]
+----
+include::{sourcefile}[tag=assets]
+----
+
+== Size
+Order sizes and position sizes are expressed as an instance of the `Size` class. This class is precise till 8 decimal digits and ensures that there are no rounding errors when for example closing a position.
+
+It is an immutable class, but you can perform simple arithmetic on it. It also caters for fractional trading if desired.
+
+[source,kotlin,indent=0]
+----
+include::{sourcefile}[tag=size]
+----

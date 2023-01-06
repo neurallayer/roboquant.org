@@ -77,6 +77,21 @@ private fun exchangeRates() {
 }
 
 
+private fun assets() {
+    // tag::assets[]
+    val start = Instant.parse("2023-01-04-T10:00:00Z")
+    val end = Instant.parse("2023-01-04-T16:00:00Z")
+
+    // Sydney
+    val asset1 = Asset("XYZ", exchange = Exchange.SSX)
+    asset1.exchange.sameDay(start, end) // False
+
+    // London
+    val asset2 = Asset("XYZ", exchange = Exchange.LSE)
+    asset2.exchange.sameDay(start, end) // True
+    // end::assets[]
+}
+
 private fun timeFrame() {
     // tag::tf[]
     // Parse a string

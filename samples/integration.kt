@@ -1,9 +1,11 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "TooManyFunctions", "SpreadOperator")
 
+import com.crazzyghost.alphavantage.parameters.Interval
 import org.roboquant.Roboquant
 import org.roboquant.alpaca.AlpacaBroker
 import org.roboquant.alpaca.AlpacaHistoricFeed
 import org.roboquant.alpaca.AlpacaLiveFeed
+import org.roboquant.alphavantage.AlphaVantageHistoricFeed
 import org.roboquant.brokers.ECBExchangeRates
 import org.roboquant.common.*
 import org.roboquant.oanda.OANDABroker
@@ -14,7 +16,6 @@ import org.roboquant.polygon.PolygonHistoricFeed
 import org.roboquant.polygon.PolygonLiveFeed
 import org.roboquant.yahoo.YahooHistoricFeed
 import java.time.Instant
-
 
 fun yahooFeed() {
     // tag::yahoo[]
@@ -46,15 +47,6 @@ fun oandaLiveFeed(roboquant: Roboquant) {
 
 
 
-fun polygonHistoricFeed() {
-    // tag::polygonhistoric[]
-    val feed = PolygonHistoricFeed()
-    val tf = Timeframe.past(100.days)
-    feed.retrieve("AAPL", "JPM", "TSLA", timeframe = tf)
-    // end::polygonhistoric[]
-}
-
-
 fun ecb() {
     // tag::ecb[]
     // Download the latest rates from the ECB website
@@ -67,9 +59,39 @@ fun ecb() {
     // What is the conversion today in GBP
     wallet.convert(Currency.GBP)
 
-    // What would the same conversion been 5 years ago
+    // What would the same conversion have been 5 years ago
     wallet.convert(Currency.GBP, Instant.now() - 5.years)
     // end::ecb[]
+}
+
+
+
+fun alphaHistoricFeed() {
+    // tag::alphahistoric[]
+    val feed = AlphaVantageHistoricFeed()
+
+    // You can retrieve end of day prices
+    val assets = listOf(
+        // regular US stock
+        Asset("AAPL"),
+
+        // stock listed on a non-US exchange
+        Asset("DAI.DEX", currency = Currency.EUR, exchange = Exchange.DEX)
+    )
+    feed.retrieveDaily(*assets.toTypedArray())
+
+    // You can retrieve intra-day prices
+    feed.retrieveIntraday(Asset("TSLA"), interval = Interval.ONE_MIN)
+    // end::alphahistoric[]
+}
+
+
+fun polygonHistoricFeed() {
+    // tag::polygonhistoric[]
+    val feed = PolygonHistoricFeed()
+    val tf = Timeframe.past(100.days)
+    feed.retrieve("AAPL", "JPM", "TSLA", timeframe = tf)
+    // end::polygonhistoric[]
 }
 
 suspend fun polygonLiveFeed(roboquant: Roboquant) {
@@ -83,7 +105,6 @@ suspend fun polygonLiveFeed(roboquant: Roboquant) {
 }
 
 
-
 fun oandaBroker() {
     // tag::oandabroker[]
     val broker = OANDABroker()
@@ -95,17 +116,17 @@ fun oandaBroker() {
     // end::oandabroker[]
 }
 
-
-
 fun alpacaHistoricFeed() {
     // tag::alpacahistoric[]
     val feed = AlpacaHistoricFeed()
     val tf = Timeframe.past(100.days)
-    feed.retrieveStockPriceBars("AAPL", "IBM", timeframe = tf)
+
+    // You can retrieve historic price-bars, quotes or trades
+    feed.retrieveStockPriceBars("AAPL", "JPM", "TSLA", timeframe = tf)
+    feed.retrieveStockQuotes("AAPL", "JPM", "TSLA", timeframe = tf)
+    feed.retrieveStockTrades("AAPL", "JPM", "TSLA", timeframe = tf)
     // end::alpacahistoric[]
 }
-
-
 
 fun alpacaLiveFeed(roboquant: Roboquant) {
     // tag::alpacalive[]
@@ -116,7 +137,6 @@ fun alpacaLiveFeed(roboquant: Roboquant) {
     roboquant.run(feed,tf)
     // end::alpacalive[]
 }
-
 
 fun alpacaBroker() {
     // tag::alpacabroker[]

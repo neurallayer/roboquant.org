@@ -33,7 +33,7 @@ import org.roboquant.oanda.*
 ----
 
 == Configuration
-When you want to integrate with a 3rd party, you most likely require credentials to gain access to their APIs. Often this is in the form of an API key and secret. You can include these credentials directly in your source code, however _roboquant_ offers better and more secure alternatives.
+When you want to integrate with a 3rd party, you most likely require credentials to gain access to their APIs. Often this is in the form of an API key and/or secret. You can include these credentials directly in your source code, however _roboquant_ offers better and more secure alternatives.
 
 The following list shows the steps _roboquant_ uses to resolve these configuration parameters:
 
@@ -42,7 +42,7 @@ The following list shows the steps _roboquant_ uses to resolve these configurati
 . If the credentials are set as system environment variable (export MY_KEY="some value"), use these, otherwise go to next step.
 . If the credentials are set in a property file called ".env" in the working directory, use these, otherwise go to next step.
 . If the credentials are set in a property file called "dotenv" in the working directory, use these, otherwise go to next step.
-. If the credentials are set in a property file called ".env" in the $HOME/.roboquant directory, use these, otherwise go to next step.
+. If the credentials are set in a property file called ".env" in the $HOME/.roboquant directory, use these, otherwise not found.
 
 The following provides an overview of the used properties in _roboquant_
 
@@ -79,7 +79,7 @@ include::{sourcefile}[tag=yahoo]
 ----
 
 === Alpaca
-The integration with Alpaca covers their broker API as well as their historic and live market data. In order to use this, you'll need at least register and get a paper-trading account with an API-key.
+The integration with Alpaca covers their broker API as well as their historic and live market data APIs. In order to use this, you'll need at least register and get a paper-trading account with an API-key.
 
 [source, kotlin,indent=0]
 ----
@@ -128,11 +128,20 @@ include::{sourcefile}[tag=polygonlive]
 ----
 
 == ECB
-The ECB (European Central Bank) publishes since the start of the Euro daily the historic exchange rates with almost all other fiat currencies in the world. Roboquant can automatically download these exchange rates from their website and use them for currency conversions during trading.
+The ECB (European Central Bank) publishes since the start of the Euro the daily historic exchange rates with almost all other fiat currencies in the world. Roboquant can automatically download these exchange rates from their website and use them for currency conversions during trading.
 
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=ecb]
+----
+
+
+== Alpha Vantage
+Alpha Vantage provides a rich set of historic stock prices, not only those stocks listed on US exchanges.
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=alphahistoric]
 ----
 
 
