@@ -3,6 +3,7 @@
 :icons: font
 :source-highlighter: rouge
 :dotenvfile: ../../samples/dotenv
+:sourcefile: ../../samples/integration.kt
 
 There are several types of integrations available with 3rd parties:
 
@@ -69,6 +70,71 @@ The following table shows which 3rd parties are supported out of the box and wha
 |===
 
 NOTE: _roboquant_ is open source software that is developed independently of these 3rd party companies. There are no direct or indirect ties to any of these companies.
+
+=== Yahoo
+You can use the `YahooHistoricFeed` to retrieve historic prices from Yahoo Finance. This is one of the few APIs out there that you can use without requiring a registration or an API key.
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=yahoo]
+----
+
+=== Alpaca
+The integration with Alpaca covers their broker API as well as their historic and live market data. In order to use this, you'll need at least register and get a paper-trading account with an API-key.
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=alpacahistoric]
+----
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=alpacalive]
+----
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=alpacabroker]
+----
+
+=== OANDA
+The integration with OANDA covers their broker API as well as their historic and live market data. In order to use this, you'll need at least register and get a paper-trading account with an API-key.
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=oandahistoric]
+----
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=oandalive]
+----
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=oandabroker]
+----
+
+== Polygon
+Polygon has several type of subscriptions available, depending on your needs. The free version only provides access to historic data, while the paid versions also provide live data.
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=polygonhistoric]
+----
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=polygonlive]
+----
+
+== ECB
+The ECB (European Central Bank) publishes since the start of the Euro daily the historic exchange rates with almost all other fiat currencies in the world. Roboquant can automatically download these exchange rates from their website and use them for currency conversions during trading.
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=ecb]
+----
+
 
 == Adding new 3rd party integrations
 Adding integration with a 3rd party is not difficult. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library that is available, this could take as little as a few hours to a few days. You can read more about the Feed interface that you need to implement right xref:feed.adoc#_custom_feeds[here].
