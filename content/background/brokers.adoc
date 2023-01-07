@@ -15,9 +15,9 @@ Select a broker that have a proven track record and is known to be reliable comp
 * It easy to get your money in and out. There are still "brokers" (read scams) that will happily take your money but make it almost impossible to get it out.
 * The broker is transparent how trades are executed, for example do they sell order flows.
 * They tell you how they earn their money. Many brokers advertise "no transaction fees" on their homepage but only show many additional costs somewhere hidden on their website.
+* They are regulated and the company itself is registered in a country that has good due diligence in place.
 +
-Brokers that are offering trading in classic asset classes like stocks, often are more regulated. And although this is no
-guarantee, there are fewer scams than in for example the crypto world which is less regulated.
+Brokers that offer classic asset classes like stocks, often are more regulated. And although this is no guarantee, there are fewer scams than in for example the crypto or forex world which is less regulated.
 
 . High Available
 +
@@ -38,7 +38,6 @@ Before going live, it is good practice to first test your software with a paper-
 . Rich set of order types
 +
 This makes it easier to create robust trading software since the order type takes care of some automatic behavior like take profit or stop loss. Some brokers additionally provide the user with control over the order routing, making it possible to further optimize order management.
-
 
 
 TIP: Check online communities like Reddit for experience of other traders with a particular broker or exchange. Or post your question on the _roboquant_ discord channel. And remember, “if it sounds too good to be true, it probably is”.

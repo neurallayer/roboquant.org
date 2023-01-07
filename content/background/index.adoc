@@ -52,17 +52,21 @@ When importing data, there is functionality to convert the data from timezone sp
 But the fact remains that all internal logic relies only on the Instant type in order to prevent timezone mistakes from happening.
 
 == Performance
-With data sets growing, it is important that a strategy can still be quickly evaluated and tuned when required. If this develop-test cycle becomes too slow, it is nearly impossible to create high performing strategies.
+With historic data sets growing, it is important that a strategy can still be quickly evaluated and tuned. If this develop-test cycle becomes too slow, it is nearly impossible to create high performing strategies.
+
+Some of the measures that have been taken to ensure the highest performance possible:
 
 * Roboquant isn't setup to be a financial ledger and in general trading applications don't require this accuracy. The native Java Double type provides enough precision for most algo-trading purposes and there is no need to use (the much slower and more memory hungry) BigDecimal type. The area where _roboquant_ uses more precise calculation is when dealing with order and position sizes.
 
 * The data Feed API supports data that is kept in-memory as well data that is stored on disk and only accessed when required. This allows for running back test where the test data doesn't fit in memory or running back-tests on machines with limited memory. In fact _roboquant_ can be used on a JVM with only 200 MB of heap allocated.
 
-* Many of the builtin features use multithreading to speedup processing. For example the CSV parser parses CSV files in parallel so even directories with thousands of CSV files can be parsed in seconds.
+* Many of the builtin features use multithreading to speedup processing. For example the CSVFeed parses CSV files in parallel so directories with thousands of CSV files can be parsed in seconds.
 
 * Avoid (auto)boxing, so the JVM can access these variables directly. This means where possible use native types and not the wrapper one. See https://docs.oracle.com/javase/1.5.0/docs/guide/language/autoboxing.html[background^]
 
 * Overall the latency is kept very low when processing a new event and generating orders. So it is feasible to create fast, low latency (milliseconds) trading strategies.
+
+To give some idea, a simple back test can easily run over 5.000.000 candlesticks per second on modern hardware.
 
 == Reliability
 Even more important than performance, is reliability when it comes to trading software. So _roboquant_ takes several quality assurance measures in order to catch as many bugs as possible before the software is released:
@@ -82,7 +86,7 @@ Event-driven algo-trading platforms provide several advantages over a vectorised
 
 * Reuse - _roboquant_ uses the same event-driven approach for all xref:four_stages.adoc[4 stages] of developing trading strategies, ensuring minimal friction when moving from one stage to the next.
 
-* Avoid Lookahead - With event-driven back-tests, it is unlikely that the strategy will actually peep into the future since at the time of making any decision in the code, the future data is not yet available.
+* Avoid Lookahead bias - With event-driven back-tests, it is unlikely that the strategy will actually peep into the future since at the time of making any decision in the code, the future data is not yet available. In fact, within _roboquant_ the simulated broker is guaranteed to see pricing information before your strategy does.
 
 * Robustness - Live trading is by definition event-driven. So by using the same approach during back testing, it ensures you got have to address use-cases that otherwise wouldn't show up until it is too late.
 
@@ -90,6 +94,6 @@ Although event-driven systems come with the above benefits, they traditionally s
 
 . They are more complex to implement and test. That is why using platform like _roboquant_ makes a lot of sense, since much of the heavy lifting is done by the platform.
 
-. They can be slower to execute compared to a vectorised system. But by using Kotlin and a highly optimized engine, _roboquant_ is actually faster than other algo-trading platforms.
+. They can be slower to execute compared to a vectorised system. But by using Kotlin and a highly optimized execution engine, _roboquant_ is actually faster than other algo-trading platforms.
 
 To find out more about how Events and Actions are implemented in _roboquant_, check out the documentation on xref:../tutorial/feed.adoc[feeds].

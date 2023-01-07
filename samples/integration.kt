@@ -1,7 +1,9 @@
 @file:Suppress("unused", "TooManyFunctions", "SpreadOperator")
 
 import com.crazzyghost.alphavantage.parameters.Interval
+import net.jacobpeterson.alpaca.model.properties.DataAPIType
 import org.roboquant.Roboquant
+import org.roboquant.alpaca.AccountType
 import org.roboquant.alpaca.AlpacaBroker
 import org.roboquant.alpaca.AlpacaHistoricFeed
 import org.roboquant.alpaca.AlpacaLiveFeed
@@ -53,13 +55,13 @@ fun ecb() {
     // The results are cached by default
     Config.exchangeRates = ECBExchangeRates.fromWeb()
 
-    // Create a wallet with different currencies
+    // Create a wallet holding different currencies
     val wallet = 100.EUR + 20.USD + 1000.JPY
 
-    // What is the conversion today in GBP
+    // convert the wallet to GBP at today's exchange rates
     wallet.convert(Currency.GBP)
 
-    // What would the same conversion have been 5 years ago
+    //  convert the wallet to GBP using 5 years ago exchange rates
     wallet.convert(Currency.GBP, Instant.now() - 5.years)
     // end::ecb[]
 }
@@ -105,12 +107,15 @@ suspend fun polygonLiveFeed(roboquant: Roboquant) {
 }
 
 
+
+
 fun oandaBroker() {
     // tag::oandabroker[]
     val broker = OANDABroker()
     println(broker.account.summary())
     println(broker.availableAssets)
 
+    // place a market order to buy 100 stocks Apple
     val order = MarketOrder(Asset("AAPL"), 100)
     broker.place(listOf(order))
     // end::oandabroker[]
@@ -128,6 +133,8 @@ fun alpacaHistoricFeed() {
     // end::alpacahistoric[]
 }
 
+
+
 fun alpacaLiveFeed(roboquant: Roboquant) {
     // tag::alpacalive[]
     val feed = AlpacaLiveFeed()
@@ -140,10 +147,17 @@ fun alpacaLiveFeed(roboquant: Roboquant) {
 
 fun alpacaBroker() {
     // tag::alpacabroker[]
-    val broker = AlpacaBroker()
+    // instantiation with hard coded configuration, rather than using dotenv property file
+    val broker = AlpacaBroker {
+        publicKey = "123"
+        secretKey = "456"
+        accountType = AccountType.PAPER
+        dataType = DataAPIType.IEX
+    }
     println(broker.account.summary())
     println(broker.availableAssets)
 
+    // place a market order to buy 100 stocks Apple
     val order = MarketOrder(Asset("AAPL"), 100)
     broker.place(listOf(order))
     // end::alpacabroker[]

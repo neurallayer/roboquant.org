@@ -4,38 +4,41 @@
 :source-highlighter: rouge
 :dotenvfile: ../../samples/dotenv
 :sourcefile: ../../samples/integration.kt
+:cryptofile: ../../samples/crypto.kt
 
-There are several types of integrations available with 3rd parties:
+There are several types of functionality available from 3rd parties providers:
 
 * Historic data feeds
 * Live data feeds
-* Brokers implementations
+* Broker implementations
 * Exchange rates
 
 In some cases a single 3rd party provides all types of functionality, or sometimes they are just specialised for a subset. You can combine several of these 3rd parties together in a single run, for example using a data feed from one provider and the broker functionality from another one.
 
-One of the design principles is that _roboquant_ tries to avoid exposing 3rd party APIs directly and typically wraps them in _roboquant_ equivalent types. This makes it easier to switch between different providers and also reduces the learning curve.
+One of the design principles is that _roboquant_ tries to avoid exposing 3rd party APIs directly and typically wraps them in _roboquant_ specific APIs and types. This makes it easier to switch between different providers and also reduces the learning curve.
 
 == Modules & Packages
-The third party integrations have their own modules and are not part of the core `roboquant` module:
+The third party providers have their own modules and are not part of the core `roboquant` module:
 
 * roboquant-extra for the "traditional" broker and data feed providers
 * roboquant-crypto for cryptocurrency related 3rd parties
 * roboquant-ibkr for Interactive Brokers
 
-Include these modules in your Maven or Gradle build. Except for `roboquant-ibkr`, these modules are included by default in the Jupyter Notebooks.
+You can include these modules in your Maven or Gradle build. In order to use the 3rd party integration, you'll have to import the package. All third party integration have their own package directly under `org.roboquant`.
 
-In order to use the 3rd party integration, you'll first have to import the package. All third party integration have their own package directly under `org.roboquant`. So you can import all the required classes for OANDA as follows:
+So for example you can import all the required classes for OANDA as follows:
 
 [source, kotlin]
 ----
 import org.roboquant.oanda.*
 ----
 
+This `wildcard` import is especially useful if you use _roboquant_ in a Jupyter Notebook. If you use _roboquant_ in an IDE like IntelliJ IDEA, the IDE will automatically import the right packages and classes for you.
+
 == Configuration
 When you want to integrate with a 3rd party, you most likely require credentials to gain access to their APIs. Often this is in the form of an API key and/or secret. You can include these credentials directly in your source code, however _roboquant_ offers better and more secure alternatives.
 
-The following list shows the steps _roboquant_ uses to resolve these configuration parameters:
+The following list shows the order of steps _roboquant_ uses to find these configuration parameters:
 
 . If the credentials are provided directly in the code when calling the API, use these, otherwise go to next step.
 . If the credentials are provided as startup parameter to the JVM with the -D syntax, use these, otherwise go to next step.
@@ -136,8 +139,30 @@ include::{sourcefile}[tag=ecb]
 ----
 
 
+== Binance
+The integration with Binance covers their broker API as well as their historic and live market data APIs. From an algo-trading perspective, it is also nice to see that the access to (high-frequency) market data is free. Even if you don't have a trading account, you can still access it.
+
+[source, kotlin,indent=0]
+----
+include::{cryptofile}[tag=binancehistoricfeed]
+----
+
+To subscribe to live quotes for one or more currency pairs, is easy
+[source, kotlin,indent=0]
+----
+include::{cryptofile}[tag=binancelivefeed]
+----
+
+Currently the broker integration with Binance is largely untested and core features are disabled to avoid costly bugs. People have been using it as a starting point for their own implementation, but the included implementation should not be relied upon yet.
+
+[source, kotlin,indent=0]
+----
+include::{cryptofile}[tag=binancebroker]
+----
+
+
 == Alpha Vantage
-Alpha Vantage provides a rich set of historic stock prices, not only those stocks listed on US exchanges.
+Alpha Vantage provides a rich set of historic stock prices, not only those stocks listed on US exchanges. Although Alpha Vantage also provides other information besides stock market data, that is right now not yet supported by the `AlphaVantageHistoricFeed`.
 
 [source, kotlin,indent=0]
 ----
