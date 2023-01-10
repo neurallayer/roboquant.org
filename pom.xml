@@ -140,6 +140,18 @@
 			<artifactId>kotlin-jupyter-api</artifactId>
 			<version>0.11.0-210</version>
 		</dependency>
+		<dependency>
+			<groupId>org.knowm.xchange</groupId>
+			<artifactId>xchange-bitstamp</artifactId>
+			<version>5.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.knowm.xchange</groupId>
+			<artifactId>xchange-stream-bitstamp</artifactId>
+			<version>5.1.0</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 </project>

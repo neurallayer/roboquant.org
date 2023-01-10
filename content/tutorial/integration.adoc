@@ -160,6 +160,42 @@ Currently the broker integration with Binance is largely untested and core featu
 include::{cryptofile}[tag=binancebroker]
 ----
 
+== XChange
+XChange is a library providing a consistent API for interacting with 60+ Bitcoin and other crypto currency exchanges, providing an interface for trading and accessing market data.
+
+Roboquant integrates with XChange for retrieving historic data, live data and accessing trading functionality. Because there is support for so many crypto exchanges, the initial setup is a bit more elaborate than with other 3rd party providers.
+
+You'll always have to add the additional exchange specific libraries to your project. We'll use Maven and Bitstamp as an example:
+
+[source, xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>org.knowm.xchange</groupId>
+        <artifactId>xchange-bitstamp</artifactId>
+        <version>5.1.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.knowm.xchange</groupId>
+        <artifactId>xchange-stream-bitstamp</artifactId>
+        <version>5.1.0</version>
+    </dependency>
+</dependencies>
+----
+
+To get live data, you'll first need to acquire an instance of a `StreamingExchange`. Again using Bitstamp as an example, you can use the following code snippet:
+
+[source, kotlin,indent=0]
+----
+include::{cryptofile}[tag=bitstamp]
+----
+
+Now you are ready to create an instance of XChangeLiveFeed and subscribe to one or more currency pairs.
+[source, kotlin,indent=0]
+----
+include::{cryptofile}[tag=xchangelivefeed]
+----
+
 
 == Alpha Vantage
 Alpha Vantage provides a rich set of historic stock prices, not only those stocks listed on US exchanges. Although Alpha Vantage also provides other information besides stock market data, that is right now not yet supported by the `AlphaVantageHistoricFeed`.

@@ -1,4 +1,4 @@
-= Postcasts
+= Podcasts
 :jbake-type: item
 :jbake-status: published
 :icons: font
