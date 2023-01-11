@@ -18,7 +18,7 @@ fun binanceHistoricFeed() {
     val feed = BinanceHistoricFeed()
     println(feed.availableAssets.summary())
 
-    // Retrieve 1 minute candlesticks for two currency pair for the last day
+    // Retrieve 1-minute candlesticks for two currency pair for the last day
     val timeframe = Timeframe.past(1.days)
     feed.retrieve("BTCBUSD", "ETHBUSD", timeframe = timeframe, interval = Interval.ONE_MINUTE)
     // end::binancehistoricfeed[]

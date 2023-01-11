@@ -7,60 +7,75 @@ The following table provides an overview of popular market data providers, free 
 
 [frame=ends]
 [.table]
-[cols="<,<,^,^,^,^,<"]
+[cols="<,<,^,^,^,^,<,<"]
 |===
-|Provider|Asset Types|API|Historic|Realtime Delayed|Realtime|Pricing model
+|Provider|Asset Types|API|Historic|Realtime Delayed|Realtime|Pricing model|Remarks
 
 |Polygon
 |US Stocks, Options & crypto
 |&check;|&check;|&check;|&check;
 |Fee per month
+|Good performing API
 
 |Yahoo Finance
 |US Stocks
 |&check;|&check;|&check;|
 |Free
+|Can have some quality issues
 
 |Alpha Vantage
-|US stocks, fundamental, forex, crypto and economic indicators
+|Stocks, fundamental, forex, crypto and economic indicators
 |&check;|&check;||
 |Fee based on API calls per minute
+|Also covers exchanges outside US
 
 |Stooq
 |US stocks, UK stocks, World stocks, macroeconomic indicators
 ||&check;||
 |Free
+|
 
 |Alpaca
 |US Stocks & Crypto
 |&check;|&check;|&check;|&check;
 |Fee per month
+|Subscripting prices fluctuated a lot in recent years
+
+|Tiingo
+|US Stocks/ETF & China Stocks/ETF & Crypto
+|&check;|&check;|&check;|
+|Low fee per month
+|IEX Live feed with only 15ms delay
 
 |Databento
 |US Stocks L3
 ||&check;||
 |Fee per download
+|
 
 |Dukascopy
 |Forex, Commodities, CFD
 ||&check;||
 |Free
+|
 
 |Binance
 |Crypto
 |&check;|&check;|&check;|&check;
 |Free
+|
 
 |IEX Exchange
 |IEX traded US stocks L3
 ||&check;||
 |Free
+|Large file that require additional processing
 
 |Kaggle
 |Various datasets
 ||&check;||
 |Free
-
+|Some datasets have big quality issues
 |===
 
 

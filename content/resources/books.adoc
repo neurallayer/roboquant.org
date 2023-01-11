@@ -76,7 +76,7 @@ This book is more theoretical than some others books on this list. But that is a
 image::econometrics.jpeg[width="200", float="left"]
 *Applied Time Series Econometrics* - Helmut Lütkepohl
 
-This book provides a great foundation for understanding much of the theory behind time series analysis. It clearly explains commonly used models and important concepts like stationary processes. However, it requires a good knowledge of math at least at an undergraduate level. The examples used in this book cover both macro-economical as well as investment oriented use-cases.
+This book provides a great foundation for understanding much of the theory behind time series analysis. It clearly explains commonly used models and important concepts like stationary processes. However, it requires a good knowledge of math at least at an undergraduate level. The examples used in this book cover both macro-economical and investment oriented use-cases.
 
 Besides the great content, there is also a Java GUI project provided at http://jmulti.de that implements various models explained in this book, like an ARIMA model. This Java project is however a bit outdated since the code-base pre-dates 2010.
 --

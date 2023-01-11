@@ -153,7 +153,7 @@ To subscribe to live quotes for one or more currency pairs, is easy
 include::{cryptofile}[tag=binancelivefeed]
 ----
 
-Currently the broker integration with Binance is largely untested and core features are disabled to avoid costly bugs. People have been using it as a starting point for their own implementation, but the included implementation should not be relied upon yet.
+Currently, the broker integration with Binance is largely untested and core features are disabled to avoid costly bugs. People have been using it as a starting point for their own implementation, but the included implementation should not be relied upon yet.
 
 [source, kotlin,indent=0]
 ----
@@ -161,7 +161,7 @@ include::{cryptofile}[tag=binancebroker]
 ----
 
 == XChange
-XChange is a library providing a consistent API for interacting with 60+ Bitcoin and other crypto currency exchanges, providing an interface for trading and accessing market data.
+XChange is a library providing a consistent API for interacting with 60+ Bitcoin and other cryptocurrency exchanges, providing an interface for trading and accessing market data.
 
 Roboquant integrates with XChange for retrieving historic data, live data and accessing trading functionality. Because there is support for so many crypto exchanges, the initial setup is a bit more elaborate than with other 3rd party providers.
 

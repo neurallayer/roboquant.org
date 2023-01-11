@@ -119,7 +119,7 @@ Apache Avro™ is a data serialization system. Avro provides a compact, fast, bi
 Avro files make it easy to store large amount of data in a single file and efficiently use it during back testing. The AvroFeed implementation of _roboquant_ only loads data in memory when it is required, so very large datasets can be used without having to worry about memory issues. Also since the Avro Feed uses a single file, it is easier to distribute it than for example directories full of CSV files.
 
 
-As you might already guessed, but the use of an `AvroFeed` comes highly recommended.
+As you might have guessed, but the use of an `AvroFeed` comes highly recommended.
 
 
 === Using an AvroFeed
