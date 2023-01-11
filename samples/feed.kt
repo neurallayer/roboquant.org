@@ -80,8 +80,12 @@ fun avroCaptureLive() {
     // tag::avrocapturelive[]
     val feed = BinanceLiveFeed()
     feed.subscribePriceBar("BTCUSDT")
-    val timeframe = Timeframe.next(4.hours)
+    var timeframe = Timeframe.next(4.hours)
     AvroFeed.record(feed, "bitcoin.avro", timeframe = timeframe)
+
+    // You can also append to an existing Avro file
+    timeframe = Timeframe.next(8.hours)
+    AvroFeed.record(feed, "bitcoin.avro", timeframe = timeframe, append = true)
     // end::avrocapturelive[]
 }
 

@@ -6,7 +6,7 @@
 :sourcefile: ../../samples/integration.kt
 :cryptofile: ../../samples/crypto.kt
 
-There are several types of functionality available from 3rd parties providers:
+There are several categories of functionality available from 3rd parties providers:
 
 * Historic data feeds
 * Live data feeds

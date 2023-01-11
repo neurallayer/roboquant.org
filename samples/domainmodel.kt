@@ -158,5 +158,9 @@ private fun predefined(roboquant: Roboquant, feed: Feed) {
     timeFrames.forEach {
         roboquant.run(feed, it)
     }
+
+    // Create a timeframe from 2 months before till 1 months after Black Monday
+    val tf = Timeframe.blackMonday1987.extend(before = 2.months, after = 1.months)
+
     // end::predefined[]
 }

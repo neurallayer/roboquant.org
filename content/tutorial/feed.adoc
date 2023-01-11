@@ -1,5 +1,6 @@
 = Feed
 :source-highlighter: rouge
+:icons: font
 :sourcefile: ../../samples/feed.kt
 :jbake-date: 2020-09-01
 
@@ -113,15 +114,13 @@ TIP: Convert the CSV files to an AvroFeed, that way you have the best of both wo
 
 
 == Avro Feed
-Apache Avro™ is a data serialization system. Avro provides:
+Apache Avro™ is a data serialization system. Avro provides a compact, fast, binary data format. Avro file format is a row-based repository, making a good match for event-driven architectures like _roboquant_.
 
-* Rich data structures.
-* A compact, fast, binary data format.
-* A container file, to store persistent data.
+Avro files make it easy to store large amount of data in a single file and efficiently use it during back testing. The AvroFeed implementation of _roboquant_ only loads data in memory when it is required, so very large datasets can be used without having to worry about memory issues. Also since the Avro Feed uses a single file, it is easier to distribute it than for example directories full of CSV files.
 
-Avro files make it easy to store large amount of data in a single file and efficiently use it during back testing. The AvroFeed implementation of _roboquant_ only loads data in memory when it is required, so very large datasets can be used without having to worry about memory issues.
 
-Also since the Avro Feed uses a single file, it is easier to distribute it than for example directories full of CSV files.
+As you might already guessed, but the use of an `AvroFeed` comes highly recommended.
+
 
 === Using an AvroFeed
 Using any compatible Avro file as a feed is straightforward. You just provide the file location to the constructor as a parameter and the feed will be ready to use.

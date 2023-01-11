@@ -10,16 +10,14 @@ A broker receives orders and processes them. The outcome of this processing is a
 1. SimBroker: simulates a broker and the trading that happens on an exchange.
 2. Third party brokers: implementations that integrate with a real broker like IBKR, Alpaca or Binance.
 
-These two types implement the same `Broker` interface. Normally during back-testing and live-testing you'll use the SimBroker, and during paper-trading and live-trading you'll use a real broker. The main method is:
-
+These two types implement the same `Broker` interface. Normally during back-testing and live-testing you'll use the SimBroker, and during paper-trading and live-trading you'll use a real broker. The main method is `broker.place`. And although normally you wouldn't invoke it directly since the `Roboquant` instance would do that as part of a run, you can if you want to:
 
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=basic]
 ----
 
-
-WARNING: Broker implementations can differ in what order types and assets are supported. So when moving from SimBroker to a real broker, validate if the behavior is still as expected.
+WARNING: Broker implementations can differ in what order types and assets are supported. So when moving from the `SimBroker` to a real broker, always validate if the behavior is still as expected.
 
 == Account
 `broker.account` property returns an Account object. This `Account` object contains a snapshot of the exposed state of a broker and is identical between the simulated broker and real brokers. The object is guaranteed not to change, which also implies that if you want an updated version, you need to invoke `broker.account` again.
@@ -35,13 +33,16 @@ The `Account` object contains the following key properties:
 
 TIP: Always use the `Account.buyingPower` property if you want to know how much money is remaining for trading. Especially when using a `MarginAccount`, you shouldn't rely on the `Account.cash` property, since that doesn't take into account any margin or leverage you might have.
 
-Since the properties of the account object are mostly plain Kotlin collections, you can use standard Kotlin access patterns. Additionally, there are several extensions defined that might come in convenient when dealing with an account object.
+Since properties like `trades` and `openOrders` of the account object are plain Kotlin collections, you can use standard Kotlin access patterns. Kotlin collections are very powerful tool to access data structures once you master them.
+
+TIP: If you are new to Kotlin collections, you can go to this page for more info: https://kotlinlang.org/docs/collections-overview.html
+
+Additionally, _roboquant_ defines several extensions that come in handy when dealing with the account object.
 
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=account]
 ----
-
 
 .Equity
 ****
