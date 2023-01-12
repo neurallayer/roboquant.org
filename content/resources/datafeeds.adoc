@@ -42,7 +42,7 @@ The following table provides an overview of popular market data providers, free 
 |Subscripting prices fluctuated a lot in recent years
 
 |Tiingo
-|US Stocks/ETF & China Stocks/ETF & Crypto
+|US/China Stocks & ETF & Crypto
 |&check;|&check;|&check;|
 |Low fee per month
 |IEX Live feed with only 15ms delay
