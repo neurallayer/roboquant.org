@@ -116,8 +116,7 @@ There are use cases that require a strategy not only to have access to an `Event
 * Access to the Account instance is required, for example to re-balance a portfolio
 * Directly generate orders instead of signals
 
-See the xref:policy.adoc[policy documentation] for more details.
-
+See the xref:policy.adoc#_advanced_policies[advanced policies] for more details.
 
 == Signals
 A `Signal` is the outcome of a strategy and is modelled closely after the ratings given by rating agencies. The two mandatory attributes of a `Signal` are:

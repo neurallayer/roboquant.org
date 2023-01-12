@@ -2,6 +2,8 @@
 
 import org.roboquant.Roboquant
 import org.roboquant.brokers.Account
+import org.roboquant.brokers.Position
+import org.roboquant.brokers.diff
 import org.roboquant.common.Size
 import org.roboquant.common.days
 import org.roboquant.feeds.Event
@@ -11,6 +13,8 @@ import org.roboquant.strategies.NoSignalStrategy
 import org.roboquant.strategies.Signal
 import org.roboquant.ta.PriceBarSeries
 import org.roboquant.ta.TaLib
+import java.time.Instant
+import org.roboquant.common.*
 
 // tag::basic[]
 class MyPolicy : Policy {
@@ -30,6 +34,21 @@ private fun chainedPolicies() {
         .resolve(SignalResolution.NO_CONFLICTS) // remove all conflicting signals
         .circuitBreaker(10, 1.days) // stop orders if there are too many created
     // end::chaining[]
+}
+
+
+fun constr() {
+    // tag::constructor[]
+    val policy = FlexPolicy(
+        orderPercentage = 0.01,
+        shorting = true,
+        priceType = "OPEN",
+        fractions = 4,
+        oneOrderOnly = true,
+        safetyMargin = 0.1,
+        minPrice = 1000.USD
+    )
+    // end::constructor[]
 }
 
 
@@ -136,12 +155,30 @@ fun noStrategy() {
     // tag::advanced[]
     class MyPolicy : Policy {
 
-        override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
-            // signals will be an empty list
-            val orders = mutableListOf<Order>()
-            // Your code goes here
-            return orders
+        private var rebalanceDate = Instant.MIN
+        private val holdingPeriod = 20.days
+
+        /**
+         * Based on some logic determine the target portfolio
+         */
+        fun getTargetPortfolio() : List<Position> {
+            TODO("your logic for goes here")
         }
+
+        override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
+            if (event.time < rebalanceDate) return emptyList()
+
+            rebalanceDate = event.time + holdingPeriod
+            val targetPortfolio = getTargetPortfolio()
+
+            // Get the difference of target portfolio and the current portfolio
+            val diff = account.positions.diff(targetPortfolio)
+
+            // Transform the difference into MarketOrders
+            return diff.map { MarketOrder(it.key, it.value) }
+        }
+
+        override fun reset() { rebalanceDate = Instant.MIN }
     }
 
     val roboquant = Roboquant(
