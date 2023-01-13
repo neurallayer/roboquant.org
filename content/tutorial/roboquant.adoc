@@ -64,9 +64,9 @@ include::{sourcefile}[tag=run3]
 ----
 
 == Running in Parallel
-If you want to run many back-test, you can run them in parallel and leverage all the cores on your computer to expedite the process. _Roboquant_ scales almost linearly with the number of available cores, and it only requires a few extra lines of code.
+If you want to run many back-tests, you can run them in parallel and leverage all the cores on your computer to expedite the process. _Roboquant_ scales almost linearly with the number of available cores, and it only requires a few extra lines of code.
 
-The following example shows how to run a walk forward in parallel. By reusing the same logger instance, all results will be stored in a single logger instance and can be easily compared afterwards.
+The following example shows how to run a walk forward in parallel. By reusing the same logger instance, all results will be stored in a single logger instance and can be easily compared afterwards. Also the feed can be shared across jobs, resulting in lower memory consumption.
 
 [source, kotlin, indent=0]
 ----

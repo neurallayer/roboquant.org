@@ -44,6 +44,14 @@ Additionally, _roboquant_ defines several extensions that come in handy when dea
 include::{sourcefile}[tag=account]
 ----
 
+You can also print a `account.summary` or `account.fullSummary` overview. The full summary includes all positions, trades and orders, so it can become very large after an extensive back test:
+
+[source,indent=0]
+----
+include::{sourcefile}[tag=fullsummary]
+----
+
+
 .Equity
 ****
 Equity is a key metric to monitor if you want to see how your account is performing during a run. The following two equations hold true when running a back test:
@@ -53,6 +61,8 @@ Equity is a key metric to monitor if you want to see how your account is perform
 include::{sourcefile}[tag=equity]
 ----
 ****
+
+When you plot the equity curve in a Jupyter Notebook, you don't only can see the PNL performance, you also can see how smooth the curve is, providing an visual indication on the volatility of the returns of your strategy.
 
 == Out of the box available brokers
 The following `Broker` implementations are available:

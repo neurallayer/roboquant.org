@@ -98,7 +98,7 @@ Add the following snippet to your pom.xml file in the dependencies section:
 </dependency>
 ----
 
-or if you want to create your own fresh project, you can run a Maven Archetype:
+or if you want to create your own new algo-trading project, you can run a Maven Archetype:
 
 [source,shell]
 ----
@@ -110,6 +110,8 @@ mvn archetype:generate                          \
 -DartifactId=myapp                              \
 -Dversion=0.1-SNAPSHOT
 ----
+
+This will result in a fully functional Kotlin Maven project with a small sample strategy, that is ready to be imported an IDE like IntelliJ IDEA.
 
 === Gradle
 Include the following line in your build.gradle script:
