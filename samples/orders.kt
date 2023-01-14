@@ -1,7 +1,10 @@
 @file:Suppress("unused", "UnnecessaryVariable", "UNUSED_VARIABLE")
 
-import org.roboquant.brokers.sim.execution.*
+import org.roboquant.brokers.Broker
 import org.roboquant.brokers.sim.Pricing
+import org.roboquant.brokers.sim.execution.CreateOrderExecutor
+import org.roboquant.brokers.sim.execution.Execution
+import org.roboquant.brokers.sim.execution.ExecutionEngine
 import org.roboquant.common.Asset
 import org.roboquant.common.Size
 import org.roboquant.orders.*
@@ -30,6 +33,23 @@ fun bracketOrder(asset: Asset, price: Double) {
     // end::bracketOrder[]
 }
 
+
+
+fun accountOrder(broker: Broker) {
+    // tag::accountOrder[]
+    val asset = Asset("AAPL")
+    val order = MarketOrder(asset, 100)
+    val account = broker.place(listOf(order))
+
+    val openOrder = account.openOrders.last()
+    assert(openOrder.order is MarketOrder)
+    assert(order == openOrder.order)
+    
+    with (openOrder) {
+        println("status=$status openedAt=$openedAt closedAt=$closedAt")
+    }
+    // end::accountOrder[]
+}
 
 fun customCreateOrder() {
 

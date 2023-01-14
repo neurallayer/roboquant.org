@@ -5,16 +5,18 @@
 :sourcefile: ../../samples/orders.kt
 
 == Order Types
-Roboquant comes out of the box with support for different types of orders. All orders are grouped in one of these two categories:
+Roboquant comes out of the box with support for different types of orders. All orders are a subclass of one of these two abstract classes:
 
-1. Create-orders: create a new order
-2. Modify-order: modify an already existing create-order
+1. `CreateOrder`: represents a regular new order, for example a MarketOrder or LimitOrder.
+2. `ModifyOrder`: modifies an existing open create order, for example an UpdateOrder or CancelOrder.
 
-The following diagram shows the order types that are supported out-of-the-box and also their class relationship to each other.
+The following diagram shows the order types that are supported out-of-the-box and also their relationship to each other. The SimBroker supports all these order types, but other `Broker` implementations might only support a subset.
+
+See also the SimBroker section on xref:simbroker.adoc#_order_handling[order handling] for more details how orders are exactly processed.
 
 image::order_types.png[]
 
-All orders refer to a single asset, including advanced order types like BracketOrders. The reason for putting this restriction in place is that real brokers only have limited support for multi-asset orders and this could lead to issues that are only discovered during live trading. Additionally, it makes back testing difficult if the price for one asset is known but not for the other.
+All orders refer to a single asset, including advanced order types like BracketOrders. The reason for putting this restriction in place is that real brokers only have limited support for multi-asset orders and this could lead to issues that are only discovered during live trading. Additionally, it makes back testing inconsistent if the price is only known for one of the assets.
 
 == Creating Orders
 The `Policy` used during a `run` is responsible for creating the orders. This can be based on the received signals from the `Strategy`, but can also be done for other reasons (like for example cyclic portfolio re-balancing).
@@ -35,7 +37,7 @@ Most advanced order types are often constructed using multiple `SingleOrder` typ
 include::{sourcefile}[tag=bracketOrder]
 ----
 
-TIP: Always make sure to only use during back testing order types that are also supported by the broker you want to use for live trading. Also be aware that the way these advanced order types are executed might slightly differ between brokers.
+TIP: During back testing make sure to only use order types that are also supported by the broker you plan to use for live trading. Also be aware that the way advanced order types are executed might differ slightly between brokers.
 
 == TIF (Time In Force)
 TIF sets an execution policy for an order, defining under what conditions the order remains valid. Roughly speaking, there are two types of TIF:
@@ -62,5 +64,12 @@ After that, you can use this new order type in your policy just like any of the 
 include::{sourcefile}[tag=customOrder]
 ----
 
+== Account Orders
+After an order has been placed at a Broker, the state can be tracked via `Account.openOrders` or `Account.closedOrders`. It is important to realize that these two collections contain `OrderState` objects that wrap the original order that was placed at the broker. Besides the underlying order, the `OrderState` object also contains the OrderStatus and timestamps when the order was accepted and closed.
 
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=accountOrder]
+----
 
+TIP: When creating a new order in a Policy, always validate if you still have an open order for the same asset and take the appropriate action.

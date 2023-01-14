@@ -26,43 +26,49 @@ However, you can overwrite many of the default values. Common use cases are:
 
 So a more custom configured version of the SimBroker can be instantiated using:
 
-[source, kotlin,indent=0]
+[source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=extra]
 ----
 
 TIP: if you are trading specific markets, like FOREX, you most likely want to use customize the configuration since the default values like those selected for spreads are not representative for those type of markets.
 
-The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit. Typically, the initial deposit is denoted in a single currency, like a *$50,000.00 USD* account. But this is not a hard requirement and with `SimBroker` you can use a multi-currency initial deposit if you prefer. However, there is always only one `baseCurrency`.
+The initial deposit is the cash that is deposited at the opening of an account.Any time the SimBroker is reset, the account will be reset to this initial deposit.Typically, the initial deposit is denoted in a single currency, like a *$50,000.00 USD* account.But this is not a hard requirement and with `SimBroker` you can use a multi-currency initial deposit if you prefer.However, there is always only one `baseCurrency`.
 
-
+[#_order_handling]
 == Order Handling
-When an order is placed at the SimBroker, it only gets processed once there is a known price for the underlying asset. Till an event happens that has that price action available, the order will remain in the `INITIAL` state.
+When an order is placed at the SimBroker, the following rules apply:
 
-Any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted. So an order in `INITIAL` state will not expire, and time based TIF will only start counting after it has been accepted.
+- create-orders only gets executed once there is a known price for the underlying asset.Till an event appears that has that price action available, the order will remain in the `INITIAL` state and not be executed.
 
-Any open orders will be processed based on FIFO (first-in-first-out) basis, so older open orders are processed first. Exception to this rule are modify orders, that are always processed before regular order types. The most common modify orders are `CancelOrder` and `UpdateOrder`.
+- modify-orders will always get executed, even if there is no known price for the asset.
+
+- any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted.So an order in `INITIAL` state will not expire, and time based TIF will only start counting after it has been accepted.
+
+- pending modify orders will always be processed BEFORE pending create orders.So if you send a `CancelOrder` and `MarketOrder` for the same asset, the `CancelOrder` is guaranteed to be processed first.
+
+- Open create orders will be processed based on FIFO (first-in-first-out) basis, so older open orders are processed first.
 
 
 == Custom Configuration
 Custom models are a way to further configure `SimBroker` and ensure it closely mimics the behavior of your real broker.
 
-WARNING: if you don't take these type of trading cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading. When in doubt, better to be on the safe side and configure the cost to be slightly higher.
+WARNING: if you don't take any type of trading cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading. When in doubt, better to be on the safe side and configure the cost to be slightly higher.
 
 The following three types of models can be implemented if the default ones that comes with _roboquant_ are not sufficient:
 
-. PricingEngine: calculate the price to use for a trade. It can be used to simulate the following type of trading cost:
+. `PricingEngine`: calculate the price to use for a trade. It can be used to simulate the following type of trading cost:
     - Spread (difference between buy and sell price)
     - Slippage (large orders will require multiple trades against different prices)
     - Exchange rates
 
-. FeeModels: the transaction related fees and commissions. Trading cost to take into consideration:
+. `FeeModel`: the transaction related fees and commissions. Trading cost to take into consideration:
     . Broker commission fees
     . Borrowing cost when shorting
     . Storage & custodial fees
     . Exchange fees and/or rebates
 
-. AccountModel: model the different types of accounts, like a Cash or Margin account and the amount of buying power available.
+. `AccountModel`: model the buying power calculations based on the account type.
 
 Below are the default included models with examples of their configuration parameters:
 
@@ -81,18 +87,17 @@ Like any simulation, SimBroker also has limitations compared to live trading. It
 == Account Models
 Account models allow to model the amount of **buying-power** for different types of accounts, like a Cash Account or Margin Account when using the SimBroker. Buying-power represents the amount of money available for trading.
 
-
 Out of the box _roboquant_ comes with two models that cater for the most common account types:
 
-1. Cash accounts, that don't have any leverage or margin available
-2. Margin account, that have configurable margin values/
+1. `CashAccount`; account that doesn't have any leverage or margin available
+2. `MarginAccount`; account that has (configurable) initial and maintenance margin requirements
 
 === Cash Accounts
 Cash accounts can be modelled using the `CashAccount`. This model is also the default if you don't provide a BuyingPowerModel when instantiating a xref:simbroker.adoc[SimBroker].
 
 `CashAccount` bases the buying power only on the available cash, and no margin is calculated and no leverage is used. So cash and buying power are equal, however cash can contain multiple currencies while the buying power is always converted to the base currency of the account.
 
-The below table shows an example using the default CashBuyingPowerModel when trading in different currencies, EUR and USD in this case.
+The below table shows an example using the default CashAccount when trading in different currencies, EUR and USD in this case.
 
 [%autowidth, cols="^,<,>,>,>,>,>,>,>"]
 |===
@@ -116,17 +121,17 @@ Margin based accounts can be modelled using the `MarginAccount`. This model supp
 
 All margin calculations are based on the equity of the account, and not just the cash. And although in the below tables the (maintenance) margin is shown, it is actually not exposed. Only the buying-power value is available through the account object.
 
-The logic of calculating the buying power looks roughly like this (excluding open orders):
+The logic for calculating the buying power looks roughly like this in pseudocode:
 
-[source]
+[source,kotlin]
 ----
-long value = long positions * maintance margin long
-short value = short positions * maintance margin short
-excess margin = equity - long value - short value - minimum equity
-buying power = excess margin * ( 1 / initial margin)
+long_value = long_positions * maintenance_margin_long
+short_value = short_positions * maintenance_margin_short
+excess_margin = equity - long_value - short_value - minimum_equity
+buying_power = excess_margin * ( 1 / initial_margin)
 ----
 
-The following table shows an example for long trading with margin account in a Japanese Yen, using the following (default) values:
+The following table shows an example for long trading with a margin account in a Japanese Yen, using the following (default) values:
 
 - initial margin: 50%
 - maintenance margin: 30% (both for long and short positions)
@@ -159,14 +164,13 @@ The following table shows another example, but this time shorting on a USD margi
 |6 |buy XYZ 100 @ $300|$15,000|0|0|$15,000|$30,000|0|-$5,000
 |===
 
-=== Order Rules
-
-The following rules apply when taking into account open orders when calculating the buying power:
+=== Order impact on Buying Power
+The following rules apply when taking into account orders when calculating the buying power:
 
 - until an order is accepted, it doesn't impact margin or buying power.
 - open orders that reduce a position, don’t require buying power. So you can always close a position, both short and long positions.
-- Once an order has been accepted and is in an open state, it will not be cancelled due to lack of buying power.
-- An order in closed state will not impact margin or buying power (so similar to INITIAL state)
+- once an order has been accepted, it will not be cancelled due to lack of buying power.
+- an order in a closed state will not impact margin or buying power (so similar to INITIAL state)
 
 NOTE: Not all rules are currently implemented yet.
 
