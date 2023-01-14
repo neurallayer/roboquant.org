@@ -44,7 +44,7 @@ fun accountOrder(broker: Broker) {
     val openOrder = account.openOrders.last()
     assert(openOrder.order is MarketOrder)
     assert(order == openOrder.order)
-    
+
     with (openOrder) {
         println("status=$status openedAt=$openedAt closedAt=$closedAt")
     }
