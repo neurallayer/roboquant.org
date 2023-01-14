@@ -13,7 +13,7 @@
 		<kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
 		<kotlin.compiler.incremental>false</kotlin.compiler.incremental>
 		<kotlin.version>1.8.0</kotlin.version>
-		<roboquant.version>${version}</roboquant.version>
+		<roboquant.version>${project.version}</roboquant.version>
 	</properties>
 
 	<repositories>
@@ -57,7 +57,7 @@
 					<dependency>
 			            <groupId>org.asciidoctor</groupId>
 			            <artifactId>asciidoctorj</artifactId>
-			            <version>2.4.3</version>
+			            <version>2.5.7</version>
 			        </dependency>
 			        <dependency>
             			<groupId>org.freemarker</groupId>

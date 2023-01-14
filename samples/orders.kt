@@ -39,7 +39,8 @@ fun customCreateOrder() {
         asset: Asset,
         val size: Size,
         val customProperty: Int,
-    ) : CreateOrder(asset, "")
+        tag: String = ""
+    ) : CreateOrder(asset, tag)
 
     // Define a handler for your custom order type.
     // This is only required if you want your order to be supported by the SimBroker
@@ -57,7 +58,7 @@ fun customCreateOrder() {
             }
         }
 
-        // Cannot be updated
+        // Our order type cannot be updated
         override fun update(order: CreateOrder, time: Instant) = false
 
         // Execute the order. This will only be called when there is a price available
@@ -75,7 +76,7 @@ fun customCreateOrder() {
 
             // Set the state to be COMPLETED once done.
             // As long as the state is not in a closed state, the executor stays active and will be invoked when new
-            // price actions become available
+            // price actions become available for the underlying asset
             status = OrderStatus.COMPLETED
 
             // Return the executions, or empty list if there are no executions
@@ -84,7 +85,7 @@ fun customCreateOrder() {
 
     }
 
-    // Register the handler
+    // Register the handler so the SimBroker knows how to execute this new order type
     ExecutionEngine.register<MyOrder> { MyOrderExecutor(it) }
     // end::customOrder[]
 

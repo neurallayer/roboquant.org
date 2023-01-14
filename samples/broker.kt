@@ -74,8 +74,7 @@ fun equity(account: Account, initialDeposit: Wallet) {
 }
 
 
-fun fullSummary() : String {
-    return """
+const val SUMMARY_EXAMPLE = """
 // tag::fullsummary[]    
 account
 ├── last update: 2023-01-09T14:47:01Z
@@ -163,4 +162,3 @@ account
     └──  2023-01-09T14:43:00Z│ ETHBUSD│ BUSD│      150.81│  199751.23│ 0.00│     0.00│  1324.52│ 
 // end::fullsummary[]        
     """
-}

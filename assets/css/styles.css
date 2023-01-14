@@ -11384,3 +11384,15 @@ details ul li .nav-link {
 h1.doc {
     text-align: left;
 }
+
+
+ul.feature-list {
+  margin-left: 0px;
+  padding-left: 0px;
+  list-style: none;
+}
+
+.feature-list li:before {
+  content: "> ";
+  color: #3296c8;
+}

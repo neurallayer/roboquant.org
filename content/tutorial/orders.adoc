@@ -5,12 +5,16 @@
 :sourcefile: ../../samples/orders.kt
 
 == Order Types
-Roboquant comes out of the box with support for different types of orders. The following diagram shows which orders are supported and also their class relationship to each other.
+Roboquant comes out of the box with support for different types of orders. All orders are grouped in one of these two categories:
+
+1. Create-orders: create a new order
+2. Modify-order: modify an already existing create-order
+
+The following diagram shows the order types that are supported out-of-the-box and also their class relationship to each other.
 
 image::order_types.png[]
 
-All orders refer to a single asset, including advanced order types like BracketOrders. The reason for putting this restriction
-in place is that real brokers only have limited support for multi-asset orders and this could lead to issues that are only discovered during live trading. Additionally, it makes back testing difficult if the price for one asset is known but not for the other.
+All orders refer to a single asset, including advanced order types like BracketOrders. The reason for putting this restriction in place is that real brokers only have limited support for multi-asset orders and this could lead to issues that are only discovered during live trading. Additionally, it makes back testing difficult if the price for one asset is known but not for the other.
 
 == Creating Orders
 The `Policy` used during a `run` is responsible for creating the orders. This can be based on the received signals from the `Strategy`, but can also be done for other reasons (like for example cyclic portfolio re-balancing).
@@ -22,7 +26,7 @@ An example on how to convert a list of signals into a list of (market) orders:
 include::{sourcefile}[tag=orders]
 ----
 
-NOTE: There is no explicit notion of BUY or SELL order in _roboquant_. A BUY order is just any order with a positive size and a SELL order has a negative size. But other than that, they are equal and created the same way.
+NOTE: There is no explicit notion of BUY or SELL order in _roboquant_. A BUY order is just an order with a positive size and a SELL order has a negative size. But other than that, they are equal and created the same way.
 
 Most advanced order types are often constructed using multiple `SingleOrder` types. The following snippet shows how to instantiate a BracketOrder using three individual SingleOrders.
 
@@ -31,7 +35,7 @@ Most advanced order types are often constructed using multiple `SingleOrder` typ
 include::{sourcefile}[tag=bracketOrder]
 ----
 
-TIP: Always make sure to only use during back testing order types that are also supported by the broker you want to use for live trading. Also be aware that the way these advanced order types are exactly executed might differ between brokers.
+TIP: Always make sure to only use during back testing order types that are also supported by the broker you want to use for live trading. Also be aware that the way these advanced order types are executed might slightly differ between brokers.
 
 == TIF (Time In Force)
 TIF sets an execution policy for an order, defining under what conditions the order remains valid. Roughly speaking, there are two types of TIF:
@@ -39,11 +43,11 @@ TIF sets an execution policy for an order, defining under what conditions the or
 . Time based, defining how long the order stays valid. Two common ones are GTD (Good Till Day) and GTC (Good Till Cancelled)
 . Fill based, defining under which fill conditions the order stays valid. A common one if FOK (Fill Or Kill)
 
-The following diagram shows the time in force policies that come out of the box:
+The following diagram shows the time in force policies that are available out of the box:
 
 image::tif.png[]
 
-The default TIF for orders in _roboquant_, if none is explicitly specified, is GTC (Good Till Cancelled). All TIF policies only become active once an `Order` has been `ACCEPTED` (so it's not anymore in the `INITIAL` state).
+The default TIF for orders in _roboquant_, if none is explicitly specified, is GTC (Good Till Cancelled). All TIF policies only become active once an `CreateOrder` has been `ACCEPTED` (so it's not anymore in the `INITIAL` state).
 
 == Custom Order Types
 Orders can be extended with your own order types if the ones that come out of the box are not sufficient. The steps required to make yor own order types are:
