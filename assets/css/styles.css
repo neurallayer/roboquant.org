@@ -11396,3 +11396,11 @@ ul.feature-list {
   content: "> ";
   color: #3296c8;
 }
+
+.fa.fa-discord {
+  font-family: "Font Awesome 6 Brands"
+}
+
+.fa.fa-github {
+  font-family: "Font Awesome 6 Brands"
+}

@@ -5,11 +5,14 @@
 :icons: font
 
 == Approach
-Besides core components like `Strategy` and `Policy`, _roboquant_ also comes with a number of domain specific classes that make it easier to implement robust trading strategies. The two main focus areas are money related entities and time related entities.
+Besides core components like `Strategy` and `Policy`, _roboquant_ also comes with a number of domain specific classes that make it easier to implement robust trading strategies. The two main focus areas are:
 
-This approach makes it very easy to deal with these entities without much code. This is also where many of the Kotlin language features come in handy with support for operator overloading and extension functions.
+1. monetary related functionality
+2. time related functionality
 
-== Money
+This approach makes it very easy to deal with these entities without much code. This is also where many of the Kotlin language features come in handy like the support for operator overloading and extension functions.
+
+== Monetary
 In order to make it easier to develop solutions in a multi-currency setup, _roboquant_ introduces a number of money-related domain classes: <<Currency>>, <<Amount>>, <<Wallet>> and <<ExchangeRates>> that will help to do so.
 
 === Currency
@@ -61,10 +64,10 @@ include::{sourcefile}[tag=er]
 == Time
 In order to make it easier to trade in multiple regions, _roboquant_ introduces a number of time related domain classes: <<Timeline>>, <<Timeframe>>, <<TradingPeriod>>.
 
-Internally all time in stored as an `Instant` type and so can always be easily compared, regardless of in which timezone the information originated. `Event`, for example, exposes its time attribute as an `Instant`.
+Internally all time in stored as an `Instant` type and so can always be easily compared, regardless of from which timezone the information originated. `Event`, for example, exposes its time attribute as an `Instant`.
 
 === Timeline
-Timeline is a list of `Instant` instances ordered in chronological order. For example, a CSVFeed has a timeline, which represents all the moments in time for which the feed has data available. A timeline has zero or more elements, but is always finite.
+Timeline is a list of `Instant` instances ordered in chronological order. For example, a CSVFeed has a timeline, that represents all the moments in time for which the feed has data available. A timeline has zero or more elements, but is always finite.
 
 [source,kotlin,indent=0]
 ----
@@ -72,7 +75,7 @@ include::{sourcefile}[tag=timeline]
 ----
 
 === Timeframe
-`Timeframe` represents a period of time with a start-time (inclusive) and an end-time (inclusive or exclusive).
+`Timeframe` represents a period of time with a start-time (always inclusive) and an end-time (inclusive or exclusive).
 
 It is used throughout _roboquant_, but one particular use case is that you can restrict a `run` to a particular timeframe. So instead of one large run over all the events in a `Feed`, you can have multiple smaller runs. The `Timeframe` has several helper methods that make it easier to split a timeframe into smaller parts.
 
@@ -81,7 +84,7 @@ It is used throughout _roboquant_, but one particular use case is that you can r
 include::{sourcefile}[tag=tf]
 ----
 
-There is also a set of predefined timeframes for significant events in the history of trading. This comes in handy if you want to validate the performance of your strategy in a certain type of regime.
+There is also a set of predefined timeframes for significant periods in the history of trading. This comes in handy if you want to validate the performance of your strategy in a certain type of regime.
 
 [source,kotlin,indent=0]
 ----
@@ -91,8 +94,8 @@ include::{sourcefile}[tag=predefined]
 === TradingPeriod
 When dealing with time duration, there are actual two types of duration in Java/Kotlin:
 
-1. `Period` which you use for days and longer and is timezone sensitive
-2. `Duration` which you use for days and shorter and is not timezone sensitive
+1. `Period` which you use for days and longer and is timezone dependent
+2. `Duration` which you use for days and shorter and is not timezone dependent
 
 The TradingPeriod in _roboquant_ unifies this into a single implementation, allowing you
 to do things like:
@@ -102,6 +105,8 @@ to do things like:
 include::{sourcefile}[tag=tradingperiod]
 ----
 
+Whenever a timezone is required for a time operation, the one configured at `Config.defaultZoneId` will be used.
+
 === Assets & Exchanges
 An asset is linked to an exchange and that exchange has a time-zone associated with it.
 
@@ -109,6 +114,8 @@ An asset is linked to an exchange and that exchange has a time-zone associated w
 ----
 include::{sourcefile}[tag=assets]
 ----
+
+The exchange also has a `TradingCalendar` associated with it, that determines what are the valid trading hours for a particular exchange.
 
 == Size
 Order sizes and position sizes are expressed as an instance of the `Size` class. This class is precise till 8 decimal digits and ensures that there are no rounding errors when for example closing a position.
