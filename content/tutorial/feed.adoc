@@ -31,7 +31,7 @@ For example when you want to use unemployment numbers as part of your feed, you 
 === Action
 Action is an abstraction for any type of information that can be made available in an <<Event>>. An action ranges from price actions, like price-bars and order-book snapshots, to social media content or images.
 
-There is no commonality between actions, and you can add any type of action to the platform. The only requirements is that they implement the empty interface `Action`. It is up to the strategy to filter for the action types it is interested in.
+There is no commonality between actions, and you can add any type of action you like to the platform. The only requirements is that they implement the empty interface `Action`. It is up to the strategy to filter for the action types it is interested in.
 
 For example if your strategy would require `PriceBar` (candlestick) data, you could use the following pattern to filter this type:
 
@@ -113,13 +113,12 @@ include::{sourcefile}[tag=lazy]
 TIP: Convert the CSV files to an AvroFeed, that way you have the best of both worlds: low memory consumption and high performance. See <<Convert to an AvroFeed>> on how to do that.
 
 
-== Avro Feed
+== AvroFeed
 Apache Avro™ is a data serialization system. Avro provides a compact, fast, binary data format. Avro file format is a row-based repository, making a good match for event-driven architectures like _roboquant_.
 
-Avro files make it easy to store large amount of data in a single file and efficiently use it during back testing. The AvroFeed implementation of _roboquant_ only loads data in memory when it is required, so very large datasets can be used without having to worry about memory issues. Also since the Avro Feed uses a single file, it is easier to distribute it than for example directories full of CSV files.
+Avro files make it easy to store large amount of data in a single file and efficiently use it during back testing. The `AvroFeed` implementation of _roboquant_ only loads prices in memory when it is required, so very large datasets can be used without having to worry about memory issues. Also since an `AvroFeed` uses a single file to store its prices, it is easier to distribute it than for example many directories full of CSV files.
 
-
-As you might have guessed, but the use of an `AvroFeed` comes highly recommended.
+As you might have guessed, but the use of the `AvroFeed` comes highly recommended.
 
 
 === Using an AvroFeed

@@ -42,7 +42,7 @@ After you have created an instance of the `Roboquant` class and have a xref:feed
 
 NOTE: The same `run` method is used for all the different stages, from back testing to live trading. See also xref:../background/four_stages.adoc[the 4 stages] for more details about these stages.
 
-In the most basic form, you provide a feed as a single the argument to the `run` method. In that case, all the events available in the feed will be used in the run. So if your feed contains 100 stocks with each 20 years of end of day candlesticks, all that data will be used in a single run.
+In the most basic form, you provide the `Feed` as a single the argument to the `run` method. In that case, all the events available in the feed will be used in the run. So if your feed contains 100 stocks with each 20 years of end of day candlesticks, all that data will be used in a single run.
 
 [source, kotlin, indent=0]
 ----
@@ -63,10 +63,29 @@ You can invoke a run multiple times, for example with different timeframes. The 
 include::{sourcefile}[tag=run3]
 ----
 
+Or run even more back tests, like in this Monte Carlo simulation where we draw 100 random timeframes of 2 years each:
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=run4]
+----
+
+== Validation run
+There are strategies that are self-learning. For example many machine learning based strategies fall under this category. These strategies are trained on one timeframe and then validated on another (typically sequential) timeframe.
+
+Also, this type of strategy can be easily back-tested with _roboquant_. The run method accepts an additional timeframe parameter to trigger a second validation phase.
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=runValidation]
+----
+
+From a metric logging perspective, the metrics have a different `RunPhase` in the `RunInfo` object associated with them. So you can always find out in which `RunPhase` a metric was generated.
+
+
 == Running in Parallel
 If you want to run many back-tests, you can run them in parallel and leverage all the cores on your computer to expedite the process. _Roboquant_ scales almost linearly with the number of available cores, and it only requires a few extra lines of code.
 
-The following example shows how to run a walk forward in parallel. By reusing the same logger instance, all results will be stored in a single logger instance and can be easily compared afterwards. Also the feed can be shared across jobs, resulting in lower memory consumption.
+The following example shows how to run a walk forward in parallel. By reusing the same logger instance, all results will be stored in a single logger instance and can be easily compared afterwards. Also, the feed can be shared across jobs, resulting in lower memory consumption.
 
 [source, kotlin, indent=0]
 ----

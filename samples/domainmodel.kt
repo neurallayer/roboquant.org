@@ -89,6 +89,12 @@ private fun assets() {
     // London
     val asset2 = Asset("XYZ", exchange = Exchange.LSE)
     asset2.exchange.sameDay(start, end) // True
+
+    // Access local date
+    val time = Instant.now()
+    val localDate = asset2.exchange.getLocalDate(time)
+    val dayOfWeek = localDate.dayOfWeek
+    val dayOfMonth = localDate.dayOfMonth
     // end::assets[]
 }
 

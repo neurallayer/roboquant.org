@@ -100,6 +100,35 @@ fun run3(feed: Feed, roboquant: Roboquant) {
 }
 
 
+fun run4(feed: Feed, roboquant: Roboquant) {
+
+    // tag::run4[]
+    val timeframe = feed.timeframe
+    timeframe.sample(2.years, 100).forEach {
+        roboquant.run(feed, it)
+        println(roboquant.broker.account.equityAmount)
+    }
+    // end::run4[]
+}
+
+
+fun runValidation(feed: Feed, roboquant: Roboquant) {
+
+    // tag::runValidation[]
+    // Single run example
+    val (main, validation) = feed.timeframe.splitTrainTest(0.2) // 20% for validation phase
+    roboquant.run(feed, main, validation)
+    println(roboquant.broker.account.equityAmount)
+
+    // Walk forward example
+    feed.timeframe.split(2.years).forEach {
+        val (main2, validation2) = it.splitTrainTest(0.25) // 25% for validation phase
+        roboquant.run(feed, main2, validation2)
+        println(roboquant.broker.account.equityAmount)
+    }
+    // end::runValidation[]
+}
+
 
 fun runParallel(feed: Feed) {
 

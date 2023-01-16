@@ -1,11 +1,15 @@
 @file:Suppress("unused", "UNUSED_VARIABLE")
 
+import org.roboquant.Roboquant
+import org.roboquant.binance.BinanceBroker
 import org.roboquant.brokers.*
 import org.roboquant.common.Asset
 import org.roboquant.common.Currency
 import org.roboquant.common.Wallet
+import org.roboquant.metrics.AccountMetric
 import org.roboquant.orders.MarketOrder
 import org.roboquant.orders.cancel
+import org.roboquant.strategies.EMAStrategy
 import java.time.ZoneId
 import java.time.temporal.ChronoField
 
@@ -13,13 +17,20 @@ import java.time.temporal.ChronoField
 fun placeOrder(broker: Broker) {
     // tag::basic[]
     val orders = listOf(
-        MarketOrder(Asset("AAPL"), 100),
-        MarketOrder(Asset("TSLA"), -100),
+        MarketOrder(Asset("AAPL"), 100), // BUY 100 stocks Apple
+        MarketOrder(Asset("TSLA"), -100), // SELL 100 stocks Tesla
     )
     val account = broker.place(orders)
     // end::basic[]
 }
 
+
+fun regular() {
+    // tag::regular[]
+    val roboquant = Roboquant(EMAStrategy(), AccountMetric(), broker = BinanceBroker())
+    println(roboquant.broker.account.fullSummary())
+    // end::regular[]
+}
 
 fun account(broker: Broker) {
     // tag::account[]

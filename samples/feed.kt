@@ -47,7 +47,7 @@ fun play() {
     // tag::play[]
     suspend fun play(channel: EventChannel) {
         for (i in 1..100) {
-            val actions = emptyList<Action>() // replace with real actions
+            val actions = emptyList<Action>() // replace with real list of actions
             val now = Instant.now()
             val event = Event(actions, now)
             channel.send(event)

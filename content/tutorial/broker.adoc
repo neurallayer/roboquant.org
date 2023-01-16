@@ -17,6 +17,13 @@ These two types implement the same `Broker` interface. Normally during back-test
 include::{sourcefile}[tag=basic]
 ----
 
+Normally you would specify the broker you want to use when you create an instance of `Roboquant'
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=regular]
+----
+
 WARNING: Broker implementations can differ in what order types and assets are supported. So when moving from the `SimBroker` to a real broker, always validate if the behavior is still as expected.
 
 == Account
