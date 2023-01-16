@@ -66,7 +66,7 @@
                                 <div class="col mb-3 h-100">
                                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-1"><span>Flexible</span></div>
                                     <ul class="feature-list">
-                                        <li>Stocks, crypto, futures, options, forex, and more</li>
+                                        <li>Stocks, crypto, options, forex, and more</li>
                                         <li>Multi-currency & multi-region</li>
                                         <li>Advanced order types</li>
                                         <li>Highly configurable broker simulator</li>
@@ -75,7 +75,7 @@
                                 <div class="col mb-3 h-100">
                                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-1"><span>Friendly</span></div>
                                     <ul class="feature-list">
-                                        <li>Interactive development with Jupyter Notebooks</li>
+                                        <li>Develop with Jupyter Notebooks</li>
                                         <li>Dedicated algo-trading charts</li>
                                         <li>150+ technical indicators included</li>
                                         <li>Easy to use APIs</li>
