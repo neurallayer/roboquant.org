@@ -107,15 +107,13 @@ include::{sourcefile}[tag=tradingperiod]
 
 Whenever a timezone is required for a time operation, the one configured at `Config.defaultZoneId` will be used.
 
-=== Assets & Exchanges
-An asset is linked to an exchange and that exchange has a time-zone associated with it.
+=== Assets, Exchanges and TradingCalendars
+An asset is linked to a single exchange and that exchange has a time-zone associated with it. The exchange also has a `TradingCalendar` associated with it, that determines what are the valid trading hours for that particular exchange.
 
 [source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=assets]
 ----
-
-The exchange also has a `TradingCalendar` associated with it, that determines what are the valid trading hours for a particular exchange.
 
 == Size
 Order sizes and position sizes are expressed as an instance of the `Size` class. This class is precise till 8 decimal digits and ensures that there are no rounding errors when for example closing a position.

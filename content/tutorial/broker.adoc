@@ -70,7 +70,7 @@ include::{sourcefile}[tag=equity]
 The metric `AccountMetric` makes the equity curve available for further analysis.
 ****
 
-When you plot the equity curve in a Jupyter Notebook, you don't only can see the PNL performance, you also can see how smooth the curve is, providing an visual indication on the volatility of the returns of your strategy.
+When you plot the equity curve in a Jupyter Notebook, you don't only can see the PNL performance, you also can see how smooth the curve is, providing a visual indication on the volatility of the returns of your strategy.
 
 == Out of the box available brokers
 The following `Broker` implementations are available:

@@ -77,24 +77,26 @@ private fun exchangeRates() {
 }
 
 
+
 private fun assets() {
     // tag::assets[]
     val start = Instant.parse("2023-01-04-T10:00:00Z")
     val end = Instant.parse("2023-01-04-T16:00:00Z")
+    val now = Instant.now()
 
-    // Sydney
-    val asset1 = Asset("XYZ", exchange = Exchange.SSX)
-    asset1.exchange.sameDay(start, end) // False
+    val exchange = Exchange.SSX // Sydney exchange
+    val asset = Asset("XYZ", exchange = exchange)
+    exchange.sameDay(start, end) // False
 
-    // London
-    val asset2 = Asset("XYZ", exchange = Exchange.LSE)
-    asset2.exchange.sameDay(start, end) // True
-
-    // Access local date
-    val time = Instant.now()
-    val localDate = asset2.exchange.getLocalDate(time)
+    // LocalDate features
+    val localDate = exchange.getLocalDate(now)
     val dayOfWeek = localDate.dayOfWeek
     val dayOfMonth = localDate.dayOfMonth
+
+    // using the configured TradingCalendar
+    exchange.isTrading(now)
+    exchange.getOpeningTime(localDate)
+    exchange.getClosingTime(localDate)
     // end::assets[]
 }
 
