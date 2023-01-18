@@ -162,7 +162,7 @@ fun noStrategy() {
          * Based on some logic determine the target portfolio
          */
         fun getTargetPortfolio() : List<Position> {
-            TODO("your logic for goes here")
+            TODO("your logic goes here")
         }
 
         override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {

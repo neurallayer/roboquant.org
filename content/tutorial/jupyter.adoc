@@ -5,27 +5,27 @@
 :jbake-date: 2020-02-01
 
 == Usage
-Since developing an algorithmic trading strategy requires a lot of experimentation and testing, an interactive development environment like Jupyter Notebooks is ideal. Especially in the beginning phase, it can help to progress a lot quicker.
+Since developing an automated trading strategy requires a lot of experimentation and testing, an interactive development environment like Jupyter Notebooks is ideal. Especially in the beginning phase, it can help to progress a lot quicker.
 
-Roboquant is designed to be used in both standalone applications and Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without much ceremony and there are many charts included that make it easier to interpret what is going on during a `run`.
+Roboquant is designed to be used in both standalone applications and Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without too much ceremony and there are many charts included that make it easier to interpret what is going on during a `run`.
 
 Using _roboquant_ in a Kotlin Jupyter Notebook requires just a single command:
 
 [source]
 ----
-%use @http://roboquant.org/roboquant.json
+%use roboquant(1.0.0)
 ----
 
-This will automatically load the _roboquant_ library (it will actually load three _roboquant_ modules: core, extra and crypt) and import most commonly used packages from the core module.
+This will automatically load the _roboquant_ libraries. In face, it will load the modules `roboquant`, `roboquant-ta` and `roboquant-jupyter` and import most commonly used packages from the modules.
 
-If you run `Welcome()` in a notebook cell afterwards, you'll see the version of _roboquant_ you are using together with other information about the environment you are in.
+If you run `Welcome()` in a notebook cell afterwards, you'll see the exact version of _roboquant_ you are using together with information about the environment you are in.
 
 [source]
 ----
 Welcome()
 ----
 
-TIP: Chromium based browsers perform best, especially when you plot charts with many data points.
+TIP: Chromium based browsers perform best. Especially when you plot charts with many data points they stay more responsive.
 
 
 == Importing packages

@@ -58,7 +58,7 @@ TIP: The `FlexPolicy` allows you to specify the number of decimals for sizing ca
 
 
 == Custom Policies
-In case the out-of-the-box policies will not do, you can implement your own `Policy`. You only have to implement a single method named `act`. This method has access both to the generated signals and to the `Account` and `Event`.
+In case the out-of-the-box policies will not do, you can implement your own `Policy`. You only have to implement a single method named `act`. This method has access to the generated signals and the `Account` and `Event` object.
 
 [source, kotlin,indent=0]
 ----

@@ -50,8 +50,8 @@ When an order is placed at the SimBroker, the following rules apply:
 - Open create orders will be processed based on FIFO (first-in-first-out) basis, so older open orders are processed first.
 
 
-== Custom Configuration
-Custom models are a way to further configure `SimBroker` and ensure it closely mimics the behavior of your real broker.
+== Customize SimBroker
+Custom models are a way to further customize the `SimBroker` and ensure it closely mimics the behavior of your real broker.
 
 WARNING: if you don't take any type of trading cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading. When in doubt, better to be on the safe side and configure the cost to be slightly higher.
 
@@ -70,7 +70,7 @@ The following three types of models can be implemented if the default ones that 
 
 . `AccountModel`: model the buying power calculations based on the account type.
 
-Below are the default included models with examples of their configuration parameters:
+Before implementing your own model, it is advised to check if the default included models with their configuration options aren't sufficient. Below the available models with some examples of their configuration parameters:
 
 [source, kotlin,indent=0]
 ----
