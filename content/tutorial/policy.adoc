@@ -79,7 +79,7 @@ include::{sourcefile}[tag=naive2]
 ----
 
 
-The following example is more realistic and shows an implementation that calculates the ATR (Average True Range) that is then used to set the limit amount in a Limit Order. This example use the `FlexPolicy` as its base class that will take care of much of the logic like sizing and dealing with concurrent orders.
+The following example is more realistic and shows an implementation that calculates the ATR (Average True Range). The ATR is then used to set the limit amount in a Limit Order. This example use the `FlexPolicy` as its base class that will take care of much of the logic like sizing and dealing with concurrent orders.
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=custom3]

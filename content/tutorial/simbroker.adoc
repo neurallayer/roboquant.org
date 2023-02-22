@@ -49,7 +49,6 @@ When an order is placed at the SimBroker, the following rules apply:
 
 - Open create orders will be processed based on FIFO (first-in-first-out) basis, so older open orders are processed first.
 
-
 == Customize SimBroker
 Custom models are a way to further customize the `SimBroker` and ensure it closely mimics the behavior of your real broker.
 
