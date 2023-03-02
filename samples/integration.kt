@@ -28,6 +28,18 @@ fun yahooFeed() {
 }
 
 
+
+fun oandaConfig() {
+    // tag::alpacaconfig[]
+    val feed = AlpacaHistoricFeed {
+        publicKey = "..."
+        secretKey = "..."
+    }
+    // end::alpacaconfig[]
+}
+
+
+
 fun oandaHistoricFeed() {
     // tag::oandahistoric[]
     val feed = OANDAHistoricFeed()

@@ -59,7 +59,7 @@ fun play() {
 
 fun avro(roboquant: Roboquant) {
     // tag::avro[]
-    val feed = AvroFeed("myfile.avro")
+    val feed = AvroFeed("my_file.avro")
     roboquant.run(feed)
     // end::avro[]
 }
@@ -67,11 +67,17 @@ fun avro(roboquant: Roboquant) {
 
 fun avroCapture() {
     // tag::avrocapture[]
+    val fileName = "my_file.avro"
+
     val feed = CSVFeed("some/path/")
-    AvroFeed.record(feed, "myfile.avro")
+    AvroFeed.record(feed, fileName)
+
+    // Append to existing avro file
+    val feed2 = CSVFeed("some/path2/")
+    AvroFeed.record(feed2, fileName, append = true)
 
     // Later you can use the same file in a AvroFeed
-    val feed2 = AvroFeed("myfile.avro")
+    val feed3 = AvroFeed(fileName)
     // end::avrocapture[]
 }
 
@@ -93,6 +99,7 @@ private fun predefined() {
     // tag::predefined[]
     val feed1 = AvroFeed.sp500() // S&P500 with daily PriceBar data
     val feed2 = AvroFeed.sp500Quotes() // S&P500 with PriceQuote data
+    val feed3 = AvroFeed.forex() // EUR/USD forex data
     // end::predefined[]
 }
 

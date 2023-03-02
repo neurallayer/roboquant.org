@@ -98,14 +98,14 @@ Add the following snippet to your pom.xml file in the dependencies section:
 </dependency>
 ----
 
-or if you want to create your own new algo-trading project, you can run a Maven Archetype:
+or if you want to create your own new algo-trading project, you can run the Maven Archetype that is available for _roboquant_:
 
 [source,shell]
 ----
 mvn archetype:generate                          \
 -DarchetypeGroupId=org.roboquant                \
 -DarchetypeArtifactId=roboquant-quickstart      \
--DarchetypeVersion=1.0                          \
+-DarchetypeVersion=1.1.0                        \
 -DgroupId=org.mydomain                          \
 -DartifactId=myapp                              \
 -Dversion=1.0-SNAPSHOT
@@ -129,35 +129,35 @@ _Roboquant_ uses a directory setup that is similar to most other Kotlin projects
 []
 ----
 root
-    submodule1
+    roboquant
         src/main/kotlin
         src/test/kotlin
-    submodule2
+    roboquant-extra
         src/main/kotlin
         src/test/kotlin
 ----
 
-All source code is written in Kotlin, so there are no Java or other language source files. Roboquant uses Maven for the build process and assuming you already have this installed, building the libraries locally is as easy as:
+All source code is written in Kotlin, so there are no Java or other language source files. Roboquant uses Maven for the build process and includes a Maven wrapper (mvnw) to ensure optimal compatability between environments. Building the libraries locally is as easy as running a single command:
 
 [source, shell]
 ----
-mvn install
+./mvnw install
 ----
 
-The build and install is tested using JDK 17 runtime, however the generated libraries are targeted against JDK 11 in order to provide better compatibility for projects that still use older versions of the JDK.
+The build and install is tested using the JDK 17 runtime, however the generated libraries are targeted against JDK 11 in order to provide better compatibility for projects that still use older versions of the JDK. JDK versions before 11 are not supported.
 
 The following script shows how to get everything build based on a clean Ubuntu 22.04 installation (like the one you can select when starting an AWS EC2 instance)
 
 [source, shell]
 ----
 sudo apt update -y
-sudo apt install -y maven git openjdk-17-jre-headless
+sudo apt install -y git openjdk-17-jre-headless
 git clone https://github.com/neurallayer/roboquant.git
 cd roboquant
-mvn install
+./mvnw install
 ----
 
-When the `mvn install` process has successfully finished, you should see something like this:
+When the `./wvnw install` process has successfully finished, you should see something like this:
 [source]
 ----
 [INFO] roboquant parent ................................... SUCCESS [  1.618 s]

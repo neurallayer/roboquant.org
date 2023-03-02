@@ -19,7 +19,7 @@
                         <div class="col-lg-4 mb-1 mb-lg-0"><h2 class="fw-bolder mb-0">What is roboquant</h2></div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <p><em>Roboquant</em> is an open source algorithmic trading platform written in Kotlin. It is very fast, flexible, user-friendly and completely free to use.</p>
+                                <p><em>Roboquant</em> is an open source algorithmic trading platform written in Kotlin. It is lightning fast, flexible, user-friendly and completely free to use.</p>
                                 <p>It is designed for anyone serious about algo-trading. So whether you are a beginning retail trader or an established trading firm,
                                 <em>roboquant</em> can help you to quickly develop robust and fully automated trading strategies.</p>
                             </div>
@@ -57,9 +57,9 @@
                                 <div class="col mb-3 h-100">
                                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-1"><span>Fast</span></div>
                                     <ul class="feature-list">
-                                        <li>5M candles per second</li>
-                                        <li>60-100x faster vs Zipline & backtrader</li>
-                                        <li>Run massive back tests in parallel</li>
+                                        <li>millions of candles per second</li>
+                                        <li>100x faster than Zipline or backtrader</li>
+                                        <li>Run back tests in parallel</li>
                                         <li>Sub millisecond trading</li>
                                     </ul>
                                 </div>
@@ -69,7 +69,7 @@
                                         <li>Stocks, crypto, options, forex, and more</li>
                                         <li>Multi-currency & multi-region</li>
                                         <li>Advanced order types</li>
-                                        <li>Highly configurable broker simulator</li>
+                                        <li>Highly configurable simulation engine</li>
                                     </ul>
                                 </div>
                                 <div class="col mb-3 h-100">

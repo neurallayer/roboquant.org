@@ -13,7 +13,7 @@ Using _roboquant_ in a Kotlin Jupyter Notebook requires just a single command:
 
 [source]
 ----
-%use roboquant(1.0.0)
+%use roboquant(1.1.0)
 ----
 
 This will automatically load the _roboquant_ libraries. In face, it will load the modules `roboquant`, `roboquant-ta` and `roboquant-jupyter` and import most commonly used packages from the modules.

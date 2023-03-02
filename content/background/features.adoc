@@ -24,37 +24,57 @@ Nowadays, there is so much more data available than ever before. It would be a l
 To give an idea what performance can be achieved on moderate hardware; running the included performance test on an Apple MacBook Pro gives the following results:
 
 ----
-INFO PerformanceTest - ****    500.000 candlesticks ****
-INFO PerformanceTest -     feed filter            122 ms
-INFO PerformanceTest -     base run               158 ms
-INFO PerformanceTest -     parallel runs (x4)     226 ms
-INFO PerformanceTest -     extended run           390 ms
-INFO PerformanceTest - ****  1.000.000 candlesticks ****
-INFO PerformanceTest -     feed filter            176 ms
-INFO PerformanceTest -     base run               191 ms
-INFO PerformanceTest -     parallel runs (x4)     329 ms
-INFO PerformanceTest -     extended run          1309 ms
-INFO PerformanceTest - ****  5.000.000 candlesticks ****
-INFO PerformanceTest -     feed filter            902 ms
-INFO PerformanceTest -     base run               929 ms
-INFO PerformanceTest -     parallel runs (x4)    1035 ms
-INFO PerformanceTest -     extended run          8452 ms
-INFO PerformanceTest - **** 10.000.000 candlesticks ****
-INFO PerformanceTest -     feed filter           1967 ms
-INFO PerformanceTest -     base run              1845 ms
-INFO PerformanceTest -     parallel runs (x4)    2004 ms
-INFO PerformanceTest -     extended run         11850 ms
+             _______
+            | $   $ |             roboquant
+            |   o   |             version: 1.2.0-SNAPSHOT
+            |_[___]_|             build: 2023-03-01T21:43:33Z
+        ___ ___|_|___ ___         os: Mac OS X 13.2.1
+       ()___)       ()___)        home: /Users/peter/.roboquant
+      // / |         | \ \\       jvm: OpenJDK 64-Bit Server VM 19.0.2
+     (___) |_________| (___)      memory: 4096MB
+      | |   __/___\__   | |       cpu cores: 8
+      /_\  |_________|  /_\
+     // \\  |||   |||  // \\
+     \\ //  |||   |||  \\ //
+           ()__) ()__)
+           ///     \\\
+        __///_     _\\\__
+       |______|   |______|
+INFO PerformanceTest - *****    500.000 candlesticks *****
+INFO PerformanceTest -     feed filter               21 ms
+INFO PerformanceTest -     base run                 138 ms
+INFO PerformanceTest -     parallel runs (x8)       220 ms
+INFO PerformanceTest -     extended run             553 ms
+INFO PerformanceTest -     throughput 18 million candles/s
+INFO PerformanceTest - *****  1.000.000 candlesticks *****
+INFO PerformanceTest -     feed filter               33 ms
+INFO PerformanceTest -     base run                 185 ms
+INFO PerformanceTest -     parallel runs (x8)       356 ms
+INFO PerformanceTest -     extended run            1535 ms
+INFO PerformanceTest -     throughput 22 million candles/s
+INFO PerformanceTest - *****  5.000.000 candlesticks *****
+INFO PerformanceTest -     feed filter              178 ms
+INFO PerformanceTest -     base run                 518 ms
+INFO PerformanceTest -     parallel runs (x8)       747 ms
+INFO PerformanceTest -     extended run           16798 ms
+INFO PerformanceTest -     throughput 53 million candles/s
+INFO PerformanceTest - ***** 10.000.000 candlesticks *****
+INFO PerformanceTest -     feed filter              114 ms
+INFO PerformanceTest -     base run                 761 ms
+INFO PerformanceTest -     parallel runs (x8)      1330 ms
+INFO PerformanceTest -     extended run           15280 ms
+INFO PerformanceTest -     throughput 60 million candles/s
 ----
 
-You can easily reproduce it on your own hardware after you've cloned the roboquant GitHub repo:
+As you can see, even on this consumer grade hardware it is possible to reach a throughput of 60 million candles per second. You can easily run the performance test on your own hardware after you've cloned the roboquant GitHub repo:
 
 [source, shell]
 ----
-mvn test -Dtest="org.roboquant.PerformanceTest" -DTEST_PERFORMANCE -pl roboquant
+./mvnw test -P performance
 ----
 ****
 
-The following table shows the order of magnitude that the different parts of the system has been optimized for:
+The following table shows the order of magnitude that the different parts of the system have been optimized for:
 
 [frame=ends]
 [.table]

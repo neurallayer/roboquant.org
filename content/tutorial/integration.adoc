@@ -33,21 +33,38 @@ So for example you can import all the required classes for OANDA as follows:
 import org.roboquant.oanda.*
 ----
 
-This `wildcard` import is especially useful if you use _roboquant_ in a Jupyter Notebook. If you use _roboquant_ in an IDE like IntelliJ IDEA, the IDE will automatically import the right packages and classes for you.
+This `wildcard` import is especially useful if you use _roboquant_ in a Jupyter Notebook. If you use _roboquant_ in an IDE like IntelliJ IDEA, the IDE will automatically suggest which packages and classes to import for you.
 
 == Configuration
-When you want to integrate with a 3rd party, you most likely require credentials to gain access to their APIs. Often this is in the form of an API key and/or secret. You can include these credentials directly in your source code, however _roboquant_ offers better and more secure alternatives.
+When you want to integrate with a 3rd party, you most likely require credentials to gain access to their APIs. Often this is in the form of an API key and/or secret. You can include these credentials directly in your source code. However, this is not considered good practice since it is easy by mistake to version these files and make the credentials available to a wider audience.
 
-The following list shows the order of steps _roboquant_ uses to find these configuration parameters:
+So _roboquant_ offers better and more secure alternatives. The following list shows the order of steps _roboquant_ uses to find these configuration parameters:
 
 . If the credentials are provided directly in the code when calling the API, use these, otherwise go to next step.
++
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=alpacaconfig]
+----
 . If the credentials are provided as startup parameter to the JVM with the -D syntax, use these, otherwise go to next step.
-. If the credentials are set as system environment variable (export MY_KEY="some value"), use these, otherwise go to next step.
-. If the credentials are set in a property file called ".env" in the working directory, use these, otherwise go to next step.
-. If the credentials are set in a property file called "dotenv" in the working directory, use these, otherwise go to next step.
-. If the credentials are set in a property file called ".env" in the $HOME/.roboquant directory, use these, otherwise not found.
++
+[source, shell, indent=0]
+----
+java myapp.jar -Dalpaca.secret.key=... -Dalpaca.pubic.key=...
+----
+. If the credentials are set as system environment variable (export my_key="some value"), use these, otherwise go to next step. In this case use `_` and not `.` in the key names.
++
+[source, shell, indent=0]
+----
+export alpaca_secret_key=...
+export alpaca_public_key=...
+java myapp.jar
+----
+. If the credentials are set in a property file called `.env` in the working directory, use these, otherwise go to next step.
+. If the credentials are set in a property file called `dotenv` in the working directory, use these, otherwise go to next step. The reason to support this variation is that `.files` are hidden in Jupyter notebooks and then `dotenv` is a good alternative.
+. If the credentials are set in a property file called `.env` in the $HOME/.roboquant directory, use these, otherwise not found.
 
-The following provides an overview of the used properties in _roboquant_
+The following provides an overview of the used properties in _roboquant_:
 
 [source, properties, indent=0]
 ----
@@ -82,7 +99,7 @@ include::{sourcefile}[tag=yahoo]
 ----
 
 === Alpaca
-The integration with Alpaca covers their broker API as well as their historic and live market data APIs. In order to use this, you'll need at least register and get a paper-trading account with an API-key.
+The integration with Alpaca covers their broker API as well as their historic and live market data APIs. In order to use these, you'll need at least register for a paper-trading account and create an API-key.
 
 [source, kotlin,indent=0]
 ----
@@ -100,7 +117,7 @@ include::{sourcefile}[tag=alpacabroker]
 ----
 
 === OANDA
-The integration with OANDA covers their broker API as well as their historic and live market data. In order to use this, you'll need at least register and get a paper-trading account with an API-key.
+The integration with OANDA covers their broker API as well as their historic and live market data. In order to use these, you'll need to at least register for a paper-trading account with an API-key.
 
 [source, kotlin,indent=0]
 ----
@@ -131,7 +148,7 @@ include::{sourcefile}[tag=polygonlive]
 ----
 
 == ECB
-The ECB (European Central Bank) publishes since the start of the Euro the daily historic exchange rates with almost all other fiat currencies in the world. Roboquant can automatically download these exchange rates from their website and use them for currency conversions during trading.
+The ECB (European Central Bank) publishes since the start of the Euro the daily historic exchange rates with almost all other fiat currencies in the world. Roboquant can automatically download these exchange rates from their website and use them for currency conversions during trading. There is no need for registration or API key, since this data is available on their public website.
 
 [source, kotlin,indent=0]
 ----
@@ -207,8 +224,8 @@ include::{sourcefile}[tag=alphahistoric]
 
 
 == Adding new 3rd party integrations
-Adding integration with a 3rd party is not difficult. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library that is available, this could take as little as a few hours to a few days. You can read more about the Feed interface that you need to implement right xref:feed.adoc#_custom_feeds[here].
+Adding integration with a 3rd party is not difficult. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library that is available, this could take as little as a few hours to a few days. You can read more about the Feed interface that you need to implement it right xref:feed.adoc#_custom_feeds[here].
 
-Integrating with a new broker is not hard either, but requires more effort. The most amount of work will be the translation of object exposed by the broker to those used by _roboquant_. For example an Order in _roboquant_ is slightly different from an Order expected by the client library of the broker, and a conversion needs to happen.
+Integrating with a new broker is not that difficult either, but requires more effort. Most of the work will be the translation of object exposed by the broker to those used by _roboquant_. For example an Order in _roboquant_ will be different from an Order expected by the client library of the broker, and a conversion needs to happen in both directions.
 
 For both custom Feed and Broker integrations, it is recommended to first look at some existing integrations and use them as a starting point. And if you have questions, you can always reach out via one of the channels mentioned on the xref:../community.adoc[community page].

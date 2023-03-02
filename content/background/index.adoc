@@ -66,7 +66,7 @@ Some of the measures that have been taken to ensure the highest performance poss
 
 * Overall the latency is kept very low when processing a new event and generating orders. So it is feasible to create fast, low latency (milliseconds) trading strategies.
 
-To give some idea, a simple back test can easily run over 5.000.000 candlesticks per second on modern hardware.
+
 
 == Reliability
 Even more important than performance, is reliability when it comes to trading software. So _roboquant_ takes several quality assurance measures in order to catch as many bugs as possible before the software is released:
