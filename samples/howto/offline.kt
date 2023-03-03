@@ -1,3 +1,4 @@
+@file:Suppress("unused")
 package howto
 
 import org.roboquant.Roboquant
