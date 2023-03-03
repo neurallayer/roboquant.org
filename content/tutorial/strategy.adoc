@@ -48,6 +48,16 @@ include::{sourcefile}[tag=rsi]
 === NoSignalStrategy
 This strategy doesn't perform any action and will never generate a signal. If you develop all your logic in a Policy and don't require a strategy, use this strategy when you create a `Roboquant` instance. See also <<_policy_based_strategies>>.
 
+== AssetFilterStrategy
+If you don't want to receive all price actions, you can wrap your strategy in a `AssetFilterStrategy` that allows to filter out certain price actions based on
+asset and/or time.
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=filter]
+----
+
+
 === CombinedStrategy
 The `Roboquant` constructor takes only a single strategy as its argument. However, it is easy to combine multiple strategies in your run using the `CombinedStrategy` class. This class will invoke each strategy in sequence and return the combined signals in the same order as the strategies are provided. There is no additional signal processing (like for example remove duplicate signals).
 

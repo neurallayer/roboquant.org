@@ -35,6 +35,17 @@ fun test(roboquant: Roboquant) {
 }
 
 
+fun csvPreConfig(roboquant: Roboquant) {
+    // tag::csvpreconfig[]
+    // CSV files downloaded from stooq.pl
+    val feed1 = CSVFeed.fromStooq("somepath")
+
+    // CSV files downloaded from histdata.com
+    val feed2 = CSVFeed.fromHistData("somepath")
+    // end::csvpreconfig[]
+}
+
+
 fun testLazy(roboquant: Roboquant) {
     // tag::lazy[]
     val feed = LazyCSVFeed("data/test")

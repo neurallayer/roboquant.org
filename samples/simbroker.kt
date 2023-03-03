@@ -20,7 +20,7 @@ fun configSimBroker() {
         initialDeposit = Wallet(10_000.EUR), // How much to initially deposit into the account
         baseCurrency = Currency.EUR, // Currency to use for reporting
         feeModel = PercentageFeeModel(), // Logic to use to calculate fees, commissions, etc
-        accountModel = MarginAccount(), // Cash or Margin account
+        accountModel = MarginAccount(), // type of account, like a Cash or Margin account
         pricingEngine = SpreadPricingEngine() // Engine to use to calculate the price of a trade
     )
     // end::extra[]

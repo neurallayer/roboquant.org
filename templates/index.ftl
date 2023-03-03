@@ -57,7 +57,7 @@
                                 <div class="col mb-3 h-100">
                                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-1"><span>Fast</span></div>
                                     <ul class="feature-list">
-                                        <li>millions of candles per second</li>
+                                        <li>Process millions of candles per second</li>
                                         <li>100x faster than Zipline or backtrader</li>
                                         <li>Run back tests in parallel</li>
                                         <li>Sub millisecond trading</li>

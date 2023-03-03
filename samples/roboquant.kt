@@ -2,7 +2,6 @@
 
 import org.roboquant.Roboquant
 import org.roboquant.brokers.Account
-import org.roboquant.brokers.sim.SimBroker
 import org.roboquant.common.ParallelJobs
 import org.roboquant.common.Timeframe
 import org.roboquant.common.minutes
@@ -13,9 +12,11 @@ import org.roboquant.feeds.LiveFeed
 import org.roboquant.feeds.RandomWalkFeed
 import org.roboquant.jupyter.MetricChart
 import org.roboquant.jupyter.TradeChart
+import org.roboquant.loggers.InfoLogger
 import org.roboquant.loggers.MemoryLogger
 import org.roboquant.metrics.AccountMetric
-import org.roboquant.metrics.ProgressMetric
+import org.roboquant.metrics.PNLMetric
+import org.roboquant.oanda.OANDABroker
 import org.roboquant.policies.FlexPolicy
 import org.roboquant.strategies.CombinedStrategy
 import org.roboquant.strategies.EMAStrategy
@@ -36,19 +37,13 @@ fun tradeChart(account: Account) {
 }
 
 fun complete() {
-    val strategy  = EMAStrategy()
-    val myBroker = SimBroker()
-    val myPolicy = FlexPolicy()
-    val metric1 = AccountMetric()
-    val metric2 = ProgressMetric()
-    val myLogger  = MemoryLogger()
     // tag::complete[]
     val roboquant = Roboquant(
-        strategy,
-        metric1, metric2,
-        policy = myPolicy,
-        broker = myBroker,
-        logger = myLogger
+        EMAStrategy(),
+        AccountMetric(), PNLMetric(),
+        policy = FlexPolicy(shorting = true),
+        broker = OANDABroker(),
+        logger = InfoLogger()
     )
     // end::complete[]
 }

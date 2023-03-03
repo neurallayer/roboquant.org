@@ -100,10 +100,17 @@ file.extension = csv
 file.skip = ABC.csv XYZ.csv
 ----
 
-=== Memory Constraints
-The default `CSVFeed` loads all the data found in all the files into memory during initialization. The benefit is that after initialization the CSVFeed is very fast when used in back tests. And since you reuse the feed in concurrent back-tests, this becomes even more important when doing extensive back testing.
+In order to make it easier to use CSVFeed, there are several popular market data providers of CSV feed pre-configured.
 
-However, a possible downside is memory usage when working in a memory-constrained environment. So there is also a CSV Feed implementation that only reads the data when required. This is substantial slower, but consumes a lot less memory. It supports the same configuration, the only difference is that you need to use `LazyCSVFeed` instead of the regular `CSVFeed`
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=csvpreconfig]
+----
+
+=== Memory Constraints
+The default `CSVFeed` loads all the data found in all the files into memory during initialization. The benefit is that after initialization the CSVFeed is very fast when used in back tests. And since you can reuse the feed in parallel back-tests, this becomes even more important when doing extensive back testing.
+
+However, a downside is memory usage when working in a memory-constrained environment. So there is also a CSV Feed implementation that only reads the data when required. This is substantial slower, but consumes a lot less memory. It supports the same configuration, the only difference is that you need to use `LazyCSVFeed` instead of the regular `CSVFeed`
 
 [source, kotlin, indent=0]
 ----
@@ -118,7 +125,7 @@ Apache Avro™ is a data serialization system. Avro provides a compact, fast, bi
 
 Avro files make it easy to store large amount of data in a single file and efficiently use it during back testing. The `AvroFeed` implementation of _roboquant_ only loads prices in memory when it is required, so very large datasets can be used without having to worry about memory issues. Also since an `AvroFeed` uses a single file to store its prices, it is easier to distribute it than for example many directories full of CSV files.
 
-As you might have guessed, but the use of the `AvroFeed` comes highly recommended. It is fast and scales well with large sets of data.
+As you might have guessed, the use of the `AvroFeed` comes highly recommended. It is fast and scales well with large sets of data.
 
 === Using an AvroFeed
 Using any compatible Avro file as a feed is straightforward. You just provide the file location to the constructor as a parameter and the feed will be ready to use.

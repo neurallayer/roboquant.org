@@ -153,7 +153,7 @@ fun customPolicy2() {
 
 fun noStrategy() {
     // tag::advanced[]
-    class MyPolicy : Policy {
+    class MyPolicy: Policy {
 
         private var rebalanceDate = Instant.MIN
         private val holdingPeriod = 20.days

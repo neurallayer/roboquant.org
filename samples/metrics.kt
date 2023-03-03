@@ -6,6 +6,7 @@ import org.roboquant.brokers.Account
 import org.roboquant.common.Asset
 import org.roboquant.feeds.Event
 import org.roboquant.jupyter.MetricChart
+import org.roboquant.loggers.MetricsEntry
 import org.roboquant.loggers.MetricsLogger
 import org.roboquant.metrics.*
 import org.roboquant.strategies.Strategy
@@ -36,7 +37,7 @@ fun memoryLogger(roboquant: Roboquant) {
     val logger = roboquant.logger
     println(logger.metricNames)
 
-    // And easily plot a metric in a notebook
+    // And plot a metric in a Jupyter Notebook
     val equity = logger.getMetric("account.equity")
     MetricChart(equity)
     // end::memoryLogger[]
@@ -60,16 +61,33 @@ fun staticExample() {
 
 
 fun exampleCustomLogger() {
-    class Database { fun store(key: String, value: Number, time: Instant) { TODO() } }
+    class Database {
+        fun store(key: String, value: Number, time: Instant) { TODO() }
+        fun retrieve(key: String) : List<MetricsEntry> { TODO() }
+        fun retrieveKeys(): List<String> { TODO() }
+    }
 
     // tag::customLogger[]
-    class MyConsoleLogger : MetricsLogger {
+    class MyDatabaseLogger : MetricsLogger {
 
         private val database = Database()
 
         override fun log(results: MetricResults, info: RunInfo) {
             for ((key, value) in results) database.store(key, value, info.time)
         }
+
+        /**
+         * Optional, if you want to access the logged metrics via roboquant
+         */
+        override fun getMetric(name: String): List<MetricsEntry> {
+            return database.retrieve(name)
+        }
+
+        /**
+         * Optional, if you want to access the logged metrics via roboquant
+         */
+        override val metricNames
+            get() = database.retrieveKeys()
 
     }
     // end::customLogger[]

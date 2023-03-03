@@ -89,7 +89,7 @@ The following table shows which 3rd parties are supported out of the box and wha
 |ECB||||✓
 |===
 
-NOTE: _roboquant_ is open source software that is developed independently of these 3rd party companies. There are no direct or indirect ties to any of these companies.
+NOTE: _roboquant_ is open source software that is developed independently of these 3rd party companies and has no associations with them. There is also no direct on indirect recommendation using them.
 
 === Yahoo
 You can use the `YahooHistoricFeed` to retrieve historic prices from Yahoo Finance. This is one of the few APIs out there that you can use without requiring a registration or an API key.
@@ -157,7 +157,7 @@ include::{sourcefile}[tag=ecb]
 
 
 == Binance
-The integration with Binance covers their broker API as well as their historic and live market data APIs. From an algo-trading perspective, it is also nice to see that the access to (high-frequency) market data is free. Even if you don't have a trading account, you can still access it.
+The integration with Binance covers their broker API as well as their historic and live market data APIs. From an algo-trading perspective, it is also nice to see that the access to (high-frequency) market data is free. Even without a trading account with them, you can still access the data.
 
 [source, kotlin,indent=0]
 ----
@@ -213,15 +213,13 @@ Now you are ready to create an instance of XChangeLiveFeed and subscribe to one 
 include::{cryptofile}[tag=xchangelivefeed]
 ----
 
-
 == Alpha Vantage
-Alpha Vantage provides a rich set of historic stock prices, not only those stocks listed on US exchanges. Although Alpha Vantage also provides other information besides stock market data, that is right now not yet supported by the `AlphaVantageHistoricFeed`.
+Alpha Vantage provides a rich set of historic stock prices, not only for stocks listed on US exchanges. Although Alpha Vantage also provides other information besides stock market data, that is not yet supported by the `AlphaVantageHistoricFeed`.
 
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=alphahistoric]
 ----
-
 
 == Adding new 3rd party integrations
 Adding integration with a 3rd party is not difficult. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library that is available, this could take as little as a few hours to a few days. You can read more about the Feed interface that you need to implement it right xref:feed.adoc#_custom_feeds[here].

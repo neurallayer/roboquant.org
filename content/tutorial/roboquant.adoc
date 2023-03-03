@@ -7,7 +7,7 @@
 == Create an Instance
 The `Roboquant` class (org.roboquant.Roboquant) is the engine of the platform, not to be confused with _roboquant_ (all lower case) which is the name of the platform itself. An instance of the `Roboquant` class orchestrates the interaction between the components and performs the actual runs.
 
-You are only required to provide a strategy when creating a new instance of _Roboquant_. So the bare minimum to get a working instance would look something like this:
+The only required parameter when creating a new instance of `Roboquant` is the strategy. So the bare minimum to create an instance would look something like this:
 
 [source, kotlin, indent=0]
 ----
@@ -16,7 +16,7 @@ include::{sourcefile}[tag=basic]
 
 The following default values will be used if you don't provide additional parameters:
 
-* No metrics will be captured at all
+* No `Metric` will be captured
 * The `SimBroker` will be used as the broker with its default settings
 * The `FlexPolicy` will be the policy used
 * The `MemoryLogger` for logging the metrics (although without any metrics to capture, there is not much to log)

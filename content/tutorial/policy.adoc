@@ -94,12 +94,12 @@ TIP: When creating an order in a Policy, always validate if you still have an op
 == Advanced Policies
 Most commonly, a `Policy` is used to transform signals it receives from the `Strategy` into orders. But there are use cases where the policy is not using Signals to create orders. Common use cases are:
 
-. Re-balancing your portfolio at regular intervals (like monthly) based on some risk profile. Since a `Strategy` doesn't have access to an `Account` and therefore neither to a `Portfolio`, this needs to be done in a `Policy`.
+. Re-balancing your portfolio at regular intervals (like monthly) based on some risk profile. Since a `Strategy` doesn't have access to an `Account` and therefore neither to the positions in the `Account`, this needs to be done in a `Policy`.
 . Advanced machine learning techniques like reinforcement learning that train the algorithm to directly create orders based on events (without creating intermediate signals).
 
 In these cases you don't require a `Strategy` and you can implement all the logic in the `Policy` instead. You can use the `NoSignalStrategy` as strategy that doesn't perform any action.
 
-The following example shows the boilerplate for a policy that at a regular interval (20 days) re-balances the portfolio:
+The following example shows the boilerplate code for a policy that at a regular interval (20 days) re-balances the portfolio:
 
 [source, kotlin,indent=0]
 ----

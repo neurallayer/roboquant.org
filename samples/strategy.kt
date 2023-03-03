@@ -3,11 +3,13 @@
 
 import org.roboquant.Roboquant
 import org.roboquant.common.Asset
+import org.roboquant.common.AssetFilter
+import org.roboquant.common.Currency
 import org.roboquant.feeds.Event
 import org.roboquant.strategies.*
 import org.roboquant.ta.*
 import org.roboquant.ta.TaLibStrategy
-
+import java.time.Instant
 
 
 private fun intro() {
@@ -39,6 +41,28 @@ private fun simpleSignal() {
     val signal = Signal(apple, Rating.BUY)
     // end::simpleSignal[]
 }
+
+
+
+private fun filter() {
+    // tag::filter[]
+    // Only receive price actions denoted in USD
+    val strategy1 = AssetFilterStrategy(EMAStrategy(), AssetFilter.includeCurrencies(Currency.USD))
+
+    // use the filter extension function to exclude price actions for Tesla
+    val strategy2 = EMAStrategy().filter { asset, time ->
+        asset.symbol != "TSLA"
+    }
+
+    // use CombinedStrategy and filter to create more complex strategies
+    val t = Instant.parse("2010-01-01T00:00:00Z")
+    val strategy = CombinedStrategy(
+        EMAStrategy.PERIODS_12_26.filter { asset, time -> time <  t },
+        EMAStrategy.PERIODS_5_15.filter { asset, time -> time >=  t }
+    )
+    // end::filter[]
+}
+
 
 
 @Suppress("RedundantExplicitType")
