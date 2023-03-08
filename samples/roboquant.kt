@@ -29,7 +29,6 @@ fun basic() {
     // end::basic[]
 }
 
-
 fun tradeChart(account: Account) {
     // tag::tradeChart[]
     TradeChart(account.trades)
@@ -48,8 +47,6 @@ fun complete() {
     // end::complete[]
 }
 
-
-
 fun combined() {
     // tag::combined[]
     val strategy1 = EMAStrategy.PERIODS_12_26
@@ -58,7 +55,6 @@ fun combined() {
     val roboquant = Roboquant(strategy)
     // end::combined[]
 }
-
 
 
 fun run() {

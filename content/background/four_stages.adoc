@@ -1,7 +1,7 @@
 = The 4 Stages
 :jbake-type: doc
 :icons: font
-:jbake-date: 2020-01-02
+:jbake-date: 2020-02-02
 
 == Introduction
 There are 4 distinct stages that you should go through when you develop, test and run a new trading strategy. The below diagram shows these stages and the order in which they are ideally executed:
