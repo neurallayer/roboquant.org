@@ -5,7 +5,7 @@
 :jbake-date: 2020-01-01
 
 == Fast
-To be very *Fast* is one of the main objectives of _roboquant_. And in order to test performance and avoid performance degradation with new releases, a standard performance test is included in the test suite.
+To be very fast is one of the 4 main objectives of _roboquant_. And in order to test performance and avoid performance degradation with new releases, a standard performance test is included in the test suite.
 
 This page provide an overview of that performance test run on different types of hardware. It is important to note the performance test is mainly designed to measure the performance of the back-test engine and not individual strategies, feeds, metrics or policies. So your performance may differ based on used components in your back-tests.
 

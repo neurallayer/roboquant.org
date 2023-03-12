@@ -1,81 +1,81 @@
-= Market Data Providers
+= Market Data
 :jbake-type: item
 :jbake-status: published
 :icons: font
 
-The following table provides an overview of popular market data providers, free as well as paid ones.
+The following table provides an overview of popular market data providers. The list includes free as well as paid providers. Many of them have out-of-the-box support in _roboquant_.
 
 [frame=ends]
 [.table]
 [cols="<,<,^,^,^,^,<,<"]
 |===
-|Provider|Asset Types|API|Historic|Realtime Delayed|Realtime|Pricing model|Remarks
+|Provider|Asset Types|API|Historic|Realtime Delayedfootnote:[typically 15 minutes delay due to distributions restrictions imposed by US exchanges]|Realtime|Pricing model|Remarks
 
-|Polygon
+|https://polygon.io[Polygon]
 |US Stocks, Options & crypto
 |&check;|&check;|&check;|&check;
 |Fee per month
 |Good performing API
 
-|Yahoo Finance
+|https://finance.yahoo.com[Yahoo Finance]
 |US Stocks
 |&check;|&check;|&check;|
-|Free
+|Free, no API key required
 |Can have some quality issues
 
-|Alpha Vantage
+|https://www.alphavantage.co[Alpha Vantage]
 |Stocks, fundamental, forex, crypto and economic indicators
 |&check;|&check;||
 |Fee based on API calls per minute
 |Also covers exchanges outside US
 
-|Stooq
+|https://stooq.pl[Stooq]
 |US stocks, UK stocks, World stocks, macroeconomic indicators
 ||&check;||
 |Free
-|
+|Website is in Polish
 
-|Alpaca
+|https://alpaca.markets[Alpaca]
 |US Stocks & Crypto
 |&check;|&check;|&check;|&check;
 |Fee per month
-|Subscripting prices fluctuated a lot in recent years
+|Subscription prices fluctuated a lot in recent years
 
-|Tiingo
+|https://tiingo.com[Tiingo]
 |US/China Stocks & ETF & Crypto
 |&check;|&check;|&check;|
 |Low fee per month
-|IEX Live feed with only 15ms delay
+|30+ year of end-of-day data and IEX Live feed with very small delay
 
-|Databento
+|https://databento.com[Databento]
 |US Stocks L3
 ||&check;||
 |Fee per download
 |
 
-|Dukascopy
+|https://dukascopy.com[Dukascopy]
 |Forex, Commodities, CFD
 ||&check;||
 |Free
 |
 
-|Binance
+|https://binance.com[Binance]
 |Crypto
 |&check;|&check;|&check;|&check;
 |Free
 |
 
-|IEX Exchange
+|https://iextrading.com/trading/market-data/[IEX Exchange]
 |IEX traded US stocks L3
 ||&check;||
 |Free
-|Large file that require additional processing
+|Large daily files that require additional processing
 
-|Kaggle
+|https://kaggle.com[Kaggle]
 |Various datasets
 ||&check;||
 |Free
-|Some datasets have big quality issues
+|Some datasets have major quality issues
 |===
 
 

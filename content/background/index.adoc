@@ -1,4 +1,4 @@
-= Background
+= Background Info
 :jbake-type: doc
 :icons: font
 :jbake-date: 2020-12-01
@@ -60,12 +60,11 @@ Some of the measures that have been taken to ensure the highest performance poss
 
 * The data Feed API supports data that is kept in-memory as well data that is stored on disk and only accessed when required. This allows for running back test where the test data doesn't fit in memory or running back-tests on machines with limited memory. In fact _roboquant_ can be used on a JVM with only 200 MB of heap allocated.
 
-* Many of the builtin features use multithreading to speedup processing. For example the CSVFeed parses CSV files in parallel so directories with thousands of CSV files can be parsed in seconds.
+* Much of the builtin functionality uses multithreading to speedup processing. For example the CSVFeed parses CSV files in parallel so directories with thousands of CSV files can be parsed in seconds.
 
-* Avoid (auto)boxing, so the JVM can access these variables directly. This means where possible use native types and not the wrapper one. See https://docs.oracle.com/javase/1.5.0/docs/guide/language/autoboxing.html[background^]
+* Avoid (auto)boxing, so the JVM can access these variables directly. This means where possible use native types and not the wrapped ones. See https://docs.oracle.com/javase/1.5.0/docs/guide/language/autoboxing.html[background^]
 
 * Overall the latency is kept very low when processing a new event and generating orders. So it is feasible to create fast, low latency (milliseconds) trading strategies.
-
 
 
 == Reliability
