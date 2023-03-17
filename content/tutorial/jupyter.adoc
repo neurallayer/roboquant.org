@@ -13,30 +13,40 @@ Using _roboquant_ in a Kotlin Jupyter Notebook requires just a single command:
 
 [source]
 ----
-%use roboquant(1.1.0)
+%use roboquant
 ----
 
-This will automatically load the _roboquant_ libraries. In face, it will load the modules `roboquant`, `roboquant-ta` and `roboquant-jupyter` and import most commonly used packages from the modules.
+This will automatically load the _roboquant_ libraries. In face, it will load the modules `roboquant`, `roboquant-ta` and `roboquant-jupyter` and import most commonly used packages from these modules.
 
 If you run `Welcome()` in a notebook cell afterwards, you'll see the exact version of _roboquant_ you are using together with information about the environment you are in.
 
+You can also load a different version of _roboquant_ and additional modules (separated by a `:`):
+
 [source]
 ----
-Welcome()
+%use roboquant(version=1.2.0, modules=crypto:extra)
 ----
 
-TIP: Chromium based browsers perform best. Especially when you plot charts with many data points they stay more responsive.
+By default, most of the core _roboquant_ packages are imported. But the packages of the `roboquant-crypto` and `roboquant-extra` modules are not included by default. So for these you need to include the appropriate import statement.
+
+[source]
+----
+%use roboquant(modules=extra)
+import org.roboquant.alpaca.*
+----
+
+TIP: Chromium based browsers perform best. Especially when you plot charts with many data points, the webpage stays more responsive.
 
 
-== Importing packages
-By default, most of the core _roboquant_ packages are imported. But the packages of the `roboquant-crypto` and `roboquant-extra` modules are not included by default. So for these you need to add the appropriate import statement.
-
-But you are not limited to using _roboquant_ libraries only. In fact, you can use any Java or Kotlin library that is published on some repository or is available in the local file system.
+== Importing 3rd party libraries
+You are not limited to using _roboquant_ libraries only. In fact, you can use any Java or Kotlin library that is published on some repository or is available in the local file system.
 
 [source]
 ----
 @file:DependsOn("org.xyz:abc:1.0.0")
 @file:DependsOn("someLocalFile.jar")
+
+import org.xyz.abc.*
 ----
 
 == Charts
