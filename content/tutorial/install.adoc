@@ -6,8 +6,8 @@
 :source-highlighter: rouge
 :jbake-date: 2020-11-01
 
-== Two approaches
-There are two different ways to install and use _roboquant_:
+== Different approaches
+There are two ways to install and use _roboquant_:
 
 [.float-group]
 --
@@ -15,20 +15,19 @@ image::jupyter-lab.png[width="500", float="left"]
 Interactively in a *Jupyter Notebook*. If you want to be up and running quickly, this is the easiest approach. Additionally, you get many charts out-of-the-box that help you to understand how the strategy is performing.
 --
 {empty} +
-
 [.float-group]
 --
 image::idea.png[width="500", float="right"]
 As a library in your *standalone Kotlin or Java application*. If you plan to develop large and complex trading strategies, this is a good approach since you'll have the full power of an IDE like IntelliJ IDEA at your disposal.
 --
 
-== Run Jupyter Notebook
+== Jupyter Notebooks
 If you don't want to install anything on your local machine, you can try any of the included notebooks right now by clicking on one of the two following badges:
 
 . Jupyter Classic: image:https://mybinder.org/badge_logo.svg[Binder,link=https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=tree/notebooks/,window=_blank]
 . Jupyter Lab: image:https://mybinder.org/badge_logo.svg[Binder,link=https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/notebooks/,window=_blank]
 
-If you have already Docker installed on your local machine, all it takes is a single command to have a fully functional Jupyter Notebook environment with _roboquant_ available that is ready to use.
+However, if you have already Docker installed on your local machine, all it takes is a single command to have a fully functional Jupyter Notebook environment with _roboquant_ available that is ready to use.
 
 [source,shell]
 ----
@@ -36,17 +35,25 @@ docker run -p 8888:8888 docker.io/roboquant/jupyter
 ----
 By default, this will start a new Jupyter-Lab environment. The installation comes with several how-to notebooks included that demonstrate how to develop and run your own strategies.
 
-The following startup command has two additional features:
+The following startup command shows some useful additional options that you can use:
 
-1. it disposes of the container as soon as you stop the container (the `--rm` option)
-2. it uses a fixed token, so you don't have to look at the output to find out the token to use.
+* dispose of the container as soon as you stop the container (the `--rm` option)
+* use a predefined token, so you don't have to look in the output to find out the token to use
+* map your local working directory to the work directory in the docker container
+* starts a classic notebook rather than a Jupyter Lab environment
 
 [source, shell]
 ----
-docker run --rm -p 8888:8888 -e JUPYTER_TOKEN="my-secret" docker.io/roboquant/jupyter
+docker run                              \
+  --rm                                  \
+  -p 8888:8888                          \
+  -e JUPYTER_TOKEN="my-secret"          \
+  -e DOCKER_STACKS_JUPYTER_CMD=notebook \
+  -v "${PWD}":/home/jovyan/work         \
+  roboquant/jupyter
 ----
 
-If you don't have Docker yet installed on your computer, check out https://www.docker.com/get-started[Docker get started^] and download Docker Desktop from there. If you are running Linux, then your distribution likely already has Docker or Podman included.
+If you don't have Docker yet installed on your computer, check out https://www.docker.com/get-started[Docker get started^] and download Docker Personal from there. If you are running Linux, then your distribution likely already has Docker or Podman included.
 
 === AWS SageMaker
 The AWS SageMaker notebook instances don't have Kotlin support enabled by default. But there is an easy way to add it the first time an instance is created. You can add a `lifecycle` script that will be run when the environment is created and in our case adds the Kotlin kernel.
@@ -105,7 +112,7 @@ or if you want to create your own new algo-trading project, you can run the Mave
 mvn archetype:generate                          \
 -DarchetypeGroupId=org.roboquant                \
 -DarchetypeArtifactId=roboquant-quickstart      \
--DarchetypeVersion=1.1.0                        \
+-DarchetypeVersion=1.2.0                        \
 -DgroupId=org.mydomain                          \
 -DartifactId=myapp                              \
 -Dversion=1.0-SNAPSHOT
@@ -135,6 +142,7 @@ root
     roboquant-extra
         src/main/kotlin
         src/test/kotlin
+    ...
 ----
 
 All source code is written in Kotlin, so there are no Java or other language source files. Roboquant uses Maven for the build process and includes a Maven wrapper (mvnw) to ensure optimal compatability between environments. Building the libraries locally is as easy as running a single command:
