@@ -3,12 +3,9 @@
     <#include "head.ftl">
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
-            <!-- Navigation-->
             <#include "menu.ftl">
-            <!-- Header-->
             <header class="masthead bg-primary text-white text-center">
                 <div class="container d-flex align-items-center flex-column">
-                    <!-- Masthead Banner Image-->
                     <img class="masthead-banner mb-1" src="/img/banner.png" alt="${config.site} banner">
                 </div>
             </header>
