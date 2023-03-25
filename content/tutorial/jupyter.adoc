@@ -18,7 +18,7 @@ Using _roboquant_ in a Kotlin Jupyter Notebook requires just a single command:
 
 This will automatically load the _roboquant_ libraries. In face, it will load the modules `roboquant`, `roboquant-ta` and `roboquant-jupyter` and import most commonly used packages from these modules.
 
-If you run `Welcome()` in a notebook cell afterwards, you'll see the exact version of _roboquant_ you are using together with information about the environment you are in.
+If you run `Welcome()` in a notebook cell afterwards, you'll see the exact version of _roboquant_ you are using together with information about the environment you are in. You can also run a quick demo to validate if everything is working as expected using a statements like `Welcome().demo1()`
 
 You can also load a different version of _roboquant_ and additional modules (separated by a `:`):
 

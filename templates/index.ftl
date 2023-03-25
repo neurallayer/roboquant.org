@@ -28,18 +28,22 @@
                 </div>
             </section>
 
-            <section class="py-3" id="sample">
+            <section class="py-3" id="sample2">
                 <div class="container px-5 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-1 mb-lg-0"><h2 class="fw-bolder mb-0">Simple to get started</h2></div>
                         <div class="col-lg-8">
                             <div class="col h-100">
                                 A lot of effort and attention went into making sure <em>roboquant</em> is easy to use, especially for less experienced developers.
-                                The following code snippet shows all the ingredients required to run a back test.
-                                <br>
-                                <#include "snippet.ftl">
+                                The following example shows the ingredients required to run a full back test.
+                                <br></br>
+                                <div class="imageblock">
+                                    <div class="content">
+                                        <img src="/img/code.gif" alt="screenshot" />
+                                    </div>
+                                </div>
                                 <form action="/tutorial/install.html">
-                                <button class="btn btn-outline-dark float-end" id="install_software" type="submit">Get the software</button>
+                                    <button class="btn btn-outline-dark float-end" id="install_software" type="submit">Get the software</button>
                                 </form>
                             </div>
                         </div>
@@ -47,7 +51,6 @@
                 </div>
             </section>
 
-            <!-- Features section-->
             <section class="pb-3" id="features">
                 <div class="container px-5 my-3">
                     <div class="row gx-5">

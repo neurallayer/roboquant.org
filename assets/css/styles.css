@@ -11340,7 +11340,6 @@ html {
 }
 
 img[alt="screenshot"] {
-    width: 98%;
     margin: 0px;
     padding: 20px;
     border: 1px solid grey;
