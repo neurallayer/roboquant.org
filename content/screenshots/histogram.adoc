@@ -1,0 +1,9 @@
+= Histogram
+:jbake-type: item
+:jbake-status: published
+:imagesdir: ../img/
+:icons: font
+
+When you quickly want to see how values are distributed, you can use a histogram. For example the following chat shows the histogram of equity returns over different back tests.
+
+image::histogram.png[alt="screenshot"]

@@ -1,0 +1,21 @@
+= Metric Chart
+:jbake-type: item
+:jbake-status: published
+:jbake-heading: we can chart our future clearly only when we know the path that led to the present
+:imagesdir: ../img/
+:icons: font
+
+You can easily plot the captured metrics during a run using the MetricChart.Not only can it plot a metric that was captured during a single run, it also knows how to plot a metric over multiple runs.
+
+== Single Run
+image::metric.png[alt="screenshot"]
+
+== Walk Forward
+Plot a metric during a walk-forward test to provide insight into the performance of the strategy during different timeframes. Here we plot the account equity (= cash + positions) and that provides insights how a strategy performs during different timeframes. Clearly we can see that the strategy wasn't profitable during every timeframe.
+
+image::walkforward.png[alt="screenshot"]
+
+== Monte Carlo
+An even more extensive back-test is to run the experiment over randomly sampled timeframes of a fixed duration. In this example we selected the duration to be 250 trading days. We then plot the results of all samples and this provide a good view of the distribution of the profit/loss a strategy could generate over 250 days timeframe.
+
+image::randomsamples.png[alt="screenshot"]
