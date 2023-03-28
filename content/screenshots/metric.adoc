@@ -5,13 +5,15 @@
 :imagesdir: ../img/
 :icons: font
 
-You can easily plot the captured metrics during a run using the MetricChart.Not only can it plot a metric that was captured during a single run, it also knows how to plot a metric over multiple runs.
+You can easily plot the captured metrics during a run using the MetricChart. Not only can it plot a metric that was captured during a single run, it also knows how to plot a metric over multiple runs.
 
 == Single Run
 image::metric.png[alt="screenshot"]
 
 == Walk Forward
-Plot a metric during a walk-forward test to provide insight into the performance of the strategy during different timeframes. Here we plot the account equity (= cash + positions) and that provides insights how a strategy performs during different timeframes. Clearly we can see that the strategy wasn't profitable during every timeframe.
+Plot a metric during a walk-forward test to provide insight into the performance of the strategy during different timeframes. The walk-forward test involves dividing the historical data into multiple timeframes or "windows," and using each timeframe to test the performance of the strategy.
+
+Here we plot the account equity (= cash + positions) and that provides insights how a strategy performs during different timeframes. Clearly we can see that the strategy wasn't profitable during every timeframe.
 
 image::walkforward.png[alt="screenshot"]
 

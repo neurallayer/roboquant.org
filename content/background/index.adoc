@@ -15,14 +15,19 @@ Before we started to develop _roboquant_, we looked at existing frameworks and p
 Some of these might be unique to our situation, but since we believe that others might also benefit from the platform we decided to open source it and make it available for free to everyone.
 
 == Why use Kotlin
-There are many computer languages available to choose from. After having developed several prototypes in different languages, we decided to go with Kotlin. Some main benefits being:
+There are many computer languages available to choose from. After having developed several prototypes in different languages, we decided to go with Kotlin.
 
-* Easy to learn and use with excellent tooling support
-* It is very concise with almost no boilerplate code required
-* You can use it both within Jupyter Notebooks and traditional IDEs
-* Fast enough to even handle the largest data sets during back testing
-* Access to the huge Java ecosystem with libraries available for almost any task at hand
-* Excellent for building robust software, a necessity in our opinion when developing complex trading strategies and your own money at risk
+Kotlin is a popular programming language that was first introduced in 2011 by JetBrains. It is a versatile language that is designed to be compatible with Java and can be used for a wide range of applications, including financial software. There are several reasons why Kotlin is particularly suitable for algo-trading software:
+
+* *High-Level Language*: Kotlin is a high-level language that is easy to read and understand, making it an ideal choice for developers working on complex financial applications. It has a concise and clear syntax that allows developers to write code quickly and efficiently.
+* *Interoperability with Java*: Kotlin is interoperable with Java, which means that developers can use existing Java libraries and frameworks in their Kotlin projects. This feature is particularly useful in financial software development, where many existing libraries are written in Java.
+* *Type-Safety*: Kotlin is a type-safe language, which means that it provides strong type-checking during the compilation process. This helps to eliminate common errors and bugs that can occur in algo-trading software development.
+* *Null-Safety*: Kotlin has built-in null-safety features that help to prevent null pointer exceptions. In algo-trading software, where even a small error can have significant consequences, null-safety is essential.
+* *Concise Code*: Kotlin's concise syntax allows developers to write code more efficiently, reducing the amount of boilerplate code required. This helps to improve productivity and reduce the risk of errors.
+* *Strong Community Support*: Kotlin has a strong and growing community of developers who contribute to its development and offer support to others. This community provides a wealth of resources, including tutorials, libraries, and tools, making it easier for developers to create high-quality software.
+* *Fast Runtime*: Kotlin on a JVM is fast enough to handle even the largest data sets during back testing and allow for sub-millisecond live market data processing.
+
+In conclusion, Kotlin is a versatile and powerful programming language that is well-suited for algo-trading software development. Its high-level syntax, interoperability with Java, type-safety, null-safety, concise code, and strong community support make it an excellent choice for developers working on complex financial applications.
 
 One often heard question is *Why didn't you choose Python instead?* Truth be told, we would have loved to be able to use Python. However, during the prototype phase of _roboquant_ we discovered that the performance was lacking too much for our use-cases. In some scenarios the performance was over 100x slower. This was including using libraries like Numpy and Pandas and even some Cython to speedup processing. One problem is that in back testing many things cannot be vectorized and these fast libraries like Numpy are no longer a good match.
 
@@ -42,10 +47,10 @@ Where some Kotlin/Java based applications require a lot of ceremony to implement
 * Use a flat package structure, so import statements are simple to remember
 * Leverage type inference where possible so no additional type info needs to be provided
 
-== Time handling
-When testing strategies that trade simultaneously in multiple time-zones, like stocks in New York and London, it is key to have proper time management. Otherwise, you run the risk that your strategy performs very well but only because it can peep into the future due to faulty handling of time-zones.
+== Time-Zone handling
+When trading simultaneously in multiple time-zones, like trade stocks both in New York and London, it is key to have proper time management in place. Otherwise, you run the risk that your strategy performs very well but only because it can peep into the future due to faulty handling of time-zones.
 
-Because of that, _roboquant_ internally only uses the Java Instant type to represent a moment in time. So all time events can be easily compared without having to consider time zones.
+Because of that, _roboquant_ internally only uses the Java Instant type to represent a moment in time. This type is independent of any timezone. So all time events can easily be directly compared without having to consider time zones.
 
 When importing data, there is functionality to convert the data from timezone specific value towards the Instant type. When displaying time related information, it can be converted back the other way around if desired.
 

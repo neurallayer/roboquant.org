@@ -5,7 +5,11 @@
 :jbake-date: 2020-08-01
 
 == What is a broker
-A broker receives orders and processes them. The outcome of this processing is an updated `Account` object. There are two types of broker implementations:
+A  broker facilitates the buying and selling transactions of financial assets, such as stocks, bonds, currencies, options, and other securities, on behalf of their clients. Brokers may operate through different platforms, including online trading platforms.
+
+In _roboquant, it is the broker that receives new orders and processes them. The outcome of this processing is an updated `Account` object. This object is the same for all broker implementations. This allows for a seamless transition between 4 the stages of developing a strategy.
+
+There are two types of broker implementations:
 
 1. SimBroker: simulates a broker and the trading that happens on an exchange.
 2. Third party brokers: implementations that integrate with a real broker like IBKR, Alpaca or Binance.

@@ -9,17 +9,17 @@ The `Policy` is responsible for creating the orders that will be placed at the b
 
 A good `Policy` implementation is key in making your solution as robust as possible. Important things to consider when implementing a policy:
 
+* How to manage overall risk and exposure when market conditions change
 * What is a good allocation strategy, so how much of your buying power do you allocate to a certain asset
 * What order types to create
 * How to handle new orders when there are still open orders (for the same asset)
 * How to limit the maximum number of orders sent to a broker (circuit breaker)
 * How to deal with conflicting signals from strategies
 * How to handle yo-yo signals (buy-sell-buy-sell) in a short timeframe
-* How to manage overall risk and exposure when volatility changes
 * How to ensure there is still enough buying power left to avoid margin calls
 
 ****
-CAUTION: If there is one thing that prevents algo-traders from going live, it is that there is not a robust policy in place that handles all the possible edge-cases. The logic required for a robust policy is anything but trivial and should incorporate an extensive testing.
+CAUTION: If there is one thing that prevents algo-traders from going live, it is that there is not a robust policy in place that handles all the possible edge-cases. The logic required for a robust policy is anything but trivial and should always incorporate extensive testing.
 ****
 
 == Out-of-the-box policies

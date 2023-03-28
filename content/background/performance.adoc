@@ -180,7 +180,7 @@ INFO PerformanceTest -     throughput 217 million candles/s
 == AWS EC2 c7g.16xlarge + GraalVM
 This is the same ARM based instance (Graviton) with 64 vCPU and 128GB memory. But rather than using the OpenJDK that comes with Ubuntu 22.04,  the performance tests are run using the Oracle GraalVM Enterprise 22.3.
 
-The JDK was installed using the following two commands:
+The GraalVM based JDK was installed using the following two commands:
 
 [source, shell]
 ----
@@ -188,7 +188,7 @@ bash <(curl -sL https://get.graalvm.org/ee-token)
 bash <(curl -sL https://get.graalvm.org/jdk)
 ----
 
-Overall the performance is not significantly better than with OpenJDK. This might change in the future when GraalVM get better optimized for the ARM CPU architecture. But for now it seems the extra hassle and cost of using GraalVM is not worth it.
+Overall the performance (*214 million candles per second*) is not significantly better than with OpenJDK. This might change in the future when GraalVM gets better optimized for the ARM CPU architecture. But for now it seems the extra hassle and cost of using GraalVM is not worth it.
 
 ----
              _______

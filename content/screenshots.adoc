@@ -1,4 +1,4 @@
-= Jupyter Notebooks
+= Visualizations
 :jbake-type: collection
 :jbake-status: published
 :jbake-heading: we can chart our future clearly only when we know the path that led to the present
@@ -6,6 +6,8 @@
 :icons: font
 :items: screenshots
 
-When working in a Jupyter Notebook environment, _roboquant_ comes with several types of charts included, that can help to understand how a strategy is behaving. This page shows some examples of those charts. The charts are fully interactive, allowing you to zoom in areas of interest or filter only those values you want to see.
+_Roboquant_ comes with several types of charts included, that can help to understand how a strategy is behaving. This page shows some examples of those charts.
+
+The charts are based on the EChart library and are fully interactive. You can zoom in areas of interest or filter only those values you want to see. This is especially useful for analyzing large back tests that generate a lot of metrics.
 
 TIP: You can try these charts yourself right now in your browser without any installation, since they all come from the https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=tree/notebooks/charts.ipynb[charts Jupyter Notebook, window=_target].

@@ -106,7 +106,7 @@ But it doesn't stop at the software. For real progress also data has to become f
 
 .Deep Learning Datasets
 ****
-For inspiration, look at what quality training data did for progress of AI in recent years. By having standardized sets of data that are known to be of good quality and representative, it became much easier to compare different network architectures and continue to improve those that showed the best performance.
+For inspiration, look at what quality training data did for the progress of AI in recent years. By having standardized sets of data that are known to be of good quality and representative, it became much easier to compare different network architectures and continue to improve those that showed the best performance.
 
 The same can hopefully also be achieved in the algo-trading world, so we can easily compare strategies and reproduce results.
 ****

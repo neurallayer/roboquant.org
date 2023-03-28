@@ -1,4 +1,4 @@
-= Price Charts
+= Pricing Charts
 :jbake-type: item
 :jbake-status: published
 :imagesdir: ../img/
@@ -12,6 +12,7 @@ This type of chart supports any type of price action, ranging from quotes to ord
 image::prices.png[alt="screenshot"]
 
 == PriceBarChart
-This type of chart only support candlestick data.
+This type of chart only support candlestick data. The example below also shows the
+trades that occurred and the sizes of those trades.
 
 image::pricebars.png[alt="screenshot"]
