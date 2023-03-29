@@ -5,7 +5,11 @@
 :jbake-date: 2020-06-01
 
 == Introduction
-A `Strategy`  is responsible for generating signals based on the events it receives and is likely the place where you do most software development. The main method that needs to be implemented is the `generate` method:
+A  strategy is a systematic approach to buying and selling assets, such as stocks, bonds, currencies, or commodities, in order to achieve a specific financial goal. A  strategy typically involves the use of a set of rules, indicators, and other technical or fundamental analysis tools to identify potential trades.
+
+A `Strategy`  in _roboquant_ is the component responsible for generating signals based on the events it receives and is likely the place where you do most of your software development and differentiate from other algo-traders.
+
+The main method that needs to be implemented in the `Strategy` interface is the `generate` method:
 
 [source, kotlin,indent=0]
 ----
@@ -18,7 +22,13 @@ Since a `Strategy` only has access to an `Event` and not the `Account`, it has n
 There are several commonly used strategies included with _roboquant_. This section highlights some of them, and using them is a great way to get started.
 
 === EMAStrategy
-This strategy uses two exponential moving averages and whenever they cross over, a BUY or SELL signal is generated.
+An EMA (Exponential Moving Average) crossover strategy is a popular technical trading strategy that involves the use of two or more EMA lines of different periods to identify trends and potential buy or sell signals.
+
+In this strategy, traders typically use two EMAs: a shorter-term EMA and a longer-term EMA. The shorter-term EMA reacts more quickly to price changes, while the longer-term EMA smoothes out the price movements over a longer period.
+
+When the shorter-term EMA crosses above the longer-term EMA, it is seen as a bullish signal, indicating that the trend is turning upward and traders may want to consider buying the asset. Conversely, when the shorter-term EMA crosses below the longer-term EMA, it is seen as a bearish signal, indicating that the trend is turning downward and traders may want to consider selling the asset.
+
+Traders can adjust the periods of the EMAs depending on their trading style and the time frame of the chart they are analyzing. For example, a popular combination is the 50-day EMA and the 200-day EMA, which can be used to identify long-term trends.
 
 [source, kotlin,indent=0]
 ----
