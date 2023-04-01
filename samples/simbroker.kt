@@ -1,4 +1,4 @@
-@file:Suppress("unused", "UNUSED_VARIABLE", "WildCardImport", "MagicNumber")
+@file:Suppress("unused", "UNUSED_VARIABLE", "WildcardImport", "MagicNumber")
 
 import org.roboquant.brokers.sim.*
 import org.roboquant.common.Currency
