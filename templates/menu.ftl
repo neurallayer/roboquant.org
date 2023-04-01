@@ -20,7 +20,7 @@
                         <li><a class="dropdown-item" href="/resources.html#Market Data">Market Data</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="/screenshots.html">Screenshots</a></li>
+                <li class="nav-item"><a class="nav-link" href="/charts.html">Charts</a></li>
                 <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
                 <li class="nav-item"><a class="nav-link" href="https://github.com/neurallayer/roboquant" target="_blank">
                     <span class="icon"><i class="fa fa-github fa-1x"></i></span> GitHub

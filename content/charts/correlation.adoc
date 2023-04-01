@@ -7,6 +7,6 @@
 
 Another interesting visualization is the correlation matrix. In general a correlation matrix is a matrix that shows the correlation coefficients between several variables. Each variable is listed both in the rows and columns of the matrix, and the cells of the matrix show the correlation coefficient between the variable in the corresponding row and the variable in the corresponding column.
 
-In roboquant the variables are the prices of different assets and hte matrix show how they are correlated to each other during a certain timeframe.
+In roboquant the variables are the prices of different assets and the matrix show how they are correlated to each other during a certain timeframe.
 
 image::correlation.png[alt="screenshot"]

@@ -18,11 +18,11 @@ include::{sourcefile}[tag=intro]
 
 Since a `Strategy` only has access to an `Event` and not the `Account`, it has no knowledge of things like orders, open positions or buying power. As a consequence a `Strategy` is a generic component that can be easily shared or re-used.
 
-== Standard Strategies
+== Out-of-the-box Strategies
 There are several commonly used strategies included with _roboquant_. This section highlights some of them, and using them is a great way to get started.
 
 === EMAStrategy
-An EMA (Exponential Moving Average) crossover strategy is a popular technical trading strategy that involves the use of two or more EMA lines of different periods to identify trends and potential buy or sell signals.
+An EMA (Exponential Moving Average) crossover strategy is a popular technical trading strategy that involves the use of EMA lines of different periods to identify trends and potential buy or sell signals.
 
 In this strategy, traders typically use two EMAs: a shorter-term EMA and a longer-term EMA. The shorter-term EMA reacts more quickly to price changes, while the longer-term EMA smoothes out the price movements over a longer period.
 
@@ -96,12 +96,13 @@ This is an ideal base class if you only care about a single asset.
 === HistoricPriceStrategy
 A useful base strategy is `HistoricPriceStrategy`. This strategy collects historic prices for a predefined look-back period before invoking your method. That way you don't have to deal with some of the complexity that comes with an event-based trading engine.
 
-You can:
+You can override one of two methods:
 
-* Override the `generateSignal` method if you want full control on the signal that is created.
-* Override the `generateRating` method if the default Signal is fine, and you only need to provide the rating.
+* the `generateSignal` method if you want full control on the `Signal` that is created.
+* the `generateRating` method if the default Signal is fine, and you only want to provide the `Rating`.
 
-The following code shows an example of each implementation:
+The following code shows an example of each approach:
+
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=extend]
@@ -141,8 +142,8 @@ See the xref:policy.adoc#_advanced_policies[advanced policies] for more details.
 == Signals
 A `Signal` is the outcome of a strategy and is modelled closely after the ratings given by rating agencies. The two mandatory attributes of a `Signal` are:
 
-1. The asset for which the signal applies, like a single stock
-2. A rating for that same asset. A 5-point scale used for the `Rating` of a `Signal`:
+1. The `Asset` to which the signal applies, like a single stock
+2. A `Rating` for that asset. A 5-point scale (a Kotlin enumeration type) is used for the `Rating` of a `Signal`:
 
 * `BUY`: Also known as strong buy and "on the recommended list". Buy is a recommendation to purchase a specific security.
 * `SELL`: Also known as strong sell, it's a recommendation to sell a security or to liquidate an asset.
@@ -168,4 +169,4 @@ Besides the mandatory Rating and Asset attributes of a signal instance, a signal
 include::{sourcefile}[tag=attrSignal]
 ----
 
-It is up to the xref:policy.adoc[policy] if/how these attributes are used when generating the orders. For example, the probability could be used to determine the sizing of the order, a higher probability implying a larger order size.
+It is up to the xref:policy.adoc[policy] if/how these attributes are used when generating the orders. For example, the probability could be used to determine the sizing of an order, a higher probability implying a larger order size.

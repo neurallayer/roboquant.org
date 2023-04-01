@@ -6,4 +6,4 @@
 
 See the asset allocation within the open positions. If assets are denoted in different currencies, this will convert to the base currency of the account.
 
-image::assets.png[alt="screenshot"]
+image::assetallocation.png[alt="screenshot"]

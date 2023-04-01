@@ -26,11 +26,13 @@ private fun intro() {
 
 private fun ema() {
     // tag::ema[]
-    // Use a EMA Crossover Strategy with predefined look-back periods
-    val strategy1 = EMAStrategy.PERIODS_12_26
+    // Use a EMA  crossover strategy with predefined periods
+    val strategy1 = EMAStrategy.PERIODS_5_15
+    val strategy2 = EMAStrategy.PERIODS_12_26
+    val strategy3 = EMAStrategy.PERIODS_50_200
 
-    // Use an EMA Crossover Strategy custom look-back periods
-    val strategy2 = EMAStrategy(fastPeriod = 20, slowPeriod = 50)
+    // Use an EMA crossover strategy with custom periods
+    val strategy4 = EMAStrategy(fastPeriod = 20, slowPeriod = 50)
     // end::ema[]
 }
 

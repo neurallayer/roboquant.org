@@ -6,8 +6,6 @@
 
 When you quickly want to see how values are distributed, you can use a histogram. Histograms are often used to visualize the shape of the distribution of data, including the location and spread of the data, as well as any skewness, kurtosis, or other features of the distribution.
 
-They can be useful for exploring patterns in data, identifying outliers, and determining the appropriate statistical analysis to use for a particular data set.
-
-The following chart shows a histogram of equity returns over different back tests.
+They can be useful for exploring patterns in data, identifying outliers, and determining the appropriate statistical analysis to use for a particular data set. The following chart shows a histogram of daily equity returns over a period of time.
 
 image::histogram.png[alt="screenshot"]

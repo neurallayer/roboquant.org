@@ -20,4 +20,4 @@ image::walkforward.png[alt="screenshot"]
 == Monte Carlo
 An even more extensive back-test is to run the experiment over randomly sampled timeframes of a fixed duration. In this example we selected the duration to be 250 trading days. We then plot the results of all samples and this provide a good view of the distribution of the profit/loss a strategy could generate over 250 days timeframe.
 
-image::randomsamples.png[alt="screenshot"]
+image::montecarlo.png[alt="screenshot"]

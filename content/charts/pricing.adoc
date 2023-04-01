@@ -1,0 +1,21 @@
+= Pricing Charts
+:jbake-type: item
+:jbake-status: published
+:imagesdir: ../img/
+:icons: font
+
+You can see price and optional the trades that were executed in relation to the price of that asset. Especially for strategies based only on price actions this helps to validate if trades occurred when expected.
+
+== Price Chart
+This type of chart supports any type of price action, ranging from quotes to order books.
+
+image::prices.png[alt="screenshot"]
+
+== PriceBarChart
+PriceBar charts display the price action for a given time period as a series of individual price-bars or "candles". Each candle represents the open, high, low, and close price for a specific time interval, such as one day or one hour. The body of the candle represents the difference between the open and close price, while the "wicks" or "shadows" at the top and bottom of the candle represent the high and low prices for that interval.
+
+The color of the candle can vary depending on whether the price closed higher or lower than it opened. Typically, a green or white candle indicates that the price closed higher than it opened, while a red or black candle indicates that the price closed lower than it opened.
+
+The example below also shows the trades that occurred and the sizes of those trades in the same chart as the actual candles.
+
+image::pricebars.png[alt="screenshot"]
