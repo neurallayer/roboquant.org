@@ -1,4 +1,4 @@
-@file:Suppress("unused", "UNUSED_VARIABLE", "TooManyFunctions")
+@file:Suppress("unused", "UNUSED_VARIABLE", "TooManyFunctions",  "WildCardImport", "MagicNumber")
 
 
 import org.roboquant.Roboquant
