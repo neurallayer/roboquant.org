@@ -1,6 +1,5 @@
 @file:Suppress("unused", "UNUSED_VARIABLE", "TooManyFunctions",  "WildcardImport", "MagicNumber")
 
-
 import org.roboquant.Roboquant
 import org.roboquant.common.Asset
 import org.roboquant.common.AssetFilter

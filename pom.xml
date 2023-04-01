@@ -34,7 +34,7 @@
 			<plugin>
 				<groupId>org.jbake</groupId>
 				<artifactId>jbake-maven-plugin</artifactId>
-				<version>0.3.4</version>
+				<version>2.7.0-rc.7</version>
 				<configuration>
 				    <inputDirectory>${project.basedir}</inputDirectory>
 				    <outputDirectory>${project.basedir}/build</outputDirectory>
@@ -49,11 +49,11 @@
 					</execution>
 				</executions>
 				<dependencies>
-					<dependency>
+					<!-- dependency>
 						<groupId>com.orientechnologies</groupId>
 						<artifactId>orientdb-core</artifactId>
 						<version>3.1.16</version>
-					</dependency>
+					</dependency -->
 					<dependency>
 			            <groupId>org.asciidoctor</groupId>
 			            <artifactId>asciidoctorj</artifactId>

@@ -1,4 +1,4 @@
-@file:Suppress("unused", "ControlFlowWithEmptyBody", "UNUSED_VARIABLE")
+@file:Suppress("unused", "ControlFlowWithEmptyBody", "UNUSED_VARIABLE" , "WildcardImport", "MagicNumber")
 
 import org.roboquant.Roboquant
 import org.roboquant.binance.BinanceLiveFeed
@@ -35,7 +35,7 @@ fun test(roboquant: Roboquant) {
 }
 
 
-fun csvPreConfig(roboquant: Roboquant) {
+fun csvPreConfig() {
     // tag::csvpreconfig[]
     // CSV files downloaded from stooq.pl
     val feed1 = CSVFeed.fromStooq("somepath")
