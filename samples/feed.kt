@@ -1,4 +1,6 @@
-@file:Suppress("unused", "ControlFlowWithEmptyBody", "UNUSED_VARIABLE" , "WildcardImport", "MagicNumber")
+@file:Suppress(
+    "unused", "ControlFlowWithEmptyBody", "UNUSED_VARIABLE" , "WildcardImport", "MagicNumber", "TooManyFunctions"
+)
 
 import org.roboquant.Roboquant
 import org.roboquant.binance.BinanceLiveFeed
