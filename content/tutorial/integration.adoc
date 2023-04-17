@@ -10,12 +10,12 @@ There are several categories of functionality available from 3rd parties provide
 
 * Historic data feeds
 * Live data feeds
-* Broker implementations
+* Broker functionality
 * Exchange rates
 
-In some cases a single 3rd party provides all types of functionality, or sometimes they are just specialised for a subset. You can combine several of these 3rd parties together in a single run, for example using a data feed from one provider and the broker functionality from another one.
+In some cases a single 3rd party provides all types of functionality, or sometimes they are just offer a subset. You can combine several of these 3rd parties together in a single run, for example using a data feed from one provider and the broker functionality from another one.
 
-One of the design principles is that _roboquant_ tries to avoid exposing 3rd party APIs directly and typically wraps them in _roboquant_ specific APIs and types. This makes it easier to switch between different providers and also reduces the learning curve.
+One of the design principles is that _roboquant_ tries to enforce is avoiding exposing 3rd party APIs directly. Typically, these APIs are wrapped in _roboquant_ specific APIs and types. This makes it easier to switch between different providers and also reduces the learning curve.
 
 == Modules & Packages
 The third party providers have their own modules and are not part of the core `roboquant` module:
@@ -61,7 +61,7 @@ export alpaca_public_key=...
 java myapp.jar
 ----
 . If the credentials are set in a property file called `.env` in the working directory, use these, otherwise go to next step.
-. If the credentials are set in a property file called `dotenv` in the working directory, use these, otherwise go to next step. The reason to support this variation is that `.files` are hidden in Jupyter notebooks and then `dotenv` is a good alternative.
+. If the credentials are set in a property file called `dotenv` in the working directory, use these, otherwise go to next step. The reason to support this variation is that `.env` files are hidden in Jupyter notebook directories and then `dotenv` is a good alternative.
 . If the credentials are set in a property file called `.env` in the $HOME/.roboquant directory, use these, otherwise not found.
 
 The following provides an overview of the used properties in _roboquant_:

@@ -14,9 +14,9 @@ Click this link to find out which episodes might be of most interest to algo-tra
 
 - https://podcasts.apple.com/nl/podcast/top-traders-unplugged/id888420325[Top Traders Unplugged] - rule based investment in the context of trend following strategies. There are some very experienced traders on this show, and they share a lot of useful tips and best practices.
 +
-An additional benefit for beginning algo-traders is that their trend following rules they are not that hard to translate into executable code.
+An additional benefit for beginning algo-traders is that their trend following rules are not that difficult to translate into executable code. One thing to notice is that typically a lot of the discussed assets are commodities and futures, and not individual stocks.
 
-- https://podcasts.apple.com/nl/podcast/patrick-boyle-on-finance/id1547740313[Patrick Boyle on Finance] - good background information on trending financial events. Besides providing excellent insights into these hot topics, I really enjoy the dry humor in these podcasts.
+- https://podcasts.apple.com/nl/podcast/patrick-boyle-on-finance/id1547740313[Patrick Boyle on Finance] - good background information on trending financial topics. Besides providing excellent insights into these hot topics, I really enjoy the way it is presented with a good amount of dry English humor.
 +
 For example checkout this episode: https://podcasts.apple.com/nl/podcast/patrick-boyle-on-finance/id1547740313?i=1000518760107[The Bitcoin Green Revolution - Is Cathie Wood Right About Bitcoin?]
 

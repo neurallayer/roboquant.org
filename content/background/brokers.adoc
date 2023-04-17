@@ -43,7 +43,7 @@ This makes it easier to create robust trading software since the order type take
 TIP: Check online communities like Reddit for experience of other traders with a particular broker or exchange. Or post your question on the _roboquant_ discord channel. And remember, “if it sounds too good to be true, it probably is”.
 
 == Overview
-The following table provides an overview of some of the more well known brokers and exchanges that provide APIs. It is provided as a reference and doesn't imply a recommendation for any of the mentioned companies. Do your own homework before selecting a broker that serves your needs best.
+The following table provides an overview of some of the more well known brokers and exchanges that provide APIs. It is provided as a reference only, and doesn't imply a recommendation for any of the mentioned companies. As always, do your own due diligence before selecting a broker that serves your needs best.
 
 [frame=ends]
 [.table]

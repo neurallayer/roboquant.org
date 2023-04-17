@@ -1,15 +1,33 @@
-= Performance Test
+= Performance
 :jbake-type: doc
 :icons: font
 :source-highlighter: rouge
 :jbake-date: 2020-01-01
 
-== Fast
-To be very fast is one of the 4 main objectives of _roboquant_. And in order to test performance and avoid performance degradation with new releases, a standard performance test is included in the test suite.
 
-This page provide an overview of that performance test run on different types of hardware. It is important to note the performance test is mainly designed to measure the performance of the back-test engine and not individual strategies, feeds, metrics or policies. So your performance may differ based on used components in your back-tests.
+With historic data sets becoming more widely available and growing in size, it is important that a strategy can still be quickly developed, evaluated and modified. If this cycle takes too long, it is nearly impossible to create high performing strategies.
 
-Also, the used operating systems and JDKs are not further tuned and used out of the box.
+Some of the measures that have been taken to ensure the highest performance possible within _roboquant_ are:
+
+* [x] Much of the builtin functionality uses multithreading and coroutines to speedup processing. For example the CSVFeed parses CSV files in parallel so directories with thousands of CSV files can be parsed in seconds.
+
+* [x] Roboquant isn't designed to be a financial ledger, and in general algo-trading applications don't require this. The native Java Double type provides enough precision for algo-trading purposes and there is no need to use (the much slower and more memory hungry) BigDecimal type. BTW, the area where _roboquant_ uses higher precise calculations is when dealing with order and position sizes.
+
+* [x] The data Feed API supports data that is kept in-memory as well data that is stored on disk and only accessed when required. This allows for running back test where the test data doesn't fit in memory or running back-tests on machines with limited memory. In fact _roboquant_ can be used on a JVM with only 200 MB of heap allocated.
+
+* [x] Avoid (auto)boxing, so the JVM can access these variables directly. This means where possible use native types and not the wrapped ones. See also this https://docs.oracle.com/javase/1.5.0/docs/guide/language/autoboxing.html[autoboxing article^] from Oracle.
+
+* [x] Optimized paths for common use-cases, like for example trading in a single currency only.
+
+* [x] Overall the latency is kept to a minimum when processing new market data events and generating the corresponding orders. So it is feasible to create fast, low latency (milliseconds) trading strategies.
+
+
+== Performance Tests
+In order to test performance and avoid performance degradation with new releases, a standard performance test is included in the test suite. The remainder of this page provide an overview of that performance test run on different types of hardware. It is important to note that:
+
+- the performance tests are designed to measure the performance of the back-test engine and not individual strategies, feeds, metrics or policies. So your performance may differ based on the used components in your back-tests.
+- the used operating systems and JDKs are not further tuned and used with their out-of-the-box configuration settings.
+
 
 .Running the performance test yourself
 ****
@@ -19,7 +37,65 @@ You can easily run the performance test on your own hardware after you've cloned
 ----
 ./mvnw test -P performance
 ----
+****
 
+
+=== Apple MacBook Pro M2
+This is an Apple Silicon (ARM) based laptop with 8 CPU cores and 16GB of memory. Is has OpenJDK 19 installed. It is also the hardware used for most of the development of roboquant.
+
+As you can see from the output below, the maximum throughput is *65 million candles per second* when running parallel back tests. For a laptop this is very impressive. When you look at a single run, the performance is even more impressive. It beats powerful and much more expensive EC2 server instances by a wide margin.
+----
+              _______
+            | $   $ |             roboquant
+            |   o   |             version: 1.3.0
+            |_[___]_|             build: 2023-04-03T09:39:47Z
+        ___ ___|_|___ ___         os: Mac OS X 13.3
+       ()___)       ()___)        home: /Users/peter/.roboquant
+      // / |         | \ \\       jvm: OpenJDK 64-Bit Server VM 19.0.2
+     (___) |_________| (___)      memory: 4096MB
+      | |   __/___\__   | |       cpu cores: 8
+      /_\  |_________|  /_\
+     // \\  |||   |||  // \\
+     \\ //  |||   |||  \\ //
+           ()__) ()__)
+           ///     \\\
+        __///_     _\\\__
+       |______|   |______|
+
+*****    500.000 candlesticks *****
+    feed filter               20 ms
+    base run                 119 ms
+    parallel runs (x8)       270 ms
+    extended run             560 ms
+    throughput 14 million candles/s
+
+*****  1.000.000 candlesticks *****
+    feed filter               39 ms
+    base run                 172 ms
+    parallel runs (x8)       390 ms
+    extended run            1613 ms
+    throughput 20 million candles/s
+
+*****  5.000.000 candlesticks *****
+    feed filter              189 ms
+    base run                 520 ms
+    parallel runs (x8)       744 ms
+    extended run           14987 ms
+    throughput 53 million candles/s
+
+***** 10.000.000 candlesticks *****
+    feed filter              123 ms
+    base run                 705 ms
+    parallel runs (x8)      1220 ms
+    extended run           15689 ms
+    throughput 65 million candles/s
+----
+
+=== AWS EC2 c6a.16xlarge
+This is an AMD third generation Epyc processor based instance with 64 vCPU, 128GB memory and OpenJDK 17.
+
+.Running on AWS
+****
 If you want to run the performance test on AWS EC2 instances, you can use the following commands to install and run the test (assuming an Ubuntu 22.04 image):
 
 [source, shell]
@@ -32,65 +108,66 @@ cd roboquant
 ----
 ****
 
+The maximum throughput is *82 million candles per second*, which makes it suitable for large back tests. However, given that it has 8x the number of cores compared to the Apple laptop, the performance gain is not that impressive. So it is not the most cost-efficient solution.
 
-== Apple MacBook Pro M2
-This is an Apple Silicon (ARM) based laptop with 8 CPU cores and 16GB of memory. Is has OpenJDK 19 installed. It is also the hardware used for most of the development of roboquant.
+----
+             _______
+            | $   $ |             roboquant
+            |   o   |             version: 1.3.0
+            |_[___]_|             build: 2023-04-03T10:21:12Z
+        ___ ___|_|___ ___         os: Linux 5.15.0-1031-aws
+       ()___)       ()___)        home: /home/ubuntu/.roboquant
+      // / |         | \ \\       jvm: OpenJDK 64-Bit Server VM 17.0.6
+     (___) |_________| (___)      memory: 30688MB
+      | |   __/___\__   | |       cpu cores: 64
+      /_\  |_________|  /_\
+     // \\  |||   |||  // \\
+     \\ //  |||   |||  \\ //
+           ()__) ()__)
+           ///     \\\
+        __///_     _\\\__
+       |______|   |______|
 
-As you can see from the output below, the maximum throughput is *60 million candles per second* when running parallel back tests. For a laptop this is very impressive. When you look at a single run, the performance is even more impressive. It beats powerful and much more expensive EC2 server instances by a wide margin.
+*****    500,000 candlesticks *****
+    feed filter               22 ms
+    base run                 197 ms
+    parallel runs (x64)      825 ms
+    extended run             954 ms
+    throughput 38 million candles/s
+
+*****  1,000,000 candlesticks *****
+    feed filter               24 ms
+    base run                 355 ms
+    parallel runs (x64)     2467 ms
+    extended run            3522 ms
+    throughput 25 million candles/s
+
+*****  5,000,000 candlesticks *****
+    feed filter              100 ms
+    base run                1071 ms
+    parallel runs (x64)     5298 ms
+    extended run           21389 ms
+    throughput 60 million candles/s
+
+***** 10,000,000 candlesticks *****
+    feed filter              170 ms
+    base run                1180 ms
+    parallel runs (x64)     7770 ms
+    extended run           22232 ms
+    throughput 82 million candles/s
+----
+
+=== AWS EC2 c7g.16xlarge
+This is an ARM based instance (Graviton) with 64 vCPU, 128GB memory and OpenJDK 17. The hourly pricing is slightly below the AMD Epyc instance, and it has the same amount of memory and vCPU's.
+
+You would perhaps expect that due to the long history of running server JVMs on X86 based hardware, that an ARM instance might underperform. But actually the opposite is true. The maximum throughput is *215 million candles per second*, which make it the best single instance solution for large parallel back tests.
+
 ----
             _______
             | $   $ |             roboquant
-            |   o   |             version: 1.2.0-SNAPSHOT
-            |_[___]_|             build: 2023-03-01T21:43:33Z
-        ___ ___|_|___ ___         os: Mac OS X 13.2.1
-       ()___)       ()___)        home: /Users/peter/.roboquant
-      // / |         | \ \\       jvm: OpenJDK 64-Bit Server VM 19.0.2
-     (___) |_________| (___)      memory: 4096MB
-      | |   __/___\__   | |       cpu cores: 8
-      /_\  |_________|  /_\
-     // \\  |||   |||  // \\
-     \\ //  |||   |||  \\ //
-           ()__) ()__)
-           ///     \\\
-        __///_     _\\\__
-       |______|   |______|
-INFO PerformanceTest - *****    500.000 candlesticks *****
-INFO PerformanceTest -     feed filter               21 ms
-INFO PerformanceTest -     base run                 138 ms
-INFO PerformanceTest -     parallel runs (x8)       220 ms
-INFO PerformanceTest -     extended run             553 ms
-INFO PerformanceTest -     throughput 18 million candles/s
-INFO PerformanceTest - *****  1.000.000 candlesticks *****
-INFO PerformanceTest -     feed filter               33 ms
-INFO PerformanceTest -     base run                 185 ms
-INFO PerformanceTest -     parallel runs (x8)       356 ms
-INFO PerformanceTest -     extended run            1535 ms
-INFO PerformanceTest -     throughput 22 million candles/s
-INFO PerformanceTest - *****  5.000.000 candlesticks *****
-INFO PerformanceTest -     feed filter              178 ms
-INFO PerformanceTest -     base run                 518 ms
-INFO PerformanceTest -     parallel runs (x8)       747 ms
-INFO PerformanceTest -     extended run           16798 ms
-INFO PerformanceTest -     throughput 53 million candles/s
-INFO PerformanceTest - ***** 10.000.000 candlesticks *****
-INFO PerformanceTest -     feed filter              114 ms
-INFO PerformanceTest -     base run                 761 ms
-INFO PerformanceTest -     parallel runs (x8)      1330 ms
-INFO PerformanceTest -     extended run           15280 ms
-INFO PerformanceTest -     throughput 60 million candles/s
-----
-
-== AWS EC2 c6a.16xlarge
-This is an AMD third generation Epyc processor based instance with 64 vCPU, 128GB memory and OpenJDK 17.
-
-The maximum throughput is *114 million candles per second*, which makes it suitable for large back tests. However, given that it has 8x the number of cores compared to the Apple laptop, the performance gain is only 2x. So it is not the most cost-efficient solution.
-
-----
-             _______
-            | $   $ |             roboquant
-            |   o   |             version: 1.2.0-SNAPSHOT
-            |_[___]_|             build: 2023-03-01T19:28:44Z
-        ___ ___|_|___ ___         os: Linux 5.15.0-1028-aws
+            |   o   |             version: 1.3.0
+            |_[___]_|             build: 2023-04-03T10:02:44Z
+        ___ ___|_|___ ___         os: Linux 5.15.0-1031-aws
        ()___)       ()___)        home: /home/ubuntu/.roboquant
       // / |         | \ \\       jvm: OpenJDK 64-Bit Server VM 17.0.6
      (___) |_________| (___)      memory: 30688MB
@@ -102,82 +179,38 @@ The maximum throughput is *114 million candles per second*, which makes it suita
            ///     \\\
         __///_     _\\\__
        |______|   |______|
-INFO PerformanceTest - *****    500,000 candlesticks *****
-INFO PerformanceTest -     feed filter               23 ms
-INFO PerformanceTest -     base run                 194 ms
-INFO PerformanceTest -     parallel runs (x64)      761 ms
-INFO PerformanceTest -     extended run             978 ms
-INFO PerformanceTest -     throughput 42 million candles/s
-INFO PerformanceTest - *****  1,000,000 candlesticks *****
-INFO PerformanceTest -     feed filter               29 ms
-INFO PerformanceTest -     base run                 776 ms
-INFO PerformanceTest -     parallel runs (x64)     2708 ms
-INFO PerformanceTest -     extended run            2752 ms
-INFO PerformanceTest -     throughput 23 million candles/s
-INFO PerformanceTest - *****  5,000,000 candlesticks *****
-INFO PerformanceTest -     feed filter               97 ms
-INFO PerformanceTest -     base run                 930 ms
-INFO PerformanceTest -     parallel runs (x64)     4708 ms
-INFO PerformanceTest -     extended run           18383 ms
-INFO PerformanceTest -     throughput 67 million candles/s
-INFO PerformanceTest - ***** 10,000,000 candlesticks *****
-INFO PerformanceTest -     feed filter              153 ms
-INFO PerformanceTest -     base run                1160 ms
-INFO PerformanceTest -     parallel runs (x64)     5598 ms
-INFO PerformanceTest -     extended run           21639 ms
-INFO PerformanceTest -     throughput 114 million candles/s
-----
 
-== AWS EC2 c7g.16xlarge
-This is an ARM based instance (Graviton) with 64 vCPU, 128GB memory and OpenJDK 17. The hourly pricing is slightly below the AMD Epyc instance, and it has the same amount of memory and vCPU's.
+*****    500,000 candlesticks *****
+    feed filter               22 ms
+    base run                 182 ms
+    parallel runs (x64)      537 ms
+    extended run            1226 ms
+    throughput 59 million candles/s
 
-You would perhaps expect that due to the long history of running server JVMs on X86 based hardware, that an ARM instance might underperform. But actually the opposite is true. The maximum throughput is *217 million candles per second*, which make it the best single instance solution for large parallel back tests.
+*****  1,000,000 candlesticks *****
+    feed filter               30 ms
+    base run                 267 ms
+    parallel runs (x64)     1229 ms
+    extended run            3384 ms
+    throughput 52 million candles/s
 
-----
-             _______
-            | $   $ |             roboquant
-            |   o   |             version: 1.2.0-SNAPSHOT
-            |_[___]_|             build: 2023-03-01T19:19:46Z
-        ___ ___|_|___ ___         os: Linux 5.15.0-1028-aws
-       ()___)       ()___)        home: /home/ubuntu/.roboquant
-      // / |         | \ \\       jvm: OpenJDK 64-Bit Server VM 17.0.6
-     (___) |_________| (___)      memory: 30688MB
-      | |   __/___\__   | |       cpu cores: 64
-      /_\  |_________|  /_\
-     // \\  |||   |||  // \\
-     \\ //  |||   |||  \\ //
-           ()__) ()__)
-           ///     \\\
-        __///_     _\\\__
-       |______|   |______|
-INFO PerformanceTest - *****    500,000 candlesticks *****
-INFO PerformanceTest -     feed filter               24 ms
-INFO PerformanceTest -     base run                 181 ms
-INFO PerformanceTest -     parallel runs (x64)      523 ms
-INFO PerformanceTest -     extended run            1115 ms
-INFO PerformanceTest -     throughput 61 million candles/s
-INFO PerformanceTest - *****  1,000,000 candlesticks *****
-INFO PerformanceTest -     feed filter               30 ms
-INFO PerformanceTest -     base run                 258 ms
-INFO PerformanceTest -     parallel runs (x64)     1222 ms
-INFO PerformanceTest -     extended run            3288 ms
-INFO PerformanceTest -     throughput 52 million candles/s
-INFO PerformanceTest - *****  5,000,000 candlesticks *****
-INFO PerformanceTest -     feed filter               98 ms
-INFO PerformanceTest -     base run                 739 ms
-INFO PerformanceTest -     parallel runs (x64)     2524 ms
-INFO PerformanceTest -     extended run           17404 ms
-INFO PerformanceTest -     throughput 126 million candles/s
-INFO PerformanceTest - ***** 10,000,000 candlesticks *****
-INFO PerformanceTest -     feed filter              180 ms
-INFO PerformanceTest -     base run                1085 ms
-INFO PerformanceTest -     parallel runs (x64)     2949 ms
-INFO PerformanceTest -     extended run           21935 ms
-INFO PerformanceTest -     throughput 217 million candles/s
+*****  5,000,000 candlesticks *****
+    feed filter               97 ms
+    base run                 746 ms
+    parallel runs (x64)     2526 ms
+    extended run           16997 ms
+    throughput 126 million candles/s
+
+***** 10,000,000 candlesticks *****
+    feed filter              175 ms
+    base run                1052 ms
+    parallel runs (x64)     2963 ms
+    extended run           20695 ms
+    throughput 215 million candles/s
 ----
 
 
-== AWS EC2 c7g.16xlarge + GraalVM
+=== AWS EC2 c7g.16xlarge + GraalVM
 This is the same ARM based instance (Graviton) with 64 vCPU and 128GB memory. But rather than using the OpenJDK that comes with Ubuntu 22.04,  the performance tests are run using the Oracle GraalVM Enterprise 22.3.
 
 The GraalVM based JDK was installed using the following two commands:
@@ -188,16 +221,16 @@ bash <(curl -sL https://get.graalvm.org/ee-token)
 bash <(curl -sL https://get.graalvm.org/jdk)
 ----
 
-Overall the performance (*214 million candles per second*) is not significantly better than with OpenJDK. This might change in the future when GraalVM gets better optimized for the ARM CPU architecture. But for now it seems the extra hassle and cost of using GraalVM is not worth it.
+Overall the performance (*208 million candles per second*) is not significantly better than with OpenJDK. This might change in the future when GraalVM gets better optimized for the ARM CPU architecture. But for now it seems the extra hassle and cost of using GraalVM is not worth it.
 
 ----
              _______
             | $   $ |             roboquant
-            |   o   |             version: 1.2.0-SNAPSHOT
-            |_[___]_|             build: 2023-03-08T07:56:30Z
-        ___ ___|_|___ ___         os: Linux 5.15.0-1028-aws
+            |   o   |             version: 1.3.0
+            |_[___]_|             build: 2023-04-03T10:32:59Z
+        ___ ___|_|___ ___         os: Linux 5.15.0-1031-aws
        ()___)       ()___)        home: /home/ubuntu/.roboquant
-      // / |         | \ \\       jvm: Java HotSpot(TM) 64-Bit Server VM 17.0.6
+      // / |         | \ \\       jvm: OpenJDK 64-Bit Server VM 17.0.6
      (___) |_________| (___)      memory: 30688MB
       | |   __/___\__   | |       cpu cores: 64
       /_\  |_________|  /_\
@@ -207,28 +240,32 @@ Overall the performance (*214 million candles per second*) is not significantly 
            ///     \\\
         __///_     _\\\__
        |______|   |______|
-INFO PerformanceTest - *****    500,000 candlesticks *****
-INFO PerformanceTest -     feed filter               24 ms
-INFO PerformanceTest -     base run                 179 ms
-INFO PerformanceTest -     parallel runs (x64)      599 ms
-INFO PerformanceTest -     extended run            1426 ms
-INFO PerformanceTest -     throughput 53 million candles/s
-INFO PerformanceTest - *****  1,000,000 candlesticks *****
-INFO PerformanceTest -     feed filter               51 ms
-INFO PerformanceTest -     base run                 380 ms
-INFO PerformanceTest -     parallel runs (x64)     1351 ms
-INFO PerformanceTest -     extended run            4422 ms
-INFO PerformanceTest -     throughput 47 million candles/s
-INFO PerformanceTest - *****  5,000,000 candlesticks *****
-INFO PerformanceTest -     feed filter              152 ms
-INFO PerformanceTest -     base run                 871 ms
-INFO PerformanceTest -     parallel runs (x64)     2671 ms
-INFO PerformanceTest -     extended run           18593 ms
-INFO PerformanceTest -     throughput 119 million candles/s
-INFO PerformanceTest - ***** 10,000,000 candlesticks *****
-INFO PerformanceTest -     feed filter              292 ms
-INFO PerformanceTest -     base run                1138 ms
-INFO PerformanceTest -     parallel runs (x64)     2985 ms
-INFO PerformanceTest -     extended run           22288 ms
-INFO PerformanceTest -     throughput 214 million candles/s
+
+*****    500,000 candlesticks *****
+    feed filter               27 ms
+    base run                 177 ms
+    parallel runs (x64)      579 ms
+    extended run            1304 ms
+    throughput 55 million candles/s
+
+*****  1,000,000 candlesticks *****
+    feed filter               52 ms
+    base run                 309 ms
+    parallel runs (x64)     1332 ms
+    extended run            4809 ms
+    throughput 48 million candles/s
+
+*****  5,000,000 candlesticks *****
+    feed filter              115 ms
+    base run                 797 ms
+    parallel runs (x64)     2687 ms
+    extended run           23222 ms
+    throughput 119 million candles/s
+
+***** 10,000,000 candlesticks *****
+    feed filter              178 ms
+    base run                1132 ms
+    parallel runs (x64)     3074 ms
+    extended run           28914 ms
+    throughput 208 million candles/s
 ----
