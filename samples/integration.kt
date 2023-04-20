@@ -1,4 +1,4 @@
-@file:Suppress("unused", "TooManyFunctions", "SpreadOperator")
+@file:Suppress("unused", "TooManyFunctions", "SpreadOperator", "MagicNumber", "WildcardImport")
 
 import com.crazzyghost.alphavantage.parameters.Interval
 import net.jacobpeterson.alpaca.model.properties.DataAPIType
@@ -37,6 +37,7 @@ fun oandaConfig() {
         secretKey = "..."
     }
     // end::alpacaconfig[]
+    println(feed)
 }
 
 
