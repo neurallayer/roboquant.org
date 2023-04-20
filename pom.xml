@@ -131,6 +131,11 @@
 			<version>${roboquant.version}</version>
 		</dependency>
 		<dependency>
+			<artifactId>roboquant-ibkr</artifactId>
+			<groupId>org.roboquant</groupId>
+			<version>${roboquant.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-stdlib</artifactId>
 			<version>${kotlin.version}</version>

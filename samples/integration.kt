@@ -10,6 +10,7 @@ import org.roboquant.alpaca.AlpacaLiveFeed
 import org.roboquant.alphavantage.AlphaVantageHistoricFeed
 import org.roboquant.brokers.ECBExchangeRates
 import org.roboquant.common.*
+import org.roboquant.ibkr.IBKRHistoricFeed
 import org.roboquant.oanda.OANDABroker
 import org.roboquant.oanda.OANDAHistoricFeed
 import org.roboquant.oanda.OANDALiveFeed
@@ -59,6 +60,15 @@ fun oandaLiveFeed(roboquant: Roboquant) {
     // end::oandalive[]
 }
 
+
+fun ibkrFeed(roboquant: Roboquant) {
+    // tag::ibkrfeed[]
+    val feed = IBKRHistoricFeed()
+    val asset = Asset("TSLA")
+    feed.retrieve(asset)
+    roboquant.run(feed)
+    // end::ibkrfeed[]
+}
 
 
 fun ecb() {

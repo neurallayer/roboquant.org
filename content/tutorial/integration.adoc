@@ -5,6 +5,7 @@
 :dotenvfile: ../../samples/dotenv
 :sourcefile: ../../samples/integration.kt
 :cryptofile: ../../samples/crypto.kt
+:imagesdir: ../img/
 
 There are several categories of functionality available from 3rd parties providers:
 
@@ -220,6 +221,30 @@ Alpha Vantage provides a rich set of historic stock prices, not only for stocks 
 ----
 include::{sourcefile}[tag=alphahistoric]
 ----
+
+
+== Interactive Brokers
+Interactive Brokers integration requires to run either TWS or IB Gateway on a local machine. So you cannot directly connect from roboquant to their servers.
+
+Other than that, the integration is the same as other brokers and data feeds.
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=ibkrfeed]
+----
+
+[TIP]
+====
+If you run your software in a Docker container and the IB Gateway is running on the host, you still need to be able to connect from your software to the IB Gateway.
+
+image::ibkr_install.png[]
+
+One way to achieve this, is to set the IBKR host property to "host.docker.internal" in your software.
+[source,kotlin]
+----
+Config.setProperty("ibkr.host", "host.docker.internal")
+----
+====
 
 == Adding new 3rd party integrations
 Adding integration with a 3rd party is not difficult. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library that is available, this could take as little as a few hours to a few days. You can read more about the Feed interface that you need to implement it right xref:feed.adoc#_custom_feeds[here].
