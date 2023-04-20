@@ -16,7 +16,7 @@
                         <div class="col-lg-4 mb-1 mb-lg-0"><h2 class="fw-bolder mb-0">What is roboquant</h2></div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <p><em>Roboquant</em> is an open source algorithmic trading platform written in Kotlin. It is lightning fast, flexible, user-friendly and completely free to use.</p>
+                                <p><em>Roboquant</em> is an open source algorithmic trading platform written in Kotlin. It is flexible, user-friendly, completely free to use and most of all, lightning fast:</p>
                                 <div class="imageblock">
                                     <div class="content">
                                         <img src="/img/performance_overview.png" alt="screenshot" />
