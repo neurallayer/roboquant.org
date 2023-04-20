@@ -17,6 +17,11 @@
                         <div class="col-lg-8">
                             <div class="col h-100">
                                 <p><em>Roboquant</em> is an open source algorithmic trading platform written in Kotlin. It is lightning fast, flexible, user-friendly and completely free to use.</p>
+                                <div class="imageblock">
+                                    <div class="content">
+                                        <img src="/img/performance_overview.png" alt="screenshot" />
+                                    </div>
+                                </div>
                                 <p>It is designed for anyone serious about algo-trading. So whether you are a beginning retail trader or an established trading firm,
                                 <em>roboquant</em> can help you to quickly develop robust and fully automated trading strategies.</p>
                             </div>
@@ -58,7 +63,7 @@
                                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-1"><span>Fast</span></div>
                                     <ul class="feature-list">
                                         <li>Process millions of candles per second</li>
-                                        <li>100x faster than Zipline or backtrader</li>
+                                        <li>500x faster than Zipline or backtrader</li>
                                         <li>Run back tests in parallel</li>
                                         <li>Sub millisecond trading</li>
                                     </ul>

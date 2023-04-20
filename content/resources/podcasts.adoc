@@ -22,7 +22,7 @@ Great podcast about systematic trading. Since there is often accompanying visual
 image::chat_with_traders.png[width="100", float="right"]
 https://podcasts.apple.com/nl/podcast/chat-with-traders/id957265404[Chat with Traders]
 
-Contains several episodes and interviews with professional algo traders. Especially the potential pitfalls of going live with fully automated trading systems are especially helpful and insightful.
+Contains several episodes and interviews with professional algo traders. Especially the coverage of potential pitfalls of going live with fully automated trading systems might prove to be extra helpful and insightful.
 ====
 --
 
@@ -35,7 +35,9 @@ https://podcasts.apple.com/nl/podcast/top-traders-unplugged/id888420325[Top Trad
 
 All about rule based investment in the context of trend following strategies. There are some very experienced traders on this show, and they share a lot of useful tips and best practices.
 
-An additional benefit for beginning algo-traders is that their trend following rules are not that difficult to translate into executable code. One thing to notice is that a lot of the discussed assets are commodities and futures, and not individual stocks.
+The episodes with Rob Carver as guest are particular interesting since he is a retail algo-trader himself, but not (yet) using roboquant. An additional benefit for beginning algo-traders is that most trend following strategies are not that difficult to translate into executable code.
+
+One thing to notice is that because most presenters come from a CTA (Commodity Trading Advisor) background, a lot of the covered assets are commodities and futures, and not individual stocks.
 ====
 --
 
