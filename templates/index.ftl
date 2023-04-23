@@ -47,7 +47,7 @@
                                         <img src="/img/code.gif" alt="screenshot" />
                                     </div>
                                 </div>
-                                As you can see, it is not difficult to get started. So if you are a beginning developer, give _roboquant_ notebooks a try. And if you are an
+                                As you can see, it is not difficult to get started. So if you are a beginning developer, give <em>roboquant</em> notebooks a try. And if you are an
                                 experienced developer or want to develop complex strategies, try out the Kotlin libraries.
                                 <form action="/tutorial/install.html">
                                     <button class="btn btn-outline-dark float-end" id="install_software" type="submit">Get the software</button>
