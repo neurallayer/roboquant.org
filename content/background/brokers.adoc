@@ -54,7 +54,6 @@ The following table provides an overview of some of the more well known brokers 
 |IBKR|&check;| stocks, options, bonds, futures, forex, crypto, funds| Worldwide| 1993 |Access to many asset classes and countries
 |Alpaca|&check;| stocks, options, crypto| Worldwide| 2018| API first broker
 |Tradier|| stocks, options, crypto| Worldwide| 2013|
-|OANDA| &check;| forex, commodity, crypto| Worldwide| 1999
 |Binance| &check;| crypto| Worldwide| 2017| Largest crypto exchange, but countries start to ban them
 |===
 

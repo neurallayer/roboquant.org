@@ -31,7 +31,7 @@ However, if you have already Docker installed on your local machine, all it take
 
 [source,shell]
 ----
-docker run -p 8888:8888 docker.io/roboquant/jupyter
+docker run -p 8888:8888 roboquant/jupyter
 ----
 By default, this will start a new Jupyter-Lab environment. The installation comes with several how-to notebooks included that demonstrate how to develop and run your own strategies.
 

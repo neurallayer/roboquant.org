@@ -346,7 +346,7 @@ ol > li p, ul > li p, ul dd, ol dd, .olist .olist, .ulist .ulist, .ulist .olist,
 
 ul.unstyled, ol.unnumbered, ul.checklist, ul.none { list-style-type: none; }
 
-ul.unstyled, ol.unnumbered, ul.checklist { margin-left: 0.625em; }
+ul.unstyled, ol.unnumbered { margin-left: 0.625em; }
 
 ul.checklist li > p:first-child > i[class^="icon-check"]:first-child, ul.checklist li > p:first-child > input[type="checkbox"]:first-child { margin-right: 0.25em; }
 

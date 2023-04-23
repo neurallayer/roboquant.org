@@ -11,9 +11,6 @@ import org.roboquant.alphavantage.AlphaVantageHistoricFeed
 import org.roboquant.brokers.ECBExchangeRates
 import org.roboquant.common.*
 import org.roboquant.ibkr.IBKRHistoricFeed
-import org.roboquant.oanda.OANDABroker
-import org.roboquant.oanda.OANDAHistoricFeed
-import org.roboquant.oanda.OANDALiveFeed
 import org.roboquant.orders.MarketOrder
 import org.roboquant.polygon.PolygonHistoricFeed
 import org.roboquant.polygon.PolygonLiveFeed
@@ -28,38 +25,6 @@ fun yahooFeed() {
     // end::yahoo[]
 }
 
-
-
-fun oandaConfig() {
-    // tag::alpacaconfig[]
-    val feed = AlpacaHistoricFeed {
-        publicKey = "..."
-        secretKey = "..."
-    }
-    // end::alpacaconfig[]
-    println(feed)
-}
-
-
-
-fun oandaHistoricFeed() {
-    // tag::oandahistoric[]
-    val feed = OANDAHistoricFeed()
-    val tf = Timeframe.past(2.days)
-    feed.retrieve("EUR_USD", "USD_JPY", "GBP_USD", timeframe = tf)
-    // end::oandahistoric[]
-}
-
-
-fun oandaLiveFeed(roboquant: Roboquant) {
-    // tag::oandalive[]
-    val feed = OANDALiveFeed()
-    feed.subscribePriceBar("EUR_USD", "USD_JPY", "GBP_USD")
-
-    val tf = Timeframe.next(120.minutes)
-    roboquant.run(feed,tf)
-    // end::oandalive[]
-}
 
 
 fun ibkrFeed(roboquant: Roboquant) {
@@ -129,20 +94,6 @@ suspend fun polygonLiveFeed(roboquant: Roboquant) {
     // end::polygonlive[]
 }
 
-
-
-
-fun oandaBroker() {
-    // tag::oandabroker[]
-    val broker = OANDABroker()
-    println(broker.account.summary())
-    println(broker.availableAssets)
-
-    // place a market order to buy 100 stocks Apple
-    val order = MarketOrder(Asset("AAPL"), 100)
-    broker.place(listOf(order))
-    // end::oandabroker[]
-}
 
 fun alpacaHistoricFeed() {
     // tag::alpacahistoric[]

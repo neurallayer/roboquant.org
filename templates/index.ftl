@@ -16,14 +16,17 @@
                         <div class="col-lg-4 mb-1 mb-lg-0"><h2 class="fw-bolder mb-0">What is roboquant</h2></div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <p><em>Roboquant</em> is an open source algorithmic trading platform written in Kotlin. It is flexible, user-friendly, completely free to use and most of all, lightning fast:</p>
+                                <p><em>Roboquant</em> is an open source algorithmic trading platform written in Kotlin. It is flexible, user-friendly and completely free to use. It is designed for anyone serious about algo-trading. So whether you are a beginning retail trader or an established trading firm,
+                                    <em>roboquant</em> can help you to quickly develop robust and fully automated trading strategies.
+                                </p>
+
+                                <p>But perhaps most important of all, it is lightning fast. It is orders of magnitude faster than many other algo-trading platforms.</p>
                                 <div class="imageblock">
                                     <div class="content">
                                         <img src="/img/performance_overview.png" alt="screenshot" />
                                     </div>
                                 </div>
-                                <p>It is designed for anyone serious about algo-trading. So whether you are a beginning retail trader or an established trading firm,
-                                <em>roboquant</em> can help you to quickly develop robust and fully automated trading strategies.</p>
+                                <p>With historic data sets becoming more widely available and growing in size, it is important that a strategy can still be quickly developed, back-tested and optimized. If this cycle takes too long, it is nearly impossible to create high performing and robust strategies.</p>
                             </div>
                         </div>
                     </div>
@@ -37,7 +40,7 @@
                         <div class="col-lg-8">
                             <div class="col h-100">
                                 A lot of effort and attention went into making sure <em>roboquant</em> is easy to use, especially for less experienced developers.
-                                The following example shows the ingredients required to run a full back test.
+                                The following example shows the steps required to run a full back test.
                                 <br></br>
                                 <div class="imageblock">
                                     <div class="content">
@@ -89,7 +92,7 @@
                                 <div class="col mb-3 h-100">
                                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-1"><span>Free</span></div>
                                     <ul class="feature-list">
-                                        <li>All sourcecode on GitHub</li>
+                                        <li>All source code on GitHub</li>
                                         <li>Permissive Apache 2.0 license</li>
                                         <li>Code contributions are appreciated</li>
                                         <li>Welcoming community</li>

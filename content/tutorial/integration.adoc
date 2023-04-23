@@ -27,11 +27,11 @@ The third party providers have their own modules and are not part of the core `r
 
 You can include these modules in your Maven or Gradle build. In order to use the 3rd party integration, you'll have to import the package. All third party integration have their own package directly under `org.roboquant`.
 
-So for example you can import all the required classes for OANDA as follows:
+So for example you can import all the required classes for Alpaca as follows:
 
 [source, kotlin]
 ----
-import org.roboquant.oanda.*
+import org.roboquant.alpaca.*
 ----
 
 This `wildcard` import is especially useful if you use _roboquant_ in a Jupyter Notebook. If you use _roboquant_ in an IDE like IntelliJ IDEA, the IDE will automatically suggest which packages and classes to import for you.
@@ -81,7 +81,6 @@ The following table shows which 3rd parties are supported out of the box and wha
 
 |Interactive Brokers|✓|✓|✓|✓
 |Alpaca|✓|✓|✓|
-|OANDA|✓|✓|✓|✓
 |Polygon.io|✓|✓||
 |Yahoo Finance|✓|||
 |Alpha Vantage|✓|||
@@ -115,24 +114,6 @@ include::{sourcefile}[tag=alpacalive]
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=alpacabroker]
-----
-
-=== OANDA
-The integration with OANDA covers their broker API as well as their historic and live market data. In order to use these, you'll need to at least register for a paper-trading account with an API-key.
-
-[source, kotlin,indent=0]
-----
-include::{sourcefile}[tag=oandahistoric]
-----
-
-[source, kotlin,indent=0]
-----
-include::{sourcefile}[tag=oandalive]
-----
-
-[source, kotlin,indent=0]
-----
-include::{sourcefile}[tag=oandabroker]
 ----
 
 == Polygon

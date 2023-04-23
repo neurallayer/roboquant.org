@@ -1,6 +1,7 @@
 @file:Suppress("unused", "UNUSED_VARIABLE", "MagicNumber")
 
 import org.roboquant.Roboquant
+import org.roboquant.alpaca.AlpacaBroker
 import org.roboquant.brokers.Account
 import org.roboquant.common.ParallelJobs
 import org.roboquant.common.Timeframe
@@ -16,7 +17,6 @@ import org.roboquant.loggers.InfoLogger
 import org.roboquant.loggers.MemoryLogger
 import org.roboquant.metrics.AccountMetric
 import org.roboquant.metrics.PNLMetric
-import org.roboquant.oanda.OANDABroker
 import org.roboquant.policies.FlexPolicy
 import org.roboquant.strategies.CombinedStrategy
 import org.roboquant.strategies.EMAStrategy
@@ -41,7 +41,7 @@ fun complete() {
         EMAStrategy(),
         AccountMetric(), PNLMetric(),
         policy = FlexPolicy(shorting = true),
-        broker = OANDABroker(),
+        broker = AlpacaBroker(),
         logger = InfoLogger()
     )
     // end::complete[]
