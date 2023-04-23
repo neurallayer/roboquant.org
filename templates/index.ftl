@@ -20,7 +20,7 @@
                                     <em>roboquant</em> can help you to quickly develop robust and fully automated trading strategies.
                                 </p>
 
-                                <p>But perhaps most important of all, it is lightning fast. It is orders of magnitude faster than many other algo-trading platforms.</p>
+                                <p>But perhaps most important of all, it is <a href="/background/performance.html">lightning fast</a>. Roboquant is orders of magnitude faster than most other algo-trading platforms.</p>
                                 <div class="imageblock">
                                     <div class="content">
                                         <img src="/img/performance_overview.png" alt="screenshot" />
@@ -40,13 +40,15 @@
                         <div class="col-lg-8">
                             <div class="col h-100">
                                 A lot of effort and attention went into making sure <em>roboquant</em> is easy to use, especially for less experienced developers.
-                                The following example shows the steps required to run a full back test.
+                                The following example shows all the steps required to run a full back test in a Jupyter notebook.
                                 <br></br>
                                 <div class="imageblock">
                                     <div class="content">
                                         <img src="/img/code.gif" alt="screenshot" />
                                     </div>
                                 </div>
+                                As you can see, it is not difficult to get started. So if you are a beginning developer, give _roboquant_ notebooks a try. And if you are an
+                                experienced developer or want to develop complex strategies, try out the Kotlin libraries.
                                 <form action="/tutorial/install.html">
                                     <button class="btn btn-outline-dark float-end" id="install_software" type="submit">Get the software</button>
                                 </form>
