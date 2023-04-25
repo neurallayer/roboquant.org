@@ -5,12 +5,15 @@
 :jbake-date: 2020-12-01
 
 == Reading Guide
-Welcome to the _roboquant_ tutorial. Just like the _roboquant_ software, the documentation is also open source. So if you find mistakes or want to contribute, head over to the https://github.com/neurallayer/roboquant.org[GitHub documentation repository] where you can find the source. The documentation is in https://docs.asciidoctor.org/asciidoctor/latest/#relationship-to-asciidoc[AsciiDoc] format, so it's easy to modify with any editor.
-
 * You can select a topic from the menu to get more information about that item.
 * Content that is formatted like `SomeName`, represents a real Kotlin class, interface, method or attribute.
 * The package names are typically omitted to make it easier to read.
 * All the used code snippets are compilable and runnable code. However, the required import statements are not shown to improve readability.
+
+.Contribution
+****
+The documentation is also open source, just like the software. So if you find mistakes or want to contribute, head over to the https://github.com/neurallayer/roboquant.org[GitHub documentation repository] where you can find the content. The documentation is written using the https://docs.asciidoctor.org/asciidoctor/latest/#relationship-to-asciidoc[AsciiDoc] format, so it's easy to modify with any editor.
+****
 
 == Main components
 Perhaps the most important part of using _roboquant_ is to understand the sequence of steps and the responsibility each component has in this flow. The following diagram provides a logical overview of the main components and the type of data they consume and produce.

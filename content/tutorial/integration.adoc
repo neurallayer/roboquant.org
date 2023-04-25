@@ -130,13 +130,12 @@ include::{sourcefile}[tag=polygonlive]
 ----
 
 == ECB
-The ECB (European Central Bank) publishes since the start of the Euro the daily historic exchange rates with almost all other fiat currencies in the world. Roboquant can automatically download these exchange rates from their website and use them for currency conversions during trading. There is no need for registration or API key, since this data is available on their public website.
+The ECB (European Central Bank) publishes since the start of the Euro the daily historic exchange rates with almost all other fiat currencies in the world. `ECBExchangeRates` will automatically download the exchange rates from their website and use them for currency conversions during trading. There is no need for registration or an API key, since this data is available on their public website.
 
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=ecb]
 ----
-
 
 == Binance
 The integration with Binance covers their broker API as well as their historic and live market data APIs. From an algo-trading perspective, it is also nice to see that the access to (high-frequency) market data is free. Even without a trading account with them, you can still access the data.
