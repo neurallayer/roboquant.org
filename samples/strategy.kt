@@ -51,15 +51,15 @@ private fun filter() {
     val strategy1 = AssetFilterStrategy(EMAStrategy(), AssetFilter.includeCurrencies(Currency.USD))
 
     // use the filter extension function to exclude price actions for Tesla
-    val strategy2 = EMAStrategy().filter { asset, time ->
+    val strategy2 = EMAStrategy().filter { asset, _ ->
         asset.symbol != "TSLA"
     }
 
     // use CombinedStrategy and filter to create more complex strategies
     val t = Instant.parse("2010-01-01T00:00:00Z")
     val strategy = CombinedStrategy(
-        EMAStrategy.PERIODS_12_26.filter { asset, time -> time <  t },
-        EMAStrategy.PERIODS_5_15.filter { asset, time -> time >=  t }
+        EMAStrategy.PERIODS_12_26.filter { _, time -> time <  t },
+        EMAStrategy.PERIODS_5_15.filter { _, time -> time >=  t }
     )
     // end::filter[]
 }

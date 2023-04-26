@@ -4,7 +4,7 @@
 
 	<groupId>org.roboquant</groupId>
 	<artifactId>roboquant-org</artifactId>
-	<version>1.4.0-SNAPSHOT</version>
+	<version>1.4.0</version>
 	<name>roboquant-org</name>
 
 	<properties>
@@ -143,7 +143,7 @@
 		<dependency>
 			<groupId>org.jetbrains.kotlinx</groupId>
 			<artifactId>kotlin-jupyter-api</artifactId>
-			<version>0.11.0-346</version>
+			<version>0.11.0-358</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
