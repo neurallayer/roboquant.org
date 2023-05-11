@@ -7,8 +7,8 @@
 == Order Types
 Roboquant comes out of the box with support for different types of orders. All orders are a subclass of one of these two abstract classes:
 
-1. `CreateOrder`: represents a regular new order, for example a MarketOrder or LimitOrder. But also more complex order types like a BracketOrder are subclasses of the CreateOrder.
-2. `ModifyOrder`: modifies an existing open create order, for example an UpdateOrder or CancelOrder.
+1. `CreateOrder`: represents a regular new order, for example a `MarketOrder` or `LimitOrder`. But also more complex order types like a `BracketOrder` are subclasses of the CreateOrder.
+2. `ModifyOrder`: modifies an existing open create order. Right now there are two concrete subclasses: `UpdateOrder` and `CancelOrder`.
 
 The following diagram shows the order types that are supported out-of-the-box and also their relationship to each other. The SimBroker supports all these order types, but other real `Broker` implementations might only support a subset.
 
@@ -16,7 +16,9 @@ See also the SimBroker section on xref:simbroker.adoc#_order_handling[order hand
 
 image::order_types.png[]
 
+****
 An order always refers to a single asset, including advanced order types like BracketOrders. The reason for putting this restriction in place is that real brokers only have limited support for multi-asset orders and this could lead to issues that are only discovered during live trading. Additionally, it makes back testing unpredictable if the price is only known for one of the assets.
+****
 
 == Creating Orders
 The `Policy` used during a `run` is responsible for creating the orders. This can be based on the received signals from the `Strategy`, but can also be done for other reasons (like for example cyclic portfolio re-balancing).
@@ -52,7 +54,7 @@ image::tif.png[]
 The default TIF for orders in _roboquant_, if none is explicitly specified, is GTC (Good Till Cancelled). All TIF policies only become active once an `CreateOrder` has been `ACCEPTED` (so it's not anymore in the `INITIAL` state).
 
 == Custom Order Types
-Orders can be extended with your own order types if the ones that come out of the box are not sufficient. The steps required to make yor own order types are:
+Orders can be extended with your own order types if the ones that come out of the box are not sufficient. The steps required to use your own order types are:
 
 . Extend one of the two `CreateOrder` or `ModifyOrder` abstract classes with your own order type
 . If you want to use these orders also in back testing, you'll also need to implement and register an `OrderExecutor`
@@ -64,10 +66,10 @@ After that, you can use this new order type in your policy just like any of the 
 include::{sourcefile}[tag=customOrder]
 ----
 
-== Account Orders
+== Tracking Orders
 After an order has been placed at a Broker, the state can be tracked via `Account.openOrders` or `Account.closedOrders`. It is important to realize that these two collections contain `OrderState` objects that wrap the original order that was placed at the broker.
 
-Besides the underlying order, the `OrderState` object also contains the OrderStatus and timestamps when the order was accepted and closed.
+Besides the underlying order, the `OrderState` object also contains the latest `OrderStatus` and timestamps when the order was accepted and closed.
 
 [source, kotlin,indent=0]
 ----

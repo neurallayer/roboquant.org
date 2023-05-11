@@ -9,7 +9,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/tutorial/index.html">Tutorial</a></li>
                         <li><a class="dropdown-item" href="https://github.com/neurallayer/roboquant-notebook" target="_blank">Jupyter Notebooks</a></li>
-                        <li><a class="dropdown-item" href="/background/index.html">Background Info</a></li>
+                        <li><a class="dropdown-item" href="/background/index.html">History</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

@@ -9,6 +9,8 @@ import org.roboquant.feeds.csv.CSVFeed
 import org.roboquant.orders.MarketOrder
 import java.time.Duration
 import java.time.Instant
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 
 private fun currency() {
@@ -134,21 +136,35 @@ private fun timeline(roboquant: Roboquant) {
 private fun tradingPeriod(roboquant: Roboquant, feed: Feed) {
     // tag::tradingperiod[]
     // Use the TradingPeriod constructor directly
-    val period = TradingPeriod(Duration.ofDays(10L))
+    val period = TradingPeriod(years = 1, months = 6, seconds = 30)
 
     // Use extension methods
     val oneDay = 1.days
     val oneHour = 1.hours
+    val myTradingPeriod = 1.years + 6.months
+    val myHighFrequencyPeriod = 1.seconds + 500.millis
 
-    // Calculate using TradingPeriods
+    // Calculate using TradingPeriods (using UTC if required)
     val now = Instant.now()
-    val tomorrow = now + oneDay
-    val yesterday = now - oneDay
-    val nextHour = now + oneHour
+    val tomorrow = now + 1.days
+    val yesterday = now - 1.days
+    val nextHourAndHalf = now + 1.hours + 30.minutes
+    val nextYearAndHalf = now + myTradingPeriod
+
+    // Using an explicit timezone
+    val zone = ZoneId.of("Europe/Amsterdam")
+    val localTomorrow = now.plus(1.months, zone)
+
+    // Using timezone aware ZonedDateTime
+    val localNow = ZonedDateTime.now() // timezone aware datetime
+    val localTomorrow2 = localNow + 1.days
 
     // Run a forward test for the next 8 hours
     val timeframe = Timeframe.next(8.hours)
     roboquant.run(feed, timeframe)
+
+    // Extend a timeframe
+    val timeframe2 = Timeframe.blackMonday1987.extend(before = 2.months, after = 1.months)
     // end::tradingperiod[]
 }
 
@@ -163,12 +179,9 @@ private fun predefined(roboquant: Roboquant, feed: Feed) {
         Timeframe.tenYearBullMarket2009,
     )
 
+    // Run a back test against these periods
     timeFrames.forEach {
-        roboquant.run(feed, it)
+        roboquant.run(feed, it.extend(5.days))
     }
-
-    // Create a timeframe from 2 months before till 1 month after Black Monday
-    val tf = Timeframe.blackMonday1987.extend(before = 2.months, after = 1.months)
-
     // end::predefined[]
 }

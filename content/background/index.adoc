@@ -1,17 +1,7 @@
-= Background Info
+= History
 :jbake-type: doc
 :icons: font
 :jbake-date: 2020-12-01
-
-== Why use roboquant
-Developing and running algo-trading software is not an easy task at all. You already need additional skills and on top of that there is a lot of complexity involved that isn't perhaps clear from the beginning.
-
-So it makes sense so separate the logic that is common to all automated strategies from the logic that is specific to your strategy. The following diagram shows some of the components that come with roboquant and you can easily reuse while you focus on the part that gives you an edge:
-
-image::high-level.png[]
-
-Roboquant is also agnostic when it comes to the type of strategies that you want to develop. Ranging from technical indicators all the way to neural networks, everything is possible.
-
 
 == Why develop a new platform
 Before we started to develop _roboquant_, we looked at existing frameworks and platforms to see if these could fit the bill. What we quickly found out is that many of these frameworks take a very naive approach to algo-trading. For example, hardly any of the sample code available should ever be used in live trading since it doesn't address many of the edge cases.
@@ -43,15 +33,19 @@ There are several reasons why Kotlin is particularly suitable for financial soft
 In conclusion, Kotlin is a versatile and powerful programming language that is well-suited for algo-trading software development.
 
 == Why not use Python
-One often heard question is "Why didn't you choose Python instead?" Truth be told, we would have loved to be able to use Python. However, during the prototype phase of _roboquant_ we discovered that the performance was lacking too much for our use-cases. In some scenarios the performance was over 100x slower. This was including using libraries like Numpy and Pandas and even some Cython to speedup processing. One problem is that in back testing many things cannot be vectorized and these fast libraries like Numpy are no longer a good match.
+One often heard question is "Why didn't you choose Python instead?" Truth be told, we would have loved to be able to use Python. However, during the prototype phase of _roboquant_ we discovered that the performance was lacking too much for our use-cases. In some scenarios the performance was over 100x slower on multicore machines. This was including using libraries like Numpy and Pandas and even some Cython to speedup processing. One problem is that in back testing many things cannot be vectorized and these fast libraries like Numpy are no longer a good match.
+
+When compared to popular other Python algo-trading frameworks like backtrader the performance difference is even larger, with roboquant being over 500x faster.
+
+image::performance_overview.png[]
 
 The main reason for this lackluster performance is not only that Python is an interpreted language, but also the fact that it is has a single threaded runtime that makes it difficult and inefficient to use all the cores found on modern CPU's.
 
-The good news is that if you really want to stick with Python, there are plenty of alternatives available. For example, you could have a look at Backtrader, pyalgotrade or zipline. But we recommend to give _roboquant_ and Kotlin a try, and we are confident you will not regret that decision.
+The good news is that if you really want to stick with Python, there are plenty of alternatives available. For example, you could have a look at backtrader, pyalgotrade or zipline. But we recommend to give _roboquant_ and Kotlin a try, and we are confident you will not regret that decision in the long term.
 
 .Embed Python
 ****
-It is possible to embed a Python interpreter within the JVM and use Python code to develop your strategies in _roboquant_. Right now this functionality isn't included yet, and it requires more investigations to see what approach would work best. But it may be included in future releases, especially if it would also open up the Python ecosystem to _roboquant_.
+It is possible to embed a Python interpreter within the JVM and use Python code to develop your strategies in _roboquant_. Right now this integration isn't yet included, and it requires more investigations to see what approach would work best. But it may be included in future releases, especially if it would also open up the Python ecosystem to _roboquant_.
 ****
 
 == Interactive Development
@@ -69,7 +63,7 @@ Where some Kotlin/Java based applications require a lot of ceremony to implement
 == Time-Zone handling
 When trading simultaneously in multiple time-zones, like trade stocks both in New York and London, it is key to have proper time management in place. Otherwise, you run the risk that your strategy performs very well but only because it can peep into the future due to faulty handling of time-zones.
 
-Because of that, _roboquant_ internally only uses the Java Instant type to represent a moment in time. This type is independent of any timezone. So all time events can easily be directly compared without having to consider time zones.
+Because of that, _roboquant_ internally only uses the Java `Instant` type to represent a moment in time. This type is independent of any timezone. So all time events can easily be directly compared without having to consider time zones.
 
 When importing data, there is functionality to convert the data from timezone specific value towards the Instant type. When displaying time related information, it can be converted back the other way around if desired.
 
@@ -85,7 +79,7 @@ Even more important than performance, is reliability when it comes to trading so
 * Extensive error logging to alert possible issues, including data quality
 * Immutable data classes (when appropriate)
 * Assert/requires to validate input parameters
-* Proven third party libraries
+* USe of proven third party libraries
 
 == Why an event-driven approach?
 Event-driven software is a paradigm in which the flow of the application is determined by events such as user actions, sensor outputs, or message passing from other programs. In the case of algo-trading, these actions are often price actions that happen in the financial markets.

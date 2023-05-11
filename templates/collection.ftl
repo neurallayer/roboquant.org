@@ -21,7 +21,7 @@
             </header>
 
             <section class="pt-3" id="intro">
-                <div class="container px-5 my-1">
+                <div class="container px-3 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-1 mb-lg-0"></div>
                         <div class="col-lg-8">
@@ -36,7 +36,7 @@
             <#list items?sort_by("uri") as item>
                 <#if item.uri?starts_with(content.items)>
                 <section class="pt-3">
-                    <div class="container px-5 my-1">
+                    <div class="container px-3 my-1">
                         <div class="row gx-5">
                             <div class="col-lg-4 mb-1 mb-lg-0"><h2 id="${item.title}" class="fw-bolder mb-0">${item.title}</h2></div>
                             <div class="col-lg-8">

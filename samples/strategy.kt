@@ -5,6 +5,7 @@ import org.roboquant.common.Asset
 import org.roboquant.common.AssetFilter
 import org.roboquant.common.Currency
 import org.roboquant.feeds.Event
+import org.roboquant.feeds.PriceAction
 import org.roboquant.strategies.*
 import org.roboquant.ta.*
 import org.roboquant.ta.TaLibStrategy
@@ -41,6 +42,21 @@ private fun simpleSignal() {
     val apple = Asset("AAPL")
     val signal = Signal(apple, Rating.BUY)
     // end::simpleSignal[]
+}
+
+
+private fun singleAsset() {
+    // tag::singleAsset[]
+    class MyStrategy(asset: Asset) : SingleAssetStrategy(asset) {
+
+        override fun generate(priceAction: PriceAction, time: Instant): Signal? {
+            TODO("Your implementation goes here")
+        }
+
+    }
+    val apple = Asset("AAPL")
+    val strategy = MyStrategy(apple)
+    // end::singleAsset[]
 }
 
 

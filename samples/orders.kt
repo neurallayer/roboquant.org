@@ -2,9 +2,9 @@
 
 import org.roboquant.brokers.Broker
 import org.roboquant.brokers.sim.Pricing
-import org.roboquant.brokers.sim.execution.CreateOrderExecutor
 import org.roboquant.brokers.sim.execution.Execution
 import org.roboquant.brokers.sim.execution.ExecutionEngine
+import org.roboquant.brokers.sim.execution.OrderExecutor
 import org.roboquant.common.Asset
 import org.roboquant.common.Size
 import org.roboquant.orders.*
@@ -62,24 +62,20 @@ fun customCreateOrder() {
         tag: String = ""
     ) : CreateOrder(asset, tag)
 
-    // Define a handler for your custom order type.
-    // This is only required if you want your order to be supported by the SimBroker
-    class MyOrderExecutor(override val order: MyOrder) : CreateOrderExecutor<MyOrder> {
+    // Define an executor for your custom order type.
+    class MyOrderExecutor(override val order: MyOrder) : OrderExecutor<MyOrder> {
 
         override var status = OrderStatus.INITIAL
 
-        // Our order type can be cancelled
-        override fun cancel(time: Instant) : Boolean {
-            return if (status.open) {
+        // Our order type can be cancelled, but don't support other modify order types
+        override fun modify(modifyOrder: ModifyOrder, time: Instant): Boolean {
+            return if (modifyOrder is CancelOrder && status.open) {
                 status = OrderStatus.CANCELLED
                 true
             } else {
                 false
             }
         }
-
-        // Our order type cannot be updated
-        override fun update(order: CreateOrder, time: Instant) = false
 
         // Execute the order. This will only be called when there is a price available
         // for the asset

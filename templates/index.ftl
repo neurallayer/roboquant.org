@@ -11,7 +11,7 @@
             </header>
 
             <section class="pt-3" id="intro">
-                <div class="container px-5 my-1">
+                <div class="container px-3 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-1 mb-lg-0"><h2 class="fw-bolder mb-0">What is roboquant</h2></div>
                         <div class="col-lg-8">
@@ -34,7 +34,7 @@
             </section>
 
             <section class="py-3" id="sample2">
-                <div class="container px-5 my-1">
+                <div class="container px-3 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-1 mb-lg-0"><h2 class="fw-bolder mb-0">Simple to get started</h2></div>
                         <div class="col-lg-8">
@@ -59,7 +59,7 @@
             </section>
 
             <section class="pb-3" id="features">
-                <div class="container px-5 my-3">
+                <div class="container px-3 my-3">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-1 mb-lg-0"><h2 class="fw-bolder mb-0">Features</h2></div>
                         <div class="col-lg-8">
@@ -107,7 +107,7 @@
             </section>
 
             <section class="pb-3" id="integration">
-                <div class="container px-5 my-1">
+                <div class="container px-3 my-1">
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-1 mb-lg-0"><h2 class="fw-bolder mb-0">3rd Party Providers</h2></div>
                         <div class="col-lg-8">

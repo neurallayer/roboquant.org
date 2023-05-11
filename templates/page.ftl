@@ -20,7 +20,7 @@
                  </header>
             <!-- Page content-->
             <section class="py-3">
-                <div class="container-sm px-5 my-3">
+                <div class="container-sm px-3 my-3">
                      ${content.body}
                </div>
             </section>

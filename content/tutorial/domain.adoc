@@ -7,18 +7,16 @@
 == Approach
 Besides core components like `Strategy` and `Policy`, _roboquant_ also comes with a number of domain specific classes that make it easier to implement robust trading strategies. The two main focus areas are:
 
-1. monetary related functionality
-2. time related functionality
+1. <<Monetary>> related functionality
+2. <<Time>> related functionality
 
 This approach makes it very easy to deal with these entities without much code. This is also where many of the Kotlin language features come in handy like the support for operator overloading and extension functions.
 
 == Monetary
-In order to make it easier to develop solutions in a multi-currency setup, _roboquant_ introduces a number of money-related domain classes: <<Currency>>, <<Amount>>, <<Wallet>> and <<ExchangeRates>> that will help to do so.
+In order to make it easier to develop solutions in a multi-currency setup, _roboquant_ introduces a number of money-related domain classes: <<Currency>>, <<Amount>>, <<Wallet>> and <<ExchangeRates>>.
 
 === Currency
-The _roboquant_ `Currency` class represents any type of currency. It follows closely the interface that comes with the standard Java Currency class, but is independent of it. The main reason is that the Java implementation doesn't support cryptocurrencies while the _roboquant_ implementation supports any type of currency.
-
-Also, several common currencies are predefined, to make it easier to work with and avoid typing mistakes.
+The _roboquant_ `Currency` class represents any type of currency. It follows closely the interface tof the standard Java Currency class, but is independent of it. The main reason is that the Java implementation doesn't support cryptocurrencies while the _roboquant_ implementation supports any type of currency. Several common currencies are predefined, to make it easier to work with and avoid typing mistakes.
 
 [source,kotlin,indent=0]
 ----
@@ -92,23 +90,24 @@ include::{sourcefile}[tag=predefined]
 ----
 
 === TradingPeriod
-When dealing with time duration, there are actual two types of duration in Java/Kotlin:
+When dealing with time duration, there are actual two types of duration in Java/Kotlin world:
 
 1. `Period` which you use for days and longer and is timezone dependent
-2. `Duration` which you use for days and shorter and is not timezone dependent
+2. `Duration` which you use for hours and shorter and is timezone independent
 
-The TradingPeriod in _roboquant_ unifies this into a single implementation, allowing you
-to do things like:
+The `TradingPeriod` class in _roboquant_ unifies this into a single implementation and make it easy to use them in combination with `Timeframe`, `Instant` and `ZonedDateTime` instances. You can do things like:
 
 [source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=tradingperiod]
 ----
 
-Whenever a timezone is required for a time operation, the one configured at `Config.defaultZoneId` will be used.
+NOTE: whenever a timezone is required for an operation and none is supplied, `UTC` will be used. This provides consistent behavior across machines in different timezones.
 
-=== Assets, Exchanges and TradingCalendars
-An asset is linked to a single exchange and that exchange has a time-zone associated with it. The exchange also has a `TradingCalendar` associated with it, that determines what are the valid trading hours for that particular exchange.
+=== Exchanges and TradingCalendars
+An asset is linked to a single exchange and that exchange has a time-zone associated with it. This is mostly relevant during back-testing when certain time-in-force policies need to be evaluated (like good for today).
+
+The exchange also has a `TradingCalendar` associated with it, that determines what are the valid trading hours for that particular exchange.
 
 [source,kotlin,indent=0]
 ----
@@ -116,9 +115,9 @@ include::{sourcefile}[tag=assets]
 ----
 
 == Size
-Order sizes and position sizes are expressed as an instance of the `Size` class. This class is precise till 8 decimal digits and ensures that there are no rounding errors when for example closing a position.
+Order sizes and position sizes are expressed as an instance of the `Size` class. For the internal working of _roboquant_ there is no differentiation between fractional and non-fractional orders. All are expressed using the same `Size` class.
 
-It is an immutable class, but you can perform simple arithmetic on it. It also caters for fractional trading if desired.
+This class is precise till 8 decimal digits and ensures that there are no rounding errors when for example closing a position. It is an immutable class, but you can perform simple arithmetic on it.
 
 [source,kotlin,indent=0]
 ----

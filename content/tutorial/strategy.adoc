@@ -9,6 +9,9 @@ A  strategy is a systematic approach to buying and selling assets, such as stock
 
 A `Strategy`  in _roboquant_ is the component responsible for generating signals based on the events it receives and is likely the place where you do most of your software development and differentiate from other algo-traders.
 
+
+NOTE: a `Strategy` in _roboquant_ doesn't generate orders, that is the task of a `Policy`.
+
 The main method that needs to be implemented in the `Strategy` interface is the `generate` method:
 
 [source, kotlin,indent=0]
@@ -22,7 +25,7 @@ Since a `Strategy` only has access to an `Event` and not the `Account`, it has n
 There are several commonly used strategies included with _roboquant_. This section highlights some of them, and using them is a great way to get started.
 
 === EMAStrategy
-An EMA (Exponential Moving Average) crossover strategy is a popular technical trading strategy that involves the use of EMA lines of different periods to identify trends and potential buy or sell signals.
+An EMA (Exponential Moving Average) crossover strategy is a popular technical analysis strategy that involves the use of moving averages of different periods to identify trends and potential buy or sell signals.
 
 In this strategy, traders typically use two EMAs: a shorter-term EMA and a longer-term EMA. The shorter-term EMA reacts more quickly to price changes, while the longer-term EMA smoothes out the price movements over a longer period.
 
@@ -90,11 +93,16 @@ include::{sourcefile}[tag=parallel]
 Next to the standard strategies, there are also strategies included that can be the foundation for your own strategy. You extend these classes and add your own logic to them. These base strategies take care of some repetitive tasks and make it quicker to develop your own strategies.
 
 === SingleAssetStrategy
-This is an ideal base class if you only care about a single asset.
+This is an ideal base class if your strategy is only interested in a single asset. If an event doesn't contain a price-action for that particular asset, the `generate` method will not be invoked.
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=singleAsset]
+----
 
 
 === HistoricPriceStrategy
-A useful base strategy is `HistoricPriceStrategy`. This strategy collects historic prices for a predefined look-back period before invoking your method. That way you don't have to deal with some of the complexity that comes with an event-based trading engine.
+A useful base strategy is `HistoricPriceStrategy`. This strategy collects historic prices for a predefined look-back period before invoking your method. Only once enough historic data is collected, your method will be invoked. That way you don't have to deal with some of the complexity that comes with an event-based trading engine.
 
 You can override one of two methods:
 
@@ -110,7 +118,7 @@ include::{sourcefile}[tag=extend]
 
 
 == Custom Strategies
-When you develop your own `Strategy`, you will need to implement at least the `generate` method that is defined in the `Strategy` interface. This method should return zero or more signals.
+When you develop your own `Strategy` from scratch, you will need to implement at least the `generate` method that is defined in the `Strategy` interface. This method should return zero or more signals.
 
 [source, kotlin,indent=0]
 ----
@@ -169,4 +177,4 @@ Besides the mandatory Rating and Asset attributes of a signal instance, a signal
 include::{sourcefile}[tag=attrSignal]
 ----
 
-It is up to the xref:policy.adoc[policy] if/how these attributes are used when generating the orders. For example, the probability could be used to determine the sizing of an order, a higher probability implying a larger order size.
+It is up to the xref:policy.adoc[`Policy`] if/how these attributes are used when generating the orders. For example, the probability could be used to determine the sizing of an order, a higher probability implying a larger order size.

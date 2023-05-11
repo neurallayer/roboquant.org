@@ -33,33 +33,38 @@ include::{sourcefile}[tag=extra]
 
 TIP: if you are trading specific markets, like FOREX, you most likely want to use customize the configuration since the default values like those selected for spreads are not representative for those type of markets.
 
-The initial deposit is the cash that is deposited at the opening of an account.Any time the SimBroker is reset, the account will be reset to this initial deposit.Typically, the initial deposit is denoted in a single currency, like a *$50,000.00 USD* account.But this is not a hard requirement and with `SimBroker` you can use a multi-currency initial deposit if you prefer.However, there is always only one `baseCurrency`.
+The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit. Typically, the initial deposit is denoted in a single currency, like a *$50,000.00 USD* account. But this is not a hard requirement and with `SimBroker` you can use a multi-currency initial deposit if you prefer. However, there is always only one `baseCurrency`.
 
 [#_order_handling]
-== Order Handling
+== Order Execution
 When an order is placed at the SimBroker, the following rules apply:
 
-- create-orders only gets executed once there is a known price for the underlying asset.Till an event appears that has that price action available, the order will remain in the `INITIAL` state and not be executed.
+- create-orders only get executed if there is a known price for the underlying asset. Till an event occurs that has that price action available, the order will remain in its `INITIAL` state and will not be executed.
 
 - modify-orders will always get executed, even if there is no known price for the asset.
 
-- any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted.So an order in `INITIAL` state will not expire, and time based TIF will only start counting after it has been accepted.
+- any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted. So an order in `INITIAL` state will not expire, and time based TIF will only start counting after it has been accepted.
 
-- pending modify orders will always be processed BEFORE pending create orders.So if you send a `CancelOrder` and `MarketOrder` for the same asset, the `CancelOrder` is guaranteed to be processed first.
+- modify orders will always be processed BEFORE create-orders. So if you send a `CancelOrder` and `MarketOrder` for the same asset, the `CancelOrder` is guaranteed to be processed first in the `SimBroker`.
 
-- Open create orders will be processed based on FIFO (first-in-first-out) basis, so older open orders are processed first.
+- Create and modify-orders will be processed based on FIFO (first-in-first-out) basis, so older orders are processed first.
+
+- Once an order is closed, it cannot be opened again.
+
+The following diagram shows the possible `OrderStatus` transitions:
+
+image::orderstatus_transition.png[]
 
 == Customize SimBroker
 Custom models are a way to further customize the `SimBroker` and ensure it closely mimics the behavior of your real broker.
 
-WARNING: if you don't take any type of trading cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading. When in doubt, better to be on the safe side and configure the cost to be slightly higher.
+WARNING: if you don't take any type of trading cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading. When in doubt, better to be on the safe side and configure the cost to be slightly higher than expected.
 
 The following three types of models can be implemented if the default ones that comes with _roboquant_ are not sufficient:
 
 . `PricingEngine`: calculate the price to use for a trade. It can be used to simulate the following type of trading cost:
-    - Spread (difference between buy and sell price)
+    - Spread (difference between the buy- and sell-price)
     - Slippage (large orders will require multiple trades against different prices)
-    - Exchange rates
 
 . `FeeModel`: the transaction related fees and commissions. Trading cost to take into consideration:
     . Broker commission fees
@@ -77,24 +82,26 @@ include::{sourcefile}[tag=included]
 ----
 
 == Limitations
-Like any simulation, SimBroker also has limitations compared to live trading. It is important to realize this and take appropriate actions where possible:
+Like any simulation, SimBroker also has limitations compared to live trading. It is important to realize this and take appropriate measures when possible:
 
 1. The default cost calculations become less realistic if you trade large sizes compared to overall daily volume. As a rule of thumb: don't underestimate the additional costs like spread, slippage and commissions and better be on the safe side.
-2. Order types might behave slightly different between SimBroker and different real brokers. If possible, perform paper trading to see if your solution still performs as expected.
-3. The buying power and margin calculations might differ. Again, be on the safe side and use a higher margin requirement in the SimBroker than required by your actual broker.
+2. Order types might behave slightly different between SimBroker and different real brokers. If possible, perform extensive paper trading testing to see if your solution still performs as expected.
+3. The buying power and margin calculations might differ. Again, be on the safe side and use higher margin requirements in the SimBroker than required by your actual broker.
 
 == Account Models
-Account models allow to model the amount of **buying-power** for different types of accounts, like a Cash Account or Margin Account when using the SimBroker. Buying-power represents the amount of money available for trading.
+Account models allow you to model the amount of **buying-power** for different types of accounts, like a Cash Account or Margin Account when using the SimBroker. Buying-power represents the amount of money available for trading.
 
-Out of the box _roboquant_ comes with two models that cater for the most common account types:
+Out of the box _roboquant_ comes with two account models that cater for the most common account types:
 
-1. `CashAccount`; account that doesn't have any leverage or margin available
-2. `MarginAccount`; account that has (configurable) initial and maintenance margin requirements
+1. `CashAccount`; account that doesn't have any leverage or margin available.
+2. `MarginAccount`; account that has (configurable) initial and maintenance margin requirements.
 
 === Cash Accounts
 Cash accounts can be modelled using the `CashAccount`. This model is also the default if you don't provide a BuyingPowerModel when instantiating a xref:simbroker.adoc[SimBroker].
 
 `CashAccount` bases the buying power only on the available cash, and no margin is calculated and no leverage is used. So cash and buying power are equal, however cash can contain multiple currencies while the buying power is always converted to the base currency of the account.
+
+Although _roboquant_ doesn't stop you from using this model even when shorting assets, it is not advised to do so.
 
 The below table shows an example using the default CashAccount when trading in different currencies, EUR and USD in this case.
 
@@ -167,9 +174,13 @@ The following table shows another example, but this time shorting on a USD margi
 The following rules apply when taking into account orders when calculating the buying power:
 
 - until an order is accepted, it doesn't impact margin or buying power.
-- open orders that reduce a position, don’t require buying power. So you can always close a position, both short and long positions.
+- open orders that reduce a position size, don’t require buying power. So you can always close a position, both short and long positions.
 - once an order has been accepted, it will not be cancelled due to lack of buying power.
-- an order in a closed state will not impact margin or buying power (so similar to INITIAL state)
+- an order in a closed state doesn't impact margin or buying power (so similar to INITIAL state)
 
 NOTE: Not all rules are currently implemented yet.
 
+=== Margin Calls
+A negative value for `BuyingPower` indicates a possible margin call situation. However, _roboquant_ doesn't interrupt the back-test for that.
+
+If you are interested in detecting these conditions, best to configure a metric that logs the BuyingPower at each step and evaluate that metric after the run.

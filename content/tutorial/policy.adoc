@@ -25,7 +25,7 @@ CAUTION: If there is one thing that prevents algo-traders from going live, it is
 == Out-of-the-box policies
 
 === FlexPolicy
-This is the default policy that will be used if no other policy is specified when creating an instance of the `Roboquant` class. It provides several constructor parameters that influence its behavior.
+This is the default policy that will be used if no other policy is specified when creating an instance of the `Roboquant` class. It provides many constructor parameters that influence its behavior.
 
 [source, kotlin,indent=0]
 ----
@@ -92,9 +92,9 @@ TIP: When creating an order in a Policy, always validate if you still have an op
 
 [#_advanced_policies]
 == Advanced Policies
-Most commonly, a `Policy` is used to transform signals it receives from the `Strategy` into orders. But there are use cases where the policy is not using Signals to create orders. Common use cases are:
+Most commonly, a `Policy` is used to transform signals it receives from the `Strategy` into orders. But there are cases where the policy is not using Signals to create orders. Common use cases are:
 
-. Re-balancing your portfolio at regular intervals (like monthly) based on some risk profile. Since a `Strategy` doesn't have access to an `Account` and therefore neither to the positions in the `Account`, this needs to be done in a `Policy`.
+. Re-balancing your portfolio at regular intervals (like monthly) based on some criteria. Since a `Strategy` doesn't have access to an `Account` and therefore also not to the positions in the `Account`, this needs to be done in a `Policy`.
 . Advanced machine learning techniques like reinforcement learning that train the algorithm to directly create orders based on events (without creating intermediate signals).
 
 In these cases you don't require a `Strategy` and you can implement all the logic in the `Policy` instead. You can use the `NoSignalStrategy` as strategy that doesn't perform any action.

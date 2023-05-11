@@ -58,12 +58,42 @@ Flexible also means _roboquant_ is fully modular and can be extended:
 == Friendly
 Developing trading algorithms requires a lot of different skills. You need to know of course a lot about trading itself, but also programming and even a bit of statistics comes in handy. Roboquant tries to cater for both experienced and less experienced users and make it as user-friendly as possible without sacrificing the other objectives.
 
+=== Simple API
+
+Below are two examples of the same simple breakout strategy. The first one is implemented using `Python/backtrader` and the second one is using `Kotlin/roboquant`:
+
+[source,python,indent=0]
+----
+class MySignal(bt.Indicator):
+    lines = ('signal',)
+    params = (('period', 10),)
+
+    def __init__(self):
+        self.lines.signal = self.data - bt.indicators.SMA(period=self.p.period)
+----
+
+[source,kotlin,indent=0]
+----
+include::{sourcefile}[tag=strategy]
+----
+
+As you can see, the roboquant version is just as easy to develop.
+
 === Trading specific Domain Model
-Rather than having a generic framework where you still have to code a lot to make it usable, _roboquant_ approach is that of a trading specific domain model. For example, you can easily work with monetary amounts:
+Rather than having a generic framework where you still have to code a lot to make it usable, _roboquant_ approach is that of providing a trading specific domain model.
+
+For example, you can easily work with monetary amounts:
 
 [source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=friendly1]
+----
+
+But also working with collections is easy:
+
+[source,kotlin,indent=0]
+----
+include::{sourcefile}[tag=friendly3]
 ----
 
 === Interactive Development
@@ -94,9 +124,9 @@ Because of this, _roboquant_ separates the generation of signals (Strategy) from
 === Batteries included
 * [x] Over 150 technical indicators that are easy to use in your own strategies
 * [x] Powerful charts when running back-tests in a Jupyter Notebook
-* [x] Support for many back-testing approaches, like for walk-forwards and random samples
+* [x] Support for many back-testing approaches, like for walk-forwards and Monte Carlo
 * [x] Pluggable metrics you can use to see how a strategy is performing
-* [x] An advanced simulated broker for back-testing and live-testing that can handle both basic and advanced order types
+* [x] An advanced simulated broker for back-testing and live-testing that supports both basic and advanced order types
 * [x] Integration with 3rd party brokers and data providers
 
 == Free
