@@ -4,7 +4,7 @@
 :imagesdir: ../img/
 :icons: font
 
-Box plot aggregates a metric over a time interval so the different values for certain quantiles can be easily spotted.
-When we plot the change in account value as in the chart below, it provides quick insights into max draw downs and volatility of our strategy.
+Box plot aggregates a metric over a time interval, so the different values for certain quantiles can be easily spotted.
+When we plot the change in account value as in the chart below, it provides quick insights into max draw-downs and volatility of our strategy.
 
 image::box.png[alt="screenshot"]

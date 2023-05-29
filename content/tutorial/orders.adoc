@@ -75,3 +75,13 @@ Besides the underlying order, the `OrderState` object also contains the latest `
 ----
 include::{sourcefile}[tag=accountOrder]
 ----
+
+== Own order logic
+Although you typically would use an instance of `Roboquant` to handle method invocations on the various components, you can actually also invoke them directly.
+
+For example, if you want to place a market order you can directly invoke the `Broker.place` method:
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=manualOrder]
+----

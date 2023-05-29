@@ -1,5 +1,6 @@
 @file:Suppress("unused", "UnnecessaryVariable", "UNUSED_VARIABLE", "MagicNumber", "WildcardImport")
 
+import org.roboquant.alpaca.AlpacaBroker
 import org.roboquant.brokers.Broker
 import org.roboquant.brokers.sim.Pricing
 import org.roboquant.brokers.sim.execution.Execution
@@ -34,6 +35,23 @@ fun bracketOrder(asset: Asset, price: Double) {
 }
 
 
+private fun manualOrder() {
+    // tag::manualOrder[]
+    // Connect to the broker
+    val broker = AlpacaBroker {
+        publicKey = "..."
+        secretKey = "..."
+    }
+
+    // create the order
+    val tesla = Asset("TSLA")
+    val order = MarketOrder(tesla, 10)
+
+    // place the order
+    broker.place(listOf(order))
+    // end::manualOrder[]
+}
+
 
 fun accountOrder(broker: Broker) {
     // tag::accountOrder[]
@@ -67,7 +85,7 @@ fun customCreateOrder() {
 
         override var status = OrderStatus.INITIAL
 
-        // Our order type can be cancelled, but don't support other modify order types
+        // Our order type can be cancelled, but doesn't support other modify order types
         override fun modify(modifyOrder: ModifyOrder, time: Instant): Boolean {
             return if (modifyOrder is CancelOrder && status.open) {
                 status = OrderStatus.CANCELLED

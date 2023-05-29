@@ -1,12 +1,11 @@
 @file:Suppress("unused", "UNUSED_VARIABLE" , "UNUSED_PARAMETER")
 
 import org.roboquant.Roboquant
-import org.roboquant.RunInfo
 import org.roboquant.brokers.Account
 import org.roboquant.common.Asset
+import org.roboquant.common.TimeSeries
 import org.roboquant.feeds.Event
 import org.roboquant.jupyter.MetricChart
-import org.roboquant.loggers.MetricsEntry
 import org.roboquant.loggers.MetricsLogger
 import org.roboquant.metrics.*
 import org.roboquant.strategies.Strategy
@@ -49,7 +48,7 @@ fun staticExample() {
 
         private val asset = Asset("AAPL")
 
-        override fun calculate(account: Account, event: Event): MetricResults {
+        override fun calculate(account: Account, event: Event): Map<String, Double> {
             val metric1 = account.buyingPower.value
             val metric2 = event.getPrice(asset) ?: Double.NaN
             return mapOf("buyingpower" to metric1, "appleprice" to metric2)
@@ -63,7 +62,7 @@ fun staticExample() {
 fun exampleCustomLogger() {
     class Database {
         fun store(key: String, value: Number, time: Instant) { TODO() }
-        fun retrieve(key: String) : List<MetricsEntry> { TODO() }
+        fun retrieve(key: String) :  Map<String, TimeSeries> { TODO() }
         fun retrieveKeys(): List<String> { TODO() }
     }
 
@@ -72,14 +71,14 @@ fun exampleCustomLogger() {
 
         private val database = Database()
 
-        override fun log(results: MetricResults, info: RunInfo) {
-            for ((key, value) in results) database.store(key, value, info.time)
+        override fun log(results: Map<String, Double>, time: Instant, run: String) {
+            for ((key, value) in results) database.store(key, value, time)
         }
 
         /**
          * Optional, if you want to access the logged metrics via roboquant
          */
-        override fun getMetric(name: String): List<MetricsEntry> {
+        override fun getMetric(name: String): Map<String, TimeSeries> {
             return database.retrieve(name)
         }
 

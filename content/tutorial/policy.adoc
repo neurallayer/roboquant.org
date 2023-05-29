@@ -4,7 +4,7 @@
 :sourcefile: ../../samples/policy.kt
 :jbake-date: 2020-05-01
 
-== What is a policy
+== What is a policy?
 The `Policy` is responsible for creating the orders that will be placed at the broker. The most common use case is that a `Policy` does this based on the signals it receives from a `Strategy` (but there are other use cases).
 
 A good `Policy` implementation is key in making your solution as robust as possible. Important things to consider when implementing a policy:
@@ -15,7 +15,7 @@ A good `Policy` implementation is key in making your solution as robust as possi
 * How to handle new orders when there are still open orders (for the same asset)
 * How to limit the maximum number of orders sent to a broker (circuit breaker)
 * How to deal with conflicting signals from strategies
-* How to handle yo-yo signals (buy-sell-buy-sell) in a short timeframe
+* How to handle yo-yo signals (buy-sell-buy-sell) that occur in a short timeframe
 * How to ensure there is still enough buying power left to avoid margin calls
 
 ****
@@ -52,7 +52,9 @@ include::{sourcefile}[tag=chaining]
 
 
 == Fractional Order sizes
-Roboquant doesn't make assumptions on the minimal order and position sizes. They are not limited to integers only and so there is no restriction on using a broker that supports fractional trading. Since it is the Policy that create the orders, here you can also put any type of order size logic you require.
+Roboquant doesn't make assumptions on the minimal order and position sizes. They are not limited to integers only, and so there is no restriction on using a broker that supports fractional trading.
+
+Since it is a `Policy` instance that creates the orders, here you can also put any type of order size logic you require.
 
 TIP: The `FlexPolicy` allows you to specify the number of decimals for sizing calculations, allowing to easily enable fractional orders.
 
@@ -79,13 +81,15 @@ include::{sourcefile}[tag=naive2]
 ----
 
 
-The following example is more realistic and shows an implementation that calculates the ATR (Average True Range). The ATR is then used to set the limit amount in a Limit Order. This example use the `FlexPolicy` as its base class that will take care of much of the logic like sizing and dealing with concurrent orders.
+The following example is more realistic and shows an implementation that calculates the ATR (Average True Range). The ATR is then used to set the limit amount in a Limit Order.
+
+This example uses the `FlexPolicy` as its base class that will take care of much of the logic like sizing and dealing with concurrent orders.
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=custom3]
 ----
 
-When developing custom policies, they should not only be robust and deal with corner-cases, but they should also be explainable. Back-testing over large amounts of data is already challenging enough without having a `Policy` in place whose behavior is very difficult to wrap your head around. So the KISS design principle (Keep It Simple, Stupid) applies to policies.
+When developing custom policies, they should not only be robust and deal with corner-cases, but they should also be explainable. Back-testing over large amounts of data is already challenging enough without having a `Policy` in place whose behavior is very difficult to wrap your head around. So the KISS design principle (`Keep It Simple, Stupid`) applies to policies.
 
 TIP: When creating an order in a Policy, always validate if you still have an open order for the same asset and take the appropriate action.
 

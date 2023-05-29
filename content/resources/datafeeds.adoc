@@ -9,7 +9,7 @@ The following table provides an overview of popular market data providers. The l
 [.table]
 [cols="<,<,^,^,^,^,<,<"]
 |===
-|Provider|Asset Types|API|Historic|Realtime Delayedfootnote:[typically 15 minutes delay due to distributions restrictions imposed by US exchanges]|Realtime|Pricing model|Remarks
+|Provider|Asset Types|API|Historic|Realtime Delayedfootnote:[Typically, 15-minutes delay due to distribution restrictions imposed by US exchanges]|Realtime|Pricing model|Remarks
 
 |https://polygon.io[Polygon]
 |US Stocks, Options & crypto
@@ -17,17 +17,11 @@ The following table provides an overview of popular market data providers. The l
 |Fee per month
 |Good performing API
 
-|https://finance.yahoo.com[Yahoo Finance]
-|US Stocks
-|&check;|&check;|&check;|
-|Free, no API key required
-|Can have some quality issues
-
 |https://www.alphavantage.co[Alpha Vantage]
 |Stocks, fundamental, forex, crypto and economic indicators
 |&check;|&check;||
 |Fee based on API calls per minute
-|Also covers exchanges outside US
+|Covers exchanges outside US
 
 |https://stooq.pl[Stooq]
 |US stocks, UK stocks, World stocks, macroeconomic indicators
@@ -39,13 +33,13 @@ The following table provides an overview of popular market data providers. The l
 |US Stocks & Crypto
 |&check;|&check;|&check;|&check;
 |Fee per month
-|Subscription prices fluctuated a lot in recent years
+|Subscription prices have fluctuated a lot in recent years
 
 |https://tiingo.com[Tiingo]
 |US/China Stocks & ETF & Crypto
 |&check;|&check;|&check;|
-|Low fee per month
-|30+ year of end-of-day data and IEX Live feed with very small delay
+|Fee per month
+|50+ year of end-of-day data and IEX Live feed with very small delay
 
 |https://databento.com[Databento]
 |US Stocks L3
@@ -75,7 +69,14 @@ The following table provides an overview of popular market data providers. The l
 |Various datasets
 ||&check;||
 |Free
-|Some datasets have major quality issues
+|Several datasets have major quality issues
+
+|https://metatrader5.com[MetaTrader5]
+|Forex/Futures/Stocks
+||&check;||
+|Depends on the used Broker
+|You'll need to install an app to get most functionality
+
 |===
 
 

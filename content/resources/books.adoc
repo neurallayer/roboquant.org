@@ -6,7 +6,7 @@
 
 There are more books than ever that cover the topic of algo-trading. The quality varies a lot, from books that are really present value to books that are just a cut&paste of some public internet articles. The books covered in these reviews all fall in the first category, they all present value in some way.
 
-When looking for books to learn more about (algo-)trading, I recommended to look for books that focus on the foundation. So books that explain how to develop and test a strategy, what are good metrics to monitor and what are possible pitfalls. Or books that go into more details about the mathematical side of algo-trading. Books that just promise to give you strategies that make a lot of profit, should be best avoided (IMHO).
+When looking for books to learn more about (algo-)trading, I recommended looking for books that focus on the foundation. So books that explain how to develop and test a strategy, what are good metrics to monitor and what are possible pitfalls. Or books that go into more details about the mathematical side of algo-trading. Books that just promise to give you strategies that make a lot of profit, should be best avoided (IMHO).
 
 [.float-group]
 --
@@ -18,7 +18,7 @@ level: intermediate
 
 This book explains how different machine learning techniques can be applied to algo-trading. It doesn't focus on a single technique like deep learning, but touches many different techniques instead. For example, it has some good content on Bayesian machine learning.
 
-Because of the all the different techniques described, this book is over 800 pages long. If you want to start using machine learning in your strategies, this book is a must-have in my honest opinion. One thing to keep in mind is that because machine learning is progressing so fast, some libraries and examples mentioned are outdated.
+Because of all the different techniques described, this book is over 800 pages long. If you want to start using machine learning in your strategies, this book is a must-have in my honest opinion. One thing to keep in mind is that because machine learning is progressing so fast, some libraries and examples mentioned are outdated.
 ====
 
 --
@@ -32,7 +32,7 @@ level: intermediate
 
 This book has several innovative and fresh ideas about approaches to algo-trading. For example using volume-based candlesticks rather than time-based candlesticks.
 
-And although the included code-snippets are written in Python, the underlying theory is applicable to any implementation. Also, this book contains great information about how easy it is for your approach to developing look-ahead bias without realizing it.
+And although the included code snippets are written in Python, the underlying theory is applicable to any implementation. Also, this book contains great information about how easy it is for your approach to developing look-ahead bias without realizing it.
 
 Marcos Lopez de Prado also has some good YouTube videos where he explains much of the same theory. So check those out first if you are not sure yet about buying this book. Also, the book felt a bit fragmented at times, and the videos help to make the topics covered in the book more coherent.
 ====
@@ -64,9 +64,9 @@ level: beginner
 
 Easy to understand and follow with extra attention on how to diversify your portfolio using different strategies. The book also describes 7 concrete strategies and the rules that need to be implemented for each of these strategies. The strategies are easy to understand and are a mix of trend-following and mean-reversion. The book doesn't contain any code snippets.
 
-Not sure about the merits of the strategies described in this book, since the evaluation criteria included are too simplistic in my opinion. But I would argue implementing some of the strategies yourself from scratch, is a great learning experience.
+Not sure about the merits of the strategies described in this book, since the evaluation criteria included are too simplistic in my opinion. But I would argue implementing some strategies yourself from scratch is a great learning experience.
 
-Like many other "Amazon printed" books, the images are not great. But in this case fortunately they are not that important to understand the content.
+Like many other "Amazon printed" books, the images are not great. But in this case, fortunately, they are not that important to understand the content.
 ====
 --
 
@@ -127,11 +127,11 @@ image::151tradingstrategies.jpeg[width="200", float="right"]
 
 level: intermediate
 
-This book provides an overview of many strategies, divided by asset class. So there are strategies for options, stocks, bonds, etc. Each strategy is described shortly, using simple mathematical formulas and often a reference to the original publication. If you are only been exposed to limited set of strategies, this will help to broaden your horizon and get new ideas.
+This book provides an overview of many strategies, divided by asset class. So there are strategies for options, stocks, bonds, etc. Each strategy is described shortly, using simple mathematical formulas and often a reference to the original publication. If you have only been exposed to a limited set of strategies, this will help to broaden your horizon and get new ideas.
 
-Although the formulas are concise, essential information is sometimes missing to be able to transfer these strategies into code. For example the description of a mean-reversion strategy doesn't explain how to find correlated assets, just how to generate a signal given that they are correlated.
+Although the formulas are concise, essential information is sometimes missing to be able to transfer these strategies into code. For example, the description of a mean-reversion strategy doesn't explain how to find correlated assets, just how to generate a signal given that they are correlated.
 
-Some chapters, like real estate strategies, have so little own content that they could have better left out in my opinion. At best these chapters are useful as a reference to other publications, but I'm not sure that justifies putting them in this book.
+Some chapters, like real estate strategies, have so little own content that they could have better left out in my opinion. At best, these chapters are useful as a reference to other publications, but I'm not sure that justifies putting them in this book.
 
 Also, note there is no analysis included about the performance of the strategies. So expect to do a fair amount of research before the described strategies are ready for a back test.
 ====
@@ -164,9 +164,9 @@ level: advanced
 
 This book combines academic research with industry trends. It covers a wide range of topics, from statistical trading models to optimizing order execution and risk management. Sometimes it feels a bit like each author focused on their own area of expertise, leading to somewhat disjointed chapters. Still, the content is unique and the authors are clearly experts.
 
-Because of the wide range of topics, some of the chapters lack the details to directly apply them to your own strategies. So it serves better as a source of inspiration, rather than a pragmatic approach to algo trading. Please note you'll need a firm grasp on math to get most out of this book.
+Because of the wide range of topics, some chapters lack the details to directly apply them to your own strategies. So it serves better as a source of inspiration, rather than a pragmatic approach to algo trading. Please note you'll need a firm grasp on math to get most out of this book.
 
-Some of the content is more catered towards trading firms than retail traders. For example optimizing trade execution is most applicable when you place large orders that would otherwise suffer from a lot of slippage.
+Some of the content is more catered towards trading firms than retail traders. For example, optimizing trade execution is most applicable when you place large orders that would otherwise suffer from a lot of slippages.
 ====
 --
 

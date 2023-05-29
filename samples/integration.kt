@@ -14,16 +14,7 @@ import org.roboquant.ibkr.IBKRHistoricFeed
 import org.roboquant.orders.MarketOrder
 import org.roboquant.polygon.PolygonHistoricFeed
 import org.roboquant.polygon.PolygonLiveFeed
-import org.roboquant.yahoo.YahooHistoricFeed
 import java.time.Instant
-
-fun yahooFeed() {
-    // tag::yahoo[]
-    val feed = YahooHistoricFeed()
-    val tf = Timeframe.past(100.days)
-    feed.retrieve("AAPL", "GOOGL", "IBM", timeframe = tf)
-    // end::yahoo[]
-}
 
 
 

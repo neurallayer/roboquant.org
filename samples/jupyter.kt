@@ -2,16 +2,12 @@
 
 import org.roboquant.Roboquant
 import org.roboquant.brokers.Account
-import org.roboquant.common.Asset
-import org.roboquant.common.Timeframe
-import org.roboquant.common.getBySymbol
-import org.roboquant.common.years
+import org.roboquant.common.*
 import org.roboquant.feeds.Feed
 import org.roboquant.feeds.HistoricFeed
 import org.roboquant.jupyter.*
-import org.roboquant.loggers.MetricsEntry
 
-fun use1(data: List<MetricsEntry>) {
+fun use1(data: TimeSeries) {
     // tag::use1[]
     // If last line, will get plotted
     MetricChart(data)
@@ -27,10 +23,9 @@ fun use2(feed: HistoricFeed, assets: List<Asset>) {
 }
 
 
-fun overview2(data: List<MetricsEntry>, account: Account, feed: Feed, asset: Asset, assets: List<Asset>) {
+fun overview2(data: TimeSeries, account: Account, feed: Feed, asset: Asset, assets: List<Asset>) {
     // tag::overview[]
     // Metric related charts
-    MetricChart(data)
     MetricBoxChart(data)
     MetricHistogramChart(data)
     MetricCalendarChart(data)

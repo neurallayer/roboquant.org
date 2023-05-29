@@ -62,4 +62,5 @@ private fun friendly3(broker: Broker) {
     val appleOrders = account.closedOrders.filter { it.asset.symbol == "AAPL" }
     val biggestPosition = account.positions.maxBy { it.marketValue.value }
     // end::friendly3[]
+    println("$totalPNL $appleOrders $biggestPosition")
 }

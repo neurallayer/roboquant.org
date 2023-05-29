@@ -5,14 +5,16 @@
 :jbake-date: 2020-12-01
 
 == Why use roboquant
-Developing and running algo-trading software is not an easy task at all. You already need additional skills and on top of that there is a lot of complexity involved that isn't perhaps clear from the beginning. So it makes sense so separate the logic that is common to all automated trading strategies from the logic that is specific to your strategy.
+Developing and running algo-trading software is not an easy task at all. You already need additional skills, and on top of that, there is a lot of complexity involved that isn't perhaps clear from the beginning.
+
+So it makes sense to separate the logic that is common to all automated trading strategies from the logic that is specific to your strategy.
 
 == Main components
 Perhaps the most important part of using _roboquant_ is to understand the sequence of steps and the responsibility each component has in this flow. The following diagram provides a logical overview of the main components and the type of data they consume and produce.
 
 image::main_flow_simplified.png[]
 
-The role and responsibilities of each of the components are as follows:
+The role and responsibilities of the components are as follows:
 
 * `Roboquant`
 +
@@ -24,7 +26,7 @@ Provides the data needed for testing and trading in the form of events. A feed c
 
 * `Strategy`
 +
-Receives the event and generates zero or more signals. A `Signal` is a `Rating` for a certain asset, like a BUY rating for stock XYZ. So the strategy doesn't create orders, that is the responsibility of the next component, the policy.
+Receives the event and generates zero or more signals. A `Signal` is a `Rating` for a certain asset, like a BUY rating for stock XYZ. So the strategy doesn't create orders; that is the responsibility of the next component, the policy.
 
 * `Policy`
 +
@@ -58,7 +60,7 @@ Developing a new strategy and validating it during a back-test is a straightforw
 ----
 include::{sourcefile}[tag=overview]
 ----
-<1> Develop a new strategy based on some idea you have. This can be done either from scratch or by assembling existing building blocks. In many cases, this is the only real software development required. See also xref:strategy.adoc[Strategy] for more details.
+<1> Develop a new strategy based on some ideas you have. This can be done either from scratch or by assembling existing building blocks. In many cases, this is the only real software development required. See also xref:strategy.adoc[Strategy] for more details.
 <2> Create an instance of your strategy.
 <3> Instantiate the metrics you want to use to evaluate the performance of your strategy.
 <4> Create an instance of Roboquant (the engine) with the strategy and metric(s) as parameters to the constructor.

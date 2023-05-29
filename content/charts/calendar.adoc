@@ -7,6 +7,6 @@
 Plot a metric for each day of the year to see how it performed over time.
 This presents a nice overview of good and bad performing days during the back test.
 
-The slider at the top of the chart allows to filter the range of values that is of interest.
+The slider at the top of the chart allows filtering the range of values that is of interest.
 
 image::calendar.png[alt="screenshot"]

@@ -75,28 +75,25 @@ include::{dotenvfile}[]
 == Supported 3rd parties
 The following table shows which 3rd parties are supported out of the box and what functionality the integration offers:
 
-[cols="<,^,^,^,^"]
+[cols="<,^,^,^,^,^"]
 |===
-|3rd party |Historic feed |Live feed |Broker |Exchange rates
+|3rd party |Type| Historic feed |Live feed |Broker |Exchange rates
 
-|Interactive Brokers|✓|✓|✓|✓
-|Alpaca|✓|✓|✓|
-|Polygon.io|✓|✓||
-|Yahoo Finance|✓|||
-|Alpha Vantage|✓|||
-|Binance|✓|✓|✓|
-|XChange (60+ crypto exchanges)|✓|✓|✓|
-|ECB||||✓
+|Interactive Brokers|API|✓|✓|✓|✓
+|Alpaca|API|✓|✓|✓|
+|Polygon.io|API|✓|✓||
+|Alpha Vantage|API|✓|||
+|Binance|API|✓|✓|✓|
+|XChange (60+ crypto exchanges)|API|✓|✓|✓|
+|ECB|CSV File||||✓
+|Stooq|CSV File|✓|||
+|MT5|CSV File|✓|||
+|HistData|CSV File|✓|||
+|Kraken|CSV File|✓|||
+|Yahoo Finance|CSV File|✓|||
 |===
 
-NOTE: _roboquant_ is open source software that is developed independently of these 3rd party companies and has no associations with them. There is also no direct on indirect recommendation using them.
-
-=== Yahoo
-You can use the `YahooHistoricFeed` to retrieve historic prices from Yahoo Finance. This is one of the few APIs out there that you can use without requiring a registration or an API key.
-[source, kotlin,indent=0]
-----
-include::{sourcefile}[tag=yahoo]
-----
+NOTE: _Roboquant_ is open source software that is developed independently of these 3rd party companies and has no associations with them. There is also no direct on indirect recommendation using them.
 
 === Alpaca
 The integration with Alpaca covers their broker API as well as their historic and live market data APIs. In order to use these, you'll need at least register for a paper-trading account and create an API-key.

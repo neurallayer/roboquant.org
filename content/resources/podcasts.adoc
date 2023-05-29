@@ -12,7 +12,7 @@ This section provides an overview of some popular podcasts about (algo-)trading.
 image::better_system_trader.png[width="100", float="left"]
 https://podcasts.apple.com/nl/podcast/better-system-trader/id985870258[Better System Trader]
 
-One of my favourite podcast about systematic trading. Every episode has a different trader as guest. The focus is on pragmatic topics that can be put directly to work in your own strategies.
+One of my favourite podcasts about systematic trading. Every episode has a different trader as guest. The focus is on pragmatic topics that can be put directly to work in your own strategies.
 
 Since there is often accompanying visual content, you might want to watch the episodes on their https://www.youtube.com/@BetterSystemTraderPodcast[YouTube channel] instead.
 ====
@@ -38,7 +38,7 @@ https://podcasts.apple.com/nl/podcast/top-traders-unplugged/id888420325[Top Trad
 
 All about rule based investment in the context of trend following strategies. There are some very experienced traders on this show, and they share a lot of useful tips and best practices.
 
-The episodes with Rob Carver as guest are particular interesting since he is a retail algo-trader himself (but not yet using roboquant ;). An additional benefit for algo-traders is that most trend following strategies are not that difficult to translate into executable code.
+The episodes with Rob Carver as guest are particularly interesting since he is a retail algo-trader himself (but not yet using roboquant ;). An additional benefit for algo-traders is that most trend following strategies are not that difficult to translate into executable code.
 
 One thing to keep in mind is that most presenters come from a CTA (Commodity Trading Advisor) background, and as a result many of the covered assets are commodities and futures, and not individual stocks.
 ====
@@ -62,7 +62,7 @@ For example checkout this episode: https://podcasts.apple.com/nl/podcast/patrick
 image::flirting_with_models.png[width="100", float="left"]
 https://podcasts.apple.com/nl/podcast/flirting-with-models/id1402620531?l=en[Flirting with Models]
 
-Explores systematic investment strategies, ranging from value to momentum and merger arbitrage to managed futures. Nice thing about this podcast is that there are many types of guests interviewed, ranging from traditional fund managers to retail crypto traders.
+Explore systematic investment strategies, ranging from value to momentum and merger arbitrage to managed futures. The nice thing about this podcast is that there are many types of guests interviewed, ranging from traditional fund managers to retail crypto traders.
 ====
 --
 

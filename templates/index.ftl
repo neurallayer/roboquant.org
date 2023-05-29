@@ -20,7 +20,7 @@
                                     <em>roboquant</em> can help you to quickly develop robust and fully automated trading strategies.
                                 </p>
 
-                                <p>But perhaps most important of all, it is <a href="/background/performance.html">lightning fast</a>. Roboquant is orders of magnitude faster than most other algo-trading platforms.</p>
+                                <p>But perhaps most important of all, it is <a href="/background/performance.html">blazingly fast</a>. Roboquant is orders of magnitude faster than most other algo-trading platforms.</p>
                                 <div class="imageblock">
                                     <div class="content">
                                         <img src="/img/performance_overview.png" alt="screenshot" />

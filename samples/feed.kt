@@ -9,6 +9,7 @@ import org.roboquant.common.Timeframe
 import org.roboquant.common.hours
 import org.roboquant.common.summary
 import org.roboquant.feeds.*
+import org.roboquant.feeds.csv.CSVConfig
 import org.roboquant.feeds.csv.CSVFeed
 import org.roboquant.feeds.csv.LazyCSVFeed
 import java.time.Instant
@@ -40,10 +41,20 @@ fun test(roboquant: Roboquant) {
 fun csvPreConfig() {
     // tag::csvpreconfig[]
     // CSV files downloaded from stooq.pl
-    val feed1 = CSVFeed.fromStooq("somepath")
+    val feed1 = CSVFeed("somepath", CSVConfig.stooq())
 
     // CSV files downloaded from histdata.com
-    val feed2 = CSVFeed.fromHistData("somepath")
+    val feed2 = CSVFeed("somepath", CSVConfig.histData())
+
+    // CSV files downloaded from MT5
+    val feed3 = CSVFeed("somepath", CSVConfig.mt5())
+
+    // CSV trade files downloaded from Kraken
+    val feed4 = CSVFeed("somepath", CSVConfig.kraken())
+
+    // CSV files downloaded from Yahoo Finance
+    val feed5 = CSVFeed("somepath", CSVConfig.yahoo())
+
     // end::csvpreconfig[]
 }
 

@@ -56,6 +56,24 @@ Roboquant includes several `Feed` implementations out of the box:
 * Integration with third party data providers that make their data available through an API. See also the xref:integration.adoc[integration documentation].
 
 
+The following table shows which out-of-the-box feeds support which types of price-actions:
+
+[cols="<,<,<,<"]
+|===
+|Feed |Type| Historic prices|Live prices
+|Generic CSV| File| PriceBar, PriceQuote| -
+|Stooq CSV| File| PriceBar| -
+|MT5 CSV| File| PriceBar, PriceQuote| -
+|Alpaca|API|PriceBar, PriceQuote, TradePrice|PriceBar, PriceQuote, TradePrice
+|Polygon.io|API|PriceBar|PriceBar, PriceQuote, TradePrice
+|Interactive Brokers|API|PriceBar|PriceBar
+|Alpha Vantage|API|PriceBar|-
+|Binance|API|PriceBar|PriceBar, PriceQuote
+|XChange|API|-|PriceQuote, TradePrice, OrderBook
+|Avro|File|PriceBar, PriceQuote, TradePrice, OrderBook|-
+|===
+
+
 [#_custom_feeds]
 == Custom Feeds
 If you have a data source that is not yet covered by _roboquant_, you can implement your own `Feed`. The main method to implement is the `play` method that will put the available events on the `EventChannel`.
@@ -96,7 +114,6 @@ asset.type = STOCK
 asset.exchange = AEB
 asset.currency = EUR
 
-file.extension = csv
 file.skip = ABC.csv XYZ.csv
 ----
 
@@ -139,7 +156,7 @@ A single feed can contain mixed price actions if required, so you can have Trade
 
 [#_convert_to_an_avrofeed]
 === Convert to an AvroFeed
-You can also convert other feeds into Avro files that you can later use for back-testing. This works with both historic data feeds and live data feeds. The current limitation is that it only works with price actions and not other type of actions like image data or social media posts.
+You can also convert other feeds into an AvroFeed that you can later use for back-testing. This works with both historic data feeds and live data feeds. The current limitation is that it only works with price actions and not other type of actions like image data or social media posts.
 
 [source,kotlin,indent=0]
 ----
@@ -148,7 +165,7 @@ include::{sourcefile}[tag=avrocapture]
 
 TIP: If you work a lot with directories full of CSV files, you can convert them to a single Avro file and use that from then on (using the above code snippet as an example). This is both faster and has lower memory consumption.
 
-The nice thing is that the recording also works with live feeds. So you can record a live feed for a specified timeframe and then use it from then on in your own back test.
+The nice thing is that the recording also works with live feeds. So you can record a live feed for a specified timeframe and then use it afterwards in your back tests.
 
 The following example shows how you can record 4 hours worth of Bitcoin price-bars from the Binance exchange.
 
@@ -158,10 +175,11 @@ include::{sourcefile}[tag=avrocapturelive]
 ----
 
 === Default AvroFeeds
-Roboquant comes with a few default AvroFeeds. The main benefit is that you can quickly test if your code is working without having to download or set up your own feeds. There are two feeds available:
+Roboquant comes with a few default AvroFeeds. The main benefit is that you can quickly test if your code is working without having to download or set up your own feeds. There are three feeds available:
 
 1. A feed with daily `PriceBar` market data for the S&P 500 stocks for the last few years
 2. A feed with a few minutes of price quotes, again for the S&P 500 stocks
+3. A feed with 1 minute forex data
 
 [source, kotlin, indent=0]
 ----
@@ -170,4 +188,4 @@ include::{sourcefile}[tag=predefined]
 
 In the future there will be more default AvroFeeds that you can use, depending on the feedback from the community. Likely candidates that are currently missing are FOREX feeds and cryptocurrency feeds.
 
-WARNING: These default feeds should not be relied on for serious back testing. They just serve to quickly run a back test and see if your strategy and policy are behaving as expected.
+WARNING: These default feeds should not be relied on for serious back testing. They just enable you to quickly run a back test and see if your strategy and policy are behaving as expected.

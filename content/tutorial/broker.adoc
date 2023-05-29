@@ -7,7 +7,7 @@
 == What is a broker
 A  broker facilitates the buying and selling transactions of financial assets, such as stocks, bonds, currencies, options, and other securities, on behalf of their clients. Brokers may operate through different platforms, including online trading platforms.
 
-In _roboquant, it is the broker that receives new orders and processes them. The outcome of this processing is an updated `Account` object. This object is the same for all broker implementations. This allows for a seamless transition between 4 the stages of developing a strategy.
+In _roboquant, it is the broker that receives new orders and processes them. The outcome of this processing is an updated `Account` object. This object is the same for all broker implementations. This allows for a seamless transition between the 4 stages of developing a strategy.
 
 There are two types of broker implementations:
 
