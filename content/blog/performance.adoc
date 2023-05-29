@@ -69,7 +69,6 @@ X86
   1000M     500  20000  100   345ms  1387ms   44519ms    2962ms  1000K      337M
 
 
-
 ARM
              _______
             | $   $ |             roboquant
@@ -115,8 +114,8 @@ And this is of course of great benefit to ARM, since the instruction set is smal
 Although the performance test is CPU bound, memory speed (bandwidth and latency) plays an important role. Unfortunately, AWS doesn't provide this metric for the selected instance. So instead, we run a small Linux benchmark utility (mbw) to get an approximation of the relative performance. We use smaller 1MB memory blocks to reflect JVM memory usage patterns:
 +
 ----
-X86: AVG	Method: MEMCPY	Elapsed: 0.00008	MiB: 1.00000	Copy: 12836.970 MiB/s
-ARM: AVG	Method: MEMCPY	Elapsed: 0.00005	MiB: 1.00000	Copy: 18761.726 MiB/s
+X86: AVG  Method: MEMCPY  MiB: 1.00  Copy: 12836.970 MiB/s
+ARM: AVG  Method: MEMCPY  MiB: 1.00  Copy: 18761.726 MiB/s
 ----
 +
 Clearly, the memory bandwidth of the ARM instance is better. And this is easily explained since Graviton uses DDR5 memory while the Epyc platform still uses the slower DDR4 memory modules.
@@ -129,10 +128,7 @@ There are still several areas where the performance of the JVM on ARM can be imp
 
 - The used CPUs in the Graviton machine are actually not that impressive (yet). When we compare the performance of an 8-core Graviton against an 8-core Apple M2, it becomes clear there is still a lot to be gained.
 +
-
-----
-The Apple M2 8-core CPU performs over 75% better than a similar sized Graviton instance. If we extrapolate this to 64 cores and assume other ARM CPU designers will catch up, the ARM platform is potentially 280% faster than X86.
-----
+The Apple M2 8-core CPU performs over 75% better than a similar sized Graviton instance. If we extrapolate this to 64 cores and assume other ARM CPU designers will catch up, the **ARM platform is potentially 280% faster than X86**.
 
 - ARM is quickly gaining traction for server-side computing. So it is not unreasonable to assume that newer ARM instruction sets will support these types of work-loads even better (ARMv9 and onwards).
 
