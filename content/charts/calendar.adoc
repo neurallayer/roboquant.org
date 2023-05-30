@@ -1,4 +1,4 @@
-= Daily Calendar
+= Calendar Chart
 :jbake-type: item
 :jbake-status: published
 :imagesdir: ../img/

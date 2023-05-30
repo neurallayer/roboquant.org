@@ -1,4 +1,4 @@
-@file:Suppress("unused", "UNUSED_PARAMETER", "WildcardImport", "MagicNumber")
+@file:Suppress("unused", "UNUSED_PARAMETER", "WildcardImport", "MagicNumber", "LongParameterList")
 
 import org.roboquant.Roboquant
 import org.roboquant.brokers.Account
@@ -6,11 +6,12 @@ import org.roboquant.common.*
 import org.roboquant.feeds.Feed
 import org.roboquant.feeds.HistoricFeed
 import org.roboquant.jupyter.*
+import org.roboquant.strategies.Strategy
 
 fun use1(data: TimeSeries) {
     // tag::use1[]
     // If last line, will get plotted
-    MetricChart(data)
+    TimeSeriesChart(data)
     // end::use1[]
 }
 
@@ -18,33 +19,36 @@ fun use2(feed: HistoricFeed, assets: List<Asset>) {
     // tag::use2[]
     // Plot the correlation matrix over different timeframes
     for (timeframe in Timeframe.past(20.years).split(2.years))
-        PriceCorrelationChart(feed, assets, timeframe).render()
+        CorrelationChart(feed, assets, timeframe).render()
     // end::use2[]
 }
 
 
-fun overview2(data: TimeSeries, account: Account, feed: Feed, asset: Asset, assets: List<Asset>) {
+fun overview2(data: TimeSeries, account: Account, feed: Feed, asset: Asset, assets: List<Asset>, strategy: Strategy) {
     // tag::overview[]
     // Metric related charts
-    MetricBoxChart(data)
-    MetricHistogramChart(data)
-    MetricCalendarChart(data)
+    BoxChart(data)
+    HistogramChart(data)
+    CalendarChart(data)
 
     // Price related charts
     PriceChart(feed, asset)
     PriceBarChart(feed, asset)
-    PriceCorrelationChart(feed, assets)
+    CorrelationChart(feed, assets)
 
     // Asset related charts
-    AssetAllocationChart(account.positions)
-    AssetPerformanceChart(feed)
+    AllocationChart(account.positions)
+    PerformanceChart(feed)
 
     // Trade related charts
     TradeChart(account.trades)
-    TradeAssetChart(account.trades)
+    TradeChart(account.trades, perAsset = true)
 
     // Order related chart
     OrderChart(account.openOrders)
+
+    // Signal chart
+    SignalChart(feed, strategy)
     // end::overview[]
 }
 
@@ -77,7 +81,7 @@ fun priceChart(feed: HistoricFeed, roboquant: Roboquant) {
 fun correlation(feed: HistoricFeed, roboquant: Roboquant) {
     // tag::correlation[]
     val assets = feed.assets.take(10)
-    PriceCorrelationChart(feed, assets, timeframe = Timeframe.past(2.years))
+    CorrelationChart(feed, assets, timeframe = Timeframe.past(2.years))
     // end::correlation[]
 }
 

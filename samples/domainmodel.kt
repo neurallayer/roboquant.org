@@ -134,21 +134,21 @@ private fun timeline(roboquant: Roboquant) {
 
 private fun tradingPeriod(roboquant: Roboquant, feed: Feed) {
     // tag::tradingperiod[]
-    // Use the TradingPeriod constructor directly
-    val period = TradingPeriod(years = 1, months = 6, seconds = 30)
+    // Use the TimePeriod constructor directly
+    val period = TimePeriod(years = 1, months = 6, seconds = 30)
 
     // Use extension methods
     val oneDay = 1.days
     val oneHour = 1.hours
-    val myTradingPeriod = 1.years + 6.months
+    val myTimePeriod = 1.years + 6.months
     val myHighFrequencyPeriod = 1.seconds + 500.millis
 
-    // Calculate using TradingPeriods (using UTC if required)
+    // Calculate using TimePeriods (using UTC if required)
     val now = Instant.now()
     val tomorrow = now + 1.days
     val yesterday = now - 1.days
     val nextHourAndHalf = now + 1.hours + 30.minutes
-    val nextYearAndHalf = now + myTradingPeriod
+    val nextYearAndHalf = now + myTimePeriod
 
     // Using an explicit timezone
     val zone = ZoneId.of("Europe/Amsterdam")

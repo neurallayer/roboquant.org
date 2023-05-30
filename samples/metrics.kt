@@ -5,7 +5,7 @@ import org.roboquant.brokers.Account
 import org.roboquant.common.Asset
 import org.roboquant.common.TimeSeries
 import org.roboquant.feeds.Event
-import org.roboquant.jupyter.MetricChart
+import org.roboquant.jupyter.TimeSeriesChart
 import org.roboquant.loggers.MetricsLogger
 import org.roboquant.metrics.*
 import org.roboquant.strategies.Strategy
@@ -38,7 +38,7 @@ fun memoryLogger(roboquant: Roboquant) {
 
     // And plot a metric in a Jupyter Notebook
     val equity = logger.getMetric("account.equity")
-    MetricChart(equity)
+    TimeSeriesChart(equity)
     // end::memoryLogger[]
 }
 

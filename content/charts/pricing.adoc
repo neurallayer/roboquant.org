@@ -6,8 +6,8 @@
 
 You can see prices and optional trades that were executed in relation to the price of that asset. Especially for strategies based only on price actions, this helps to validate if trades occurred when expected.
 
-== Price Chart
-This type of chart supports any type of price action, ranging from quotes to order books.
+== PriceChart
+This chart supports plotting any type of price action, ranging from quotes to order books.
 
 image::prices.png[alt="screenshot"]
 

@@ -1,17 +1,14 @@
-@file:Suppress("unused", "UNUSED_VARIABLE", "MagicNumber")
+@file:Suppress("unused", "UNUSED_VARIABLE", "MagicNumber", "WildcardImport")
 
 import org.roboquant.Roboquant
 import org.roboquant.alpaca.AlpacaBroker
 import org.roboquant.brokers.Account
-import org.roboquant.common.ParallelJobs
-import org.roboquant.common.Timeframe
-import org.roboquant.common.minutes
-import org.roboquant.common.years
+import org.roboquant.common.*
 import org.roboquant.feeds.Feed
 import org.roboquant.feeds.HistoricFeed
 import org.roboquant.feeds.LiveFeed
 import org.roboquant.feeds.RandomWalkFeed
-import org.roboquant.jupyter.MetricChart
+import org.roboquant.jupyter.TimeSeriesChart
 import org.roboquant.jupyter.TradeChart
 import org.roboquant.loggers.InfoLogger
 import org.roboquant.loggers.MemoryLogger
@@ -142,8 +139,8 @@ fun runParallel(feed: Feed) {
     // Wait until all the jobs are finished
     jobs.joinAllBlocking()
 
-    // If you are in Jupyter Notebook you can easily plot a metric for all the runs
+    // If you are in Jupyter Notebook, you can easily plot a metric for all the runs
     val equity = logger.getMetric("account.equity")
-    MetricChart(equity)
+    TimeSeriesChart(equity)
     // end::runParallel[]
 }

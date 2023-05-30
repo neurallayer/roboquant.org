@@ -32,7 +32,7 @@ This is the default policy that will be used if no other policy is specified whe
 include::{sourcefile}[tag=constructor]
 ----
 
-You can also extend the FlexPolicy and overwrite some of its methods. For example, to create different order types you would implement something like this:
+You can also extend the FlexPolicy and overwrite some of its methods. For example, to create different order types, you would implement something like this:
 
 [source, kotlin,indent=0]
 ----
