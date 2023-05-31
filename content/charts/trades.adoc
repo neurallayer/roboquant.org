@@ -4,7 +4,7 @@
 :imagesdir: ../img/
 :icons: font
 
-Trades provide an overview of the trades for all the assets made during a certain time period.
-It can plot different aspects of a trade like the fee or volume. But one of the most useful ones is the realized profit and loss.
+The `TradesChart` provides an overview of the trades for all the assets made during a certain time period.
+It can plot different aspects of a trade like the fees or volume. But one of the most interesting aspects is the realized profit and loss.
 
 image::trades.png[alt="screenshot"]

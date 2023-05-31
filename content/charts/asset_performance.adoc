@@ -1,9 +1,9 @@
-= Performance Chart
+= Performance
 :jbake-type: item
 :jbake-status: published
 :imagesdir: ../img/
 :icons: font
 
-Show the performance of the various assets fond in a feed. The color of the box indicates the performance and the size of the total trading volume.
+This chart shows the performance of the various assets fond in a feed. The color of the box indicates the performance and the size of the box the total trading volume.
 
 image::asset_performance.png[alt="screenshot"]

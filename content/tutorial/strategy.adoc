@@ -41,7 +41,7 @@ include::{sourcefile}[tag=ema]
 === TaLibStrategy
 `TaLibStrategy` is short for Technical Analysis Strategy and is a convenient way of using the ta-lib indicators in a strategy by defining the BUY and/or SELL condition.
 
-The ta-lib library comes with over 150 indicators and these can be combined anyway you like in a `TaLibStrategy`.
+The ta-lib library comes with over 150 indicators, and these can be combined anyway you like in a `TaLibStrategy`.
 
 [source, kotlin,indent=0]
 ----
@@ -51,7 +51,7 @@ include::{sourcefile}[tag=ta]
 === RSIStrategy
 Strategy using the Relative Strength Index of an asset to generate signals. RSI measures the magnitude of recent price changes to evaluate overbought or oversold conditions in the price of a stock or other asset.
 
-If the RSI raises above the configured high threshold (default 70), a sell signal will be generated. And if the RSI falls below the configured low threshold (default 30), a buy signal will be generated.
+If the RSI raises above the configured high-threshold (default 70), a sell signal will be generated. And if the RSI falls below the configured low-threshold (default 30), a buy signal will be generated.
 
 [source, kotlin,indent=0]
 ----

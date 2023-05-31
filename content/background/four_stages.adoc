@@ -13,7 +13,7 @@ Each stage has its own specific purpose and benefits. But before going through e
 . If possible at all, don't skip a stage. Every stage has its purpose, in order to end up with a well performing and robust trading strategy.
 . And perhaps more important, if you are not happy about the performance in a later stage, go back to the *first* stage. Often minor changes to the code can have major impact on the results and should be thoroughly tested at each and every stage.
 
-_Roboquant_ support all 4 stages with minimal changes to your configuration when you move from one stage to the next. Your `Strategy` and `Policy` shouldn't change at all between stages, and only the configured data `Feed` and `Broker` will differ between stages.
+_Roboquant_ supports all 4 stages with minimal changes to your configuration when you move from one stage to the next. Your `Strategy` and `Policy` shouldn't change at all between stages, and only the configured data `Feed` and `Broker` will differ between stages.
 
 The following table shows the used `Broker` and `Feed` in the different stages:
 
@@ -30,13 +30,13 @@ The following table shows the used `Broker` and `Feed` in the different stages:
 == Stage 1: Back Testing
 In this stage you'll use *historic data* and the *SimBroker* to back-test your `Strategy` and `Policy`.
 
-You can of course run a single back test over the complete timeline of historic data. But _roboquant_ makes it also easy to run walk forward and Monte Carlo simulations. These provide you with better insights into the performance under different regimes.
+You can, of course, run a single back test over the complete timeline of historic data. But _roboquant_ makes it also easy to run walk forward and Monte Carlo simulations. These provide you with better insights into the performance under different regimes.
 
 It is very important to get as many insights as possible about the overall performance and behavior, so you know what to expect and also what not expect when you finally will go live.
 
-This is also the only stage where you should develop and modify your strategy and policy. If you are not happy with the performance at a later stage, you should return this first stage and make the changes there. If for example you would like to use circuit-breakers during live trading to get some extra peace of mind, you should already include this logic during back testing and not introduce it at live trading.
+This is also the only stage where you should develop and modify your strategy and policy. If you are not happy with the performance at a later stage, you should return this first stage and make the changes there. If, for example, you would like to use circuit-breakers during live trading to get some extra peace of mind, you should already include this logic during back testing and not introduce it at live trading.
 
-TIP: configure the `SimBroker` similar to the live trading account and broker you are planning to use. Configure realistic cost and initial deposit, so you don't get a too optimistic outlook on the overall cost. In general is it preferable to be conservative side and define a higher cost structure at this stage then the other way around.
+TIP: configure the `SimBroker` similar to the live trading account and broker you are planning to use. Configure realistic cost and initial deposit, so you don't get a too optimistic outlook on the overall cost. In general, is it preferable to be conservative side and define a higher cost structure at this stage than the other way around.
 
 == Stage 2: Forward Testing
 In this stage you use *live data* and the `SimBroker` to test your `Strategy` and `Policy`. The main purpose of this stage is to validate if your `Strategy` is still performing well on unseen data.

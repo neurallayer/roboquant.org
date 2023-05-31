@@ -9,7 +9,7 @@ The following table provides an overview of popular market data providers. The l
 [.table]
 [cols="<,<,^,^,^,^,<,<"]
 |===
-|Provider|Asset Types|API|Historic|Realtime Delayedfootnote:[Typically, 15-minutes delay due to distribution restrictions imposed by US exchanges]|Realtime|Pricing model|Remarks
+|Provider|Asset Types|API|Historic|Realtime Delayedfootnote:[Typically, 15-minute delay due to distribution restrictions imposed by US exchanges]|Realtime|Pricing model|Remarks
 
 |https://polygon.io[Polygon]
 |US Stocks, Options & crypto
@@ -27,7 +27,7 @@ The following table provides an overview of popular market data providers. The l
 |US stocks, UK stocks, World stocks, macroeconomic indicators
 ||&check;||
 |Free
-|Website is in Polish
+|The website is in Polish
 
 |https://alpaca.markets[Alpaca]
 |US Stocks & Crypto

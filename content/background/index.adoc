@@ -6,7 +6,7 @@
 == Why develop a new platform
 Before we started to develop _roboquant_, we looked at existing frameworks and platforms to see if these could fit the bill. What we quickly found out is that many of these frameworks take a very naive approach to algo-trading. For example, hardly any of the sample code available should ever be used in live trading since it doesn't address many of the edge cases.
 
-For our use-cases none of them checked all the boxes that we required:
+For our use-cases, none of them checked all the boxes that we required:
 
 * [x] Have an engine that can handle large volumes of data and run extensive and realistic back-tests
 * [x] Trade assets in multiple currencies at the same time
@@ -41,7 +41,7 @@ image::performance_overview.png[]
 
 The main reason for this lackluster performance is not only that Python is an interpreted language, but also the fact that it is has a single threaded runtime that makes it difficult and inefficient to use all the cores found on modern CPU's.
 
-The good news is that if you really want to stick with Python, there are plenty of alternatives available. For example, you could have a look at backtrader, pyalgotrade or zipline. But we recommend to give _roboquant_ and Kotlin a try, and we are confident you will not regret that decision in the long term.
+The good news is that if you really want to stick with Python, there are plenty of alternatives available. For example, you could have a look at backtrader, pyalgotrade or zipline. But we recommend giving _roboquant_ and Kotlin a try, and we are confident you will not regret that decision in the long term.
 
 .Embed Python
 ****
@@ -53,19 +53,19 @@ From the start we developed _roboquant_ to be used either as a library included 
 
 Where some Kotlin/Java based applications require a lot of ceremony to implement even the simplest piece of functionality, _roboquant_ it designed to remove most of that. Especially in a Jupyter notebook environment, it is very easy to get started. Because of this the API exposed by _roboquant_ follows certain rules:
 
-* Minimize need for imports, for example don't expose third party types if it can be avoided
+* Minimize the need for imports, for example, don't expose third party types if it can be avoided
 * Use sensible defaults for method parameters where possible
 * Use informative toString() implementations and explanatory exception messages
 * Provide overloaded convenience methods if it makes life easier for the user of the API
 * Use a flat package structure, so import statements are simple to remember
-* Leverage type inference where possible so no additional type info needs to be provided
+* Leverage type inference where possible, so no additional type info needs to be provided
 
 == Time-Zone handling
 When trading simultaneously in multiple time-zones, like trade stocks both in New York and London, it is key to have proper time management in place. Otherwise, you run the risk that your strategy performs very well but only because it can peep into the future due to faulty handling of time-zones.
 
 Because of that, _roboquant_ internally only uses the Java `Instant` type to represent a moment in time. This type is independent of any timezone. So all time events can easily be directly compared without having to consider time zones.
 
-When importing data, there is functionality to convert the data from timezone specific value towards the Instant type. When displaying time related information, it can be converted back the other way around if desired.
+When importing data, there is functionality to convert the data from timezone-specific value towards the Instant type. When displaying time related information, it can be converted back the other way around if desired.
 
 But the fact remains that all internal logic relies only on the Instant type in order to prevent timezone mistakes from happening.
 
@@ -88,14 +88,14 @@ Event-driven algo-trading platforms provide several advantages over a vectorised
 
 * Reuse - _roboquant_ uses the same event-driven approach for all xref:four_stages.adoc[4 stages] of developing trading strategies, ensuring minimal friction when moving from one stage to the next.
 
-* Avoid Lookahead bias - With event-driven back-tests, it is unlikely that the strategy will actually peep into the future since at the time of making any decision in the code, the future data is not yet available. In fact, within _roboquant_ the simulated broker is guaranteed to see pricing information before your strategy does.
+* Avoid Lookahead bias — with event-driven back-tests, it is unlikely that the strategy will actually peep into the future since at the time of making any decision in the code, the future data is not yet available. In fact, within _roboquant_, the simulated broker is guaranteed to see pricing information before your strategy does.
 
-* Robustness - Live trading is by definition event-driven. So by using the same approach during back testing, it ensures you got have to address use-cases that otherwise wouldn't show up until it is too late.
+* Robustness - live trading is by definition event-driven. So by using the same approach during back testing, it ensures you got have to address use-cases that otherwise wouldn't show up until it is too late.
 
-Although event-driven systems come with the above benefits, they traditionally suffer from two disadvantages over simpler vectorised systems:
+Although event-driven systems come with the above benefits, they traditionally suffer from two disadvantages over simpler vectorized systems:
 
-. They are more complex to implement and test. That is why using platform like _roboquant_ makes a lot of sense, since much of the heavy lifting is done by the platform.
+. They are more complex to implement and test. That is why using a platform like _roboquant_ makes a lot of sense, since much of the heavy lifting is done by the platform.
 
-. They can be slower to execute compared to a vectorised system. But by using Kotlin and a highly optimized execution engine, _roboquant_ is actually faster than other algo-trading platforms.
+. They can be slower to execute compared to a vectorized system. But by using Kotlin and a highly optimized execution engine, _roboquant_ is actually faster than other algo-trading platforms.
 
 To find out more about how Events and Actions are implemented in _roboquant_, check out the documentation on xref:../tutorial/feed.adoc[feeds].

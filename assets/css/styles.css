@@ -40,15 +40,15 @@
     --bs-warning: #ffc107;
     --bs-danger: #dc3545;
     --bs-light: #f8f9fa;
-    --bs-dark: #3296C8;
-    --bs-primary-rgb: 50, 150, 200;
+    --bs-dark: #0A8;
+    --bs-primary-rgb: 0, 153, 255;
     --bs-secondary-rgb: 108, 117, 125;
     --bs-success-rgb: 25, 135, 84;
     --bs-info-rgb: 13, 202, 240;
     --bs-warning-rgb: 255, 193, 7;
     --bs-danger-rgb: 220, 53, 69;
     --bs-light-rgb: 248, 249, 250;
-    --bs-dark-rgb: 50, 150, 200;
+    --bs-dark-rgb: 0, 153, 255;
     --bs-white-rgb: 255, 255, 255;
     --bs-black-rgb: 0, 0, 0;
     --bs-body-rgb: 33, 37, 41;
@@ -140,7 +140,7 @@ h1 span {
 
 h2, .h2 {
     font-size: calc(1.325rem + 0.9vw);
-    color: #3296c8;
+    color: #09F;
 }
 
 @media (min-width: 1200px) {
@@ -260,7 +260,7 @@ sup {
 }
 
 a {
-    color: rgb(50, 150, 200);
+    color: #09F;
     text-decoration: underline;
 }
 
@@ -4244,7 +4244,7 @@ textarea.form-control-lg {
 .nav-link {
     display: block;
     padding: 0.3rem 1rem;
-    color: #3296C8;
+    color: #0A8;
     font-weight: 500;
     text-decoration: none;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
@@ -4258,7 +4258,7 @@ textarea.form-control-lg {
 
 .nav-link:hover, .nav-link:focus {
     text-decoration: underline;
-    color: #3296C8;
+    color: #0A8;
 }
 
 .nav-link.disabled {
@@ -11930,7 +11930,7 @@ html {
 }
 
 .pl-en {
-    color: #3296C8;
+    color: #0A8;
 }
 
 .pl-c1 {
@@ -11998,7 +11998,7 @@ ul.checklist {
 
 details ul li .nav-link {
     padding: 0px 10px;
-    color: #3296c8;
+    color: #09F;
 }
 
 h1.doc {
@@ -12013,7 +12013,7 @@ ul.feature-list {
 
 .feature-list li:before {
     content: "> ";
-    color: #3296c8;
+    color: #09F;
 }
 
 .fa.fa-discord {

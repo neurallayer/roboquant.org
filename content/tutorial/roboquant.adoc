@@ -56,7 +56,7 @@ However, you can restrict a run to a certain timeframe. This is especially usefu
 include::{sourcefile}[tag=run2]
 ----
 
-You can invoke a run multiple times, for example with different timeframes. The following code shows how to use this to perform a walk-forward back test of two-year periods:
+You can invoke a run multiple times, for example, with different timeframes. The following code shows how to use this to perform a walk-forward back test of two-year periods:
 
 [source, kotlin, indent=0]
 ----

@@ -137,13 +137,13 @@ excess_margin = equity - long_value - short_value - minimum_equity
 buying_power = excess_margin * ( 1 / initial_margin)
 ----
 
-The following table shows an example for long trading with a margin account in a Japanese Yen, using the following (default) values:
+The following table shows an example for long trading with a margin account in the Japanese Yen, using the following (default) values:
 
 - initial margin: 50%
 - maintenance margin: 30% (both for long and short positions)
 - no minimum equity is required
 
-Also, there are no commissions or other cost associated with the transactions. This is not a recommended approach, but just used here to make it a bit simpler to comprehend.
+Also, there are no commissions or other costs associated with the transactions. This is not a recommended approach, but just used here to make it a bit simpler to comprehend.
 
 [%autowidth, cols="^,<,>,>,>,>,>,>,>"]
 |===
@@ -174,9 +174,9 @@ The following table shows another example, but this time shorting on a USD margi
 The following rules apply when taking into account orders when calculating the buying power:
 
 - until an order is accepted, it doesn't impact margin or buying power.
-- open orders that reduce a position size, don’t require buying power. So you can always close a position, both short and long positions.
+- open orders that reduce a position size do not require buying power. So you can always close a position, both short and long positions.
 - once an order has been accepted, it will not be cancelled due to lack of buying power.
-- an order in a closed state doesn't impact margin or buying power (so similar to INITIAL state)
+- an order in a closed state doesn't impact margin or buying power (so similar to the `INITIAL` state)
 
 NOTE: Not all rules are currently implemented yet.
 

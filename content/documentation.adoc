@@ -14,10 +14,10 @@ A series of how-to notebooks focus on achieving a particular task, like how to i
 To find out more, go to https://github.com/neurallayer/roboquant-notebook/tree/main[GitHub], or if you just want to try it without any installation, click  image:https://mybinder.org/badge_logo.svg[Binder,link=https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=tree/notebooks/, window=_blank]
 
 == Background info
-Click xref:background/index.adoc[here] to find out why _roboquant_ was created in the first place and some key features and benefits. It will also provide an overview of the xref:background/four_stages.adoc[4 stages] process of developing robust trading strategies.
+Click xref:background/index.adoc[here] to find out why _roboquant_ was created in the first place and some key features and benefits. It will also provide an overview of the xref:background/four_stages.adoc[4-stage] process of developing robust trading strategies.
 
 == Reference
-The _roboquant_ source code documentation (work in progress).
+The _roboquant_ source code documentation (work-in-progress).
 
 == Community Help
 See the xref:community.adoc[Community page] on how to get help if you couldn't find the information in the documentation.

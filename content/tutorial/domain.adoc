@@ -5,7 +5,7 @@
 :icons: font
 
 == Approach
-Besides core components like `Strategy` and `Policy`, _roboquant_ also comes with a number of domain specific classes that make it easier to implement robust trading strategies. The two main focus areas are:
+Besides core components like `Strategy` and `Policy`, _roboquant_ also comes with a number of domain-specific classes that make it easier to implement robust trading strategies. The two main focus areas are:
 
 1. <<Monetary>> related functionality
 2. <<Time>> related functionality

@@ -5,7 +5,7 @@
 :jbake-date: 2020-02-01
 
 == Usage
-Since developing an automated trading strategy requires a lot of experimentation and testing, an interactive development environment like Jupyter Notebooks is ideal. Especially in the beginning phase, it can help to progress a lot quicker.
+Since developing an automated trading strategy requires a lot of experimentations and testing, an interactive development environment like Jupyter Notebooks is ideal. Especially in the beginning phase, it can help to progress a lot quicker.
 
 Roboquant is designed to be used in both standalone applications and Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without too much ceremony and there are many charts included that make it easier to interpret what is going on during a `run`.
 
@@ -88,13 +88,13 @@ include::{sourcefile}[tag=use2]
 
 === PriceBarCart
 
-image::https://roboquant.org/img/prices.png[]
+image::https://roboquant.org/img/pricebars.png[]
 
 Main features of this chart include:
 
 * shows the PriceBar actions (also referred to a candlesticks) for a certain `Asset` in a `Feed`
 * provides an overview of the volume in the same chart (if the feed has this information)
-* can handle large amounts of candles, and you can easily zoom into smaller timeframes to see more details
+* can handle large number of candles, and you can easily zoom into smaller timeframes to see more details
 * you can plot trades for the same asset in the same chart to see when they were created.
 
 [source, kotlin]
@@ -110,10 +110,9 @@ Similar to the functionality offered by a PriceBarChart, but this chart displays
 include::{sourcefile}[tag=priceChart]
 ----
 
-NOTE: Currently, you can only plot a single asset at a time. This might change in the future.
 
-=== PriceCorrelationChart
-Plots the Pearson correlation of a set of assets using the prices found in the provided `Feed`. You can optionally specify the period to take into account.
+=== CorrelationChart
+Plots the Pearson correlation for a set of assets using the prices found in the provided `Feed`. You can optionally specify the timeframe to take into account.
 
 image::https://roboquant.org/img/correlation.png[]
 
@@ -121,37 +120,37 @@ image::https://roboquant.org/img/correlation.png[]
 include::{sourcefile}[tag=correlation]
 ----
 
-=== MetricChart
-Plots any metric that has been captured during one or more runs. If the metric data covers multiple runs, like in a walk-forward test, each run will be plotted as its own series.
+=== TimeSeriesChart
+Plots one or more time-series. If there are multiple time-series provided, each time-series will be plotted as its own colored line. A common use-case it to plot the metrics that have been captured during one or more runs.
 
 image::https://roboquant.org/img/walkforward.png[]
 
 === CalendarChart
-Plots a metric on a year calendar, using color coding (heatmap) to indicate how each individual day performed. If you quickly want to see which days had the highest and lowest PNL, this is a great chart to use.
+Plots a time-series on a daily calendar, using color-coding (heatmap) to indicate how each day performed. If you quickly want to see which days had the highest and lowest PNL, this is a great chart to use.
 
 image::https://roboquant.org/img/calendar.png[]
 
 == TradeChart
-Plots all the executed trades from a run.
+Plots all the executed trades from a run. You can provide the aspect of the trade you are interested in.
 
 image::https://roboquant.org/img/trades.png[]
 
 
 === OrderChart
-Similar to TradeChart, but this one plots all the placed orders. In general trades contain more info (like realized pnl), so the TradeChart might be more useful.
+Similar to TradeChart, but this one plots all the placed orders. In general, trades contain more info (like realized pnl), so the TradeChart might be more useful.
 
 
-=== AssetAllocationChart
+=== AllocationChart
 Show the asset allocation of your positions, so how much you have exposed to the different assets.
 
-image::https://roboquant.org/img/assets.png[]
+image::https://roboquant.org/img/assetallocation.png[]
 
 
 [#_custom_charts]
 === Custom Charts
-Developing your own chart is not difficult. Roboquant uses the excellent https://github.com/ECharts-Java/ECharts-Java[ECharts-Java] library that makes it easy to create almost any chart from within your Java or Kotlin code.
+Developing your own chart is not difficult. Roboquant uses the excellent https://github.com/ECharts-Java/ECharts-Java[ECharts-Java] library that makes it easy to create almost any chart from within your Kotlin code.
 
-Have a look at source code of one of the included charts for inspiration. If you think your chart would also be useful for other algo-traders, consider creating a PR to get it included.
+Have a look at the source code of one of the included charts for inspiration. If you think your chart would also be useful for other algo-traders, consider creating a PR to get it included.
 
 
 

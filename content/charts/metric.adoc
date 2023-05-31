@@ -1,11 +1,11 @@
-= TimeSeries Chart
+= Time Series
 :jbake-type: item
 :jbake-status: published
 :jbake-heading: we can chart our future clearly only when we know the path that led to the present
 :imagesdir: ../img/
 :icons: font
 
-You can easily plot the captured metrics during a run using the MetricChart. Not only can it plot a metric that was captured during a single run, it also knows how to plot a metric over multiple runs.
+You can easily plot time-series, like the captured metrics during a run, using the `TimeSeriesChart`. Not only can it plot a metric that was captured during a single run, it also knows how to plot a metric over multiple runs.
 
 == Single Run
 image::metric.png[alt="screenshot"]

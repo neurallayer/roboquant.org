@@ -1,9 +1,9 @@
-= Allocation Chart
+= Allocation
 :jbake-type: item
 :jbake-status: published
 :imagesdir: ../img/
 :icons: font
 
-Plot the asset allocation within the provided positions. If assets are denoted in different currencies, these will be converted to the base currency of the account.
+With the AllocationChart you can the asset allocation for a set of provided positions. If the assets are denoted in different currencies, these will be converted to the base currency of the account.
 
 image::assetallocation.png[alt="screenshot"]

@@ -110,6 +110,19 @@ fun alpacaLiveFeed(roboquant: Roboquant) {
     // end::alpacalive[]
 }
 
+
+
+fun alpacaConfig() {
+    // tag::alpacaconfig[]
+    // instantiation with hard coded configuration
+    val feed = AlpacaHistoricFeed {
+        publicKey = "123"
+        secretKey = "456"
+        dataType = DataAPIType.IEX
+    }
+    // end::alpacaconfig[]
+}
+
 fun alpacaBroker() {
     // tag::alpacabroker[]
     // instantiation with hard coded configuration, rather than using dotenv property file

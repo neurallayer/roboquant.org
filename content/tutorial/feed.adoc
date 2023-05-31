@@ -7,7 +7,7 @@
 == What is a feed
 A feed is responsible for delivering the data that is needed to run and test strategies. There are no restrictions on the type of data that a `Feed` can emit. It can be as simple as stock prices or as complex as satellite images. A `Feed` is used to deliver historic and live data.
 
-A feed wraps its information in an `Event` and puts that `Event` on an `EventChannel`. This is all done asynchronously from rest of the trading logic. And although an `EventChannel` is used to deliver the events, this channel is normally only accessed by internal _roboquant_ logic. A xref:strategy.adoc[strategy] will be passed just the `Event` object.
+A feed wraps its information in an `Event` and puts that `Event` on an `EventChannel`. This is all done asynchronously from the rest of the trading logic. And although an `EventChannel` is used to deliver the events, this channel is normally only accessed by internal _roboquant_ logic. A xref:strategy.adoc[strategy] will be passed just the `Event` object.
 
 To read more about why _roboquant_ has selected this event-driven approach, read this xref:../background/features.adoc[introduction to event-driven software].
 
@@ -20,12 +20,12 @@ An `Event` instance contains all the data that happens at a certain point in <<T
 Events are always expected to be delivered in chronological order.
 
 === Time
-The time attribute in an event is of the type `java.time.Instant`. So they can be easily processed and compared without having to worry about timezones. When a feed delivers events, they are always in chronological order.
+The time attribute in an event is of the type `java.time.Instant`. So they can be easily processed and compared without having to worry about time zones. When a feed delivers events, they are always in chronological order.
 
 ****
 It is very important that the time in the event reflects when the actions in that same event became available, not when they happened. Typically, there is some delay between when something occurred and when it is published. An event time should reflect the published time.
 
-For example when you want to use unemployment numbers as part of your feed, you should use the time when they are published, and you have access to them, not the last day of the period they cover. Otherwise, your strategy is looking into the future during back testing and can make decisions based on information it will never have in live trading.
+For example, when you want to use unemployment numbers as part of your feed, you should use the time when they are published, and you have access to them, not the last day of the period they cover. Otherwise, your strategy is looking into the future during back testing and can make decisions based on information it will never have in live trading.
 ****
 
 === Action
@@ -52,7 +52,7 @@ Roboquant includes several `Feed` implementations out of the box:
 
 * `CSVFeed` that can process CSV files stored somewhere on your local machine.
 * `AvroFeed` that can process an Avro files stored somewhere on your local machine.
-* `RandomWalkFeed` that (as the name suggests) generates random price actions for random assets.
+* `RandomWalkFeed` that, as the name suggests, generates random price actions for random assets.
 * Integration with third party data providers that make their data available through an API. See also the xref:integration.adoc[integration documentation].
 
 
@@ -134,7 +134,7 @@ However, a downside is memory usage when working in a memory-constrained environ
 include::{sourcefile}[tag=lazy]
 ----
 
-TIP: Convert the CSV files to an AvroFeed, that way you have the best of both worlds: low memory consumption and high performance. See <<Convert to an AvroFeed>> on how to do that.
+TIP: Convert the CSV files to an `AvroFeed`, that way you have the best of both worlds: low memory consumption and high performance. See <<Convert to an AvroFeed>> on how to do that.
 
 
 == AvroFeed
@@ -156,7 +156,7 @@ A single feed can contain mixed price actions if required, so you can have Trade
 
 [#_convert_to_an_avrofeed]
 === Convert to an AvroFeed
-You can also convert other feeds into an AvroFeed that you can later use for back-testing. This works with both historic data feeds and live data feeds. The current limitation is that it only works with price actions and not other type of actions like image data or social media posts.
+You can also convert other feeds into an `AvroFeed` that you can later use for back-testing. This works with both historic data feeds and live data feeds. The current limitation is that it only works with price actions and not other actions like image data or social media posts.
 
 [source,kotlin,indent=0]
 ----
@@ -167,7 +167,7 @@ TIP: If you work a lot with directories full of CSV files, you can convert them 
 
 The nice thing is that the recording also works with live feeds. So you can record a live feed for a specified timeframe and then use it afterwards in your back tests.
 
-The following example shows how you can record 4 hours worth of Bitcoin price-bars from the Binance exchange.
+The following example shows how you can record 4-hours worth of Bitcoin price-bars from the Binance exchange.
 
 [source, kotlin, indent=0]
 ----
@@ -179,7 +179,7 @@ Roboquant comes with a few default AvroFeeds. The main benefit is that you can q
 
 1. A feed with daily `PriceBar` market data for the S&P 500 stocks for the last few years
 2. A feed with a few minutes of price quotes, again for the S&P 500 stocks
-3. A feed with 1 minute forex data
+3. A feed with 1-minute forex data
 
 [source, kotlin, indent=0]
 ----

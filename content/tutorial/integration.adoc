@@ -41,7 +41,7 @@ When you want to integrate with a 3rd party, you most likely require credentials
 
 So _roboquant_ offers better and more secure alternatives. The following list shows the order of steps _roboquant_ uses to find these configuration parameters:
 
-. If the credentials are provided directly in the code when calling the API, use these, otherwise go to next step.
+. If the credentials are provided directly in the code when calling the API, use these, otherwise go to the next step.
 +
 [source, kotlin, indent=0]
 ----
@@ -53,7 +53,7 @@ include::{sourcefile}[tag=alpacaconfig]
 ----
 java myapp.jar -Dalpaca.secret.key=... -Dalpaca.pubic.key=...
 ----
-. If the credentials are set as system environment variable (export my_key="some value"), use these, otherwise go to next step. In this case use `_` and not `.` in the key names.
+. If the credentials are set as system environment variable (export my_key="some value"), use these, otherwise go to the next step. In this case use `_` and not `.` in the key names.
 +
 [source, shell, indent=0]
 ----
