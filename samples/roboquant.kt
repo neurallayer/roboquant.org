@@ -44,7 +44,7 @@ fun complete() {
     // end::complete[]
 }
 
-fun combined() {
+fun combinedStrategy() {
     // tag::combined[]
     val strategy1 = EMAStrategy.PERIODS_12_26
     val strategy2 = EMAStrategy.PERIODS_50_200

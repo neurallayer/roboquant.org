@@ -4,20 +4,20 @@
 :sourcefile: ../../samples/feed.kt
 :jbake-date: 2020-09-01
 
-== What is a feed
+== What is a feed?
 A feed is responsible for delivering the data that is needed to run and test strategies. There are no restrictions on the type of data that a `Feed` can emit. It can be as simple as stock prices or as complex as satellite images. A `Feed` is used to deliver historic and live data.
 
-A feed wraps its information in an `Event` and puts that `Event` on an `EventChannel`. This is all done asynchronously from the rest of the trading logic. And although an `EventChannel` is used to deliver the events, this channel is normally only accessed by internal _roboquant_ logic. A xref:strategy.adoc[strategy] will be passed just the `Event` object.
+A feed wraps its information in an `Event` and puts that `Event` on an `EventChannel`. This is all done asynchronously from the rest of the trading logic. And although an `EventChannel` is used to deliver the events, this channel is normally only accessed by internal _roboquant_ logic. A xref:strategy.adoc[strategy] will just be passed the `Event` object as one it method parameters.
 
 To read more about why _roboquant_ has selected this event-driven approach, read this xref:../background/features.adoc[introduction to event-driven software].
 
 == Event
-An `Event` instance contains all the data that happens at a certain point in <<Time>>. It contains the following two attributes
+An `Event` instance contains all the data that is observed at a certain point in <<Time>>. It contains the following two attributes
 
 . The `time` attribute when the information within the event became available.
-. The list of all the <<Action>> instances at that time. This can be a mixed list of classes that implement the `Action` interface. A single `Event` can contain prices, satellite images and social media news at the same time.
+. The list of all the <<Action>> instances at that time. This can be a mixed list of classes that implement the `Action` interface. A single `Event` can contain a mix of prices, satellite images and social media news at the same time.
 
-Events are always expected to be delivered in chronological order.
+Events are always guaranteed to be delivered in chronological order.
 
 === Time
 The time attribute in an event is of the type `java.time.Instant`. So they can be easily processed and compared without having to worry about time zones. When a feed delivers events, they are always in chronological order.
@@ -31,9 +31,9 @@ For example, when you want to use unemployment numbers as part of your feed, you
 === Action
 Action is an abstraction for any type of information that can be made available in an <<Event>>. An action ranges from price actions, like price-bars and order-book snapshots, to social media content or images.
 
-There is no commonality between actions, and you can add any type of action you like to the platform. The only requirements is that they implement the empty interface `Action`. It is up to the strategy to filter for the action types it is interested in.
+There is no commonality between actions, and you can add any type of action you like to the platform. The only requirement is that an action implements the empty interface `Action`. It is up to the strategy to filter for the action types it is interested in.
 
-For example if your strategy would require `PriceBar` (candlestick) data, you could use the following pattern to filter this type:
+For example, if your strategy would require `PriceBar` (candlestick) data, you could use the following pattern to filter this type:
 
 [source, kotlin, indent=0]
 ----
@@ -53,16 +53,19 @@ Roboquant includes several `Feed` implementations out of the box:
 * `CSVFeed` that can process CSV files stored somewhere on your local machine.
 * `AvroFeed` that can process an Avro files stored somewhere on your local machine.
 * `RandomWalkFeed` that, as the name suggests, generates random price actions for random assets.
+* `AggregatorFeed` that aggregates price to price-bars.
+* `CombinedFeed` that combines two or more feeds into a new feed.
 * Integration with third party data providers that make their data available through an API. See also the xref:integration.adoc[integration documentation].
 
 
-The following table shows which out-of-the-box feeds support which types of price-actions:
+The following table shows which out-of-the-box providers support which types of price-actions:
 
 [cols="<,<,<,<"]
 |===
-|Feed |Type| Historic prices|Live prices
-|Generic CSV| File| PriceBar, PriceQuote| -
+|Provider |Type| Historic prices|Live prices
+|Generic CSV| CSV File| PriceBar, PriceQuote| -
 |Stooq CSV| File| PriceBar| -
+|Kraken CSV| File| PriceQuote| -
 |MT5 CSV| File| PriceBar, PriceQuote| -
 |Alpaca|API|PriceBar, PriceQuote, TradePrice|PriceBar, PriceQuote, TradePrice
 |Polygon.io|API|PriceBar|PriceBar, PriceQuote, TradePrice
@@ -83,7 +86,7 @@ If you have a data source that is not yet covered by _roboquant_, you can implem
 include::{sourcefile}[tag=interface]
 ----
 
-The following dummy implementation of the `play` method sends out 100 empty events, empty meaning an event without any actions included. When the EventChannel is full, the `channel.send` method will be blocking.
+The following example implementation of the `play` method sends out 100 empty events, empty meaning an event without any actions included. When the EventChannel is full, the `channel.send` method will be blocking.
 
 [source, kotlin, indent=0]
 ----
@@ -91,7 +94,7 @@ include::{sourcefile}[tag=play]
 ----
 
 == CSV Feed
-CSV files are one of the most common used file formats for storing historic price data. However, since there is no standard defined, they differ a lot depending on where you downloaded them from. Additionally, they often lack some required meta-data, like the currency of the price or the exchange where they are traded.
+CSV files are one of the most commonly used file formats for storing historic price data. However, since there is no standard defined, they differ a lot depending on where you downloaded them from. Additionally, they often lack some required meta-data, like the currency of the price or the exchange where they are traded.
 
 The `CSVFeed` class in _roboquant_ offers several configuration options to cater to these differences, allowing you to parse almost any CSV files found on the internet.
 
@@ -104,20 +107,29 @@ include::{sourcefile}[tag=basic]
 ----
 
 === Configuration
-Since the format of CSV files differs a lot, the CSVFeed allows for a lot of configuration to cater to this.
+Since the format of CSV files differs a lot, the CSVFeed allows for a lot of configuration to cater to this. If you
+just instantiate a CSVFeed with only a path, it will try to auto-detect the parameters based on the CSV headers and
+first row it encounters.
 
-The following properties determine how the CSV files are parsed
+A more flexible way to configure the parsing it to provide a custom CSVConfig:
+
+[source, properties]
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=config]
+----
+
+
+Also, you can define some of the CSVConfig settings in a property file:
 
 [source, properties]
 ----
-asset.type = STOCK
-asset.exchange = AEB
-asset.currency = EUR
-
+file.parse = *.csv
 file.skip = ABC.csv XYZ.csv
 ----
 
-In order to make it easier to use CSVFeed, there are several popular market data providers of CSV feed pre-configured.
+In order to make it easier to use CSVFeed, there are several popular market data providers of CSV feed available as
+pre-configured CSVConfig settings:
 
 [source, kotlin, indent=0]
 ----
@@ -125,9 +137,9 @@ include::{sourcefile}[tag=csvpreconfig]
 ----
 
 === Memory Constraints
-The default `CSVFeed` loads all the data found in all the files into memory during initialization. The benefit is that after initialization the CSVFeed is very fast when used in back tests. And since you can reuse the feed in parallel back-tests, this becomes even more important when doing extensive back testing.
+The default `CSVFeed` loads all the data found in all the files into memory during initialization. The benefit is that after initialization, the CSVFeed is very fast when used in back tests. And since you can reuse the feed in parallel back-tests, this becomes even more important when doing extensive back testing.
 
-However, a downside is memory usage when working in a memory-constrained environment. So there is also a CSV Feed implementation that only reads the data when required. This is substantial slower, but consumes a lot less memory. It supports the same configuration, the only difference is that you need to use `LazyCSVFeed` instead of the regular `CSVFeed`
+However, a downside is the high-memory usage when working in a memory-constrained environment. So there is also a CSV Feed implementation that only reads the data when required. This is substantially slower, but consumes a lot less memory. It supports the same configuration; the only difference is that you need to use `LazyCSVFeed` instead of the regular `CSVFeed`
 
 [source, kotlin, indent=0]
 ----
@@ -136,6 +148,27 @@ include::{sourcefile}[tag=lazy]
 
 TIP: Convert the CSV files to an `AvroFeed`, that way you have the best of both worlds: low memory consumption and high performance. See <<Convert to an AvroFeed>> on how to do that.
 
+== AggregatorFeed
+The aggregator feed enables you to aggregate PriceActions from another feed to higher level resolution PriceBars.
+
+The `AggregatorFeed` supports all included types of PriceActions (PriceBar, TradePrice, PriceQuote, OrderBook).
+So for example, you can convert tick prices to price-bars.
+
+The following example assumes the CSVFeed contains 1-minute price-bars, and you want to have 15-minute price-bars.
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=aggr]
+----
+
+== CombinedFeed
+You can only parse a single feed instance to the `Roboquant.run` method. However, it is easy to combine multiple feeds into a single one before invoking the run method:
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=combined]
+----
+
+You can combine any number of arbitrary feeds.
 
 == AvroFeed
 Apache Avro™ is a data serialization system. Avro provides a compact, fast, binary data format. Avro file format is a row-based repository, making a good match for event-driven architectures like _roboquant_.
@@ -145,7 +178,7 @@ Avro files make it easy to store large amount of data in a single file and effic
 As you might have guessed, the use of the `AvroFeed` comes highly recommended. It is fast and scales well with large sets of data.
 
 === Using an AvroFeed
-Using any compatible Avro file as a feed is straightforward. You just provide the file location to the constructor as a parameter and the feed will be ready to use.
+Using any compatible Avro file as a feed is straightforward. You just provide the file location to the constructor as a parameter, and the feed will be ready to use.
 
 [source,kotlin,indent=0]
 ----

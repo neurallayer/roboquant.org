@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "WildcardImport")
 
 import info.bitrich.xchangestream.bitstamp.v2.BitstampStreamingExchange
 import info.bitrich.xchangestream.core.StreamingExchange

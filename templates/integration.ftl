@@ -10,7 +10,11 @@ So <em>roboquant</em> comes out-of-the-box with several integrations included:
     <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/alpha-vantage.png" alt="Alpha Vantage">
     <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/polygon.jpg" alt="Polygon.io">
     <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/ecb.png" alt="European Central Bank">
+    <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/mt5.png" alt="MetaTrader 5">
+    <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/yahoo-finance.jpg" alt="Yahoo Finance">
+    <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/stooq.png" alt="Stooq">
+    <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/kraken.png" alt="Kraken">
 </div>
 </div>
 
-And if this isn't enough, <em>roboquant</em> is designed so you can easily extend it with your own broker and data feeds.
+And if this isn't enough, you can easily extend <em>roboquant</em> with your own broker and data feeds.

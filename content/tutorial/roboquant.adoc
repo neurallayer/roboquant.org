@@ -28,7 +28,7 @@ Each of these defaults can be overwritten with a different implementation when y
 include::{sourcefile}[tag=complete]
 ----
 
-As you can see, you can provide multiple metrics, but only a single instance of the other components. But that doesn't mean you cannot use multiple strategies or policies. You can for example combine multiple strategies into one and pass that instance to the `Roboquant` constructor:
+As you can see, you can provide multiple metrics, but only a single instance of the other components. But that doesn't mean you cannot use multiple strategies or policies. You can, for example, combine multiple strategies into one and pass that instance to the `Roboquant` constructor:
 
 [source, kotlin, indent=0]
 ----
@@ -42,7 +42,7 @@ After you have created an instance of the `Roboquant` class and have a xref:feed
 
 NOTE: The same `run` method is used for all the different stages, from back testing to live trading. See also xref:../background/four_stages.adoc[the 4 stages] for more details about these stages.
 
-In the most basic form, you provide the `Feed` as a single the argument to the `run` method. In that case, all the events available in the feed will be used in the run. So if your feed contains 100 stocks with each 20 years of end of day candlesticks, all that data will be used in a single run.
+In the most basic form, you provide the `Feed` as a single the argument to the `run` method. In that case, all the events available in the feed will be used in the run. So if your feed contains 100 stocks with each stock having 20 years of end-of-day candlesticks, all that data will be used in a single run.
 
 [source, kotlin, indent=0]
 ----
@@ -71,7 +71,7 @@ include::{sourcefile}[tag=run4]
 ----
 
 == Validation run
-There are strategies that are self-learning. For example many machine learning based strategies fall under this category. These strategies are trained on one timeframe and then validated on another (typically sequential) timeframe.
+There are strategies that are self-learning. For example, many machine-learning-based strategies fall under this category. These strategies are trained on one timeframe and then validated on another (typically sequential) timeframe.
 
 Also, this type of strategy can be easily back-tested with _roboquant_. The run method accepts an additional timeframe parameter to trigger a second validation phase.
 [source, kotlin, indent=0]

@@ -120,11 +120,13 @@ ARM
 
 
 == Reasons
-There are two main reasons why we observe this large difference in performance:
+There are two main reasons why we observe these large differences in performance:
 
 . Instructions per cycle
 +
-The JVM doesn't utilize all the X86 instructions that are available. Compared to something like a LLVM compiler, the JIT compiler is more limited in the instructions it actually compiles to. For example, the JVM will not generate AVX512 instructions, even if the CPU supports it, and it could speed up the code. So although the X86 has more powerful instructions available, the JIT compiler doesn't use them.
+The JVM doesn't utilize all the X86 instructions that are available. Compared to something like a LLVM compiler, the JIT compiler is more limited in the instructions it actually compiles to.
++
+For example, the JVM only recently started using AVX512 instructions and only for limited use-cases. So although the X86 has more powerful instructions available, the JIT compiler doesn't always use them.
 +
 And this is of course of great benefit to ARM, since the instruction set is smaller by design, but the number of instructions it can process per clock-cycle is higher. So from this perspective, a "RISC" architecture like ARM is better suited to the JIT compiler.
 
@@ -146,11 +148,11 @@ One might argue that this is just a temporary situation, and in the remaining of
 == Future of the JVM on ARM
 There are still several areas where the performance can be improved, triggered by both JVM and ARM improvements:
 
-- The CPUs used in the Graviton machine are actually not that impressive (yet). When we compare the performance of an 8-core Graviton against an 8-core Apple M2 chip, it becomes clear there is still a lot to be gained.
+* [x] The CPUs used in the Graviton machine are actually not that impressive (yet). When we compare the performance of an 8-core Graviton against an 8-core Apple M2 chip, it becomes clear there is still a lot to be gained.
 +
 The Apple M2 8-core CPU performs over 75% better than a similar sized Graviton instance. If we extrapolate this to 64 cores and assume other ARM CPU designers will catch up, the **ARM CPU is potentially a whopping 210% faster than X86**.
 
-- ARM is quickly gaining traction for server-side computing. So it is not unreasonable to assume that newer ARM instruction sets will support these types of work-loads even better (ARMv9 and onwards).
+* [x] ARM is quickly gaining traction for server-side computing. So it is not unreasonable to assume that newer ARM instruction sets will support these types of work-loads even better (ARMv9 and onwards).
 
-- The JIT compiler gets further optimized for the ARM platform. Support for AArch64 is relatively new, with the first decent port only included in JDK 11. So again, it is reasonable to expect that the JIT compiler will take better advantage of the ARM architecture in the future.
+* [x] The JIT compiler gets further optimized for the ARM platform. Support for AArch64 is relatively new, with the first decent port only included in JDK 11. So again, it is reasonable to expect that the JIT compiler will take better advantage of the ARM architecture in the future.
 

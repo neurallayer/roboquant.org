@@ -135,7 +135,7 @@ private fun timeline(roboquant: Roboquant) {
 private fun tradingPeriod(roboquant: Roboquant, feed: Feed) {
     // tag::tradingperiod[]
     // Use the TimePeriod constructor directly
-    val period = TimePeriod(years = 1, months = 6, seconds = 30)
+    val period = TimeSpan(years = 1, months = 6, seconds = 30)
 
     // Use extension methods
     val oneDay = 1.days

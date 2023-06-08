@@ -72,7 +72,7 @@ include::{sourcefile}[tag=filter]
 
 
 === CombinedStrategy
-The `Roboquant` constructor takes only a single strategy as its argument. However, it is easy to combine multiple strategies in your run using the `CombinedStrategy` class. This class will invoke each strategy in sequence and return the combined signals in the same order as the strategies are provided. There is no additional signal processing (like for example remove duplicate signals).
+The `Roboquant` constructor takes only a single strategy as its argument. However, it is easy to combine multiple strategies in your run using the `CombinedStrategy` class. This class will invoke each strategy in sequence and return the combined signals in the same order as the strategies are provided. There is no additional signal processing (like, for example, remove duplicate signals).
 
 [source, kotlin,indent=0]
 ----
@@ -142,7 +142,7 @@ As you can see, a Strategy can maintain state, like `previousPrices` in the abov
 == Policy based Strategies
 There are use cases that require a strategy not only to have access to an `Event` but also to the `Account`. These type of strategies can be implemented in _roboquant_, but they should be implemented as a policy instead. Some reasons you might need to use a policy:
 
-* Access to the Account instance is required, for example to re-balance a portfolio
+* Access to the Account instance is required, for example, to re-balance a portfolio
 * Directly generate orders instead of signals
 
 See the xref:policy.adoc#_advanced_policies[advanced policies] for more details.

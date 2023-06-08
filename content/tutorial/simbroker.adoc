@@ -31,7 +31,7 @@ So a more custom configured version of the SimBroker can be instantiated using:
 include::{sourcefile}[tag=extra]
 ----
 
-TIP: if you are trading specific markets, like FOREX, you most likely want to use customize the configuration since the default values like those selected for spreads are not representative for those type of markets.
+TIP: if you are trading specific markets, like FOREX, you most likely want to use customize the configuration since the default values like those selected for spreads are not representative for those types of markets.
 
 The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit. Typically, the initial deposit is denoted in a single currency, like a *$50,000.00 USD* account. But this is not a hard requirement and with `SimBroker` you can use a multi-currency initial deposit if you prefer. However, there is always only one `baseCurrency`.
 
@@ -47,7 +47,7 @@ When an order is placed at the SimBroker, the following rules apply:
 
 - modify orders will always be processed BEFORE create-orders. So if you send a `CancelOrder` and `MarketOrder` for the same asset, the `CancelOrder` is guaranteed to be processed first in the `SimBroker`.
 
-- Create and modify-orders will be processed based on FIFO (first-in-first-out) basis, so older orders are processed first.
+- Create and modify-orders will be processed based on a FIFO (first-in-first-out) basis, so older orders are processed first.
 
 - Once an order is closed, it cannot be opened again.
 
@@ -60,7 +60,7 @@ Custom models are a way to further customize the `SimBroker` and ensure it close
 
 WARNING: if you don't take any type of trading cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading. When in doubt, better to be on the safe side and configure the cost to be slightly higher than expected.
 
-The following three types of models can be implemented if the default ones that comes with _roboquant_ are not sufficient:
+The following three types of models can be implemented if the default ones that come with _roboquant_ are not sufficient:
 
 . `PricingEngine`: calculate the price to use for a trade. It can be used to simulate the following type of trading cost:
     - Spread (difference between the buy- and sell-price)
@@ -74,7 +74,7 @@ The following three types of models can be implemented if the default ones that 
 
 . `AccountModel`: model the buying power calculations based on the account type.
 
-Before implementing your own model, it is advised to check if the default included models with their configuration options aren't sufficient. Below the available models with some examples of their configuration parameters:
+Before implementing your own model, it is advised to check if the default-included models with their configuration options aren't sufficient. Below the available models with some examples of their configuration parameters:
 
 [source, kotlin,indent=0]
 ----
@@ -173,10 +173,10 @@ The following table shows another example, but this time shorting on a USD margi
 === Order impact on Buying Power
 The following rules apply when taking into account orders when calculating the buying power:
 
-- until an order is accepted, it doesn't impact margin or buying power.
-- open orders that reduce a position size do not require buying power. So you can always close a position, both short and long positions.
-- once an order has been accepted, it will not be cancelled due to lack of buying power.
-- an order in a closed state doesn't impact margin or buying power (so similar to the `INITIAL` state)
+- Until an order is accepted, it doesn't impact margin or buying power.
+- Open orders that reduce a position size do not require buying power. So you can always close a position, both short and long positions.
+- Once an order has been accepted, it will not be cancelled due to lack of buying power.
+- An order in a closed state doesn't impact margin or buying power (so similar to the `INITIAL` state)
 
 NOTE: Not all rules are currently implemented yet.
 
@@ -184,3 +184,32 @@ NOTE: Not all rules are currently implemented yet.
 A negative value for `BuyingPower` indicates a possible margin call situation. However, _roboquant_ doesn't interrupt the back-test for that.
 
 If you are interested in detecting these conditions, best to configure a metric that logs the BuyingPower at each step and evaluate that metric after the run.
+
+
+=== Realized profit
+Open positions hold unrealized profit. As soon as a trade happens, some of this unrealized profit can become realized profit.
+
+The following table shows the logic that is applied for long positions:
+
+[%autowidth, cols=">,>,>,>,<"]
+|===
+|Position before|Trade|Position after|Realized PnL|Remark
+
+|0|10 @ $104.0|10 @ $104.0| $0.0|Open position
+|10 @ $100.0|-10 @ 104.0| 0 | $40.0|Close position
+|10 @ $100.0| 10 @ 104.0| 20 @ $102.0 | $0.0|Increase position
+|10 @ $100.0| -20 @ 104.0| -10 @ $104.0 | $40.0|Reverse position
+|===
+
+The same logic applies to short positions:
+
+[%autowidth, cols=">,>,>,>,<"]
+|===
+|Position before|Trade|Position after|Realized PnL|Remark
+
+|0|-10 @ $104.0|-10 @ $104.0| $0.0|Open position
+|-10 @ $100.0|10 @ 104.0| 0 | -$40.0|Close position
+|-10 @ $100.0| -10 @ 104.0| -20 @ $102.0 | $0.0|Increase position
+|-10 @ $100.0| 20 @ 104.0| 10 @ $104.0 | -$40.0|Reverse position
+|===
+

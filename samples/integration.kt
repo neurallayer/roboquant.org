@@ -51,7 +51,7 @@ fun alphaHistoricFeed() {
     // tag::alphahistoric[]
     val feed = AlphaVantageHistoricFeed()
 
-    // You can retrieve end of day prices
+    // You can retrieve the end-of-day prices
     val assets = listOf(
         // regular US stock
         Asset("AAPL"),
@@ -108,6 +108,7 @@ fun alpacaLiveFeed(roboquant: Roboquant) {
     val tf = Timeframe.next(120.minutes)
     roboquant.run(feed,tf)
     // end::alpacalive[]
+    println(feed)
 }
 
 
@@ -121,6 +122,7 @@ fun alpacaConfig() {
         dataType = DataAPIType.IEX
     }
     // end::alpacaconfig[]
+    println(feed)
 }
 
 fun alpacaBroker() {

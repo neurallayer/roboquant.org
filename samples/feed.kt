@@ -1,18 +1,21 @@
 @file:Suppress(
-    "unused", "ControlFlowWithEmptyBody", "UNUSED_VARIABLE" , "WildcardImport", "MagicNumber", "TooManyFunctions"
+    "unused", "ControlFlowWithEmptyBody", "UNUSED_VARIABLE", "WildcardImport", "MagicNumber", "TooManyFunctions"
 )
 
 import org.roboquant.Roboquant
 import org.roboquant.binance.BinanceLiveFeed
-import org.roboquant.common.Asset
-import org.roboquant.common.Timeframe
-import org.roboquant.common.hours
-import org.roboquant.common.summary
+import org.roboquant.common.*
 import org.roboquant.feeds.*
+import org.roboquant.feeds.csv.AssetBuilder
 import org.roboquant.feeds.csv.CSVConfig
 import org.roboquant.feeds.csv.CSVFeed
 import org.roboquant.feeds.csv.LazyCSVFeed
+import org.roboquant.feeds.csv.PriceBarParser
+import org.roboquant.feeds.csv.TimeParser
+import java.text.DateFormat
 import java.time.Instant
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 fun feedInterface() {
@@ -37,6 +40,37 @@ fun test(roboquant: Roboquant) {
     // end::basic[]
 }
 
+
+fun aggr() {
+    // tag::aggr[]
+    val oneMinuteFeed = CSVFeed("data/test")
+    val feed = AggregatorFeed(oneMinuteFeed, 15.minutes)
+    // end::aggr[]
+}
+
+
+fun config() {
+    // tag::config[]
+    val df = DateTimeFormatter.ISO_DATE_TIME
+    val config = CSVConfig(
+        filePattern = "*.csv",
+        fileSkip = listOf("skip_me.csv"),
+        hasHeader = false,
+        separator = ';',
+        priceParser = PriceBarParser(
+            autodetect = false,
+            open = 1,
+            close = 2,
+            low = 3,
+            high = 4,
+            timeSpan = 15.minutes
+        ),
+        timeParser = { line, asset -> LocalDateTime.parse(line[0], df).atZone(asset.exchange.zoneId).toInstant() },
+        assetBuilder = { file -> Asset(file.nameWithoutExtension) },
+    )
+    val feed = CSVFeed("somepath", config)
+    // end::config[]
+}
 
 fun csvPreConfig() {
     // tag::csvpreconfig[]
@@ -67,11 +101,21 @@ fun testLazy(roboquant: Roboquant) {
 }
 
 
+fun combinedFeed(roboquant: Roboquant) {
+    // tag::combined[]
+    val feed1 = CSVFeed("data/test1")
+    val feed2 = CSVFeed("data/test2")
+    val feed = CombinedFeed(feed1, feed2)
+
+    roboquant.run(feed)
+    // end::combined[]
+}
+
 fun play() {
     // tag::play[]
     suspend fun play(channel: EventChannel) {
         for (i in 1..100) {
-            val actions = emptyList<Action>() // replace with real list of actions
+            val actions = emptyList<Action>() // replace with a real list of actions
             val now = Instant.now()
             val event = Event(actions, now)
             channel.send(event)

@@ -35,12 +35,12 @@ WARNING: Broker implementations can differ in what order types and assets are su
 
 The `Account` object contains the following key properties:
 
-- base currency of the account, used when converting a Wallet into a single-currency Amount
-- total cash balance (represents the credit cash - loan value)
-- the open positions
-- trades that contain all the trade executions that have happened so far
-- orders, both open orders and closed orders
-- total amount of buying power available for trading (denoted in the base currency of the account)
+- The base currency of the account, used when converting a Wallet into a single-currency Amount
+- The total cash balance (represents the credit cash - loan value)
+- All the open positions
+- The trades that contain all the trade executions that have happened so far
+- The orders, both open orders and closed orders
+- The total amount of buying power available for trading (denoted in the base currency of the account)
 
 TIP: Always use the `Account.buyingPower` property if you want to know how much money is remaining for trading. Especially when using a `MarginAccount`, you shouldn't rely on the `Account.cash` property, since that doesn't take into account any margin or leverage you might have.
 

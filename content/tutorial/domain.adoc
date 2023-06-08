@@ -60,7 +60,7 @@ include::{sourcefile}[tag=er]
 
 
 == Time
-In order to make it easier to trade in multiple regions, _roboquant_ introduces a number of time related domain classes: <<Timeline>>, <<Timeframe>>, <<TimePeriod>>.
+In order to make it easier to trade in multiple regions, _roboquant_ introduces a number of time related domain classes: <<Timeline>>, <<Timeframe>>, <<TimeSpan>>.
 
 Internally all time in stored as an `Instant` type and so can always be easily compared, regardless of from which timezone the information originated. `Event`, for example, exposes its time attribute as an `Instant`.
 
@@ -89,13 +89,13 @@ There is also a set of predefined timeframes for significant periods in the hist
 include::{sourcefile}[tag=predefined]
 ----
 
-=== TimePeriod
+=== TimeSpan
 When dealing with time duration, there are actually two types of duration in Java/Kotlin world:
 
 1. `Period` which you use for days and longer and is timezone dependent
 2. `Duration` which you use for hours and shorter and is timezone independent
 
-The `TimePeriod` class in _roboquant_ unifies this into a single implementation, and make it easier to use them in combination with `Timeframe`, `Instant` and `ZonedDateTime` instances.
+The `TimeSpan` class in _roboquant_ unifies this into a single implementation, and make it easier to use them in combination with `Timeframe`, `Instant` and `ZonedDateTime` instances.
 
 You can perform operations like:
 
