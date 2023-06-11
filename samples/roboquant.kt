@@ -1,4 +1,4 @@
-@file:Suppress("unused", "UNUSED_VARIABLE", "MagicNumber", "WildcardImport")
+@file:Suppress("unused", "UNUSED_VARIABLE", "MagicNumber", "WildcardImport", "TooManyFunctions")
 
 import org.roboquant.Roboquant
 import org.roboquant.alpaca.AlpacaBroker
