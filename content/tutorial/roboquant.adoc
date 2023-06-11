@@ -92,3 +92,27 @@ The following example shows how to run a walk forward in parallel. By reusing th
 include::{sourcefile}[tag=runParallel]
 ----
 
+== Pinpointing issues
+It isn't always easy to find out why a run isn't behaving as expected. One way to pinpoint where the actual issue is located is to enable extra
+metrics recording:
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=debug]
+----
+
+This will tell you for each step, how many `actions`, `signals` and `orders` there were and enables you to draw some conclusions:
+
+[%autowidth, cols="<,<,<"]
+|===
+|Metric|Value|Possible problem
+
+|policy.actions|always 0|the feed isn't generating actions
+|policy.signals|always 0|the strategy isn't generating signals
+|policy.orders|always 0|the policy isn't generating orders
+|===
+
+
+
+
+

@@ -10,6 +10,7 @@ import org.roboquant.feeds.LiveFeed
 import org.roboquant.feeds.RandomWalkFeed
 import org.roboquant.jupyter.TimeSeriesChart
 import org.roboquant.jupyter.TradeChart
+import org.roboquant.loggers.ConsoleLogger
 import org.roboquant.loggers.InfoLogger
 import org.roboquant.loggers.MemoryLogger
 import org.roboquant.metrics.AccountMetric
@@ -143,4 +144,15 @@ fun runParallel(feed: Feed) {
     val equity = logger.getMetric("account.equity")
     TimeSeriesChart(equity)
     // end::runParallel[]
+}
+
+
+fun debug(feed: Feed) {
+
+    // tag::debug[]
+    val strategy = EMAStrategy()
+    val policy = FlexPolicy(recording = true)
+    val roboquant = Roboquant(strategy, policy = policy, logger = ConsoleLogger())
+    roboquant.run(feed)
+    // end::debug[]
 }

@@ -1,0 +1,14 @@
+= Blog
+:jbake-type: blog
+:jbake-status: published
+:jbake-heading: if you personalize losses, you can't trade
+:icons: font
+:items: blog
+
+Some blog articles
+
+
+
+
+
+

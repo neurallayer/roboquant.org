@@ -88,6 +88,15 @@ Like any simulation, SimBroker also has limitations compared to live trading. It
 2. Order types might behave slightly different between SimBroker and different real brokers. If possible, perform extensive paper trading testing to see if your solution still performs as expected.
 3. The buying power and margin calculations might differ. Again, be on the safe side and use higher margin requirements in the SimBroker than required by your actual broker.
 
+== PricingEngine
+The PricingEngine determines the price that is used for a trade execution. There are default ones included, but you can also easily implement your own:
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=pricing]
+----
+
+
 == Account Models
 Account models allow you to model the amount of **buying-power** for different types of accounts, like a Cash Account or Margin Account when using the SimBroker. Buying-power represents the amount of money available for trading.
 

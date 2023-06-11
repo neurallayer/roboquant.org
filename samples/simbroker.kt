@@ -3,7 +3,12 @@
 import org.roboquant.brokers.sim.*
 import org.roboquant.common.Currency
 import org.roboquant.common.EUR
+import org.roboquant.common.Size
 import org.roboquant.common.Wallet
+import org.roboquant.feeds.OrderBook
+import org.roboquant.feeds.PriceAction
+import org.roboquant.feeds.PriceQuote
+import java.time.Instant
 
 
 fun usageBasic() {
@@ -48,3 +53,27 @@ fun includedModels() {
     // end::included[]
 }
 
+fun pricingEngine() {
+    // tag::pricing[]
+    class MyPricingEngine : PricingEngine {
+
+        inner class MyPricing(val action : PriceAction) : Pricing {
+
+            override fun marketPrice(size: Size): Double {
+                return when(action) {
+                    is PriceQuote -> if (size.isPositive) action.askPrice else action.bidPrice
+                    is OrderBook -> if (size.isPositive) action.bestOffer else action.bestBid
+                    else -> action.getPrice()
+                }
+            }
+
+        }
+
+        override fun getPricing(action: PriceAction, time: Instant): Pricing {
+            return MyPricing(action)
+        }
+
+    }
+    // end::pricing[]
+
+}

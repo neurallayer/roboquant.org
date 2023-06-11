@@ -6,26 +6,26 @@
 
 When designing and developing _roboquant_, performance and scalability was one of the key objectives. The design principles that have been followed to ensure the best performance possible are:
 
-* [x] Much of the builtin functionality uses multithreading and Kotlin coroutines to speedup processing. For example the CSVFeed parses CSV files in parallel so directories with thousands of CSV files can be parsed in seconds. So modern multicore CPU's can be fully utilized.
+* [x] Much of the builtin functionality uses multithreading and Kotlin coroutines to speedup processing. For example, the CSVFeed parses CSV files in parallel so directories with thousands of CSV files can be parsed in seconds. So modern multicore CPUs can be fully utilized.
 
-* [x] Roboquant is designed NOT to be a financial ledger, and in general algo-trading applications don't require this. The native Java Double type provides enough precision for algo-trading purposes and there is no need to use (the much slower and more memory hungry) BigDecimal type. BTW, the area where _roboquant_ uses high precise calculations is when dealing with order- and position-sizes.
+* [x] Roboquant is designed NOT to be a financial ledger, and in general, algo-trading applications don't require this. The native Java Double type provides enough precision for algo-trading purposes, and there is no need to use (a much slower and more memory-hungry) BigDecimal type. BTW, the area where _roboquant_ uses high precise calculations is when dealing with order- and position-sizes.
 
 * [x] Avoid (auto)boxing, so the JVM can access these variables directly. This means where possible use native types and not the wrapped ones. Read also this https://docs.oracle.com/javase/1.5.0/docs/guide/language/autoboxing.html[autoboxing article^] from Oracle.
 
-* [x] Optimized paths for common use-cases, like for example trading in a single currency only.
+* [x] Optimized paths for common use-cases, for example, trading in a single currency only.
 
-* [x] Reuse objects to allow for faster referential equality comparisons. For example the common use-case of accessing a `Map` with an `Asset` as key, benefits a lot from this.
+* [x] Reuse objects to allow for faster referential equality comparisons. For example, the common use-case of accessing a `Map` with an `Asset` as key, benefits a lot from this.
 
-* [x] The Feed API supports data that is kept in-memory as well data that is stored on disk and only accessed when required. This allows for running back test where the test data doesn't fit in memory or running back-tests on machines with limited memory. In fact _roboquant_ can be used on a JVM with only 200 MB of heap allocated.
+* [x] The Feed API supports data that is kept in-memory as well as data that is stored on disk and only accessed when required. This allows for running back test where the test data doesn't fit in memory or running back-tests on machines with limited memory. In fact, _roboquant_ can be used on a JVM with only 200 MB of heap allocated.
 
-* [x] Avoid unnecessary copying of objects in order to limit memory allocations and garbage collection. The overall latency is kept to a minimum when processing new market data events and generating the corresponding orders. So it is feasible to create fast, low latency (millisecond) trading strategies.
+* [x] Avoid unnecessary copying of objects in order to limit memory allocations and garbage collection. The overall latency is kept to a minimum when processing new market data events and generating the corresponding orders. So it is feasible to create fast, low-latency (millisecond) trading strategies.
 
-* [x] Optimized collections, so they can be accessed efficiently even if back tests grow in size. For example, open- and closed-orders are maintained in two separate collections so access to open-orders remains fast even if total number of generated orders in a back test grow to over 100.000.
+* [x] Optimized collections, so they can be accessed efficiently even if back tests grow in size. For example, open- and closed-orders are maintained in two separate collections, so access to open-orders remains fast even if the total number of generated orders in a back test grows to over 100.000.
 
-With all these measures in place, _roboquant_ is very fast while still have the benefit of being able to use a high level language.
+With all these measures in place, _roboquant_ is very fast while still have the benefit of being able to use a high-level language.
 
 == Performance Tests
-In order to test the performance and avoid performance degradation with new releases, a standard performance test is included in the test suite. The remainder of this page provide an overview of that performance test run on different hardware.
+In order to test the performance and avoid performance degradation with new releases, a standard performance test is included in the test suite. The remainder of this page provides an overview of that performance test run on different hardware.
 
 The performance test measures the performance of the following 4 scenarios with different parameters (number of assets and events):
 

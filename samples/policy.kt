@@ -15,6 +15,7 @@ import org.roboquant.ta.PriceBarSeries
 import org.roboquant.ta.TaLib
 import java.time.Instant
 import org.roboquant.common.*
+import org.roboquant.feeds.PriceAction
 
 // tag::basic[]
 class MyPolicy : Policy {
@@ -55,11 +56,12 @@ fun constr() {
 // tag::default[]
 class MyFlexPolicy : FlexPolicy() {
 
-    override fun createOrder(signal: Signal, size: Size, price: Double): Order? {
-        // We don't short in this example and exit orders are already covered by the bracket order
+    override fun createOrder(signal: Signal, size: Size, priceAction: PriceAction): Order? {
+        // We don't short in this example, and exit orders are already covered by the bracket order
         if (size < 0) return null
 
         val asset = signal.asset
+        val price = priceAction.getPrice(priceType)
 
         // Create a bracket order with an additional take-profit and stop-loss defined
         return BracketOrder(
@@ -129,8 +131,9 @@ fun customPolicy2() {
          * Override the default behavior of creating a simple MarkerOrder. Create limit BUY and
          * SELL orders with the actual limit based on the ATR of the underlying asset.
          */
-        override fun createOrder(signal: Signal, size: Size, price: Double): Order? {
+        override fun createOrder(signal: Signal, size: Size, priceAction: PriceAction): Order? {
             val asset = signal.asset
+            val price = priceAction.getPrice(priceType)
 
             // We set a limit based on the ATR. The higher the ATR, the more the limit price
             // will be distanced from the current price.
