@@ -21,6 +21,7 @@
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="/charts.html">Charts</a></li>
+                <li class="nav-item"><a class="nav-link" href="/blog/index.html">Blog</a></li>
                 <li class="nav-item"><a class="nav-link" href="/community.html">Community</a></li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://github.com/neurallayer/roboquant" target="_blank">

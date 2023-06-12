@@ -33,19 +33,17 @@
                 </div>
             </section>
 
-            <#list items?sort_by("uri") as item>
-                <#if item.uri?starts_with(content.items)>
+            <#list docs as item>
+                <#if item.uri?starts_with("blog/")>
                 <section class="pt-3">
                     <div class="container px-3 my-1">
                         <div class="row gx-5">
-                            <div class="col-lg-4 mb-1 mb-lg-0"><h2 id="${item.title}" class="fw-bolder mb-0">${item.title}</h2></div>
+                            <div class="col-lg-4 mb-1 mb-lg-0"><h2 class="fw-bolder mb-0">${item.date?date}</h2></div>
                             <div class="col-lg-8">
                                 <div class="col h-100">
-                                    ${item.intro}
-                                    <br/><br/>
-                                    <p>
-                                    Click <a href="${item.uri}">here</a> to read the full article.
-                                    </p>
+                                    <h3> ${item.title}</h3>
+                                    <p>${item.intro}</p>
+                                    <p>Click <a href="/${item.uri}">here</a> to read the full article.</p>
                                 </div>
                             </div>
                         </div>

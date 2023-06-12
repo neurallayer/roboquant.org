@@ -3,7 +3,7 @@
 :jbake-status: published
 :jbake-heading: if you personalize losses, you can't trade
 :icons: font
-:items: blog
+:jbake-date: 2023-04-30
 
 Some blog articles
 
