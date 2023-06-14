@@ -3,6 +3,7 @@
 :jbake-status: published
 :icons: font
 :jbake-date: 2023-04-30
+:jbake-heading: markets can remain irrational longer than you can remain solvent
 
 The following articles are available
 
