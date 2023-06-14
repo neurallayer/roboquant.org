@@ -1,9 +1,9 @@
-= ARM vs X86
+= ARM vs x86
 :icons: font
 :source-highlighter: rouge
 :jbake-date: 2023-06-12
 :jbake-heading: testing leads to failure, and failure leads to understanding
-:intro: This article investigates what is the most cost-efficient machine for performing CPU intensive JVM tasks like back-testing. It compares top-end X86 vs ARM machines, and the outcome may surpise you.
+:intro: This article investigates what is the most cost-efficient machine for performing CPU intensive JVM tasks like back-testing. It compares top-end x86 vs ARM machines, and the outcome may surpise you.
 
 == Background
 Roboquant is an algo-trading platform written in Kotlin, and more importantly for this article, runs on a Java Virtual Machine (JVM).
@@ -17,7 +17,7 @@ And since this test doesn't rely on network- or disk-io, it is a good indicator 
 == The 2 candidates
 Cloud infra is a cost-effective way to perform these types of elastic workloads. So we selected two similar AWS EC2 instances for the comparison test.
 
-. Intel/AMD based instance (X86-64)
+. Intel/AMD based instance (x86-64)
 . ARM based instance (AArch64)
 
 Other than the CPU architecture, these two instances have almost the same configuration and cost associated with them. The two instances also both run OpenJDK 17 and Ubuntu-22.04 (AWS standard EC2 images) without further tuning.
@@ -28,13 +28,13 @@ Other than the CPU architecture, these two instances have almost the same config
 |===
 |EC2 Instance |Architecture|Type| vCPU |Memory | Cost/hour
 
-|c6a.16xlarge|X86-64|AMD Epyc third generation |64| 128GB|$2.45
+|c6a.16xlarge|x86-64|AMD Epyc third generation |64| 128GB|$2.45
 |c7g.16xlarge|AArch64|AWS Graviton third generation| 64| 128GB|$2.31
 |===
 
 
 == Results
-The outcome of running the performance test on both machines might come as a bit of surprise. Since JVM has been running on X86-64 hardware much longer than Arm64, you might expect it also to perform better on that platform. But actually, the opposite is true.
+The outcome of running the performance test on both machines might come as a bit of surprise. Since JVM has been running on x86-64 hardware much longer than Arm64, you might expect it also to perform better on that platform. But actually, the opposite is true.
 
 image::performance_chart.png[alt="chart", width="100%"]
 
@@ -42,7 +42,7 @@ image::performance_chart.png[alt="chart", width="100%"]
 [.table]
 [cols=">,>,>,>"]
 |===
-|Load (M)|X86 throughput (M/s)|ARM throughput (M/s)| Difference
+|Load (M)|x86 throughput (M/s)|ARM throughput (M/s)| Difference
 
 |1|27|31|15%
 |5|	263|312|19%
@@ -53,15 +53,15 @@ image::performance_chart.png[alt="chart", width="100%"]
 |1000|337|612|**82%**
 |===
 
-As is clear from the above chart and table, the performance on ARM is significantly better than on X86:
+As is clear from the above chart and table, the performance on ARM is significantly better than on x86:
 
-- The maximum throughput on X86 is 443 million candlesticks per second, while on ARM it is 711 million. So at maximum throughput, ARM is 60% faster, while at a similar or slightly lower price point.
-- If we look at the biggest load of 1 billion bars, **ARM is 82% faster than X86**.
+- The maximum throughput on x86 is 443 million candlesticks per second, while on ARM it is 711 million. So at maximum throughput, ARM is 60% faster, while at a similar or slightly lower price point.
+- If we look at the biggest load of 1 billion bars, **ARM is 82% faster than x86**.
 
 For those interested in the exact output of the performance tests:
 
 ----
-X86
+x86
              _______
             | $   $ |             roboquant
             |   o   |             version: 1.5.0-SNAPSHOT
@@ -125,9 +125,9 @@ There are two main reasons why we observe these large differences in performance
 
 . Instructions per cycle
 +
-The JVM doesn't utilize all the X86 instructions that are available. Compared to something like a LLVM compiler, the JIT compiler is more limited in the instructions it actually compiles to.
+The JVM doesn't utilize all the x86 instructions that are available. Compared to something like a LLVM compiler, the JIT compiler is more limited in the instructions it actually compiles to.
 +
-For example, the JVM only recently started using AVX512 instructions and only for limited use-cases. So although the X86 has more powerful instructions available, the JIT compiler doesn't always use them.
+For example, the JVM only recently started using AVX512 instructions and only for limited use-cases. So although the x86 has more powerful instructions available, the JIT compiler doesn't always use them.
 +
 And this is of course of great benefit to ARM, since the instruction set is smaller by design, but the number of instructions it can process per clock-cycle is higher. So from this perspective, a "RISC" architecture like ARM is better suited to the JIT compiler.
 
@@ -137,13 +137,13 @@ And this is of course of great benefit to ARM, since the instruction set is smal
 Although the performance test is CPU bound, memory speed (bandwidth and latency) plays an important role. Unfortunately, AWS doesn't provide this metric for the selected instance. So instead, we run a small Linux benchmark utility (`mbw`) to get an approximation of the memory performance. We use smaller 1MB memory blocks to reflect JVM memory usage patterns:
 +
 ----
-X86: AVG  Method: MEMCPY  MiB: 1.00  Copy: 12836.970 MiB/s
+x86: AVG  Method: MEMCPY  MiB: 1.00  Copy: 12836.970 MiB/s
 ARM: AVG  Method: MEMCPY  MiB: 1.00  Copy: 18761.726 MiB/s
 ----
 +
 Clearly, the memory bandwidth of the ARM instance is better. And this is easily explained since Graviton uses DDR5 memory while the Epyc platform still uses the slower DDR4 memory modules.
 +
-One might argue that this is just a temporary situation, and in the remaining of 2023 several new X86 DDR5 server platforms will be launched. And while this might be true, the complexity of the X86 chips combined with the fact that there are only two chip designers (Intel & AMD), means it will always be lacking when it comes to more purpose-built systems.
+One might argue that this is just a temporary situation, and in the remaining of 2023 several new x86 DDR5 server platforms will be launched. And while this might be true, the complexity of the x86 chips combined with the fact that there are only two chip designers (Intel & AMD), means it will always be lacking when it comes to more purpose-built systems.
 
 
 == Future of the JVM on ARM
@@ -151,7 +151,7 @@ There are still several areas where the performance can be improved, triggered b
 
 * [x] The CPUs used in the Graviton machine are actually not that impressive (yet). When we compare the performance of an 8-core Graviton against an 8-core Apple M2 chip, it becomes clear there is still a lot to be gained.
 +
-The Apple M2 8-core CPU performs over 75% better than a similar sized Graviton instance. If we extrapolate this to 64 cores and assume other ARM CPU designers will catch up, the **ARM CPU is potentially a whopping 210% faster than X86**.
+The Apple M2 8-core CPU performs over 75% better than a similar sized Graviton instance. If we extrapolate this to 64 cores and assume other ARM CPU designers will catch up, the **ARM CPU is potentially a whopping 210% faster than x86**.
 
 * [x] ARM is quickly gaining traction for server-side computing. So it is not unreasonable to assume that newer ARM instruction sets will support these types of work-loads even better (ARMv9 and onwards).
 
