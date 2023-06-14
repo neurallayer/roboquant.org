@@ -1,7 +1,7 @@
 = Kotlin vs Python
 :icons: font
 :source-highlighter: rouge
-:jbake-date: 2021-06-10
+:jbake-date: 2022-06-10
 :jbake-heading: testing leads to failure, and failure leads to understanding
 :intro: Before starting developing roboquant, we prototyped several solutions. If you want to find out why we settled on Kotlin, read this article.
 

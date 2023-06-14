@@ -1,7 +1,7 @@
 = ARM vs X86
 :icons: font
 :source-highlighter: rouge
-:jbake-date: 2023-05-30
+:jbake-date: 2023-06-12
 :jbake-heading: testing leads to failure, and failure leads to understanding
 :intro: This article investigates what is the most cost-efficient machine for performing CPU intensive JVM tasks like back-testing. It compares top-end X86 vs ARM machines, and the outcome may surpise you.
 
@@ -15,7 +15,7 @@ Question that than remains: what is the best machine to run these simulations on
 And since this test doesn't rely on network- or disk-io, it is a good indicator of the overall CPU architecture performance.
 
 == The 2 candidates
-Cloud infra is a cost-effective way to perform these types of performance tests. So we selected two similar AWS EC2 instances for the comparison test.
+Cloud infra is a cost-effective way to perform these types of elastic workloads. So we selected two similar AWS EC2 instances for the comparison test.
 
 . Intel/AMD based instance (X86-64)
 . ARM based instance (AArch64)
@@ -42,7 +42,7 @@ image::performance_chart.png[alt="chart", width="100%"]
 [.table]
 [cols=">,>,>,>"]
 |===
-|Load (million)|X86 throughput (million/s)|ARM throughput (million/s)| Difference
+|Load (M)|X86 throughput (M/s)|ARM throughput (M/s)| Difference
 
 |1|27|31|15%
 |5|	263|312|19%

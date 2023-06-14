@@ -1,7 +1,7 @@
 = Choosing a Broker
 :icons: font
 :source-highlighter: rouge
-:jbake-date: 2021-01-02
+:jbake-date: 2022-01-02
 :intro: Selecting the right broker for you is not an easy task. This article gives some pointers to come to a good decision.
 
 
