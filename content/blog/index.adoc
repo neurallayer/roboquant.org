@@ -1,11 +1,10 @@
 = Blog
 :jbake-type: blog
 :jbake-status: published
-:jbake-heading: if you personalize losses, you can't trade
 :icons: font
 :jbake-date: 2023-04-30
 
-Some blog articles
+The following articles are available
 
 
 

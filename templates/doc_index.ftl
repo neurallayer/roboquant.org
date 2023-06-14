@@ -3,25 +3,9 @@
     <div class="collapse navbar-collapse show" id="navbarSupportedContent2">
         <ul class="navbar-nav">
         <#list docs as doc>
-
-            <#if content.uri?starts_with("tutorial/")>
-                <#if doc.uri?starts_with("tutorial/")>
-                   <li class="nav-item"><a href="/${doc.uri}" class="nav-link">${doc.title}</a></li>
-                </#if>
+            <#if doc.uri?starts_with(content.uri?substring(0, 4))>
+                <li class="nav-item"><a href="/${doc.uri}" class="nav-link">${doc.title}</a></li>
             </#if>
-
-            <#if content.uri?starts_with("background/")>
-                <#if doc.uri?starts_with("background/")>
-                     <li class="nav-item"><a href="/${doc.uri}" class="nav-link">${doc.title}</a></li>
-                </#if>
-            </#if>
-
-            <#if content.uri?starts_with("blog/")>
-                <#if doc.uri?starts_with("blog/")>
-                    <li class="nav-item"><a href="/${doc.uri}" class="nav-link">${doc.title}</a></li>
-                </#if>
-            </#if>
-
         </#list>
         </ul>
     </div>

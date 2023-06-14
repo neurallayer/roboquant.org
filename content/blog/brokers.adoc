@@ -1,8 +1,8 @@
-= Choosing a broker
-:jbake-type: doc
+= Choosing a Broker
 :icons: font
 :source-highlighter: rouge
-:jbake-date: 2020-01-02
+:jbake-date: 2021-01-02
+:intro: Selecting the right broker for you is not an easy task. This article gives some pointers to come to a good decision.
 
 
 == Criteria
@@ -21,11 +21,11 @@ Brokers that offer classic asset classes like stocks, often are more regulated. 
 
 . High Available
 +
-You need stable IT systems at your broker, even when markets are very volatile. Nothing is more damaging than not being able to close positions when you are loosing money.
+You need stable IT systems at your broker, even when markets are very volatile. Nothing is more damaging than not being able to close positions when you are losing money. Important to realize is that during low-volatile times, there is not much traffic and most brokers are up. But when the volatility rises, some brokers are having difficulties dealing with the increased order load.
 
 . Stable APIs
 +
-Stable and well-designed APIs that allow you to trade how you want and offer access to the same functionality as you have via a UI.
+Stable and well-designed APIs that allow you to trade how you want and offer access to the same functionality as you have via a UI. Ideally, they publish and maintain their own REST apis, or even better make client libraries available.
 
 . Access to markets
 +
@@ -33,7 +33,7 @@ Have access to asset classes and markets that you want to trade in. And in order
 
 . Paper trading functionality
 +
-Before going live, it is good practice to first test your software with a paper-trading or demo account of the same broker. And the closer the paper trading is to live trading, the better you'll be prepared. See also the xref:four_stages.adoc[4 stages] of developing and testing your strategy.
+Before going live, it is good practice to first test your software with a paper-trading or demo account of the same broker. And the closer the paper trading is to live trading, the better you'll be prepared. See also the xref:../background/four_stages.adoc[4 stages] of developing and testing your strategy.
 
 . Rich set of order types
 +
