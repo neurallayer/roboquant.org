@@ -5,7 +5,7 @@
 :jbake-date: 2020-06-01
 
 == Introduction
-A  strategy is a systematic approach to buying and selling assets, such as stocks, bonds, currencies, or commodities, in order to achieve a specific financial goal. A  strategy typically involves the use of a set of rules, indicators, and other technical or fundamental analysis tools to identify potential trades.
+A  strategy is a systematic approach to buying and selling assets, such as stocks, bonds, currencies, or commodities, in order to achieve a specific financial goal. A strategy typically involves the use rules, indicators, and other technical or fundamental analysis tools to identify potential trades.
 
 A `Strategy`  in _roboquant_ is the component responsible for generating signals based on the events it receives and is likely the place where you do most of your software development and differentiate from other algo-traders.
 
@@ -19,7 +19,7 @@ The main method that needs to be implemented in the `Strategy` interface is the 
 include::{sourcefile}[tag=intro]
 ----
 
-Since a `Strategy` only has access to an `Event` and not the `Account`, it has no knowledge of things like orders, open positions or buying power. As a consequence a `Strategy` is a generic component that can be easily shared or re-used.
+Since a `Strategy` only has access to an `Event` and not the `Account`, it has no knowledge of things like open orders, positions or buying power. As a consequence a `Strategy` is a generic component that can be easily shared or re-used.
 
 == Out-of-the-box Strategies
 There are several commonly used strategies included with _roboquant_. This section highlights some of them, and using them is a great way to get started.

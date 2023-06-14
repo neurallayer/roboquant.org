@@ -7,14 +7,14 @@
 :cryptofile: ../../samples/crypto.kt
 :imagesdir: ../img/
 
-There are several categories of functionality available from 3rd parties providers:
+There are several categories of functionality available from 3rd party providers:
 
 * Historic data feeds
 * Live data feeds
 * Broker functionality
 * Exchange rates
 
-In some cases a single 3rd party provides all types of functionality, or sometimes they are just offer a subset. You can combine several of these 3rd parties together in a single run, for example using a data feed from one provider and the broker functionality from another one.
+In some cases, a single 3rd party provides all types of functionality, or sometimes they are just offer a subset. You can combine several of these 3rd parties together in a single run, for example using a data feed from one provider and the broker functionality from another one.
 
 One of the design principles is that _roboquant_ tries to enforce is avoiding exposing 3rd party APIs directly. Typically, these APIs are wrapped in _roboquant_ specific APIs and types. This makes it easier to switch between different providers and also reduces the learning curve.
 
@@ -216,7 +216,7 @@ If you run your software in a Docker container and the IB Gateway is running on 
 
 image::ibkr_install.png[]
 
-One way to achieve this, is to set the IBKR host property to "host.docker.internal" in your software.
+One way to achieve this, is to set the IBKR host property to "host.docker.internal" in your application.
 [source,kotlin]
 ----
 Config.setProperty("ibkr.host", "host.docker.internal")

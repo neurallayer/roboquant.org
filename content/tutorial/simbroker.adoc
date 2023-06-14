@@ -180,9 +180,9 @@ The following table shows another example, but this time shorting on a USD margi
 |===
 
 === Order impact on Buying Power
-The following rules apply when taking into account orders when calculating the buying power:
+The following order-rules apply when calculating the buying power:
 
-- Until an order is accepted, it doesn't impact margin or buying power.
+- Until an order is accepted (so in `INITIAL` state), it doesn't impact margin or buying power.
 - Open orders that reduce a position size do not require buying power. So you can always close a position, both short and long positions.
 - Once an order has been accepted, it will not be cancelled due to lack of buying power.
 - An order in a closed state doesn't impact margin or buying power (so similar to the `INITIAL` state)
@@ -193,6 +193,8 @@ NOTE: Not all rules are currently implemented yet.
 A negative value for `BuyingPower` indicates a possible margin call situation. However, _roboquant_ doesn't interrupt the back-test for that.
 
 If you are interested in detecting these conditions, best to configure a metric that logs the BuyingPower at each step and evaluate that metric after the run.
+
+TIP: Always be very conservative about the amount of margin being available. Stay as far away from margin calls as possible, since these are typically manual broker processes that cannot be automated in an algo-trading strategy.
 
 
 === Realized profit

@@ -15,6 +15,7 @@ import org.roboquant.ta.PriceBarSeries
 import org.roboquant.ta.TaLib
 import java.time.Instant
 import org.roboquant.common.*
+import org.roboquant.feeds.AssetFeed
 import org.roboquant.feeds.PriceAction
 
 // tag::basic[]
@@ -138,7 +139,7 @@ fun customPolicy2() {
             // We set a limit based on the ATR. The higher the ATR, the more the limit price
             // will be distanced from the current price.
             val priceBarSerie = prices.getValue(asset)
-            if (! priceBarSerie.isFull()) return null
+            if (!priceBarSerie.isFull()) return null
 
             val atr = taLib.atr(priceBarSerie, windowSize)
             val limit = price - size.sign * atr * atrPercentage
@@ -154,9 +155,77 @@ fun customPolicy2() {
     // end::custom3[]
 }
 
+fun customSingleAssetPolicy(feed: AssetFeed) {
+    // tag::singleAsset[]
+    class SingleAssetPolicy(private val asset: Asset) : Policy {
+
+        private val history = PriceSerie(10)
+
+        /**
+         * Open a position
+         */
+        private fun openPosition(account: Account, priceAction: PriceAction): Order? {
+            val available = account.buyingPower.value * 0.9 // Let's not use 100%
+            val price = priceAction.getPrice()
+            val size = asset.contractSize(available, price, fractions = 0)
+
+            return if (history.add(price)) {
+                // Your logic to decide to open a position
+                TODO()
+            } else {
+                null
+            }
+        }
+
+        /**
+         * Close a position
+         */
+        private fun closePosition(position: Position, priceAction: PriceAction): Order? {
+            val price = priceAction.getPrice()
+            val profit = price / position.avgPrice - 1.0
+
+            return when {
+                profit >= 0.01 -> MarketOrder(position.asset, -position.size) // take profit
+                profit <= 0.01 -> MarketOrder(position.asset, -position.size) // stop loss
+                else -> null
+            }
+        }
+
+        override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
+            // If there is already an open order, don't do anything
+            if (account.openOrders.assets.contains(asset)) return emptyList()
+
+            // If there is no price, don't do anything
+            val priceAction = event.prices[asset] ?: return emptyList()
+
+            val position = account.positions.firstOrNull { it.asset == asset }
+            val order = if (position != null) {
+                closePosition(position, priceAction)
+            } else {
+                openPosition(account, priceAction)
+            }
+
+            return if (order == null) emptyList() else listOf(order)
+        }
+
+        override fun reset() {
+            history.clear()
+        }
+
+    }
+
+    val roboquant = Roboquant(
+        NoSignalStrategy(), // will always return an empty list of signals
+        policy = SingleAssetPolicy(feed.assets.first())
+    )
+
+    roboquant.run(feed)
+    // end::singleAsset[]
+}
+
 fun noStrategy() {
     // tag::advanced[]
-    class MyPolicy: Policy {
+    class MyPolicy : Policy {
 
         private var rebalanceDate = Instant.MIN
         private val holdingPeriod = 20.days
@@ -164,7 +233,7 @@ fun noStrategy() {
         /**
          * Based on some logic determine the target portfolio
          */
-        fun getTargetPortfolio() : List<Position> {
+        fun getTargetPortfolio(): List<Position> {
             TODO("your logic goes here")
         }
 
@@ -181,7 +250,9 @@ fun noStrategy() {
             return diff.map { MarketOrder(it.key, it.value) }
         }
 
-        override fun reset() { rebalanceDate = Instant.MIN }
+        override fun reset() {
+            rebalanceDate = Instant.MIN
+        }
     }
 
     val roboquant = Roboquant(

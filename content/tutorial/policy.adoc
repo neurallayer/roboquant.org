@@ -110,3 +110,12 @@ The following example shows the boilerplate code for a policy that at a regular 
 include::{sourcefile}[tag=advanced]
 ----
 
+
+The following example shows an approach to trading a single asset. This would be applicable if, for example, you only trade a single currency pair.
+
+The advantage over using a strategy is that you have full control over all the logic in a single place.
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=singleAsset]
+----
