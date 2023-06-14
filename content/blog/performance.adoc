@@ -10,7 +10,7 @@ Roboquant is an algo-trading platform written in Kotlin, and more importantly fo
 
 When testing and optimizing a trading strategy, you'll need to run thousands of simulations over large historic data sets. In order to speed up this process, roboquant is built to efficiently (low-memory, high-throughput) run these simulations in parallel.
 
-Question that than remains: what is the best machine to run these simulations on? To take some of the guess work out of the equation, roboquant comes with a dedicated performance test. The test measures the performance of the maximum throughput expressed as `the number of candles per second`.
+Question that than remains: what is the best machine to run these simulations on? To take some of the guess work out of the equation, roboquant comes with a dedicated performance test. The test measures the performance of the maximum throughput expressed as "the number of candles per second".
 
 And since this test doesn't rely on network- or disk-io, it is a good indicator of the overall CPU architecture performance.
 
