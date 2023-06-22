@@ -151,7 +151,7 @@ fun debug(feed: Feed) {
 
     // tag::debug[]
     val strategy = EMAStrategy()
-    val policy = FlexPolicy(recording = true)
+    val policy = FlexPolicy(enableMetrics = true)
     val roboquant = Roboquant(strategy, policy = policy, logger = ConsoleLogger())
     roboquant.run(feed)
     // end::debug[]

@@ -1,0 +1,79 @@
+= Technical Analysis
+:source-highlighter: rouge
+:icons: font
+:sourcefile: ../../samples/talib.kt
+:jbake-date: 2019-01-01
+
+== Introduction
+Technical analysis is based on information coming directly from the financial markets and exchanges. This includes attributes like:
+
+- Asset prices, including quotes, trades and aggregates like price-bars
+- Volumes of trades and aggregates there of
+- Open interest (only for certain types of asset classes)
+- Shorting percentage
+- Spread (difference between ask and bid prices)
+
+Since many strategies use technical analysis as a basis for decision-making, _roboquant_ comes out-of-the-box with support for two of the most popular Java libraries:
+
+. TaLib (https://www.ta-lib.org)
+. Ta4j (https://ta4j.com)
+
+In order to use this, you'll need to include to module `roboquant-ta` in your build tool of choice.
+
+This page goes into more details on how to use the TaLib library. For Ta4j, please check their website.
+
+== Basic usage
+TaLib is a very fast and powerful library that can be used for calculating many different types of indicators. It is a pure Java library, but using an API that might be confusing.
+
+In order to make it more convenient to work with, _roboquant_ comes with a wrapper for it. The following example shows how to use it:
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=basic]
+----
+
+If you invoke a taLib-indicator and don't have enough data to perform the calculations, an InsufficientData exception will be thrown. You can either increase the initial capacity of the PriceBarSerie, or use this exception to increase the historic data capacity:
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=dynamic]
+----
+
+== TaLibStrategy
+If you use `TaLibStrategy` as a foundation for your strategy, much of the boilerplate code is already taken care of. All you have to do is to define the sell and buy rules.
+
+Each rule should return `true` or `false`. In case you return `true`, a corresponding `Signal` will be created. So if you return `true` from the buy-rule, a buy signal will be created.
+
+If you don't implement a rule, it will by default always return `false`.
+
+You can provide the amount of history to keep track of when initializing the `TaLibStrategy`. But if you don't, the history will grow automatically until the rules can be successfully executed.
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=strategy]
+----
+
+== TaLibMetric & TaLibIndicator
+Similar to the TaLibStrategy, the TaLibMetric makes it convenient to turn TaLib indicators into _roboquant_ metrics.
+
+The following example demonstrates how to create a metric for the three values of the Bollinger Band indicator.
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=metric]
+----
+
+The final names of the metrics will be in the form of "<metric name>.<symbol>".
+
+The TaLibIndicator works almost exactly the same, but as usual, an indicator only works on a single price-series.
+
+The following indicator flags when it detects a 3-white-soldiers candlestick pattern:
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=indicator]
+----
+
+
+
+

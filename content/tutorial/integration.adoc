@@ -201,9 +201,9 @@ include::{sourcefile}[tag=alphahistoric]
 
 
 == Interactive Brokers
-Interactive Brokers integration requires to run either TWS or IB Gateway on a local machine. So you cannot directly connect from roboquant to their servers.
+Interactive Brokers integration requires running either TWS or IB Gateway on a local machine. So you cannot directly connect from _roboquant_ to the IBKR servers. Other than that, the integration is the same as other brokers and data feeds.
 
-Other than that, the integration is the same as other brokers and data feeds.
+IB Gateway provides some benefits over TWS, in that you can more easily monitor the messages being exchanged, and it is a lighter on resources.
 
 [source, kotlin,indent=0]
 ----
@@ -224,8 +224,39 @@ Config.setProperty("ibkr.host", "host.docker.internal")
 ====
 
 == Adding new 3rd party integrations
-Adding integration with a 3rd party is not difficult. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library that is available, this could take as little as a few hours to a few days. You can read more about the Feed interface that you need to implement it right xref:feed.adoc#_custom_feeds[here].
-
-Integrating with a new broker is not that difficult either, but requires more effort. Most of the work will be the translation of object exposed by the broker to those used by _roboquant_. For example an Order in _roboquant_ will be different from an Order expected by the client library of the broker, and a conversion needs to happen in both directions.
+Adding integration with a 3rd party is not difficult. Integration with 3rd party data providers is straight forward and requires implementing a single interface. Depending on the client library that is available, this could take as little as a few hours to a few days.
 
 For both custom Feed and Broker integrations, it is recommended to first look at some existing integrations and use them as a starting point. And if you have questions, you can always reach out via one of the channels mentioned on the xref:../community.adoc[community page].
+
+=== Feed integration
+You can read more about the Feed interface that you need to implement it right xref:feed.adoc#_custom_feeds[here].
+
+The following code-snippet shows the template of what you would normally implement for a historic data feed. By convention, _roboquant_ uses `retrieve` for historic feeds and `subscribe` for live feeds.
+
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=feedIntegration]
+----
+
+=== Broker integration
+Integrating with a new broker is not that difficult either, but requires more effort. Most of the work will be the translation of object exposed by the broker to those used by _roboquant_. For example, an `Order` in _roboquant_ will be different from an Order expected by the client library of the broker, and a conversion needs to happen in both directions.
+
+To get started, it is most helpful to look at one of the existing implementations, like the BinanceBroker or IBKRBroker. This will give you a good idea of how to approach this.
+
+A few things that might make the task easier:
+
+. You can use the `InternalAccount` class to store the state in the broker implementation. It makes it easy to create an Account instance.
+. BuyingPower tells you how much money there is to place new orders. You have to make sure that this value is correct.
+. Open Orders and Positions are also important to decide what to do in your logic and should reflect the latest status.
+. Closed orders, Cash and Trades are typically not required when making decisions for new orders. So if you don't map these, typically a few metrics might be wrong, but it should not impact your overall trading logic.
+
+The following snippet can serve as a template:
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=customBroker]
+----
+
+
+

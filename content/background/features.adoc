@@ -9,16 +9,43 @@
 Roboquant has 4 main objectives that determine most of its features: *<<Fast>>*, *<<Flexible>>*, *<<Friendly>>* and *<<Free>>*. All the features listed on this page can be directly linked to one of these 4 objectives.
 
 == Fast
-Nowadays, there is so much more data available than ever before. It would be a lost opportunity not being able to use this data to develop smarter and better performing strategies. Roboquant can work seamlessly with these large data-sets:
+Nowadays, there is so much more data available than ever before. It would be a lost opportunity not being able to use this data to develop smarter and better performing strategies. Roboquant can work seamlessly with these large data-sets.
 
-* [x] Use of multi-threading and coroutines to fully utilize modern hardware, like large multicore machines
-* [x] Optimized and fine-tuned back-test engine so the engine itself will not become a bottleneck
-* [x] Run multiple back-test in parallel
-* [x] Very fast parallel CSV parsing, allowing to process directories full of CSV files in just seconds
-* [x] Support for file formats like Apache Avro™ to further reduce parsing overhead and easily share data sets
-* [x] Support for lazy loading of data, so memory doesn't become a constraint
-* [x] Several very fast algorithms out of the box
+The design principles that have been followed to ensure the best performance possible are:
 
+* [x] Much of the builtin functionality uses multithreading and Kotlin coroutines to speedup processing. For example, the CSVFeed parses CSV files in parallel so directories with thousands of CSV files can be parsed in seconds. So modern multicore CPUs can be fully utilized.
+
+* [x] Roboquant is designed NOT to be a financial ledger, and in general, algo-trading applications don't require this. The native Java Double type provides enough precision for algo-trading purposes, and there is no need to use (a much slower and more memory-hungry) BigDecimal type. BTW, the area where _roboquant_ uses high precise calculations is when dealing with order- and position-sizes.
+
+* [x] Avoid (auto)boxing, so the JVM can access these variables directly. This means where possible use native types and not the wrapped ones. Read also this https://docs.oracle.com/javase/1.5.0/docs/guide/language/autoboxing.html[autoboxing article^] from Oracle.
+
+* [x] Optimized paths for common use-cases, for example, trading in a single currency only.
+
+* [x] Reuse objects to allow for faster referential equality comparisons. For example, the common use-case of accessing a `Map` with an `Asset` as key, benefits a lot from this.
+
+* [x] The Feed API supports data that is kept in-memory as well as data that is stored on disk and only accessed when required. This allows for running back test where the test data doesn't fit in memory or running back-tests on machines with limited memory. In fact, _roboquant_ can be used on a JVM with only 100 MB of heap allocated.
++
+Additionally, there is feed support for file formats like Apache Avro™ to further reduce parsing overhead and easily share data sets
+
+* [x] Avoid unnecessary copying of objects in order to limit memory allocations and garbage collection. The overall latency is kept to a minimum when processing new market data events and generating the corresponding orders. So it is feasible to create fast, low-latency (millisecond) trading strategies.
+
+* [x] Optimized collections, so they can be accessed efficiently even if back tests grow in size. For example, open- and closed-orders are maintained in two separate collections, so access to open-orders remains fast even if the total number of generated orders in a back test grows to over 100.000.
+
+* [x] Optimized and fine-tuned back-test engine so the engine itself will not become a bottleneck. See also xref:../blog/performance.adoc[the performance blog] for more details about the actual performance of this engine.
+
+
+.Running the performance test yourself
+****
+You can easily run the performance test on your own hardware after you've cloned the roboquant GitHub repo. All it takes is a single command from the command line:
+
+[source, shell]
+----
+./mvnw compile exec:java -pl roboquant
+----
+****
+
+
+With all these measures in place, _roboquant_ is very fast while still have the benefit of being able to use a high-level language.
 
 The following table shows the order of magnitude that the different parts of the system have been optimized for:
 
@@ -29,12 +56,12 @@ The following table shows the order of magnitude that the different parts of the
 |Aspect |Size |Description
 
 |Assets|50k|the number of unique assets used in a run. For example, every stock or option-contract is a unique asset
-|Open Positions|5k|the number of open positions during a run
-|Created Orders|100k|the number of orders created during a run
+|Positions|5k|the number of open positions during a run
+|Orders|100k|the number of orders created during a run
 |Trades|100k|the number of trades generated during a run
-|Cash currencies|50|the number of currencies in cash balances
-|Published Events|10M|the total number of events during a run
-|Actions|1B|the total number of actions (like candlesticks) used during a run
+|Currencies|100|the number of different currencies used
+|Events|10M|the total number of events during a run
+|Actions|10B|the total number of actions (like candlesticks) used during a run
 |Exchanges|100|the number of exchanges defined
 |===
 
@@ -80,7 +107,7 @@ include::{sourcefile}[tag=strategy]
 As you can see, the roboquant version is just as easy to develop.
 
 === Trading specific Domain Model
-Rather than having a generic framework where you still have to code a lot to make it usable, _roboquant_ approach is that of providing a trading specific domain model.
+Rather than having a generic framework where you still have to code a lot to make it usable, _roboquant_ approach is that of providing a trading-specific domain model.
 
 For example, you can easily work with monetary amounts:
 
@@ -101,19 +128,19 @@ Roboquant can be run inside a Jupyter Notebook which makes it easy to explore an
 
 A lot of effort went into designing an API that is easy to use from a Notebook and add features that make sense in the context of algo-trading:
 
-* [x] Many charts out of the box that provide insights into the feeds and the results of a run
-* [x] Graceful introduction of complexity.In other words: simple things should be simple, complex things should be possible
+* [x] Many charts out of the box that provide insights into the feeds and the results of a run. See aso xref:../charts.adoc[charts examples]
+* [x] Graceful introduction of complexity. In other words: simple things should be simple, complex things should be possible
 * [x] Many convenience methods to get results with minimal amount of coding
 * [x] Sensible defaults for many arguments, so you don't have to specify them all the time
 
-Another example, if you want to plot a chart, you don't first have to mangle data to make it consumable by the chart. In _roboquant_ the charts understand the key domain concepts like Account, Trades and Metrics and can plot these directly.
+Another example, if you want to plot a chart, you don't first have to mangle data to make it consumable by the chart. In _roboquant_, the charts understand the key domain concepts like Account, Trades and Metrics and can plot these directly.
 
 [source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=friendly2]
 ----
 
-Once you code base grows too large for a notebook, the same code can be used in a traditional IDE.
+Once your code base grows too large for a notebook, the same code can be used in a traditional IDE.
 
 [#_order_management]
 === Order Management
@@ -132,17 +159,17 @@ Because of this, _roboquant_ separates the generation of signals (Strategy) from
 == Free
 In order to build the best platform for algo-trading possible, we think it is important to make sure this platform is free for anyone to use, contribute and improve upon. That is why _roboquant_ is developed under the permissive Apache 2.0 license and welcomes people to contribute.
 
-But it doesn't stop at the software. For real progress also data has to become freely available so performance of various strategies can be more easily compared. This is still very much work in progress, but for sure on the agenda of _roboquant_.
+But it doesn't stop at the software. For real progress also data has to become freely available so performance of various strategies can be more easily compared. This is still very much work in progress, but for sure, on the agenda of _roboquant_.
 
 .Deep Learning Datasets
 ****
-For inspiration, look at what quality training data did for the progress of AI in recent years. By having standardized sets of data that are known to be of good quality and representative, it became much easier to compare different network architectures and continue to improve those that showed the best performance.
+For inspiration, look at what quality training data did for the progress of AI in recent years. By having standardized sets of data that are known to be of good quality and representative, it became much easier to compare different approaches and continue to improve those that showed the best performance.
 
 The same can hopefully also be achieved in the algo-trading world, so we can easily compare strategies and reproduce results.
 ****
 
 == Feature Comparison
-The following table provide a short overview of how the features of _roboquant_ stack up to some alternative algo-trading frameworks.
+The following table provides a short overview of how the features of _roboquant_ stack up to some alternative algo-trading frameworks.
 
 Of course, we are not completely objective, so we recommend trying them out for yourself and see which one suits you best.
 

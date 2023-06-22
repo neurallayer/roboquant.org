@@ -8,14 +8,23 @@ import org.roboquant.alpaca.AlpacaBroker
 import org.roboquant.alpaca.AlpacaHistoricFeed
 import org.roboquant.alpaca.AlpacaLiveFeed
 import org.roboquant.alphavantage.AlphaVantageHistoricFeed
+import org.roboquant.brokers.Account
+import org.roboquant.brokers.Broker
 import org.roboquant.brokers.ECBExchangeRates
+import org.roboquant.brokers.sim.execution.InternalAccount
 import org.roboquant.common.*
+import org.roboquant.common.Currency
+import org.roboquant.feeds.Event
+import org.roboquant.feeds.HistoricPriceFeed
+import org.roboquant.feeds.TradePrice
 import org.roboquant.ibkr.IBKRHistoricFeed
 import org.roboquant.orders.MarketOrder
+import org.roboquant.orders.Order
 import org.roboquant.polygon.PolygonHistoricFeed
 import org.roboquant.polygon.PolygonLiveFeed
+import java.math.BigDecimal
 import java.time.Instant
-
+import java.time.LocalDate
 
 
 fun ibkrFeed(roboquant: Roboquant) {
@@ -125,9 +134,114 @@ fun alpacaConfig() {
     println(feed)
 }
 
+private class FeedAPI {
+    fun getTrades(symbol: String, start: Instant, end: Instant): List<Triple<LocalDate, Double, Int>> {
+        TODO()
+    }
+}
+
+private fun feedIntegration() {
+    // tag::feedIntegration[]
+    class MyHistoricFeed : HistoricPriceFeed() {
+
+        // The api of your provider
+        private val api = FeedAPI()
+
+        fun retrieve(symbol: String, timeframe: Timeframe) {
+
+            // Make the API call
+            val trades = api.getTrades(symbol, timeframe.start, timeframe.end)
+
+            // The API returns American stocks
+            val asset = Asset(symbol, AssetType.STOCK, Currency.USD, Exchange.US)
+
+            // Loop over trades
+            for ((date, price, volume) in trades) {
+
+                // Convert to a TradePrice
+                val tradePrice = TradePrice(asset, price, volume.toDouble())
+
+                // Convert to an Instant
+                val time = asset.exchange.getClosingTime(date)
+
+                // Add it
+                add(time, tradePrice)
+            }
+        }
+
+    }
+    // end::feedIntegration[]
+}
+
+fun myBroker() {
+
+    class BrokerApi {
+        fun placeMarketOrder(symbol: String, volume: BigDecimal, id: Int) {}
+        fun getOrders(): List<Any> { TODO() }
+        fun getBuyingPower(): BigDecimal = TODO()
+        fun getPositions(): List<Any> = TODO()
+    }
+
+    // tag::customBroker[]
+    class MyBroker : Broker {
+
+        private val api = BrokerApi()
+
+        // Internal Account is a mutable version of Account
+        private val iAccount = InternalAccount(baseCurrency = Currency.USD)
+
+        override val account: Account
+            get() = iAccount.toAccount()
+
+        fun sync() {
+            // All the hard work goes here where you sync the InternalAccount object with your broker
+            // The api calls are all fictitious examples
+
+            // Sync the positions
+            iAccount.portfolio.clear()
+            for (position in api.getPositions()) {
+                TODO()
+                // iAccount.setPosition(...)
+            }
+
+            // Sync orders
+            for (order in api.getOrders()) {
+                TODO()
+                // iAccount.updateOrder(...)
+            }
+
+            // Sync buying-power
+            val buyingPower = api.getBuyingPower()
+            iAccount.buyingPower = buyingPower.USD
+        }
+
+        override fun place(orders: List<Order>, event: Event): Account {
+            // Validation of the supported order types
+            require(orders.all { it is MarketOrder })
+
+            // Store them in the internal account. Orders should never be (temporary) lost
+            iAccount.initializeOrders(orders)
+
+            // Process the orders
+            for (order in orders.filterIsInstance<MarketOrder>()) {
+                // Fictitious API call
+                api.placeMarketOrder(order.asset.symbol, order.size.toBigDecimal(), order.id)
+            }
+
+            // Sync the state
+            sync()
+
+            return account
+        }
+
+    }
+    // end::customBroker[]
+
+}
+
 fun alpacaBroker() {
     // tag::alpacabroker[]
-    // instantiation with hard coded configuration, rather than using dotenv property file
+    // instantiation with hard-coded configuration, rather than using dotenv property file
     val broker = AlpacaBroker {
         publicKey = "123"
         secretKey = "456"

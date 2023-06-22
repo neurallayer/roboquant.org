@@ -1,15 +1,14 @@
-@file:Suppress("unused", "UNUSED_VARIABLE")
+@file:Suppress("unused", "UNUSED_VARIABLE", "WildcardImport")
 
 import org.roboquant.Roboquant
 import org.roboquant.binance.BinanceBroker
 import org.roboquant.brokers.*
-import org.roboquant.common.Asset
-import org.roboquant.common.Currency
-import org.roboquant.common.Wallet
+import org.roboquant.common.*
 import org.roboquant.metrics.AccountMetric
 import org.roboquant.orders.MarketOrder
 import org.roboquant.orders.cancel
 import org.roboquant.strategies.EMAStrategy
+import java.time.Instant
 import java.time.ZoneId
 import java.time.temporal.ChronoField
 
@@ -24,6 +23,35 @@ fun placeOrder(broker: Broker) {
     // end::basic[]
 }
 
+
+fun positionTesla() {
+    // tag::positionTesla[]
+    val asset = Asset("TSLA")
+    // We bought 5 stocks tesla
+    // We bought at $250.10
+    // The current market price is $250.05
+    val position = Position(asset, Size(5), 250.10, 250.05, Instant.now())
+
+    println(position.unrealizedPNL) // USD -0.25
+    println(position.marketValue) // USD 1,250.25
+    println(position.totalCost) // USD 1,250.50
+    // end::positionTesla[]
+}
+
+fun positionBTC() {
+    // tag::positionBTC[]
+    val asset = Asset("BTC-USDT", AssetType.CRYPTO, "USDT", "CRYPTO")
+
+    // We bought 0.1 bitcoin
+    // We bought at 25.100 USDT
+    // The current market price is 25.000 USDT (for 1 bitcoin)
+    val position = Position(asset, Size(0.1), 25_100.0, 25_000.0, Instant.now())
+
+    println(position.unrealizedPNL) // USDT -10.00
+    println(position.marketValue) // USDT 2,500.00
+    println(position.totalCost) // USDT 2,510.00
+    // end::positionBTC[]
+}
 
 fun regular() {
     // tag::regular[]

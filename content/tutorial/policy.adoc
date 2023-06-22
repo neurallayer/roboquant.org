@@ -103,6 +103,8 @@ Most commonly, a `Policy` is used to transform signals it receives from the `Str
 
 In these cases you don't require a `Strategy` and you can implement all the logic in the `Policy` instead. You can use the `NoSignalStrategy` as strategy that doesn't perform any action.
 
+See also the xref:broker.adoc#_account[Account] description on how to use information available in the account object to make decisions.
+
 The following example shows the boilerplate code for a policy that at a regular interval (20 days) re-balances the portfolio:
 
 [source, kotlin,indent=0]

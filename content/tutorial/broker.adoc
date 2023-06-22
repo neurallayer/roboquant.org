@@ -23,15 +23,16 @@ include::{sourcefile}[tag=basic]
 
 Normally you would specify the broker you want to use when you create an instance of `Roboquant'
 
-[source, kotlin,indent=0]
+[source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=regular]
 ----
 
-WARNING: Broker implementations can differ in what order types and assets are supported. So when moving from the `SimBroker` to a real broker, always validate if the behavior is still as expected.
+WARNING: Broker implementations can differ in what order types and assets are supported.So when moving from the `SimBroker` to a real broker, always validate if the behavior is still as expected.
 
+[#_account]
 == Account
-`broker.account` property returns an Account object. This `Account` object contains a snapshot of the exposed state of a broker and is identical between the simulated broker and real brokers. The object is guaranteed not to change, which also implies that if you want an updated version, you need to invoke `broker.account` again.
+`broker.account` property returns an Account object.This `Account` object contains a snapshot of the exposed state of a broker and is identical between the simulated broker and real brokers. An account instance is guaranteed not to change, which also implies that if you want an updated snapshot, you need to invoke `broker.account` again.
 
 The `Account` object contains the following key properties:
 
@@ -44,7 +45,8 @@ The `Account` object contains the following key properties:
 
 TIP: Always use the `Account.buyingPower` property if you want to know how much money is remaining for trading. Especially when using a `MarginAccount`, you shouldn't rely on the `Account.cash` property, since that doesn't take into account any margin or leverage you might have.
 
-Since properties like `trades` and `openOrders` of the account object are plain Kotlin collections, you can use standard Kotlin access patterns. Kotlin's collection APIs are a very powerful tool to access data structures once you master them.
+Since properties like `trades` and `openOrders` of the account object are plain Kotlin collections, you can use standard Kotlin access patterns. Kotlin's collection APIs are a very powerful tool to access data structures once you learn them.
+
 
 TIP: If you are new to Kotlin's collections, you can go to this page for more info: https://kotlinlang.org/docs/collections-overview.html
 
@@ -62,6 +64,25 @@ As shown in the code snippet above, you can print an `account.summary` or `accou
 include::{sourcefile}[tag=fullsummary]
 ----
 
+
+=== Position
+Normally, you won't create positions since this is all taken off by the broker implementation. However, it might be helpful to understand what attributes a position contains and how they are used.
+
+Below is an example of a position in Tesla stocks:
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=positionTesla]
+----
+
+But the same attributes and logic apply to Forex, crypto, and other asset classes:
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=positionBTC]
+----
+
+
 .Equity
 ****
 Equity is a key metric to monitor if you want to see how your strategy is performing during a run. The following two equations hold true when running a back test:
@@ -74,10 +95,10 @@ include::{sourcefile}[tag=equity]
 The metric `AccountMetric` makes the equity curve available for further analysis.
 ****
 
-When you plot the equity curve in a Jupyter Notebook, you don't only can see the PNL performance, you also can see how smooth the curve is, providing a visual indication on the volatility of the returns of your strategy.
+When you plot the equity curve in a Jupyter Notebook, you don't only see the PNL performance, you also can see how smooth the curve is. This provides a visual indication of the volatility of the returns of your strategy.
 
 == Out of the box available brokers
-The following `Broker` implementations are available:
+The following `Broker` implementations are available out-of-the-box:
 
 image::brokers.png[]
 
