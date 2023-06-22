@@ -1,4 +1,4 @@
-@file:Suppress("unused", "UNUSED_VARIABLE", "WildcardImport")
+@file:Suppress("unused", "UNUSED_VARIABLE", "WildcardImport", "MagicNumber")
 
 import org.roboquant.Roboquant
 import org.roboquant.binance.BinanceBroker

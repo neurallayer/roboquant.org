@@ -2,7 +2,6 @@
 
 import org.roboquant.common.Asset
 import org.roboquant.feeds.PriceBar
-import org.roboquant.jupyter.PriceBarChart
 import org.roboquant.ta.*
 
 

@@ -1,4 +1,4 @@
-@file:Suppress("unused", "TooManyFunctions", "SpreadOperator", "MagicNumber", "WildcardImport")
+@file:Suppress("unused", "UNUSED_PARAMETER", "TooManyFunctions", "SpreadOperator", "MagicNumber", "WildcardImport")
 
 import com.crazzyghost.alphavantage.parameters.Interval
 import net.jacobpeterson.alpaca.model.properties.DataAPIType
@@ -176,7 +176,7 @@ private fun feedIntegration() {
 fun myBroker() {
 
     class BrokerApi {
-        fun placeMarketOrder(symbol: String, volume: BigDecimal, id: Int) {}
+        fun placeMarketOrder(symbol: String, volume: BigDecimal, id: Int) { TODO() }
         fun getOrders(): List<Any> { TODO() }
         fun getBuyingPower(): BigDecimal = TODO()
         fun getPositions(): List<Any> = TODO()
