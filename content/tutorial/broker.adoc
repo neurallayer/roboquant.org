@@ -57,6 +57,14 @@ Additionally, _roboquant_ defines several extensions that come in handy when dea
 include::{sourcefile}[tag=account]
 ----
 
+A common case of accessing the account object is if you implement your own policy.
+The following example provides some typical patterns that you can use in your policy using attributes found in the account object:
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=account2]
+----
+
 As shown in the code snippet above, you can print an `account.summary` or `account.fullSummary` overview. The full summary includes all positions, trades and orders, so it can become very large after an extensive back test:
 
 [source,indent=0]

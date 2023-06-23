@@ -54,10 +54,10 @@ image::tif.png[]
 The default TIF for orders in _roboquant_, if none is explicitly specified, is GTC (Good Till Cancelled). All TIF policies only become active once an `CreateOrder` has been `ACCEPTED` (so it's not anymore in the `INITIAL` state).
 
 == Custom Order Types
-Orders can be extended with your own order types if the ones that come out of the box are not sufficient. The steps required to use your own order types are:
+Orders can be extended with your own order types if the ones that come out-of-the-box are not sufficient. The steps required to use your own order types are:
 
 . Extend one of the two `CreateOrder` or `ModifyOrder` abstract classes with your own order type
-. If you want to use these orders also in back testing, you'll also need to implement and register an `OrderExecutor`
+. If you want to use these orders also in back testing, you'll also need to implement and register an `OrderExecutor`. This is used by the `SimBroker` to simulate the executions of your order type.
 
 After that, you can use this new order type in your policy just like any of the included order types.
 
@@ -79,7 +79,7 @@ include::{sourcefile}[tag=accountOrder]
 == Own order logic
 Although you typically would use an instance of `Roboquant` to handle method invocations on the various components, you can actually also invoke them directly.
 
-For example, if you want to place a market order you can directly invoke the `Broker.place` method:
+For example, if you want to place a market order, you can directly invoke the `Broker.place` method:
 
 [source, kotlin,indent=0]
 ----

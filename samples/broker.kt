@@ -4,13 +4,17 @@ import org.roboquant.Roboquant
 import org.roboquant.binance.BinanceBroker
 import org.roboquant.brokers.*
 import org.roboquant.common.*
+
 import org.roboquant.metrics.AccountMetric
+import org.roboquant.orders.CancelOrder
 import org.roboquant.orders.MarketOrder
 import org.roboquant.orders.cancel
 import org.roboquant.strategies.EMAStrategy
+import org.roboquant.strategies.Signal
 import java.time.Instant
 import java.time.ZoneId
 import java.time.temporal.ChronoField
+import kotlin.collections.sumOf
 
 
 fun placeOrder(broker: Broker) {
@@ -72,7 +76,7 @@ fun account(broker: Broker) {
     val winningTrades = account.trades.filter { it.pnl > 0 }
     val loosingTrades = account.trades.filter { it.pnl < 0 }
     val biggestExposure = account.positions.maxBy { it.exposure.value }
-    val marketOrders = account.openOrders.filter { it.order is MarketOrder}
+    val marketOrders = account.openOrders.filter { it.order is MarketOrder }
     val appleTrades = account.trades.filter { it.asset.symbol == "AAPL" }
 
     // Some useful extensions
@@ -95,6 +99,35 @@ fun account(broker: Broker) {
         .maxBy { it.value.value }
     // end::account[]
 }
+
+
+fun account2(account: Account, signals: List<Signal>) {
+    // tag::account2[]
+    for (signal in signals) {
+        val asset = signal.asset
+        val openOrders = account.openOrders.filter { it.asset == asset }
+        val openPositions = account.positions.filter { it.asset == asset } // returns 0 or 1 positions
+        val pastTrades = account.trades.filter { it.asset == asset }
+
+        // cancel open orders
+        val cancellations = openOrders.map { CancelOrder(it) }
+
+        // close positions
+        val closeOrders = openPositions.map { MarketOrder(it.asset, - it.size) }
+
+        // Stop a losing streak
+        val last2Hours = Timeframe.past(2.hours)
+        val pnl = pastTrades.filter { last2Hours.contains(it.time) }.sumOf { it.pnlValue }
+        if (pnl < -1_000) {
+            TODO()
+        }
+    }
+    // end::account2[]
+
+}
+
+
+
 
 fun equity(account: Account, initialDeposit: Wallet) {
     // tag::equity[]

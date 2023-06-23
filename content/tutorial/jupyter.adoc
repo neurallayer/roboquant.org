@@ -5,9 +5,9 @@
 :jbake-date: 2020-02-01
 
 == Usage
-Since developing an automated trading strategy requires a lot of experimentations and testing, an interactive development environment like Jupyter Notebooks is ideal. Especially in the beginning phase, it can help to progress a lot quicker.
+Developing an automated trading strategy requires experimentation and testing. An interactive development environment like Jupyter Notebooks is ideal in such scenario. Especially in the starting phase, it can help to progress a lot quicker.
 
-Roboquant is designed to be used in both standalone applications and Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without too much ceremony and there are many charts included that make it easier to interpret what is going on during a `run`.
+Roboquant is designed to be used in both standalone JVM applications and Jupyter Notebooks. The exposed APIs are convenient to call from a Jupyter Notebook without too much ceremony and there are many charts included that make it easier to interpret what is going on during a `run`.
 
 Using _roboquant_ in a Kotlin Jupyter Notebook requires just a single command:
 
