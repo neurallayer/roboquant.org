@@ -40,7 +40,7 @@ You can easily run the performance test on your own hardware after you've cloned
 
 [source, shell]
 ----
-./mvnw compile exec:java -pl roboquant
+./mvnw compile exec:java -pl roboquant-perf
 ----
 ****
 

@@ -124,7 +124,7 @@ fun alpacaLiveFeed(roboquant: Roboquant) {
 
 fun alpacaConfig() {
     // tag::alpacaconfig[]
-    // instantiation with hard coded configuration
+    // instantiation with hard-coded configuration
     val feed = AlpacaHistoricFeed {
         publicKey = "123"
         secretKey = "456"
