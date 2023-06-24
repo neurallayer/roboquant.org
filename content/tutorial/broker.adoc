@@ -32,7 +32,7 @@ WARNING: Broker implementations can differ in what order types and assets are su
 
 [#_account]
 == Account
-`broker.account` property returns an Account object.This `Account` object contains a snapshot of the exposed state of a broker and is identical between the simulated broker and real brokers. An account instance is guaranteed not to change, which also implies that if you want an updated snapshot, you need to invoke `broker.account` again.
+`broker.account` property returns an Account object. This `Account` object contains a snapshot of the current state and is identical between the simulated broker and real brokers. An account instance is guaranteed not to change, which also implies that if you want an updated snapshot, you need to invoke `broker.account` again.
 
 The `Account` object contains the following key properties:
 

@@ -91,8 +91,17 @@ include::{sourcefile}[tag=custom3]
 
 When developing custom policies, they should not only be robust and deal with corner-cases, but they should also be explainable. Back-testing over large amounts of data is already challenging enough without having a `Policy` in place whose behavior is very difficult to wrap your head around. So the KISS design principle (`Keep It Simple, Stupid`) applies to policies.
 
-TIP: When creating an order in a Policy, always validate if you still have an open order for the same asset and take the appropriate action.
+Things you might want to check before creating new orders in your policy and take the appropriate action:
 
+- Are there pending open orders for that same asset?
+- What are the total numbers of open orders?
+- How many orders have been created in the last x minutes?
+- How many open positions are there right now?
+- How much buying power is left?
+- What is the unrealized PNL of my open positions?
+- What is the realized PNL in the last x minutes?
+
+See also how to use the xref:broker.adoc#_account[account] to help answer some of the above questions/
 
 [#_advanced_policies]
 == Advanced Policies
