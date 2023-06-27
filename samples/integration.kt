@@ -20,6 +20,7 @@ import org.roboquant.feeds.TradePrice
 import org.roboquant.ibkr.IBKRHistoricFeed
 import org.roboquant.orders.MarketOrder
 import org.roboquant.orders.Order
+import org.roboquant.orders.OrderStatus
 import org.roboquant.polygon.PolygonHistoricFeed
 import org.roboquant.polygon.PolygonLiveFeed
 import java.math.BigDecimal
@@ -175,9 +176,13 @@ private fun feedIntegration() {
 
 fun myBroker() {
 
+    abstract class BrokerOrder {
+        abstract var status: String
+    }
+
     class BrokerApi {
         fun placeMarketOrder(symbol: String, volume: BigDecimal, id: Int) { TODO() }
-        fun getOrders(): List<Any> { TODO() }
+        fun getOrder(id: Any): BrokerOrder { TODO() }
         fun getBuyingPower(): BigDecimal = TODO()
         fun getPositions(): List<Any> = TODO()
     }
@@ -204,10 +209,15 @@ fun myBroker() {
                 // iAccount.setPosition(...)
             }
 
-            // Sync orders
-            for (order in api.getOrders()) {
-                TODO()
-                // iAccount.updateOrder(...)
+            // Sync the open orders
+            for (order in iAccount.orders) {
+                val brokerOrder = api.getOrder(order.orderId)
+
+                // Fictitious implementation
+                when (brokerOrder.status) {
+                    "RECEIVED" -> iAccount.updateOrder(order.order, Instant.now(), OrderStatus.ACCEPTED)
+                    "DONE" -> iAccount.updateOrder(order.order, Instant.now(), OrderStatus.COMPLETED)
+                }
             }
 
             // Sync buying-power
