@@ -13,11 +13,11 @@ image::metric.png[alt="screenshot"]
 == Walk Forward
 Plot a metric during a walk-forward test to provide insight into the performance of the strategy during different timeframes. The walk-forward test involves dividing the historical data into multiple timeframes or "windows," and using each timeframe to test the performance of the strategy.
 
-Here we plot the account equity (= cash + positions) and that provides insights how a strategy performs during different timeframes. Clearly we can see that the strategy wasn't profitable during every timeframe.
+Here we plot the account equity, the sum of the cash and positions. That provides insights on how a strategy performs during different timeframes. Clearly, we can see that the strategy wasn't profitable during every timeframe.
 
 image::walkforward.png[alt="screenshot"]
 
 == Monte Carlo
-An even more extensive back-test is to run the experiment over randomly sampled timeframes of a fixed duration. In this example, we selected the duration to be 250 trading days. We then plot the results of all samples and this provides a good view of the distribution of the profit/loss a strategy could generate over 250-days timeframe.
+An even more extensive back-test is to run the experiment over randomly sampled timeframes of a fixed duration. In this example, we selected the duration to be 250 trading days. We then plot the results of all the samples, and this provides a good view of the distribution of the profit/loss a strategy could generate over 250-days timeframe.
 
 image::montecarlo.png[alt="screenshot"]

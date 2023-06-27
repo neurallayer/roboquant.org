@@ -66,13 +66,13 @@ The following three types of models can be implemented if the default ones that 
     - Spread (difference between the buy- and sell-price)
     - Slippage (large orders will require multiple trades against different prices)
 
-. `FeeModel`: the transaction related fees and commissions. Trading cost to take into consideration:
-    . Broker commission fees
-    . Borrowing cost when shorting
-    . Storage & custodial fees
-    . Exchange fees and/or rebates
+. `FeeModel`: model the transaction-related fees and commissions. Trading cost to take into consideration:
+    .. Broker commission fees
+    .. Borrowing cost when shorting
+    .. Storage & custodial fees
+    .. Exchange fees and/or rebates
 
-. `AccountModel`: model the buying power calculations based on the account type.
+. `AccountModel`: calculate the available buying-power based on margins, open orders, cash and open positions.
 
 Before implementing your own model, it is advised to check if the default-included models with their configuration options aren't sufficient. Below the available models with some examples of their configuration parameters:
 

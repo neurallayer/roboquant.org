@@ -213,6 +213,9 @@ fun myBroker() {
             // Sync buying-power
             val buyingPower = api.getBuyingPower()
             iAccount.buyingPower = buyingPower.USD
+
+            // Set the lastUpdate time
+            iAccount.lastUpdate = Instant.now()
         }
 
         override fun place(orders: List<Order>, event: Event): Account {
@@ -229,7 +232,7 @@ fun myBroker() {
             }
 
             // Sync the state
-            sync()
+            if (orders.isNotEmpty() || (Instant.now() > account.lastUpdate + 1.minutes)) sync()
 
             return account
         }
