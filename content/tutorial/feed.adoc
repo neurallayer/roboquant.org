@@ -5,9 +5,11 @@
 :jbake-date: 2020-09-01
 
 == What is a feed?
-A feed is responsible for delivering the data that is needed to run and test strategies. There are no restrictions on the type of data that a `Feed` can emit. It can be as simple as stock prices or as complex as satellite images. A `Feed` is used to deliver historic and live data.
+A feed is responsible for delivering the data that is needed to run and test strategies. There are no restrictions on the type of data that a `Feed` can emit. It can be as simple as stock prices or as complex as satellite images. A `Feed` is used to deliver historic and live data and the interface is the same.
 
-A feed wraps its information in an `Event` and puts that `Event` on an `EventChannel`. This is all done asynchronously from the rest of the trading logic. And although an `EventChannel` is used to deliver the events, this channel is normally only accessed by internal _roboquant_ logic. A xref:strategy.adoc[strategy] will just be passed the `Event` object as one it method parameters.
+A feed wraps its information in an `Event` and puts that `Event` on an `EventChannel`. This is all done asynchronously from the rest of the trading logic. So while your strategy is processing the previous event and calculating signals, the feed can receive new events.
+
+And although an `EventChannel` is used to deliver the events, this channel is normally only accessed by internal _roboquant_ logic. A xref:strategy.adoc[strategy] will just be passed the `Event` object as one it method parameters.
 
 To read more about why _roboquant_ has selected this event-driven approach, read this xref:../background/features.adoc[introduction to event-driven software].
 
@@ -17,7 +19,7 @@ An `Event` instance contains all the data that is observed at a certain point in
 . The `time` attribute when the information within the event became available.
 . The list of all the <<Action>> instances at that time. This can be a mixed list of classes that implement the `Action` interface. A single `Event` can contain a mix of prices, satellite images and social media news at the same time.
 
-Events are always guaranteed to be delivered in chronological order.
+Events are guaranteed to be delivered in chronological order. A sequential event has a time greater or equal than the previous event.
 
 === Time
 The time attribute in an event is of the type `java.time.Instant`. So they can be easily processed and compared without having to worry about time zones. When a feed delivers events, they are always in chronological order.
@@ -86,7 +88,7 @@ If you have a data source that is not yet covered by _roboquant_, you can implem
 include::{sourcefile}[tag=interface]
 ----
 
-The following example implementation of the `play` method sends out 100 empty events, empty meaning an event without any actions included. When the EventChannel is full, the `channel.send` method will be blocking.
+The following implementation of the `play` method sends 100 empty events (empty meaning an event without any actions included). When the EventChannel is full, the `channel.send` method will be blocking.
 
 [source, kotlin, indent=0]
 ----

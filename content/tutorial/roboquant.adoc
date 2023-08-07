@@ -83,7 +83,9 @@ From a metric logging perspective, the metrics have a different `RunPhase` in th
 
 
 == Running in Parallel
-If you want to run many back-tests, you can run them in parallel and leverage all the cores on your computer to expedite the process. _Roboquant_ scales almost linearly with the number of available cores, and it only requires a few extra lines of code.
+If you want to run many back-tests, you can run them in parallel and leverage the available cores on your computer to expedite the process. The _roboquant_ engine scales almost linearly with the number of available cores, and it only requires a few extra lines of code.
+
+NOTE: Performance and scalability are determined by many other factors besides the engine itself. For example, the amount of memory used and allocated at each step, the CPU usage of your strategy, or the files read from disc.
 
 The following example shows how to run a walk forward in parallel. By reusing the same logger instance, all results will be stored in a single logger instance and can be easily compared afterwards. Also, the feed can be shared across jobs, resulting in lower memory consumption.
 
@@ -105,11 +107,11 @@ This will tell you for each step, how many `actions`, `signals` and `orders` the
 
 [%autowidth, cols="<,<,<"]
 |===
-|Metric|Value|Possible problem
+|Metric|Observation|Possible problem
 
-|policy.actions|always 0|the feed isn't generating actions
-|policy.signals|always 0|the strategy isn't generating signals
-|policy.orders|always 0|the policy isn't generating orders
+|policy.actions|always 0|The feed isn't generating actions. For example, when using a LiveFeed outside trading hours.
+|policy.signals|always 0|The strategy isn't generating signals.
+|policy.orders|always 0|The policy isn't generating orders. For example, you don't have enough buying power to buy a single BitCoin and didn't enable fractional orders.
 |===
 
 

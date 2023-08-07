@@ -23,7 +23,7 @@ fun placeOrder(broker: Broker) {
         MarketOrder(Asset("AAPL"), 100), // BUY 100 stocks Apple
         MarketOrder(Asset("TSLA"), -100), // SELL 100 stocks Tesla
     )
-    val account = broker.place(orders)
+    broker.place(orders)
     // end::basic[]
 }
 

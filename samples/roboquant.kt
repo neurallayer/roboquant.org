@@ -106,13 +106,17 @@ fun runValidation(feed: Feed, roboquant: Roboquant) {
     // tag::runValidation[]
     // Single run example
     val (main, validation) = feed.timeframe.splitTrainTest(0.2) // 20% for validation phase
-    roboquant.run(feed, main, validation)
+    roboquant.run(feed, main, "run-main")
     println(roboquant.broker.account.equityAmount)
+    roboquant.broker.reset()
+    roboquant.run(feed, validation, "run-validation")
 
     // Walk forward example
     feed.timeframe.split(2.years).forEach {
         val (main2, validation2) = it.splitTrainTest(0.25) // 25% for validation phase
-        roboquant.run(feed, main2, validation2)
+        roboquant.run(feed, main2)
+        roboquant.broker.reset()
+        roboquant.run(feed, validation, "run-validation")
         println(roboquant.broker.account.equityAmount)
     }
     // end::runValidation[]
@@ -132,8 +136,7 @@ fun runParallel(feed: Feed) {
             val roboquant = Roboquant(EMAStrategy(), AccountMetric(), logger = logger)
 
             // Give the run a unique identifiable name
-            // Otherwise a unique name will be generated for each run
-            roboquant.run(feed, period, name = "run-$period")
+            roboquant.runAsync(feed, period, name = "run-$period")
         }
     }
 

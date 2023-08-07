@@ -11,9 +11,16 @@ _Roboquant_ has its own Discord server with various channels to discuss algo-tra
 
 Since the _roboquant_ documentation is still lacking in certain areas, this is a great place to ask questions and find out more about the platform.
 
+
+++++
+<p align="center">
+<iframe src="https://discord.com/widget?id=954650958300856340&theme=light" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+</p>
+++++
+
 Invite link: https://discord.gg/Vt9wgNjSzw[join roboquant Discord server]
 
-Goto the *#general* channel: https://discord.com/channels/954650958300856340/954650958300856343[general discussions, window=_target]
+If you are already a member, you can go directly to the https://discord.com/channels/954650958300856340/954650958300856343[#general,window=_target] discussion channel
 
 == icon:github[1x] GitHub
 If you find a bug or know of a great feature to add to _roboquant_, best to raise an issue on GitHub. Issues are used to track todos, bugs, feature requests, and more. As issues are created, they’ll appear there in a searchable and filterable list. Before you create a new issue, please check if not someone else already raised a similar ticket. To see the open issues or create a new one, head over to https://github.com/neurallayer/roboquant/issues[here^]
@@ -21,4 +28,4 @@ If you find a bug or know of a great feature to add to _roboquant_, best to rais
 TIP: If you want to contribute, this is a great place to check what still needs to be done and ask for advice what to work on.
 
 == icon:envelope[1x] Email
-Although we encourage that questions and remarks are shared in the broader community so everyone can learn from it, you can also drop us an email at mailto:info@roboquant.org[]
+Although we encourage that questions and remarks are shared in the broader community so everyone can benefit from it, you can also drop us an email at mailto:info@roboquant.org[]

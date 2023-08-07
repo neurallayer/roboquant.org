@@ -41,18 +41,6 @@ Receives the newly created orders by the policy and processes them. Any open ord
 Receives the latest state of the account and calculates various metrics that are of interest to determine the progress and results of the run so far. These results are then handed over to the `MetricsLogger` that will store and/or log the metric values, so you can inspect them at a later time.
 
 
-== Implementation details
-The actual implementation is a bit more elaborate. Especially the order of the components in the actual implementation might not be what you expected.
-
-But there is a good reason it is done this way: it is now almost impossible to look into the future (look-ahead bias) with your strategy since the broker will always first observe a new event. So the signals and orders you create based on event at time t will only be processed by the broker based on an event at time t+1.
-
-The following diagram shows the actual interactions with their real method names and parameters between the components.
-
-image::main_flow.png[]
-
-NOTE: Although the above diagram might look complicated, most of the complexity is handled by the Roboquant engine and when developing your own strategy you don't have to worry about it.
-
-
 == Developing your own strategy
 Developing a new strategy and validating it during a back-test is a straightforward process. The code snippet below shows the different steps that you have to take to develop and run your strategy.
 

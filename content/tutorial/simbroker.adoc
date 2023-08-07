@@ -4,7 +4,9 @@
 :jbake-date: 2020-08-01
 :icons: font
 
-You use the `SimBroker` class (short for Simulated Broker) both for the back testing and forward testing stages. See also the xref:../background/four_stages.adoc[four stages] for more background about the different stages when developing trading strategies.
+The `SimBroker` implements the `Broker` interface just like any other implementation. You use the `SimBroker` class (short for Simulated Broker) both for the back testing and forward testing stages.
+
+See also the xref:../background/four_stages.adoc[four stages] for more background about the different stages when developing trading strategies.
 
 SimBroker can simulate a wide range of brokers and exchanges. Besides several configuration parameters that are available, the behavior can be further extended by providing custom models for trading, fee and account modelling.
 
@@ -24,14 +26,14 @@ However, you can overwrite many of the default values. Common use cases are:
 * you want to simulate a `MarginAccount` and not the default `CashAccount`
 * you want to apply custom fees and pricing logic
 
-So a more custom configured version of the SimBroker can be instantiated using:
+So a more custom-configured version of the SimBroker can be instantiated using:
 
 [source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=extra]
 ----
 
-TIP: if you are trading specific markets, like FOREX, you most likely want to use customize the configuration since the default values like those selected for spreads are not representative for those types of markets.
+TIP: If you are trading specific markets, like FOREX, you most likely want to use customize the configuration. The default values, like those selected for spreads, might not be representative for those types of liquid markets.
 
 The initial deposit is the cash that is deposited at the opening of an account. Any time the SimBroker is reset, the account will be reset to this initial deposit. Typically, the initial deposit is denoted in a single currency, like a *$50,000.00 USD* account. But this is not a hard requirement and with `SimBroker` you can use a multi-currency initial deposit if you prefer. However, there is always only one `baseCurrency`.
 
@@ -39,17 +41,19 @@ The initial deposit is the cash that is deposited at the opening of an account. 
 == Order Execution
 When an order is placed at the SimBroker, the following rules apply:
 
-- create-orders only get executed if there is a known price for the underlying asset. Till an event occurs that has that price action available, the order will remain in its `INITIAL` state and will not be executed.
+- Create-orders only get executed if there is a known price for the underlying asset. Till an event occurs that has that price action available, the order will remain in its `INITIAL` state and will not be executed.
 
-- modify-orders will always get executed, even if there is no known price for the asset.
+- Modify-orders will always get executed, even if there is no known price for the asset.
 
-- any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted. So an order in `INITIAL` state will not expire, and time based TIF will only start counting after it has been accepted.
+- Any TIF (Time In Force) enforcement of order execution will only start after an order has been accepted. So an order in `INITIAL` state will not expire, and time-based TIF will only start counting after it has been accepted.
 
-- modify orders will always be processed BEFORE create-orders. So if you send a `CancelOrder` and `MarketOrder` for the same asset, the `CancelOrder` is guaranteed to be processed first in the `SimBroker`.
+- Modify-orders will always be processed BEFORE create-orders. So if you send a `CancelOrder` and `MarketOrder` for the same asset, the `CancelOrder` is guaranteed to be processed first in the `SimBroker`.
 
-- Create and modify-orders will be processed based on a FIFO (first-in-first-out) basis, so older orders are processed first.
+- Create- and modify-orders will be processed based on a FIFO (first-in-first-out) basis, so older orders are processed first.
 
 - Once an order is closed, it cannot be opened again.
+
+- When an order is placed at time _t_, the order-execution will start at time _t+1_. This avoids looking-ahead bias.
 
 The following diagram shows the possible `OrderStatus` transitions:
 
@@ -58,23 +62,23 @@ image::orderstatus_transition.png[]
 == Customize SimBroker
 Custom models are a way to further customize the `SimBroker` and ensure it closely mimics the behavior of your real broker.
 
-WARNING: if you don't take any type of trading cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading. When in doubt, better to be on the safe side and configure the cost to be slightly higher than expected.
+WARNING: If you don't take any type of trading cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading. When in doubt, better to be on the safe side and configure the cost to be slightly higher than expected.
 
 The following three types of models can be implemented if the default ones that come with _roboquant_ are not sufficient:
 
-. `PricingEngine`: calculate the price to use for a trade. It can be used to simulate the following type of trading cost:
+. `PricingEngine` — Calculate the price to use for a trade. It can be used to simulate the following type of trading cost:
     - Spread (difference between the buy- and sell-price)
     - Slippage (large orders will require multiple trades against different prices)
 
-. `FeeModel`: model the transaction-related fees and commissions. Trading cost to take into consideration:
+. `FeeModel` — Model the transaction-related fees and commissions. Trading cost to take into consideration:
     .. Broker commission fees
     .. Borrowing cost when shorting
     .. Storage & custodial fees
     .. Exchange fees and/or rebates
 
-. `AccountModel`: calculate the available buying-power based on margins, open orders, cash and open positions.
+. `AccountModel` — Calculate the available buying-power based on margins, open orders, cash and open positions.
 
-Before implementing your own model, it is advised to check if the default-included models with their configuration options aren't sufficient. Below the available models with some examples of their configuration parameters:
+Before implementing your own model, it is advisable to check if the default-included models with their configuration options aren't sufficient. Below the available models with some examples of their configuration parameters:
 
 [source, kotlin,indent=0]
 ----
@@ -128,21 +132,21 @@ The below table shows an example using the default CashAccount when trading in d
 |===
 
 === Margin Accounts
-Margin based accounts can be modelled using the `MarginAccount`. This model supports:
+Margin accounts can be modelled using the `MarginAccount`. This model supports:
 
 1. Initial margin (aka leverage)
-2. Maintenance margin, with support for different values for long and short positions
-3. Minimum amount of required equity that cannot be used as margin
+2. Maintenance margin, with support for different maintenance percentages for long and short positions
+3. Minimum amount of equity that cannot be used as margin (to stay away from margin calls)
 
 All margin calculations are based on the equity of the account, and not just the cash. And although in the below tables the (maintenance) margin is shown, it is actually not exposed. Only the buying-power value is available through the account object.
 
-The logic for calculating the buying power looks roughly like this in pseudocode:
+The calculations for the buying-power look roughly like this in pseudocode:
 
 [source,kotlin]
 ----
-long_value = long_positions * maintenance_margin_long
-short_value = short_positions * maintenance_margin_short
-excess_margin = equity - long_value - short_value - minimum_equity
+long_margin = long_positions * maintenance_margin_long
+short_margin = short_positions * maintenance_margin_short
+excess_margin = equity - long_margin - short_margin - minimum_equity
 buying_power = excess_margin * ( 1 / initial_margin)
 ----
 
@@ -190,7 +194,7 @@ The following order-rules apply when calculating the buying power:
 NOTE: Not all rules are currently implemented yet.
 
 === Margin Calls
-A negative value for `BuyingPower` indicates a possible margin call situation. However, _roboquant_ doesn't interrupt the back-test for that.
+A negative value for `BuyingPower` indicates a possible margin call situation. However, _roboquant_ doesn't interrupt the back-test if that condition happens. However, if the `DefaultPolicy` is used, it will guarantee that no new positions will be opened. Only the decrease of positions is allowed if there is insufficient buying-power available.
 
 If you are interested in detecting these conditions, best to configure a metric that logs the BuyingPower at each step and evaluate that metric after the run.
 

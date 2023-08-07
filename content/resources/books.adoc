@@ -30,9 +30,9 @@ image::advances.jpeg[width="200", float="right"]
 
 level: intermediate
 
-This book has several innovative and fresh ideas about approaches to algo-trading. For example using volume-based candlesticks rather than time-based candlesticks.
+This book has several innovative and fresh ideas about approaches to algo-trading. And although the title has "Machine Learning" in it, much of the content also applies to more traditional strategies. For example, there are several chapters dedicated to back-testing that are relevant for almost any type of strategy.
 
-And although the included code snippets are written in Python, the underlying theory is applicable to any implementation. Also, this book contains great information about how easy it is for your approach to developing look-ahead bias without realizing it.
+The included code snippets are written in Python, but the underlying software algorithms are applicable to any implementation. Also, this book contains great information about how easy it is for your approach to developing look-ahead bias without realizing it.
 
 Marcos Lopez de Prado also has some good YouTube videos where he explains much of the same theory. So check those out first if you are not sure yet about buying this book. Also, the book felt a bit fragmented at times, and the videos help to make the topics covered in the book more coherent.
 ====
@@ -46,7 +46,7 @@ image::trading.jpeg[width="200", float="left"]
 
 level: beginner
 
-A good book for a beginner that has plenty of pragmatic tips how to build, test, optimise and implement robustness trading systems. There is some AmiBroker code included, but even without understanding this, you can still follow along.
+A good book for a beginner that has plenty of pragmatic tips on how to build, test, optimize and implement robustness trading systems. There is some AmiBroker code included, but even without understanding this, you can still follow along.
 
 After explaining the basic theory behind developing algo-trading strategies, the book includes a step-by-step example. There are also many colorful charts included, so be aware if you order the e-book version and want to view it on a gray-scale e-reader.
 
@@ -95,7 +95,7 @@ level: intermediate
 
 This book does not try to sell you trading strategies, but teaches you the methods and underlying discipline to achieve good strategies.
 
-The code snippets included are written in MATLAB. But don't let that put you off, they are easy to understand, especially if you have some background in math or another computer language. The chapters are divided between mean-reversion and momentum strategies and the last chapter has useful tips on how to approach risk management.
+The code snippets included are written in MATLAB. But don't let that put you off, they are easy to understand, especially if you have some background in math or another computer language. The chapters are divided between mean-reversion and momentum strategies, and the last chapter has useful tips on how to approach risk management.
 
 This book is more theoretical than some other intermediate books on this list. But that is also a major bonus; it means it will stay relevant longer, and not be outdated as quick as books that focus more on programming using third-party libraries.
 ====
@@ -112,7 +112,7 @@ level: advanced
 
 This book provides a great foundation for understanding much of the theory behind time series analysis. It clearly explains commonly used models and important concepts like stationary and non-stationary processes. It requires good knowledge of math at least at an undergraduate level.
 
-The examples used in this book cover both macro-economical and investment oriented use-cases. So this is in particular a great book if you want to strengthen your overall knowledge of (non-stationary) timeseries.
+The examples used in this book cover both macro-economical and investment oriented use-cases. So this is, in particular, a great book if you want to strengthen your overall knowledge of (non-stationary) timeseries.
 
 Besides the content, there is also an accompanying Java project hosted at http://jmulti.de that implements various models described in the book, like an ARIMA model. This Java project is a bit outdated since the code-base pre-dates 2010, but nonetheless a nice bonus.
 ====
@@ -131,7 +131,7 @@ This book provides an overview of many strategies, divided by asset class. So th
 
 Although the formulas are concise, essential information is sometimes missing to be able to transfer these strategies into code. For example, the description of a mean-reversion strategy doesn't explain how to find correlated assets, just how to generate a signal given that they are correlated.
 
-Some chapters, like real estate strategies, have so little own content that they could have better left out in my opinion. At best, these chapters are useful as a reference to other publications, but I'm not sure that justifies putting them in this book.
+Some chapters, like real estate strategies, have so little own content that they could have better left out, in my opinion. At best, these chapters are useful as a reference to other publications, but I'm not sure that justifies putting them in this book.
 
 Also, note there is no analysis included about the performance of the strategies. So expect to do a fair amount of research before the described strategies are ready for a back test.
 ====
@@ -146,11 +146,11 @@ image::evaltrading.jpeg[width="200", float="left"]
 
 level: beginner
 
-If you are new to algo-trading and need insights on how to develop a trading strategy and test and optimize it, this is the book for you. It covers most topics important to algo-traders and the content is easy to grasp and explained in plain English with many examples.
+If you are new to algo-trading and need insights on how to develop a trading strategy and test and optimize it, this is the book for you. It covers most topics important to algo-traders, and the content is easy to grasp and explained in plain English with many examples.
 
 Even if you don't have a background in software development or math, you can easily follow along. And although the book is more than 15 years old, most of it is still applicable today. Of course, the downside of not using code or math to explain the concepts, is that it is a bit less concise. But that is to be expected.
 
-If there is one small complaint, there are a lot of white spaces, tables and charts that not add much. So this 360+ pages book could have easily been condensed to 200 pages.
+If there is one small complaint, there are a lot of white spaces, tables and charts that do not add much. So this 360+ page book could have easily been condensed to 200 pages.
 ====
 --
 
@@ -171,4 +171,37 @@ Some of the content is more catered towards trading firms than retail traders. F
 --
 
 
+[.float-group]
+--
+====
+image::testing_tuning.jpeg[width="200", float="left"]
+*Testing and Tuning Market Trading Systems* - Timothy Masters
 
+level: intermediate
+
+The main topics covered in this book are algo-strategy optimization and testing. Besides a deep dive into these topics, there is also a lot of attention to establishing the statistical characteristics of the results with topics like confidence intervals. These are important topics that are often missing in other (simpler) books.
+
+The typical layout per chapter is first a textual description of the steps and then the corresponding C\++ code. The code used is very basic, so you can almost directly translate it into another language like Kotlin. So for sure, you don't need to be a C++ guru to understand the code snippets.
+
+Much of the back testing theory is overlapping with books like `Advances in Financial Machine Learning by Marcos Lopez de Prado`. What is different is that this book also contains some results of applying the theory to real data. This makes it more pragmatic and tangible, even if, of course, the results are outdated.
+
+The page layout of the book is not great. The code snippets are not standing out, and the font used for code is rather large. Also, this book doesn't use right-aligned text. This all together makes the pages often look very busy.
+====
+--
+
+
+[.float-group]
+--
+====
+image::statistically_sound.jpeg[width="200", float="right"]
+*Statistically Sound Indicators For Financial Market Predictions* - Timothy Masters
+
+level: intermediate
+
+This is perhaps the exception to the rule to not buy books that promise profitable strategies or indicators. The approach taken in this book is indeed very sound, just like the title promises. And even if some of the proposed indicators are not profitable any more, you can learn a lot from the approach taken.
+
+The indicators are grouped by type. For example, you have chapters dedicated to volume-based indicators and multi-market indicators. Next to the indicator chapters, there is also an excellent chapter on the stationarity of timeseries.
+
+Just like the other book of Timothy Masters that is reviewed above, the C++ code in this book is not difficult to understand and can be easily translated into other computer languages.
+====
+--

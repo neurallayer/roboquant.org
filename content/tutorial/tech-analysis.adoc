@@ -53,6 +53,23 @@ You can provide the amount of history to keep track of when initializing the `Ta
 include::{sourcefile}[tag=strategy]
 ----
 
+You can also write your own TaLib indicators and use them:
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=strategy2]
+----
+
+
+If you want to run different indicators over different resolutions, that is also possible:
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=strategy3]
+----
+
+
+
 == TaLibMetric & TaLibIndicator
 Similar to the TaLibStrategy, the TaLibMetric makes it convenient to turn TaLib indicators into _roboquant_ metrics.
 

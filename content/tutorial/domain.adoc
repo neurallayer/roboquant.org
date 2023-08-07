@@ -117,9 +117,10 @@ include::{sourcefile}[tag=assets]
 ----
 
 == Size
-Order sizes and position sizes are expressed as an instance of the `Size` class. For the internal working of _roboquant_ there is no differentiation between fractional and non-fractional orders. All are expressed using the same `Size` class.
+Order sizes and position sizes are expressed as an instance of the `Size` class. For the internal working of _roboquant_, there is no differentiation between fractional and non-fractional orders. All the order and position quantities are expressed using the same `Size` class.
 
-This class is precise till 8 decimal digits and ensures that there are no rounding errors when, for example, closing a position. It is an immutable class, but you can perform simple arithmetic on it.
+The `Size` class is precise till 8 decimal digits and ensures that there are no rounding errors when, for example, when closing a position.
+It is an immutable class, and you can perform simple arithmetic on it.
 
 [source,kotlin,indent=0]
 ----

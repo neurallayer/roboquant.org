@@ -198,9 +198,13 @@ fun myBroker() {
         override val account: Account
             get() = iAccount.toAccount()
 
-        fun sync() {
+        override fun sync(event: Event) {
             // All the hard work goes here where you sync the InternalAccount object with your broker
             // The api calls are all fictitious examples
+            val now = Instant.now()
+
+            // Optional check to avoid to many calls to the broker
+            if (iAccount.orders.isEmpty() && (now < account.lastUpdate + 1.minutes)) return
 
             // Sync the positions
             iAccount.portfolio.clear()
@@ -215,8 +219,8 @@ fun myBroker() {
 
                 // Fictitious implementation
                 when (brokerOrder.status) {
-                    "RECEIVED" -> iAccount.updateOrder(order.order, Instant.now(), OrderStatus.ACCEPTED)
-                    "DONE" -> iAccount.updateOrder(order.order, Instant.now(), OrderStatus.COMPLETED)
+                    "RECEIVED" -> iAccount.updateOrder(order.order, now, OrderStatus.ACCEPTED)
+                    "DONE" -> iAccount.updateOrder(order.order, now, OrderStatus.COMPLETED)
                 }
             }
 
@@ -225,10 +229,15 @@ fun myBroker() {
             iAccount.buyingPower = buyingPower.USD
 
             // Set the lastUpdate time
-            iAccount.lastUpdate = Instant.now()
+            iAccount.lastUpdate = now
         }
 
-        override fun place(orders: List<Order>, event: Event): Account {
+
+        override fun place(orders: List<Order>, time: Instant) {
+
+            // Optional sanity check that we don't use this broker in historic back tests
+            if (time < Instant.now() - 1.hours) throw UnsupportedException("Cannot place old orders")
+
             // Validation of the supported order types
             require(orders.all { it is MarketOrder })
 
@@ -241,10 +250,7 @@ fun myBroker() {
                 api.placeMarketOrder(order.asset.symbol, order.size.toBigDecimal(), order.id)
             }
 
-            // Sync the state
-            if (orders.isNotEmpty() || (Instant.now() > account.lastUpdate + 1.minutes)) sync()
 
-            return account
         }
 
     }

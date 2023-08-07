@@ -8,6 +8,7 @@ import org.roboquant.brokers.sim.execution.ExecutionEngine
 import org.roboquant.brokers.sim.execution.OrderExecutor
 import org.roboquant.common.Asset
 import org.roboquant.common.Size
+import org.roboquant.feeds.Event
 import org.roboquant.orders.*
 import org.roboquant.strategies.Signal
 import java.time.Instant
@@ -57,7 +58,14 @@ fun accountOrder(broker: Broker) {
     // tag::accountOrder[]
     val asset = Asset("AAPL")
     val order = MarketOrder(asset, 100)
-    val account = broker.place(listOf(order))
+    broker.place(listOf(order))
+
+    // You might want to sleep a bit to give broker time to process your order
+    Thread.sleep(1_000)
+
+    // Get the latest state
+    broker.sync()
+    val account = broker.account
 
     val openOrder = account.openOrders.last()
     assert(openOrder.order is MarketOrder)

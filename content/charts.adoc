@@ -6,7 +6,9 @@
 :icons: font
 :items: charts
 
-When dealing with a large amount of data, visualizations can help to easier understand what is going on. _Roboquant_ comes with several types of charts included that can help to understand how an algo-trading strategy is behaving.
+When dealing with a large amount of data, visualizations can help to better understand what is going on.
+
+_Roboquant_ comes with several types of charts included that can help to understand how an algo-trading strategy is behaving.
 
 This page shows a few of those charts. All the charts are based on the excellent EChart library and are fully interactive. You can zoom in areas of interest or filter only those values you want to see. This is especially useful for analyzing large back tests that generate a lot of metrics.
 

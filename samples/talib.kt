@@ -71,6 +71,42 @@ private fun strategy() {
 }
 
 
+
+private fun strategy2() {
+    // tag::strategy2[]
+    fun TaLib.myIndicator(period: Int = 10, priceBarSerie: PriceBarSerie) : Double {
+        val x1 = sma(priceBarSerie, period)
+        val x2 = ema(priceBarSerie, period)
+        return x1 - x2
+    }
+
+    val s = TaLibStrategy()
+    s.buy {
+        myIndicator(10, it) > 0
+    }
+    // end::strategy2[]
+
+}
+
+
+private fun strategy3() {
+    // tag::strategy3[]
+    fun TaLib.myIndicator(priceBarSerie1M: PriceBarSerie) : Double {
+        val priceBarSerie5M = priceBarSerie1M.aggregate(5)
+        val x1 = sma(priceBarSerie1M, 20)
+        val x2 = ema(priceBarSerie5M, 2)
+        return x1 - x2
+    }
+
+    // You have to specify enough history for both 1M and 5M
+    val s = TaLibStrategy(21)
+    s.buy {
+        myIndicator(it) > 0
+    }
+    // end::strategy3[]
+}
+
+
 private fun metric() {
     // tag::metric[]
     val metric = TaLibMetric {
