@@ -174,6 +174,7 @@ private fun feedIntegration() {
     // end::feedIntegration[]
 }
 
+@Suppress("CyclomaticComplexMethod")
 fun myBroker() {
 
     abstract class BrokerOrder {

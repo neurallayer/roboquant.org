@@ -1,3 +1,4 @@
+@file:Suppress("unused", "TooManyFunctions", "SpreadOperator", "MagicNumber", "WildcardImport")
 import org.roboquant.Roboquant
 import org.roboquant.binance.BinanceLiveFeed
 import org.roboquant.brokers.sim.SimBroker
@@ -12,7 +13,7 @@ import org.roboquant.strategies.EMAStrategy
 
 suspend fun binanceWebServer() {
     // tag::webserver[]
-    // set up the feed and subscribe to assets
+    // set up the feed and subscribe to asset(s) of interest
     val feed = BinanceLiveFeed()
     feed.subscribePriceBar("BTCBUSD")
 

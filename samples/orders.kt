@@ -8,7 +8,6 @@ import org.roboquant.brokers.sim.execution.ExecutionEngine
 import org.roboquant.brokers.sim.execution.OrderExecutor
 import org.roboquant.common.Asset
 import org.roboquant.common.Size
-import org.roboquant.feeds.Event
 import org.roboquant.orders.*
 import org.roboquant.strategies.Signal
 import java.time.Instant
