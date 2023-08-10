@@ -1,10 +1,7 @@
 @file:Suppress("unused", "UNUSED_VARIABLE", "WildcardImport", "MagicNumber")
 
 import org.roboquant.brokers.sim.*
-import org.roboquant.common.Currency
-import org.roboquant.common.EUR
-import org.roboquant.common.Size
-import org.roboquant.common.Wallet
+import org.roboquant.common.*
 import org.roboquant.feeds.OrderBook
 import org.roboquant.feeds.PriceAction
 import org.roboquant.feeds.PriceQuote
@@ -16,7 +13,6 @@ fun usageBasic() {
     val broker = SimBroker()
     // end::basic[]
 }
-
 
 
 fun configSimBroker() {
@@ -48,7 +44,7 @@ fun includedModels() {
     val feeModel2 = NoFeeModel() // no additional fees apply
 
     // Pricing engines
-    val pricingEngine1 = SpreadPricingEngine(spreadInBips = 5, priceType = "OPEN")
+    val pricingEngine1 = SpreadPricingEngine(spread = 5.bips, priceType = "OPEN")
     val pricingEngine2 = NoCostPricingEngine(priceType = "CLOSE")
     // end::included[]
 }
@@ -57,10 +53,10 @@ fun pricingEngine() {
     // tag::pricing[]
     class MyPricingEngine : PricingEngine {
 
-        inner class MyPricing(val action : PriceAction) : Pricing {
+        inner class MyPricing(val action: PriceAction) : Pricing {
 
             override fun marketPrice(size: Size): Double {
-                return when(action) {
+                return when (action) {
                     is PriceQuote -> if (size.isPositive) action.askPrice else action.bidPrice
                     is OrderBook -> if (size.isPositive) action.bestOffer else action.bestBid
                     else -> action.getPrice()

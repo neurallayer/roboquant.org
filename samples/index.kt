@@ -14,7 +14,6 @@ import org.roboquant.strategies.Signal
 import org.roboquant.strategies.Strategy
 
 
-
 fun myFirst() {
 
     val rq = Roboquant(EMAStrategy.PERIODS_5_15)

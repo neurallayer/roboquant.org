@@ -1,4 +1,4 @@
-@file:Suppress("unused", "UNUSED_VARIABLE", "TooManyFunctions",  "WildcardImport", "MagicNumber")
+@file:Suppress("unused", "UNUSED_VARIABLE", "TooManyFunctions", "WildcardImport", "MagicNumber")
 
 import org.roboquant.common.Asset
 import org.roboquant.feeds.PriceBar
@@ -71,10 +71,9 @@ private fun strategy() {
 }
 
 
-
 private fun strategy2() {
     // tag::strategy2[]
-    fun TaLib.myIndicator(period: Int = 10, priceBarSerie: PriceBarSerie) : Double {
+    fun TaLib.myIndicator(period: Int = 10, priceBarSerie: PriceBarSerie): Double {
         val x1 = sma(priceBarSerie, period)
         val x2 = ema(priceBarSerie, period)
         return x1 - x2
@@ -91,7 +90,7 @@ private fun strategy2() {
 
 private fun strategy3() {
     // tag::strategy3[]
-    fun TaLib.myIndicator(priceBarSerie1M: PriceBarSerie) : Double {
+    fun TaLib.myIndicator(priceBarSerie1M: PriceBarSerie): Double {
         val priceBarSerie5M = priceBarSerie1M.aggregate(5)
         val x1 = sma(priceBarSerie1M, 20)
         val x2 = ema(priceBarSerie5M, 2)
@@ -110,7 +109,7 @@ private fun strategy3() {
 private fun metric() {
     // tag::metric[]
     val metric = TaLibMetric {
-        val (h,m,l) = bbands(it)
+        val (h, m, l) = bbands(it)
         mapOf(
             "bbands.low" to l,
             "bbands.mid" to m,

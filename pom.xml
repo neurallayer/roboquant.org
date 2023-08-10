@@ -129,12 +129,27 @@
 			<version>${roboquant.version}</version>
 		</dependency>
 		<dependency>
-			<artifactId>roboquant-extra</artifactId>
+			<artifactId>roboquant-polygon</artifactId>
 			<groupId>org.roboquant</groupId>
 			<version>${roboquant.version}</version>
 		</dependency>
 		<dependency>
-			<artifactId>roboquant-crypto</artifactId>
+			<artifactId>roboquant-alpaca</artifactId>
+			<groupId>org.roboquant</groupId>
+			<version>${roboquant.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>roboquant-binance</artifactId>
+			<groupId>org.roboquant</groupId>
+			<version>${roboquant.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>roboquant-xchange</artifactId>
+			<groupId>org.roboquant</groupId>
+			<version>${roboquant.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>roboquant-alphavantage</artifactId>
 			<groupId>org.roboquant</groupId>
 			<version>${roboquant.version}</version>
 		</dependency>

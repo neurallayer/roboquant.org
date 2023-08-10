@@ -21,7 +21,6 @@ private fun currency() {
 }
 
 
-
 private fun size(bitcoin: Asset, account: Account) {
     // tag::size[]
     val size = Size(100) + Size(200)
@@ -76,7 +75,6 @@ private fun exchangeRates() {
     require(amountGBP1 != amountGBP2)
     // end::er[]
 }
-
 
 
 private fun assets() {

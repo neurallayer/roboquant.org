@@ -23,6 +23,7 @@ import org.roboquant.orders.Order
 import org.roboquant.orders.OrderStatus
 import org.roboquant.polygon.PolygonHistoricFeed
 import org.roboquant.polygon.PolygonLiveFeed
+import org.roboquant.strategies.EMAStrategy
 import java.math.BigDecimal
 import java.time.Instant
 import java.time.LocalDate
@@ -54,7 +55,6 @@ fun ecb() {
     wallet.convert(Currency.GBP, Instant.now() - 5.years)
     // end::ecb[]
 }
-
 
 
 fun alphaHistoricFeed() {
@@ -91,7 +91,7 @@ suspend fun polygonLiveFeed(roboquant: Roboquant) {
     feed.subscribe("AAPL", "JPM", "TSLA")
 
     val tf = Timeframe.next(120.minutes)
-    roboquant.run(feed,tf)
+    roboquant.run(feed, tf)
     // end::polygonlive[]
 }
 
@@ -109,19 +109,50 @@ fun alpacaHistoricFeed() {
 }
 
 
-
 fun alpacaLiveFeed(roboquant: Roboquant) {
     // tag::alpacalive[]
     val feed = AlpacaLiveFeed()
     feed.subscribeStocks("AAPL", "IBM")
 
     val tf = Timeframe.next(120.minutes)
-    roboquant.run(feed,tf)
+    roboquant.run(feed, tf)
     // end::alpacalive[]
     println(feed)
 }
 
+fun feedPolygon() {
 
+    // Get the feed
+    val feed = PolygonHistoricFeed()
+    println(feed.availableAssets.summary())
+    val tf = Timeframe.fromYears(2021, 2022)
+    feed.retrieve("IBM", "AAPL", timeframe = tf)
+    println(feed.assets)
+    println(feed.timeline.size)
+
+    // Use the feed
+    val strategy = EMAStrategy()
+    val roboquant = Roboquant(strategy)
+    roboquant.run(feed)
+    val account = roboquant.broker.account
+    println(account.fullSummary())
+}
+
+fun alphaVantage() {
+    val feed = AlphaVantageHistoricFeed()
+
+    val assets = listOf(
+        // regular US stock
+        Asset("IBM"),
+
+        // stock listed on non-US exchange
+        Asset("DAI.DEX", currency = Currency.EUR, exchange = Exchange.DEX)
+    )
+
+    feed.retrieveDaily(*assets.toTypedArray())
+    feed.retrieveIntraday(Asset("TSLA"))
+    println(feed.timeframe)
+}
 
 fun alpacaConfig() {
     // tag::alpacaconfig[]
@@ -182,8 +213,14 @@ fun myBroker() {
     }
 
     class BrokerApi {
-        fun placeMarketOrder(symbol: String, volume: BigDecimal, id: Int) { TODO() }
-        fun getOrder(id: Any): BrokerOrder { TODO() }
+        fun placeMarketOrder(symbol: String, volume: BigDecimal, id: Int) {
+            TODO()
+        }
+
+        fun getOrder(id: Any): BrokerOrder {
+            TODO()
+        }
+
         fun getBuyingPower(): BigDecimal = TODO()
         fun getPositions(): List<Any> = TODO()
     }

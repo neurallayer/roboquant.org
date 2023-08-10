@@ -1,11 +1,11 @@
-@file:Suppress("unused", "UNUSED_VARIABLE" , "UNUSED_PARAMETER", "WildcardImport", "MagicNumber")
+@file:Suppress("unused", "UNUSED_VARIABLE", "UNUSED_PARAMETER", "WildcardImport", "MagicNumber")
 
 import org.roboquant.Roboquant
 import org.roboquant.brokers.Account
 import org.roboquant.common.Asset
 import org.roboquant.common.TimeSeries
 import org.roboquant.feeds.Event
-import org.roboquant.jupyter.TimeSeriesChart
+import org.roboquant.charts.TimeSeriesChart
 import org.roboquant.loggers.MetricsLogger
 import org.roboquant.metrics.*
 import org.roboquant.strategies.Strategy
@@ -61,9 +61,17 @@ fun staticExample() {
 
 fun exampleCustomLogger() {
     class Database {
-        fun store(key: String, value: Number, time: Instant) { TODO() }
-        fun retrieve(key: String) :  Map<String, TimeSeries> { TODO() }
-        fun retrieveKeys(): List<String> { TODO() }
+        fun store(key: String, value: Number, time: Instant) {
+            TODO()
+        }
+
+        fun retrieve(key: String): Map<String, TimeSeries> {
+            TODO()
+        }
+
+        fun retrieveKeys(): List<String> {
+            TODO()
+        }
     }
 
     // tag::customLogger[]

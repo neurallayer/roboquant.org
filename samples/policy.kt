@@ -41,15 +41,15 @@ private fun chainedPolicies() {
 
 fun constr() {
     // tag::constructor[]
-    val policy = FlexPolicy(
-        orderPercentage = 0.01,
-        shorting = true,
-        priceType = "OPEN",
-        fractions = 4,
-        oneOrderOnly = true,
-        safetyMargin = 0.1,
+    val policy = FlexPolicy {
+        orderPercentage = 0.01
+        shorting = true
+        priceType = "OPEN"
+        fractions = 4
+        oneOrderOnly = true
+        safetyMargin = 0.1
         minPrice = 1000.USD
-    )
+    }
     // end::constructor[]
 }
 
@@ -62,7 +62,7 @@ class MyFlexPolicy : FlexPolicy() {
         if (size < 0) return null
 
         val asset = signal.asset
-        val price = priceAction.getPrice(priceType)
+        val price = priceAction.getPrice(config.priceType)
 
         // Create a bracket order with an additional take-profit and stop-loss defined
         return BracketOrder(
@@ -134,7 +134,7 @@ fun customPolicy2() {
          */
         override fun createOrder(signal: Signal, size: Size, priceAction: PriceAction): Order? {
             val asset = signal.asset
-            val price = priceAction.getPrice(priceType)
+            val price = priceAction.getPrice(config.priceType)
 
             // We set a limit based on the ATR. The higher the ATR, the more the limit price
             // will be distanced from the current price.

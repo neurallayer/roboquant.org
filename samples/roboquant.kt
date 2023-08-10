@@ -8,8 +8,8 @@ import org.roboquant.feeds.Feed
 import org.roboquant.feeds.HistoricFeed
 import org.roboquant.feeds.LiveFeed
 import org.roboquant.feeds.RandomWalkFeed
-import org.roboquant.jupyter.TimeSeriesChart
-import org.roboquant.jupyter.TradeChart
+import org.roboquant.charts.TimeSeriesChart
+import org.roboquant.charts.TradeChart
 import org.roboquant.loggers.ConsoleLogger
 import org.roboquant.loggers.InfoLogger
 import org.roboquant.loggers.MemoryLogger
@@ -22,7 +22,7 @@ import org.roboquant.strategies.EMAStrategy
 
 fun basic() {
     // tag::basic[]
-    val strategy  = EMAStrategy()
+    val strategy = EMAStrategy()
     val roboquant = Roboquant(strategy)
     // end::basic[]
 }
@@ -38,7 +38,9 @@ fun complete() {
     val roboquant = Roboquant(
         EMAStrategy(),
         AccountMetric(), PNLMetric(),
-        policy = FlexPolicy(shorting = true),
+        policy = FlexPolicy {
+            shorting = true
+        },
         broker = AlpacaBroker(),
         logger = InfoLogger()
     )
@@ -64,7 +66,7 @@ fun run() {
 }
 
 
-fun run2(feed1: HistoricFeed, feed2: LiveFeed, roboquant: Roboquant ) {
+fun run2(feed1: HistoricFeed, feed2: LiveFeed, roboquant: Roboquant) {
     // tag::run2[]
     // Historical feed run example
     val timeframe = Timeframe.fromYears(2015, 2020)
@@ -154,7 +156,8 @@ fun debug(feed: Feed) {
 
     // tag::debug[]
     val strategy = EMAStrategy()
-    val policy = FlexPolicy(enableMetrics = true)
+    val policy = FlexPolicy()
+    policy.enableMetrics = true
     val roboquant = Roboquant(strategy, policy = policy, logger = ConsoleLogger())
     roboquant.run(feed)
     // end::debug[]

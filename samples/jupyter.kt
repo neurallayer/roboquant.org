@@ -5,12 +5,13 @@ import org.roboquant.brokers.Account
 import org.roboquant.common.*
 import org.roboquant.feeds.Feed
 import org.roboquant.feeds.HistoricFeed
+import org.roboquant.charts.*
 import org.roboquant.jupyter.*
 import org.roboquant.strategies.Strategy
 
 fun use1(data: TimeSeries) {
     // tag::use1[]
-    // If last line, will get plotted
+    // If the statement is on the last line, the chart will get plotted
     TimeSeriesChart(data)
     // end::use1[]
 }

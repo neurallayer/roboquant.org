@@ -113,7 +113,7 @@ fun account2(account: Account, signals: List<Signal>) {
         val cancellations = openOrders.map { CancelOrder(it) }
 
         // close positions
-        val closeOrders = openPositions.map { MarketOrder(it.asset, - it.size) }
+        val closeOrders = openPositions.map { MarketOrder(it.asset, -it.size) }
 
         // Stop a losing streak
         val last2Hours = Timeframe.past(2.hours)
@@ -125,8 +125,6 @@ fun account2(account: Account, signals: List<Signal>) {
     // end::account2[]
 
 }
-
-
 
 
 fun equity(account: Account, initialDeposit: Wallet) {

@@ -8,7 +8,7 @@ import org.roboquant.common.JPY
 import org.roboquant.common.USD
 import org.roboquant.common.sumOf
 import org.roboquant.feeds.RandomWalkFeed
-import org.roboquant.jupyter.TradeChart
+import org.roboquant.charts.TradeChart
 import org.roboquant.loggers.SilentLogger
 import org.roboquant.metrics.ProgressMetric
 import org.roboquant.strategies.EMAStrategy

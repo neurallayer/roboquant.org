@@ -1,4 +1,4 @@
-@file:Suppress("unused", "UNUSED_VARIABLE", "TooManyFunctions",  "WildcardImport", "MagicNumber")
+@file:Suppress("unused", "UNUSED_VARIABLE", "TooManyFunctions", "WildcardImport", "MagicNumber")
 
 import org.roboquant.Roboquant
 import org.roboquant.common.Asset
@@ -18,8 +18,8 @@ private fun intro() {
 
         // tag::intro[]
         override fun generate(event: Event): List<Signal> {
-        // end::intro[]
-           TODO("Not yet implemented")
+            // end::intro[]
+            TODO("Not yet implemented")
         }
     }
 }
@@ -54,11 +54,11 @@ private fun singleAsset() {
         }
 
     }
+
     val apple = Asset("AAPL")
     val strategy = MyStrategy(apple)
     // end::singleAsset[]
 }
-
 
 
 private fun filter() {
@@ -74,12 +74,11 @@ private fun filter() {
     // use CombinedStrategy and filter to create more complex strategies
     val t = Instant.parse("2010-01-01T00:00:00Z")
     val strategy = CombinedStrategy(
-        EMAStrategy.PERIODS_12_26.filter { _, time -> time <  t },
-        EMAStrategy.PERIODS_5_15.filter { _, time -> time >=  t }
+        EMAStrategy.PERIODS_12_26.filter { _, time -> time < t },
+        EMAStrategy.PERIODS_5_15.filter { _, time -> time >= t }
     )
     // end::filter[]
 }
-
 
 
 @Suppress("RedundantExplicitType")
@@ -118,7 +117,7 @@ private fun rsi() {
 
 private fun extending() {
     // tag::extend[]
-    class MyStrategy1(lookBack:Int= 10) : HistoricPriceStrategy(lookBack) {
+    class MyStrategy1(lookBack: Int = 10) : HistoricPriceStrategy(lookBack) {
 
         /**
          * this method should return a Signal or null. Signal can contain
@@ -134,7 +133,7 @@ private fun extending() {
 
     }
 
-    class MyStrategy2(lookBack:Int= 10) : HistoricPriceStrategy(lookBack) {
+    class MyStrategy2(lookBack: Int = 10) : HistoricPriceStrategy(lookBack) {
 
         /**
          * this method should return a Rating or null.

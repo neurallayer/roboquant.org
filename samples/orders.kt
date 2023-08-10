@@ -70,7 +70,7 @@ fun accountOrder(broker: Broker) {
     assert(openOrder.order is MarketOrder)
     assert(order == openOrder.order)
 
-    with (openOrder) {
+    with(openOrder) {
         println("status=$status openedAt=$openedAt closedAt=$closedAt")
     }
     // end::accountOrder[]
