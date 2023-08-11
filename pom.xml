@@ -154,6 +154,11 @@
 			<version>${roboquant.version}</version>
 		</dependency>
 		<dependency>
+			<artifactId>roboquant-server</artifactId>
+			<groupId>org.roboquant</groupId>
+			<version>${roboquant.version}</version>
+		</dependency>
+		<dependency>
 			<artifactId>roboquant-ibkr</artifactId>
 			<groupId>org.roboquant</groupId>
 			<version>${roboquant.version}</version>

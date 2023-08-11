@@ -6,13 +6,13 @@ import org.roboquant.brokers.sim.SimBroker
 import org.roboquant.common.Amount
 import org.roboquant.common.Timeframe
 import org.roboquant.common.hours
-import org.roboquant.http.WebServer
 import org.roboquant.loggers.InfoLogger
 import org.roboquant.policies.FlexPolicy
+import org.roboquant.server.WebServer
 import org.roboquant.strategies.EMAStrategy
 
 
-suspend fun binanceWebServer() {
+fun binanceWebServer() {
     // tag::webserver[]
     // set up the feed and subscribe to asset(s) of interest
     val feed = BinanceLiveFeed()
@@ -28,13 +28,13 @@ suspend fun binanceWebServer() {
 
     // start the web server
     val server = WebServer(username = "test", password = "secret")
-    server.start()
 
     // Start a run for 8 hours
     val tf = Timeframe.next(8.hours)
-    server.runAsync(rq, feed, tf)
+    server.run(rq, feed, tf)
 
-    // After the run has finished, stop the webserver
+    // After the run has finished, stop the webserver and close the feed.
     server.stop()
+    feed.close()
     // end::webserver[]
 }
