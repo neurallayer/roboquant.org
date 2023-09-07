@@ -3,16 +3,14 @@
 import org.roboquant.Roboquant
 import org.roboquant.binance.BinanceLiveFeed
 import org.roboquant.brokers.sim.SimBroker
-import org.roboquant.common.Amount
-import org.roboquant.common.Timeframe
-import org.roboquant.common.hours
-import org.roboquant.loggers.InfoLogger
+import org.roboquant.common.*
+import org.roboquant.feeds.Feed
 import org.roboquant.policies.FlexPolicy
 import org.roboquant.server.WebServer
 import org.roboquant.strategies.EMAStrategy
 
 
-fun binanceWebServer() {
+private fun binanceWebServer() {
     // tag::webserver[]
     // set up the feed and subscribe to asset(s) of interest
     val feed = BinanceLiveFeed()
@@ -23,11 +21,14 @@ fun binanceWebServer() {
     val initialDeposit = Amount("BUSD", 10_000).toWallet()
     val broker = SimBroker(initialDeposit)
     val policy = FlexPolicy.singleAsset()
-    policy.enableMetrics = true
-    val rq = Roboquant(strategy, broker = broker, policy = policy, logger = InfoLogger())
+    val rq = Roboquant(strategy, broker = broker, policy = policy)
 
-    // start the web server
-    val server = WebServer(username = "test", password = "secret")
+    // start the web server, secured with credentials and running on the provided port
+    val server = WebServer {
+        username = "test"
+        password = "secret"
+        port = 8081
+    }
 
     // Start a run for 8 hours
     val tf = Timeframe.next(8.hours)
@@ -37,4 +38,23 @@ fun binanceWebServer() {
     server.stop()
     feed.close()
     // end::webserver[]
+}
+
+
+private fun multiRun(roboquant1: Roboquant, roboquant2: Roboquant, feed1: Feed, feed2: Feed) {
+    // tag::multirun[]
+    // start the web server with default port (8080) and NO login required
+    val server = WebServer()
+
+    // Start two runs
+    val jobs = ParallelJobs()
+    jobs.add {
+        val tf = Timeframe.next(60.minutes)
+        server.runAsync(roboquant1, feed1, tf, "run-strategy1")
+        server.runAsync(roboquant2, feed2, tf, "run-strategy2")
+    }
+
+    jobs.joinAllBlocking()
+    server.stop()
+    // end::multirun[]
 }

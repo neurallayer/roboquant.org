@@ -47,6 +47,21 @@ include::{sourcefile}[tag=memoryLogger]
 - `InfoLogger`: logs metrics using the built-in logger at INFO level.
 - `ConsoleLogger`: logs the metrics to the console using the `println` statement.
 
+
+- `QuestDBLogger`: logs the metrics to a QuestDB database.
++
+[source,kotlin,indent=0]
+----
+include::{sourcefile}[tag=questdblogger]
+----
++
+You can access the data just like with the memory logger, or use a web console:
++
+[source, shell, indent=0]
+----
+docker run --rm -p 9000:9000 -v "$HOME/.roboquant/questdb-metrics:/var/lib/questdb" questdb/questdb:7.3.1
+----
+
 === Custom Loggers
 You can also implement your own metrics logger, for example if you want to store values into a database or have a custom file format that you want to use. The following example shows a minimal implementation:
 

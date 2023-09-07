@@ -1,9 +1,9 @@
 @file:Suppress("unused", "UnnecessaryVariable", "WildcardImport", "MagicNumber", "ReturnCount")
 
 import org.roboquant.Roboquant
+import org.roboquant.avro.AvroFeed
 import org.roboquant.brokers.Account
 import org.roboquant.brokers.Broker
-import org.roboquant.feeds.AvroFeed
 import org.roboquant.feeds.Event
 import org.roboquant.feeds.EventChannel
 import org.roboquant.feeds.csv.CSVFeed

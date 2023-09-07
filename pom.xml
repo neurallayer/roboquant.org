@@ -119,7 +119,22 @@
 			<version>${roboquant.version}</version>
 		</dependency>
 		<dependency>
+			<artifactId>roboquant-charts</artifactId>
+			<groupId>org.roboquant</groupId>
+			<version>${roboquant.version}</version>
+		</dependency>
+		<dependency>
 			<artifactId>roboquant-ta</artifactId>
+			<groupId>org.roboquant</groupId>
+			<version>${roboquant.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>roboquant-avro</artifactId>
+			<groupId>org.roboquant</groupId>
+			<version>${roboquant.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>roboquant-questdb</artifactId>
 			<groupId>org.roboquant</groupId>
 			<version>${roboquant.version}</version>
 		</dependency>

@@ -38,9 +38,9 @@ By default, this will start a new Jupyter-Lab environment. The installation come
 The following startup command shows some useful additional options that you can use:
 
 * dispose of the container as soon as you stop the container (the `--rm` option)
-* use a predefined token, so you don't have to look in the output to find out the token to use
+* use a predefined token, so you don't have to look at the output to find out the token to use
 * map your local working directory to the work directory in the docker container
-* starts a classic notebook rather than a Jupyter Lab environment
+* start a classic notebook rather than a Jupyter Lab environment
 
 [source, shell]
 ----
@@ -55,26 +55,6 @@ docker run                              \
 
 If you don't have Docker yet installed on your computer, check out https://www.docker.com/get-started[Docker get started^] and download Docker Personal from there. If you are running Linux, then your distribution likely already has Docker or Podman included.
 
-=== AWS SageMaker
-The AWS SageMaker notebook instances don't have Kotlin support enabled by default. But there is an easy way to add it the first time an instance is created. You can add a `lifecycle` script that will be run when the environment is created and in our case adds the Kotlin kernel.
-
-When creating a new notebook instance from the SageMaker menu, open the `additional configuration` option and select `create new lifecycle configuration` from the lifecycle configuration dropdown. Then add the following snippet to the `Start notebook` tab.
-
-[source,shell]
-----
-#!/bin/bash
-set -eux
-
-# This script installs the Kotlin kernel before starting the notebook
-sudo -u ec2-user -i <<'EOF'
-source /home/ec2-user/anaconda3/bin/activate JupyterSystemEnv
-pip install kotlin-jupyter-kernel
-source /home/ec2-user/anaconda3/bin/deactivate
-EOF
-
-----
-
-This has been tested with the platform identifier set to "Amazon Linux 2/Jupyter Lab 3" and "Give users root access to the notebook" enabled (default).
 
 == Install the _roboquant_ libraries
 Just add `roboquant` as a dependency to your build tool, like Maven or Gradle. Regular versions of the Roboquant modules are published to Maven Central and snapshots are published to OSS Sonatype (https://s01.oss.sonatype.org/content/repositories/snapshots).
@@ -87,11 +67,17 @@ The latest available versions:
 The following modules are available for inclusion in your application:
 
 * `roboquant`: the core module of the platform
-* `roboquant-crypto`: support for many of today's popular crypto exchanges
-* `roboquant-extra`: integrations with 3rd party brokers and market data providers
-* `roboquant-ibkr`: integration with Interactive Brokers
-* `roboquant-ta`: over 150 technical analysis indicators and strategies
-* `roboquant-jupyter` additional Jupyter Notebook functionality like charting
+* `roboquant-binance`: adds support for binance
+* `roboquant-xchange`: adds support for many of today's popular crypto exchanges via the `XChange` library
+* `roboquant-alpaca`: adds support the Alpaca broker and their market data feeds
+* `roboquant-polygon`: adds support for Polygon data feeds
+* `roboquant-alphavantage`: adds support for AlphaVantage data feeds
+* `roboquant-server`: enables to control your runs via a web interface, ideal for hosting on remote servers
+* `roboquant-charts`: integration with the `Apache ECharts` library
+* `roboquant-ibkr`: adds support for Interactive Brokers
+* `roboquant-ta`: over 150 technical analysis indicators and strategies using `Ta-Lib` or `Ta4j`
+* `roboquant-jupyter` additional Jupyter Notebook
+* `roboquant-performance` contains a series of performance tests, mostly useful to evaluate specific hardware
 
 === Maven
 Add the following snippet to your pom.xml file in the dependencies section:
@@ -105,20 +91,22 @@ Add the following snippet to your pom.xml file in the dependencies section:
 </dependency>
 ----
 
-or if you want to create your own new algo-trading project, you can run the Maven Archetype that is available for _roboquant_:
+Or if you want to create your own new algo-trading project, you can run the Maven Archetype that is available for _roboquant_:
 
 [source,shell]
 ----
 mvn archetype:generate                          \
 -DarchetypeGroupId=org.roboquant                \
 -DarchetypeArtifactId=roboquant-quickstart      \
--DarchetypeVersion=1.5.0                        \
+-DarchetypeVersion=2.0.0                        \
 -DgroupId=org.mydomain                          \
 -DartifactId=myapp                              \
 -Dversion=1.0-SNAPSHOT
 ----
+Change the last three lines to your own settings.
 
-This will result in a fully functional Kotlin Maven project with a small sample strategy, that is ready to be imported an IDE like IntelliJ IDEA.
+This will create a fully functional Kotlin Maven project with a small sample strategy.
+It can be run from the command line or imported in an IDE like IntelliJ IDEA.
 
 === Gradle
 Include the following line in your build.gradle script:
@@ -139,7 +127,7 @@ root
     roboquant
         src/main/kotlin
         src/test/kotlin
-    roboquant-extra
+    roboquant-server
         src/main/kotlin
         src/test/kotlin
     ...
@@ -168,21 +156,31 @@ cd roboquant
 When the `./wvnw install` process has successfully finished, you should see something like this:
 [source]
 ----
-[INFO] roboquant parent ................................... SUCCESS [  1.618 s]
-[INFO] roboquant .......................................... SUCCESS [  6.768 s]
-[INFO] roboquant ta ....................................... SUCCESS [  3.868 s]
-[INFO] roboquant jupyter .................................. SUCCESS [  2.503 s]
-[INFO] roboquant extra .................................... SUCCESS [  2.838 s]
-[INFO] roboquant crypto ................................... SUCCESS [  3.213 s]
+[INFO] roboquant parent ................................... SUCCESS [  0.074 s]
+[INFO] roboquant .......................................... SUCCESS [ 20.190 s]
+[INFO] roboquant charts ................................... SUCCESS [  2.430 s]
+[INFO] roboquant ta ....................................... SUCCESS [  2.565 s]
+[INFO] roboquant jupyter .................................. SUCCESS [  1.526 s]
+[INFO] roboquant extra .................................... SUCCESS [  0.320 s]
+[INFO] roboquant alpaca ................................... SUCCESS [  0.749 s]
+[INFO] roboquant polygon .................................. SUCCESS [  0.808 s]
+[INFO] roboquant xchange .................................. SUCCESS [  0.595 s]
+[INFO] roboquant binance .................................. SUCCESS [  0.479 s]
+[INFO] roboquant server ................................... SUCCESS [  0.861 s]
+[INFO] roboquant performance .............................. SUCCESS [  0.192 s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  30.858 s
 ----
 
+By default, the Kotlin incremental compiler property is set to true (in the main `pom.xml`). This enables very fast compilation if there are only a few changes made.
+So additional compiles should typically take not more than a few seconds.
 
-TIP: If you plan to make regular changes and updates to the _roboquant_ source code, checkout the https://github.com/apache/maven-mvnd[Maven Daemon] project that provides faster builds. Additionally, you can set the Kotlin incremental compiler property to true (in the main `pom.xml`).
+TIP: If you plan to make regular large changes and updates to the _roboquant_ source code, checkout the https://github.com/apache/maven-mvnd[Maven Daemon] project for even faster builds.
 
 == Interactive Brokers
-Unfortunately we are not allowed to redistribute the Interactive Brokers Java client, so you'll have to download the TwsApi.jar file yourself. You can download the stable version `10.19` from here: https://interactivebrokers.github.io and within the downloaded archive file you'll find the required `TwsApi.jar`.
+Unfortunately, we are not allowed to redistribute the Interactive Brokers Java client, so you'll have to download the TwsApi.jar file yourself. You can download the stable version `10.19` from here: https://interactivebrokers.github.io and within the downloaded archive file you'll find the required `TwsApi.jar`.
 
 Then install the jar file in your local Maven repository on your machine using the following command:
 

@@ -3,6 +3,7 @@
 )
 
 import org.roboquant.Roboquant
+import org.roboquant.avro.AvroFeed
 import org.roboquant.binance.BinanceLiveFeed
 import org.roboquant.common.*
 import org.roboquant.feeds.*
@@ -10,6 +11,8 @@ import org.roboquant.feeds.csv.CSVConfig
 import org.roboquant.feeds.csv.CSVFeed
 import org.roboquant.feeds.csv.LazyCSVFeed
 import org.roboquant.feeds.csv.PriceBarParser
+import org.roboquant.questdb.QuestDBFeed
+import org.roboquant.questdb.QuestDBRecorder
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -176,6 +179,31 @@ fun testEvent(event: Event) {
     // end::event[]
 }
 
+
+
+fun questDB(inputFeed: Feed) {
+    // tag::qdb[]
+    val recorder = QuestDBRecorder()
+    recorder.record<PriceBar>(inputFeed, "pricebars")
+
+    val feed = QuestDBFeed("pricebars")
+    // end::qdb[]
+}
+
+
+fun questDB2(inputFeed1: Feed, inputFeed2: Feed) {
+    // tag::qdb2[]
+    val recorder = QuestDBRecorder()
+
+    // If we want later to add out-of-order entries, we need to partition the table
+    recorder.record<PriceBar>(inputFeed1, "pricebars", partition = QuestDBRecorder.Partition.YEAR)
+
+    // Add the out-of-order pricebars
+    recorder.record<PriceBar>(inputFeed2, "pricebars", append = true)
+
+    val feed = QuestDBFeed("pricebars")
+    // end::qdb2[]
+}
 
 fun testPriceAction(event: Event) {
     // tag::priceaction[]

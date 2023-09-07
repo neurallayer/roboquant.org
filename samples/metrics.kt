@@ -6,8 +6,12 @@ import org.roboquant.common.Asset
 import org.roboquant.common.TimeSeries
 import org.roboquant.feeds.Event
 import org.roboquant.charts.TimeSeriesChart
+import org.roboquant.common.years
+import org.roboquant.feeds.Feed
 import org.roboquant.loggers.MetricsLogger
 import org.roboquant.metrics.*
+import org.roboquant.questdb.QuestDBMetricsLogger
+import org.roboquant.strategies.EMAStrategy
 import org.roboquant.strategies.Strategy
 import java.time.Instant
 
@@ -30,11 +34,28 @@ fun standard(strategy: Strategy, sp500Asset: Asset) {
 }
 
 
+fun questdbLogger(roboquant: Roboquant, feed: Feed) {
+    // tag::questdblogger[]
+    // Without specifying a path, the logger will use
+    // the default DB path ~/.roboquant/questdb-metrics/db
+    val logger = QuestDBMetricsLogger()
+
+    val rq = Roboquant(EMAStrategy(), AccountMetric(), logger = logger)
+
+    // The logger can be used for multiple runs, even concurrently if required.
+    // Just make sure every run has a unique name
+    feed.timeframe.split(1.years).forEach {
+        rq.run(feed, it , name = "run-${it.toPrettyString()}")
+    }
+    // end::questdblogger[]
+}
+
+
 fun memoryLogger(roboquant: Roboquant) {
     // tag::memoryLogger[]
     // You can always find out which metrics are available after a run
     val logger = roboquant.logger
-    println(logger.metricNames)
+    println(logger.getMetricNames())
 
     // And plot a metric in a Jupyter Notebook
     val equity = logger.getMetric("account.equity")
@@ -65,11 +86,11 @@ fun exampleCustomLogger() {
             TODO()
         }
 
-        fun retrieve(key: String): Map<String, TimeSeries> {
+        fun retrieve(key: String, run: String): TimeSeries {
             TODO()
         }
 
-        fun retrieveKeys(): List<String> {
+        fun retrieveKeys(run: String): Set<String> {
             TODO()
         }
     }
@@ -86,15 +107,14 @@ fun exampleCustomLogger() {
         /**
          * Optional, if you want to access the logged metrics via roboquant
          */
-        override fun getMetric(name: String): Map<String, TimeSeries> {
-            return database.retrieve(name)
+        override fun getMetric(metricName: String, run: String): TimeSeries {
+            return database.retrieve(metricName, run)
         }
 
         /**
          * Optional, if you want to access the logged metrics via roboquant
          */
-        override val metricNames
-            get() = database.retrieveKeys()
+        override fun getMetricNames(run: String) = database.retrieveKeys(run)
 
     }
     // end::customLogger[]

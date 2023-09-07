@@ -11,7 +11,7 @@ private fun basicTaLib() {
     val asset = Asset("TEST")
 
     // Keep maximum 30 price-bars in history
-    val serie = PriceBarSerie(30)
+    val serie = PriceBarSeries(30)
     repeat(30) {
         serie.add(PriceBar(asset, 100.0, 101.0, 99.0, 100.0, 1000))
     }
@@ -37,16 +37,16 @@ private fun basicTaLib() {
 }
 
 
-private fun dynamic(priceBarSerie: PriceBarSerie) {
+private fun dynamic(series: PriceBarSeries) {
 
     val taLib = TaLib()
     // tag::dynamic[]
-    if (priceBarSerie.isFull()) {
+    if (series.isFull()) {
         try {
-            taLib.sma(priceBarSerie, 30)
+            taLib.sma(series, 30)
         } catch (err: InsufficientData) {
             // The error contains the minimum required size
-            priceBarSerie.increaseCapacity(err.minSize)
+            series.increaseCapacity(err.minSize)
         }
     }
     // end::dynamic[]
@@ -73,9 +73,9 @@ private fun strategy() {
 
 private fun strategy2() {
     // tag::strategy2[]
-    fun TaLib.myIndicator(period: Int = 10, priceBarSerie: PriceBarSerie): Double {
-        val x1 = sma(priceBarSerie, period)
-        val x2 = ema(priceBarSerie, period)
+    fun TaLib.myIndicator(period: Int = 10, series: PriceBarSeries): Double {
+        val x1 = sma(series, period)
+        val x2 = ema(series, period)
         return x1 - x2
     }
 
@@ -90,10 +90,10 @@ private fun strategy2() {
 
 private fun strategy3() {
     // tag::strategy3[]
-    fun TaLib.myIndicator(priceBarSerie1M: PriceBarSerie): Double {
-        val priceBarSerie5M = priceBarSerie1M.aggregate(5)
-        val x1 = sma(priceBarSerie1M, 20)
-        val x2 = ema(priceBarSerie5M, 2)
+    fun TaLib.myIndicator(serie1M: PriceBarSeries): Double {
+        val series5M = serie1M.aggregate(5)
+        val x1 = sma(serie1M, 20)
+        val x2 = ema(series5M, 2)
         return x1 - x2
     }
 

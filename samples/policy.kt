@@ -17,6 +17,7 @@ import java.time.Instant
 import org.roboquant.common.*
 import org.roboquant.feeds.AssetFeed
 import org.roboquant.feeds.PriceAction
+import org.roboquant.ta.AssetPriceBarSeries
 
 // tag::basic[]
 class MyPolicy : Policy {
@@ -115,7 +116,7 @@ fun customPolicy2() {
     class SmartLimitPolicy(val atrPercentage: Double = 0.02, val windowSize: Int = 5) : FlexPolicy() {
 
         // Keep track of historic prices per asset
-        private var prices = PriceBarSeries(windowSize + 1)
+        private var prices = AssetPriceBarSeries(windowSize + 1)
 
         // Use TaLib for calculation of the ATR
         private val taLib = TaLib()
@@ -159,7 +160,7 @@ fun customSingleAssetPolicy(feed: AssetFeed) {
     // tag::singleAsset[]
     class SingleAssetPolicy(private val asset: Asset) : Policy {
 
-        private val history = PriceSerie(10)
+        private val history = PriceSeries(10)
 
         /**
          * Open a position

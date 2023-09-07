@@ -221,6 +221,42 @@ Roboquant comes with a few default AvroFeeds. The main benefit is that you can q
 include::{sourcefile}[tag=predefined]
 ----
 
-In the future there will be more default AvroFeeds that you can use, depending on the feedback from the community. Likely candidates that are currently missing are FOREX feeds and cryptocurrency feeds.
+In the future, there will be more default AvroFeeds that you can use, depending on the feedback from the community. Likely candidates that are currently missing are FOREX feeds and cryptocurrency feeds.
 
 WARNING: These default feeds should not be relied on for serious back testing. They just enable you to quickly run a back test and see if your strategy and policy are behaving as expected.
+
+== QuestDB Feed
+QuestDBFeed and QuestDBRecorder are similar to AvroFeed. But in this case, the data will be stored in a QuestDB database.
+
+The `QuestDBFeed` has the following characteristics:
+
+1. Support for very large data sets.
+2. Very fast read and write operations, with random access on timestamp.
+3. Support micro-second timestamp resolution.
+4. Supports only a single PriceAction type per feed. So a single feed can contain price-bars or trade-prices, but not both.
+5. Although no compression, efficient storage since good support for repeating strings.
+6. You can append new entries with overlapping time to an existing QuestDB feed.
+7. Support for `PriceBar`, `PriceQuote` and `TradePrice`.
+
+
+Example how to create a QuestDBFeed based on some other feed (like a CSVFeed). This will use the default database.
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=qdb]
+----
+
+
+Example how to append data to an existing feed:
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=qdb2]
+----
+
+
+You can also access your database with a web-viewer. Accessing the default price database:
+[source, shell, indent=0]
+----
+
+docker run --rm -p 9000:9000 -v "$HOME/.roboquant/questdb-prices:/var/lib/questdb" questdb/questdb:7.3.1
+----
