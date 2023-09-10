@@ -44,8 +44,19 @@ fun test(roboquant: Roboquant) {
 fun aggr() {
     // tag::aggr[]
     val oneMinuteFeed = CSVFeed("data/test")
-    val feed = AggregatorFeed(oneMinuteFeed, 15.minutes)
+    val fifteenMinuteFeed = AggregatorFeed(oneMinuteFeed, 15.minutes)
     // end::aggr[]
+}
+
+
+
+fun aggr2() {
+    // tag::aggr2[]
+    val feed = BinanceLiveFeed()
+    feed.subscribePriceQuote("BTCBUSD", "ETHBUSD")
+
+    val priceBarFeed = AggregatorFeed(feed, 1.minutes)
+    // end::aggr2[]
 }
 
 

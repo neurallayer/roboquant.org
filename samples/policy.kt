@@ -4,20 +4,17 @@ import org.roboquant.Roboquant
 import org.roboquant.brokers.Account
 import org.roboquant.brokers.Position
 import org.roboquant.brokers.diff
-import org.roboquant.common.Size
-import org.roboquant.common.days
+import org.roboquant.common.*
+import org.roboquant.feeds.AssetFeed
 import org.roboquant.feeds.Event
+import org.roboquant.feeds.PriceAction
 import org.roboquant.orders.*
 import org.roboquant.policies.*
 import org.roboquant.strategies.NoSignalStrategy
 import org.roboquant.strategies.Signal
-import org.roboquant.ta.PriceBarSeries
+import org.roboquant.ta.AssetPriceBarSeries
 import org.roboquant.ta.TaLib
 import java.time.Instant
-import org.roboquant.common.*
-import org.roboquant.feeds.AssetFeed
-import org.roboquant.feeds.PriceAction
-import org.roboquant.ta.AssetPriceBarSeries
 
 // tag::basic[]
 class MyPolicy : Policy {

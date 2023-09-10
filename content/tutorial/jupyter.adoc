@@ -20,22 +20,21 @@ This will automatically load the _roboquant_ libraries. In face, it will load th
 
 If you run `Welcome()` in a notebook cell afterwards, you'll see the exact version of _roboquant_ you are using together with information about the environment you are in. You can also run a quick demo to validate if everything is working as expected using a statements like `Welcome().demo1()`
 
-You can also load a different version of _roboquant_ and additional modules (separated by a `:`):
+You can also load a different version of _roboquant_ and additional modules (separated by a `:`).
+
+By default, the core _roboquant_ packages are imported.
+But 3rd party modules like Binance and Polygon are not included by default.
+So these you'll need to specify and add the appropriate import statement.
+
 
 [source]
 ----
-%use roboquant(version=1.2.0, modules=crypto:extra)
+%use roboquant(version=1.2.0, modules=binance:polygon)
+import org.roboquant.binance.*
+import org.roboquant.polygon.*
 ----
 
-By default, most of the core _roboquant_ packages are imported. But the packages of the `roboquant-crypto` and `roboquant-extra` modules are not included by default. So for these you need to include the appropriate import statement.
-
-[source]
-----
-%use roboquant(modules=extra)
-import org.roboquant.alpaca.*
-----
-
-TIP: Chromium based browsers perform best. Especially when you plot charts with many data points, the webpage stays more responsive.
+TIP: Chromium-based browsers perform best. Especially when you plot charts with many data points, the webpage stays more responsive.
 
 
 == Importing 3rd party libraries
@@ -86,15 +85,23 @@ However, if the chart instance is not the last statement in a cell, you'll need 
 include::{sourcefile}[tag=use2]
 ----
 
+You can also customize charts.
+This allows you to change the eCharts options before it is being rendered.
+
+[source, kotlin]
+----
+include::{sourcefile}[tag=custom]
+----
+
 === PriceBarCart
 
 image::https://roboquant.org/img/pricebars.png[]
 
-Main features of this chart include:
+The main features of this chart include:
 
 * shows the PriceBar actions (also referred to a candlesticks) for a certain `Asset` in a `Feed`
 * provides an overview of the volume in the same chart (if the feed has this information)
-* can handle large number of candles, and you can easily zoom into smaller timeframes to see more details
+* can handle a large number of candles, and you can easily zoom into smaller timeframes to see more details
 * you can plot trades for the same asset in the same chart to see when they were created.
 
 [source, kotlin]

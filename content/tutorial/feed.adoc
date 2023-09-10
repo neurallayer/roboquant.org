@@ -162,6 +162,15 @@ The following example assumes the CSVFeed contains 1-minute price-bars, and you 
 include::{sourcefile}[tag=aggr]
 ----
 
+You can also aggregate live feeds.
+For example, aggregate live quotes from the Binance exchange into one-minute price-bars.
+
+[source, kotlin, indent=0]
+----
+include::{sourcefile}[tag=aggr2]
+----
+
+
 == CombinedFeed
 You can only parse a single feed instance to the `Roboquant.run` method. However, it is easy to combine multiple feeds into a single one before invoking the run method:
 

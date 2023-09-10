@@ -49,6 +49,13 @@ private fun manualOrder() {
 
     // place the order
     broker.place(listOf(order))
+
+    // Get an updated versions of your broker account
+    repeat(10) {
+        broker.sync()
+        println(broker.account.summary())
+        Thread.sleep(1_000)
+    }
     // end::manualOrder[]
 }
 

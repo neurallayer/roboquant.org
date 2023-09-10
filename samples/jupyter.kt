@@ -53,6 +53,16 @@ fun overview2(data: TimeSeries, account: Account, feed: Feed, asset: Asset, asse
     // end::overview[]
 }
 
+fun custom(data: TimeSeries) {
+    // tag::custom[]
+    val chart = TimeSeriesChart(data)
+    chart.customize = {
+        backgroundColor = "yellow"
+    }
+    // end::custom[]
+}
+
+
 fun global() {
     // tag::global[]
     Chart.maxSamples = 100_000 // Max samples to use when drawing a chart

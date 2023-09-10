@@ -17,8 +17,9 @@ private fun intro() {
     class MyStrategy : Strategy {
 
         // tag::intro[]
-        override fun generate(event: Event): List<Signal> {
-            // end::intro[]
+        override fun generate(event: Event): List<Signal>
+        // end::intro[]
+        {
             TODO("Not yet implemented")
         }
     }
@@ -26,7 +27,7 @@ private fun intro() {
 
 private fun ema() {
     // tag::ema[]
-    // Use a EMA  crossover strategy with predefined periods
+    // Use an EMA-crossover strategy with predefined periods
     val strategy1 = EMAStrategy.PERIODS_5_15
     val strategy2 = EMAStrategy.PERIODS_12_26
     val strategy3 = EMAStrategy.PERIODS_50_200

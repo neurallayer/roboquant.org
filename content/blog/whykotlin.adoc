@@ -35,4 +35,6 @@ The good news is that if you really want to stick with Python, there are plenty 
 .Embed Python
 ****
 It is possible to embed a Python interpreter within the JVM and use Python code to develop your strategies in _roboquant_. Right now this integration isn't yet included, and it requires more investigations to see what approach would work best. But it may be included in future releases, especially if it also opens up the Python ecosystem to _roboquant_.
+
+An alternative to this is using GraalVM and leveraging their support for Python. This would enable a more seamless integration.
 ****

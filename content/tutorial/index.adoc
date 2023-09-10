@@ -10,7 +10,7 @@ Developing and running algo-trading software is not an easy task at all. You alr
 So it makes sense to separate the logic that is common to all automated trading strategies from the logic that is specific to your strategy.
 
 == Main components
-Perhaps the most important part of using _roboquant_ is to understand the sequence of steps and the responsibility each component has in this flow. The following diagram provides a logical overview of the main components and the type of data they consume and produce.
+Perhaps the most important part of using _roboquant_ is to understand the sequence of steps and the responsibility each component has in this flow. The following diagram provides a logical overview of the main components and the data they produce and consume.
 
 image::main_flow_simplified.png[]
 
@@ -22,15 +22,17 @@ The engine of the platform that performs the actual run and orchestrates the int
 
 * `Feed`
 +
-Provides the data needed for testing and trading in the form of events. A feed can represent both historic and live data and is not restricted to pricing information only. A feed delivers its data in the form of events on a channel.
+Provides the data needed for testing and trading. The data is provided in the form of events. A feed can represent both historic and live data and is not restricted to pricing information only.
 
 * `Strategy`
 +
-Receives the event and generates zero or more signals. A `Signal` is a `Rating` for a certain asset, like a BUY rating for stock XYZ. So the strategy doesn't create orders; that is the responsibility of the next component, the policy.
+Receives the event and generates zero or more signals. A `Signal` is a `Rating` for a certain asset, like a BUY rating for Tesla. So the strategy doesn't create orders; that is the responsibility of the next component, the policy.
 
 * `Policy`
 +
-Receives the generated signals and creates the actual orders. If you need to create orders that are not based on signals, this is also the place to do so, for example to re-balance your positions at regular intervals. Check in xref:../background/features.adoc#_order_management[features] why it is smart to separate this from your strategy logic.
+Receives the generated signals and creates the actual orders. If you need to create orders that are not based on signals, this is also the place to do so. For example, to re-balance your positions at regular intervals.
++
+Check out xref:../background/features.adoc#_order_management[features] to understand why it makes sense to separate this from your strategy logic.
 
 * `Broker`
 +
@@ -56,3 +58,6 @@ include::{sourcefile}[tag=overview]
 <6> Run the back test using the data feed you just created.
 
 The _roboquant_ platform is very flexible and provides many more options than the above example shows. You can easily change almost any aspect of the platform if the default behavior doesn't suit your needs.
+
+This might mean that the learning curve is a steeper than some simpler platforms.
+But in our experience, this is required to be able to develop robust automated trading solutions.

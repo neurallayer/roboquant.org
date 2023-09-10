@@ -77,7 +77,7 @@ include::{sourcefile}[tag=accountOrder]
 ----
 
 == Own order logic
-Although you typically would use an instance of `Roboquant` to handle method invocations on the various components, you can actually also invoke them directly.
+Although you typically would use an instance of `Roboquant` to handle method invocations on the various components, you can also invoke these methods directly from your own code.
 
 For example, if you want to place a market order, you can directly invoke the `Broker.place` method:
 
