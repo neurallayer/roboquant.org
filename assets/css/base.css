@@ -47,6 +47,11 @@ body {
   margin: 20px 0;
 }
 
+table {
+  display: block;
+  overflow-x: auto;
+}
+
 /*code {
   font-size: 80%;
 }*/

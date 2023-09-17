@@ -172,7 +172,8 @@ include::{sourcefile}[tag=aggr2]
 
 
 == CombinedFeed
-You can only parse a single feed instance to the `Roboquant.run` method. However, it is easy to combine multiple feeds into a single one before invoking the run method:
+You can only provide a single feed instance to the `Roboquant.run` method.
+However, it is easy to combine multiple feeds into a single one before invoking the run method:
 
 [source, kotlin, indent=0]
 ----

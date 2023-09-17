@@ -43,12 +43,10 @@ This logger is especially useful if you are using a Jupyter Notebook and want to
 include::{sourcefile}[tag=memoryLogger]
 ----
 
-- `SilentLogger`: this logger just silently ignores all metric values and is mostly useful for unit tests
-- `InfoLogger`: logs metrics using the built-in logger at INFO level.
-- `ConsoleLogger`: logs the metrics to the console using the `println` statement.
-
-
-- `QuestDBLogger`: logs the metrics to a QuestDB database.
+- `SilentLogger` — This logger just silently ignores all metric values and is mostly useful for unit tests
+- `InfoLogger` — Logs metrics using the built-in logger at INFO level
+- `ConsoleLogger` — Logs the metrics to the console using the `println` statement
+- `QuestDBLogger` — Logs the metrics to a QuestDB database.
 +
 [source,kotlin,indent=0]
 ----

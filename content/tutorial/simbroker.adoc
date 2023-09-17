@@ -183,6 +183,7 @@ The following table shows another example, but this time shorting on a USD margi
 |6 |buy XYZ 100 @ $300|$15,000|0|0|$15,000|$30,000|0|-$5,000
 |===
 
+
 === Order impact on Buying Power
 The following order-rules apply when calculating the buying power:
 

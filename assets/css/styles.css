@@ -12023,3 +12023,9 @@ ul.feature-list {
 .fa.fa-github {
     font-family: "Font Awesome 6 Brands"
 }
+
+
+table {
+    display: block;
+    overflow-x: auto;
+}
