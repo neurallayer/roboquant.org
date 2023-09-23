@@ -5,8 +5,17 @@
         <main class="flex-shrink-0">
             <#include "menu.ftl">
             <header class="masthead bg-primary text-white text-center">
-                <div class="container d-flex align-items-center flex-column">
-                    <img class="masthead-banner mb-1" src="/img/banner.png" alt="${config.site} banner">
+                <div class="container">
+                    <div class="row gx-2">
+                        <div class="col-lg-4 mb-2 mb-lg-0">
+                            <img class="mb-0 masthead-avatar" src="/img/avatar.png" alt="${config.site} avatar">
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="center">
+                            <h1 class="fw-light mt-1"><span>r</span>obo<span>q</span>uant</h1>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </header>
 
@@ -16,7 +25,7 @@
                         <div class="col-lg-4 mb-1 mb-lg-0"><h2 class="fw-bolder mb-0">What is roboquant</h2></div>
                         <div class="col-lg-8">
                             <div class="col h-100">
-                                <p><em>Roboquant</em> is an open source algorithmic trading platform written in Kotlin. It is flexible, user-friendly and completely free to use. It is designed for anyone serious about algo-trading. So whether you are a beginning retail trader or an established trading firm,
+                                <p><em>Roboquant</em> is an open-source algorithmic trading platform written in Kotlin. It is flexible, user-friendly and completely free to use. It is designed for anyone serious about algo-trading. So whether you are a beginning retail trader or an established trading firm,
                                     <em>roboquant</em> can help you to quickly develop robust and fully automated trading strategies.
                                 </p>
 

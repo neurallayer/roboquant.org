@@ -125,7 +125,7 @@ pre {
 
 h1, .h1 {
     font-size: calc(1.375rem + 1.5vw);
-    /* font-family: 'Comfortaa', cursive; */
+    font-family: 'Comfortaa', cursive;
 }
 
 h1 span {
@@ -11973,11 +11973,12 @@ img[alt="screenshot"] {
 
 
 .masthead-avatar {
-    height: 200px;
+    height: 180px;
 }
 
 .masthead-banner {
-    width: 60%;
+    /* width: 60%; */
+    height: 250px;
 }
 
 @media (min-width: 1200px) {
@@ -12024,8 +12025,20 @@ ul.feature-list {
     font-family: "Font Awesome 6 Brands"
 }
 
+@font-face {
+    font-family: "comfortaa";
+    src: url("Comfortaa-Light.ttf");
+}
 
 table {
     display: block;
     overflow-x: auto;
+}
+
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }

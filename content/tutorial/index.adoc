@@ -43,8 +43,8 @@ Receives the newly created orders by the policy and processes them. Any open ord
 Receives the latest state of the account and calculates various metrics that are of interest to determine the progress and results of the run so far. These results are then handed over to the `MetricsLogger` that will store and/or log the metric values, so you can inspect them at a later time.
 
 
-== Developing your own strategy
-Developing a new strategy and validating it during a back-test is a straightforward process. The code snippet below shows the different steps that you have to take to develop and run your strategy.
+== Main steps
+Developing a new strategy and validating it with a back-test is a straightforward process. The code snippet below shows the different steps that you have to take to develop and run your strategy.
 
 [source, kotlin, subs="attributes,verbatim", indent=0]
 ----
