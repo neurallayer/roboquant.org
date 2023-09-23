@@ -44,7 +44,6 @@ You can easily run the performance test on your own hardware after you've cloned
 ----
 ****
 
-
 With all these measures in place, _roboquant_ is very fast while still have the benefit of being able to use a high-level language.
 
 The following table shows the order of magnitude that the different parts of the system have been optimized for:

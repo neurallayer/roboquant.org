@@ -14,7 +14,7 @@ Since the _roboquant_ documentation is still lacking in certain areas, this is a
 
 ++++
 <p align="center">
-<iframe src="https://discord.com/widget?id=954650958300856340&theme=light" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+<iframe src="https://discord.com/widget?id=954650958300856340&theme=light" width="500" height="300" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
 </p>
 ++++
 
