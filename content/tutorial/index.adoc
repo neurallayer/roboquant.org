@@ -1,4 +1,4 @@
-= Welcome
+= Tutorial
 :icons: font
 :sourcefile: ../../samples/index.kt
 :source-highlighter: rouge

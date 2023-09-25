@@ -39,13 +39,11 @@ fun tradeChart(account: Account) {
 fun complete() {
     // tag::complete[]
     val roboquant = Roboquant(
-        EMAStrategy(),
-        AccountMetric(), PNLMetric(),
-        policy = FlexPolicy {
-            shorting = true
-        },
-        broker = AlpacaBroker(),
-        logger = InfoLogger()
+        EMAStrategy(), // the strategy to use
+        AccountMetric(), PNLMetric(), // multiple metrics to capture
+        policy = FlexPolicy { shorting = true }, // a customized policy
+        broker = AlpacaBroker(), // using the Alpaca broker
+        logger = InfoLogger() // a different logger
     )
     // end::complete[]
 }

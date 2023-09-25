@@ -3,7 +3,7 @@
 :source-highlighter: rouge
 :jbake-date: 2023-06-12
 :jbake-heading: testing leads to failure, and failure leads to understanding
-:intro: This article investigates what is the most cost-efficient machine for performing CPU intensive JVM tasks like back-testing. It compares top-end x86 vs ARM machines, and the outcome may surpise you.
+:intro: What is the most cost-efficient machine for performing CPU intensive JVM tasks like back-testing. Find out how high-end x86 vs ARM machines compare, and the outcome may surpise you.
 
 == Background
 Roboquant is an algo-trading platform written in Kotlin, and more importantly for this article, runs on a Java Virtual Machine (JVM).

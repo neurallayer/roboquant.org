@@ -97,3 +97,22 @@ fun correlation(feed: HistoricFeed, roboquant: Roboquant) {
 }
 
 
+fun timeSeries(roboquant: Roboquant) {
+    // tag::timeseries[]
+    val logger = roboquant.logger
+
+    // Get the equity for multiple runs
+    val equities = logger.getMetric("account.equity")
+
+    // Plot all the equity curves
+    TimeSeriesChart(equities, useTime = false)
+    // end::timeseries[]
+}
+
+fun tradeChart(roboquant: Roboquant) {
+    // tag::trade-chart[]
+    val account = roboquant.broker.account
+    val trades = account.trades.takeLast(100)
+    TradeChart(trades)
+    // end::trade-chart[]
+}

@@ -44,7 +44,11 @@ fun includedModels() {
     val feeModel2 = NoFeeModel() // no additional fees apply
 
     // Pricing engines
+    // Use a 5 BIPS spread based on the open prices.
+    // So BUY is +2.5 BIPS and SELL is -2.5 BIPS
     val pricingEngine1 = SpreadPricingEngine(spread = 5.bips, priceType = "OPEN")
+
+    // Use the close prices and no spread
     val pricingEngine2 = NoCostPricingEngine(priceType = "CLOSE")
     // end::included[]
 }

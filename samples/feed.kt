@@ -43,8 +43,8 @@ fun test(roboquant: Roboquant) {
 
 fun aggr() {
     // tag::aggr[]
-    val oneMinuteFeed = CSVFeed("data/test")
-    val fifteenMinuteFeed = AggregatorFeed(oneMinuteFeed, 15.minutes)
+    val feed = CSVFeed("data/test_1min")
+    val fifteenMinuteFeed = AggregatorFeed(feed, 15.minutes)
     // end::aggr[]
 }
 
@@ -99,7 +99,6 @@ fun csvPreConfig() {
 
     // CSV files downloaded from Yahoo Finance
     val feed5 = CSVFeed("somepath", CSVConfig.yahoo())
-
     // end::csvpreconfig[]
 }
 
@@ -189,7 +188,6 @@ fun testEvent(event: Event) {
     }
     // end::event[]
 }
-
 
 
 fun questDB(inputFeed: Feed) {

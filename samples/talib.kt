@@ -73,12 +73,14 @@ private fun strategy() {
 
 private fun strategy2() {
     // tag::strategy2[]
+    // Your indicator
     fun TaLib.myIndicator(period: Int = 10, series: PriceBarSeries): Double {
         val x1 = sma(series, period)
         val x2 = ema(series, period)
         return x1 - x2
     }
 
+    // Use the indicator in a strategy
     val s = TaLibStrategy()
     s.buy {
         myIndicator(10, it) > 0

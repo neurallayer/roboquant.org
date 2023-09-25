@@ -5,7 +5,7 @@
 :jbake-date: 2020-06-01
 
 == Introduction
-A  strategy is a systematic approach to buying and selling assets, such as stocks, bonds, currencies, or commodities, in order to achieve a specific financial goal. A strategy typically involves the use rules, indicators, and other technical or fundamental analysis tools to identify potential trades.
+A  strategy in general is a systematic approach to buying and selling assets, such as stocks, bonds, currencies, or commodities, in order to achieve a specific financial goal. A strategy typically involves the use rules, indicators, and other technical or fundamental analysis tools to identify potential trades.
 
 A `Strategy`  in _roboquant_ is the component responsible for generating signals based on the events it receives and is likely the place where you do most of your software development and differentiate from other algo-traders.
 
@@ -19,7 +19,7 @@ The main method that needs to be implemented in the `Strategy` interface is the 
 include::{sourcefile}[tag=intro]
 ----
 
-Since a `Strategy` only has access to an `Event` and not the `Account`, it has no knowledge of things like open orders, positions or buying power. As a consequence a `Strategy` is a generic component that can be easily shared or re-used.
+Since a `Strategy` only has access to an `Event` and not the `Account`, it has no knowledge of things like open orders, positions, trades or buying power. As a consequence a `Strategy` is a generic component that can be easily shared or re-used.
 
 == Out-of-the-box Strategies
 There are several commonly used strategies included with _roboquant_. This section highlights some of them, and using them is a great way to get started.
@@ -140,7 +140,9 @@ As you can see, a Strategy can maintain state, like `previousPrices` in the abov
 
 [#_policy_based_strategies]
 == Policy based Strategies
-There are use cases that require a strategy not only to have access to an `Event` but also to the `Account`. These type of strategies can be implemented in _roboquant_, but they should be implemented as a policy instead. Some reasons you might need to use a policy:
+There are use cases that require a strategy not only to have access to an `Event` but also to the `Account`. These types of strategies can be implemented in _roboquant_, but they should be implemented as a policy instead.
+
+Some reasons you might need to use a policy:
 
 * Access to the Account instance is required, for example, to re-balance a portfolio
 * Directly generate orders instead of signals
@@ -151,7 +153,7 @@ See the xref:policy.adoc#_advanced_policies[advanced policies] for more details.
 A `Signal` is the outcome of a strategy and is modelled closely after the ratings given by rating agencies. The two mandatory attributes of a `Signal` are:
 
 1. The `Asset` to which the signal applies, like a single stock
-2. A `Rating` for that asset. A 5-point scale (a Kotlin enumeration type) is used for the `Rating` of a `Signal`:
+2. A `Rating` for that asset. A 5-point scale (Kotlin enumeration type) is used for the `Rating` of a `Signal`:
 
 * `BUY`: Also known as strong buy and "on the recommended list". Buy is a recommendation to purchase a specific security.
 * `SELL`: Also known as strong sell, it's a recommendation to sell a security or to liquidate an asset.
@@ -168,6 +170,8 @@ When instantiating a Signal, only the Asset and Rating are required parameters a
 ----
 include::{sourcefile}[tag=simpleSignal]
 ----
+
+In the above example, the asset is instantiated. But typically they are re-used from the actions found in the event.
 
 == Advanced Signals
 Besides the mandatory Rating and Asset attributes of a signal instance, a signal can optionally contain the following attributes (with their default values):

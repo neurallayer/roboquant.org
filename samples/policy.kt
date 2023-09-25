@@ -93,10 +93,10 @@ fun naivePolicy2() {
     // tag::naive2[]
     class MyNaivePolicy : Policy {
 
-        override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
-            return signals.map {
-                val size = if (it.rating.isPositive) 100 else -100
-                MarketOrder(it.asset, size)
+        override fun act(signals: List<Signal>, account: Account, event: Event) = buildList {
+            signals.forEach {
+                val size = it.rating.direction * 100
+                add(MarketOrder(it.asset, size))
             }
         }
     }

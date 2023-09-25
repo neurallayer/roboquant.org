@@ -5,7 +5,7 @@
 :jbake-date: 2020-10-01
 
 == Create an Instance
-The `Roboquant` class (org.roboquant.Roboquant) is the engine of the platform, not to be confused with _roboquant_ (all lower case) which is the name of the platform itself. An instance of the `Roboquant` class orchestrates the interaction between the components and performs the actual runs.
+The `Roboquant` class (org.roboquant.Roboquant) is the engine of the platform, not to be confused with _roboquant_ (all lower case) which is the name of the platform itself. An instance of the `Roboquant` class orchestrates the interaction between the components and performs the actual run.
 
 The only required parameter when creating a new instance of `Roboquant` is the strategy. So the bare minimum to create an instance would look something like this:
 
@@ -96,7 +96,9 @@ include::{sourcefile}[tag=runParallel]
 
 == Pinpointing issues
 It isn't always easy to find out why a run isn't behaving as expected. One way to pinpoint where the actual issue is located is to enable extra
-metrics recording:
+metrics recording.
+
+The `Policy` is a place where made decisions can sometime not be that obvious, and additional metrics can help:
 
 [source, kotlin, indent=0]
 ----

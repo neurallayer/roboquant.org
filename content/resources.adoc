@@ -5,8 +5,9 @@
 :icons: font
 :items: resources
 
-Developing algo-trading skills is a major endeavor, and this page lists some of the resources that can help with it.
-These resources are not limited to _roboquant_ and can be beneficial to any algo-trading development.
+Developing algo-trading skills is a major endeavor.
+This page lists some of the resources that can help with that.
+The resources listed are not limited to _roboquant_ and can be beneficial to any algo-trading development.
 
 
 

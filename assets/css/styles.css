@@ -126,6 +126,7 @@ pre {
 h1, .h1 {
     font-size: calc(1.375rem + 1.5vw);
     font-family: 'Comfortaa', cursive;
+    text-transform: lowercase;
 }
 
 h1 span {

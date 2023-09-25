@@ -5,7 +5,8 @@
 :jbake-date: 2020-05-01
 
 == What is a policy?
-The `Policy` is responsible for creating the orders that will be placed at the broker. The most common use case is that a `Policy` does this based on the signals it receives from a `Strategy` (but there are other use cases).
+The `Policy` is responsible for creating the orders that will be placed at the broker. The most common use case is that a `Policy` does this based on the signals it receives from a `Strategy`.
+But there are other use cases, see also <<#_advanced_policies>>
 
 A good `Policy` implementation is key in making your solution as robust as possible. Important things to consider when implementing a policy:
 
@@ -25,7 +26,8 @@ CAUTION: If there is one thing that prevents algo-traders from going live, it is
 == Out-of-the-box policies
 
 === FlexPolicy
-This is the default policy that will be used if no other policy is specified when creating an instance of the `Roboquant` class. It provides many constructor parameters that influence its behavior.
+This is the default policy that will be used if no other policy is specified when creating an instance of the `Roboquant` class.
+It provides several constructor parameters that determine its behavior.
 
 [source, kotlin,indent=0]
 ----
@@ -74,7 +76,7 @@ So a very naive and not robust implementation could look something like this:
 include::{sourcefile}[tag=naive]
 ----
 
-Or using the more concise Kotlin way of doing things:
+Or using the more concise Kotlin way of doing things (but still not a robust policy):
 [source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=naive2]

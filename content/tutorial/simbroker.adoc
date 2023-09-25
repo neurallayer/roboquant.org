@@ -4,11 +4,11 @@
 :jbake-date: 2020-08-01
 :icons: font
 
-The `SimBroker` implements the `Broker` interface just like any other implementation. You use the `SimBroker` class (short for Simulated Broker) both for the back testing and forward testing stages.
+The `SimBroker` implements the `Broker` interface just like any other broker implementation. You use the `SimBroker` class (short for Simulated Broker) both for the back testing and forward testing stages.
 
 See also the xref:../background/four_stages.adoc[four stages] for more background about the different stages when developing trading strategies.
 
-SimBroker can simulate a wide range of brokers and exchanges. Besides several configuration parameters that are available, the behavior can be further extended by providing custom models for trading, fee and account modelling.
+SimBroker can simulate a wide range of brokers and exchanges. Besides several configuration parameters that are available, the behavior can be further extended by providing custom models for trading-, fee- and account-modelling.
 
 == Usage
 The instantiation of a `SimBroker` is surprisingly simple if the default settings suit your needs:
@@ -60,7 +60,7 @@ The following diagram shows the possible `OrderStatus` transitions:
 image::orderstatus_transition.png[]
 
 == Customize SimBroker
-Custom models are a way to further customize the `SimBroker` and ensure it closely mimics the behavior of your real broker.
+Custom models are a way to further customize the `SimBroker` behavior and ensure it closely mimics the behavior of your real broker.
 
 WARNING: If you don't take any type of trading cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading. When in doubt, better to be on the safe side and configure the cost to be slightly higher than expected.
 

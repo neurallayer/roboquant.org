@@ -31,6 +31,8 @@ include::{sourcefile}[tag=simple]
 == Metrics Loggers
 A metrics logger receives the metric values at each step and then stores and/or logs these values. All implement the `MetricsLogger` interface.
 
+Some loggers only print the metrics, while others can also be used to retrieve the values after a run.
+
 The following metric loggers are available out of the box:
 
 - `MemoryLogger`: this is the default logger used if no other logger is configured. It stores all the recorded values in memory and allows them to be queried afterwards. It also comes with an optional progress bar that shows how much time is left during
@@ -46,7 +48,7 @@ include::{sourcefile}[tag=memoryLogger]
 - `SilentLogger` — This logger just silently ignores all metric values and is mostly useful for unit tests
 - `InfoLogger` — Logs metrics using the built-in logger at INFO level
 - `ConsoleLogger` — Logs the metrics to the console using the `println` statement
-- `QuestDBLogger` — Logs the metrics to a QuestDB database.
+- `QuestDBLogger` — Logs the metrics to a QuestDB database. This logger also supports retrieving the values afterwards.
 +
 [source,kotlin,indent=0]
 ----
@@ -61,7 +63,8 @@ docker run --rm -p 9000:9000 -v "$HOME/.roboquant/questdb-metrics:/var/lib/quest
 ----
 
 === Custom Loggers
-You can also implement your own metrics logger, for example if you want to store values into a database or have a custom file format that you want to use. The following example shows a minimal implementation:
+You can also implement your own metrics logger. For example, if you want to store values into a database or have a custom file format that you want to use.
+The following example shows a minimal implementation:
 
 [source,kotlin,indent=0]
 ----

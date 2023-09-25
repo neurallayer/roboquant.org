@@ -104,16 +104,16 @@ private fun timeFrame() {
     // Parse a string
     val tf1 = Timeframe.parse("2019-01-01", "2020-01-01")
 
-    // Add to years to the timeframe
+    // Add two years to the timeframe
     val tf2 = tf1 + 2.years
 
-    // Split timeframe in 31 days periods
+    // Split timeframe in 31-days periods
     val tf3 = tf2.split(31.days) // result is List<Timeframe>
 
-    // Create 100 random timeframes, each of 3 months duration
+    // Create 100 random timeframes, each of a 3-month timespan
     val tf4 = tf2.sample(3.months, 100) // result is List<Timeframe>
 
-    // Predefined timeframes
+    // Use one of the predefined timeframes
     val tf5 = Timeframe.blackMonday1987
     // end::tf[]
 }

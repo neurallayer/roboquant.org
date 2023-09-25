@@ -3,7 +3,7 @@
 :source-highlighter: rouge
 :jbake-date: 2022-06-10
 :jbake-heading: testing leads to failure, and failure leads to understanding
-:intro: Before starting developing roboquant, we prototyped several solutions. If you want to find out why we settled on Kotlin, read this article.
+:intro: Before starting developing roboquant, we prototyped several solutions in different computer languages. This article explains why we decided to go with Kotlin in the end.
 
 == Why use Kotlin
 There are many computer languages available to choose from. After having developed several prototypes in different languages (Python, Julia and Kotlin), we decided to go with Kotlin. Kotlin is a popular programming language that was first introduced in 2011 by JetBrains. It is a versatile language that is designed to be compatible with Java and can be used for a wide range of applications, including financial software.

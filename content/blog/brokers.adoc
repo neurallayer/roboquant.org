@@ -2,7 +2,7 @@
 :icons: font
 :source-highlighter: rouge
 :jbake-date: 2022-01-02
-:intro: Selecting the right broker for you is not an easy task. This article gives some pointers to come to a good decision.
+:intro: Selecting the right broker for algo-trading is not an easy task. This article provides some pointers to come to a balanced decision.
 
 
 == Criteria
@@ -17,7 +17,8 @@ Select a broker that has a proven track record and is known to be a reliable com
 * They tell you how they earn their money. Many brokers advertise "no transaction fees" on their homepage but only show many additional costs somewhere hidden on their website.
 * They are regulated and the company itself is registered in a country that has good due diligence in place.
 +
-Brokers that offer classic asset classes like stocks, often are more regulated. And although this is no guarantee, there are fewer scams than in for example the crypto or forex world which is less regulated.
+Brokers that offer classic asset classes like stocks, often are more regulated.
+And although this is no guarantee, but there are fewer scams than with crypto or forex brokers who are less regulated.
 
 . High Available
 +

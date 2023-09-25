@@ -97,7 +97,7 @@ private fun allSignalAttributes(asset: Asset, rating: Rating) {
     // The probability of this signal being correct
     val probability: Double = Double.NaN
 
-    // An arbitrary string, for example to trace the strategy that generated this signal
+    // An arbitrary string, for example, to trace the strategy that generated this signal
     val tag: String = ""
 
     Signal(asset, rating, type, takeProfit, stopLoss, probability, tag)
@@ -121,7 +121,7 @@ private fun extending() {
     class MyStrategy1(lookBack: Int = 10) : HistoricPriceStrategy(lookBack) {
 
         /**
-         * this method should return a Signal or null. Signal can contain
+         * This method should return a [Signal] or null. A signal can contain
          * additional attributes to the ones shown in this example.
          */
         override fun generateSignal(asset: Asset, data: DoubleArray): Signal? {
@@ -137,7 +137,7 @@ private fun extending() {
     class MyStrategy2(lookBack: Int = 10) : HistoricPriceStrategy(lookBack) {
 
         /**
-         * this method should return a Rating or null.
+         * This method should return a [Rating] or null.
          */
         override fun generateRating(data: DoubleArray): Rating? {
             return when {
