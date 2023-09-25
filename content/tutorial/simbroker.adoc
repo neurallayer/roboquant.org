@@ -142,7 +142,6 @@ All margin calculations are based on the equity of the account, and not just the
 
 The calculations for the buying-power look roughly like this in pseudocode:
 
-[source,kotlin]
 ----
 long_margin = long_positions * maintenance_margin_long
 short_margin = short_positions * maintenance_margin_short
