@@ -53,6 +53,8 @@ private fun wallet() {
 
     val wallet2 = 20.EUR - 1000.JPY + 100.GBP
     val wallet3 = 0.02.BTC + 100.USDT + 0.1.ETH
+
+    val wallet4 = 20.USD + 30.USD
     // end::wallet[]
 }
 

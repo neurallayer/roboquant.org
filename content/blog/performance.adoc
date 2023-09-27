@@ -17,8 +17,8 @@ And since this test doesn't rely on network- or disk-io, it is a good indicator 
 == The 2 candidates
 Cloud infra is a cost-effective way to perform these types of elastic workloads. So we selected two similar AWS EC2 instances for the comparison test.
 
-. Intel/AMD based instance (x86-64)
-. ARM based instance (AArch64)
+. Intel/AMD-based instance (x86-64)
+. ARM-based instance (AArch64)
 
 Other than the CPU architecture, these two instances have almost the same configuration and cost associated with them. The two instances also both run OpenJDK 17 and Ubuntu-22.04 (AWS standard EC2 images) without further tuning.
 

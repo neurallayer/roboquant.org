@@ -102,7 +102,9 @@ include::{sourcefile}[tag=singleAsset]
 
 
 === HistoricPriceStrategy
-A useful base strategy is `HistoricPriceStrategy`. This strategy collects historic prices for a predefined look-back period before invoking your method. Only once enough historic data is collected, your method will be invoked. That way you don't have to deal with some of the complexity that comes with an event-based trading engine.
+A useful base strategy is `HistoricPriceStrategy`.
+This strategy collects historic prices for a predefined look-back period before invoking your method. Only once enough historic data is collected, your method will be invoked.
+That way, you don't have to deal with some of the complexity that comes with an event-based trading engine.
 
 You can override one of two methods:
 
@@ -155,11 +157,11 @@ A `Signal` is the outcome of a strategy and is modelled closely after the rating
 1. The `Asset` to which the signal applies, like a single stock
 2. A `Rating` for that asset. A 5-point scale (Kotlin enumeration type) is used for the `Rating` of a `Signal`:
 
-* `BUY`: Also known as strong buy and "on the recommended list". Buy is a recommendation to purchase a specific security.
+* `BUY`: Also known as strong buy and "on the recommended list". Buy is a recommendation to purchase a specific asset.
 * `SELL`: Also known as strong sell, it's a recommendation to sell a security or to liquidate an asset.
 * `HOLD`: In general terms, a company with a hold recommendation is expected to perform at the same pace as comparable companies or in-line with the market.
 * `UNDERPERFORM`: A recommendation that means a stock is expected to do slightly worse than the overall stock market return. Underperform can also be expressed as "moderate sell," "weak hold" and "underweight."
-* `OUTPERFORM`: Also known as "moderate buy," "accumulate" and "overweight." Outperform is an analyst recommendation meaning a stock is expected to do slightly better than the market return.
+* `OUTPERFORM`: Also known as "moderate buy," "accumulate" and "overweight." Outperform is an analyst recommendation, meaning an asset is expected to do slightly better than the market return.
 +
 NOTE: A `HOLD` rating is not the same as no signal. Only generate hold signals if you think the asset will perform like the market. If your strategy gives no clear indication about the future performance of an asset, don't generate a signal at all.
 

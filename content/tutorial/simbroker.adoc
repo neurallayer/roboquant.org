@@ -112,7 +112,7 @@ Out of the box _roboquant_ comes with two account models that cater for the most
 === Cash Accounts
 Cash accounts can be modelled using the `CashAccount`. This model is also the default if you don't provide a BuyingPowerModel when instantiating a xref:simbroker.adoc[SimBroker].
 
-`CashAccount` bases the buying power only on the available cash, and no margin is calculated and no leverage is used. So cash and buying power are equal, however cash can contain multiple currencies while the buying power is always converted to the base currency of the account.
+`CashAccount` bases the buying power only on the available cash, and no margin is calculated and no leverage is used. So cash and buying power are equal. However, cash can contain multiple currencies while the buying power is always converted to the base currency of the account.
 
 Although _roboquant_ doesn't stop you from using this model even when shorting assets, it is not advised to do so.
 

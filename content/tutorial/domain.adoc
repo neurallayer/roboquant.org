@@ -21,7 +21,8 @@ In order to make it easier to develop solutions in a multi-currency setup, _robo
 
 === Currency
 The _roboquant_ `Currency` class represents any type of currency. It closely follows the interface of the standard Java Currency class, but is independent of it.
-The main reason for this is that the Java implementation doesn't support cryptocurrencies while the _roboquant_ implementation supports any type of currency. Several common currencies are predefined, to make it easier to work with and avoid typing mistakes.
+The main reason for this is that the Java implementation doesn't support cryptocurrencies while the _roboquant_ implementation supports any type of currency.
+Several common currencies are predefined to make it easier to work with and avoid typing mistakes.
 
 [source,kotlin,indent=0]
 ----
@@ -39,7 +40,7 @@ include::{sourcefile}[tag=amount]
 NOTE: Amounts store their values internally as a `Double` and not a `BigDecimal`. For (simulated) trading, the potential loss of precision is not an issue, and the benefits are improved performance and lower memory consumption.
 
 === Wallet
-A `Wallet` can hold monetary amounts of different currencies. You can create a new `Wallet` by using its constructor, or by adding multiple amounts together.
+A `Wallet` can hold different currencies. You can create a new `Wallet` by using its constructor, or by adding multiple amounts together.
 You can also deposit and withdraw amounts in a wallet. A `Wallet` instance is mutable.
 
 There is an important difference between `deposit` method and using the `+ operator`. The `deposit` method will modify the existing instance while the `+ operator` will return a new wallet instance.
@@ -73,7 +74,8 @@ So it can always be easily compared, regardless of from which timezone the infor
 An `Event`, for example, exposes its time attribute as an `Instant`.
 
 === Timeline
-Timeline is a list of `Instant` instances ordered in chronological order. For example, a CSVFeed has a timeline, that represents all the moments in time for which the feed has data available. A timeline has zero or more elements, but is always finite.
+Timeline is a list of `Instant` instances ordered in chronological order. For example, a CSVFeed has a timeline that represents all the moments in time for which the feed has data available.
+A timeline has zero or more elements, but is always finite.
 
 [source,kotlin,indent=0]
 ----

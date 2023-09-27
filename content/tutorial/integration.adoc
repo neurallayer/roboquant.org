@@ -19,19 +19,20 @@ In some cases, a single 3rd party provides all types of functionality, or someti
 One of the design principles is that _roboquant_ tries to enforce is avoiding exposing 3rd party APIs directly. Typically, these APIs are wrapped in _roboquant_ specific APIs and types. This makes it easier to switch between different providers and also reduces the learning curve.
 
 == Modules & Packages
-The third party providers have their own modules and are not part of the core `roboquant` module:
+The third party providers have their own modules and are not part of the core `roboquant` module. For example:
 
-* roboquant-extra for the "traditional" broker and data feed providers
-* roboquant-crypto for cryptocurrency related 3rd parties
-* roboquant-ibkr for Interactive Brokers
+* roboquant-alpaca for the Alpaca broker and data feed integration
+* roboquant-binance for Binance crypto-exchange integration
+
+You can see all the modules at https://central.sonatype.com/artifact/org.roboquant/roboquant/dependents[Maven Central^]
 
 You can include these modules in your Maven or Gradle build. In order to use the 3rd party integration, you'll have to import the package. All third party integrations have their own package directly under `org.roboquant`.
 
 So for example, you can import all the required classes for Alpaca as follows:
 
-[source, kotlin]
+[source, kotlin, indent=0]
 ----
-import org.roboquant.alpaca.*
+include::{sourcefile}[tag=alpaca-import]
 ----
 
 This `wildcard` import is especially useful if you use _roboquant_ in a Jupyter Notebook. If you use _roboquant_ in an IDE like IntelliJ IDEA, the IDE will automatically suggest which packages and classes to import for you.
@@ -47,7 +48,7 @@ So _roboquant_ offers better and more secure alternatives. The following list sh
 ----
 include::{sourcefile}[tag=alpacaconfig]
 ----
-. If the credentials are provided as startup parameter to the JVM with the -D syntax, use these, otherwise go to next step.
+. If the credentials are provided as startup parameter to the JVM with the -D syntax, use these, otherwise go to the next step.
 +
 [source, shell, indent=0]
 ----
@@ -93,10 +94,11 @@ The following table shows which 3rd parties are supported out of the box and wha
 |Yahoo Finance|CSV File|✓|||
 |===
 
-NOTE: _Roboquant_ is open source software that is developed independently of these 3rd party companies and has no associations with them. There is also no direct on indirect recommendation using them.
+NOTE: _Roboquant_ is open-source software that is developed independently of these 3rd party companies and has no associations with them. There is also no direct on indirect recommendation using them.
 
 === Alpaca
-The integration with Alpaca covers their broker API as well as their historic and live market data APIs. In order to use these, you'll need at least register for a paper-trading account and create an API-key.
+The integration with Alpaca covers their broker API as well as their historic and live market data APIs.
+In order to use this, you'll need at least to register for a paper-trading account and create an API-key.
 
 [source, kotlin,indent=0]
 ----
@@ -217,9 +219,9 @@ If you run your software in a Docker container and the IB Gateway is running on 
 image::ibkr_install.png[]
 
 One way to achieve this, is to set the IBKR host property to "host.docker.internal" in your application.
-[source,kotlin]
+[source, kotlin, indent=0]
 ----
-Config.setProperty("ibkr.host", "host.docker.internal")
+include::{sourcefile}[tag=ibkr-config]
 ----
 ====
 

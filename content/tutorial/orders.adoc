@@ -30,7 +30,7 @@ An example on how to convert a list of signals into a list of (market) orders:
 include::{sourcefile}[tag=orders]
 ----
 
-NOTE: There is no explicit notion of BUY or SELL order in _roboquant_. A BUY order is just an order with a positive size and a SELL order has a negative size. But other than that, they are equal and created the same way.
+NOTE: There is no explicit notion of BUY or SELL order in _roboquant_. A BUY order is just an order with a positive size, and a SELL order has a negative size. But other than that, they are equal and created the same way.
 
 Advanced order types are often constructed using multiple `SingleOrder` types. The following snippet shows how to instantiate a BracketOrder using three individual SingleOrders.
 
@@ -39,7 +39,7 @@ Advanced order types are often constructed using multiple `SingleOrder` types. T
 include::{sourcefile}[tag=bracketOrder]
 ----
 
-TIP: During back testing make sure to only use order types that are also supported by the broker you plan to use for live trading. Also be aware that the way advanced order types are executed during live trading might differ slightly between brokers.
+TIP: During back testing, make sure to only use order types that are also supported by the broker you plan to use for live trading. Also be aware that the way advanced order types are executed during live trading might differ slightly between brokers.
 
 == TIF (Time In Force)
 TIF sets an execution policy for an order, defining under what conditions the order remains valid. There are two types of TIF:
@@ -51,7 +51,8 @@ The following diagram shows the time in force policies that are available out of
 
 image::tif.png[]
 
-The default TIF for orders in _roboquant_, if none is explicitly specified, is GTC (Good Till Cancelled). All TIF policies only become active once an `CreateOrder` has been `ACCEPTED` (so it's not anymore in the `INITIAL` state).
+The default TIF for orders in _roboquant_, if none is explicitly specified, is GTC (Good Till Cancelled).
+All TIF policies only become active once an `CreateOrder` has been `ACCEPTED` (so it's not any more in the `INITIAL` state).
 
 == Custom Order Types
 Orders can be extended with your own order types if the ones that come out-of-the-box are not sufficient. The steps required to use your own order types are:

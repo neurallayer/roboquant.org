@@ -3,10 +3,9 @@
 import com.crazzyghost.alphavantage.parameters.Interval
 import net.jacobpeterson.alpaca.model.properties.DataAPIType
 import org.roboquant.Roboquant
-import org.roboquant.alpaca.AccountType
-import org.roboquant.alpaca.AlpacaBroker
-import org.roboquant.alpaca.AlpacaHistoricFeed
-import org.roboquant.alpaca.AlpacaLiveFeed
+// tag::alpaca-import[]
+import org.roboquant.alpaca.*
+// end::alpaca-import[]
 import org.roboquant.alphavantage.AlphaVantageHistoricFeed
 import org.roboquant.brokers.Account
 import org.roboquant.brokers.Broker
@@ -76,6 +75,11 @@ fun alphaHistoricFeed() {
     // end::alphahistoric[]
 }
 
+fun ibkrConfig() {
+    // tag::ibkr-config[]
+    Config.setProperty("ibkr.host", "host.docker.internal")
+    // end::ibkr-config[]
+}
 
 fun polygonHistoricFeed() {
     // tag::polygonhistoric[]
