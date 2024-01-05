@@ -108,7 +108,7 @@ fun runValidation(feed: Feed, roboquant: Roboquant) {
 
     // tag::runValidation[]
     // Single run example
-    val (main, validation) = feed.timeframe.splitTrainTest(0.2) // 20% for validation phase
+    val (main, validation) = feed.timeframe.splitTwoWay(testSize = 0.2) // 20% for validation phase
     roboquant.run(feed, main, "run-main")
     println(roboquant.broker.account.equityAmount)
     roboquant.broker.reset()
@@ -116,7 +116,7 @@ fun runValidation(feed: Feed, roboquant: Roboquant) {
 
     // Walk forward example
     feed.timeframe.split(2.years).forEach {
-        val (main2, validation2) = it.splitTrainTest(0.25) // 25% for validation phase
+        val (main2, validation2) = it.splitTwoWay(testSize = 0.25) // 25% for validation phase
         roboquant.run(feed, main2)
         roboquant.broker.reset()
         roboquant.run(feed, validation, "run-validation")

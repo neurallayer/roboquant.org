@@ -53,8 +53,20 @@ docker run                              \
   roboquant/jupyter
 ----
 
-If you don't have Docker yet installed on your computer, check out https://www.docker.com/get-started[Docker get started^] and download Docker Personal from there. If you are running Linux, then your distribution likely already has Docker or Podman included.
+If you don't have Docker yet installed on your computer,
+check out the https://www.docker.com/get-started[Docker get started page^] and download Docker Personal from there.
+If you are running Linux, then your distribution likely already has Docker or Podman included.
 
+You can also install Jupyter-lab and the Kotlin kernel directly on your machine
+if you already have Python installed:
+
+[source, shell]
+----
+pip install jupyterlab
+pip install -i https://test.pypi.org/simple/ kotlin-jupyter-kernel
+----
+
+WARNING: Roboquant requires a new version of the Kotlin kernel, so be sure to use the dev channel as in the above example. See also https://test.pypi.org/project/kotlin-jupyter-kernel/[Kotlin Kernel^] for more information.
 
 == Install the _roboquant_ libraries
 Just add `roboquant` as a dependency to your build tool, like Maven or Gradle. Regular versions of the Roboquant modules are published to Maven Central and snapshots are published to OSS Sonatype (https://s01.oss.sonatype.org/content/repositories/snapshots).
@@ -117,7 +129,10 @@ implementation group: 'org.roboquant', name: 'roboquant', version: 'VERSION'
 ----
 
 == Building from source
-First start with cloning the _roboquant_ GitHub repository to your local disk. The quickest way to be up and running is then to install IntelliJ IDEA (either the free community edition or the paid Ultimate version) and open the directory you just cloned. IntelliJ IDEA will recognize it as Kotlin/Maven project, and you can build it and run test directly from the IDE.
+First start with cloning the _roboquant_ GitHub repository to your local disk.
+The quickest way to be up and running is then to install IntelliJ IDEA (either the free community edition or the paid Ultimate version)
+and open the directory you just cloned.
+IntelliJ IDEA will recognize it as a Kotlin/Maven project, and you can build it and run test directly from the IDE.
 
 _Roboquant_ uses a directory setup that is similar to most other Kotlin projects:
 
@@ -133,16 +148,17 @@ root
     ...
 ----
 
-All source code is written in Kotlin, so there are no Java or other language source files. Roboquant uses Maven for the build process and includes a Maven wrapper (mvnw) to ensure optimal compatability between environments. Building the libraries locally is as easy as running a single command:
+All source code is written in Kotlin, so there are no Java or other language source files. Roboquant uses Maven for the build process and includes a Maven wrapper (`mvnw`) to ensure optimal compatability between environments.
+Building the libraries locally is as easy as running a single command:
 
 [source, shell]
 ----
 ./mvnw install
 ----
 
-The build and install is tested using the JDK 17 runtime, however the generated libraries are targeted against JDK 11 in order to provide better compatibility for projects that still use older versions of the JDK. JDK versions before 11 are not supported.
+The build and install is tested using the JDK 17 runtime.
 
-The following script shows how to get everything build based on a clean Ubuntu 22.04 installation (like the one you can select when starting an AWS EC2 instance)
+The following script shows how to get everything to build based on a clean Ubuntu 22.04 installation (like the one you can select when starting an AWS EC2 instance)
 
 [source, shell]
 ----
@@ -153,28 +169,34 @@ cd roboquant
 ./mvnw install
 ----
 
-When the `./wvnw install` process has successfully finished, you should see something like this:
+When the `./mvnw install` process has successfully finished, you should see something like this:
 [source]
 ----
-[INFO] roboquant parent ................................... SUCCESS [  0.074 s]
-[INFO] roboquant .......................................... SUCCESS [ 20.190 s]
-[INFO] roboquant charts ................................... SUCCESS [  2.430 s]
-[INFO] roboquant ta ....................................... SUCCESS [  2.565 s]
-[INFO] roboquant jupyter .................................. SUCCESS [  1.526 s]
-[INFO] roboquant extra .................................... SUCCESS [  0.320 s]
-[INFO] roboquant alpaca ................................... SUCCESS [  0.749 s]
-[INFO] roboquant polygon .................................. SUCCESS [  0.808 s]
-[INFO] roboquant xchange .................................. SUCCESS [  0.595 s]
-[INFO] roboquant binance .................................. SUCCESS [  0.479 s]
-[INFO] roboquant server ................................... SUCCESS [  0.861 s]
-[INFO] roboquant performance .............................. SUCCESS [  0.192 s]
+[INFO] roboquant parent ................................... SUCCESS [  0.252 s]
+[INFO] roboquant .......................................... SUCCESS [  7.795 s]
+[INFO] roboquant avro ..................................... SUCCESS [  0.887 s]
+[INFO] roboquant charts ................................... SUCCESS [  1.202 s]
+[INFO] roboquant ta ....................................... SUCCESS [  1.115 s]
+[INFO] roboquant ml ....................................... SUCCESS [  0.167 s]
+[INFO] roboquant jupyter .................................. SUCCESS [  0.499 s]
+[INFO] roboquant alphavantage ............................. SUCCESS [  0.064 s]
+[INFO] roboquant alpaca ................................... SUCCESS [  0.161 s]
+[INFO] roboquant polygon .................................. SUCCESS [  0.113 s]
+[INFO] roboquant xchange .................................. SUCCESS [  0.156 s]
+[INFO] roboquant binance .................................. SUCCESS [  0.098 s]
+[INFO] roboquant server ................................... SUCCESS [  0.147 s]
+[INFO] roboquant questdb .................................. SUCCESS [  0.124 s]
+[INFO] roboquant ssr ...................................... SUCCESS [  0.329 s]
+[INFO] roboquant performance .............................. SUCCESS [  0.046 s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  30.858 s
+[INFO] Total time:  13.239 s
+[INFO] Finished at: 2023-12-24T12:08:01+01:00
+[INFO] ------------------------------------------------------------------------
 ----
 
-By default, the Kotlin incremental compiler property is set to true (in the main `pom.xml`). This enables very fast compilation if there are only a few changes made.
+By default, the Kotlin incremental compiler property is set to true (in the main `pom.xml`). This enables fast compilation if there are only a few changes made.
 So additional compiles should typically take not more than a few seconds.
 
 TIP: If you plan to make regular large changes and updates to the _roboquant_ source code, checkout the https://github.com/apache/maven-mvnd[Maven Daemon] project for even faster builds.

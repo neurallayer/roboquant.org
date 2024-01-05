@@ -24,7 +24,7 @@ fun standard(strategy: Strategy, sp500Asset: Asset) {
     val metric4 = VWAPMetric()
     val metric5 = ReturnsMetric()
     val metric6 = PNLMetric()
-    val metric7 = AlphaBetaMetric(sp500Asset, 250)
+    val metric7 = AlphaBetaMetric(period = 250)
     val metric8 = ScorecardMetric()
 
     val roboquant = Roboquant(

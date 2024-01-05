@@ -15,6 +15,7 @@
     <meta name="theme-color" content="#00A1FF">
     <title><#if (content.title)??>${config.title} - ${content.title}<#else>${config.title}</#if></title>
     <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.1/css/all.css" />
     <link href="/css/asciidoctor.css" rel="stylesheet" />
     <link href="/css/rouge_github.css" rel="stylesheet" />

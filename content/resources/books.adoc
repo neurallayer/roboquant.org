@@ -6,7 +6,10 @@
 
 There are more books than ever that cover the topic of algo-trading. The quality varies a lot, from books that are really present value to books that are just a cut&paste of some public internet articles. The books covered in these reviews all fall in the first category, they all present value in some way.
 
-When looking for books to learn more about (algo-)trading, I recommended looking for books that focus on the foundation. So books that explain how to develop and test a strategy, what are good metrics to monitor and what are possible pitfalls. Or books that go into more details about the mathematical side of algo-trading. Books that just promise to give you strategies that make a lot of profit, should be best avoided (IMHO).
+When looking for books to learn more about (algo-)trading, I recommended looking for books that focus on the foundation.
+So books that explain how to develop and test a strategy, what are good metrics to monitor and what are possible pitfalls.
+Or books that go into more details about the mathematical side of algo-trading.
+Books that promise to provide you with strategies that make a lot of profit should be best avoided (IMHO).
 
 [.float-group]
 --
@@ -14,7 +17,7 @@ When looking for books to learn more about (algo-)trading, I recommended looking
 image::machinelearning.jpeg[width="200", float="left"]
 *Machine Learning for Algorithmic Trading* - Stefan Jansen
 
-level: intermediate
+Level: ★★
 
 This book explains how different machine learning techniques can be applied to algo-trading. It doesn't focus on a single technique like deep learning, but touches many different techniques instead. For example, it has some good content on Bayesian machine learning.
 
@@ -30,7 +33,7 @@ One thing to keep in mind is that because machine learning is progressing so fas
 image::advances.jpeg[width="200", float="right"]
 *Advances in Financial Machine Learning* - Marcos Lopez de Prado
 
-level: intermediate
+Level: ★★
 
 This book has several innovative and fresh ideas about approaches to algo-trading. And although the title has "Machine Learning" in it, much of the content also applies to more traditional strategies. For example, there are several chapters dedicated to back-testing that are relevant for almost any type of strategy.
 
@@ -46,7 +49,7 @@ Marcos Lopez de Prado also has some good YouTube videos where he explains much o
 image::trading.jpeg[width="200", float="left"]
 *Trading Systems* - Emilio Tomasini
 
-level: beginner
+Level: ★
 
 A good book for a beginner that has plenty of pragmatic tips on how to build, test, optimize and implement robustness trading systems. There is some AmiBroker code included, but even without understanding this, you can still follow along.
 
@@ -62,9 +65,12 @@ Lastly, if you are new to statistics, this book also has a good introduction on 
 image::automated.jpeg[width="200", float="right"]
 *Automated Stock Trading Systems* - Laurens Bensdorp
 
-level: beginner
+Level: ★
 
-Easy to understand and follow with extra attention on how to diversify your portfolio using different strategies. The book also describes 7 concrete strategies and the rules that need to be implemented for each of these strategies. The strategies are easy to understand and are a mix of trend-following and mean-reversion. The book doesn't contain any code snippets.
+Easy to understand and follow with extra attention on how to diversify your portfolio using different strategies.
+The book also describes 7 concrete strategies and the rules that need to be implemented for each of these strategies.
+The strategies are easy to understand and are a mix of trend-following and mean-reversion strategies.
+The book doesn't contain any code snippets.
 
 Not sure about the merits of the strategies described in this book, since the evaluation criteria included are too simplistic in my opinion. But I would argue implementing some strategies yourself from scratch is a great learning experience.
 
@@ -79,7 +85,7 @@ image::systematic.jpeg[width="200", float="left"]
 
 *Systematic Trading* - Robert Carver
 
-level: intermediate
+Level: ★★
 
 Robert Carver is a regular guest at the podcast `Top Traders Unplugged` and has written several good books, of which this is one.
 
@@ -93,7 +99,7 @@ He develops his own algo-trading software (available under open-source) and that
 image::algorithmic.jpeg[width="200", float="right"]
 *Algorithmic Trading* - Ernest P. Chan
 
-level: intermediate
+Level: ★★
 
 This book does not try to sell you trading strategies, but teaches you the methods and underlying discipline to achieve good strategies.
 
@@ -110,7 +116,7 @@ This book is more theoretical than some other intermediate books on this list. B
 image::econometrics.jpeg[width="200", float="left"]
 *Applied Time Series Econometrics* - Helmut Lütkepohl
 
-level: advanced
+Level: ★★★
 
 This book provides a great foundation for understanding much of the theory behind time series analysis. It clearly explains commonly used models and important concepts like stationary and non-stationary processes. It requires good knowledge of math at least at an undergraduate level.
 
@@ -127,7 +133,7 @@ Besides the content, there is also an accompanying Java project hosted at http:/
 image::151tradingstrategies.jpeg[width="200", float="right"]
 *151 Trading Strategies* - Zura Kakushadze and Juan Andrés Serur
 
-level: intermediate
+Level: ★★
 
 This book provides an overview of many strategies, divided by asset class. So there are strategies for options, stocks, bonds, etc. Each strategy is described shortly, using simple mathematical formulas and often a reference to the original publication. If you have only been exposed to a limited set of strategies, this will help to broaden your horizon and get new ideas.
 
@@ -146,13 +152,14 @@ Also, note there is no analysis included about the performance of the strategies
 image::evaltrading.jpeg[width="200", float="left"]
 *The Evaluation and Optimization of Trading Strategies* - Robert Pardo
 
-level: beginner
+Level: ★
 
 If you are new to algo-trading and need insights on how to develop a trading strategy and test and optimize it, this is the book for you. It covers most topics important to algo-traders, and the content is easy to grasp and explained in plain English with many examples.
+The author is also the creator of the walk-forward analysis.
 
 Even if you don't have a background in software development or math, you can easily follow along. And although the book is more than 15 years old, most of it is still applicable today. Of course, the downside of not using code or math to explain the concepts, is that it is a bit less concise. But that is to be expected.
 
-If there is one small complaint, there are a lot of white spaces, tables and charts that do not add much. So this 360+ page book could have easily been condensed to 200 pages.
+If there is one small complaint, there are a lot of white spaces, and the tables and charts don't add that much. So this 360+ page book could have easily been condensed to 200 pages.
 ====
 --
 
@@ -162,7 +169,7 @@ If there is one small complaint, there are a lot of white spaces, tables and cha
 image::quantatativetrading.jpeg[width="200", float="right"]
 *Quantitative Trading* - Xin Guo and others
 
-level: advanced
+Level: ★★★
 
 This book combines academic research with industry trends. It covers a wide range of topics, from statistical trading models to optimizing order execution and risk management. Sometimes it feels a bit like each author focused on their own area of expertise, leading to somewhat disjointed chapters. Still, the content is unique and the authors are clearly experts.
 
@@ -179,7 +186,7 @@ Some content is more catered towards trading firms than retail traders. For exam
 image::testing_tuning.jpeg[width="200", float="left"]
 *Testing and Tuning Market Trading Systems* - Timothy Masters
 
-level: intermediate
+Level: ★★
 
 The main topics covered in this book are algo-strategy optimization and testing. Besides a deep dive into these topics, there is also a lot of attention to establishing the statistical characteristics of the results with topics like confidence intervals. These are important topics that are often missing in other (simpler) books.
 
@@ -187,7 +194,7 @@ The typical layout per chapter is first a textual description of the steps and t
 
 Much of the back testing theory is overlapping with books like `Advances in Financial Machine Learning by Marcos Lopez de Prado`. What is different is that this book also contains some results of applying the theory to real data. This makes it more pragmatic and tangible, even if, of course, the results are outdated.
 
-The page layout of the book is not great. The code snippets are not standing out, and the font used for code is rather large. Also, this book doesn't use right-aligned text. This all together makes the pages often look very busy.
+The page layout of the book is not great. The code snippets are not standing out, and the font used for code is large. Also, this book doesn't use a right-aligned text layout. This all together makes pages often look very busy. But the content makes up for it.
 ====
 --
 
@@ -198,7 +205,7 @@ The page layout of the book is not great. The code snippets are not standing out
 image::statistically_sound.jpeg[width="200", float="right"]
 *Statistically Sound Indicators For Financial Market Predictions* - Timothy Masters
 
-level: intermediate
+Level: ★★
 
 This is perhaps the exception to the rule to not buy books that promise profitable strategies or indicators. The approach taken in this book is indeed very sound, just like the title promises. And even if some of the proposed indicators are not profitable any more, you can learn a lot from the approach taken.
 

@@ -28,7 +28,7 @@ Normally you would specify the broker you want to use when you create an instanc
 include::{sourcefile}[tag=regular]
 ----
 
-WARNING: Broker implementations can differ in what order types and assets are supported.So when moving from the `SimBroker` to a real broker, always validate if the behavior is still as expected.
+WARNING: Broker implementations can differ in what order types and assets are supported. So when moving from the `SimBroker` to a real broker, always validate if the behavior is still as expected.
 
 [#_account]
 == Account
@@ -65,7 +65,8 @@ The following example provides some typical patterns that you can use in your po
 include::{sourcefile}[tag=account2]
 ----
 
-As shown in the code snippet above, you can print an `account.summary` or `account.fullSummary` overview. The full summary includes all positions, trades and orders, so it can become very large after an extensive back test:
+As shown in the code snippet above, you can print an `account.summary` or `account.fullSummary` overview.
+The full summary includes all positions, trades and orders, so it can become large after an extensive back test:
 
 [source,indent=0]
 ----

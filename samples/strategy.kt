@@ -1,11 +1,13 @@
 @file:Suppress("unused", "UNUSED_VARIABLE", "TooManyFunctions", "WildcardImport", "MagicNumber")
 
 import org.roboquant.Roboquant
-import org.roboquant.common.Asset
-import org.roboquant.common.AssetFilter
-import org.roboquant.common.Currency
+import org.roboquant.brokers.sim.SimBroker
+import org.roboquant.common.*
 import org.roboquant.feeds.Event
+import org.roboquant.feeds.HistoricFeed
+import org.roboquant.feeds.LiveFeed
 import org.roboquant.feeds.PriceAction
+import org.roboquant.ibkr.IBKRBroker
 import org.roboquant.strategies.*
 import org.roboquant.ta.*
 import org.roboquant.ta.TaLibStrategy
@@ -240,3 +242,20 @@ private fun customStrategy2() {
 }
 
 
+
+
+fun warmup(liveFeed: LiveFeed, historicFeed: HistoricFeed) {
+    // tag::warmup[]
+    val strategy = EMAStrategy()
+
+    // Run a warmup over the past 30 days with the default SimBroker
+    val warmup = Roboquant(strategy, broker = SimBroker())
+    val past = Timeframe.past(30.days)
+    warmup.run(historicFeed, past)
+
+    // Start the live trading with a real broker over the next 8 hours
+    val live = Roboquant(strategy, broker = IBKRBroker())
+    val next = Timeframe.next(8.hours)
+    live.run(liveFeed, next, reset = false)
+    // end::warmup[]
+}

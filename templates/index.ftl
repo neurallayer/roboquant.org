@@ -35,7 +35,7 @@
                                         <img src="/img/performance_overview.png" alt="screenshot" />
                                     </div>
                                 </div>
-                                <p>With historic data sets becoming more widely available and growing in size, it is important that a strategy can still be quickly developed, back-tested and optimized. If this cycle takes too long, it is nearly impossible to create high performing and robust strategies.</p>
+                                <p>With historic data sets becoming more widely available and growing in size, it is important that a strategy can still be quickly developed, back-tested and optimized. If this cycle takes too long, it is nearly impossible to create high-performing and robust strategies.</p>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
             <section class="py-3" id="sample2">
                 <div class="container px-3 my-1">
                     <div class="row gx-5">
-                        <div class="col-lg-4 mb-1 mb-lg-0"><h2 class="fw-bolder mb-0">Simple to get started</h2></div>
+                        <div class="col-lg-4 mb-1 mb-lg-0"><h2 class="fw-bolder mb-0">Get started</h2></div>
                         <div class="col-lg-8">
                             <div class="col h-100">
                                 A lot of effort and attention went into making sure <em>roboquant</em> is easy to use, especially for less experienced developers.

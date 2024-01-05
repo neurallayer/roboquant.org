@@ -10,7 +10,7 @@ A  strategy in general is a systematic approach to buying and selling assets, su
 A `Strategy`  in _roboquant_ is the component responsible for generating signals based on the events it receives and is likely the place where you do most of your software development and differentiate from other algo-traders.
 
 
-NOTE: a `Strategy` in _roboquant_ doesn't generate orders, that is the task of a `Policy`.
+NOTE: a `Strategy` in _roboquant_ doesn't generate orders, that is the responsibility of a `Policy`.
 
 The main method that needs to be implemented in the `Strategy` interface is the `generate` method:
 
@@ -72,7 +72,12 @@ include::{sourcefile}[tag=filter]
 
 
 === CombinedStrategy
-The `Roboquant` constructor takes only a single strategy as its argument. However, it is easy to combine multiple strategies in your run using the `CombinedStrategy` class. This class will invoke each strategy in sequence and return the combined signals in the same order as the strategies are provided. There is no additional signal processing (like, for example, remove duplicate signals).
+The `Roboquant` constructor takes only a single strategy as its argument.
+However, it is possible to combine multiple strategies in your run using the `CombinedStrategy` class.
+
+This class will invoke each strategy in sequence
+and return the combined signals in the same order as the strategies are provided.
+There is no additional signal processing (like removing duplicate signals) performed.
 
 [source, kotlin,indent=0]
 ----
@@ -80,7 +85,8 @@ include::{sourcefile}[tag=composition]
 ----
 
 === ParallelStrategy
-This is similar to the CombinedStrategy, but this time the strategies are run in parallel and not sequential. The order of returned signals follows the same logic as with a CombinedStrategy.
+This is similar to the CombinedStrategy, but this time the strategies are run in parallel and not sequential.
+The order of returned signals follows the same logic as with a CombinedStrategy.
 
 The main benefit is that this strategy can speed up the processing, assuming the hardware has sufficient CPU resources available.
 
@@ -184,3 +190,17 @@ include::{sourcefile}[tag=attrSignal]
 ----
 
 It is up to the xref:policy.adoc[`Policy`] if/how these attributes are used when generating the orders. For example, the probability could be used to determine the sizing of an order, a higher probability implying a larger order size.
+
+
+== Warmup
+Sometimes before going live, you want to ensure your strategy already has enough historical data to start generating signals from the start.
+
+A separate run can achieve this you start live trading.
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=warmup]
+----
+
+NOTE: Make sure to set `reset` to `false` when starting the live run.
+Otherwise, the historic data will be deleted before the run is even started.

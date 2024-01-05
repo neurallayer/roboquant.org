@@ -4,11 +4,11 @@
 :jbake-date: 2020-08-01
 :icons: font
 
-The `SimBroker` implements the `Broker` interface just like any other broker implementation. You use the `SimBroker` class (short for Simulated Broker) both for the back testing and forward testing stages.
+The `SimBroker` implements the `Broker` interface just like any other broker implementation.
 
-See also the xref:../background/four_stages.adoc[four stages] for more background about the different stages when developing trading strategies.
+You use the `SimBroker` class (short for Simulated Broker) both for the back testing and forward testing stages. See also the xref:../background/four_stages.adoc[four stages] for more background about the different stages when developing trading strategies.
 
-SimBroker can simulate a wide range of brokers and exchanges. Besides several configuration parameters that are available, the behavior can be further extended by providing custom models for trading-, fee- and account-modelling.
+SimBroker can simulate a wide range of brokers and exchanges. Besides several configuration parameters that are available, the behavior can be further tuned by providing custom models for trading-, fee- and account-modelling.
 
 == Usage
 The instantiation of a `SimBroker` is surprisingly simple if the default settings suit your needs:
@@ -18,11 +18,12 @@ The instantiation of a `SimBroker` is surprisingly simple if the default setting
 include::{sourcefile}[tag=basic]
 ----
 
-NOTE: This is also the configuration you get when you create an instance of `Roboquant` and don't specify a broker at all.
+NOTE: This is also the configuration you get when you create an instance of `Roboquant` and don't specify a broker.
 
 However, you can overwrite many of the default values. Common use cases are:
 
 * you don't trade in USD but in some other currency
+* you don't want to use an initial deposit of 1_000_000 dollars
 * you want to simulate a `MarginAccount` and not the default `CashAccount`
 * you want to apply custom fees and pricing logic
 
@@ -93,7 +94,8 @@ Like any simulation, SimBroker also has limitations compared to live trading. It
 3. The buying power and margin calculations might differ. Again, be on the safe side and use higher margin requirements in the SimBroker than required by your actual broker.
 
 == PricingEngine
-The PricingEngine determines the price that is used for a trade execution. There are default ones included, but you can also easily implement your own:
+The PricingEngine determines the price that is used for a trade execution.
+There are default ones included, but you can also implement your own:
 
 [source, kotlin,indent=0]
 ----

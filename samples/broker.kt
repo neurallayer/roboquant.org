@@ -24,6 +24,10 @@ fun placeOrder(broker: Broker) {
         MarketOrder(Asset("TSLA"), -100), // SELL 100 stocks Tesla
     )
     broker.place(orders)
+
+    // Get the latest state of the broker
+    broker.sync()
+    println(broker.account.summary())
     // end::basic[]
 }
 
@@ -31,8 +35,8 @@ fun placeOrder(broker: Broker) {
 fun positionTesla() {
     // tag::positionTesla[]
     val asset = Asset("TSLA")
-    // We bought 5 stocks tesla
-    // We bought at $250.10
+    // We bought five stocks Tesla
+    // We bought them at $250.10
     // The current market price is $250.05
     val position = Position(asset, Size(5), 250.10, 250.05, Instant.now())
 

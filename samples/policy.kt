@@ -184,7 +184,7 @@ fun customSingleAssetPolicy(feed: AssetFeed) {
 
             return when {
                 profit >= 0.01 -> MarketOrder(position.asset, -position.size) // take profit
-                profit <= 0.01 -> MarketOrder(position.asset, -position.size) // stop loss
+                profit <= -0.01 -> MarketOrder(position.asset, -position.size) // stop loss
                 else -> null
             }
         }

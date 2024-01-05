@@ -18,15 +18,16 @@ Since many strategies use technical analysis as a basis for decision-making, _ro
 . TaLib (https://www.ta-lib.org)
 . Ta4j (https://ta4j.com)
 
-In order to use these, you'll need to include to module `roboquant-ta` in your build tool of choice.
+To use these libraries, you'll need to include the module `roboquant-ta` in your build tool of choice.
 
 This page goes into more details on how to use the TaLib library. For `Ta4j`, please check their website.
 
 == Basic usage
-TaLib is a very fast and powerful library that can be used for calculating many different types of indicators.
+TaLib is a lightning fast and powerful library that can be used for calculating many different types of indicators.
 It is a pure Java library, but it is exposing an API that might be confusing at first.
 
-In order to make it more convenient to use it, _roboquant_ comes with a wrapper for it. The following example shows how to use it:
+To make it more convenient to use it, _roboquant_ comes with a wrapper for it.
+The following example shows how to use it:
 
 [source, kotlin,indent=0]
 ----
@@ -70,6 +71,12 @@ If you want to run different indicators over different time-spans, that is also 
 include::{sourcefile}[tag=strategy3]
 ----
 
+You also have access to the time the price-bars were recorded:
+
+[source, kotlin,indent=0]
+----
+include::{sourcefile}[tag=time-based]
+----
 
 
 == TaLibMetric & TaLibIndicator

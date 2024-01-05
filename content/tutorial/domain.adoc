@@ -14,10 +14,10 @@ The two main focus areas of the domain model are:
 1. <<Monetary>> related functionality
 2. <<Time>> related functionality
 
-This approach makes it very easy to deal with these entities without much code. This is also where many of the Kotlin language features come in handy like the support for operator overloading and extension functions.
+This approach makes it easy to deal with these entities without much code. This is also where many of the Kotlin language features come in handy like the support for operator overloading and extension functions.
 
 == Monetary
-In order to make it easier to develop solutions in a multi-currency setup, _roboquant_ introduces a number of money-related domain classes: <<Currency>>, <<Amount>>, <<Wallet>> and <<ExchangeRates>>.
+To make it easier to develop solutions in a multi-currency setup, _roboquant_ introduces a number of money-related domain classes: <<Currency>>, <<Amount>>, <<Wallet>> and <<ExchangeRates>>.
 
 === Currency
 The _roboquant_ `Currency` class represents any type of currency. It closely follows the interface of the standard Java Currency class, but is independent of it.
@@ -67,7 +67,7 @@ include::{sourcefile}[tag=er]
 
 
 == Time
-In order to make it easier to trade in multiple regions, _roboquant_ introduces a number of time related domain classes: <<Timeline>>, <<Timeframe>>, <<TimeSpan>>.
+To make it easier to trade in multiple regions, _roboquant_ introduces a number of time related domain classes: <<Timeline>>, <<Timeframe>>, <<TimeSpan>>.
 
 Internally, all time is stored as an `Instant` type.
 So it can always be easily compared, regardless of from which timezone the information originated.

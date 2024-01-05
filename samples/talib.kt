@@ -1,8 +1,12 @@
 @file:Suppress("unused", "UNUSED_VARIABLE", "TooManyFunctions", "WildcardImport", "MagicNumber")
 
 import org.roboquant.common.Asset
+import org.roboquant.common.Timeframe
+import org.roboquant.common.*
 import org.roboquant.feeds.PriceBar
 import org.roboquant.ta.*
+import java.time.Instant
+import java.time.ZoneId
 
 
 private fun basicTaLib() {
@@ -13,7 +17,7 @@ private fun basicTaLib() {
     // Keep maximum 30 price-bars in history
     val serie = PriceBarSeries(30)
     repeat(30) {
-        serie.add(PriceBar(asset, 100.0, 101.0, 99.0, 100.0, 1000))
+        serie.add(PriceBar(asset, 100.0, 101.0, 99.0, 100.0, 1000), Instant.now())
     }
 
     // Calculate EMA over the last 10 days using the default price-type (close)
@@ -105,6 +109,34 @@ private fun strategy3() {
         myIndicator(it) > 0
     }
     // end::strategy3[]
+}
+
+
+
+private fun strategy4(myIndicator: (PriceBarSeries) -> Boolean) {
+    // tag::time-based[]
+    val s = TaLibStrategy()
+    val zoneId = ZoneId.of("America/New_York")
+    s.buy {
+
+        it.timeline // List<Instant>
+
+        // Get only the latest time
+        val now = it.now()
+        val localDateTime = now.atZone(zoneId)
+
+        // Don't BUY after 4:00 PM
+        if (localDateTime.hour < 16) {
+
+            // Use the data from the last 60 minutes
+            val timeFrame = Timeframe(now - 60.minutes, now, true)
+            val series = it[timeFrame]
+            myIndicator(series)
+        } else {
+            false
+        }
+    }
+    // end::time-based[]
 }
 
 

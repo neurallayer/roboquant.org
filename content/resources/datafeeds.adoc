@@ -3,7 +3,9 @@
 :jbake-status: published
 :icons: font
 
-The following table provides an overview of popular market data providers. The list includes free as well as paid providers. Many of them have out-of-the-box support in _roboquant_.
+The following table provides an overview of popular (market) data providers.
+The list includes free as well as paid providers.
+Several of them have out-of-the-box support in _roboquant_.
 
 [frame=ends]
 [.table]
@@ -12,40 +14,40 @@ The following table provides an overview of popular market data providers. The l
 |Provider|Asset Types|API|Historic|Realtime Delayedfootnote:[Typically, 15-minute delay due to distribution restrictions imposed by US exchanges]|Realtime|Pricing model|Remarks
 
 |https://polygon.io[Polygon]
-|US Stocks, Options & crypto
+|US stocks, options, currencies and indices
 |&check;|&check;|&check;|&check;
 |Fee per month
-|Good performing API
+|Unlimited API calls
 
 |https://www.alphavantage.co[Alpha Vantage]
 |Stocks, fundamental, forex, crypto and economic indicators
 |&check;|&check;||
 |Fee based on API calls per minute
-|Covers exchanges outside US
+|Covers also exchanges outside US
 
 |https://stooq.pl[Stooq]
-|US stocks, UK stocks, World stocks, macroeconomic indicators
+|US stocks, UK stocks, world stocks, macroeconomic indicators
 ||&check;||
 |Free
 |The website is in Polish
 
 |https://alpaca.markets[Alpaca]
-|US Stocks & Crypto
+|US stocks, crypto
 |&check;|&check;|&check;|&check;
 |Fee per month
 |Subscription prices have fluctuated a lot in recent years
 
 |https://tiingo.com[Tiingo]
-|US/China Stocks & ETF & Crypto
-|&check;|&check;|&check;|
-|Fee per month
-|50+ year of end-of-day data and IEX Live feed with very small delay
+|US/China Stocks, ETF, crypto
+|&check;|&check;|&check;|&check;
+|Fee per month (cheap)
+|50+ year of end-of-day data and IEX realtime data with only 15ms delay.
 
 |https://databento.com[Databento]
-|US Stocks L3
+|US Stocks
 ||&check;||
 |Fee per download
-|
+|L3 level data
 
 |https://dukascopy.com[Dukascopy]
 |Forex, Commodities, CFD
@@ -53,11 +55,17 @@ The following table provides an overview of popular market data providers. The l
 |Free
 |
 
+|https://norgatedata.com[Norgate Data]
+|Stocks, Futures and Forex
+|&check;|&check;||
+|6- or 12-month subscription
+|Norgate uses a local database to store the data, Windows only.
+
 |https://binance.com[Binance]
 |Crypto
 |&check;|&check;|&check;|&check;
 |Free
-|
+|Market data only from own exchange
 
 |https://iextrading.com/trading/market-data/[IEX Exchange]
 |IEX traded US stocks L3
@@ -65,14 +73,26 @@ The following table provides an overview of popular market data providers. The l
 |Free
 |Large daily files that require additional processing
 
+|https://iexcloud.io/[IEX Cloud]
+|Market data, fundamental, economic
+|&check;|&check;|&check;|&check;
+|Bundles + plans
+|Streaming data requires an additional plan
+
+|https://financialmodelingprep.com/[Financial Modeling Prep]
+|Market data, fundamental, news, economic, insider
+|&check;|&check;||&check;
+|Monthly fee
+|U.S., Xetra, Euronext, TSX, SEDAR, SEHK
+
 |https://kaggle.com[Kaggle]
 |Various datasets
 ||&check;||
 |Free
-|Several datasets have major quality issues
+|Some datasets have major quality issues
 
 |https://metatrader5.com[MetaTrader5]
-|Forex/Futures/Stocks
+|Forex, futures, stocks
 ||&check;||
 |Depends on the used Broker
 |You'll need to install an app to get most functionality
