@@ -32,7 +32,7 @@ Receives the event and generates zero or more signals. A `Signal` is a `Rating` 
 +
 Receives the generated signals and creates the actual orders. If you need to create orders that are not based on signals, this is also the place to do so. For example, to re-balance your positions at regular intervals.
 +
-Check out xref:../background/features.adoc#_order_management[features] to understand why it makes sense to separate this from your strategy logic.
+Check out the xref:../background/features.adoc#_order_management[features] to understand why it makes sense to separate this from your strategy logic.
 
 * `Broker`
 +

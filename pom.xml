@@ -4,7 +4,7 @@
 
 	<groupId>org.roboquant</groupId>
 	<artifactId>roboquant-org</artifactId>
-	<version>2.2.0-SNAPSHOT</version>
+	<version>2.2.0</version>
 	<name>roboquant-org</name>
 
 	<properties>
@@ -12,7 +12,7 @@
 		<kotlin.code.style>official</kotlin.code.style>
 		<kotlin.compiler.jvmTarget>17</kotlin.compiler.jvmTarget>
 		<kotlin.compiler.incremental>false</kotlin.compiler.incremental>
-		<kotlin.version>1.9.20</kotlin.version>
+		<kotlin.version>1.9.22</kotlin.version>
 		<roboquant.version>${project.version}</roboquant.version>
 	</properties>
 
@@ -135,6 +135,11 @@
 		</dependency>
 		<dependency>
 			<artifactId>roboquant-questdb</artifactId>
+			<groupId>org.roboquant</groupId>
+			<version>${roboquant.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>roboquant-tiingo</artifactId>
 			<groupId>org.roboquant</groupId>
 			<version>${roboquant.version}</version>
 		</dependency>

@@ -14,7 +14,11 @@ So <em>roboquant</em> comes out-of-the-box with several integrations included:
     <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/yahoo-finance.jpg" alt="Yahoo Finance">
     <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/stooq.png" alt="Stooq">
     <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/kraken.png" alt="Kraken">
+    <img class="col-lg-2 mx-3 my-2 logo" src="/img/thirdparty/tiingo.svg" alt="Tiingo">
 </div>
 </div>
+
+See also the <a href="/tutorial/integration.html#_3rd_party_integration">integration table</a> for more details
+om the integration.
 
 And if this isn't enough, you can easily extend <em>roboquant</em> with your own broker and data feeds.

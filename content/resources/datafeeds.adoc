@@ -4,8 +4,8 @@
 :icons: font
 
 The following table provides an overview of popular (market) data providers.
-The list includes free as well as paid providers.
-Several of them have out-of-the-box support in _roboquant_.
+The list includes free as well as paid providers. Since subscription fees change all the time, these are not included.
+Several of the data providers have out-of-the-box support in _roboquant_.
 
 [frame=ends]
 [.table]
@@ -16,13 +16,13 @@ Several of them have out-of-the-box support in _roboquant_.
 |https://polygon.io[Polygon]
 |US stocks, options, currencies and indices
 |&check;|&check;|&check;|&check;
-|Fee per month
+|Monthly Fee
 |Unlimited API calls
 
 |https://www.alphavantage.co[Alpha Vantage]
 |Stocks, fundamental, forex, crypto and economic indicators
 |&check;|&check;||
-|Fee based on API calls per minute
+|API calls per minute
 |Covers also exchanges outside US
 
 |https://stooq.pl[Stooq]
@@ -31,34 +31,40 @@ Several of them have out-of-the-box support in _roboquant_.
 |Free
 |The website is in Polish
 
+|https://intrinio.com[Intrinio]
+|US stocks, options, Fundamentals
+|&check;|&check;|&check;|&check;
+|Annual Fee
+|Realtime feeds don't have additional limits
+
 |https://alpaca.markets[Alpaca]
 |US stocks, crypto
 |&check;|&check;|&check;|&check;
-|Fee per month
+|Monthly Fee
 |Subscription prices have fluctuated a lot in recent years
 
 |https://tiingo.com[Tiingo]
 |US/China Stocks, ETF, crypto
 |&check;|&check;|&check;|&check;
-|Fee per month (cheap)
+|Monthly Fee (economical)
 |50+ year of end-of-day data and IEX realtime data with only 15ms delay.
 
 |https://databento.com[Databento]
-|US Stocks
-||&check;||
-|Fee per download
-|L3 level data
+|US Stocks, FX, futures and options
+|&check;|&check;||&check;
+|Fee per GB
+|L3 level data, proprietary protocol for live data
 
 |https://dukascopy.com[Dukascopy]
 |Forex, Commodities, CFD
-||&check;||
-|Free
-|
+|&check;|&check;||&check;
+|Free (after creating an account)
+|They also provide a Java client called JForex
 
 |https://norgatedata.com[Norgate Data]
 |Stocks, Futures and Forex
 |&check;|&check;||
-|6- or 12-month subscription
+|6- or 12-monthly fee
 |Norgate uses a local database to store the data, Windows only.
 
 |https://binance.com[Binance]

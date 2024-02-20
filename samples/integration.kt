@@ -13,6 +13,7 @@ import org.roboquant.brokers.ECBExchangeRates
 import org.roboquant.brokers.sim.execution.InternalAccount
 import org.roboquant.common.*
 import org.roboquant.common.Currency
+import org.roboquant.feeds.AggregatorLiveFeed
 import org.roboquant.feeds.Event
 import org.roboquant.feeds.HistoricPriceFeed
 import org.roboquant.feeds.TradePrice
@@ -23,6 +24,8 @@ import org.roboquant.orders.OrderStatus
 import org.roboquant.polygon.PolygonHistoricFeed
 import org.roboquant.polygon.PolygonLiveFeed
 import org.roboquant.strategies.EMAStrategy
+import org.roboquant.tiingo.TiingoHistoricFeed
+import org.roboquant.tiingo.TiingoLiveFeed
 import java.math.BigDecimal
 import java.time.Instant
 import java.time.LocalDate
@@ -79,6 +82,42 @@ fun ibkrConfig() {
     // tag::ibkr-config[]
     Config.setProperty("ibkr.host", "host.docker.internal")
     // end::ibkr-config[]
+}
+
+
+
+fun tiingoHistoricFeed() {
+    // tag::tiingohistoric[]
+    val feed = TiingoHistoricFeed()
+    val tf = Timeframe.past(3.years)
+    feed.retrieve("AAPL", "JPM", "TSLA", timeframe = tf)
+    // end::tiingohistoric[]
+}
+
+
+fun tiingoLiveFeed() {
+    // tag::tiingolive[]
+    val feed = TiingoLiveFeed.iex()
+
+    feed.subscribe("AAPL", "JPM", "TSLA")
+
+    // or to subscribe to all stocks
+    feed.subscribe()
+    // end::tiingolive[]
+}
+
+
+
+fun tiingoAggregateLiveFeed() {
+    // tag::tiingoaggregate[]
+    val iex = TiingoLiveFeed.iex()
+
+    // subscribe to all stocks
+    iex.subscribe()
+
+    // aggregate to 10 second candlesticks
+    val feed = AggregatorLiveFeed(iex, 10.seconds)
+    // end::tiingoaggregate[]
 }
 
 fun polygonHistoricFeed() {
