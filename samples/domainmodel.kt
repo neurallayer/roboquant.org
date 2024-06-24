@@ -27,7 +27,7 @@ private fun size(bitcoin: Asset, account: Account) {
     val size2 = Size("100.12")
 
     val order = MarketOrder(bitcoin, Size("0.01"))
-    val positionSize = account.positions.first().size
+    val positionSize = account.positions.size
     // end::size[]
 }
 
@@ -127,7 +127,7 @@ private fun timeline(roboquant: Roboquant) {
     // Split the timeline in chunks of 250
     // and run back test over them
     feed.timeline.split(250).forEach {
-        roboquant.run(feed, it)
+        roboquant.run(feed, timeframe = it)
     }
     // end::timeline[]
 }
@@ -160,7 +160,7 @@ private fun tradingPeriod(roboquant: Roboquant, feed: Feed) {
 
     // Run a forward test for the next 8 hours
     val timeframe = Timeframe.next(8.hours)
-    roboquant.run(feed, timeframe)
+    roboquant.run(feed, timeframe = timeframe)
 
     // Extend a timeframe
     val timeframe2 = Timeframe.blackMonday1987.extend(before = 2.months, after = 1.months)
@@ -180,7 +180,7 @@ private fun predefined(roboquant: Roboquant, feed: Feed) {
 
     // Run a back test against these periods
     timeFrames.forEach {
-        roboquant.run(feed, it.extend(5.days))
+        roboquant.run(feed, timeframe = it.extend(5.days))
     }
     // end::predefined[]
 }

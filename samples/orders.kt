@@ -2,12 +2,12 @@
 
 import org.roboquant.alpaca.AlpacaBroker
 import org.roboquant.brokers.Broker
-import org.roboquant.brokers.sim.Pricing
 import org.roboquant.brokers.sim.execution.Execution
-import org.roboquant.brokers.sim.execution.ExecutionEngine
 import org.roboquant.brokers.sim.execution.OrderExecutor
+import org.roboquant.brokers.sim.execution.OrderExecutorFactory
 import org.roboquant.common.Asset
 import org.roboquant.common.Size
+import org.roboquant.feeds.PriceItem
 import org.roboquant.orders.*
 import org.roboquant.strategies.Signal
 import java.time.Instant
@@ -16,7 +16,7 @@ fun signal2order(signals: List<Signal>) {
     // tag::orders[]
     val orders = mutableListOf<Order>()
     for (signal in signals) {
-        val size = if (signal.rating.isPositive) 100 else -100
+        val size = if (signal.isBuy) 100 else -100
         val order = MarketOrder(signal.asset, size)
         orders.add(order)
     }
@@ -52,8 +52,8 @@ private fun manualOrder() {
 
     // Get an updated versions of your broker account
     repeat(10) {
-        broker.sync()
-        println(broker.account.summary())
+        val account = broker.sync()
+        println(account)
         Thread.sleep(1_000)
     }
     // end::manualOrder[]
@@ -70,15 +70,14 @@ fun accountOrder(broker: Broker) {
     Thread.sleep(1_000)
 
     // Get the latest state
-    broker.sync()
-    val account = broker.account
+    val account = broker.sync()
 
     val openOrder = account.openOrders.last()
-    assert(openOrder.order is MarketOrder)
-    assert(order == openOrder.order)
+    assert(openOrder is MarketOrder)
+    assert(order == openOrder)
 
     with(openOrder) {
-        println("status=$status openedAt=$openedAt closedAt=$closedAt")
+        println("status=$status openedAt=$openedAt")
     }
     // end::accountOrder[]
 }
@@ -92,35 +91,31 @@ fun customCreateOrder() {
         val size: Size,
         val customProperty: Int,
         tag: String = ""
-    ) : CreateOrder(asset, tag)
+    ) : Order(asset, tag)
 
     // Define an executor for your custom order type.
-    class MyOrderExecutor(override val order: MyOrder) : OrderExecutor<MyOrder> {
+    class MyOrderExecutor(override val order: MyOrder) : OrderExecutor {
 
         override var status = OrderStatus.INITIAL
 
         // Our order type can be cancelled, but doesn't support other modify order types
-        override fun modify(modifyOrder: ModifyOrder, time: Instant): Boolean {
-            return if (modifyOrder is CancelOrder && status.open) {
-                status = OrderStatus.CANCELLED
-                true
-            } else {
-                false
-            }
+        override fun cancel(time: Instant): Boolean {
+            status = OrderStatus.CANCELLED
+            return true
         }
 
         // Execute the order. This will only be called when there is a price available
         // for the asset
-        override fun execute(pricing: Pricing, time: Instant): List<Execution> {
+        override fun execute(item: PriceItem, time: Instant): List<Execution> {
 
-            // Set state to accepted
+            // Set status to ACCEPTED
             status = OrderStatus.ACCEPTED
 
             // Get the price to use for the execution
-            val price = pricing.marketPrice(order.size)
+            val price = item.getPrice("OPENa")
 
             // the logic for the custom order type
-            // ....
+            // .....
 
             // Set the state to be COMPLETED once done.
             // As long as the state is not in a closed state, the executor stays active and will be invoked when new
@@ -133,8 +128,8 @@ fun customCreateOrder() {
 
     }
 
-    // Register the handler so the SimBroker knows how to execute this new order type
-    ExecutionEngine.register<MyOrder> { MyOrderExecutor(it) }
+    // Register the executor so the SimBroker knows how to execute this new order type
+    OrderExecutorFactory.register<MyOrder> { MyOrderExecutor(it) }
     // end::customOrder[]
 
 }

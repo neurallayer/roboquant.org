@@ -7,7 +7,7 @@ import org.roboquant.brokers.diff
 import org.roboquant.common.*
 import org.roboquant.feeds.AssetFeed
 import org.roboquant.feeds.Event
-import org.roboquant.feeds.PriceAction
+import org.roboquant.feeds.PriceItem
 import org.roboquant.orders.*
 import org.roboquant.policies.*
 import org.roboquant.strategies.NoSignalStrategy
@@ -55,18 +55,18 @@ fun constr() {
 // tag::default[]
 class MyFlexPolicy : FlexPolicy() {
 
-    override fun createOrder(signal: Signal, size: Size, priceAction: PriceAction): Order? {
+    override fun createOrder(signal: Signal, size: Size, priceItem: PriceItem): Order? {
         // We don't short in this example, and exit orders are already covered by the bracket order
         if (size < 0) return null
 
         val asset = signal.asset
-        val price = priceAction.getPrice(config.priceType)
+        val price = priceItem.getPrice(config.priceType)
 
         // Create a bracket order with an additional take-profit and stop-loss defined
         return BracketOrder(
             LimitOrder(asset, size, price), // limit order at current price for entry
             TrailOrder(asset, -size, 0.05), // 5% trail order for take profit
-            StopOrder(asset, -size, price * 0.98) // stop loss order 2% under current price
+            StopOrder(asset, -size, price * 0.98) // stop loss order 2% under the current price
         )
     }
 }
@@ -79,7 +79,7 @@ fun naivePolicy1() {
         override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
             val orders = mutableListOf<Order>()
             for (signal in signals) {
-                val size = if (signal.rating.isPositive) 100 else -100
+                val size = if (signal.isBuy) 100 else -100
                 val order = MarketOrder(signal.asset, size)
                 orders.add(order)
             }
@@ -95,7 +95,7 @@ fun naivePolicy2() {
 
         override fun act(signals: List<Signal>, account: Account, event: Event) = buildList {
             signals.forEach {
-                val size = it.rating.direction * 100
+                val size = it.direction * 100
                 add(MarketOrder(it.asset, size))
             }
         }
@@ -118,7 +118,7 @@ fun customPolicy2() {
         // Use TaLib for calculation of the ATR
         private val taLib = TaLib()
 
-        override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
+        override fun act(signals: List<Signal>, account: Account, event: Event): List<Instruction> {
             // Update prices, so we have them available when the createOrder is invoked.
             prices.addAll(event)
 
@@ -130,9 +130,9 @@ fun customPolicy2() {
          * Override the default behavior of creating a simple MarkerOrder. Create limit BUY and
          * SELL orders with the actual limit based on the ATR of the underlying asset.
          */
-        override fun createOrder(signal: Signal, size: Size, priceAction: PriceAction): Order? {
+        override fun createOrder(signal: Signal, size: Size, priceItem: PriceItem): Order? {
             val asset = signal.asset
-            val price = priceAction.getPrice(config.priceType)
+            val price = priceItem.getPrice(config.priceType)
 
             // We set a limit based on the ATR. The higher the ATR, the more the limit price
             // will be distanced from the current price.
@@ -162,9 +162,9 @@ fun customSingleAssetPolicy(feed: AssetFeed) {
         /**
          * Open a position
          */
-        private fun openPosition(account: Account, priceAction: PriceAction): Order? {
+        private fun openPosition(account: Account, priceItem: PriceItem): Order? {
             val available = account.buyingPower.value * 0.9 // Let's not use 100%
-            val price = priceAction.getPrice()
+            val price = priceItem.getPrice()
             val size = asset.contractSize(available, price, fractions = 0)
 
             return if (history.add(price)) {
@@ -178,8 +178,8 @@ fun customSingleAssetPolicy(feed: AssetFeed) {
         /**
          * Close a position
          */
-        private fun closePosition(position: Position, priceAction: PriceAction): Order? {
-            val price = priceAction.getPrice()
+        private fun closePosition(position: Position, PriceItem: PriceItem): Order? {
+            val price = PriceItem.getPrice()
             val profit = price / position.avgPrice - 1.0
 
             return when {
@@ -191,16 +191,16 @@ fun customSingleAssetPolicy(feed: AssetFeed) {
 
         override fun act(signals: List<Signal>, account: Account, event: Event): List<Order> {
             // If there is already an open order, don't do anything
-            if (account.openOrders.assets.contains(asset)) return emptyList()
+            if (account.openOrders.any { it.asset == asset }) return emptyList()
 
             // If there is no price, don't do anything
-            val priceAction = event.prices[asset] ?: return emptyList()
+            val PriceItem = event.prices[asset] ?: return emptyList()
 
-            val position = account.positions.firstOrNull { it.asset == asset }
+            val position = account.positions.get(asset)
             val order = if (position != null) {
-                closePosition(position, priceAction)
+                closePosition(position, PriceItem)
             } else {
-                openPosition(account, priceAction)
+                openPosition(account, PriceItem)
             }
 
             return if (order == null) emptyList() else listOf(order)
@@ -242,7 +242,7 @@ fun noStrategy() {
             val targetPortfolio = getTargetPortfolio()
 
             // Get the difference of target portfolio and the current portfolio
-            val diff = account.positions.diff(targetPortfolio)
+            val diff = account.positions.values.diff(targetPortfolio)
 
             // Transform the difference into MarketOrders
             return diff.map { MarketOrder(it.key, it.value) }

@@ -6,7 +6,7 @@ import org.roboquant.common.*
 import org.roboquant.feeds.Event
 import org.roboquant.feeds.HistoricFeed
 import org.roboquant.feeds.LiveFeed
-import org.roboquant.feeds.PriceAction
+import org.roboquant.feeds.PriceItem
 import org.roboquant.ibkr.IBKRBroker
 import org.roboquant.strategies.*
 import org.roboquant.ta.*
@@ -30,12 +30,12 @@ private fun intro() {
 private fun ema() {
     // tag::ema[]
     // Use an EMA-crossover strategy with predefined periods
-    val strategy1 = EMAStrategy.PERIODS_5_15
-    val strategy2 = EMAStrategy.PERIODS_12_26
-    val strategy3 = EMAStrategy.PERIODS_50_200
+    val strategy1 = EMACrossover.PERIODS_5_15
+    val strategy2 = EMACrossover.PERIODS_12_26
+    val strategy3 = EMACrossover.PERIODS_50_200
 
     // Use an EMA crossover strategy with custom periods
-    val strategy4 = EMAStrategy(fastPeriod = 20, slowPeriod = 50)
+    val strategy4 = EMACrossover(fastPeriod = 20, slowPeriod = 50)
     // end::ema[]
 }
 
@@ -43,7 +43,7 @@ private fun ema() {
 private fun simpleSignal() {
     // tag::simpleSignal[]
     val apple = Asset("AAPL")
-    val signal = Signal(apple, Rating.BUY)
+    val signal = Signal.buy(apple)
     // end::simpleSignal[]
 }
 
@@ -52,7 +52,7 @@ private fun singleAsset() {
     // tag::singleAsset[]
     class MyStrategy(asset: Asset) : SingleAssetStrategy(asset) {
 
-        override fun generate(priceAction: PriceAction, time: Instant): Signal? {
+        override fun generate(priceItem: PriceItem, time: Instant): Signal? {
             TODO("Your implementation goes here")
         }
 
@@ -66,43 +66,37 @@ private fun singleAsset() {
 
 private fun filter() {
     // tag::filter[]
-    // Only receive price actions denoted in USD
-    val strategy1 = AssetFilterStrategy(EMAStrategy(), AssetFilter.includeCurrencies(Currency.USD))
+    // Only receive price actions for Apple
+    val strategy1 = AssetFilterStrategy(EMACrossover(), AssetFilter.includeSymbols("AAPL"))
 
     // use the filter extension function to exclude price actions for Tesla
-    val strategy2 = EMAStrategy().filter { asset, _ ->
+    val strategy2 = EMACrossover().filter { asset, _ ->
         asset.symbol != "TSLA"
     }
 
     // use CombinedStrategy and filter to create more complex strategies
     val t = Instant.parse("2010-01-01T00:00:00Z")
     val strategy = CombinedStrategy(
-        EMAStrategy.PERIODS_12_26.filter { _, time -> time < t },
-        EMAStrategy.PERIODS_5_15.filter { _, time -> time >= t }
+        EMACrossover.PERIODS_12_26.filter { _, time -> time < t },
+        EMACrossover.PERIODS_5_15.filter { _, time -> time >= t }
     )
     // end::filter[]
 }
 
 
 @Suppress("RedundantExplicitType")
-private fun allSignalAttributes(asset: Asset, rating: Rating) {
+private fun allSignalAttributes(asset: Asset) {
     // tag::attrSignal[]
     // Type of signal: ENTRY, EXIT or BOTH
     val type: SignalType = SignalType.BOTH
 
-    // The price when to exit when profitable
-    val takeProfit: Double = Double.NaN
-
-    // The price when to exit when unprofitable
-    val stopLoss: Double = Double.NaN
-
-    // The probability of this signal being correct
-    val probability: Double = Double.NaN
-
     // An arbitrary string, for example, to trace the strategy that generated this signal
     val tag: String = ""
 
-    Signal(asset, rating, type, takeProfit, stopLoss, probability, tag)
+    // A double value
+    val rating = 1.0
+
+    Signal(asset, rating, type, tag)
     // end::attrSignal[]
 }
 
@@ -128,8 +122,8 @@ private fun extending() {
          */
         override fun generateSignal(asset: Asset, data: DoubleArray): Signal? {
             return when {
-                data.last() == data.max() -> Signal(asset, Rating.BUY)
-                data.last() == data.min() -> Signal(asset, Rating.SELL)
+                data.last() == data.maxOrNull() -> Signal.buy(asset)
+                data.last() == data.minOrNull() -> Signal.sell(asset)
                 else -> null
             }
         }
@@ -139,12 +133,12 @@ private fun extending() {
     class MyStrategy2(lookBack: Int = 10) : HistoricPriceStrategy(lookBack) {
 
         /**
-         * This method should return a [Rating] or null.
+         * This method should return a rating value or null.
          */
-        override fun generateRating(data: DoubleArray): Rating? {
+        override fun generateRating(data: DoubleArray): Double? {
             return when {
-                data.last() == data.max() -> Rating.BUY
-                data.last() == data.min() -> Rating.SELL
+                data.last() == data.maxOrNull() -> 1.0
+                data.last() == data.minOrNull() -> -1.0
                 else -> null
             }
         }
@@ -216,16 +210,16 @@ private fun customStrategy2() {
 
         override fun generate(event: Event): List<Signal> {
             val signals = mutableListOf<Signal>()
-            for ((asset, priceAction) in event.prices) {
+            for ((asset, PriceItem) in event.prices) {
 
-                val currentPrice = priceAction.getPrice()
+                val currentPrice = PriceItem.getPrice()
                 val previousPrice = previousPrices.getOrDefault(asset, currentPrice)
 
                 if (currentPrice > 1.05 * previousPrice)
-                    signals.add(Signal(asset, Rating.BUY))
+                    signals.add(Signal.buy(asset))
 
                 if (currentPrice < 0.95 * previousPrice)
-                    signals.add(Signal(asset, Rating.SELL))
+                    signals.add(Signal.sell(asset))
 
                 previousPrices[asset] = currentPrice
             }
@@ -246,16 +240,16 @@ private fun customStrategy2() {
 
 fun warmup(liveFeed: LiveFeed, historicFeed: HistoricFeed) {
     // tag::warmup[]
-    val strategy = EMAStrategy()
+    val strategy = EMACrossover()
 
     // Run a warmup over the past 30 days with the default SimBroker
     val warmup = Roboquant(strategy, broker = SimBroker())
     val past = Timeframe.past(30.days)
-    warmup.run(historicFeed, past)
+    warmup.run(historicFeed, timeframe = past)
 
     // Start the live trading with a real broker over the next 8 hours
     val live = Roboquant(strategy, broker = IBKRBroker())
     val next = Timeframe.next(8.hours)
-    live.run(liveFeed, next, reset = false)
+    live.run(liveFeed, timeframe = next)
     // end::warmup[]
 }

@@ -6,12 +6,16 @@ import org.roboquant.common.Asset
 import org.roboquant.common.TimeSeries
 import org.roboquant.feeds.Event
 import org.roboquant.charts.TimeSeriesChart
-import org.roboquant.common.years
+import org.roboquant.run
 import org.roboquant.feeds.Feed
-import org.roboquant.loggers.MetricsLogger
+import org.roboquant.journals.Journal
+import org.roboquant.journals.MemoryJournal
 import org.roboquant.metrics.*
-import org.roboquant.questdb.QuestDBMetricsLogger
-import org.roboquant.strategies.EMAStrategy
+import org.roboquant.orders.Instruction
+import org.roboquant.orders.Order
+import org.roboquant.questdb.QuestDBJournal
+import org.roboquant.strategies.EMACrossover
+import org.roboquant.strategies.Signal
 import org.roboquant.strategies.Strategy
 import java.time.Instant
 
@@ -27,38 +31,30 @@ fun standard(strategy: Strategy, sp500Asset: Asset) {
     val metric7 = AlphaBetaMetric(period = 250)
     val metric8 = ScorecardMetric()
 
-    val roboquant = Roboquant(
-        strategy, metric1, metric2, metric3, metric4, metric5, metric6, metric7, metric8
+    val journal = MemoryJournal(
+        metric1, metric2, metric3, metric4, metric5, metric6, metric7, metric8
     )
     // end::standard[]
 }
 
 
-fun questdbLogger(roboquant: Roboquant, feed: Feed) {
+fun questdbLogger(feed: Feed) {
     // tag::questdblogger[]
     // Without specifying a path, the logger will use
     // the default DB path ~/.roboquant/questdb-metrics/db
-    val logger = QuestDBMetricsLogger()
-
-    val rq = Roboquant(EMAStrategy(), AccountMetric(), logger = logger)
-
-    // The logger can be used for multiple runs, even concurrently if required.
-    // Just make sure every run has a unique name
-    feed.timeframe.split(1.years).forEach {
-        rq.run(feed, it , name = "run-${it.toPrettyString()}")
-    }
+    val journal = QuestDBJournal(AccountMetric())
+    run(feed, EMACrossover(), journal)
     // end::questdblogger[]
 }
 
 
-fun memoryLogger(roboquant: Roboquant) {
+fun memoryLogger(journal: MemoryJournal) {
     // tag::memoryLogger[]
     // You can always find out which metrics are available after a run
-    val logger = roboquant.logger
-    println(logger.getMetricNames())
+    println(journal.getMetricNames())
 
     // And plot a metric in a Jupyter Notebook
-    val equity = logger.getMetric("account.equity")
+    val equity = journal.getMetric("account.equity")
     TimeSeriesChart(equity)
     // end::memoryLogger[]
 }
@@ -96,25 +92,15 @@ fun exampleCustomLogger() {
     }
 
     // tag::customLogger[]
-    class MyDatabaseLogger : MetricsLogger {
+    class MyDatabaseLogger : Journal {
 
         private val database = Database()
 
-        override fun log(results: Map<String, Double>, time: Instant, run: String) {
-            for ((key, value) in results) database.store(key, value, time)
+        override fun track(event: Event, account: Account, signals: List<Signal>, instructions: List<Instruction>) {
+            for (signal in signals) {
+                database.store(signal.asset.symbol, signal.rating, event.time)
+            }
         }
-
-        /**
-         * Optional, if you want to access the logged metrics via roboquant
-         */
-        override fun getMetric(metricName: String, run: String): TimeSeries {
-            return database.retrieve(metricName, run)
-        }
-
-        /**
-         * Optional, if you want to access the logged metrics via roboquant
-         */
-        override fun getMetricNames(run: String) = database.retrieveKeys(run)
 
     }
     // end::customLogger[]

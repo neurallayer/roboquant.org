@@ -8,10 +8,9 @@ import org.roboquant.common.JPY
 import org.roboquant.common.USD
 import org.roboquant.common.sumOf
 import org.roboquant.charts.TradeChart
-import org.roboquant.feeds.random.RandomWalkFeed
-import org.roboquant.loggers.SilentLogger
-import org.roboquant.metrics.ProgressMetric
-import org.roboquant.strategies.EMAStrategy
+import org.roboquant.feeds.random.RandomWalk
+import org.roboquant.journals.BasicJournal
+import org.roboquant.strategies.EMACrossover
 import kotlin.system.measureTimeMillis
 import org.roboquant.ta.TaLibStrategy
 
@@ -19,13 +18,13 @@ import org.roboquant.ta.TaLibStrategy
 private fun performance() {
     // tag::performance[]
     // Generate 1.008.000 1-minute price bars
-    val feed = RandomWalkFeed.lastDays(days = 7, nAssets = 100)
+    val feed = RandomWalk.lastDays(days = 7, nAssets = 100)
 
     // Repeat three times to exclude compile time overhead of the first run
     repeat(3) {
         val t = measureTimeMillis {
-            val roboquant = Roboquant(EMAStrategy(), ProgressMetric(), logger = SilentLogger())
-            roboquant.run(feed)
+            val roboquant = Roboquant(EMACrossover())
+            roboquant.run(feed, BasicJournal())
         }
         println("time = $t ms")
     }
@@ -50,17 +49,17 @@ private fun strategy() {
 
 private fun friendly2(broker: Broker) {
     // tag::friendly2[]
-    val account = broker.account
+    val account = broker.sync()
     TradeChart(account.trades)
     // end::friendly2[]
 }
 
 private fun friendly3(broker: Broker) {
     // tag::friendly3[]
-    val account = broker.account
+    val account = broker.sync()
     val totalPNL = account.trades.sumOf { it.pnl }
     val appleOrders = account.closedOrders.filter { it.asset.symbol == "AAPL" }
-    val biggestPosition = account.positions.maxBy { it.marketValue.value }
+    val biggestPosition = account.positions.values.maxByOrNull { it.marketValue.value }
     // end::friendly3[]
     println("$totalPNL $appleOrders $biggestPosition")
 }

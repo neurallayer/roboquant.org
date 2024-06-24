@@ -5,11 +5,8 @@ import org.roboquant.binance.BinanceBroker
 import org.roboquant.brokers.*
 import org.roboquant.common.*
 
-import org.roboquant.metrics.AccountMetric
-import org.roboquant.orders.CancelOrder
 import org.roboquant.orders.MarketOrder
-import org.roboquant.orders.cancel
-import org.roboquant.strategies.EMAStrategy
+import org.roboquant.strategies.EMACrossover
 import org.roboquant.strategies.Signal
 import java.time.Instant
 import java.time.ZoneId
@@ -26,8 +23,8 @@ fun placeOrder(broker: Broker) {
     broker.place(orders)
 
     // Get the latest state of the broker
-    broker.sync()
-    println(broker.account.summary())
+    val account = broker.sync()
+    println(account)
     // end::basic[]
 }
 
@@ -63,34 +60,33 @@ fun positionBTC() {
 
 fun regular() {
     // tag::regular[]
-    val roboquant = Roboquant(EMAStrategy(), AccountMetric(), broker = BinanceBroker())
-    println(roboquant.broker.account.fullSummary())
+    val roboquant = Roboquant(EMACrossover(), broker = BinanceBroker())
+    println(roboquant.broker.sync())
     // end::regular[]
 }
 
 fun account(broker: Broker) {
     // tag::account[]
-    val account = broker.account
+    val account = broker.sync()
 
     // Print the account
-    println(account.summary())
-    println(account.fullSummary())
+    println(account)
 
     // Standard Kotlin
     val winningTrades = account.trades.filter { it.pnl > 0 }
     val loosingTrades = account.trades.filter { it.pnl < 0 }
-    val biggestExposure = account.positions.maxBy { it.exposure.value }
-    val marketOrders = account.openOrders.filter { it.order is MarketOrder }
+    val biggestExposure = account.positions.values.maxByOrNull { it.exposure.value }
+    val marketOrders = account.openOrders.filterIsInstance<MarketOrder>()
     val appleTrades = account.trades.filter { it.asset.symbol == "AAPL" }
 
     // Some useful extensions
-    val totalUnrealizedPNL = account.positions.unrealizedPNL
+    val totalUnrealizedPNL = account.positions.values.unrealizedPNL
     val totalRealizedPNL = account.trades.realizedPNL
     val totalRealizedLosses = loosingTrades.realizedPNL
-    val biggestLoosingTrade = account.trades.map { it.pnl.convert(Currency.USD) }.minBy { it.value }
+    val biggestLoosingTrade = account.trades.map { it.pnl.convert(Currency.USD) }.minByOrNull { it.value }
     val totalFee = account.trades.fee
     val realizedPNLApple = appleTrades.realizedPNL
-    val cancellationOrders = account.openOrders.cancel()
+    val cancellationOrders = account.openOrders.first().cancel()
 
     // More advanced examples
     val zone = ZoneId.systemDefault()
@@ -100,7 +96,7 @@ fun account(broker: Broker) {
     val maxFeeExchange = account.trades
         .groupBy { it.asset.exchange }
         .mapValues { it.value.fee.convert(Currency.USD) }
-        .maxBy { it.value.value }
+        .maxByOrNull { it.value.value }
     // end::account[]
 }
 
@@ -110,14 +106,14 @@ fun account2(account: Account, signals: List<Signal>) {
     for (signal in signals) {
         val asset = signal.asset
         val openOrders = account.openOrders.filter { it.asset == asset }
-        val openPositions = account.positions.filter { it.asset == asset } // returns 0 or 1 positions
+        val openPositions = account.positions.filter { it.key == asset } // returns 0 or 1 positions
         val pastTrades = account.trades.filter { it.asset == asset }
 
         // cancel open orders
-        val cancellations = openOrders.map { CancelOrder(it) }
+        val cancellations = openOrders.map { it.cancel() }
 
         // close positions
-        val closeOrders = openPositions.map { MarketOrder(it.asset, -it.size) }
+        val closeOrders = openPositions.mapValues { MarketOrder(it.key, -it.value.size) }
 
         // Stop a losing streak
         val last2Hours = Timeframe.past(2.hours)
@@ -137,10 +133,10 @@ fun equity(account: Account, initialDeposit: Wallet) {
     val equity0 = account.equity
 
     // Sum of cash balances + open positions
-    val equity1 = account.cash + account.positions.marketValue
+    val equity1 = account.cash + account.marketValue()
 
     // Sum of initial deposit + all the Profit And Loss
-    val equity2 = initialDeposit + account.trades.realizedPNL + account.positions.unrealizedPNL
+    val equity2 = initialDeposit + account.realizedPNL() + account.unrealizedPNL()
 
     assert(equity0 == equity1)
     assert(equity0 == equity2)

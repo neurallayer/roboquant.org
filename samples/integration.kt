@@ -1,7 +1,6 @@
 @file:Suppress("unused", "UNUSED_PARAMETER", "TooManyFunctions", "SpreadOperator", "MagicNumber", "WildcardImport")
 
 import com.crazzyghost.alphavantage.parameters.Interval
-import net.jacobpeterson.alpaca.model.properties.DataAPIType
 import org.roboquant.Roboquant
 // tag::alpaca-import[]
 import org.roboquant.alpaca.*
@@ -18,12 +17,12 @@ import org.roboquant.feeds.Event
 import org.roboquant.feeds.HistoricPriceFeed
 import org.roboquant.feeds.TradePrice
 import org.roboquant.ibkr.IBKRHistoricFeed
+import org.roboquant.orders.Instruction
 import org.roboquant.orders.MarketOrder
-import org.roboquant.orders.Order
 import org.roboquant.orders.OrderStatus
 import org.roboquant.polygon.PolygonHistoricFeed
 import org.roboquant.polygon.PolygonLiveFeed
-import org.roboquant.strategies.EMAStrategy
+import org.roboquant.strategies.EMACrossover
 import org.roboquant.tiingo.TiingoHistoricFeed
 import org.roboquant.tiingo.TiingoLiveFeed
 import java.math.BigDecimal
@@ -134,7 +133,7 @@ suspend fun polygonLiveFeed(roboquant: Roboquant) {
     feed.subscribe("AAPL", "JPM", "TSLA")
 
     val tf = Timeframe.next(120.minutes)
-    roboquant.run(feed, tf)
+    roboquant.run(feed, timeframe = tf)
     // end::polygonlive[]
 }
 
@@ -145,9 +144,9 @@ fun alpacaHistoricFeed() {
     val tf = Timeframe.past(100.days)
 
     // You can retrieve historic price-bars, quotes or trades
-    feed.retrieveStockPriceBars("AAPL", "JPM", "TSLA", timeframe = tf)
-    feed.retrieveStockQuotes("AAPL", "JPM", "TSLA", timeframe = tf)
-    feed.retrieveStockTrades("AAPL", "JPM", "TSLA", timeframe = tf)
+    feed.retrieveStockPriceBars("AAPL,JPM,TSLA", timeframe = tf)
+    feed.retrieveStockQuotes("AAPL,JPM,TSLA", timeframe = tf)
+    feed.retrieveStockTrades("AAPL,JPM,TSLA", timeframe = tf)
     // end::alpacahistoric[]
 }
 
@@ -158,7 +157,7 @@ fun alpacaLiveFeed(roboquant: Roboquant) {
     feed.subscribeStocks("AAPL", "IBM")
 
     val tf = Timeframe.next(120.minutes)
-    roboquant.run(feed, tf)
+    roboquant.run(feed, timeframe = tf)
     // end::alpacalive[]
     println(feed)
 }
@@ -167,18 +166,17 @@ fun feedPolygon() {
 
     // Get the feed
     val feed = PolygonHistoricFeed()
-    println(feed.availableAssets.summary())
+    println(feed.availableAssets)
     val tf = Timeframe.fromYears(2021, 2022)
     feed.retrieve("IBM", "AAPL", timeframe = tf)
     println(feed.assets)
     println(feed.timeline.size)
 
     // Use the feed
-    val strategy = EMAStrategy()
+    val strategy = EMACrossover()
     val roboquant = Roboquant(strategy)
-    roboquant.run(feed)
-    val account = roboquant.broker.account
-    println(account.fullSummary())
+    val account = roboquant.run(feed)
+    println(account)
 }
 
 fun alphaVantage() {
@@ -203,7 +201,7 @@ fun alpacaConfig() {
     val feed = AlpacaHistoricFeed {
         publicKey = "123"
         secretKey = "456"
-        dataType = DataAPIType.IEX
+        dataType = DataType.IEX
     }
     // end::alpacaconfig[]
     println(feed)
@@ -256,7 +254,7 @@ fun myBroker() {
     }
 
     class BrokerApi {
-        fun placeMarketOrder(symbol: String, volume: BigDecimal, id: Int) {
+        fun placeMarketOrder(symbol: String, volume: BigDecimal, id: String) {
             TODO()
         }
 
@@ -272,36 +270,40 @@ fun myBroker() {
     class MyBroker : Broker {
 
         private val api = BrokerApi()
+        private var id = 0
 
         // Internal Account is a mutable version of Account
         private val iAccount = InternalAccount(baseCurrency = Currency.USD)
 
-        override val account: Account
-            get() = iAccount.toAccount()
 
-        override fun sync(event: Event) {
+        override fun sync(event: Event?) : Account {
             // All the hard work goes here where you sync the InternalAccount object with your broker
             // The api calls are all fictitious examples
+
             val now = Instant.now()
 
+            // Optional check that this broker isn't used in a back test
+            if (event != null  && event.time < Instant.now() - 1.hours)
+                throw UnsupportedException("Cannot place old orders")
+
             // Optional check to avoid to many calls to the broker
-            if (iAccount.orders.isEmpty() && (now < account.lastUpdate + 1.minutes)) return
+            if (iAccount.openOrders.isEmpty() && (now < iAccount.lastUpdate + 1.minutes)) return iAccount.toAccount()
 
             // Sync the positions
-            iAccount.portfolio.clear()
+            iAccount.positions.clear()
             for (position in api.getPositions()) {
                 TODO()
                 // iAccount.setPosition(...)
             }
 
             // Sync the open orders
-            for (order in iAccount.orders) {
-                val brokerOrder = api.getOrder(order.orderId)
+            for (order in iAccount.openOrders) {
+                val brokerOrder = api.getOrder(order.id)
 
                 // Fictitious implementation
                 when (brokerOrder.status) {
-                    "RECEIVED" -> iAccount.updateOrder(order.order, now, OrderStatus.ACCEPTED)
-                    "DONE" -> iAccount.updateOrder(order.order, now, OrderStatus.COMPLETED)
+                    "RECEIVED" -> iAccount.updateOrder(order, now, OrderStatus.ACCEPTED)
+                    "DONE" -> iAccount.updateOrder(order, now, OrderStatus.COMPLETED)
                 }
             }
 
@@ -311,24 +313,22 @@ fun myBroker() {
 
             // Set the lastUpdate time
             iAccount.lastUpdate = now
+            return  iAccount.toAccount()
         }
 
 
-        override fun place(orders: List<Order>, time: Instant) {
-
-            // Optional sanity check that we don't use this broker in historic back tests
-            if (time < Instant.now() - 1.hours) throw UnsupportedException("Cannot place old orders")
+        override fun place(instructions: List<Instruction>) {
 
             // Validation of the supported order types
-            require(orders.all { it is MarketOrder })
+            require(instructions.all { it is MarketOrder })
 
-            // Store them in the internal account. Orders should never be (temporary) lost
-            iAccount.initializeOrders(orders)
 
             // Process the orders
-            for (order in orders.filterIsInstance<MarketOrder>()) {
-                // Fictitious API call
+            for (order in instructions.filterIsInstance<MarketOrder>()) {
+                order.id = id++.toString()
                 api.placeMarketOrder(order.asset.symbol, order.size.toBigDecimal(), order.id)
+
+                iAccount.initializeOrders(listOf(order))
             }
 
 
@@ -346,10 +346,9 @@ fun alpacaBroker() {
         publicKey = "123"
         secretKey = "456"
         accountType = AccountType.PAPER
-        dataType = DataAPIType.IEX
+        dataType = DataType.IEX
     }
-    println(broker.account.summary())
-    println(broker.availableAssets)
+    println(broker.sync())
 
     // place a market order to buy 100 stocks Apple
     val order = MarketOrder(Asset("AAPL"), 100)

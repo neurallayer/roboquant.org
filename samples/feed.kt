@@ -3,8 +3,8 @@
 )
 
 import org.roboquant.Roboquant
+import org.roboquant.alpaca.AlpacaLiveFeed
 import org.roboquant.avro.AvroFeed
-import org.roboquant.binance.BinanceLiveFeed
 import org.roboquant.common.*
 import org.roboquant.feeds.*
 import org.roboquant.feeds.csv.CSVConfig
@@ -12,7 +12,6 @@ import org.roboquant.feeds.csv.CSVFeed
 import org.roboquant.feeds.csv.LazyCSVFeed
 import org.roboquant.feeds.csv.PriceBarParser
 import org.roboquant.questdb.QuestDBFeed
-import org.roboquant.questdb.QuestDBRecorder
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -36,7 +35,7 @@ fun test(roboquant: Roboquant) {
     // tag::basic[]
     val feed = CSVFeed("data/test")
     roboquant.run(feed)
-    println(feed.assets.summary())
+    println(feed.assets)
     // end::basic[]
 }
 
@@ -48,16 +47,6 @@ fun aggr() {
     // end::aggr[]
 }
 
-
-
-fun aggr2() {
-    // tag::aggr2[]
-    val feed = BinanceLiveFeed()
-    feed.subscribePriceQuote("BTCBUSD", "ETHBUSD")
-
-    val priceBarFeed = AggregatorFeed(feed, 1.minutes)
-    // end::aggr2[]
-}
 
 
 fun config() {
@@ -125,9 +114,9 @@ fun play() {
     // tag::play[]
     suspend fun play(channel: EventChannel) {
         for (i in 1..100) {
-            val actions = emptyList<Action>() // replace with a real list of actions
+            val actions = emptyList<Item>() // replace with a real list of actions
             val now = Instant.now()
-            val event = Event(actions, now)
+            val event = Event(now, actions)
             channel.send(event)
         }
     }
@@ -145,45 +134,42 @@ fun avro(roboquant: Roboquant) {
 
 fun avroCapture() {
     // tag::avrocapture[]
-    val fileName = "my_file.avro"
 
-    val feed = CSVFeed("some/path/")
-    AvroFeed.record(feed, fileName)
+    val inputFeed = CSVFeed("some/path/")
+    val outputFeed = AvroFeed("my_file.avro")
+    outputFeed.record(inputFeed)
 
     // Append to existing avro file
-    val feed2 = CSVFeed("some/path2/")
-    AvroFeed.record(feed2, fileName, append = true)
-
-    // Later you can use the same file in a AvroFeed
-    val feed3 = AvroFeed(fileName)
+    val inputFeed2 = CSVFeed("some/path2/")
+    outputFeed.record(inputFeed, append = true)
     // end::avrocapture[]
 }
 
 
 fun avroCaptureLive() {
     // tag::avrocapturelive[]
-    val feed = BinanceLiveFeed()
-    feed.subscribePriceBar("BTCUSDT")
+    val feed = AlpacaLiveFeed()
+    feed.subscribeStocks("AAPL", "TSLA", "IBM")
     var timeframe = Timeframe.next(4.hours)
-    AvroFeed.record(feed, "bitcoin.avro", timeframe = timeframe)
+
+    val avroFeed = AvroFeed("my_file.avro")
+    avroFeed.record(feed, timeframe = timeframe)
 
     // You can also append to an existing Avro file
     timeframe = Timeframe.next(8.hours)
-    AvroFeed.record(feed, "bitcoin.avro", timeframe = timeframe, append = true)
+    avroFeed.record(feed, timeframe = timeframe, append = true)
     // end::avrocapturelive[]
 }
 
 private fun predefined() {
     // tag::predefined[]
-    val feed1 = AvroFeed.sp500() // S&P500 with daily PriceBar data
-    val feed2 = AvroFeed.sp500Quotes() // S&P500 with PriceQuote data
-    val feed3 = AvroFeed.forex() // EUR/USD forex data
+    val feed1 = AvroFeed.sp25() // S&P 25 with daily PriceBar data
     // end::predefined[]
 }
 
 fun testEvent(event: Event) {
     // tag::event[]
-    for (priceBar in event.actions.filterIsInstance<PriceBar>()) {
+    for (priceBar in event.items.filterIsInstance<PriceBar>()) {
         // your code
     }
     // end::event[]
@@ -192,38 +178,37 @@ fun testEvent(event: Event) {
 
 fun questDB(inputFeed: Feed) {
     // tag::qdb[]
-    val recorder = QuestDBRecorder()
-    recorder.record<PriceBar>(inputFeed, "pricebars")
-
     val feed = QuestDBFeed("pricebars")
+    feed.record<PriceBar>(inputFeed)
+
+    println(feed.timeframe)
     // end::qdb[]
 }
 
 
 fun questDB2(inputFeed1: Feed, inputFeed2: Feed) {
     // tag::qdb2[]
-    val recorder = QuestDBRecorder()
+    val feed = QuestDBFeed("prices")
 
     // If we want later to add out-of-order entries, we need to partition the table
-    recorder.record<PriceBar>(inputFeed1, "pricebars", partition = QuestDBRecorder.Partition.YEAR)
+    feed.record<PriceBar>(inputFeed1, partition = QuestDBFeed.Partition.YEAR)
 
     // Add the out-of-order pricebars
-    recorder.record<PriceBar>(inputFeed2, "pricebars", append = true)
+    feed.record<PriceBar>(inputFeed2, append = true)
 
-    val feed = QuestDBFeed("pricebars")
     // end::qdb2[]
 }
 
-fun testPriceAction(event: Event) {
-    // tag::priceaction[]
+fun testPriceItem(event: Event) {
+    // tag::PriceItem[]
     // iterate over all price actions in an event
-    for (priceAction in event.prices) {
-        println(priceAction)
+    for (priceItem in event.prices) {
+        println(priceItem)
     }
 
     // get the first price for a particular asset
     val price: Double? = event.getPrice(Asset("XYZ"))
-    // end::priceaction[]
+    // end::PriceItem[]
 }
 
 

@@ -7,7 +7,7 @@ import org.roboquant.common.*
 import org.roboquant.feeds.Feed
 import org.roboquant.policies.FlexPolicy
 import org.roboquant.server.WebServer
-import org.roboquant.strategies.EMAStrategy
+import org.roboquant.strategies.EMACrossover
 
 
 private fun binanceWebServer() {
@@ -17,7 +17,7 @@ private fun binanceWebServer() {
     feed.subscribePriceBar("BTCBUSD")
 
     // Set up a roboquant instance
-    val strategy = EMAStrategy.PERIODS_5_15
+    val strategy = EMACrossover.PERIODS_5_15
     val initialDeposit = Amount("BUSD", 10_000).toWallet()
     val broker = SimBroker(initialDeposit)
     val policy = FlexPolicy.singleAsset()
@@ -32,7 +32,7 @@ private fun binanceWebServer() {
 
     // Start a run for 8 hours
     val tf = Timeframe.next(8.hours)
-    server.run(rq, feed, tf)
+    server.run(rq, feed, timeframe = tf)
 
     // After the run has finished, stop the webserver and close the feed.
     server.stop()
@@ -50,8 +50,8 @@ private fun multiRun(roboquant1: Roboquant, roboquant2: Roboquant, feed1: Feed, 
     val jobs = ParallelJobs()
     jobs.add {
         val tf = Timeframe.next(60.minutes)
-        server.runAsync(roboquant1, feed1, tf, "run-strategy1")
-        server.runAsync(roboquant2, feed2, tf, "run-strategy2")
+        server.runAsync(roboquant1, feed1, timeframe = tf, name = "run-strategy1")
+        server.runAsync(roboquant2, feed2, timeframe = tf, name = "run-strategy2")
     }
 
     jobs.joinAllBlocking()

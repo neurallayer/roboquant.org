@@ -6,6 +6,7 @@ import org.roboquant.common.*
 import org.roboquant.feeds.Feed
 import org.roboquant.feeds.HistoricFeed
 import org.roboquant.charts.*
+import org.roboquant.journals.MetricsJournal
 import org.roboquant.jupyter.*
 import org.roboquant.strategies.Strategy
 
@@ -38,7 +39,7 @@ fun overview2(data: TimeSeries, account: Account, feed: Feed, asset: Asset, asse
     CorrelationChart(feed, assets)
 
     // Asset related charts
-    AllocationChart(account.positions)
+    AllocationChart(account)
     PerformanceChart(feed)
 
     // Trade related charts
@@ -70,9 +71,9 @@ fun global() {
 }
 
 
-fun priceBarChart(feed: HistoricFeed, roboquant: Roboquant) {
+fun priceBarChart(feed: HistoricFeed, account: Account) {
     // tag::priceBarChart[]
-    val trades = roboquant.broker.account.trades
+    val trades = account.trades
 
     // Plot the prices of the first asset from a historic feed and also all the trades for that same asset
     PriceBarChart(feed, feed.assets.first(), trades = trades)
@@ -97,21 +98,18 @@ fun correlation(feed: HistoricFeed, roboquant: Roboquant) {
 }
 
 
-fun timeSeries(roboquant: Roboquant) {
+fun timeSeries(journal: MetricsJournal) {
     // tag::timeseries[]
-    val logger = roboquant.logger
-
     // Get the equity for multiple runs
-    val equities = logger.getMetric("account.equity")
+    val equities = journal.getMetric("account.equity")
 
     // Plot all the equity curves
     TimeSeriesChart(equities, useTime = false)
     // end::timeseries[]
 }
 
-fun tradeChart(roboquant: Roboquant) {
+fun tradeChart2(account: Account) {
     // tag::trade-chart[]
-    val account = roboquant.broker.account
     val trades = account.trades.takeLast(100)
     TradeChart(trades)
     // end::trade-chart[]

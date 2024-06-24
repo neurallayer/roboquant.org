@@ -3,7 +3,7 @@
 import org.roboquant.brokers.sim.*
 import org.roboquant.common.*
 import org.roboquant.feeds.OrderBook
-import org.roboquant.feeds.PriceAction
+import org.roboquant.feeds.PriceItem
 import org.roboquant.feeds.PriceQuote
 import java.time.Instant
 
@@ -22,7 +22,6 @@ fun configSimBroker() {
         baseCurrency = Currency.EUR, // currency to use for reporting
         feeModel = PercentageFeeModel(), // model to use to calculate fees, commissions, etc
         accountModel = MarginAccount(), // type of account to model, like a Cash or Margin account
-        pricingEngine = SpreadPricingEngine() // engine to use to calculate the final price of a trade
     )
     // end::extra[]
 }
@@ -42,39 +41,5 @@ fun includedModels() {
     // Fee models
     val feeModel1 = PercentageFeeModel(0.01) // 1% fee
     val feeModel2 = NoFeeModel() // no additional fees apply
-
-    // Pricing engines
-    // Use a 5 BIPS spread based on the open prices.
-    // So BUY is +2.5 BIPS and SELL is -2.5 BIPS
-    val pricingEngine1 = SpreadPricingEngine(spread = 5.bips, priceType = "OPEN")
-
-    // Use the close prices and no spread
-    val pricingEngine2 = NoCostPricingEngine(priceType = "CLOSE")
     // end::included[]
 }
-
-fun pricingEngine() {
-    // tag::pricing[]
-    class MyPricingEngine : PricingEngine {
-
-        inner class MyPricing(val action: PriceAction) : Pricing {
-
-            override fun marketPrice(size: Size): Double {
-                return when (action) {
-                    is PriceQuote -> if (size.isPositive) action.askPrice else action.bidPrice
-                    is OrderBook -> if (size.isPositive) action.bestOffer else action.bestBid
-                    else -> action.getPrice()
-                }
-            }
-
-        }
-
-        override fun getPricing(action: PriceAction, time: Instant): Pricing {
-            return MyPricing(action)
-        }
-
-    }
-    // end::pricing[]
-
-}
-
