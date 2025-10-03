@@ -24,7 +24,7 @@ The role and responsibilities of the components are as follows:
 * `Feed`
 +
 Provides the data needed for testing and trading.
-The data is provided as serie of events that are published.
+The data is provided as series of events that are published.
 A feed can represent both historic and live data and is not restricted to pricing data only.
 
 * `Strategy`

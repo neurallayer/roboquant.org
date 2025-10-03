@@ -56,7 +56,7 @@ Event-driven software is a paradigm in which the flow of the application is dete
 
 Event-driven algo-trading platforms provide several advantages over a vectorized approach:
 
-* Reuse - _roboquant_ uses the same event-driven approach for all xref:four_stages.adoc[4 stages] of developing trading strategies, ensuring minimal friction when moving from one stage to the next.
+* Reuse - _roboquant_ uses the same event-driven approach for all 4 stages of developing trading strategies, ensuring minimal friction when moving from one stage to the next.
 
 * Avoid Lookahead bias — with event-driven back-tests; it is unlikely that the strategy will actually peep into the future since at the time of making any decision in the code, the future data is not yet available. In fact, within _roboquant_, the simulated broker is guaranteed to see pricing information before your strategy does.
 

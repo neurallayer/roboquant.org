@@ -10,7 +10,7 @@
                         <li><a class="dropdown-item" href="/tutorial/index.html">Tutorial</a></li>
                         <li><a class="dropdown-item" href="/charts.html">Charts</a></li>
                         <li><a class="dropdown-item" href="https://github.com/neurallayer/roboquant-notebook" target="_blank">Jupyter Notebooks</a></li>
-                        <li><a class="dropdown-item" href="/background/index.html">History</a></li>
+                        <li><a class="dropdown-item" href="/four_stages.html">4 Stages</a></li>
                     </ul>
                 </li>
                 <li class="nav-item me-2 dropdown">
@@ -21,11 +21,7 @@
                         <li><a class="dropdown-item" href="/resources.html#Market Data">Market Data</a></li>
                     </ul>
                 </li>
-                <li class="nav-item me-2"><a class="nav-link" href="/blog/index.html">Blog</a></li>
                 <li class="nav-item me-2"><a class="nav-link" href="/community.html">Community</a></li>
-                <li class="nav-item me-2">
-                    <a class="nav-link" href="https://mybinder.org/v2/gh/neurallayer/roboquant-notebook/main?urlpath=lab/tree/notebooks/" target="_blank">Try It Online</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://github.com/neurallayer/roboquant" target="_blank">
                         <span class="icon"><i class="fa fa-github fa-1x"></i></span> Star us

@@ -122,7 +122,7 @@ private fun timeFrame() {
 
 private fun timeline(strategy: Strategy) {
     // tag::timeline[]
-    val feed = CSVFeed("somepath")
+    val feed = CSVFeed("some-path")
 
     // Split the timeline in chunks of 250
     // and run back test over them

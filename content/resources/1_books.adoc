@@ -209,7 +209,7 @@ Level: ★★
 
 This is perhaps the exception to the rule to not buy books that promise profitable strategies or indicators. The approach taken in this book is indeed very sound, just like the title promises. And even if some of the proposed indicators are not profitable any more, you can learn a lot from the approach taken.
 
-The indicators are grouped by type. For example, you have chapters dedicated to volume-based indicators and multi-market indicators. Next to the indicator chapters, there is also an excellent chapter on the stationarity of timeseries.
+The indicators are grouped by type. For example, you have chapters dedicated to volume-based indicators and multi-market indicators. Next to the indicator chapters, there is also an excellent chapter on the stationarity of time series.
 
 Just like the other book of Timothy Masters that is reviewed above, the C++ code in this book is not difficult to understand and can be easily translated into other computer languages.
 ====

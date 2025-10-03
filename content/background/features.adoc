@@ -106,20 +106,14 @@ include::{sourcefile}[tag=strategy]
 As you can see, the roboquant version is just as easy to develop.
 
 === Trading specific Domain Model
-Rather than having a generic framework where you still have to code a lot to make it usable, _roboquant_ approach is that of providing a trading-specific domain model.
+Rather than having a generic framework where you still have to code a lot to make it usable,
+_roboquant_ approach is that of providing a trading-specific domain model.
 
 For example, you can easily work with monetary amounts:
 
 [source,kotlin,indent=0]
 ----
 include::{sourcefile}[tag=friendly1]
-----
-
-But also working with collections is easy:
-
-[source,kotlin,indent=0]
-----
-include::{sourcefile}[tag=friendly3]
 ----
 
 === Interactive Development
@@ -131,13 +125,6 @@ A lot of effort went into designing an API that is easy to use from a Notebook a
 * [x] Graceful introduction of complexity. In other words: simple things should be simple, complex things should be possible
 * [x] Many convenience methods to get results with minimal amount of coding
 * [x] Sensible defaults for many arguments, so you don't have to specify them all the time
-
-Another example, if you want to plot a chart, you don't first have to mangle data to make it consumable by the chart. In _roboquant_, the charts understand the key domain concepts like Account, Trades and Metrics and can plot these directly.
-
-[source,kotlin,indent=0]
-----
-include::{sourcefile}[tag=friendly2]
-----
 
 Once your code base grows too large for a notebook, the same code can be used in a traditional IDE.
 

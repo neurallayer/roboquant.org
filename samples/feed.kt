@@ -190,9 +190,9 @@ fun questDB2(inputFeed1: Feed, inputFeed2: Feed) {
     val feed = QuestDBFeed("prices")
 
     // If we want later to add out-of-order entries, we need to partition the table
-    feed.record<PriceBar>(inputFeed1, partition = QuestDBFeed.Partition.YEAR)
+    feed.record<PriceBar>(inputFeed1, partition = QuestDBFeed.YEAR)
 
-    // Add the out-of-order pricebars
+    // Add the out-of-order price-bars
     feed.record<PriceBar>(inputFeed2, append = true)
 
     // end::qdb2[]

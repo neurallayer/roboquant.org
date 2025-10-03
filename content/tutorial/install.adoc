@@ -148,7 +148,7 @@ root
     ...
 ----
 
-All source code is written in Kotlin, so there are no Java or other language source files. Roboquant uses Maven for the build process and includes a Maven wrapper (`mvnw`) to ensure optimal compatability between environments.
+All source code is written in Kotlin, so there are no Java or other language source files. Roboquant uses Maven for the build process and includes a Maven wrapper (`mvnw`) to ensure optimal compatibility between environments.
 Building the libraries locally is as easy as running a single command:
 
 [source, shell]
