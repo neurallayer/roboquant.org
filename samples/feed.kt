@@ -2,7 +2,6 @@
     "unused", "ControlFlowWithEmptyBody", "UNUSED_VARIABLE", "WildcardImport", "MagicNumber", "TooManyFunctions"
 )
 
-import org.roboquant.Roboquant
 import org.roboquant.alpaca.AlpacaLiveFeed
 import org.roboquant.avro.AvroFeed
 import org.roboquant.common.*
@@ -12,8 +11,9 @@ import org.roboquant.feeds.csv.CSVFeed
 import org.roboquant.feeds.csv.LazyCSVFeed
 import org.roboquant.feeds.csv.PriceBarParser
 import org.roboquant.questdb.QuestDBFeed
+import org.roboquant.run
+import org.roboquant.strategies.Strategy
 import java.time.Instant
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 
@@ -31,11 +31,11 @@ fun feedInterface() {
     // end::interface[]
 }
 
-fun test(roboquant: Roboquant) {
+fun test(strategy: Strategy) {
     // tag::basic[]
     val feed = CSVFeed("data/test")
-    roboquant.run(feed)
     println(feed.assets)
+    run(feed, strategy)
     // end::basic[]
 }
 
@@ -65,8 +65,7 @@ fun config() {
             high = 4,
             timeSpan = 15.minutes
         ),
-        timeParser = { line, asset -> LocalDateTime.parse(line[0], df).atZone(asset.exchange.zoneId).toInstant() },
-        assetBuilder = { file -> Asset(file.nameWithoutExtension) },
+        assetBuilder = { file -> Stock(file) },
     )
     val feed = CSVFeed("somepath", config)
     // end::config[]
@@ -92,21 +91,21 @@ fun csvPreConfig() {
 }
 
 
-fun testLazy(roboquant: Roboquant) {
+fun testLazy(strategy: Strategy) {
     // tag::lazy[]
     val feed = LazyCSVFeed("data/test")
-    roboquant.run(feed)
+    run(feed, strategy)
     // end::lazy[]
 }
 
 
-fun combinedFeed(roboquant: Roboquant) {
+fun combinedFeed(strategy: Strategy) {
     // tag::combined[]
     val feed1 = CSVFeed("data/test1")
     val feed2 = CSVFeed("data/test2")
     val feed = CombinedFeed(feed1, feed2)
 
-    roboquant.run(feed)
+    run(feed, strategy)
     // end::combined[]
 }
 
@@ -124,10 +123,10 @@ fun play() {
 }
 
 
-fun avro(roboquant: Roboquant) {
+fun avro(strategy: Strategy) {
     // tag::avro[]
     val feed = AvroFeed("my_file.avro")
-    roboquant.run(feed)
+    run(feed, strategy)
     // end::avro[]
 }
 
@@ -207,7 +206,7 @@ fun testPriceItem(event: Event) {
     }
 
     // get the first price for a particular asset
-    val price: Double? = event.getPrice(Asset("XYZ"))
+    val price: Double? = event.getPrice(Stock("XYZ"))
     // end::PriceItem[]
 }
 

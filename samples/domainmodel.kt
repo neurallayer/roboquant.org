@@ -1,12 +1,13 @@
 @file:Suppress("unused", "UNUSED_VARIABLE", "MagicNumber", "WildcardImport")
 
-import org.roboquant.Roboquant
-import org.roboquant.brokers.Account
+import org.roboquant.common.Account
 import org.roboquant.brokers.ECBExchangeRates
 import org.roboquant.common.*
 import org.roboquant.feeds.Feed
 import org.roboquant.feeds.csv.CSVFeed
-import org.roboquant.orders.MarketOrder
+import org.roboquant.run
+import org.roboquant.strategies.EMACrossover
+import org.roboquant.strategies.Strategy
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -26,7 +27,7 @@ private fun size(bitcoin: Asset, account: Account) {
     val size = Size(100) + Size(200)
     val size2 = Size("100.12")
 
-    val order = MarketOrder(bitcoin, Size("0.01"))
+    val order = Order(bitcoin, Size("0.01"), 50000.0)
     val positionSize = account.positions.size
     // end::size[]
 }
@@ -62,14 +63,14 @@ private fun wallet() {
 private fun exchangeRates() {
     // tag::er[]
     // Load the exchange rates as published by the ECB (European Central Bank)
-    Config.exchangeRates = ECBExchangeRates.fromWeb()
+    Amount.registerConvertor(ECBExchangeRates.fromWeb())
     val amountEUR = 20.EUR
-    val amountUSD = amountEUR.convert(Currency.USD)
+    val amountUSD = amountEUR.convert(Currency.USD, Instant.now())
 
     val wallet = 20.USD + 1000.JPY
 
     // Convert wallet based on today's exchange rates
-    val amountGBP1 = wallet.convert(Currency.GBP)
+    val amountGBP1 = wallet.convert(Currency.GBP, Instant.now())
 
     // Convert wallet based on two years ago exchange rates
     val time = Instant.now() - 2.years
@@ -86,7 +87,6 @@ private fun assets() {
     val now = Instant.now()
 
     val exchange = Exchange.SSX // Sydney exchange
-    val asset = Asset("XYZ", exchange = exchange)
     exchange.sameDay(start, end) // False
 
     // LocalDate features
@@ -120,19 +120,19 @@ private fun timeFrame() {
     // end::tf[]
 }
 
-private fun timeline(roboquant: Roboquant) {
+private fun timeline(strategy: Strategy) {
     // tag::timeline[]
     val feed = CSVFeed("somepath")
 
     // Split the timeline in chunks of 250
     // and run back test over them
     feed.timeline.split(250).forEach {
-        roboquant.run(feed, timeframe = it)
+        run(feed, strategy, timeframe = it)
     }
     // end::timeline[]
 }
 
-private fun tradingPeriod(roboquant: Roboquant, feed: Feed) {
+private fun tradingPeriod(feed: Feed) {
     // tag::tradingperiod[]
     // Use the TimePeriod constructor directly
     val period = TimeSpan(years = 1, months = 6, seconds = 30)
@@ -160,7 +160,7 @@ private fun tradingPeriod(roboquant: Roboquant, feed: Feed) {
 
     // Run a forward test for the next 8 hours
     val timeframe = Timeframe.next(8.hours)
-    roboquant.run(feed, timeframe = timeframe)
+    run(feed, EMACrossover(), timeframe = timeframe)
 
     // Extend a timeframe
     val timeframe2 = Timeframe.blackMonday1987.extend(before = 2.months, after = 1.months)
@@ -168,7 +168,7 @@ private fun tradingPeriod(roboquant: Roboquant, feed: Feed) {
 }
 
 
-private fun predefined(roboquant: Roboquant, feed: Feed) {
+private fun predefined(feed: Feed) {
     // tag::predefined[]
     val timeFrames = listOf(
         Timeframe.blackMonday1987,
@@ -180,7 +180,7 @@ private fun predefined(roboquant: Roboquant, feed: Feed) {
 
     // Run a back test against these periods
     timeFrames.forEach {
-        roboquant.run(feed, timeframe = it.extend(5.days))
+        run(feed, EMACrossover(), timeframe = it.extend(5.days))
     }
     // end::predefined[]
 }

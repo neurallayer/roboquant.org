@@ -4,10 +4,12 @@
 :sourcefile: ../../samples/roboquant.kt
 :jbake-date: 2020-10-01
 
-== Create an Instance
-The `Roboquant` class (org.roboquant.Roboquant) is the engine of the platform, not to be confused with _roboquant_ (all lower case) which is the name of the platform itself. An instance of the `Roboquant` class orchestrates the interaction between the components and performs the actual run.
+== Run
+The `run` and `runAsync` functions are the engine of the platform.
+They orchestrate the interaction between the components and perform the actual run.
 
-The only required parameter when creating a new instance of `Roboquant` is the strategy. So the bare minimum to create an instance would look something like this:
+The only required parameters are a feed and a strategy.
+So, the bare minimum to create an instance would look something like this:
 
 [source, kotlin, indent=0]
 ----
@@ -16,10 +18,9 @@ include::{sourcefile}[tag=basic]
 
 The following default values will be used if you don't provide additional parameters:
 
-* No `Metric` will be captured
 * The `SimBroker` will be used as the broker with its default settings
-* The `FlexPolicy` will be the policy used
-* The `MemoryLogger` for logging the metrics (although without any metrics to capture, there is not much to log)
+* The `FlexTrader` will be the trader used
+* No trading `Journal` will be used or metrics will be tracked
 
 Each of these defaults can be overwritten with a different implementation when you instantiate a `Roboquant`, as the following code snippet demonstrates:
 
@@ -36,9 +37,6 @@ include::{sourcefile}[tag=combined]
 ----
 
 See also the xref:strategy.adoc[strategy page] for more details.
-
-== Run
-After you have created an instance of the `Roboquant` class and have a xref:feed.adoc[data feed], you can start the run.
 
 NOTE: The same `run` method is used for all the different stages, from back testing to live trading. See also xref:../background/four_stages.adoc[the 4 stages] for more details about these stages.
 
@@ -72,15 +70,6 @@ Or run even more back tests, like in this Monte Carlo simulation where we draw 1
 include::{sourcefile}[tag=run4]
 ----
 
-== Validation run
-There are strategies that are self-learning. For example, many machine-learning-based strategies fall under this category. These strategies are trained on one timeframe and then validated on another (typically sequential) timeframe.
-
-Also, this type of strategy can be easily back-tested with _roboquant_. The run method accepts an additional timeframe parameter to trigger a second validation phase.
-[source, kotlin, indent=0]
-----
-include::{sourcefile}[tag=runValidation]
-----
-
 From a metric logging perspective, the metrics have a different `RunPhase` in the `RunInfo` object associated with them. So you can always find out in which `RunPhase` a metric was generated.
 
 
@@ -100,7 +89,7 @@ include::{sourcefile}[tag=runParallel]
 It isn't always easy to find out why a run isn't behaving as expected. One way to pinpoint where the actual issue is located is to enable extra
 metrics recording.
 
-The `Policy` is a place where made decisions can sometime not be that obvious, and additional metrics can help:
+The `Trader` is a place where made decisions can sometime not be that obvious, and additional metrics can help:
 
 [source, kotlin, indent=0]
 ----

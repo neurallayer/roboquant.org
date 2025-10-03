@@ -5,7 +5,7 @@
 :icons: font
 
 == Approach
-Besides core components like `Strategy` and `Policy`, _roboquant_ also comes with a number of domain-specific classes that make it easier to implement robust trading strategies.
+Besides core components like `Strategy` and `Trader`, _roboquant_ also comes with a number of domain-specific classes that make it easier to implement robust trading strategies.
 
 Although it adds a bit to the overall learning curve, the benefits of being able to easier build robust solutions outperform this downside.
 
@@ -65,7 +65,6 @@ The `ExchangeRates` interface also supports different rates at different moments
 include::{sourcefile}[tag=er]
 ----
 
-
 == Time
 To make it easier to trade in multiple regions, _roboquant_ introduces a number of time related domain classes: <<Timeline>>, <<Timeframe>>, <<TimeSpan>>.
 
@@ -115,16 +114,6 @@ include::{sourcefile}[tag=tradingperiod]
 ----
 
 NOTE: Whenever a timezone is required for an operation and none is supplied, `UTC` will be used. This provides consistent behavior across machines in different time zones.
-
-=== Exchanges and TradingCalendars
-An asset is linked to a single exchange, and that exchange has a time-zone associated with it. This is mostly relevant during back-testing when certain time-in-force policies need to be evaluated (like good for today).
-
-The exchange also has a `TradingCalendar` associated with it, that determines what are the valid trading hours for that particular exchange.
-
-[source,kotlin,indent=0]
-----
-include::{sourcefile}[tag=assets]
-----
 
 == Size
 Order sizes and position sizes are expressed as an instance of the `Size` class. For the internal working of _roboquant_, there is no differentiation between fractional and non-fractional orders. All the order and position quantities are expressed using the same `Size` class.

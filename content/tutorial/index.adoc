@@ -9,41 +9,42 @@ Developing and running algo-trading software is not an easy task at all. You alr
 
 So it makes sense to separate the logic that is common to all automated trading strategies from the logic that is specific to your strategy.
 
-== Main components
-Perhaps the most important part of using _roboquant_ is to understand the sequence of steps and the responsibility each component has in this flow. The following diagram provides a logical overview of the main components and the data they produce and consume.
 
-image::main_flow_simplified.png[]
+Roboquant supports all xref:../background/four_stages.adoc[4 stages] of developing a trading strategy with minimal changes to your code.
+
+== Main components
+Perhaps the most important part of using _roboquant_ is to understand the sequence of steps and the responsibility each component has in this flow.
+The following provides a logical overview of the main parts and the data they produce and consume.
+
+Feed ==event=> Strategy ==signal=> Trader ==order=> Broker ==account=>
 
 The role and responsibilities of the components are as follows:
 
-* `Roboquant`
-+
-The engine of the platform that performs the actual run and orchestrates the interaction between the components. The engine supports all xref:../background/four_stages.adoc[4 stages] of developing a trading strategy with minimal changes to your code. This is also the only component that is a concrete `class` and not an `interface` and not designed to be swapped out for a custom implementation.
 
 * `Feed`
 +
-Provides the data needed for testing and trading. The data is provided in the form of events. A feed can represent both historic and live data and is not restricted to pricing information only.
+Provides the data needed for testing and trading.
+The data is provided as serie of events that are published.
+A feed can represent both historic and live data and is not restricted to pricing data only.
 
 * `Strategy`
 +
-Receives the event and generates zero or more signals. A `Signal` is a `Rating` for a certain asset, like a BUY rating for Tesla. So the strategy doesn't create orders; that is the responsibility of the next component, the policy.
-
-* `Policy`
-+
-Receives the generated signals and creates the actual orders. If you need to create orders that are not based on signals, this is also the place to do so. For example, to re-balance your positions at regular intervals.
-+
-Check out the xref:../background/features.adoc#_order_management[features] to understand why it makes sense to separate this from your strategy logic.
+Receives the `event` and generates zero or more s.
+An instruction can be a new order, but also the cancellation/update of an existing order.
 
 * `Broker`
 +
-Receives the newly created orders by the policy and processes them. Any open orders received in previous steps will also be processed until they are closed. After the processing of the orders, it will return an updated account that reflects the latest state.
+Receives the newly created orders and processes them.
+Any open orders received in previous steps will also be processed until they are closed.
+After the processing of the orders, it will return an updated account that reflects the latest state.
 
-* `Metric`
+* `Journal`
 +
-Receives the latest state of the account and calculates various metrics that are of interest to determine the progress and results of the run so far. These results are then handed over to the `MetricsLogger` that will store and/or log the metric values, so you can inspect them at a later time.
+Receives the latest state of the account and log metrics that are of interest.
+This provides additional insights into what is happening during a run.
 
 
-== Main steps
+== Development
 Developing a new strategy and validating it with a back-test is a straightforward process. The code snippet below shows the different steps that you have to take to develop and run your strategy.
 
 [source, kotlin, subs="attributes,verbatim", indent=0]
@@ -52,12 +53,12 @@ include::{sourcefile}[tag=overview]
 ----
 <1> Develop a new strategy based on some ideas you have. This can be done either from scratch or by assembling existing building blocks. In many cases, this is the only real software development required. See also xref:strategy.adoc[Strategy] for more details.
 <2> Create an instance of your strategy.
-<3> Instantiate the metrics you want to use to evaluate the performance of your strategy.
-<4> Create an instance of Roboquant (the engine) with the strategy and metric(s) as parameters to the constructor.
-<5> Pick the data feed you want to use to test your strategy.
-<6> Run the back test using the data feed you just created.
+<3> Pick the data feed you want to use to test your strategy.
+<4> Run the back test using the data feed you just created.
+<5> Print how much equity we have at the end of the run (we start by default with $1.000.000)
 
-The _roboquant_ platform is very flexible and provides many more options than the above example shows. You can easily change almost any aspect of the platform if the default behavior doesn't suit your needs.
+The _roboquant_ platform is flexible and provides many more options than the above example shows.
+You can change almost any aspect of the platform if the default behavior doesn't suit your needs.
 
-This might mean that the learning curve is steeper than some simpler platforms.
+This might mean that the learning curve is steeper than a simpler platform.
 But in our experience, this is required to be able to develop robust automated trading solutions.

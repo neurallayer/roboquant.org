@@ -1,18 +1,17 @@
 @file:Suppress("unused", "MagicNumber")
 
-import org.roboquant.Roboquant
-import org.roboquant.brokers.Broker
+
 import org.roboquant.common.Currency.Companion.USD
 import org.roboquant.common.EUR
 import org.roboquant.common.JPY
 import org.roboquant.common.USD
-import org.roboquant.common.sumOf
-import org.roboquant.charts.TradeChart
 import org.roboquant.feeds.random.RandomWalk
 import org.roboquant.journals.BasicJournal
+import org.roboquant.run
 import org.roboquant.strategies.EMACrossover
-import kotlin.system.measureTimeMillis
 import org.roboquant.ta.TaLibStrategy
+import java.time.Instant
+import kotlin.system.measureTimeMillis
 
 
 private fun performance() {
@@ -23,8 +22,7 @@ private fun performance() {
     // Repeat three times to exclude compile time overhead of the first run
     repeat(3) {
         val t = measureTimeMillis {
-            val roboquant = Roboquant(EMACrossover())
-            roboquant.run(feed, BasicJournal())
+            run(feed, EMACrossover(), journal = BasicJournal())
         }
         println("time = $t ms")
     }
@@ -34,7 +32,7 @@ private fun performance() {
 private fun friendly1() {
     // tag::friendly1[]
     val wallet = 100.EUR + 20.USD + 1_000.JPY
-    wallet.convert(USD)
+    wallet.convert(USD, Instant.now())
     // end::friendly1[]
 }
 
@@ -47,19 +45,3 @@ private fun strategy() {
     // end::strategy[]
 }
 
-private fun friendly2(broker: Broker) {
-    // tag::friendly2[]
-    val account = broker.sync()
-    TradeChart(account.trades)
-    // end::friendly2[]
-}
-
-private fun friendly3(broker: Broker) {
-    // tag::friendly3[]
-    val account = broker.sync()
-    val totalPNL = account.trades.sumOf { it.pnl }
-    val appleOrders = account.closedOrders.filter { it.asset.symbol == "AAPL" }
-    val biggestPosition = account.positions.values.maxByOrNull { it.marketValue.value }
-    // end::friendly3[]
-    println("$totalPNL $appleOrders $biggestPosition")
-}

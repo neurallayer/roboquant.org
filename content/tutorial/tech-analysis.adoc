@@ -13,17 +13,14 @@ Technical analysis is based on information coming directly from the financial ma
 - Shorting percentage
 - Spread (difference between ask and bid prices)
 
-Since many strategies use technical analysis as a basis for decision-making, _roboquant_ comes out-of-the-box with support for two of the most popular Java libraries:
+Since many strategies use technical analysis as a basis for decision-making, _roboquant_ comes out-of-the-box with support for:
 
 . TaLib (https://www.ta-lib.org)
-. Ta4j (https://ta4j.com)
 
-To use these libraries, you'll need to include the module `roboquant-ta` in your build tool of choice.
-
-This page goes into more details on how to use the TaLib library. For `Ta4j`, please check their website.
+This page goes into more details on how to use the TaLib library.
 
 == Basic usage
-TaLib is a lightning fast and powerful library that can be used for calculating many different types of indicators.
+TaLib is a fast and powerful library that can be used for calculating many different types of indicators.
 It is a pure Java library, but it is exposing an API that might be confusing at first.
 
 To make it more convenient to use it, _roboquant_ comes with a wrapper for it.

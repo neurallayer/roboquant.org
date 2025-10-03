@@ -10,7 +10,7 @@ A  strategy in general is a systematic approach to buying and selling assets, su
 A `Strategy`  in _roboquant_ is the component responsible for generating signals based on the events it receives and is likely the place where you do most of your software development and differentiate from other algo-traders.
 
 
-NOTE: a `Strategy` in _roboquant_ doesn't generate orders, that is the responsibility of a `Policy`.
+NOTE: a `Strategy` in _roboquant_ doesn't generate orders, that is the responsibility of a `Trader`.
 
 The main method that needs to be implemented in the `Strategy` interface is the `generate` method:
 
@@ -48,27 +48,9 @@ The ta-lib library comes with over 150 indicators, and these can be combined any
 include::{sourcefile}[tag=ta]
 ----
 
-=== RSIStrategy
-Strategy using the Relative Strength Index of an asset to generate signals. RSI measures the magnitude of recent price changes to evaluate overbought or oversold conditions in the price of a stock or other asset.
-
-If the RSI raises above the configured high-threshold (default 70), a sell signal will be generated. And if the RSI falls below the configured low-threshold (default 30), a buy signal will be generated.
-
-[source, kotlin,indent=0]
-----
-include::{sourcefile}[tag=rsi]
-----
-
 === NoSignalStrategy
-This strategy doesn't perform any action and will never generate a signal. If you develop all your logic in a Policy and don't require a strategy, use this strategy when you create a `Roboquant` instance. See also <<_policy_based_strategies>>.
+This strategy doesn't perform any action and will never generate a signal. If you develop all your logic in a Trader and don't require a strategy, use this strategy when you create a `Roboquant` instance. See also <<_policy_based_strategies>>.
 
-== AssetFilterStrategy
-If you don't want to receive all price actions, you can wrap your strategy in a `AssetFilterStrategy` that allows to filter out certain price actions based on
-asset and/or time.
-
-[source, kotlin,indent=0]
-----
-include::{sourcefile}[tag=filter]
-----
 
 
 === CombinedStrategy
@@ -97,15 +79,6 @@ include::{sourcefile}[tag=parallel]
 
 == Extending Strategies
 Next to the standard strategies, there are also strategies included that can be the foundation for your own strategy. You extend these classes and add your own logic to them. These base strategies take care of some repetitive tasks and make it quicker to develop your own strategies.
-
-=== SingleAssetStrategy
-This is an ideal base class if your strategy is only interested in a single asset. If an event doesn't contain a price-action for that particular asset, the `generate` method will not be invoked.
-
-[source, kotlin,indent=0]
-----
-include::{sourcefile}[tag=singleAsset]
-----
-
 
 === HistoricPriceStrategy
 A useful base strategy is `HistoricPriceStrategy`.
@@ -147,7 +120,7 @@ As you can see, a Strategy can maintain state, like `previousPrices` in the abov
 
 
 [#_policy_based_strategies]
-== Policy based Strategies
+== Trader based Strategies
 There are use cases that require a strategy not only to have access to an `Event` but also to the `Account`. These types of strategies can be implemented in _roboquant_, but they should be implemented as a policy instead.
 
 Some reasons you might need to use a policy:
@@ -155,21 +128,12 @@ Some reasons you might need to use a policy:
 * Access to the Account instance is required, for example, to re-balance a portfolio
 * Directly generate orders instead of signals
 
-See the xref:policy.adoc#_advanced_policies[advanced policies] for more details.
-
 == Signals
-A `Signal` is the outcome of a strategy and is modelled closely after the ratings given by rating agencies. The two mandatory attributes of a `Signal` are:
+A `Signal` is the outcome of a strategy and contain the following properties:
 
 1. The `Asset` to which the signal applies, like a single stock
-2. A `Rating` for that asset. A 5-point scale (Kotlin enumeration type) is used for the `Rating` of a `Signal`:
-
-* `BUY`: Also known as strong buy and "on the recommended list". Buy is a recommendation to purchase a specific asset.
-* `SELL`: Also known as strong sell, it's a recommendation to sell a security or to liquidate an asset.
-* `HOLD`: In general terms, a company with a hold recommendation is expected to perform at the same pace as comparable companies or in-line with the market.
-* `UNDERPERFORM`: A recommendation that means a stock is expected to do slightly worse than the overall stock market return. Underperform can also be expressed as "moderate sell," "weak hold" and "underweight."
-* `OUTPERFORM`: Also known as "moderate buy," "accumulate" and "overweight." Outperform is an analyst recommendation, meaning an asset is expected to do slightly better than the market return.
-+
-NOTE: A `HOLD` rating is not the same as no signal. Only generate hold signals if you think the asset will perform like the market. If your strategy gives no clear indication about the future performance of an asset, don't generate a signal at all.
+2. A `Rating` for that asset, a float typically between -1 (Sell) and 1 (Buy).
+3. Type of Signal (exit, entry or both)
 
 == Simple Signals
 When instantiating a Signal, only the Asset and Rating are required parameters and in many cases sufficient:
@@ -188,9 +152,6 @@ Besides the mandatory Rating and Asset attributes of a signal instance, a signal
 ----
 include::{sourcefile}[tag=attrSignal]
 ----
-
-It is up to the xref:policy.adoc[`Policy`] if/how these attributes are used when generating the orders. For example, the probability could be used to determine the sizing of an order, a higher probability implying a larger order size.
-
 
 == Warmup
 Sometimes before going live, you want to ensure your strategy already has enough historical data to start generating signals from the start.

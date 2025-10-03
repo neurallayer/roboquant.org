@@ -1,17 +1,14 @@
 @file:Suppress("unused", "UNUSED_VARIABLE", "TooManyFunctions", "WildcardImport", "MagicNumber")
 
-import org.roboquant.Roboquant
-import org.roboquant.brokers.sim.SimBroker
 import org.roboquant.common.*
-import org.roboquant.feeds.Event
 import org.roboquant.feeds.HistoricFeed
 import org.roboquant.feeds.LiveFeed
-import org.roboquant.feeds.PriceItem
-import org.roboquant.ibkr.IBKRBroker
+import org.roboquant.run
 import org.roboquant.strategies.*
-import org.roboquant.ta.*
 import org.roboquant.ta.TaLibStrategy
-import java.time.Instant
+import kotlin.collections.component1
+import kotlin.collections.component2
+import kotlin.collections.set
 
 
 private fun intro() {
@@ -19,11 +16,10 @@ private fun intro() {
     class MyStrategy : Strategy {
 
         // tag::intro[]
-        override fun generate(event: Event): List<Signal>
-        // end::intro[]
-        {
+        override fun createSignals(event: Event): List<Signal> {
             TODO("Not yet implemented")
         }
+        // end::intro[]
     }
 }
 
@@ -42,45 +38,9 @@ private fun ema() {
 
 private fun simpleSignal() {
     // tag::simpleSignal[]
-    val apple = Asset("AAPL")
+    val apple = Stock("AAPL")
     val signal = Signal.buy(apple)
     // end::simpleSignal[]
-}
-
-
-private fun singleAsset() {
-    // tag::singleAsset[]
-    class MyStrategy(asset: Asset) : SingleAssetStrategy(asset) {
-
-        override fun generate(priceItem: PriceItem, time: Instant): Signal? {
-            TODO("Your implementation goes here")
-        }
-
-    }
-
-    val apple = Asset("AAPL")
-    val strategy = MyStrategy(apple)
-    // end::singleAsset[]
-}
-
-
-private fun filter() {
-    // tag::filter[]
-    // Only receive price actions for Apple
-    val strategy1 = AssetFilterStrategy(EMACrossover(), AssetFilter.includeSymbols("AAPL"))
-
-    // use the filter extension function to exclude price actions for Tesla
-    val strategy2 = EMACrossover().filter { asset, _ ->
-        asset.symbol != "TSLA"
-    }
-
-    // use CombinedStrategy and filter to create more complex strategies
-    val t = Instant.parse("2010-01-01T00:00:00Z")
-    val strategy = CombinedStrategy(
-        EMACrossover.PERIODS_12_26.filter { _, time -> time < t },
-        EMACrossover.PERIODS_5_15.filter { _, time -> time >= t }
-    )
-    // end::filter[]
 }
 
 
@@ -98,18 +58,6 @@ private fun allSignalAttributes(asset: Asset) {
 
     Signal(asset, rating, type, tag)
     // end::attrSignal[]
-}
-
-private fun rsi() {
-
-    // tag::rsi[]
-    // Default thresholds values
-    val strategy1 = RSIStrategy()
-
-    // Own defined thresholds
-    val strategy2 = RSIStrategy(lowThreshold = 25.0, highThreshold = 75.0)
-    // end::rsi[]
-
 }
 
 private fun extending() {
@@ -151,17 +99,13 @@ private fun extending() {
 private fun composition(strategy1: Strategy, strategy2: Strategy, strategy3: Strategy) {
     // tag::composition[]
     val strategy = CombinedStrategy(strategy1, strategy2, strategy3)
-    val roboquant = Roboquant(strategy)
     // end::composition[]
-
-
 }
 
 
 private fun composition2(strategy1: Strategy, strategy2: Strategy, strategy3: Strategy) {
     // tag::parallel[]
     val strategy = ParallelStrategy(strategy1, strategy2, strategy3)
-    val roboquant = Roboquant(strategy)
     // end::parallel[]
 }
 
@@ -194,7 +138,7 @@ private fun customStrategy1() {
     // tag::basic[]
     class MyStrategy : Strategy {
 
-        override fun generate(event: Event): List<Signal> {
+        override fun createSignals(event: Event):List<Signal> {
             TODO("Not yet implemented")
         }
 
@@ -208,11 +152,11 @@ private fun customStrategy2() {
 
         private val previousPrices = mutableMapOf<Asset, Double>()
 
-        override fun generate(event: Event): List<Signal> {
+        override fun createSignals(event: Event): List<Signal> {
             val signals = mutableListOf<Signal>()
-            for ((asset, PriceItem) in event.prices) {
+            for ((asset, priceItem) in event.prices) {
 
-                val currentPrice = PriceItem.getPrice()
+                val currentPrice = priceItem.getPrice()
                 val previousPrice = previousPrices.getOrDefault(asset, currentPrice)
 
                 if (currentPrice > 1.05 * previousPrice)
@@ -226,30 +170,21 @@ private fun customStrategy2() {
             return signals
         }
 
-        // Make sure we clear the previous prices when reset
-        override fun reset() {
-            previousPrices.clear()
-        }
-
     }
     // end::naive[]
 }
-
-
 
 
 fun warmup(liveFeed: LiveFeed, historicFeed: HistoricFeed) {
     // tag::warmup[]
     val strategy = EMACrossover()
 
-    // Run a warmup over the past 30 days with the default SimBroker
-    val warmup = Roboquant(strategy, broker = SimBroker())
+    // Run a warmup over the past 30 days with the default SimBroker, so no live orders are generated
     val past = Timeframe.past(30.days)
-    warmup.run(historicFeed, timeframe = past)
+    run(historicFeed, strategy, timeframe = past)
 
-    // Start the live trading with a real broker over the next 8 hours
-    val live = Roboquant(strategy, broker = IBKRBroker())
+    // Start the live trading with a real broker over the next 8 hours, now the strategy is warmed-up
     val next = Timeframe.next(8.hours)
-    live.run(liveFeed, timeframe = next)
+    run(liveFeed, strategy, timeframe = next)
     // end::warmup[]
 }

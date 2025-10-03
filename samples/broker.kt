@@ -1,26 +1,24 @@
 @file:Suppress("unused", "UNUSED_VARIABLE", "WildcardImport", "MagicNumber")
 
-import org.roboquant.Roboquant
-import org.roboquant.binance.BinanceBroker
-import org.roboquant.brokers.*
-import org.roboquant.common.*
 
-import org.roboquant.orders.MarketOrder
-import org.roboquant.strategies.EMACrossover
-import org.roboquant.strategies.Signal
-import java.time.Instant
-import java.time.ZoneId
-import java.time.temporal.ChronoField
-import kotlin.collections.sumOf
+import org.roboquant.alpaca.AlpacaBroker
+import org.roboquant.common.Account
+import org.roboquant.brokers.Broker
+import org.roboquant.brokers.SimBroker
+import org.roboquant.common.Order
+import org.roboquant.common.Size
+import org.roboquant.common.Stock
+import org.roboquant.common.Signal
+import org.roboquant.common.exposure
 
 
 fun placeOrder(broker: Broker) {
     // tag::basic[]
     val orders = listOf(
-        MarketOrder(Asset("AAPL"), 100), // BUY 100 stocks Apple
-        MarketOrder(Asset("TSLA"), -100), // SELL 100 stocks Tesla
+       Order(Stock("AAPL"), Size(100), 120.0), // BUY 100 stocks Apple
+       Order(Stock("TSLA"), Size(-100), 120.0), // SELL 100 stocks Tesla
     )
-    broker.place(orders)
+    broker.placeOrders(orders)
 
     // Get the latest state of the broker
     val account = broker.sync()
@@ -29,43 +27,23 @@ fun placeOrder(broker: Broker) {
 }
 
 
-fun positionTesla() {
+fun positionTesla(account: Account) {
     // tag::positionTesla[]
-    val asset = Asset("TSLA")
-    // We bought five stocks Tesla
-    // We bought them at $250.10
-    // The current market price is $250.05
-    val position = Position(asset, Size(5), 250.10, 250.05, Instant.now())
-
-    println(position.unrealizedPNL) // USD -0.25
-    println(position.marketValue) // USD 1,250.25
-    println(position.totalCost) // USD 1,250.50
+    val asset = Stock("TSLA")
+    val position = account.positions[asset]
+    println(account.unrealizedPNL(asset))
     // end::positionTesla[]
 }
 
-fun positionBTC() {
-    // tag::positionBTC[]
-    val asset = Asset("BTC-USDT", AssetType.CRYPTO, "USDT", "CRYPTO")
-
-    // We bought 0.1 bitcoin
-    // We bought at 25.100 USDT
-    // The current market price is 25.000 USDT (for 1 bitcoin)
-    val position = Position(asset, Size(0.1), 25_100.0, 25_000.0, Instant.now())
-
-    println(position.unrealizedPNL) // USDT -10.00
-    println(position.marketValue) // USDT 2,500.00
-    println(position.totalCost) // USDT 2,510.00
-    // end::positionBTC[]
-}
 
 fun regular() {
     // tag::regular[]
-    val roboquant = Roboquant(EMACrossover(), broker = BinanceBroker())
-    println(roboquant.broker.sync())
+    val broker = AlpacaBroker()
+    println(broker.sync())
     // end::regular[]
 }
 
-fun account(broker: Broker) {
+fun account(broker: SimBroker) {
     // tag::account[]
     val account = broker.sync()
 
@@ -73,30 +51,12 @@ fun account(broker: Broker) {
     println(account)
 
     // Standard Kotlin
-    val winningTrades = account.trades.filter { it.pnl > 0 }
-    val loosingTrades = account.trades.filter { it.pnl < 0 }
-    val biggestExposure = account.positions.values.maxByOrNull { it.exposure.value }
-    val marketOrders = account.openOrders.filterIsInstance<MarketOrder>()
-    val appleTrades = account.trades.filter { it.asset.symbol == "AAPL" }
+    val exposure = account.positions.exposure()
+    val appleOpenOrders = account.orders.filter { it.asset.symbol == "AAPL" }
 
     // Some useful extensions
-    val totalUnrealizedPNL = account.positions.values.unrealizedPNL
-    val totalRealizedPNL = account.trades.realizedPNL
-    val totalRealizedLosses = loosingTrades.realizedPNL
-    val biggestLoosingTrade = account.trades.map { it.pnl.convert(Currency.USD) }.minByOrNull { it.value }
-    val totalFee = account.trades.fee
-    val realizedPNLApple = appleTrades.realizedPNL
-    val cancellationOrders = account.openOrders.first().cancel()
-
-    // More advanced examples
-    val zone = ZoneId.systemDefault()
-    val realizedPNLPerDayOfWeek = account.trades
-        .groupBy { it.time.atZone(zone).get(ChronoField.DAY_OF_WEEK) }
-        .mapValues { it.value.realizedPNL }
-    val maxFeeExchange = account.trades
-        .groupBy { it.asset.exchange }
-        .mapValues { it.value.fee.convert(Currency.USD) }
-        .maxByOrNull { it.value.value }
+    val totalUnrealizedPNL = account.unrealizedPNL()
+    val cancellationOrders = account.orders.filter { it.isCancellation() }
     // end::account[]
 }
 
@@ -105,41 +65,27 @@ fun account2(account: Account, signals: List<Signal>) {
     // tag::account2[]
     for (signal in signals) {
         val asset = signal.asset
-        val openOrders = account.openOrders.filter { it.asset == asset }
+        val openOrders = account.orders.filter { it.asset == asset }
         val openPositions = account.positions.filter { it.key == asset } // returns 0 or 1 positions
-        val pastTrades = account.trades.filter { it.asset == asset }
 
         // cancel open orders
         val cancellations = openOrders.map { it.cancel() }
 
-        // close positions
-        val closeOrders = openPositions.mapValues { MarketOrder(it.key, -it.value.size) }
-
-        // Stop a losing streak
-        val last2Hours = Timeframe.past(2.hours)
-        val pnl = pastTrades.filter { last2Hours.contains(it.time) }.sumOf { it.pnlValue }
-        if (pnl < -1_000) {
-            TODO()
-        }
     }
     // end::account2[]
 
 }
 
 
-fun equity(account: Account, initialDeposit: Wallet) {
+fun equity(account: Account) {
     // tag::equity[]
     // Equity property
-    val equity0 = account.equity
+    val equity0 = account.equity()
 
     // Sum of cash balances + open positions
     val equity1 = account.cash + account.marketValue()
 
-    // Sum of initial deposit + all the Profit And Loss
-    val equity2 = initialDeposit + account.realizedPNL() + account.unrealizedPNL()
-
     assert(equity0 == equity1)
-    assert(equity0 == equity2)
     // end::equity[]
 }
 

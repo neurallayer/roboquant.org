@@ -84,11 +84,6 @@ The following table shows the 3rd parties that are supported out of the box and 
 
 |Interactive Brokers|API|✓|✓|✓|✓
 |Alpaca|API|✓|✓|✓|
-|Polygon.io|API|✓|✓||
-|Tiingo|API|✓|✓||
-|Alpha Vantage|API|✓|||
-|Binance|API|✓|✓|✓|
-|XChange (60+ crypto exchanges)|API|✓|✓|✓|
 |ECB|CSV File||||✓
 |Stooq|CSV File|✓|||
 |MT5|CSV File|✓|||
@@ -118,122 +113,14 @@ include::{sourcefile}[tag=alpacalive]
 include::{sourcefile}[tag=alpacabroker]
 ----
 
-[#__tiingo]
-== Tiingo
-You can retrieve historical data from the Tiingo API server using the standard `Feed` api.
 
-Under the hood, _roboquant_ uses the CSV format and/or websockets to reduce latency and bandwidth.
-This makes it a very efficient Feed implementation that scales to large amount of data.
-
-[source, kotlin,indent=0]
-----
-include::{sourcefile}[tag=tiingohistoric]
-----
-
-Tiingo also provides real-time stock data with only 15ms delay from the IEX exchange.
-You can either subscribe to a subset of the available stocks, or receive all the stocks:
-
-[source, kotlin,indent=0]
-----
-include::{sourcefile}[tag=tiingolive]
-----
-
-Please note that this can add up to a lot of data. The market data will be available as `PriceQuotes` in the `Event`.
-
-It is also easy to create price-bars out of the live price-quotes.
-The `AggregatorLiveFeed` will track the mid-point price of the quote over the provided time-span.
-
-[source, kotlin,indent=0]
-----
-include::{sourcefile}[tag=tiingoaggregate]
-----
-
-
-== Polygon
-Polygon has several types of subscriptions available, depending on your needs.
-The free version only provides access to historic data, while the paid versions also provide live data.
-
-[source, kotlin,indent=0]
-----
-include::{sourcefile}[tag=polygonhistoric]
-----
-
-[source, kotlin,indent=0]
-----
-include::{sourcefile}[tag=polygonlive]
-----
 
 == ECB
-The ECB (European Central Bank) publishes since the start of the Euro the daily historic exchange rates with almost all other fiat currencies in the world. `ECBExchangeRates` will automatically download the exchange rates from their website and use them for currency conversions during trading. There is no need for registration or an API key, since this data is available on their public website.
+The ECB (European Central Bank) has published since the start of the Euro the daily historic exchange rates with almost all other fiat currencies in the world. `ECBExchangeRates` will automatically download the exchange rates from their website and use them for currency conversions during trading. There is no need for registration or an API key, since this data is available on their public website.
 
 [source, kotlin,indent=0]
 ----
 include::{sourcefile}[tag=ecb]
-----
-
-== Binance
-The integration with Binance covers their broker API as well as their historic and live market data APIs. From an algo-trading perspective, it is also nice to see that the access to (high-frequency) market data is free. Even without a trading account with them, you can still access the data.
-
-[source, kotlin,indent=0]
-----
-include::{cryptofile}[tag=binancehistoricfeed]
-----
-
-To subscribe to live quotes for one or more currency pairs is just as easy:
-[source, kotlin,indent=0]
-----
-include::{cryptofile}[tag=binancelivefeed]
-----
-
-Currently, the broker integration with Binance is largely untested and core features are disabled to avoid costly bugs. People have been using it as a starting point for their own implementation, but the included implementation should not be relied upon yet.
-
-[source, kotlin,indent=0]
-----
-include::{cryptofile}[tag=binancebroker]
-----
-
-== XChange
-XChange is a library providing a consistent API for interacting with 60+ Bitcoin and other cryptocurrency exchanges, providing an interface for trading and accessing market data.
-
-Roboquant integrates with XChange for retrieving historic data, live data and accessing trading functionality. Because there is support for so many crypto exchanges, the initial setup is a bit more elaborate than with other 3rd party providers.
-
-You'll always have to add the additional exchange-specific libraries to your project. We'll use Maven and Bitstamp as an example:
-
-[source, xml]
-----
-<dependencies>
-    <dependency>
-        <groupId>org.knowm.xchange</groupId>
-        <artifactId>xchange-bitstamp</artifactId>
-        <version>5.1.1</version>
-    </dependency>
-    <dependency>
-        <groupId>org.knowm.xchange</groupId>
-        <artifactId>xchange-stream-bitstamp</artifactId>
-        <version>5.1.1</version>
-    </dependency>
-</dependencies>
-----
-
-To get live data, you'll first need to acquire an instance of a `StreamingExchange`. Using Bitstamp again as an example, you can use the following code snippet:
-
-[source, kotlin,indent=0]
-----
-include::{cryptofile}[tag=bitstamp]
-----
-
-Now you are ready to create an instance of XChangeLiveFeed and subscribe to one or more currency pairs.
-[source, kotlin,indent=0]
-----
-include::{cryptofile}[tag=xchangelivefeed]
-----
-
-== Alpha Vantage
-Alpha Vantage provides a rich set of historic stock prices, not only for stocks listed on US exchanges. Although Alpha Vantage also provides other information besides stock market data, that is not yet supported by the `AlphaVantageHistoricFeed`.
-
-[source, kotlin,indent=0]
-----
-include::{sourcefile}[tag=alphahistoric]
 ----
 
 == Interactive Brokers
@@ -266,14 +153,6 @@ For both custom Feed and Broker integrations, it is recommended to first look at
 
 === Feed integration
 You can read more about the Feed interface that you need to implement it right xref:feed.adoc#_custom_feeds[here].
-
-The following code-snippet shows the template of what you would normally implement for a historic data feed. By convention, _roboquant_ uses `retrieve` for historic feeds and `subscribe` for live feeds.
-
-
-[source, kotlin,indent=0]
-----
-include::{sourcefile}[tag=feedIntegration]
-----
 
 === Broker integration
 Integrating with a new broker is not that difficult either, but requires more effort. Most of the work will be the translation of object exposed by the broker to those used by _roboquant_. For example, an `Order` in _roboquant_ will be different from an Order expected by the client library of the broker, and a conversion needs to happen in both directions.

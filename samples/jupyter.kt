@@ -1,14 +1,13 @@
-@file:Suppress("unused", "UNUSED_PARAMETER", "WildcardImport", "MagicNumber", "LongParameterList")
+@file:Suppress("unused", "WildcardImport", "MagicNumber", "LongParameterList")
 
-import org.roboquant.Roboquant
-import org.roboquant.brokers.Account
+
+import org.roboquant.brokers.SimBroker
 import org.roboquant.common.*
 import org.roboquant.feeds.Feed
 import org.roboquant.feeds.HistoricFeed
 import org.roboquant.charts.*
 import org.roboquant.journals.MetricsJournal
 import org.roboquant.jupyter.*
-import org.roboquant.strategies.Strategy
 
 fun use1(data: TimeSeries) {
     // tag::use1[]
@@ -25,8 +24,7 @@ fun use2(feed: HistoricFeed, assets: List<Asset>) {
     // end::use2[]
 }
 
-
-fun overview2(data: TimeSeries, account: Account, feed: Feed, asset: Asset, assets: List<Asset>, strategy: Strategy) {
+fun overview2(data: TimeSeries, account: Account, feed: Feed, asset: Asset, assets: List<Asset>, simBroker: SimBroker) {
     // tag::overview[]
     // Metric related charts
     BoxChart(data)
@@ -46,11 +44,6 @@ fun overview2(data: TimeSeries, account: Account, feed: Feed, asset: Asset, asse
     TradeChart(account.trades)
     TradeChart(account.trades, perAsset = true)
 
-    // Order related chart
-    OrderChart(account.openOrders)
-
-    // Signal chart
-    SignalChart(feed, strategy)
     // end::overview[]
 }
 
@@ -71,26 +64,22 @@ fun global() {
 }
 
 
-fun priceBarChart(feed: HistoricFeed, account: Account) {
+fun priceBarChart(feed: HistoricFeed) {
     // tag::priceBarChart[]
-    val trades = account.trades
+    // Plot prices of a known stock
+    PriceBarChart(feed, Stock("AAPL"))
 
-    // Plot the prices of the first asset from a historic feed and also all the trades for that same asset
-    PriceBarChart(feed, feed.assets.first(), trades = trades)
+    // Plot the prices of the first asset from a historic feed
+    PriceBarChart(feed, feed.assets.first())
+
+    // Plot how Apple performed during the 2008 financial crisis
+    val apple = feed.assets.getBySymbol("AAPL")
+    PriceChart(feed, apple, timeframe = Timeframe.financialCrisis2008)
     // end::priceBarChart[]
 }
 
 
-fun priceChart(feed: HistoricFeed, roboquant: Roboquant) {
-    // tag::priceChart[]
-    // Plot how Apple performed during the 2008 financial crisis
-    val apple = feed.assets.getBySymbol("AAPL")
-    PriceChart(feed, apple, timeframe = Timeframe.financialCrisis2008)
-    // end::priceChart[]
-}
-
-
-fun correlation(feed: HistoricFeed, roboquant: Roboquant) {
+fun correlation(feed: HistoricFeed) {
     // tag::correlation[]
     val assets = feed.assets.take(10)
     CorrelationChart(feed, assets, timeframe = Timeframe.past(2.years))

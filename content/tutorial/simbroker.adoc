@@ -65,7 +65,7 @@ Custom models are a way to further customize the `SimBroker` behavior and ensure
 
 WARNING: If you don't take any type of trading cost into account, your profitable strategy in back-test might turn out not to be that profitable in live trading. When in doubt, better to be on the safe side and configure the cost to be slightly higher than expected.
 
-The following three types of models can be implemented if the default ones that come with _roboquant_ are not sufficient:
+The following three types of models can be implemented if the default ones that come with _roboquant_ are not enough:
 
 . `PricingEngine` — Calculate the price to use for a trade. It can be used to simulate the following type of trading cost:
     - Spread (difference between the buy- and sell-price)
@@ -92,16 +92,6 @@ Like any simulation, SimBroker also has limitations compared to live trading. It
 1. The default cost calculations become less realistic if you trade large sizes compared to overall daily volume. As a rule of thumb: don't underestimate the additional costs like spread, slippage and commissions and better be on the safe side.
 2. Order types might behave slightly different between SimBroker and different real brokers. If possible, perform extensive paper trading testing to see if your solution still performs as expected.
 3. The buying power and margin calculations might differ. Again, be on the safe side and use higher margin requirements in the SimBroker than required by your actual broker.
-
-== PricingEngine
-The PricingEngine determines the price that is used for a trade execution.
-There are default ones included, but you can also implement your own:
-
-[source, kotlin,indent=0]
-----
-include::{sourcefile}[tag=pricing]
-----
-
 
 == Account Models
 Account models allow you to model the amount of **buying-power** for different types of accounts, like a Cash Account or Margin Account when using the SimBroker. Buying-power represents the amount of money available for trading.
@@ -196,7 +186,7 @@ The following order-rules apply when calculating the buying power:
 NOTE: Not all rules are currently implemented yet.
 
 === Margin Calls
-A negative value for `BuyingPower` indicates a possible margin call situation. However, _roboquant_ doesn't interrupt the back-test if that condition happens. However, if the `DefaultPolicy` is used, it will guarantee that no new positions will be opened. Only the decrease of positions is allowed if there is insufficient buying-power available.
+A negative value for `BuyingPower` indicates a possible margin call situation. However, _roboquant_ doesn't interrupt the back-test if that condition happens. However, if the `DefaultTrader` is used, it will guarantee that no new positions will be opened. Only the decrease of positions is allowed if there is insufficient buying-power available.
 
 If you are interested in detecting these conditions, best to configure a metric that logs the BuyingPower at each step and evaluate that metric after the run.
 

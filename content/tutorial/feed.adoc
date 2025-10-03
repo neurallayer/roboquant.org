@@ -46,7 +46,7 @@ There are also a few helper methods in the `Event` class to make access to price
 
 [source, kotlin, indent=0]
 ----
-include::{sourcefile}[tag=priceaction]
+include::{sourcefile}[tag=PriceItem]
 ----
 
 == Included Feeds
@@ -161,15 +161,6 @@ The following example assumes the CSVFeed contains 1-minute price-bars, and you 
 ----
 include::{sourcefile}[tag=aggr]
 ----
-
-You can also aggregate live feeds.
-For example, aggregate live quotes from the Binance exchange into one-minute price-bars.
-
-[source, kotlin, indent=0]
-----
-include::{sourcefile}[tag=aggr2]
-----
-
 
 == CombinedFeed
 You can only provide a single feed instance to the `Roboquant.run` method.

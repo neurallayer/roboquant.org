@@ -1,21 +1,20 @@
 @file:Suppress("unused", "UNUSED_VARIABLE", "UNUSED_PARAMETER", "WildcardImport", "MagicNumber")
 
-import org.roboquant.Roboquant
-import org.roboquant.brokers.Account
-import org.roboquant.common.Asset
-import org.roboquant.common.TimeSeries
-import org.roboquant.feeds.Event
+import org.roboquant.common.Account
 import org.roboquant.charts.TimeSeriesChart
-import org.roboquant.run
+import org.roboquant.common.Asset
+import org.roboquant.common.Event
+import org.roboquant.common.Order
+import org.roboquant.common.Stock
+import org.roboquant.common.TimeSeries
 import org.roboquant.feeds.Feed
 import org.roboquant.journals.Journal
 import org.roboquant.journals.MemoryJournal
-import org.roboquant.metrics.*
-import org.roboquant.orders.Instruction
-import org.roboquant.orders.Order
+import org.roboquant.journals.metrics.*
 import org.roboquant.questdb.QuestDBJournal
+import org.roboquant.run
 import org.roboquant.strategies.EMACrossover
-import org.roboquant.strategies.Signal
+import org.roboquant.common.Signal
 import org.roboquant.strategies.Strategy
 import java.time.Instant
 
@@ -25,14 +24,12 @@ fun standard(strategy: Strategy, sp500Asset: Asset) {
     val metric1 = AccountMetric()
     val metric2 = ExposureMetric()
     val metric3 = ProgressMetric()
-    val metric4 = VWAPMetric()
-    val metric5 = ReturnsMetric()
-    val metric6 = PNLMetric()
-    val metric7 = AlphaBetaMetric(period = 250)
-    val metric8 = ScorecardMetric()
+    val metric4 = ReturnsMetric()
+    val metric5 = PNLMetric()
+    val metric6 = AlphaBetaMetric(period = 250)
 
     val journal = MemoryJournal(
-        metric1, metric2, metric3, metric4, metric5, metric6, metric7, metric8
+        metric1, metric2, metric3, metric4, metric5, metric6,
     )
     // end::standard[]
 }
@@ -63,14 +60,18 @@ fun staticExample() {
     // tag::simple[]
     class MyMetric : Metric {
 
-        private val asset = Asset("AAPL")
+        private val asset = Stock("AAPL")
 
-        override fun calculate(account: Account, event: Event): Map<String, Double> {
+        override fun calculate(
+            event: Event,
+            account: Account,
+            signals: List<Signal>,
+            orders: List<Order>
+        ): Map<String, Double> {
             val metric1 = account.buyingPower.value
             val metric2 = event.getPrice(asset) ?: Double.NaN
             return mapOf("buyingpower" to metric1, "appleprice" to metric2)
         }
-
     }
     // end::simple[]
 }
@@ -96,9 +97,9 @@ fun exampleCustomLogger() {
 
         private val database = Database()
 
-        override fun track(event: Event, account: Account, signals: List<Signal>, instructions: List<Instruction>) {
-            for (signal in signals) {
-                database.store(signal.asset.symbol, signal.rating, event.time)
+        override fun track(event: Event, account: Account, signals: List<Signal>, orders: List<Order>) {
+            for (order in orders) {
+                database.store(order.asset.symbol, order.size.toDouble(), event.time)
             }
         }
 

@@ -12,7 +12,7 @@
 		<kotlin.code.style>official</kotlin.code.style>
 		<kotlin.compiler.jvmTarget>17</kotlin.compiler.jvmTarget>
 		<kotlin.compiler.incremental>false</kotlin.compiler.incremental>
-		<kotlin.version>1.9.24</kotlin.version>
+		<kotlin.version>2.2.0</kotlin.version>
 		<roboquant.version>${project.version}</roboquant.version>
 	</properties>
 
@@ -139,42 +139,12 @@
 			<version>${roboquant.version}</version>
 		</dependency>
 		<dependency>
-			<artifactId>roboquant-tiingo</artifactId>
-			<groupId>org.roboquant</groupId>
-			<version>${roboquant.version}</version>
-		</dependency>
-		<dependency>
 			<artifactId>roboquant-jupyter</artifactId>
 			<groupId>org.roboquant</groupId>
 			<version>${roboquant.version}</version>
 		</dependency>
 		<dependency>
-			<artifactId>roboquant-polygon</artifactId>
-			<groupId>org.roboquant</groupId>
-			<version>${roboquant.version}</version>
-		</dependency>
-		<dependency>
 			<artifactId>roboquant-alpaca</artifactId>
-			<groupId>org.roboquant</groupId>
-			<version>${roboquant.version}</version>
-		</dependency>
-		<dependency>
-			<artifactId>roboquant-binance</artifactId>
-			<groupId>org.roboquant</groupId>
-			<version>${roboquant.version}</version>
-		</dependency>
-		<dependency>
-			<artifactId>roboquant-xchange</artifactId>
-			<groupId>org.roboquant</groupId>
-			<version>${roboquant.version}</version>
-		</dependency>
-		<dependency>
-			<artifactId>roboquant-alphavantage</artifactId>
-			<groupId>org.roboquant</groupId>
-			<version>${roboquant.version}</version>
-		</dependency>
-		<dependency>
-			<artifactId>roboquant-server</artifactId>
 			<groupId>org.roboquant</groupId>
 			<version>${roboquant.version}</version>
 		</dependency>
@@ -192,29 +162,6 @@
 			<groupId>org.jetbrains.kotlinx</groupId>
 			<artifactId>kotlin-jupyter-api</artifactId>
 			<version>0.11.0-358</version>
-		</dependency>
-		<dependency>
-			<groupId>org.knowm.xchange</groupId>
-			<artifactId>xchange-bitstamp</artifactId>
-			<version>5.1.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.knowm.xchange</groupId>
-			<artifactId>xchange-stream-bitstamp</artifactId>
-			<version>5.1.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.dv8tion</groupId>
-			<artifactId>JDA</artifactId>
-			<version>5.0.0-beta.4</version>
-			<exclusions>
-				<exclusion>
-					<groupId>club.minnced</groupId>
-					<artifactId>opus-java</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 	</dependencies>
 
