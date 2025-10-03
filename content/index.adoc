@@ -1,0 +1,7 @@
+= roboquant
+:jbake-type: collection
+:jbake-status: published
+:jbake-heading: the four most dangerous words in investing are: this time it's different
+:icons: font
+:items: index
+

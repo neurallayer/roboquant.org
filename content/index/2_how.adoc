@@ -1,0 +1,24 @@
+= How to use
+:jbake-type: item
+:jbake-status: published
+:imagesdir: ../img/
+:icons: font
+:jbake-date: 2020-01-02
+
+A lot of effort and attention went into making sure _roboquant_ is easy to use, also for less experienced Kotlin developers.
+The following example shows the steps required to run a full back test.
+
+[source,kotlin]
+----
+val strategy = EMACrossover() // <1>
+val feed = CSVFeed("data/US") // <2>
+val account = run(feed, strategy) // <3>
+println(account) // <4>
+----
+<1> Create the strategy that you want to validate
+<2> Which data feed should be used, in this case, CSV files
+<3> Run the back test
+<4> Print the account at the end of the run
+
+As you can see, it is not difficult to get started. So if you are a beginning developer, give _roboquant_ notebooks a try. And if you are an experienced developer or want to develop complex strategies, try out the roboquant libraries.
+

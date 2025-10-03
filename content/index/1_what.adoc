@@ -1,0 +1,13 @@
+= What is roboquant
+:jbake-type: item
+:jbake-status: published
+:imagesdir: ../img/
+:icons: font
+:jbake-date: 2020-01-01
+
+Roboquant is an open-source algorithmic trading platform written in Kotlin. It is flexible, free and tries to be developer-friendly. It is designed for anyone serious about algo-trading. So whether you are a beginning retail trader or an established trading firm, _roboquant_ can help you to quickly develop robust and fully automated trading strategies.
+
+But perhaps most important of all, it is blazingly fast. Roboquant is orders of magnitude faster than most other algo-trading platforms.
+
+With historic data sets becoming more widely available and growing in size, it is important that a strategy can still be quickly developed, back-tested and optimized. If this cycle takes too long, it is nearly impossible to create high-performing and robust strategies.
+

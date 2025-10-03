@@ -1,0 +1,44 @@
+= Features
+:jbake-type: item
+:jbake-status: published
+:imagesdir: ../img/
+:icons: font
+:jbake-date: 2020-01-02
+
+++++
+
+
+    <div class="row gx-5 row-cols-1 row-cols-md-2">
+        <div class="col mb-3 h-100">
+            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-1"><span>Fast</span></div>
+            <ul class="feature-list">
+                <li>Back test millions of candles per second</li>
+                <li>Sub millisecond trading</li>
+            </ul>
+        </div>
+        <div class="col mb-3 h-100">
+            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-1"><span>Flexible</span></div>
+            <ul class="feature-list">
+                <li>Stocks, crypto, options, forex, and more</li>
+                <li>Multi-currency & multi-region</li>
+            </ul>
+        </div>
+        <div class="col mb-3 h-100">
+            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-1"><span>Friendly</span></div>
+            <ul class="feature-list">
+                <li>Dedicated algo-trading charts</li>
+                <li>150+ technical indicators included</li>
+            </ul>
+        </div>
+        <div class="col mb-3 h-100">
+            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-1"><span>Free</span></div>
+            <ul class="feature-list">
+                <li>All source code on GitHub</li>
+                <li>Permissive Apache 2.0 license</li>
+            </ul>
+        </div>
+    </div>
+
+
+
+++++
